@@ -1,0 +1,1239 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  <link rel="canonical" href="https://blog.cnortles.top/wiki/c/exam-tips/">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top/npm" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>c：C语言期末考试易错知识点总结 - Aurora</title>
+
+  
+    <meta name="description" content="⭐                     重点复习 考试必看 结合考试题型整理的易错知识点                               &lt;section class&#x3D;&quot;section&quot;&gt;                 &lt;h2&gt;内容导航&lt;&#x2F;h2&gt;                 &amp;l">
+<meta property="og:type" content="website">
+<meta property="og:title" content="C语言期末考试易错知识点总结">
+<meta property="og:url" content="https://blog.cnortles.top/wiki/c/exam-tips/">
+<meta property="og:site_name" content="Aurora">
+<meta property="og:description" content="⭐                     重点复习 考试必看 结合考试题型整理的易错知识点                               &lt;section class&#x3D;&quot;section&quot;&gt;                 &lt;h2&gt;内容导航&lt;&#x2F;h2&gt;                 &amp;l">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg">
+<meta property="article:published_time" content="2026-02-01T05:00:55.000Z">
+<meta property="article:modified_time" content="2026-02-01T05:00:55.000Z">
+<meta property="article:author" content="Rl.">
+<meta property="article:tag" content="生信">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg">
+  
+  
+  
+  <meta name="keywords" content="生信">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="Aurora" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top","author":{"@type":"Person","name":"Rl.","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"Aurora","description":"愿极光，永不消逝。","url":"https://blog.cnortles.top"}</script>
+  <script>
+  if (window.localStorage.getItem('ZYI_Theme_Mode')==='dark' || (window.localStorage.getItem('ZYI_Theme_Mode')==='Moss' && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+      document.querySelector("html").id = "ZYDark";
+  }
+</script>
+<link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="/custom/css/ZYDark.css"><script src="/custom/js/link-icon.js"></script><link rel="stylesheet" href="/custom/css/index.css"><link rel="stylesheet" href="/custom/css/timeline-twikoo.css"><link rel="stylesheet" href="/css/custom/smooth-scroll.css"><link rel="stylesheet" href="/css/custom/about-page.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"><link rel="stylesheet" href="/css/custom/fonts.css"><link rel="stylesheet" href="/css/custom/rightmenu.css"><link rel="stylesheet" href="/css/custom/comment-barrage.css"><link rel="stylesheet" href="/css/custom/equipment.css"><link rel="stylesheet" href="/css/custom/subscribe.css">
+</head>
+<body>
+
+
+
+<div class="l_body content" id="start" layout="wiki" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><div class="icon"><img no-lazy class="icon" src="https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2779789.png" onerror="javascript:this.classList.add('error');this.src='https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><a class="title" href="/wiki/c/c-keywords"><div class="main">c</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="说说" href="/talk/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/notes/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/wiki/c/" placeholder="在 c 中搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<widget class="widget-wrapper doc-tree post-list"><div class="widget-body fs14"><a class="link" href="/wiki/c/c-keywords/#start"><span class="toc-text">C语言32个关键字</span></a><a class="link" href="/wiki/c/cases/"><span class="toc-text">经典案例与解析</span></a><a class="link" href="/wiki/c/chapter3/"><span class="toc-text">第3章 程序设计基本结构</span></a><a class="link" href="/wiki/c/chapter2/"><span class="toc-text">第2章 C语言基础</span></a><a class="link" href="/wiki/c/chapter4/"><span class="toc-text">第4章 数组</span></a><a class="link" href="/wiki/c/chapter5/"><span class="toc-text">第5章 指针</span></a><a class="link" href="/wiki/c/chapter6/"><span class="toc-text">第6章 函数</span></a><a class="link" href="/wiki/c/chapter7/"><span class="toc-text">第7章 结构体与共用体</span></a><a class="link" href="/wiki/c/chapter8/"><span class="toc-text">第8章 文件操作</span></a><a class="link active" href="/wiki/c/exam-tips/"><span class="toc-text">C语言期末考试易错知识点总结</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="link" href="/wiki/c/interview-questions/"><span class="toc-text">C语言面试常见题</span></a><a class="link" href="/wiki/c/main-function/"><span class="toc-text">main函数详解</span></a><a class="link" href="/wiki/c/sorting-algorithms/"><span class="toc-text">常见排序算法详解</span></a></div></widget>
+
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/atom.xml"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/p/6b21cc1.shtml"><span class="title">Test Post</span></a><a class="item title" href="/p/7a6a6b5a.shtml"><span class="title">测试文章</span></a><a class="item title" href="/p/f67acfa5.shtml"><span class="title">Test Layout Post</span></a><a class="item title" href="/p/24faff5b.shtml"><span class="title">R2 图床服务：打造你的专属高性能图片托管平台</span></a><a class="item title" href="/p/697f76e7.shtml"><span class="title">利用Hexo框架搭建静态博客</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="https://github.com/caoronglin" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-solid fa-github fa-brands fa-bounce"></i></a><a class="social" title="Bilibili" href="https://space.bilibili.com/555149182?spm_id_from=333.1007.0.0" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-brands fa-bilibili fa-bounce"></i></a><a class="social" title="Email" href="mailto:crl@cnortles.top" rel="noopener noreferrer"><i class="fa-solid fa-envelope fa-bounce"></i></a><a class="social" title="Comments" href="/comments" rel="noopener noreferrer"><i class="fa-solid fa-comment fa-bounce"></i></a><a class="social" title="深色模式" href="javaScript:void('永夜');" rel="noopener noreferrer"><img id="ThemeM" src="https://api.iconify.design/line-md:moon-filled.svg?color=%23888"/></a><a class="social" title="浅色模式" href="javaScript:void('永昼');" rel="noopener noreferrer"><img id="ThemeL" src="https://api.iconify.design/line-md:sun-filled.svg?color=%23888"/></a><a class="social" title="跟随系统" href="javaScript:void('跟随系统');" rel="noopener noreferrer"><img id="ThemeAI" src="https://api.iconify.design/line-md:computer-loop.svg?color=%23888"/></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+<div class="wiki-header"><div class="wiki-cover"></div><div class="wiki-info"><h1 class="wiki-title">undefined</h1></div></div><article class="md-text wiki-content"><div class="priority-badge">
+                    <span class="star">⭐</span>
+                    <span class="text">重点复习 考试必看 结合考试题型整理的易错知识点</span>
+                </div>
+
+<pre><code>            &lt;section class=&quot;section&quot;&gt;
+                &lt;h2&gt;内容导航&lt;/h2&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href=&quot;#choice-questions&quot;&gt;一、选择题/判断题易错点&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#fill-blanks&quot;&gt;二、程序填空题易错点&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#programming&quot;&gt;三、编程题易错点&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#high-frequency&quot;&gt;四、高频考点清单&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#review-tips&quot;&gt;五、复习建议&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/section&gt;
+
+            &lt;section class=&quot;section&quot; id=&quot;choice-questions&quot;&gt;
+                &lt;h2&gt;一、选择题/判断题易错点&lt;/h2&gt;
+
+                &lt;h3&gt;1. 指针与数组的混淆&lt;/h3&gt;
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;易错点1：数组名作为参数&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;void func(int arr[]) &#123;
+// 错误！这里sizeof(arr)返回指针大小(4/8字节)
+// 而不是数组总长度
+int size = sizeof(arr);  // 错误！
+</code></pre>
+<p>}</code></pre><br>                        <p><strong>正确做法：</strong>传递数组长度作为额外参数</p><br>                        <pre><code class="language-c">void func(int arr[], int n) &#123;<br>    // n是数组元素个数<br>    for (int i = 0; i &lt; n; i++) &#123;<br>        // ...<br>    &#125;<br>&#125;</code></pre></p>
+<pre><code>                    &lt;h5&gt;易错点2：指针运算&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;int* p;
+</code></pre>
+<p>p++;  &#x2F;&#x2F; 跳过 sizeof(int) 字节（通常是4字节）<br>      &#x2F;&#x2F; 而不是1字节！</code></pre><br>                        <p><strong>关键理解：</strong>指针的算术运算基于其指向的数据类型</p><br>                        <pre><code class="language-c">int arr[5] = &#123;1, 2, 3, 4, 5&#125;;<br>int* p = arr;</p>
+<p>p + 1;  // 指向arr[1]，地址增加 sizeof(int) = 4字节<br>*(p + 2); // 等价于 arr[2]</code></pre><br>                    </div></p>
+<pre><code>                &lt;h3&gt;2. 结构体内存对齐&lt;/h3&gt;
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;易错点：sizeof(结构体) ≠ 成员大小之和&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;struct Student &#123;
+char name;    // 1字节
+int age;      // 4字节
+float score;  // 4字节
+</code></pre>
+<p>};</p>
+<p>&#x2F;&#x2F; sizeof(struct Student) 可能是 12 字节<br>&#x2F;&#x2F; 而不是 1 + 4 + 4 &#x3D; 9 字节！</code></pre><br>                        <p><strong>原因：</strong>编译器会对结构体成员进行内存对齐（通常4字节对齐）</p></p>
+<pre><code>                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 实际内存布局（假设4字节对齐）：
+</code></pre>
+<p>&#x2F;&#x2F; [name][空][空][空][age][age][age][age][score][score][score][score]<br>&#x2F;&#x2F;  1B  +  3B填充  +     4B       +          4B           &#x3D; 12B</code></pre></p>
+<pre><code>                    &lt;h5&gt;位域的使用&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;struct Flags &#123;
+unsigned int a : 2;  // a只占2位
+unsigned int b : 3;  // b只占3位
+unsigned int c : 1;  // c只占1位
+</code></pre>
+<p>};  &#x2F;&#x2F; 总共可能只占1个int（4字节）</code></pre><br>                        <p><strong>注意：</strong>位域可能因平台不同导致跨字节问题</p><br>                    </div></p>
+<pre><code>                &lt;h3&gt;3. 宏定义的副作用&lt;/h3&gt;
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;易错点：宏参数未加括号&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 错误的宏定义
+</code></pre>
+<p>#define MAX(a, b) a &gt; b ? a : b</p>
+<p>&#x2F;&#x2F; 调用时<br>int result &#x3D; MAX(x + y, z);<br>&#x2F;&#x2F; 展开为：x + y &gt; z ? x + y : z<br>&#x2F;&#x2F; 由于运算符优先级，可能得到错误结果！</code></pre></p>
+<pre><code>                    &lt;p&gt;&lt;strong&gt;正确写法：&lt;/strong&gt;参数和整体都加括号&lt;/p&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;#define MAX(a, b) ((a) &gt; (b) ? (a) : (b))&lt;/code&gt;&lt;/pre&gt;
+
+                    &lt;h5&gt;易错点：宏替换导致多次求值&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;#define SQUARE(x) ((x) * (x))
+</code></pre>
+<p>int a &#x3D; 5;<br>int result &#x3D; SQUARE(a++);  &#x2F;&#x2F; 危险！<br>&#x2F;&#x2F; 展开为：((a++) * (a++))<br>&#x2F;&#x2F; a被自增了两次！</code></pre></p>
+<pre><code>                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;💡 建议&lt;/h4&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;宏参数都要加括号&lt;/li&gt;
+                            &lt;li&gt;避免在宏参数中使用有副作用的表达式（如++、--）&lt;/li&gt;
+                            &lt;li&gt;考虑使用inline函数替代复杂宏&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;h3&gt;4. 全局变量与静态变量&lt;/h3&gt;
+                &lt;table&gt;
+                    &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th&gt;变量类型&lt;/th&gt;
+                            &lt;th&gt;初始化默认值&lt;/th&gt;
+                            &lt;th&gt;生命周期&lt;/th&gt;
+                            &lt;th&gt;作用域&lt;/th&gt;
+                        &lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;全局变量&lt;/td&gt;
+                            &lt;td&gt;0&lt;/td&gt;
+                            &lt;td&gt;整个程序运行期&lt;/td&gt;
+                            &lt;td&gt;整个文件（可用extern扩展）&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;局部变量&lt;/td&gt;
+                            &lt;td&gt;随机值&lt;/td&gt;
+                            &lt;td&gt;函数执行期&lt;/td&gt;
+                            &lt;td&gt;函数内部&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;static局部变量&lt;/td&gt;
+                            &lt;td&gt;0&lt;/td&gt;
+                            &lt;td&gt;整个程序运行期&lt;/td&gt;
+                            &lt;td&gt;函数内部&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;static全局变量&lt;/td&gt;
+                            &lt;td&gt;0&lt;/td&gt;
+                            &lt;td&gt;整个程序运行期&lt;/td&gt;
+                            &lt;td&gt;当前文件&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/tbody&gt;
+                &lt;/table&gt;
+
+                &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;void func() &#123;
+int a;          // 随机值！
+static int b;   // 自动初始化为0
+
+printf(&quot;%d %d\n&quot;, a, b);  // a的值不确定
+</code></pre>
+<p>}</code></pre><br>                </section></p>
+<pre><code>            &lt;section class=&quot;section&quot; id=&quot;fill-blanks&quot;&gt;
+                &lt;h2&gt;二、程序填空题易错点&lt;/h2&gt;
+
+                &lt;h3&gt;1. 循环条件与边界处理&lt;/h3&gt;
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;易错点1：循环条件写反&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 遍历数组
+</code></pre>
+<p>for (int i &#x3D; 0; i &lt;&#x3D; n; i++)   &#x2F;&#x2F; 错误！越界<br>for (int i &#x3D; 0; i &lt; n; i++)    &#x2F;&#x2F; 正确</p>
+<p>for (int i &#x3D; 1; i &lt;&#x3D; n; i++)   &#x2F;&#x2F; 从1开始，到n结束<br>for (int i &#x3D; 0; i &lt; n; i++)    &#x2F;&#x2F; 从0开始，到n-1结束</code></pre></p>
+<pre><code>                    &lt;h5&gt;易错点2：二维数组行列顺序混淆&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;int matrix[3][4];
+</code></pre>
+<p>&#x2F;&#x2F; 遍历：先行后列<br>for (int i &#x3D; 0; i &lt; 3; i++) {      &#x2F;&#x2F; 行<br>    for (int j &#x3D; 0; j &lt; 4; j++) {  &#x2F;&#x2F; 列<br>        printf(“%d “, matrix[i][j]);<br>    }<br>}</p>
+<p>&#x2F;&#x2F; 错误示例：行列颠倒<br>for (int i &#x3D; 0; i &lt; 4; i++) {      &#x2F;&#x2F; 错误！i应该到3<br>    for (int j &#x3D; 0; j &lt; 3; j++) {  &#x2F;&#x2F; 错误！j应该到4<br>        &#x2F;&#x2F; …<br>    }<br>}</code></pre><br>                    </div></p>
+<pre><code>                &lt;h3&gt;2. 指针与数组下标&lt;/h3&gt;
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;易错点：指针算术类型不匹配&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;int arr[5];
+</code></pre>
+<p>int* p &#x3D; arr;</p>
+<p>&#x2F;&#x2F; 正确的指针访问<br>*(p + i)     &#x2F;&#x2F; 等价于 arr[i]<br>*(arr + i)   &#x2F;&#x2F; 等价于 arr[i]</p>
+<p>&#x2F;&#x2F; 错误示例<br>int x &#x3D; *(arr + i);  &#x2F;&#x2F; 正确<br>int y &#x3D; arr + i;     &#x2F;&#x2F; 错误！arr+i是指针，不能直接赋给int</code></pre></p>
+<pre><code>                    &lt;h5&gt;易错点：字符串输入处理&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;char str[10];
+</code></pre>
+<p>&#x2F;&#x2F; 方法1：scanf（遇到空格停止）<br>scanf(“%s”, str);</p>
+<p>&#x2F;&#x2F; 方法2：scanf读取整行（包括空格）<br>scanf(“%[^\n]”, str);</p>
+<p>&#x2F;&#x2F; 方法3：fgets（推荐）<br>fgets(str, sizeof(str), stdin);</code></pre><br>                    </div></p>
+<pre><code>                &lt;h3&gt;3. 函数参数传递&lt;/h3&gt;
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;易错点：值传递vs地址传递&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 值传递：修改形参不影响实参
+</code></pre>
+<p>void swap1(int a, int b) {<br>    int temp &#x3D; a;<br>    a &#x3D; b;<br>    b &#x3D; temp;<br>}  &#x2F;&#x2F; ❌ 无法交换实际参数</p>
+<p>&#x2F;&#x2F; 地址传递：通过指针修改实参<br>void swap2(int* a, int* b) {<br>    int temp &#x3D; *a;<br>    *a &#x3D; *b;<br>    *b &#x3D; temp;<br>}  &#x2F;&#x2F; ✅ 可以交换</p>
+<p>int x &#x3D; 10, y &#x3D; 20;<br>swap1(x, y);   &#x2F;&#x2F; x,y不变<br>swap2(&amp;x, &amp;y); &#x2F;&#x2F; x,y被交换</code></pre><br>                    </div></p>
+<pre><code>                &lt;h3&gt;4. 动态内存分配&lt;/h3&gt;
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;易错点：忘记释放内存&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 正确做法
+</code></pre>
+<p>int* p &#x3D; (int*)malloc(n * sizeof(int));<br>if (p &#x3D;&#x3D; NULL) {<br>    &#x2F;&#x2F; 处理内存分配失败<br>}</p>
+<p>&#x2F;&#x2F; 使用内存…</p>
+<p>&#x2F;&#x2F; 释放内存<br>free(p);<br>p &#x3D; NULL;  &#x2F;&#x2F; 避免野指针</code></pre></p>
+<pre><code>                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;⚠️ 记忆口诀&lt;/h4&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;谁malloc，谁free&lt;/li&gt;
+                            &lt;li&gt;free后置NULL&lt;/li&gt;
+                            &lt;li&gt;配对使用，防止泄漏&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+
+            &lt;section class=&quot;section&quot; id=&quot;programming&quot;&gt;
+                &lt;h2&gt;三、编程题易错点&lt;/h2&gt;
+
+                &lt;h3&gt;1. 数组越界与字符串处理&lt;/h3&gt;
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;易错点：缓冲区溢出&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;char src[] = &quot;Hello, World!&quot;;
+</code></pre>
+<p>char dest[5];  &#x2F;&#x2F; 只有5字节空间</p>
+<p>&#x2F;&#x2F; 危险！src有13字节，dest只有5字节<br>strcpy(dest, src);  &#x2F;&#x2F; ❌ 缓冲区溢出！</p>
+<p>&#x2F;&#x2F; 正确做法：先检查长度<br>if (strlen(src) &lt; sizeof(dest)) {<br>    strcpy(dest, src);  &#x2F;&#x2F; ✅ 安全<br>} else {<br>    printf(“目标空间不足\n”);<br>}</code></pre></p>
+<pre><code>                    &lt;h5&gt;安全函数替代方案&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 使用strncpy替代strcpy
+</code></pre>
+<p>strncpy(dest, src, sizeof(dest) - 1);<br>dest[sizeof(dest) - 1] &#x3D; ‘\0’;  &#x2F;&#x2F; 确保以’\0’结尾</p>
+<p>&#x2F;&#x2F; 使用strncat替代strcat<br>strncat(dest, src, sizeof(dest) - strlen(dest) - 1);</p>
+<p>&#x2F;&#x2F; 使用snprintf替代sprintf<br>snprintf(dest, sizeof(dest), “%s”, src);</code></pre><br>                    </div></p>
+<pre><code>                &lt;h3&gt;2. 递归函数&lt;/h3&gt;
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;易错点：缺少递归终止条件&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 错误示例：缺少终止条件
+</code></pre>
+<p>int factorial(int n) {<br>    return n * factorial(n - 1);  &#x2F;&#x2F; ❌ 无限递归！<br>}</p>
+<p>&#x2F;&#x2F; 正确示例<br>int factorial(int n) {<br>    if (n &lt;&#x3D; 1) {  &#x2F;&#x2F; ✅ 递归终止条件<br>        return 1;<br>    }<br>    return n * factorial(n - 1);<br>}</code></pre></p>
+<pre><code>                    &lt;h5&gt;递归过深导致栈溢出&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 递归深度过大时，改用迭代
+</code></pre>
+<p>int factorial_iterative(int n) {<br>    int result &#x3D; 1;<br>    for (int i &#x3D; 2; i &lt;&#x3D; n; i++) {<br>        result *&#x3D; i;<br>    }<br>    return result;<br>}</code></pre><br>                    </div></p>
+<pre><code>                &lt;h3&gt;3. 文件读写&lt;/h3&gt;
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;易错点1：忘记检查文件是否成功打开&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;FILE* fp = fopen(&quot;data.txt&quot;, &quot;r&quot;);
+</code></pre>
+<p>&#x2F;&#x2F; ❌ 直接使用，可能导致崩溃<br>fscanf(fp, “%d”, &amp;n);</p>
+<p>&#x2F;&#x2F; ✅ 正确做法：检查返回值<br>if (fp &#x3D;&#x3D; NULL) {<br>    printf(“无法打开文件\n”);<br>    return 1;<br>}</p>
+<p>&#x2F;&#x2F; 使用完记得关闭<br>fclose(fp);</code></pre></p>
+<pre><code>                    &lt;h5&gt;易错点2：处理文件结束符EOF&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 错误示例
+</code></pre>
+<p>while (!feof(fp)) {  &#x2F;&#x2F; ❌ 可能多读一次<br>    fscanf(fp, “%d”, &amp;n);<br>    printf(“%d “, n);<br>}</p>
+<p>&#x2F;&#x2F; 正确示例<br>while (fscanf(fp, “%d”, &amp;n) &#x3D;&#x3D; 1) {  &#x2F;&#x2F; ✅ 检查返回值<br>    printf(“%d “, n);<br>}</code></pre></p>
+<pre><code>                    &lt;h5&gt;易错点3：二进制文件读写参数顺序&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;int arr[10];
+</code></pre>
+<p>&#x2F;&#x2F; fread参数：指针, 元素大小, 元素个数, 文件指针<br>fread(arr, sizeof(int), 10, fp);  &#x2F;&#x2F; ✅ 正确</p>
+<p>&#x2F;&#x2F; 错误示例<br>fread(arr, 10, sizeof(int), fp);  &#x2F;&#x2F; ❌ 参数顺序错误</code></pre><br>                    </div><br>                </section></p>
+<pre><code>            &lt;section class=&quot;section&quot; id=&quot;high-frequency&quot;&gt;
+                &lt;h2&gt;四、高频考点清单&lt;/h2&gt;
+
+                &lt;table&gt;
+                    &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th&gt;知识点&lt;/th&gt;
+                            &lt;th&gt;易错点&lt;/th&gt;
+                            &lt;th&gt;考试频率&lt;/th&gt;
+                        &lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;strong&gt;指针与数组&lt;/strong&gt;&lt;/td&gt;
+                            &lt;td&gt;数组名作为参数传递时的类型差异、指针算术运算&lt;/td&gt;
+                            &lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;strong&gt;结构体与共用体&lt;/strong&gt;&lt;/td&gt;
+                            &lt;td&gt;内存对齐、位域、共用体成员覆盖&lt;/td&gt;
+                            &lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;strong&gt;宏定义与预处理&lt;/strong&gt;&lt;/td&gt;
+                            &lt;td&gt;宏参数未加括号、宏替换的副作用&lt;/td&gt;
+                            &lt;td&gt;⭐⭐⭐⭐&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;strong&gt;动态内存&lt;/strong&gt;&lt;/td&gt;
+                            &lt;td&gt;malloc/calloc的区别、free后置空指针&lt;/td&gt;
+                            &lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;strong&gt;文件操作&lt;/strong&gt;&lt;/td&gt;
+                            &lt;td&gt;模式字符串误用、文件指针位置（fseek/ftell）&lt;/td&gt;
+                            &lt;td&gt;⭐⭐⭐⭐&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;strong&gt;字符串处理&lt;/strong&gt;&lt;/td&gt;
+                            &lt;td&gt;缓冲区溢出、strcat/strcpy的安全使用&lt;/td&gt;
+                            &lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;strong&gt;递归函数&lt;/strong&gt;&lt;/td&gt;
+                            &lt;td&gt;递归终止条件、栈溢出&lt;/td&gt;
+                            &lt;td&gt;⭐⭐⭐&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;strong&gt;函数参数传递&lt;/strong&gt;&lt;/td&gt;
+                            &lt;td&gt;值传递vs地址传递、数组退化为指针&lt;/td&gt;
+                            &lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/tbody&gt;
+                &lt;/table&gt;
+            &lt;/section&gt;
+
+            &lt;section class=&quot;section&quot; id=&quot;review-tips&quot;&gt;
+                &lt;h2&gt;五、复习建议&lt;/h2&gt;
+
+                &lt;div class=&quot;tips&quot;&gt;
+                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;1. 针对性练习&lt;/h4&gt;
+                        &lt;p&gt;多做历年真题中的易错题型，特别是：&lt;/p&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;指针相关题目&lt;/li&gt;
+                            &lt;li&gt;结构体和共用体&lt;/li&gt;
+                            &lt;li&gt;文件操作&lt;/li&gt;
+                            &lt;li&gt;动态内存分配&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;2. 代码调试&lt;/h4&gt;
+                        &lt;p&gt;用printf或调试工具检查：&lt;/p&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;指针的值是否正确&lt;/li&gt;
+                            &lt;li&gt;数组下标是否越界&lt;/li&gt;
+                            &lt;li&gt;内存分配是否成功&lt;/li&gt;
+                            &lt;li&gt;文件是否正确打开&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;3. 记忆口诀&lt;/h4&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;&lt;strong&gt;指针数组&lt;/strong&gt;：&quot;指针数组，数组指针，弄清顺序&quot;&lt;/li&gt;
+                            &lt;li&gt;&lt;strong&gt;宏定义&lt;/strong&gt;：&quot;宏定义，参数括号，避免陷阱&quot;&lt;/li&gt;
+                            &lt;li&gt;&lt;strong&gt;文件操作&lt;/strong&gt;：&quot;文件操作，模式选对，EOF处理&quot;&lt;/li&gt;
+                            &lt;li&gt;&lt;strong&gt;动态内存&lt;/strong&gt;：&quot;谁malloc谁free，free后置NULL&quot;&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;4. 重点章节优先&lt;/h4&gt;
+                        &lt;p&gt;按重要性排序：&lt;/p&gt;
+                        &lt;ol&gt;
+                            &lt;li&gt;指针（最重要，最难）&lt;/li&gt;
+                            &lt;li&gt;函数&lt;/li&gt;
+                            &lt;li&gt;数组&lt;/li&gt;
+                            &lt;li&gt;结构体&lt;/li&gt;
+                            &lt;li&gt;文件操作&lt;/li&gt;
+                        &lt;/ol&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class=&quot;course-info&quot; style=&quot;margin-top: 2rem;&quot;&gt;
+                    &lt;p class=&quot;lead&quot; style=&quot;text-align: center; margin: 0;&quot;&gt;
+                        📚 祝你考试顺利！加油！💪
+                    &lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+
+            &lt;section class=&quot;section&quot;&gt;
+                &lt;h2&gt;相关资源&lt;/h2&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href=&quot;/wiki/c/cases/&quot;&gt;经典案例与解析&lt;/a&gt; - 通过实例加深理解&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;/wiki/c/chapter5/&quot;&gt;第5章 指针&lt;/a&gt; - 指针专题学习&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;/wiki/c/chapter6/&quot;&gt;第6章 函数&lt;/a&gt; - 函数专题学习&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;/wiki/c/interview-questions/&quot;&gt;面试常见题&lt;/a&gt; - 巩固基础知识&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/section&gt;
+</code></pre>
+</article>
+
+<footer class="page-footer footnote"><hr><div class="sitemap" style="column-count:4;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/blog/categories/">分类</a><a href="/blog/tags/">标签</a><a href="/blog/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https://tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https://pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https://news.cnortles.top">新闻</a><a href="/atom.xml">订阅</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/">xxx</a><a href="/">xxx</a><a href="/">xxx</a><a href="/">xxx</a></div><div class="sitemap-group"><span class="fs15">关于</span><a target="_blank" rel="noopener" href="https://icp.gov.moe/?keyword=20257782">萌ICP备20257782号</a><a target="_blank" rel="noopener" href="https://edgeone.ai">Edgeone提供服务</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/FelicxFoster/hexo-theme-stellar">Stellar</a>
+创建
+</span>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js"></script>
+<script>
+    loadStatistic("https://qexo.cnortles.top")
+</script>
+</br>
+<span id="runtime_span"></span>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var runtime_span = document.getElementById('runtime_span');
+    function show_runtime() {
+      // 调用定时器
+      setTimeout(show_runtime, 1000);
+      var seconds = 1000;
+      var minutes = seconds * 60;
+      var hours = minutes * 60;
+      var days = hours * 24;
+      var years = days * 365;
+      var today = new Date();
+      var todayYear = today.getFullYear();
+      var todayMonth = today.getMonth();
+      var todayDate = today.getDate();
+      var todayHour = today.getHours();
+      var todayMinute = today.getMinutes();
+      var todaySecond = today.getSeconds();
+      var t1 = Date.UTC(2025, 7, 1, 0, 0, 0); // UTC时间，月份从0开始
+      var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+      var diff = t2 - t1;
+      var diffYears = Math.floor(diff / years);
+      var diffDays = Math.floor((diff / days) - diffYears * 365);
+      var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+      var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+      var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+      // 更新显示时间的span元素内容
+      runtime_span.innerHTML = "🦉营业：" + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒🦉";
+    }
+    show_runtime(); // 初次调用函数以启动定时器
+  });
+</script>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+</aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"closeEnable":true,"closeText":"关闭提示","originalHost":"blog.cnortles.top","officialHosts":["localhost","caoronglin.github.io","c.cnortles.top","cnortles.top"],"encoded":"YmxvZy5jbm9ydGxlcy50b3A="};
+  window.canonical["param"] = {"permalink":"https://blog.cnortles.top/wiki/c/exam-tips","checklink":"/js/plugins/video.js"};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://cdn.cnortles.top/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        if ($(el).find('.loading-wrap').length == 0){
+          $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+        }
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"},"rss":{"js":"/js/services/rss.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.chat-file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img ,.tk-content img:not([class*="emo"])`,
+    css: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<link rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+<script defer type="text/javascript" src="https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    mermaid.initialize(mermaid_config);
+  });
+</script><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+<script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/js/smooth-scroll.js"></script><script src="/js/about-page.js"></script><script src="/js/rightmenu.js"></script><script src="/js/comment-barrage.js"></script>
+</div></body></html>

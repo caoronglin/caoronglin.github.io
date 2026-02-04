@@ -1,0 +1,1228 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  <link rel="canonical" href="https://blog.cnortles.top/wiki/c/interview-questions/">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top/npm" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>c：C语言面试常见题 - Aurora</title>
+
+  
+    <meta name="description" content="⭐                     面试必备 基础题+算法题+编程题全覆盖                               &lt;section class&#x3D;&quot;section&quot;&gt;                 &lt;h2&gt;题目分类&lt;&#x2F;h2&gt;                 &lt;ul&amp;">
+<meta property="og:type" content="website">
+<meta property="og:title" content="C语言面试常见题">
+<meta property="og:url" content="https://blog.cnortles.top/wiki/c/interview-questions/">
+<meta property="og:site_name" content="Aurora">
+<meta property="og:description" content="⭐                     面试必备 基础题+算法题+编程题全覆盖                               &lt;section class&#x3D;&quot;section&quot;&gt;                 &lt;h2&gt;题目分类&lt;&#x2F;h2&gt;                 &lt;ul&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg">
+<meta property="article:published_time" content="2026-02-01T05:00:55.000Z">
+<meta property="article:modified_time" content="2026-02-01T05:00:55.000Z">
+<meta property="article:author" content="Rl.">
+<meta property="article:tag" content="生信">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg">
+  
+  
+  
+  <meta name="keywords" content="生信">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="Aurora" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top","author":{"@type":"Person","name":"Rl.","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"Aurora","description":"愿极光，永不消逝。","url":"https://blog.cnortles.top"}</script>
+  <script>
+  if (window.localStorage.getItem('ZYI_Theme_Mode')==='dark' || (window.localStorage.getItem('ZYI_Theme_Mode')==='Moss' && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+      document.querySelector("html").id = "ZYDark";
+  }
+</script>
+<link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="/custom/css/ZYDark.css"><script src="/custom/js/link-icon.js"></script><link rel="stylesheet" href="/custom/css/index.css"><link rel="stylesheet" href="/custom/css/timeline-twikoo.css"><link rel="stylesheet" href="/css/custom/smooth-scroll.css"><link rel="stylesheet" href="/css/custom/about-page.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"><link rel="stylesheet" href="/css/custom/fonts.css"><link rel="stylesheet" href="/css/custom/rightmenu.css"><link rel="stylesheet" href="/css/custom/comment-barrage.css"><link rel="stylesheet" href="/css/custom/equipment.css"><link rel="stylesheet" href="/css/custom/subscribe.css">
+</head>
+<body>
+
+
+
+<div class="l_body content" id="start" layout="wiki" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><div class="icon"><img no-lazy class="icon" src="https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2779789.png" onerror="javascript:this.classList.add('error');this.src='https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><a class="title" href="/wiki/c/c-keywords"><div class="main">c</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="说说" href="/talk/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/notes/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/wiki/c/" placeholder="在 c 中搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<widget class="widget-wrapper doc-tree post-list"><div class="widget-body fs14"><a class="link" href="/wiki/c/c-keywords/#start"><span class="toc-text">C语言32个关键字</span></a><a class="link" href="/wiki/c/cases/"><span class="toc-text">经典案例与解析</span></a><a class="link" href="/wiki/c/chapter3/"><span class="toc-text">第3章 程序设计基本结构</span></a><a class="link" href="/wiki/c/chapter2/"><span class="toc-text">第2章 C语言基础</span></a><a class="link" href="/wiki/c/chapter4/"><span class="toc-text">第4章 数组</span></a><a class="link" href="/wiki/c/chapter5/"><span class="toc-text">第5章 指针</span></a><a class="link" href="/wiki/c/chapter6/"><span class="toc-text">第6章 函数</span></a><a class="link" href="/wiki/c/chapter7/"><span class="toc-text">第7章 结构体与共用体</span></a><a class="link" href="/wiki/c/chapter8/"><span class="toc-text">第8章 文件操作</span></a><a class="link" href="/wiki/c/exam-tips/"><span class="toc-text">C语言期末考试易错知识点总结</span></a><a class="link active" href="/wiki/c/interview-questions/"><span class="toc-text">C语言面试常见题</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="link" href="/wiki/c/main-function/"><span class="toc-text">main函数详解</span></a><a class="link" href="/wiki/c/sorting-algorithms/"><span class="toc-text">常见排序算法详解</span></a></div></widget>
+
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/atom.xml"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/p/6b21cc1.shtml"><span class="title">Test Post</span></a><a class="item title" href="/p/7a6a6b5a.shtml"><span class="title">测试文章</span></a><a class="item title" href="/p/f67acfa5.shtml"><span class="title">Test Layout Post</span></a><a class="item title" href="/p/24faff5b.shtml"><span class="title">R2 图床服务：打造你的专属高性能图片托管平台</span></a><a class="item title" href="/p/697f76e7.shtml"><span class="title">利用Hexo框架搭建静态博客</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="https://github.com/caoronglin" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-solid fa-github fa-brands fa-bounce"></i></a><a class="social" title="Bilibili" href="https://space.bilibili.com/555149182?spm_id_from=333.1007.0.0" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-brands fa-bilibili fa-bounce"></i></a><a class="social" title="Email" href="mailto:crl@cnortles.top" rel="noopener noreferrer"><i class="fa-solid fa-envelope fa-bounce"></i></a><a class="social" title="Comments" href="/comments" rel="noopener noreferrer"><i class="fa-solid fa-comment fa-bounce"></i></a><a class="social" title="深色模式" href="javaScript:void('永夜');" rel="noopener noreferrer"><img id="ThemeM" src="https://api.iconify.design/line-md:moon-filled.svg?color=%23888"/></a><a class="social" title="浅色模式" href="javaScript:void('永昼');" rel="noopener noreferrer"><img id="ThemeL" src="https://api.iconify.design/line-md:sun-filled.svg?color=%23888"/></a><a class="social" title="跟随系统" href="javaScript:void('跟随系统');" rel="noopener noreferrer"><img id="ThemeAI" src="https://api.iconify.design/line-md:computer-loop.svg?color=%23888"/></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+<div class="wiki-header"><div class="wiki-cover"></div><div class="wiki-info"><h1 class="wiki-title">undefined</h1></div></div><article class="md-text wiki-content"><div class="priority-badge">
+                    <span class="star">⭐</span>
+                    <span class="text">面试必备 基础题+算法题+编程题全覆盖</span>
+                </div>
+
+<pre><code>            &lt;section class=&quot;section&quot;&gt;
+                &lt;h2&gt;题目分类&lt;/h2&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href=&quot;#basics&quot;&gt;一、基础概念题&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#pointers&quot;&gt;二、指针与内存&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#arrays&quot;&gt;三、数组与字符串&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#functions&quot;&gt;四、函数与递归&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#bitwise&quot;&gt;五、位运算&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#algorithms&quot;&gt;六、算法实现&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/section&gt;
+
+            &lt;section class=&quot;section&quot; id=&quot;basics&quot;&gt;
+                &lt;h2&gt;一、基础概念题&lt;/h2&gt;
+
+                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q1: strlen() 和 sizeof() 的区别？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;char str[] = &quot;Hello&quot;;
+</code></pre>
+<p>sizeof(str)   &#x2F;&#x2F; 返回 6（包含’\0’）<br>strlen(str)   &#x2F;&#x2F; 返回 5（不包含’\0’）</p>
+<p>char* p &#x3D; “Hello”;<br>sizeof(p)     &#x2F;&#x2F; 返回指针大小（4或8字节）<br>strlen(p)     &#x2F;&#x2F; 返回 5</code></pre><br>                            <p><strong>关键区别：</strong></p><br>                            <ul><br>                                <li><code>sizeof</code>是运算符，编译时确定，计算变量&#x2F;类型占用的字节数</li><br>                                <li><code>strlen</code>是函数，运行时计算，统计字符串长度（不包含’\0’）</li><br>                            </ul><br>                        </div><br>                    </div></p>
+<pre><code>                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q2: ++i 和 i++ 的区别？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;int i = 5;
+</code></pre>
+<p>&#x2F;&#x2F; 前置++：先加1，再使用<br>int a &#x3D; ++i;  &#x2F;&#x2F; a&#x3D;6, i&#x3D;6</p>
+<p>&#x2F;&#x2F; 后置++：先使用，再加1<br>int b &#x3D; i++;  &#x2F;&#x2F; b&#x3D;6, i&#x3D;7</code></pre><br>                            <p><strong>效率：</strong>前置++效率更高，因为不需要保存临时值</p><br>                        </div><br>                    </div></p>
+<pre><code>                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q3: static 关键字的作用？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;p&gt;&lt;strong&gt;1. 修饰局部变量：&lt;/strong&gt;&lt;/p&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;void func() &#123;
+static int count = 0;  // 只初始化一次
+count++;
+printf(&quot;%d &quot;, count);
+</code></pre>
+<p>}</p>
+<p>int main() {<br>    func();  &#x2F;&#x2F; 输出: 1<br>    func();  &#x2F;&#x2F; 输出: 2<br>    func();  &#x2F;&#x2F; 输出: 3<br>}</code></pre><br>                            <p><strong>2. 修饰全局变量：</strong></p><br>                            <pre><code class="language-c">static int g_var = 10;  // 只在本文件内可见</code></pre><br>                            <p><strong>3. 修饰函数：</strong></p><br>                            <pre><code class="language-c">static void helper() &#123;  // 只在本文件内可见<br>    // ...<br>&#125;</code></pre><br>                        </div><br>                    </div></p>
+<pre><code>                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q4: const 关键字的作用？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 1. 常量
+</code></pre>
+<p>const int MAX &#x3D; 100;</p>
+<p>&#x2F;&#x2F; 2. 指向常量的指针（内容不能改）<br>const int* p;<br>*p &#x3D; 10;  &#x2F;&#x2F; ❌ 错误<br>p++;      &#x2F;&#x2F; ✅ 可以</p>
+<p>&#x2F;&#x2F; 3. 常量指针（指向不能改）<br>int* const p &#x3D; &a;<br>*p &#x3D; 10;  &#x2F;&#x2F; ✅ 可以<br>p++;      &#x2F;&#x2F; ❌ 错误</p>
+<p>&#x2F;&#x2F; 4. 指向常量的常量指针<br>const int* const p &#x3D; &a;<br>*p &#x3D; 10;  &#x2F;&#x2F; ❌ 错误<br>p++;      &#x2F;&#x2F; ❌ 错误</code></pre><br>                        </div><br>                    </div><br>                </section></p>
+<pre><code>            &lt;section class=&quot;section&quot; id=&quot;pointers&quot;&gt;
+                &lt;h2&gt;二、指针与内存&lt;/h2&gt;
+
+                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q5: 指针和引用的区别？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;p&gt;C语言没有引用，这是C++概念。但在面试中常问：&lt;/p&gt;
+                        &lt;table&gt;
+                            &lt;thead&gt;
+                                &lt;tr&gt;
+                                    &lt;th&gt;特性&lt;/th&gt;
+                                    &lt;th&gt;指针&lt;/th&gt;
+                                    &lt;th&gt;引用(C++)&lt;/th&gt;
+                                &lt;/tr&gt;
+                            &lt;/thead&gt;
+                            &lt;tbody&gt;
+                                &lt;tr&gt;&lt;td&gt;本质&lt;/td&gt;&lt;td&gt;变量&lt;/td&gt;&lt;td&gt;别名&lt;/td&gt;&lt;/tr&gt;
+                                &lt;tr&gt;&lt;td&gt;是否占用内存&lt;/td&gt;&lt;td&gt;是&lt;/td&gt;&lt;td&gt;否&lt;/td&gt;&lt;/tr&gt;
+                                &lt;tr&gt;&lt;td&gt;能否为空&lt;/td&gt;&lt;td&gt;可以(NULL)&lt;/td&gt;&lt;td&gt;不可以&lt;/td&gt;&lt;/tr&gt;
+                                &lt;tr&gt;&lt;td&gt;初始化&lt;/td&gt;&lt;td&gt;可以不初始化&lt;/td&gt;&lt;td&gt;必须初始化&lt;/td&gt;&lt;/tr&gt;
+                                &lt;tr&gt;&lt;td&gt;改变指向&lt;/td&gt;&lt;td&gt;可以&lt;/td&gt;&lt;td&gt;不可以&lt;/td&gt;&lt;/tr&gt;
+                            &lt;/tbody&gt;
+                        &lt;/table&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q6: 野指针是什么？如何避免？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;p&gt;&lt;strong&gt;野指针：&lt;/strong&gt;指向不确定内存地址的指针&lt;/p&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 野指针的几种情况：
+</code></pre>
+<p>&#x2F;&#x2F; 1. 未初始化<br>int* p;      &#x2F;&#x2F; 野指针！指向随机地址<br>*p &#x3D; 10;     &#x2F;&#x2F; 危险！</p>
+<p>&#x2F;&#x2F; 2. 释放后未置空<br>int* p &#x3D; (int*)malloc(sizeof(int));<br>free(p);<br>*p &#x3D; 10;     &#x2F;&#x2F; 野指针！p指向已释放的内存</p>
+<p>&#x2F;&#x2F; 3. 指针超越变量作用域<br>int* func() {<br>    int a &#x3D; 10;<br>    return &a;  &#x2F;&#x2F; 返回局部变量地址！<br>}</code></pre><br>                            <p><strong>避免方法：</strong></p><br>                            <pre><code class="language-c">// 1. 初始化为NULL<br>int* p = NULL;</p>
+<p>// 2. free后置NULL<br>free(p);<br>p = NULL;</p>
+<p>// 3. 使用前检查<br>if (p != NULL) &#123;<br>    *p = 10;<br>&#125;</code></pre><br>                        </div><br>                    </div></p>
+<pre><code>                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q7: malloc 和 calloc 的区别？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;table&gt;
+                            &lt;thead&gt;
+                                &lt;tr&gt;
+                                    &lt;th&gt;特性&lt;/th&gt;
+                                    &lt;th&gt;malloc&lt;/th&gt;
+                                    &lt;th&gt;calloc&lt;/th&gt;
+                                &lt;/tr&gt;
+                            &lt;/thead&gt;
+                            &lt;tbody&gt;
+                                &lt;tr&gt;&lt;td&gt;参数&lt;/td&gt;&lt;td&gt;malloc(字节数)&lt;/td&gt;&lt;td&gt;calloc(元素个数, 每个元素大小)&lt;/td&gt;&lt;/tr&gt;
+                                &lt;tr&gt;&lt;td&gt;初始化&lt;/td&gt;&lt;td&gt;不初始化，内容随机&lt;/td&gt;&lt;td&gt;初始化为0&lt;/td&gt;&lt;/tr&gt;
+                                &lt;tr&gt;&lt;td&gt;效率&lt;/td&gt;&lt;td&gt;稍快&lt;/td&gt;&lt;td&gt;稍慢&lt;/td&gt;&lt;/tr&gt;
+                            &lt;/tbody&gt;
+                        &lt;/table&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// malloc
+</code></pre>
+<p>int* p1 &#x3D; (int*)malloc(5 * sizeof(int));<br>&#x2F;&#x2F; 内容不确定</p>
+<p>&#x2F;&#x2F; calloc<br>int* p2 &#x3D; (int*)calloc(5, sizeof(int));<br>&#x2F;&#x2F; 内容全为0</code></pre><br>                        </div><br>                    </div><br>                </section></p>
+<pre><code>            &lt;section class=&quot;section&quot; id=&quot;arrays&quot;&gt;
+                &lt;h2&gt;三、数组与字符串&lt;/h2&gt;
+
+                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q8: 数组名和指针的区别？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;int arr[5] = &#123;1, 2, 3, 4, 5&#125;;
+</code></pre>
+<p>int* p &#x3D; arr;</p>
+<p>&#x2F;&#x2F; 相同点<br>arr[i]    等价于  p[i]<br>*(arr+i)  等价于  *(p+i)</p>
+<p>&#x2F;&#x2F; 不同点<br>sizeof(arr)  &#x2F;&#x2F; 20 (整个数组大小)<br>sizeof(p)    &#x2F;&#x2F; 4或8 (指针大小)</p>
+<p>arr++  &#x2F;&#x2F; ❌ 错误！数组名是常量<br>p++    &#x2F;&#x2F; ✅ 正确</code></pre><br>                            <p><strong>关键：</strong>数组名在某些情况下会退化为指针，但它们不是同一类型</p><br>                        </div><br>                    </div></p>
+<pre><code>                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q9: 如何实现字符串反转？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;#include &lt;string.h&gt;
+</code></pre>
+<p>void reverse(char* str) {<br>    if (str &#x3D;&#x3D; NULL) return;</p>
+<pre><code>int len = strlen(str);
+for (int i = 0; i &lt; len / 2; i++) &#123;
+    // 交换首尾字符
+    char temp = str[i];
+    str[i] = str[len - 1 - i];
+    str[len - 1 - i] = temp;
+&#125;
+</code></pre>
+<p>}</p>
+<p>int main() {<br>    char str[] &#x3D; “Hello”;<br>    reverse(str);<br>    printf(“%s\n”, str);  &#x2F;&#x2F; 输出: olleH<br>}</code></pre><br>                        </div><br>                    </div></p>
+<pre><code>                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q10: 如何判断一个字符串是否是回文？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;#include &lt;string.h&gt;
+</code></pre>
+<p>#include &lt;stdbool.h&gt;</p>
+<p>bool isPalindrome(char* str) {<br>    if (str &#x3D;&#x3D; NULL) return false;</p>
+<pre><code>int len = strlen(str);
+int left = 0;
+int right = len - 1;
+
+while (left &lt; right) &#123;
+    if (str[left] != str[right]) &#123;
+        return false;
+    &#125;
+    left++;
+    right--;
+&#125;
+return true;
+</code></pre>
+<p>}</p>
+<p>int main() {<br>    printf(“%d\n”, isPalindrome(“aba”));    &#x2F;&#x2F; 1 (true)<br>    printf(“%d\n”, isPalindrome(“abc”));    &#x2F;&#x2F; 0 (false)<br>}</code></pre><br>                        </div><br>                    </div><br>                </section></p>
+<pre><code>            &lt;section class=&quot;section&quot; id=&quot;functions&quot;&gt;
+                &lt;h2&gt;四、函数与递归&lt;/h2&gt;
+
+                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q11: 值传递和地址传递的区别？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 值传递
+</code></pre>
+<p>void swap1(int a, int b) {<br>    int temp &#x3D; a;<br>    a &#x3D; b;<br>    b &#x3D; temp;<br>}  &#x2F;&#x2F; 不影响实参</p>
+<p>&#x2F;&#x2F; 地址传递<br>void swap2(int* a, int* b) {<br>    int temp &#x3D; *a;<br>    *a &#x3D; *b;<br>    *b &#x3D; temp;<br>}  &#x2F;&#x2F; 修改实参</p>
+<p>int x &#x3D; 10, y &#x3D; 20;<br>swap1(x, y);    &#x2F;&#x2F; x,y不变<br>swap2(&amp;x, &amp;y);  &#x2F;&#x2F; x,y被交换</code></pre><br>                        </div><br>                    </div></p>
+<pre><code>                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q12: 递归的三个要素是什么？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;ol&gt;
+                            &lt;li&gt;&lt;strong&gt;递归终止条件&lt;/strong&gt;：必须有一个明确的结束条件&lt;/li&gt;
+                            &lt;li&gt;&lt;strong&gt;递归表达式&lt;/strong&gt;：问题规模缩小的规律&lt;/li&gt;
+                            &lt;li&gt;&lt;strong&gt;向终止条件收敛&lt;/strong&gt;：每次递归都要接近终止条件&lt;/li&gt;
+                        &lt;/ol&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 示例：阶乘
+</code></pre>
+<p>int factorial(int n) {<br>    &#x2F;&#x2F; 1. 终止条件<br>    if (n &lt;&#x3D; 1) {<br>        return 1;<br>    }<br>    &#x2F;&#x2F; 2. 递归表达式 + 3. 收敛<br>    return n * factorial(n - 1);<br>}</code></pre><br>                        </div><br>                    </div><br>                </section></p>
+<pre><code>            &lt;section class=&quot;section&quot; id=&quot;bitwise&quot;&gt;
+                &lt;h2&gt;五、位运算&lt;/h2&gt;
+
+                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q13: 如何判断一个数是否是2的幂？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;bool isPowerOfTwo(int n) &#123;
+// 2的幂：二进制只有一个1
+// 1: 0001
+// 2: 0010
+// 4: 0100
+// 8: 1000
+
+// n &amp; (n-1) 可以去掉最低位的1
+return (n &gt; 0) &amp;&amp; ((n &amp; (n - 1)) == 0);
+</code></pre>
+<p>}</p>
+<p>int main() {<br>    printf(“%d\n”, isPowerOfTwo(1));   &#x2F;&#x2F; 1<br>    printf(“%d\n”, isPowerOfTwo(2));   &#x2F;&#x2F; 1<br>    printf(“%d\n”, isPowerOfTwo(3));   &#x2F;&#x2F; 0<br>    printf(“%d\n”, isPowerOfTwo(4));   &#x2F;&#x2F; 1<br>    printf(“%d\n”, isPowerOfTwo(5));   &#x2F;&#x2F; 0<br>}</code></pre><br>                            <p><strong>原理：</strong>2的幂的二进制表示只有一个1，n&amp;(n-1)会将这个1变为0</p><br>                        </div><br>                    </div></p>
+<pre><code>                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q14: 如何交换两个变量的值（不使用第三个变量）？&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;方法1：加减法&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;int a = 10, b = 20;
+</code></pre>
+<p>a &#x3D; a + b;  &#x2F;&#x2F; a&#x3D;30, b&#x3D;20<br>b &#x3D; a - b;  &#x2F;&#x2F; a&#x3D;30, b&#x3D;10<br>a &#x3D; a - b;  &#x2F;&#x2F; a&#x3D;20, b&#x3D;10</code></pre><br>                            <p><strong>缺点：</strong>可能溢出</p></p>
+<pre><code>                        &lt;h5&gt;方法2：异或法（推荐）&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;int a = 10, b = 20;
+</code></pre>
+<p>a &#x3D; a ^ b;<br>b &#x3D; a ^ b;  &#x2F;&#x2F; b &#x3D; (a^b)^b &#x3D; a<br>a &#x3D; a ^ b;  &#x2F;&#x2F; a &#x3D; (a^b)^a &#x3D; b</code></pre><br>                            <p><strong>优点：</strong>不会溢出，效率高</p><br>                        </div><br>                    </div><br>                </section></p>
+<pre><code>            &lt;section class=&quot;section&quot; id=&quot;algorithms&quot;&gt;
+                &lt;h2&gt;六、算法实现&lt;/h2&gt;
+
+                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q15: 实现二分查找&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;int binarySearch(int arr[], int n, int target) &#123;
+int left = 0;
+int right = n - 1;
+
+while (left &lt;= right) &#123;
+    // 防止溢出
+    int mid = left + (right - left) / 2;
+
+    if (arr[mid] == target) &#123;
+        return mid;
+    &#125; else if (arr[mid] &lt; target) &#123;
+        left = mid + 1;
+    &#125; else &#123;
+        right = mid - 1;
+    &#125;
+&#125;
+
+return -1;  // 未找到
+</code></pre>
+<p>}</code></pre><br>                            <p><strong>时间复杂度：</strong>O(log n)</p><br>                        </div><br>                    </div></p>
+<pre><code>                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q16: 实现斐波那契数列&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;方法1：递归（低效）&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;int fib(int n) &#123;
+if (n &lt;= 1) return n;
+return fib(n - 1) + fib(n - 2);
+</code></pre>
+<p>}</code></pre><br>                            <p><strong>时间复杂度：</strong>O(2ⁿ) - 有大量重复计算</p></p>
+<pre><code>                        &lt;h5&gt;方法2：迭代（推荐）&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;int fib(int n) &#123;
+if (n &lt;= 1) return n;
+
+int a = 0, b = 1, c;
+for (int i = 2; i &lt;= n; i++) &#123;
+    c = a + b;
+    a = b;
+    b = c;
+&#125;
+return b;
+</code></pre>
+<p>}</code></pre><br>                            <p><strong>时间复杂度：</strong>O(n)</p><br>                        </div><br>                    </div></p>
+<pre><code>                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;Q17: 判断一个数是否是素数&lt;/h3&gt;
+                    &lt;div class=&quot;analysis&quot;&gt;
+                        &lt;h5&gt;答案：&lt;/h5&gt;
+                        &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;#include &lt;stdbool.h&gt;
+</code></pre>
+<p>#include &lt;math.h&gt;</p>
+<p>bool isPrime(int n) {<br>    if (n &lt;&#x3D; 1) return false;<br>    if (n &#x3D;&#x3D; 2) return true;<br>    if (n % 2 &#x3D;&#x3D; 0) return false;</p>
+<pre><code>// 只需检查到√n
+for (int i = 3; i &lt;= sqrt(n); i += 2) &#123;
+    if (n % i == 0) &#123;
+        return false;
+    &#125;
+&#125;
+return true;
+</code></pre>
+<p>}</code></pre><br>                            <p><strong>优化：</strong>只检查到√n，跳过偶数</p><br>                        </div><br>                    </div><br>                </section></p>
+<pre><code>            &lt;section class=&quot;section&quot;&gt;
+                &lt;h2&gt;面试技巧&lt;/h2&gt;
+                &lt;div class=&quot;tips&quot;&gt;
+                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;💡 回答问题的技巧&lt;/h4&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;先说结论，再解释原因&lt;/li&gt;
+                            &lt;li&gt;用代码示例佐证观点&lt;/li&gt;
+                            &lt;li&gt;分析不同方案的优缺点&lt;/li&gt;
+                            &lt;li&gt;考虑边界情况和错误处理&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;💡 编程题技巧&lt;/h4&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;先明确需求，再动手编码&lt;/li&gt;
+                            &lt;li&gt;先写框架，再填细节&lt;/li&gt;
+                            &lt;li&gt;注意变量命名和代码风格&lt;/li&gt;
+                            &lt;li&gt;主动测试边界情况&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;💡 常见追问&lt;/h4&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;&quot;这个算法的时间复杂度是多少？&quot;&lt;/li&gt;
+                            &lt;li&gt;&quot;有没有更优的解决方案？&quot;&lt;/li&gt;
+                            &lt;li&gt;&quot;如果数据量很大怎么办？&quot;&lt;/li&gt;
+                            &lt;li&gt;&quot;如何处理并发/线程安全问题？&quot;&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+
+            &lt;section class=&quot;section&quot;&gt;
+                &lt;h2&gt;相关资源&lt;/h2&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href=&quot;/wiki/c/exam-tips/&quot;&gt;期末考试易错点&lt;/a&gt; - 巩固基础知识&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;/wiki/c/cases/&quot;&gt;经典案例与解析&lt;/a&gt; - 实战项目经验&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;/wiki/c/chapter5/&quot;&gt;第5章 指针&lt;/a&gt; - 指针专题&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;/wiki/c/chapter4/&quot;&gt;第4章 数组&lt;/a&gt; - 数组与字符串&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/section&gt;
+</code></pre>
+</article>
+
+<footer class="page-footer footnote"><hr><div class="sitemap" style="column-count:4;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/blog/categories/">分类</a><a href="/blog/tags/">标签</a><a href="/blog/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https://tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https://pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https://news.cnortles.top">新闻</a><a href="/atom.xml">订阅</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/">xxx</a><a href="/">xxx</a><a href="/">xxx</a><a href="/">xxx</a></div><div class="sitemap-group"><span class="fs15">关于</span><a target="_blank" rel="noopener" href="https://icp.gov.moe/?keyword=20257782">萌ICP备20257782号</a><a target="_blank" rel="noopener" href="https://edgeone.ai">Edgeone提供服务</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/FelicxFoster/hexo-theme-stellar">Stellar</a>
+创建
+</span>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js"></script>
+<script>
+    loadStatistic("https://qexo.cnortles.top")
+</script>
+</br>
+<span id="runtime_span"></span>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var runtime_span = document.getElementById('runtime_span');
+    function show_runtime() {
+      // 调用定时器
+      setTimeout(show_runtime, 1000);
+      var seconds = 1000;
+      var minutes = seconds * 60;
+      var hours = minutes * 60;
+      var days = hours * 24;
+      var years = days * 365;
+      var today = new Date();
+      var todayYear = today.getFullYear();
+      var todayMonth = today.getMonth();
+      var todayDate = today.getDate();
+      var todayHour = today.getHours();
+      var todayMinute = today.getMinutes();
+      var todaySecond = today.getSeconds();
+      var t1 = Date.UTC(2025, 7, 1, 0, 0, 0); // UTC时间，月份从0开始
+      var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+      var diff = t2 - t1;
+      var diffYears = Math.floor(diff / years);
+      var diffDays = Math.floor((diff / days) - diffYears * 365);
+      var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+      var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+      var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+      // 更新显示时间的span元素内容
+      runtime_span.innerHTML = "🦉营业：" + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒🦉";
+    }
+    show_runtime(); // 初次调用函数以启动定时器
+  });
+</script>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+</aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"closeEnable":true,"closeText":"关闭提示","originalHost":"blog.cnortles.top","officialHosts":["localhost","caoronglin.github.io","c.cnortles.top","cnortles.top"],"encoded":"YmxvZy5jbm9ydGxlcy50b3A="};
+  window.canonical["param"] = {"permalink":"https://blog.cnortles.top/wiki/c/interview-questions","checklink":"/js/plugins/video.js"};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://cdn.cnortles.top/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        if ($(el).find('.loading-wrap').length == 0){
+          $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+        }
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"},"rss":{"js":"/js/services/rss.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.chat-file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img ,.tk-content img:not([class*="emo"])`,
+    css: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<link rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+<script defer type="text/javascript" src="https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    mermaid.initialize(mermaid_config);
+  });
+</script><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+<script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/js/smooth-scroll.js"></script><script src="/js/about-page.js"></script><script src="/js/rightmenu.js"></script><script src="/js/comment-barrage.js"></script>
+</div></body></html>

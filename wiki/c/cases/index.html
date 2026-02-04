@@ -1,0 +1,1570 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  <link rel="canonical" href="https://blog.cnortles.top/wiki/c/cases/">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top/npm" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>c：经典案例与解析 - Aurora</title>
+
+  
+    <meta name="description" content="⭐                     实战案例 通过实际项目巩固理论知识                               &lt;section class&#x3D;&quot;section&quot;&gt;                 &lt;h2&gt;案例目录&lt;&#x2F;h2&gt;                 &lt;ul&amp;gt">
+<meta property="og:type" content="website">
+<meta property="og:title" content="经典案例与解析">
+<meta property="og:url" content="https://blog.cnortles.top/wiki/c/cases/">
+<meta property="og:site_name" content="Aurora">
+<meta property="og:description" content="⭐                     实战案例 通过实际项目巩固理论知识                               &lt;section class&#x3D;&quot;section&quot;&gt;                 &lt;h2&gt;案例目录&lt;&#x2F;h2&gt;                 &lt;ul&amp;gt">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg">
+<meta property="article:published_time" content="2026-02-01T05:00:55.000Z">
+<meta property="article:modified_time" content="2026-02-01T05:00:55.000Z">
+<meta property="article:author" content="Rl.">
+<meta property="article:tag" content="生信">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg">
+  
+  
+  
+  <meta name="keywords" content="生信">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="Aurora" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top","author":{"@type":"Person","name":"Rl.","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"Aurora","description":"愿极光，永不消逝。","url":"https://blog.cnortles.top"}</script>
+  <script>
+  if (window.localStorage.getItem('ZYI_Theme_Mode')==='dark' || (window.localStorage.getItem('ZYI_Theme_Mode')==='Moss' && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+      document.querySelector("html").id = "ZYDark";
+  }
+</script>
+<link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="/custom/css/ZYDark.css"><script src="/custom/js/link-icon.js"></script><link rel="stylesheet" href="/custom/css/index.css"><link rel="stylesheet" href="/custom/css/timeline-twikoo.css"><link rel="stylesheet" href="/css/custom/smooth-scroll.css"><link rel="stylesheet" href="/css/custom/about-page.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"><link rel="stylesheet" href="/css/custom/fonts.css"><link rel="stylesheet" href="/css/custom/rightmenu.css"><link rel="stylesheet" href="/css/custom/comment-barrage.css"><link rel="stylesheet" href="/css/custom/equipment.css"><link rel="stylesheet" href="/css/custom/subscribe.css">
+</head>
+<body>
+
+
+
+<div class="l_body content" id="start" layout="wiki" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><div class="icon"><img no-lazy class="icon" src="https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2779789.png" onerror="javascript:this.classList.add('error');this.src='https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><a class="title" href="/wiki/c/c-keywords"><div class="main">c</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="说说" href="/talk/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/notes/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/wiki/c/" placeholder="在 c 中搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<widget class="widget-wrapper doc-tree post-list"><div class="widget-body fs14"><a class="link" href="/wiki/c/c-keywords/#start"><span class="toc-text">C语言32个关键字</span></a><a class="link active" href="/wiki/c/cases/"><span class="toc-text">经典案例与解析</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="link" href="/wiki/c/chapter3/"><span class="toc-text">第3章 程序设计基本结构</span></a><a class="link" href="/wiki/c/chapter2/"><span class="toc-text">第2章 C语言基础</span></a><a class="link" href="/wiki/c/chapter4/"><span class="toc-text">第4章 数组</span></a><a class="link" href="/wiki/c/chapter5/"><span class="toc-text">第5章 指针</span></a><a class="link" href="/wiki/c/chapter6/"><span class="toc-text">第6章 函数</span></a><a class="link" href="/wiki/c/chapter7/"><span class="toc-text">第7章 结构体与共用体</span></a><a class="link" href="/wiki/c/chapter8/"><span class="toc-text">第8章 文件操作</span></a><a class="link" href="/wiki/c/exam-tips/"><span class="toc-text">C语言期末考试易错知识点总结</span></a><a class="link" href="/wiki/c/interview-questions/"><span class="toc-text">C语言面试常见题</span></a><a class="link" href="/wiki/c/main-function/"><span class="toc-text">main函数详解</span></a><a class="link" href="/wiki/c/sorting-algorithms/"><span class="toc-text">常见排序算法详解</span></a></div></widget>
+
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/atom.xml"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/p/6b21cc1.shtml"><span class="title">Test Post</span></a><a class="item title" href="/p/7a6a6b5a.shtml"><span class="title">测试文章</span></a><a class="item title" href="/p/f67acfa5.shtml"><span class="title">Test Layout Post</span></a><a class="item title" href="/p/24faff5b.shtml"><span class="title">R2 图床服务：打造你的专属高性能图片托管平台</span></a><a class="item title" href="/p/697f76e7.shtml"><span class="title">利用Hexo框架搭建静态博客</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="https://github.com/caoronglin" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-solid fa-github fa-brands fa-bounce"></i></a><a class="social" title="Bilibili" href="https://space.bilibili.com/555149182?spm_id_from=333.1007.0.0" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-brands fa-bilibili fa-bounce"></i></a><a class="social" title="Email" href="mailto:crl@cnortles.top" rel="noopener noreferrer"><i class="fa-solid fa-envelope fa-bounce"></i></a><a class="social" title="Comments" href="/comments" rel="noopener noreferrer"><i class="fa-solid fa-comment fa-bounce"></i></a><a class="social" title="深色模式" href="javaScript:void('永夜');" rel="noopener noreferrer"><img id="ThemeM" src="https://api.iconify.design/line-md:moon-filled.svg?color=%23888"/></a><a class="social" title="浅色模式" href="javaScript:void('永昼');" rel="noopener noreferrer"><img id="ThemeL" src="https://api.iconify.design/line-md:sun-filled.svg?color=%23888"/></a><a class="social" title="跟随系统" href="javaScript:void('跟随系统');" rel="noopener noreferrer"><img id="ThemeAI" src="https://api.iconify.design/line-md:computer-loop.svg?color=%23888"/></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+<div class="wiki-header"><div class="wiki-cover"></div><div class="wiki-info"><h1 class="wiki-title">undefined</h1></div></div><article class="md-text wiki-content"><div class="priority-badge">
+                    <span class="star">⭐</span>
+                    <span class="text">实战案例 通过实际项目巩固理论知识</span>
+                </div>
+
+<pre><code>            &lt;section class=&quot;section&quot;&gt;
+                &lt;h2&gt;案例目录&lt;/h2&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href=&quot;#case1&quot;&gt;案例1：学生成绩管理系统（入门版）&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#case2&quot;&gt;案例2：简易计算器&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#case3&quot;&gt;案例3：猜数字游戏&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#case4&quot;&gt;案例4：图书管理系统（进阶版）&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#case5&quot;&gt;案例5：通讯录管理系统&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#case6&quot;&gt;案例6：贪吃蛇游戏&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/section&gt;
+
+            
+            &lt;section class=&quot;section&quot; id=&quot;case1&quot;&gt;
+                &lt;h2&gt;案例1：学生成绩管理系统（入门版）&lt;/h2&gt;
+
+                &lt;div class=&quot;case-meta&quot;&gt;
+                    &lt;h4&gt;📋 案例说明&lt;/h4&gt;
+                    &lt;p&gt;这是一个基础版的学生成绩管理系统，使用数组和结构体实现，适合初学者掌握基本的输入输出和数组操作。&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;涉及知识点：&lt;/strong&gt;数组、循环、选择结构、函数、结构体&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;难度等级：&lt;/strong&gt;⭐⭐ (初级)&lt;/p&gt;
+                &lt;/div&gt;
+
+                &lt;h4&gt;💡 功能需求&lt;/h4&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;添加学生信息（姓名、学号、成绩）&lt;/li&gt;
+                    &lt;li&gt;显示所有学生信息&lt;/li&gt;
+                    &lt;li&gt;计算平均分&lt;/li&gt;
+                    &lt;li&gt;查找最高分学生&lt;/li&gt;
+                    &lt;li&gt;按成绩排序&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;h4&gt;💻 完整代码&lt;/h4&gt;
+                &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;#include &lt;stdio.h&gt;
+</code></pre>
+<p>#include &lt;string.h&gt;</p>
+<p>#define MAX_STUDENTS 50</p>
+<p>&#x2F;&#x2F; 学生结构体<br>struct Student {<br>    char name[50];<br>    int id;<br>    float score;<br>};</p>
+<p>&#x2F;&#x2F; 全局变量<br>struct Student students[MAX_STUDENTS];<br>int studentCount &#x3D; 0;</p>
+<p>&#x2F;&#x2F; 函数声明<br>void addStudent();<br>void displayStudents();<br>void calculateAverage();<br>void findTopStudent();<br>void sortByScore();<br>void showMenu();</p>
+<p>int main() {<br>    int choice;</p>
+<pre><code>while (1) &#123;
+    showMenu();
+    printf(&quot;请选择操作（1-6）：&quot;);
+    scanf(&quot;%d&quot;, &amp;choice);
+
+    switch (choice) &#123;
+        case 1: addStudent(); break;
+        case 2: displayStudents(); break;
+        case 3: calculateAverage(); break;
+        case 4: findTopStudent(); break;
+        case 5: sortByScore(); break;
+        case 6:
+            printf(&quot;感谢使用，再见！\n&quot;);
+            return 0;
+        default:
+            printf(&quot;无效选择，请重新输入！\n&quot;);
+    &#125;
+
+    printf(&quot;\n按回车键继续...&quot;);
+    getchar(); getchar(); // 清空输入缓冲区
+    system(&quot;clear&quot;); // Linux/Mac 使用 clear
+    // system(&quot;cls&quot;); // Windows 使用 cls
+&#125;
+
+return 0;
+</code></pre>
+<p>}</p>
+<p>&#x2F;&#x2F; 显示菜单<br>void showMenu() {<br>    printf(“\n”);<br>    printf(“&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;\n”);<br>    printf(“   学生成绩管理系统（入门版）\n”);<br>    printf(“&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;\n”);<br>    printf(“1. 添加学生\n”);<br>    printf(“2. 显示所有学生\n”);<br>    printf(“3. 计算平均分\n”);<br>    printf(“4. 查找最高分学生\n”);<br>    printf(“5. 按成绩排序\n”);<br>    printf(“6. 退出系统\n”);<br>    printf(“&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;\n”);<br>}</p>
+<p>&#x2F;&#x2F; 添加学生<br>void addStudent() {<br>    if (studentCount &gt;&#x3D; MAX_STUDENTS) {<br>        printf(“\n⚠️  学生人数已达上限！\n”);<br>        return;<br>    }</p>
+<pre><code>printf(&quot;\n--- 添加学生 ---\n&quot;);
+printf(&quot;学号：&quot;);
+scanf(&quot;%d&quot;, &amp;students[studentCount].id);
+
+// 检查学号是否重复
+for (int i = 0; i &lt; studentCount; i++) &#123;
+    if (students[i].id == students[studentCount].id) &#123;
+        printf(&quot;⚠️  学号已存在！\n&quot;);
+        return;
+    &#125;
+&#125;
+
+printf(&quot;姓名：&quot;);
+scanf(&quot;%s&quot;, students[studentCount].name);
+printf(&quot;成绩：&quot;);
+scanf(&quot;%f&quot;, &amp;students[studentCount].score);
+
+studentCount++;
+printf(&quot;✅ 添加成功！\n&quot;);
+</code></pre>
+<p>}</p>
+<p>&#x2F;&#x2F; 显示所有学生<br>void displayStudents() {<br>    if (studentCount &#x3D;&#x3D; 0) {<br>        printf(“\n⚠️  暂无学生信息！\n”);<br>        return;<br>    }</p>
+<pre><code>printf(&quot;\n--- 所有学生信息 ---\n&quot;);
+printf(&quot;%-10s %-20s %s\n&quot;, &quot;学号&quot;, &quot;姓名&quot;, &quot;成绩&quot;);
+printf(&quot;----------------------------------------\n&quot;);
+
+for (int i = 0; i &lt; studentCount; i++) &#123;
+    printf(&quot;%-10d %-20s %.2f\n&quot;,
+           students[i].id,
+           students[i].name,
+           students[i].score);
+&#125;
+
+printf(&quot;共 %d 名学生\n&quot;, studentCount);
+</code></pre>
+<p>}</p>
+<p>&#x2F;&#x2F; 计算平均分<br>void calculateAverage() {<br>    if (studentCount &#x3D;&#x3D; 0) {<br>        printf(“\n⚠️  暂无学生信息！\n”);<br>        return;<br>    }</p>
+<pre><code>float sum = 0;
+float max = students[0].score;
+float min = students[0].score;
+
+for (int i = 0; i &lt; studentCount; i++) &#123;
+    sum += students[i].score;
+    if (students[i].score &gt; max) max = students[i].score;
+    if (students[i].score &lt; min) min = students[i].score;
+&#125;
+
+printf(&quot;\n--- 成绩统计 ---\n&quot;);
+printf(&quot;平均分：%.2f\n&quot;, sum / studentCount);
+printf(&quot;最高分：%.2f\n&quot;, max);
+printf(&quot;最低分：%.2f\n&quot;, min);
+</code></pre>
+<p>}</p>
+<p>&#x2F;&#x2F; 查找最高分学生<br>void findTopStudent() {<br>    if (studentCount &#x3D;&#x3D; 0) {<br>        printf(“\n⚠️  暂无学生信息！\n”);<br>        return;<br>    }</p>
+<pre><code>int topIndex = 0;
+for (int i = 1; i &lt; studentCount; i++) &#123;
+    if (students[i].score &gt; students[topIndex].score) &#123;
+        topIndex = i;
+    &#125;
+&#125;
+
+printf(&quot;\n--- 最高分学生 ---\n&quot;);
+printf(&quot;学号：%d\n&quot;, students[topIndex].id);
+printf(&quot;姓名：%s\n&quot;, students[topIndex].name);
+printf(&quot;成绩：%.2f\n&quot;, students[topIndex].score);
+</code></pre>
+<p>}</p>
+<p>&#x2F;&#x2F; 按成绩排序（冒泡排序）<br>void sortByScore() {<br>    if (studentCount &#x3D;&#x3D; 0) {<br>        printf(“\n⚠️  暂无学生信息！\n”);<br>        return;<br>    }</p>
+<pre><code>// 冒泡排序
+for (int i = 0; i &lt; studentCount - 1; i++) &#123;
+    for (int j = 0; j &lt; studentCount - 1 - i; j++) &#123;
+        if (students[j].score &lt; students[j + 1].score) &#123;
+            // 交换
+            struct Student temp = students[j];
+            students[j] = students[j + 1];
+            students[j + 1] = temp;
+        &#125;
+    &#125;
+&#125;
+
+printf(&quot;\n✅ 排序完成！\n&quot;);
+displayStudents();
+</code></pre>
+<p>}</code></pre></p>
+<pre><code>                &lt;h4&gt;🔍 代码解析&lt;/h4&gt;
+
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;1. 数据结构设计&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;struct Student &#123;
+char name[50];  // 姓名：字符数组
+int id;         // 学号：整型
+float score;    // 成绩：浮点型
+</code></pre>
+<p>};</code></pre><br>                        <p><strong>解析：</strong>使用结构体将学生的不同类型数据组合在一起，便于统一管理。</p></p>
+<pre><code>                    &lt;h5&gt;2. 全局变量的使用&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;struct Student students[MAX_STUDENTS];
+</code></pre>
+<p>int studentCount &#x3D; 0;</code></pre><br>                        <p><strong>解析：</strong></p><br>                        <ul><br>                            <li><code>students</code>数组：存储所有学生信息</li><br>                            <li><code>studentCount</code>：记录当前学生数量，避免每次都遍历数组</li><br>                            <li>使用<code>#define MAX_STUDENTS 50</code>定义常量，便于修改最大容量</li><br>                        </ul></p>
+<pre><code>                    &lt;h5&gt;3. 菜单系统的实现&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;while (1) &#123;  // 无限循环
+showMenu();
+scanf(&quot;%d&quot;, &amp;choice);
+switch (choice) &#123;
+    case 1: addStudent(); break;
+    // ...
+    case 6: return 0;  // 退出程序
+&#125;
+</code></pre>
+<p>}</code></pre><br>                        <p><strong>解析：</strong></p><br>                        <ul><br>                            <li><code>while(1)</code>实现无限循环，直到用户选择退出</li><br>                            <li><code>switch</code>语句根据用户选择调用不同函数</li><br>                            <li><code>return 0</code>直接退出程序，结束<code>main</code>函数</li><br>                        </ul></p>
+<pre><code>                    &lt;h5&gt;4. 冒泡排序算法&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;for (int i = 0; i &lt; studentCount - 1; i++) &#123;
+for (int j = 0; j &lt; studentCount - 1 - i; j++) &#123;
+    if (students[j].score &lt; students[j + 1].score) &#123;
+        // 交换两个结构体
+        struct Student temp = students[j];
+        students[j] = students[j + 1];
+        students[j + 1] = temp;
+    &#125;
+&#125;
+</code></pre>
+<p>}</code></pre><br>                        <p><strong>解析：</strong></p><br>                        <ul><br>                            <li>外层循环控制排序轮数（n个数需要n-1轮）</li><br>                            <li>内层循环比较相邻元素</li><br>                            <li><code>studentCount - 1 - i</code>：每轮后最大元素已就位，减少比较次数</li><br>                            <li>使用临时变量<code>temp</code>交换两个结构体</li><br>                        </ul></p>
+<pre><code>                    &lt;h5&gt;5. 输入验证&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// 检查学号是否重复
+</code></pre>
+<p>for (int i &#x3D; 0; i &lt; studentCount; i++) {<br>    if (students[i].id &#x3D;&#x3D; students[studentCount].id) {<br>        printf(“学号已存在！\n”);<br>        return;<br>    }<br>}</code></pre><br>                        <p><strong>解析：</strong>在添加学生前检查学号唯一性，避免数据重复。</p><br>                    </div></p>
+<pre><code>                &lt;h4&gt;📊 运行示例&lt;/h4&gt;
+                &lt;pre&gt;&lt;code&gt;=================================
+</code></pre>
+<h1 id="学生成绩管理系统（入门版）"><a href="#学生成绩管理系统（入门版）" class="headerlink" title="   学生成绩管理系统（入门版）"></a>   学生成绩管理系统（入门版）</h1><ol>
+<li>添加学生</li>
+<li>显示所有学生</li>
+<li>计算平均分</li>
+<li>查找最高分学生</li>
+<li>按成绩排序</li>
+<li><h1 id="退出系统"><a href="#退出系统" class="headerlink" title="退出系统"></a>退出系统</h1>请选择操作（1-6）：1</li>
+</ol>
+<p>— 添加学生 —<br>学号：1001<br>姓名：张三<br>成绩：85.5<br>✅ 添加成功！</p>
+<p>请选择操作（1-6）：1</p>
+<p>— 添加学生 —<br>学号：1002<br>姓名：李四<br>成绩：92.0<br>✅ 添加成功！</p>
+<p>请选择操作（1-6）：2</p>
+<h2 id="—-所有学生信息-—学号-姓名-成绩"><a href="#—-所有学生信息-—学号-姓名-成绩" class="headerlink" title="— 所有学生信息 —学号      姓名                 成绩"></a>— 所有学生信息 —<br>学号      姓名                 成绩</h2><p>1001      张三                 85.50<br>1002      李四                 92.00<br>共 2 名学生</p>
+<p>请选择操作（1-6）：3</p>
+<p>— 成绩统计 —<br>平均分：88.75<br>最高分：92.00<br>最低分：85.50</code></pre></p>
+<pre><code>                &lt;h4&gt;🎯 知识点总结&lt;/h4&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;✅ 结构体的定义和使用&lt;/li&gt;
+                    &lt;li&gt;✅ 数组的遍历和操作&lt;/li&gt;
+                    &lt;li&gt;✅ 函数的声明和调用&lt;/li&gt;
+                    &lt;li&gt;✅ switch-case 多分支选择&lt;/li&gt;
+                    &lt;li&gt;✅ 冒泡排序算法&lt;/li&gt;
+                    &lt;li&gt;✅ 输入验证&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;h4&gt;⚡ 扩展练习&lt;/h4&gt;
+                &lt;ol&gt;
+                    &lt;li&gt;添加删除学生功能&lt;/li&gt;
+                    &lt;li&gt;添加修改学生信息功能&lt;/li&gt;
+                    &lt;li&gt;实现按学号查找功能&lt;/li&gt;
+                    &lt;li&gt;将数据保存到文件（第8章内容）&lt;/li&gt;
+                    &lt;li&gt;添加成绩等级评定（优秀、良好、及格、不及格）&lt;/li&gt;
+                &lt;/ol&gt;
+            &lt;/section&gt;
+
+            
+            &lt;section class=&quot;section&quot; id=&quot;case2&quot;&gt;
+                &lt;h2&gt;案例2：简易计算器&lt;/h2&gt;
+
+                &lt;div class=&quot;case-meta&quot;&gt;
+                    &lt;h4&gt;📋 案例说明&lt;/h4&gt;
+                    &lt;p&gt;一个支持四则运算的简易计算器，可以处理连续运算，帮助理解函数调用和循环控制。&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;涉及知识点：&lt;/strong&gt;函数、循环、switch、运算符、字符处理&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;难度等级：&lt;/strong&gt;⭐ (入门)&lt;/p&gt;
+                &lt;/div&gt;
+
+                &lt;h4&gt;💡 功能需求&lt;/h4&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;支持加、减、乘、除四则运算&lt;/li&gt;
+                    &lt;li&gt;可以连续进行多次运算&lt;/li&gt;
+                    &lt;li&gt;除数为0时给出提示&lt;/li&gt;
+                    &lt;li&gt;支持清除和退出&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;h4&gt;💻 完整代码&lt;/h4&gt;
+                &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;#include &lt;stdio.h&gt;
+</code></pre>
+<p>#include &lt;ctype.h&gt;  &#x2F;&#x2F; 用于 toupper() 函数</p>
+<p>&#x2F;&#x2F; 函数声明<br>double add(double a, double b);<br>double subtract(double a, double b);<br>double multiply(double a, double b);<br>double divide(double a, double b);<br>void clearInputBuffer();</p>
+<p>int main() {<br>    double num1, num2, result;<br>    char operator;<br>    char choice;</p>
+<pre><code>printf(&quot;=================================\n&quot;);
+printf(&quot;       简易计算器\n&quot;);
+printf(&quot;=================================\n&quot;);
+
+do &#123;
+    printf(&quot;\n请输入第一个数字：&quot;);
+    while (scanf(&quot;%lf&quot;, &amp;num1) != 1) &#123;
+        clearInputBuffer();
+        printf(&quot;⚠️  输入无效，请重新输入数字：&quot;);
+    &#125;
+
+    printf(&quot;请输入运算符 (+, -, *, /)：&quot;);
+    clearInputBuffer();
+    scanf(&quot;%c&quot;, &amp;operator);
+
+    printf(&quot;请输入第二个数字：&quot;);
+    while (scanf(&quot;%lf&quot;, &amp;num2) != 1) &#123;
+        clearInputBuffer();
+        printf(&quot;⚠️  输入无效，请重新输入数字：&quot;);
+    &#125;
+
+    // 执行运算
+    switch (operator) &#123;
+        case &#39;+&#39;:
+            result = add(num1, num2);
+            printf(&quot;\n结果：%.2lf + %.2lf = %.2lf\n&quot;, num1, num2, result);
+            break;
+
+        case &#39;-&#39;:
+            result = subtract(num1, num2);
+            printf(&quot;\n结果：%.2lf - %.2lf = %.2lf\n&quot;, num1, num2, result);
+            break;
+
+        case &#39;*&#39;:
+            result = multiply(num1, num2);
+            printf(&quot;\n结果：%.2lf × %.2lf = %.2lf\n&quot;, num1, num2, result);
+            break;
+
+        case &#39;/&#39;:
+            if (num2 == 0) &#123;
+                printf(&quot;\n⚠️  错误：除数不能为0！\n&quot;);
+            &#125; else &#123;
+                result = divide(num1, num2);
+                printf(&quot;\n结果：%.2lf ÷ %.2lf = %.2lf\n&quot;, num1, num2, result);
+            &#125;
+            break;
+
+        default:
+            printf(&quot;\n⚠️  错误：无效的运算符 &#39;%c&#39;\n&quot;, operator);
+    &#125;
+
+    // 询问是否继续
+    printf(&quot;\n是否继续计算？(Y/N)：&quot;);
+    clearInputBuffer();
+    scanf(&quot;%c&quot;, &amp;choice);
+
+&#125; while (toupper(choice) == &#39;Y&#39;);
+
+printf(&quot;\n感谢使用计算器，再见！\n&quot;);
+return 0;
+</code></pre>
+<p>}</p>
+<p>&#x2F;&#x2F; 加法<br>double add(double a, double b) {<br>    return a + b;<br>}</p>
+<p>&#x2F;&#x2F; 减法<br>double subtract(double a, double b) {<br>    return a - b;<br>}</p>
+<p>&#x2F;&#x2F; 乘法<br>double multiply(double a, double b) {<br>    return a * b;<br>}</p>
+<p>&#x2F;&#x2F; 除法<br>double divide(double a, double b) {<br>    return a &#x2F; b;<br>}</p>
+<p>&#x2F;&#x2F; 清空输入缓冲区<br>void clearInputBuffer() {<br>    int c;<br>    while ((c &#x3D; getchar()) !&#x3D; ‘\n’ &amp;&amp; c !&#x3D; EOF);<br>}</code></pre></p>
+<pre><code>                &lt;h4&gt;🔍 代码解析&lt;/h4&gt;
+
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;1. 函数的模块化设计&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;double add(double a, double b) &#123;
+return a + b;
+</code></pre>
+<p>}</code></pre><br>                        <p><strong>解析：</strong></p><br>                        <ul><br>                            <li>每种运算封装为独立函数</li><br>                            <li>使用<code>double</code>类型支持小数运算</li><br>                            <li>函数参数和返回值都是<code>double</code>类型</li><br>                        </ul></p>
+<pre><code>                    &lt;h5&gt;2. 输入验证&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;while (scanf(&quot;%lf&quot;, &amp;num1) != 1) &#123;
+clearInputBuffer();
+printf(&quot;⚠️  输入无效，请重新输入数字：&quot;);
+</code></pre>
+<p>}</code></pre><br>                        <p><strong>解析：</strong></p><br>                        <ul><br>                            <li><code>scanf</code>返回成功读取的项目数</li><br>                            <li>如果用户输入非数字，<code>scanf</code>返回0</li><br>                            <li><code>clearInputBuffer()</code>清空错误的输入</li><br>                        </ul></p>
+<pre><code>                    &lt;h5&gt;3. 除零检查&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;case &#39;/&#39;:
+if (num2 == 0) &#123;
+    printf(&quot;\n⚠️  错误：除数不能为0！\n&quot;);
+&#125; else &#123;
+    result = divide(num1, num2);
+    printf(&quot;\n结果：%.2lf ÷ %.2lf = %.2lf\n&quot;, num1, num2, result);
+&#125;
+break;&lt;/code&gt;&lt;/pre&gt;
+                    &lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;在执行除法前检查除数，防止程序崩溃。&lt;/p&gt;
+
+                    &lt;h5&gt;4. 输入缓冲区处理&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;void clearInputBuffer() &#123;
+int c;
+while ((c = getchar()) != &#39;\n&#39; &amp;&amp; c != EOF);
+</code></pre>
+<p>}</code></pre><br>                        <p><strong>解析：</strong></p><br>                        <ul><br>                            <li>读取并丢弃缓冲区中的剩余字符</li><br>                            <li>直到遇到换行符或文件结束符</li><br>                            <li>避免<code>scanf</code>读取残留字符</li><br>                        </ul></p>
+<pre><code>                    &lt;h5&gt;5. 大小写不敏感的判断&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;&#125; while (toupper(choice) == &#39;Y&#39;);&lt;/code&gt;&lt;/pre&gt;
+                    &lt;p&gt;&lt;strong&gt;解析：&lt;/strong&gt;使用&lt;code&gt;toupper()&lt;/code&gt;函数将输入转换为大写，用户输入Y或y都可以继续。&lt;/p&gt;
+                &lt;/div&gt;
+
+                &lt;h4&gt;📊 运行示例&lt;/h4&gt;
+                &lt;pre&gt;&lt;code&gt;=================================
+   简易计算器
+</code></pre>
+<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
+<p>请输入第一个数字：10<br>请输入运算符 (+, -, <em>, &#x2F;)：</em><br>请输入第二个数字：5</p>
+<p>结果：10.00 × 5.00 &#x3D; 50.00</p>
+<p>是否继续计算？(Y&#x2F;N)：y</p>
+<p>请输入第一个数字：20<br>请输入运算符 (+, -, *, &#x2F;)：&#x2F;<br>请输入第二个数字：0</p>
+<p>⚠️  错误：除数不能为0！</p>
+<p>是否继续计算？(Y&#x2F;N)：n</p>
+<p>感谢使用计算器，再见！</code></pre></p>
+<pre><code>                &lt;h4&gt;🎯 知识点总结&lt;/h4&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;✅ 函数的定义和调用&lt;/li&gt;
+                    &lt;li&gt;✅ switch-case 语句&lt;/li&gt;
+                    &lt;li&gt;✅ do-while 循环&lt;/li&gt;
+                    &lt;li&gt;✅ 输入验证&lt;/li&gt;
+                    &lt;li&gt;✅ 字符处理函数&lt;/li&gt;
+                    &lt;li&gt;✅ 浮点数运算&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;h4&gt;⚡ 扩展练习&lt;/h4&gt;
+                &lt;ol&gt;
+                    &lt;li&gt;添加幂运算（^）和取模运算（%）&lt;/li&gt;
+                    &lt;li&gt;支持多个运算符的连续计算（如：5 + 3 * 2）&lt;/li&gt;
+                    &lt;li&gt;添加括号支持&lt;/li&gt;
+                    &lt;li&gt;记录计算历史&lt;/li&gt;
+                    &lt;li&gt;添加科学计算器功能（三角函数、对数等）&lt;/li&gt;
+                &lt;/ol&gt;
+            &lt;/section&gt;
+
+            
+            &lt;section class=&quot;section&quot; id=&quot;case3&quot;&gt;
+                &lt;h2&gt;案例3：猜数字游戏&lt;/h2&gt;
+
+                &lt;div class=&quot;case-meta&quot;&gt;
+                    &lt;h4&gt;📋 案例说明&lt;/h4&gt;
+                    &lt;p&gt;经典的猜数字游戏，计算机随机生成一个数字，玩家通过输入数字来猜测，系统会提示&quot;大了&quot;或&quot;小了&quot;。&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;涉及知识点：&lt;/strong&gt;随机数、循环、条件判断、函数&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;难度等级：&lt;/strong&gt;⭐ (入门)&lt;/p&gt;
+                &lt;/div&gt;
+
+                &lt;h4&gt;💡 功能需求&lt;/h4&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;随机生成1-100之间的数字&lt;/li&gt;
+                    &lt;li&gt;玩家输入猜测的数字&lt;/li&gt;
+                    &lt;li&gt;提示&quot;大了&quot;、&quot;小了&quot;或&quot;猜对了&quot;&lt;/li&gt;
+                    &lt;li&gt;记录猜测次数&lt;/li&gt;
+                    &lt;li&gt;提供有限次机会（如10次）&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;h4&gt;💻 完整代码&lt;/h4&gt;
+                &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;#include &lt;stdio.h&gt;
+</code></pre>
+<p>#include &lt;stdlib.h&gt;<br>#include &lt;time.h&gt;</p>
+<p>#define MAX_ATTEMPTS 10<br>#define MIN_NUM 1<br>#define MAX_NUM 100</p>
+<p>&#x2F;&#x2F; 函数声明<br>int generateRandomNumber(int min, int max);<br>void playGame();<br>void printWelcome();<br>void printGameOver(int secret, int attempts);</p>
+<p>int main() {<br>    char choice;</p>
+<pre><code>// 初始化随机数种子
+srand(time(NULL));
+
+printWelcome();
+
+do &#123;
+    playGame();
+
+    printf(&quot;\n想再玩一次吗？(Y/N)：&quot;);
+    scanf(&quot; %c&quot;, &amp;choice);
+    // 清空输入缓冲区
+    while (getchar() != &#39;\n&#39;);
+
+&#125; while (choice == &#39;Y&#39; || choice == &#39;y&#39;);
+
+printf(&quot;\n感谢游玩，再见！\n&quot;);
+return 0;
+</code></pre>
+<p>}</p>
+<p>&#x2F;&#x2F; 生成指定范围内的随机数<br>int generateRandomNumber(int min, int max) {<br>    return min + rand() % (max - min + 1);<br>}</p>
+<p>&#x2F;&#x2F; 打印欢迎信息<br>void printWelcome() {<br>    printf(“\n”);<br>    printf(“&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;\n”);<br>    printf(“        猜数字游戏\n”);<br>    printf(“&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;\n”);<br>    printf(“规则：\n”);<br>    printf(“- 我已经想好了一个 %d 到 %d 之间的数字\n”, MIN_NUM, MAX_NUM);<br>    printf(“- 你有 %d 次机会来猜它\n”, MAX_ATTEMPTS);<br>    printf(“- 我会告诉你猜大了还是小了\n”);<br>    printf(“&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;\n”);<br>}</p>
+<p>&#x2F;&#x2F; 打印游戏结束信息<br>void printGameOver(int secret, int attempts) {<br>    printf(“\n&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;\n”);<br>    printf(“           游戏结束\n”);<br>    printf(“&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;\n”);<br>    printf(“正确答案是：%d\n”, secret);<br>    printf(“你用了 %d 次机会\n”, attempts);<br>}</p>
+<p>&#x2F;&#x2F; 游戏主逻辑<br>void playGame() {<br>    int secret &#x3D; generateRandomNumber(MIN_NUM, MAX_NUM);<br>    int guess;<br>    int attempts &#x3D; 0;<br>    int found &#x3D; 0;</p>
+<pre><code>printf(&quot;\n游戏开始！你有 %d 次机会。\n&quot;, MAX_ATTEMPTS);
+
+while (attempts &lt; MAX_ATTEMPTS &amp;&amp; !found) &#123;
+    printf(&quot;\n剩余机会：%d 次\n&quot;, MAX_ATTEMPTS - attempts);
+    printf(&quot;请输入你的猜测 (%d-%d)：&quot;, MIN_NUM, MAX_NUM);
+
+    // 输入验证
+    if (scanf(&quot;%d&quot;, &amp;guess) != 1) &#123;
+        printf(&quot;⚠️  请输入有效的数字！\n&quot;);
+        // 清空输入缓冲区
+        while (getchar() != &#39;\n&#39;);
+        continue;
+    &#125;
+
+    // 检查范围
+    if (guess &lt; MIN_NUM || guess &gt; MAX_NUM) &#123;
+        printf(&quot;⚠️  请输入 %d 到 %d 之间的数字！\n&quot;, MIN_NUM, MAX_NUM);
+        continue;
+    &#125;
+
+    attempts++;
+
+    // 比较猜测
+    if (guess == secret) &#123;
+        printf(&quot;\n🎉 恭喜你，猜对了！\n&quot;);
+        printf(&quot;你用了 %d 次就猜到了答案 %d\n&quot;, attempts, secret);
+
+        // 评价
+        if (attempts &lt;= 3) &#123;
+            printf(&quot;评价：太厉害了！简直是神猜手！\n&quot;);
+        &#125; else if (attempts &lt;= 6) &#123;
+            printf(&quot;评价：很不错！继续加油！\n&quot;);
+        &#125; else &#123;
+            printf(&quot;评价：运气还是不错的！\n&quot;);
+        &#125;
+
+        found = 1;
+    &#125; else if (guess &lt; secret) &#123;
+        printf(&quot;📈 太小了！再大一点！\n&quot;);
+
+        // 提示范围
+        if (secret - guess &lt;= 10) &#123;
+            printf(&quot;💡 提示：非常接近了！\n&quot;);
+        &#125; else if (secret - guess &lt;= 30) &#123;
+            printf(&quot;💡 提示：有点接近了！\n&quot;);
+        &#125;
+    &#125; else &#123;
+        printf(&quot;📉 太大了！再小一点！\n&quot;);
+
+        // 提示范围
+        if (guess - secret &lt;= 10) &#123;
+            printf(&quot;💡 提示：非常接近了！\n&quot;);
+        &#125; else if (guess - secret &lt;= 30) &#123;
+            printf(&quot;💡 提示：有点接近了！\n&quot;);
+        &#125;
+    &#125;
+&#125;
+
+// 游戏结束
+if (!found) &#123;
+    printf(&quot;\n😢 很遗憾，你没有在 %d 次内猜中。\n&quot;, MAX_ATTEMPTS);
+    printGameOver(secret, attempts);
+&#125;
+</code></pre>
+<p>}</code></pre></p>
+<pre><code>                &lt;h4&gt;🔍 代码解析&lt;/h4&gt;
+
+                &lt;div class=&quot;analysis&quot;&gt;
+                    &lt;h5&gt;1. 随机数生成&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;srand(time(NULL));  // 初始化随机数种子
+</code></pre>
+<p>int secret &#x3D; rand() % (MAX_NUM - MIN_NUM + 1) + MIN_NUM;</code></pre><br>                        <p><strong>解析：</strong></p><br>                        <ul><br>                            <li><code>srand(time(NULL))</code>：使用当前时间作为种子，确保每次运行结果不同</li><br>                            <li><code>rand()</code>：生成0到RAND_MAX之间的随机数</li><br>                            <li><code>rand() % (max - min + 1) + min</code>：生成[min, max]范围内的随机数</li><br>                        </ul></p>
+<pre><code>                    &lt;h5&gt;2. 输入验证&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;if (scanf(&quot;%d&quot;, &amp;guess) != 1) &#123;
+printf(&quot;⚠️  请输入有效的数字！\n&quot;);
+while (getchar() != &#39;\n&#39;);
+continue;
+</code></pre>
+<p>}</p>
+<p>if (guess &lt; MIN_NUM || guess &gt; MAX_NUM) {<br>    printf(“⚠️  请输入 %d 到 %d 之间的数字！\n”, MIN_NUM, MAX_NUM);<br>    continue;<br>}</code></pre><br>                        <p><strong>解析：</strong>验证输入是否为有效数字且在指定范围内。</p></p>
+<pre><code>                    &lt;h5&gt;3. 游戏循环控制&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;while (attempts &lt; MAX_ATTEMPTS &amp;&amp; !found) &#123;
+// 游戏逻辑
+</code></pre>
+<p>}</code></pre><br>                        <p><strong>解析：</strong></p><br>                        <ul><br>                            <li>两个条件：未超过最大尝试次数 且 未猜中</li><br>                            <li><code>found</code>标志控制游戏是否结束</li><br>                        </ul></p>
+<pre><code>                    &lt;h5&gt;4. 智能提示&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;if (secret - guess &lt;= 10) &#123;
+printf(&quot;💡 提示：非常接近了！\n&quot;);
+</code></pre>
+<p>} else if (secret - guess &lt;&#x3D; 30) {<br>    printf(“💡 提示：有点接近了！\n”);<br>}</code></pre><br>                        <p><strong>解析：</strong>根据差距大小提供不同的提示信息，增强游戏性。</p></p>
+<pre><code>                    &lt;h5&gt;5. 评价系统&lt;/h5&gt;
+                    &lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;if (attempts &lt;= 3) &#123;
+printf(&quot;评价：太厉害了！简直是神猜手！\n&quot;);
+</code></pre>
+<p>} else if (attempts &lt;&#x3D; 6) {<br>    printf(“评价：很不错！继续加油！\n”);<br>} else {<br>    printf(“评价：运气还是不错的！\n”);<br>}</code></pre><br>                        <p><strong>解析：</strong>根据猜测次数给出不同的评价，增加趣味性。</p><br>                    </div></p>
+<pre><code>                &lt;h4&gt;📊 运行示例&lt;/h4&gt;
+                &lt;pre&gt;&lt;code&gt;=================================
+    猜数字游戏
+</code></pre>
+<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br>规则：</p>
+<ul>
+<li>我已经想好了一个 1 到 100 之间的数字</li>
+<li>你有 10 次机会来猜它</li>
+<li><h1 id="我会告诉你猜大了还是小了"><a href="#我会告诉你猜大了还是小了" class="headerlink" title="我会告诉你猜大了还是小了"></a>我会告诉你猜大了还是小了</h1></li>
+</ul>
+<p>游戏开始！你有 10 次机会。</p>
+<p>剩余机会：10 次<br>请输入你的猜测 (1-100)：50<br>📈 太小了！再大一点！<br>💡 提示：有点接近了！</p>
+<p>剩余机会：9 次<br>请输入你的猜测 (1-100)：75<br>📉 太大了！再小一点！<br>💡 提示：非常接近了！</p>
+<p>剩余机会：8 次<br>请输入你的猜测 (1-100)：65<br>📉 太大了！再小一点！<br>💡 提示：非常接近了！</p>
+<p>剩余机会：7 次<br>请输入你的猜测 (1-100)：60<br>📉 太大了！再小一点！<br>💡 提示：非常接近了！</p>
+<p>剩余机会：6 次<br>请输入你的猜测 (1-100)：58<br>🎉 恭喜你，猜对了！<br>你用了 5 次就猜到了答案 58<br>评价：很不错！继续加油！</code></pre></p>
+<pre><code>                &lt;h4&gt;🎯 知识点总结&lt;/h4&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;✅ 随机数生成和使用&lt;/li&gt;
+                    &lt;li&gt;✅ 循环控制&lt;/li&gt;
+                    &lt;li&gt;✅ 条件判断&lt;/li&gt;
+                    &lt;li&gt;✅ 函数的模块化设计&lt;/li&gt;
+                    &lt;li&gt;✅ 输入验证&lt;/li&gt;
+                    &lt;li&gt;✅ 标志变量的使用&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;h4&gt;⚡ 扩展练习&lt;/h4&gt;
+                &lt;ol&gt;
+                    &lt;li&gt;添加难度选择（简单：1-50，中等：1-100，困难：1-200）&lt;/li&gt;
+                    &lt;li&gt;记录并显示历史猜测&lt;/li&gt;
+                    &lt;li&gt;添加计时功能&lt;/li&gt;
+                    &lt;li&gt;实现排行榜功能&lt;/li&gt;
+                    &lt;li&gt;添加多人对战模式&lt;/li&gt;
+                &lt;/ol&gt;
+            &lt;/section&gt;
+
+            
+            &lt;section class=&quot;section&quot;&gt;
+                &lt;h2&gt;更多案例&lt;/h2&gt;
+                &lt;p&gt;由于篇幅限制，以下是其他经典案例的简要说明和代码框架。&lt;/p&gt;
+
+                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;&lt;span class=&quot;chapter-num&quot;&gt;04&lt;/span&gt;图书管理系统（进阶版）&lt;/h3&gt;
+                    &lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt;图书信息的增删改查、借阅管理、文件存储&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;涉及知识点：&lt;/strong&gt;链表、文件操作、结构体、动态内存&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;难度：&lt;/strong&gt;⭐⭐⭐⭐ (中高级)&lt;/p&gt;
+                    &lt;a href=&quot;#&quot; class=&quot;btn&quot;&gt;查看完整代码 →&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;&lt;span class=&quot;chapter-num&quot;&gt;05&lt;/span&gt;通讯录管理系统&lt;/h3&gt;
+                    &lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt;联系人管理、分组、搜索、导入导出&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;涉及知识点：&lt;/strong&gt;字符串处理、文件操作、动态数组&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;难度：&lt;/strong&gt;⭐⭐⭐ (中级)&lt;/p&gt;
+                    &lt;a href=&quot;#&quot; class=&quot;btn&quot;&gt;查看完整代码 →&lt;/a&gt;
+                &lt;/div&gt;
+
+                &lt;div class=&quot;chapter-card&quot;&gt;
+                    &lt;h3&gt;&lt;span class=&quot;chapter-num&quot;&gt;06&lt;/span&gt;贪吃蛇游戏&lt;/h3&gt;
+                    &lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt;经典贪吃蛇游戏，界面控制、碰撞检测&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;涉及知识点：&lt;/strong&gt;二维数组、游戏循环、键盘控制&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;难度：&lt;/strong&gt;⭐⭐⭐⭐⭐ (高级)&lt;/p&gt;
+                    &lt;a href=&quot;#&quot; class=&quot;btn&quot;&gt;查看完整代码 →&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+
+            &lt;section class=&quot;section&quot;&gt;
+                &lt;h2&gt;学习建议&lt;/h2&gt;
+                &lt;div class=&quot;tips&quot;&gt;
+                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;💡 理解原理&lt;/h4&gt;
+                        &lt;p&gt;不要只是复制粘贴代码，要理解每一行代码的作用和背后的原理。&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;💡 动手实践&lt;/h4&gt;
+                        &lt;p&gt;自己动手敲一遍代码，然后尝试修改和扩展功能。&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;💡 调试技巧&lt;/h4&gt;
+                        &lt;p&gt;学会使用printf调试，在关键位置输出变量值，观察程序运行过程。&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;tip&quot;&gt;
+                        &lt;h4&gt;💡 举一反三&lt;/h4&gt;
+                        &lt;p&gt;从一个案例出发，思考如何实现类似的其他功能。&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+
+            &lt;section class=&quot;section&quot;&gt;
+                &lt;h2&gt;常见问题解答&lt;/h2&gt;
+
+                &lt;h4&gt;Q1: 为什么要使用函数而不是把所有代码写在main里？&lt;/h4&gt;
+                &lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; 使用函数有以下好处：&lt;/p&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;strong&gt;模块化&lt;/strong&gt;：将复杂问题分解为小问题&lt;/li&gt;
+                    &lt;li&gt;&lt;strong&gt;复用性&lt;/strong&gt;：同一功能可以在多处调用&lt;/li&gt;
+                    &lt;li&gt;&lt;strong&gt;可维护性&lt;/strong&gt;：修改某个功能只需修改对应的函数&lt;/li&gt;
+                    &lt;li&gt;&lt;strong&gt;可读性&lt;/strong&gt;：代码结构清晰，易于理解&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;h4&gt;Q2: scanf后面的getchar()是干什么的？&lt;/h4&gt;
+                &lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; 这是用来清空输入缓冲区的。scanf读取数字后，缓冲区可能残留换行符等字符，会影响后续的字符读取。getchar()会读取并丢弃这些残留字符。&lt;/p&gt;
+
+                &lt;h4&gt;Q3: 什么时候使用数组，什么时候使用链表？&lt;/h4&gt;
+                &lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt;&lt;/p&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;strong&gt;数组&lt;/strong&gt;：大小固定，访问快速（O(1)），适合元素数量已知的情况&lt;/li&gt;
+                    &lt;li&gt;&lt;strong&gt;链表&lt;/strong&gt;：大小可变，插入删除方便（O(1)），适合频繁增删的情况&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;h4&gt;Q4: 如何避免数组越界？&lt;/h4&gt;
+                &lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt;&lt;/p&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;始终从0开始遍历到size-1&lt;/li&gt;
+                    &lt;li&gt;使用&lt;code&gt;#define&lt;/code&gt;定义数组大小，避免硬编码&lt;/li&gt;
+                    &lt;li&gt;添加边界检查&lt;/li&gt;
+                    &lt;li&gt;使用安全的函数（如fgets代替gets）&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;h4&gt;Q5: 什么时候应该使用动态内存分配？&lt;/h4&gt;
+                &lt;p&gt;&lt;strong&gt;A:&lt;/strong&gt; 当满足以下条件之一时：&lt;/p&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;编译时不知道需要多少内存&lt;/li&gt;
+                    &lt;li&gt;需要大数组，可能超出栈大小&lt;/li&gt;
+                    &lt;li&gt;数据结构需要动态增长&lt;/li&gt;
+                    &lt;li&gt;需要在函数间传递大量数据&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/section&gt;
+</code></pre>
+</article>
+
+<footer class="page-footer footnote"><hr><div class="sitemap" style="column-count:4;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/blog/categories/">分类</a><a href="/blog/tags/">标签</a><a href="/blog/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https://tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https://pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https://news.cnortles.top">新闻</a><a href="/atom.xml">订阅</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/">xxx</a><a href="/">xxx</a><a href="/">xxx</a><a href="/">xxx</a></div><div class="sitemap-group"><span class="fs15">关于</span><a target="_blank" rel="noopener" href="https://icp.gov.moe/?keyword=20257782">萌ICP备20257782号</a><a target="_blank" rel="noopener" href="https://edgeone.ai">Edgeone提供服务</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/FelicxFoster/hexo-theme-stellar">Stellar</a>
+创建
+</span>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js"></script>
+<script>
+    loadStatistic("https://qexo.cnortles.top")
+</script>
+</br>
+<span id="runtime_span"></span>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var runtime_span = document.getElementById('runtime_span');
+    function show_runtime() {
+      // 调用定时器
+      setTimeout(show_runtime, 1000);
+      var seconds = 1000;
+      var minutes = seconds * 60;
+      var hours = minutes * 60;
+      var days = hours * 24;
+      var years = days * 365;
+      var today = new Date();
+      var todayYear = today.getFullYear();
+      var todayMonth = today.getMonth();
+      var todayDate = today.getDate();
+      var todayHour = today.getHours();
+      var todayMinute = today.getMinutes();
+      var todaySecond = today.getSeconds();
+      var t1 = Date.UTC(2025, 7, 1, 0, 0, 0); // UTC时间，月份从0开始
+      var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+      var diff = t2 - t1;
+      var diffYears = Math.floor(diff / years);
+      var diffDays = Math.floor((diff / days) - diffYears * 365);
+      var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+      var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+      var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+      // 更新显示时间的span元素内容
+      runtime_span.innerHTML = "🦉营业：" + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒🦉";
+    }
+    show_runtime(); // 初次调用函数以启动定时器
+  });
+</script>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88%E5%85%A5%E9%97%A8%E7%89%88%EF%BC%89"><span class="toc-text">   学生成绩管理系统（入门版）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%80%E5%87%BA%E7%B3%BB%E7%BB%9F"><span class="toc-text">退出系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%94-%E6%89%80%E6%9C%89%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF-%E2%80%94%E5%AD%A6%E5%8F%B7-%E5%A7%93%E5%90%8D-%E6%88%90%E7%BB%A9"><span class="toc-text">— 所有学生信息 —学号      姓名                 成绩</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%88%91%E4%BC%9A%E5%91%8A%E8%AF%89%E4%BD%A0%E7%8C%9C%E5%A4%A7%E4%BA%86%E8%BF%98%E6%98%AF%E5%B0%8F%E4%BA%86"><span class="toc-text">我会告诉你猜大了还是小了</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"closeEnable":true,"closeText":"关闭提示","originalHost":"blog.cnortles.top","officialHosts":["localhost","caoronglin.github.io","c.cnortles.top","cnortles.top"],"encoded":"YmxvZy5jbm9ydGxlcy50b3A="};
+  window.canonical["param"] = {"permalink":"https://blog.cnortles.top/wiki/c/cases","checklink":"/js/plugins/video.js"};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://cdn.cnortles.top/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        if ($(el).find('.loading-wrap').length == 0){
+          $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+        }
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"},"rss":{"js":"/js/services/rss.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.chat-file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img ,.tk-content img:not([class*="emo"])`,
+    css: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<link rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+<script defer type="text/javascript" src="https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    mermaid.initialize(mermaid_config);
+  });
+</script><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+<script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/js/smooth-scroll.js"></script><script src="/js/about-page.js"></script><script src="/js/rightmenu.js"></script><script src="/js/comment-barrage.js"></script>
+</div></body></html>
