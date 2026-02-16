@@ -1,0 +1,244 @@
+/* Enhanced Twikoo Comments Widget Styling */
+
+/* Tag plugin timeline - memos/twikoo comment enhancements */
+.tag-plugin.timeline .timenode-memos {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.tag-plugin.timeline .timenode-memos >.header,
+.tag-plugin.timeline .timenode-memos >.body {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.tag-plugin.timeline .timenode-memos &[highlight] .header:before {
+  background: var(--theme-color);
+}
+
+.tag-plugin.timeline .timenode-memos &+.timenode {
+  margin-top: 1rem;
+}
+
+.tag-plugin.timeline .timenode-memos:hover .header span {
+  color: var(--text-p1);
+}
+
+.tag-plugin.timeline .timenode-memos:hover .header:before {
+  background: var(--theme-color);
+  height: 16px;
+  top: calc(50% - 0.5 * 16px);
+  transform: scale(1);
+}
+
+.tag-plugin.timeline .timenode-memos .header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 0.25rem 0;
+  font-size: 0.8125rem;
+}
+
+.tag-plugin.timeline .timenode-memos .header a.user-info span {
+  font-weight: 600;
+}
+
+.tag-plugin.timeline .timenode-memos .header .user-info {
+  display: flex;
+  align-items: center;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-p1);
+  margin-right: 8px;
+  line-height: 1;
+  border-radius: 16px;
+}
+
+.tag-plugin.timeline .timenode-memos .header .user-info img.user-avatar {
+  background: white;
+  height: 16px;
+  border-radius: 16px;
+  display: inline;
+  margin: 0 4px 0 0;
+  object-fit: contain;
+}
+
+.tag-plugin.timeline .timenode-memos .header .user-info span,
+.tag-plugin.timeline .timenode-memos .header .user-info &:span {
+  font-weight: 500;
+  color: var(--text-p3);
+  line-height: 1;
+}
+
+.tag-plugin.timeline .timenode-memos .header:before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  width: 4px;
+  border-radius: 12px;
+  height: 4px;
+  top: calc(50% - 0.5 * 4px);
+  background: var(--text-meta);
+  transition: background height top transform;
+  transform: scale(2);
+}
+
+/* Widget timeline - enhanced for twikoo comments */
+.widget-wrapper.timeline .tag-plugin.timeline {
+  padding-left: 0;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline:before {
+  left: 6px;
+}
+
+.widget-wrapper.timeline .widget-body {
+  overflow: hidden;
+}
+
+.widget-wrapper.timeline .body a {
+  transition: all 0.3s;
+  word-break: break-all;
+  font-size: var(--fsp2);
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode {
+  z-index: 1;
+  margin-top: 0.25rem;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode .header {
+  margin: 0.25rem var(--gap-padding);
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode .header .user-info {
+  background: none;
+  padding-right: 0;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode .header img {
+  display: none;
+}
+
+/* User avatar for enhanced twikoo comments */
+.widget-wrapper.timeline .tag-plugin.timeline .timenode .header .user-avatar {
+  background: white;
+  height: 16px;
+  border-radius: 16px;
+  display: inline;
+  margin: 0 4px 0 0;
+  object-fit: contain;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode .header:before {
+  left: calc(6px - var(--gap-padding));
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode .body {
+  border-radius: var(--border-card);
+  border-top-left-radius: 2px;
+  padding: 0.5rem 1rem;
+  margin: 0rem 1rem 0rem 1rem;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode .body img {
+  background: none;
+  height: auto;
+  border-radius: 0rem 0.4rem 0.4rem 0.4rem;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode .body p,
+.widget-wrapper.timeline .tag-plugin.timeline .timenode .body li {
+  font-size: var(--fsp3);
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode .body code {
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode .body .highlight,
+.widget-wrapper.timeline .tag-plugin.timeline .timenode .body pre:not([class]):has(>code) {
+  background: var(--alpha50);
+}
+
+/* Memos/twikoo specific enhancements */
+.widget-wrapper.timeline .tag-plugin.timeline .timenode-memos {
+  z-index: 1;
+  margin-top: 0.25rem;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode-memos .header {
+  margin: 0.25rem var(--gap-padding);
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode-memos .header .user-info {
+  background: none;
+  padding-right: 0;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode-memos .header img {
+  background: none;
+  height: 16px !important;
+  border-radius: 16px;
+  display: inline;
+  margin: 0 4px 0 0;
+  object-fit: contain;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode-memos .header:before {
+  left: calc(6px - var(--gap-padding));
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode-memos .body {
+  border-radius: var(--border-card);
+  border-top-left-radius: 2px;
+  padding: 0.5rem 1rem;
+  margin: 0rem 1rem 0rem 0.4rem;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode-memos .body img {
+  background: none;
+  height: auto;
+  border-radius: 0rem 0.4rem 0.4rem 0.4rem;
+  max-height: 50px;
+  width: auto;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode-memos .body p,
+.widget-wrapper.timeline .tag-plugin.timeline .timenode-memos .body li {
+  font-size: var(--fsp3);
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode-memos .body code {
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline .timenode-memos .body .highlight,
+.widget-wrapper.timeline .tag-plugin.timeline .timenode-memos .body pre:not([class]):has(>code) {
+  background: var(--alpha50);
+}
+
+.widget-wrapper.timeline .tag-plugin.timeline[api] .body .footer {
+  background: none;
+}
+
+.widget-wrapper.l_left .widget-wrapper.timeline .tag-plugin.timeline {
+  padding-left: 0;
+}
+
+.widget-wrapper.l_left .widget-wrapper.timeline .tag-plugin.timeline:before {
+  content: none;
+}
+
+.widget-wrapper.l_left .widget-wrapper.timeline .body {
+  box-shadow: none;
+  background: var(--alpha50);
+}

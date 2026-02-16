@@ -1,0 +1,1272 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  <link rel="canonical" href="https://blog.cnortles.top/wiki/Linux/linux-permissions/">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top/npm" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>Linux 基础入门：文件权限管理 - Aurora</title>
+
+  
+    <meta name="description" content="文件权限管理权限基础概念Linux 使用三种权限控制文件访问：读取(r)、写入(w)、执行(x)。这三种权限分别应用于三类用户：文件所有者(u)、所属群组(g)、其他用户(o)。 权限类型详解     读取权限 (r)文件：可读取文件内容目录：可列出目录内容（ls）               写入权限 (w)文件：可修改文件内容目录：可在目录中创建、删除、重命名文件">
+<meta property="og:type" content="website">
+<meta property="og:title" content="文件权限管理">
+<meta property="og:url" content="https://blog.cnortles.top/wiki/Linux/linux-permissions/">
+<meta property="og:site_name" content="Aurora">
+<meta property="og:description" content="文件权限管理权限基础概念Linux 使用三种权限控制文件访问：读取(r)、写入(w)、执行(x)。这三种权限分别应用于三类用户：文件所有者(u)、所属群组(g)、其他用户(o)。 权限类型详解     读取权限 (r)文件：可读取文件内容目录：可列出目录内容（ls）               写入权限 (w)文件：可修改文件内容目录：可在目录中创建、删除、重命名文件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg">
+<meta property="article:published_time" content="2026-02-16T16:05:55.885Z">
+<meta property="article:modified_time" content="2026-02-16T16:05:55.885Z">
+<meta property="article:author" content="Rl.">
+<meta property="article:tag" content="生信">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg">
+  
+  
+  
+  <meta name="keywords" content="生信">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="Aurora" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/wiki/Linux/linux-permissions/","author":{"@type":"Person","name":"Rl.","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"文件权限管理","description":"文件权限管理权限基础概念Linux 使用三种权限控制文件访问：读取(r)、写入(w)、执行(x)。这三种权限分别应用于三类用户：文件所有者(u)、所属群组(g)、其他用户(o)。\n权限类型详解\n    读取权限 (r)文件：可读取文件内容目录：可列出目录内容（ls）\n    \n    \n    写入权限 (w)文件：可修改文件内容目录：可在目录中创建、删除、重命名文件\n    \n    \n ...","url":"https://blog.cnortles.top/wiki/Linux/linux-permissions/","keywords":"生信"}</script>
+  <script>
+  if (window.localStorage.getItem('ZYI_Theme_Mode')==='dark' || (window.localStorage.getItem('ZYI_Theme_Mode')==='Moss' && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+      document.querySelector("html").id = "ZYDark";
+  }
+</script>
+<link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="/custom/css/ZYDark.css"><script src="/custom/js/link-icon.js"></script><link rel="stylesheet" href="/custom/css/index.css"><link rel="stylesheet" href="/custom/css/links.css"><link rel="stylesheet" href="/custom/css/smooth-scroll.css"><link rel="stylesheet" href="/custom/css/ZYDark.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+
+
+<div class="l_body content" id="start" layout="page" type="tech" text-indent><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><div class="icon"><img no-lazy class="icon" src="https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2779789.png" onerror="javascript:this.classList.add('error');this.src='https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><a class="title" href="/wiki/Linux/linux-basics"><div class="main">Linux 基础入门</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="主页" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="装备" href="/equipment/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/wiki/linux" placeholder="在 Linux 基础入门 中搜索..."></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<widget class="widget-wrapper doc-tree post-list"><div class="widget-body fs14"><a class="link" href="/wiki/Linux/linux-basics/#start"><span class="toc-text">Linux 基础入门</span></a><a class="link" href="/wiki/Linux/linux-filesystem/"><span class="toc-text">文件系统与目录结构</span></a><a class="link active" href="/wiki/Linux/linux-permissions/"><span class="toc-text">文件权限管理</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="link" href="/wiki/Linux/linux-process/"><span class="toc-text">进程管理</span></a><a class="link" href="/wiki/Linux/linux-shell/"><span class="toc-text">Shell 基础</span></a></div></widget>
+
+<widget class="widget-wrapper slide-up recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/subscribe"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/p/e8e1846f.shtml"><span class="title"><strong>Linux 基础入门</strong><span class="dot"></span>文件系统与目录结构</span></a><a class="item title" href="/p/74b9a2e8.shtml"><span class="title"><strong>Linux 基础入门</strong><span class="dot"></span>文件权限管理</span></a><a class="item title" href="/p/852cfab6.shtml"><span class="title"><strong>Linux 基础入门</strong><span class="dot"></span>进程管理</span></a><a class="item title" href="/p/8e5e54a1.shtml"><span class="title"><strong>Linux 基础入门</strong><span class="dot"></span>Shell 基础</span></a><a class="item title" href="/p/23c3e7ed.shtml"><span class="title"><strong>Linux 基础入门</strong><span class="dot"></span>Linux 基础入门</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="https://github.com/caoronglin" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-solid fa-github fa-brands fa-bounce"></i></a><a class="social" title="Bilibili" href="https://space.bilibili.com/555149182?spm_id_from=333.1007.0.0" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-brands fa-bilibili fa-bounce"></i></a><a class="social" title="Email" href="mailto:crl@cnortles.top" rel="noopener noreferrer"><i class="fa-solid fa-envelope fa-bounce"></i></a><a class="social" title="Comments" href="/comments" rel="noopener noreferrer"><i class="fa-solid fa-comment fa-bounce"></i></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner slide-up top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/Linux/linux-basics/">Linux 基础入门</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2026-02-16T16:05:55.885Z">2026-02-17</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>文件权限管理</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content slide-up"><h1 id="文件权限管理"><a href="#文件权限管理" class="headerlink" title="文件权限管理"></a>文件权限管理</h1><h2 id="权限基础概念"><a href="#权限基础概念" class="headerlink" title="权限基础概念"></a>权限基础概念</h2><p>Linux 使用三种权限控制文件访问：<strong>读取(r)</strong>、<strong>写入(w)</strong>、<strong>执行(x)</strong>。<br>这三种权限分别应用于三类用户：<strong>文件所有者(u)</strong>、<strong>所属群组(g)</strong>、<strong>其他用户(o)</strong>。</p>
+<h3 id="权限类型详解"><a href="#权限类型详解" class="headerlink" title="权限类型详解"></a>权限类型详解</h3><div class="tag-plugin grid"  style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));"><div class="cell" style="">
+    <p><strong>读取权限 (r)</strong></p><ul><li><strong>文件</strong>：可读取文件内容</li><li><strong>目录</strong>：可列出目录内容（<code>ls</code>）</li></ul>
+    </div>
+    <div class="cell" style="">
+    <p><strong>写入权限 (w)</strong></p><ul><li><strong>文件</strong>：可修改文件内容</li><li><strong>目录</strong>：可在目录中创建、删除、重命名文件</li></ul>
+    </div>
+    <div class="cell" style="">
+    <p><strong>执行权限 (x)</strong></p><ul><li><strong>文件</strong>：可作为程序执行</li><li><strong>目录</strong>：可进入目录（<code>cd</code>）</li></ul>
+    </div>
+    </div>
+
+<h2 id="查看文件权限"><a href="#查看文件权限" class="headerlink" title="查看文件权限"></a>查看文件权限</h2><h3 id="使用-ls-l-命令"><a href="#使用-ls-l-命令" class="headerlink" title="使用 ls -l 命令"></a>使用 ls -l 命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l filename</span><br><span class="line"><span class="built_in">ls</span> -la /path/to/directory</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出示例解析</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -l test.txt</span><br><span class="line">-rw-r--r-- 1 alice developers 1234 Jan 15 10:30 test.txt</span><br><span class="line">│└┬┘└┬┘└┬┘│    │      │      │         │</span><br><span class="line">│ │   │   │ │    │      │      │         └── 文件名</span><br><span class="line">│ │   │   │ │    │      │      └──────────── 修改时间</span><br><span class="line">│ │   │   │ │    │      └─────────────────── 所属群组</span><br><span class="line">│ │   │   │ │    └────────────────────────── 文件所有者</span><br><span class="line">│ │   │   │ └─────────────────────────────── 硬链接数</span><br><span class="line">│ │   │   └───────────────────────────────── 其他用户权限</span><br><span class="line">│ │   └───────────────────────────────────── 群组权限</span><br><span class="line">│ └───────────────────────────────────────── 所有者权限</span><br><span class="line">└─────────────────────────────────────────── 文件类型</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件类型标识"><a href="#文件类型标识" class="headerlink" title="文件类型标识"></a>文件类型标识</h3><table>
+<thead>
+<tr>
+<th>标识</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-</code></td>
+<td>普通文件</td>
+<td>文本、数据、可执行文件等</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>目录</td>
+<td>包含文件和其他目录</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>符号链接</td>
+<td>指向其他文件的引用</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>字符设备</td>
+<td>按字符流访问的设备（如终端）</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>块设备</td>
+<td>按块访问的设备（如硬盘）</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>套接字</td>
+<td>进程间通信端点</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>命名管道</td>
+<td>进程间通信</td>
+</tr>
+</tbody></table>
+<h2 id="修改文件权限"><a href="#修改文件权限" class="headerlink" title="修改文件权限"></a>修改文件权限</h2><h3 id="chmod-命令详解"><a href="#chmod-命令详解" class="headerlink" title="chmod 命令详解"></a>chmod 命令详解</h3><div class="tag-plugin tabs"id="tab_7"><div class="nav-tabs"><div class="tab active"><a href="#tab_7-1">符号模式</a></div><div class="tab"><a href="#tab_7-2">数字模式</a></div><div class="tab"><a href="#tab_7-3">参考速查表</a></div></div><div class="tab-content"><div class="tab-pane active" id="tab_7-1"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> [<span class="built_in">who</span>][operator][permission] file...</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数说明</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Who</strong></td>
+<td><code>u</code></td>
+<td>用户（所有者）</td>
+</tr>
+<tr>
+<td></td>
+<td><code>g</code></td>
+<td>群组</td>
+</tr>
+<tr>
+<td></td>
+<td><code>o</code></td>
+<td>其他用户</td>
+</tr>
+<tr>
+<td></td>
+<td><code>a</code></td>
+<td>所有用户（等同于 ugo）</td>
+</tr>
+<tr>
+<td><strong>Operator</strong></td>
+<td><code>+</code></td>
+<td>添加权限</td>
+</tr>
+<tr>
+<td></td>
+<td><code>-</code></td>
+<td>移除权限</td>
+</tr>
+<tr>
+<td></td>
+<td><code>=</code></td>
+<td>设置精确权限</td>
+</tr>
+<tr>
+<td><strong>Permission</strong></td>
+<td><code>r</code></td>
+<td>读取权限</td>
+</tr>
+<tr>
+<td></td>
+<td><code>w</code></td>
+<td>写入权限</td>
+</tr>
+<tr>
+<td></td>
+<td><code>x</code></td>
+<td>执行权限</td>
+</tr>
+<tr>
+<td></td>
+<td><code>X</code></td>
+<td>仅当文件是目录或已有执行权限时添加执行权限</td>
+</tr>
+<tr>
+<td></td>
+<td><code>s</code></td>
+<td>设置 SUID 或 SGID</td>
+</tr>
+<tr>
+<td></td>
+<td><code>t</code></td>
+<td>设置粘滞位</td>
+</tr>
+</tbody></table>
+<p><strong>示例</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加执行权限</span></span><br><span class="line"><span class="built_in">chmod</span> +x script.sh          <span class="comment"># 给所有用户添加执行权限</span></span><br><span class="line"><span class="built_in">chmod</span> u+x program           <span class="comment"># 仅给所有者添加执行权限</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 移除权限</span></span><br><span class="line"><span class="built_in">chmod</span> o-w file.txt          <span class="comment"># 移除其他用户的写入权限</span></span><br><span class="line"><span class="built_in">chmod</span> go-rwx secret.txt     <span class="comment"># 移除群组和其他用户的所有权限</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置精确权限</span></span><br><span class="line"><span class="built_in">chmod</span> u=rwx,g=rx,o=r file   <span class="comment"># 所有者读写执行，群组读执行，其他只读</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归修改目录</span></span><br><span class="line"><span class="built_in">chmod</span> -R 755 /path/to/dir   <span class="comment"># 递归修改目录及其内容</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_7-2"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> [mode] file...</span><br></pre></td></tr></table></figure>
+
+<p><strong>权限数字对应表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>二进制</th>
+<th>数字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>---</code></td>
+<td>000</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>--x</code></td>
+<td>001</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>-w-</code></td>
+<td>010</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>-wx</code></td>
+<td>011</td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>r--</code></td>
+<td>100</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>r-x</code></td>
+<td>101</td>
+<td>5</td>
+</tr>
+<tr>
+<td><code>rw-</code></td>
+<td>110</td>
+<td>6</td>
+</tr>
+<tr>
+<td><code>rwx</code></td>
+<td>111</td>
+<td>7</td>
+</tr>
+</tbody></table>
+<p><strong>常用权限组合</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>权限</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>777</td>
+<td>rwxrwxrwx</td>
+<td>完全开放（不推荐）</td>
+</tr>
+<tr>
+<td>755</td>
+<td>rwxr-xr-x</td>
+<td>标准可执行文件&#x2F;目录</td>
+</tr>
+<tr>
+<td>750</td>
+<td>rwxr-x—</td>
+<td>私有可执行文件&#x2F;目录</td>
+</tr>
+<tr>
+<td>700</td>
+<td>rwx——</td>
+<td>完全私有</td>
+</tr>
+<tr>
+<td>644</td>
+<td>rw-r–r–</td>
+<td>标准普通文件</td>
+</tr>
+<tr>
+<td>640</td>
+<td>rw-r—–</td>
+<td>群组可读</td>
+</tr>
+<tr>
+<td>600</td>
+<td>rw——-</td>
+<td>私有文件</td>
+</tr>
+</tbody></table>
+<p><strong>示例</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 755 script.sh         <span class="comment"># 可执行脚本</span></span><br><span class="line"><span class="built_in">chmod</span> 644 document.txt      <span class="comment"># 普通文档</span></span><br><span class="line"><span class="built_in">chmod</span> 600 ~/.ssh/id_rsa     <span class="comment"># 私钥文件</span></span><br><span class="line"><span class="built_in">chmod</span> 700 ~/private_dir     <span class="comment"># 私有目录</span></span><br><span class="line"><span class="built_in">chmod</span> -R 755 ~/bin          <span class="comment"># 递归设置</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_7-3"><p><strong>常用文件权限设置</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Web 服务器目录</span></span><br><span class="line">find /var/www -<span class="built_in">type</span> d -<span class="built_in">exec</span> <span class="built_in">chmod</span> 755 &#123;&#125; \;</span><br><span class="line">find /var/www -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">chmod</span> 644 &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># SSH 密钥</span></span><br><span class="line"><span class="built_in">chmod</span> 700 ~/.ssh</span><br><span class="line"><span class="built_in">chmod</span> 600 ~/.ssh/id_rsa</span><br><span class="line"><span class="built_in">chmod</span> 644 ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="built_in">chmod</span> 644 ~/.ssh/authorized_keys</span><br><span class="line"><span class="built_in">chmod</span> 644 ~/.ssh/known_hosts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 脚本文件</span></span><br><span class="line"><span class="built_in">chmod</span> +x script.sh              <span class="comment"># 添加执行权限</span></span><br><span class="line"><span class="built_in">chmod</span> u+s program               <span class="comment"># 设置 SUID</span></span><br></pre></td></tr></table></figure></div></div></div>
+
+<h2 id="修改文件所有者和群组"><a href="#修改文件所有者和群组" class="headerlink" title="修改文件所有者和群组"></a>修改文件所有者和群组</h2><h3 id="chown-命令"><a href="#chown-命令" class="headerlink" title="chown 命令"></a>chown 命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> [选项] [所有者][:群组] 文件...</span><br></pre></td></tr></table></figure>
+
+<p><strong>常用选项</strong>：</p>
+<ul>
+<li><code>-R</code> : 递归修改目录及其内容</li>
+<li><code>-c</code> : 只在发生改变时报告</li>
+<li><code>-v</code> : 显示详细处理过程</li>
+<li><code>--reference=RFILE</code> : 使用参考文件的属主</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改所有者</span></span><br><span class="line"><span class="built_in">chown</span> alice file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改群组</span></span><br><span class="line"><span class="built_in">chown</span> :developers file.txt</span><br><span class="line"><span class="built_in">chgrp</span> developers file.txt    <span class="comment"># 等效命令</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时修改所有者和群组</span></span><br><span class="line"><span class="built_in">chown</span> alice:developers file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归修改目录</span></span><br><span class="line"><span class="built_in">chown</span> -R alice:alice /home/alice/project</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用参考文件</span></span><br><span class="line"><span class="built_in">chown</span> --reference=template.txt newfile.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅修改符号链接本身（而非目标）</span></span><br><span class="line"><span class="built_in">chown</span> -h alice symlink</span><br></pre></td></tr></table></figure>
+
+<h3 id="chgrp-命令"><a href="#chgrp-命令" class="headerlink" title="chgrp 命令"></a>chgrp 命令</h3><p>专门用于修改群组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chgrp</span> [选项] 群组 文件...</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chgrp</span> developers project/</span><br><span class="line"><span class="built_in">chgrp</span> -R www-data /var/www</span><br></pre></td></tr></table></figure>
+
+<h2 id="特殊权限"><a href="#特殊权限" class="headerlink" title="特殊权限"></a>特殊权限</h2><h3 id="SUID-Set-User-ID"><a href="#SUID-Set-User-ID" class="headerlink" title="SUID (Set User ID)"></a>SUID (Set User ID)</h3><p>当可执行文件设置了 SUID 位，用户执行该文件时，进程的有效用户ID会变成<strong>文件所有者的ID</strong>，而不是执行者的ID。</p>
+<p><strong>应用场景</strong>：passwd 命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -l /usr/bin/passwd</span><br><span class="line">-rwsr-xr-x 1 root root 68208 Jul 15  2021 /usr/bin/passwd</span><br><span class="line">   ↑</span><br><span class="line">   SUID 位（所有者的 x 位置）</span><br></pre></td></tr></table></figure>
+
+<p>普通用户可以通过 passwd 修改自己的密码（需要写入 &#x2F;etc&#x2F;shadow），就是因为 passwd 有 SUID 位，执行时临时获得了 root 权限。</p>
+<p><strong>设置 SUID</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u+s /path/to/program    <span class="comment"># 符号模式</span></span><br><span class="line"><span class="built_in">chmod</span> 4755 /path/to/program   <span class="comment"># 数字模式（4 表示 SUID）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：</p>
+<ul>
+<li>大写 <code>S</code> 表示没有执行权限但设置了 SUID</li>
+<li>SUID 对目录无效（在某些 BSD 系统上有特殊用途）</li>
+<li>不当使用 SUID 可能带来安全风险</li>
+</ul>
+<h3 id="SGID-Set-Group-ID"><a href="#SGID-Set-Group-ID" class="headerlink" title="SGID (Set Group ID)"></a>SGID (Set Group ID)</h3><h4 id="对可执行文件"><a href="#对可执行文件" class="headerlink" title="对可执行文件"></a>对可执行文件</h4><p>类似于 SUID，但继承的是<strong>文件所属群组</strong>的权限。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -l /usr/bin/wall</span><br><span class="line">-rwxr-sr-x 1 root <span class="built_in">tty</span> 30800 Feb 28  2022 /usr/bin/wall</span><br><span class="line">      ↑</span><br><span class="line">      SGID 位（群组的 x 位置）</span><br></pre></td></tr></table></figure>
+
+<h4 id="对目录"><a href="#对目录" class="headerlink" title="对目录"></a>对目录</h4><p>在设置了 SGID 的目录中创建的新文件，其所属群组会自动继承<strong>目录的群组</strong>，而不是创建者的主群组。</p>
+<p><strong>应用场景</strong>：共享项目目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建项目目录</span></span><br><span class="line"><span class="built_in">mkdir</span> /srv/project</span><br><span class="line"><span class="built_in">chgrp</span> developers /srv/project</span><br><span class="line"><span class="built_in">chmod</span> 2770 /srv/project      <span class="comment"># 设置 SGID</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在任何在此目录创建的文件都属于 developers 群组</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>设置 SGID</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> g+s /path/to/directory    <span class="comment"># 符号模式</span></span><br><span class="line"><span class="built_in">chmod</span> 2775 /path/to/directory   <span class="comment"># 数字模式（2 表示 SGID）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：大写 <code>S</code> 表示没有执行权限但设置了 SGID。</p>
+<h3 id="Sticky-Bit-粘滞位"><a href="#Sticky-Bit-粘滞位" class="headerlink" title="Sticky Bit (粘滞位)"></a>Sticky Bit (粘滞位)</h3><p>粘滞位只对目录有效。设置了粘滞位的目录，只有<strong>文件所有者</strong>、<strong>目录所有者</strong>或 <strong>root</strong> 才能删除或重命名该目录中的文件，即使其他用户有写权限也不行。</p>
+<p><strong>典型应用</strong>：<code>/tmp</code> 目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -ld /tmp</span><br><span class="line">drwxrwxrwt 15 root root 4096 Jan 15 10:30 /tmp</span><br><span class="line">          ↑</span><br><span class="line">          粘滞位（其他人的 x 位置）</span><br></pre></td></tr></table></figure>
+
+<p>所有用户都可以在 <code>/tmp</code> 创建文件，但只能删除自己的文件，防止恶意删除他人的临时文件。</p>
+<p><strong>设置粘滞位</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +t /path/to/directory    <span class="comment"># 符号模式</span></span><br><span class="line"><span class="built_in">chmod</span> 1777 /path/to/directory  <span class="comment"># 数字模式（1 表示粘滞位）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：大写 <code>T</code> 表示没有执行权限但设置了粘滞位。</p>
+<h2 id="特殊权限速查表"><a href="#特殊权限速查表" class="headerlink" title="特殊权限速查表"></a>特殊权限速查表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────────────┐</span><br><span class="line">│                   权限位布局                          │</span><br><span class="line">├─────────────────────────────────────────────────────┤</span><br><span class="line">│  SUID  │  SGID  │ Sticky │  User  │ Group │ Other  │</span><br><span class="line">│   (4)  │   (2)  │   (1)  │  (rwx) │ (rwx) │ (rwx)  │</span><br><span class="line">└─────────────────────────────────────────────────────┘</span><br><span class="line"></span><br><span class="line">常用组合：</span><br><span class="line">├── 4755 (rwsr-xr-x) = SUID + 755</span><br><span class="line">├── 2755 (rwxr-sr-x) = SGID + 755</span><br><span class="line">├── 1777 (rwxrwxrwt) = Sticky + 777 (如 /tmp)</span><br><span class="line">└── 6755 (rwsr-sr-x) = SUID + SGID + 755</span><br><span class="line"></span><br><span class="line">符号模式：</span><br><span class="line">├── u+s = 设置 SUID</span><br><span class="line">├── g+s = 设置 SGID</span><br><span class="line">├── o+t = 设置粘滞位</span><br><span class="line">└── a = 所有用户 (u+g+o)</span><br></pre></td></tr></table></figure>
+
+<h2 id="实践练习"><a href="#实践练习" class="headerlink" title="实践练习"></a>实践练习</h2><details class="tag-plugin colorful folding" ><summary><p>练习：设置共享开发目录</p>
+</summary><div class="body"><p><strong>场景</strong>：团队共享的项目目录 <code>/srv/webapp</code></p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 创建目录并设置正确的群组</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /srv/webapp</span><br><span class="line"><span class="built_in">sudo</span> groupadd webdev</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> root:webdev /srv/webapp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 设置 SGID，使新文件继承目录群组</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 2770 /srv/webapp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 设置目录权限</span></span><br><span class="line"><span class="comment"># 2 = SGID, 7 = rwx (所有者), 7 = rwx (群组), 0 = --- (其他)</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 2770 /srv/webapp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 将开发用户添加到群组</span></span><br><span class="line"><span class="built_in">sudo</span> usermod -aG webdev alice</span><br><span class="line"><span class="built_in">sudo</span> usermod -aG webdev bob</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 验证设置</span></span><br><span class="line"><span class="built_in">ls</span> -ld /srv/webapp</span><br><span class="line"><span class="comment"># 预期输出：drwxrws--- 2 root webdev ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 测试（切换到开发用户）</span></span><br><span class="line">su - alice</span><br><span class="line"><span class="built_in">touch</span> /srv/webapp/test.txt</span><br><span class="line"><span class="built_in">ls</span> -l /srv/webapp/test.txt</span><br><span class="line"><span class="comment"># 预期：文件群组应该是 webdev，而不是 alice 的主群组</span></span><br></pre></td></tr></table></figure></div></details>
+
+<details class="tag-plugin colorful folding" ><summary><p>练习：SUID 安全分析</p>
+</summary><div class="body"><p><strong>任务</strong>：分析系统中的 SUID 文件</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 查找所有 SUID 文件</span></span><br><span class="line">find / -perm -4000 -<span class="built_in">type</span> f 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 查找所有 SGID 文件</span></span><br><span class="line">find / -perm -2000 -<span class="built_in">type</span> f 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 详细查看 SUID 文件</span></span><br><span class="line">find /usr/bin -perm -4000 -<span class="built_in">ls</span> 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 检查可疑的自定义 SUID 程序</span></span><br><span class="line"><span class="comment"># 正常的 SUID 程序通常在标准位置</span></span><br><span class="line"><span class="comment"># /usr/bin/passwd</span></span><br><span class="line"><span class="comment"># /usr/bin/sudo</span></span><br><span class="line"><span class="comment"># /usr/bin/su</span></span><br><span class="line"><span class="comment"># /usr/bin/mount</span></span><br><span class="line"><span class="comment"># /usr/bin/umount</span></span><br><span class="line"><span class="comment"># /usr/bin/ping</span></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 安全审计脚本</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;=== SUID 文件安全审计 ===&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;系统 SUID 文件数量：&quot;</span></span><br><span class="line">find / -perm -4000 -<span class="built_in">type</span> f 2&gt;/dev/null | <span class="built_in">wc</span> -l</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;非标准位置的 SUID 文件：&quot;</span></span><br><span class="line">find / -perm -4000 -<span class="built_in">type</span> f 2&gt;/dev/null | grep -v -E <span class="string">&quot;^/(usr/|bin/|sbin/|usr/sbin/)&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;最近修改的 SUID 文件：&quot;</span></span><br><span class="line">find / -perm -4000 -<span class="built_in">type</span> f -mtime -7 2&gt;/dev/null</span><br></pre></td></tr></table></figure></div></details>
+
+<h2 id="常见问题-FAQ"><a href="#常见问题-FAQ" class="headerlink" title="常见问题 FAQ"></a>常见问题 FAQ</h2><details class="tag-plugin colorful folding" ><summary><p>为什么无法访问文件，即使我是 root？</p>
+</summary><div class="body"><p><strong>可能原因</strong>：文件位于挂载为 <code>noexec</code>、<code>nodev</code> 或 <code>nosuid</code> 的文件系统上。</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看挂载选项</span></span><br><span class="line">mount | grep /path/to/mount</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例输出：</span></span><br><span class="line"><span class="comment"># /dev/sda1 on /home type ext4 (rw,nosuid,nodev,noexec,relatime)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解决方案：重新挂载（临时）</span></span><br><span class="line"><span class="built_in">sudo</span> mount -o remount,<span class="built_in">exec</span>,suid /home</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或编辑 /etc/fstab 永久修改</span></span><br></pre></td></tr></table></figure></div></details>
+
+<details class="tag-plugin colorful folding" ><summary><p>如何恢复误删的权限？</p>
+</summary><div class="body"><p><strong>场景</strong>：不小心执行了 <code>chmod -R 777 /</code></p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 立即停止系统写入（避免更多损坏）</span></span><br><span class="line"><span class="comment"># 2. 使用 Live CD/USB 启动</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 挂载根分区</span></span><br><span class="line"><span class="built_in">sudo</span> mount /dev/sda1 /mnt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 使用包管理器恢复默认权限（推荐）</span></span><br><span class="line"><span class="comment"># Debian/Ubuntu:</span></span><br><span class="line"><span class="built_in">sudo</span> dpkg --root=/mnt --configure -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># CentOS/RHEL/Fedora:</span></span><br><span class="line"><span class="comment"># 使用 rpm 恢复或重新安装关键包</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 手动修复关键目录</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 755 /mnt/bin /mnt/lib /mnt/lib64 /mnt/sbin /mnt/usr</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 555 /mnt/boot</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 1777 /mnt/tmp</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 755 /mnt/var</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 验证并重启</span></span><br></pre></td></tr></table></figure>  <p><strong>预防措施</strong>：</p> <ul> <li>使用 <code>chmod --reference</code> 代替手动设置</li> <li>重要操作前使用 <code>getfacl -R /path &gt; permissions_backup.acl</code> 备份权限</li> </ul> </div></details>
+
+<details class="tag-plugin colorful folding" ><summary><p>ACL 与基本权限的区别？</p>
+</summary><div class="body"><p><strong>基本权限的局限</strong>：</p> <ul> <li>只能设置一个所有者</li> <li>只能设置一个群组</li> <li>其他人的权限是统一的</li> </ul> <p><strong>ACL (Access Control List) 的优势</strong>：</p> <ul> <li>可以为多个用户设置不同权限</li> <li>可以为多个群组设置不同权限</li> <li>支持默认 ACL（新文件自动继承）</li> </ul> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查文件系统是否支持 ACL</span></span><br><span class="line">mount | grep acl</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 ACL 工具</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install acl    <span class="comment"># Debian/Ubuntu</span></span><br><span class="line"><span class="built_in">sudo</span> yum install acl        <span class="comment"># CentOS/RHEL</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 ACL</span></span><br><span class="line">getfacl filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 ACL</span></span><br><span class="line">setfacl -m u:alice:rwx filename      <span class="comment"># 给用户 alice 设置 rwx</span></span><br><span class="line">setfacl -m g:developers:rw filename  <span class="comment"># 给群组 developers 设置 rw</span></span><br><span class="line">setfacl -x u:alice filename          <span class="comment"># 移除 alice 的 ACL</span></span><br><span class="line">setfacl -b filename                  <span class="comment"># 移除所有 ACL</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置默认 ACL（目录）</span></span><br><span class="line">setfacl -d -m u:alice:rwx /shared/dir</span><br><span class="line">setfacl -R -m u:alice:rwx /shared/dir  <span class="comment"># 递归设置</span></span><br></pre></td></tr></table></figure></div></details>
+
+<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://linux.vbird.org/linux_basic/centos7/0210filepermission.php">Linux 文件权限完全指南</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.linux.com/training-tutorials/understanding-linux-file-permissions/">Understanding Linux File Permissions</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Access_Control_Lists">ACL - Arch Wiki</a></li>
+</ul>
+<div class="tag-plugin quot p"><p class="content"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from BoxIcons Solid by Atisa - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M3.691 6.292C5.094 4.771 7.217 4 10 4h1v2.819l-.804.161c-1.37.274-2.323.813-2.833 1.604A2.9 2.9 0 0 0 6.925 10H10a1 1 0 0 1 1 1v7c0 1.103-.897 2-2 2H3a1 1 0 0 1-1-1v-5l.003-2.919c-.009-.111-.199-2.741 1.688-4.789M20 20h-6a1 1 0 0 1-1-1v-5l.003-2.919c-.009-.111-.199-2.741 1.688-4.789C16.094 4.771 18.217 4 21 4h1v2.819l-.804.161c-1.37.274-2.323.813-2.833 1.604A2.9 2.9 0 0 0 17.925 10H21a1 1 0 0 1 1 1v7c0 1.103-.897 2-2 2"/></svg><span class="text">权限管理是 Linux 安全的基石</span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from BoxIcons Solid by Atisa - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.309 17.708C22.196 15.66 22.006 13.03 22 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.9 2.9 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292m-11.007 0C11.19 15.66 10.999 13.03 10.993 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.9 2.9 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292"/></svg></p></div>
+</article>
+<div class="article-footer slide-up">
+
+</div>
+
+<div class="related-wrap slide-up" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/Linux/linux-filesystem/">文件系统与目录结构</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/Linux/linux-process/">进程管理</a></div></section></div>
+
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body twikoo'>
+      
+
+<div id="twikoo_container"><svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg></div>
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/blog/categories/">分类</a><a href="/blog/tags/">标签</a><a href="/blog/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https://tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https://pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https://news.cnortles.top">新闻</a><a href="/subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/FelicxFoster/hexo-theme-stellar">Stellar</a>
+创建
+</span>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js"></script>
+<script>
+    loadStatistic("https://qexo.cnortles.top")
+</script>
+</br>
+<span id="runtime_span"></span>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var runtime_span = document.getElementById('runtime_span');
+    function show_runtime() {
+      // 调用定时器
+      setTimeout(show_runtime, 1000);
+      var seconds = 1000;
+      var minutes = seconds * 60;
+      var hours = minutes * 60;
+      var days = hours * 24;
+      var years = days * 365;
+      var today = new Date();
+      var todayYear = today.getFullYear();
+      var todayMonth = today.getMonth();
+      var todayDate = today.getDate();
+      var todayHour = today.getHours();
+      var todayMinute = today.getMinutes();
+      var todaySecond = today.getSeconds();
+      var t1 = Date.UTC(2025, 7, 1, 0, 0, 0); // UTC时间，月份从0开始
+      var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+      var diff = t2 - t1;
+      var diffYears = Math.floor(diff / years);
+      var diffDays = Math.floor((diff / days) - diffYears * 365);
+      var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+      var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+      var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+      // 更新显示时间的span元素内容
+      runtime_span.innerHTML = "🦉营业：" + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒🦉";
+    }
+    show_runtime(); // 初次调用函数以启动定时器
+  });
+</script>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="true"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-text">文件权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-text">权限基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3"><span class="toc-text">权限类型详解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">查看文件权限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-ls-l-%E5%91%BD%E4%BB%A4"><span class="toc-text">使用 ls -l 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B%E6%A0%87%E8%AF%86"><span class="toc-text">文件类型标识</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-text">修改文件权限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#chmod-%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="toc-text">chmod 命令详解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%89%80%E6%9C%89%E8%80%85%E5%92%8C%E7%BE%A4%E7%BB%84"><span class="toc-text">修改文件所有者和群组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#chown-%E5%91%BD%E4%BB%A4"><span class="toc-text">chown 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chgrp-%E5%91%BD%E4%BB%A4"><span class="toc-text">chgrp 命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E6%9D%83%E9%99%90"><span class="toc-text">特殊权限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SUID-Set-User-ID"><span class="toc-text">SUID (Set User ID)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SGID-Set-Group-ID"><span class="toc-text">SGID (Set Group ID)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="toc-text">对可执行文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E7%9B%AE%E5%BD%95"><span class="toc-text">对目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sticky-Bit-%E7%B2%98%E6%BB%9E%E4%BD%8D"><span class="toc-text">Sticky Bit (粘滞位)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E6%9D%83%E9%99%90%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="toc-text">特殊权限速查表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%BB%83%E4%B9%A0"><span class="toc-text">实践练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-FAQ"><span class="toc-text">常见问题 FAQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><span class="toc-text">延伸阅读</span></a></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":"blog.cnortles.top","officialHosts":["localhost","caoronglin.github.io","c.cnortles.top","cnortles.top"],"encoded":"YmxvZy5jbm9ydGxlcy50b3A="};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://cdn.cnortles.top/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script type="module">
+  const el = document.getElementById('twikoo_container');
+  util.viewportLazyload(el, load_twikoo, true);
+
+  function load_twikoo() {
+    if (!el) return;
+    utils.js('https://cdn.cnortles.top/npm/twikoo@1.6.44/dist/twikoo.all.min.js', {defer: true}).then(function () {
+      const path = el.getAttribute('comment_id') ?? decodeURI(window.location.pathname);
+      twikoo.init(Object.assign({"js":"https://cdn.cnortles.top/npm/twikoo@1.6.44/dist/twikoo.all.min.js","envId":"https://twikoo.cnortles.top"}, {
+        el: '#twikoo_container',
+        path: path,
+      }));
+    });
+  }
+</script>
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img ,.tk-content img:not([class*="emo"])`,
+    css: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script defer src="https://cdn.cnortles.top/npm/scrollreveal@4.0/dist/scrollreveal.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const slideUp = {
+      distance: `8px`,
+      duration: `500`,
+      interval: `50`,
+      scale: `1`,
+      opacity: 0,
+      easing: "ease-out"
+    };
+    ScrollReveal({ container: '.widgets' }).reveal('.slide-up', { ...slideUp });
+    ScrollReveal({ container: '.l_main' }).reveal('.slide-up', { ...slideUp });
+    ScrollReveal({ container: '.l_right' }).reveal('.slide-up', { ...slideUp });
+  });
+</script>
+<link rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+<script defer type="text/javascript" src="https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    mermaid.initialize(mermaid_config);
+  });
+</script><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+<script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/custom/js/smooth-scroll.js"></script><script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/custom/js/adjust-codeblock-height.js"></script><script src="/custom/js/link-icon.js"></script><script src="https://cdn.cnortles.top/npm/jquery/jquery.min.js"></script><script async data-pjax src="/custom/js/txmap.js"></script><script  src="/custom/js/back.js"></script><script type="text/javascript" src="/custom/js/ZYDark.js"></script>
+</div></body></html>

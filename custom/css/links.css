@@ -1,0 +1,190 @@
+/**
+ * 友链申请区块样式 - 3.0 极致版
+ * 修复了对比度、交互反馈及暗色模式兼容性
+ */
+:root {
+  --apply-primary: #4f46e5;
+  --apply-primary-hover: #4338ca;
+  --apply-bg: rgba(255, 255, 255, 0.75);
+  --apply-border: rgba(0, 0, 0, 0.08);
+  --apply-text-main: #1f2937;
+  --apply-text-sub: #6b7280;
+  --apply-input-bg: rgba(255, 255, 255, 0.5);
+  --apply-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+/* 兼容系统暗色及主题类名暗色 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --apply-bg: rgba(31, 31, 35, 0.8);
+    --apply-border: rgba(255, 255, 255, 0.12);
+    --apply-text-main: #f3f4f6;
+    --apply-text-sub: #a1a1aa;
+    --apply-input-bg: rgba(0, 0, 0, 0.2);
+    --apply-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+}
+[data-theme="dark"] {
+  --apply-bg: rgba(31, 31, 35, 0.8);
+  --apply-border: rgba(255, 255, 255, 0.12);
+  --apply-text-main: #f3f4f6;
+  --apply-text-sub: #a1a1aa;
+  --apply-input-bg: rgba(0, 0, 0, 0.2);
+  --apply-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* 主容器 */
+.friends-apply {
+  position: relative;
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 480px;
+  border-radius: 20px;
+  background: var(--apply-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--apply-border);
+  box-shadow: var(--apply-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 悬浮轻微浮起 */
+.friends-apply:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
+}
+
+/* 标题区域 */
+.friends-apply__header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.friends-apply__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--apply-text-main);
+  margin-bottom: 0.5rem;
+}
+
+.friends-apply__subtitle {
+  font-size: 0.85rem;
+  color: var(--apply-text-sub);
+  line-height: 1.5;
+}
+
+/* 输入框区域 */
+.friends-apply #friends-api {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.friends-apply #friends-api input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--apply-border);
+  background: var(--apply-input-bg);
+  color: var(--apply-text-main);
+  font-size: 0.9rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
+/* 输入框焦点动效 */
+.friends-apply #friends-api input:focus {
+  outline: none;
+  background: var(--apply-bg);
+  border-color: var(--apply-primary);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+  transform: scale(1.01);
+}
+
+.friends-apply #friends-api input::placeholder {
+  color: var(--apply-text-sub);
+  opacity: 0.6;
+}
+
+/* 提交按钮 */
+.friends-apply__btn {
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: var(--apply-primary);
+  color: #fff !important;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.friends-apply__btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+}
+
+.friends-apply__btn:hover {
+  background: var(--apply-primary-hover);
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+}
+
+.friends-apply__btn:hover::after {
+  left: 100%;
+}
+
+.friends-apply__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+/* 规则列表 */
+.friends-apply__list {
+  margin: 1.25rem 0 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+  list-style: none;
+}
+
+[data-theme="dark"] .friends-apply__list {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.friends-apply__list li {
+  font-size: 0.8rem;
+  color: var(--apply-text-sub);
+  margin-bottom: 6px;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.friends-apply__list li:last-child { margin-bottom: 0; }
+
+.friends-apply__list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--apply-primary);
+  font-weight: bold;
+}
+
+/* 响应式适配 */
+@media (max-width: 550px) {
+  .friends-apply {
+    margin: 1rem;
+    padding: 1.5rem;
+    max-width: none;
+  }
+  
+  .friends-apply__title {
+    font-size: 1.15rem;
+  }
+}

@@ -1,0 +1,1983 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/linux/ch08-compress/">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top/npm" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>第八章、文件与文件系统的压缩、打包与备份 - Aurora</title>
+
+  
+    <meta name="description" content="第八章、文件与文件系统的压缩、打包与备份8.1 压缩文件的用途与技术为什么需要压缩 节省存储空间：压缩后的文件占用更少的磁盘空间 提高传输效率：网络传输时减少时间和带宽消耗 归档备份：将多个文件打包成单一文件便于管理  压缩的原理压缩通过消除数据中的冗余信息来减小文件大小：  无损压缩：可以完全恢复原始数据（gzip、bzip2、xz） 有损压缩：牺牲部分质量换取更高压缩率（jpeg、mp3）">
+<meta property="og:type" content="website">
+<meta property="og:title" content="第八章、文件与文件系统的压缩、打包与备份">
+<meta property="og:url" content="https://blog.cnortles.top/notes/linux/ch08-compress/">
+<meta property="og:site_name" content="Aurora">
+<meta property="og:description" content="第八章、文件与文件系统的压缩、打包与备份8.1 压缩文件的用途与技术为什么需要压缩 节省存储空间：压缩后的文件占用更少的磁盘空间 提高传输效率：网络传输时减少时间和带宽消耗 归档备份：将多个文件打包成单一文件便于管理  压缩的原理压缩通过消除数据中的冗余信息来减小文件大小：  无损压缩：可以完全恢复原始数据（gzip、bzip2、xz） 有损压缩：牺牲部分质量换取更高压缩率（jpeg、mp3）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg">
+<meta property="article:published_time" content="2023-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-31T16:00:00.000Z">
+<meta property="article:author" content="Rl.">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="压缩">
+<meta property="article:tag" content="打包">
+<meta property="article:tag" content="备份">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg">
+  
+  
+  
+  <meta name="keywords" content=",,,">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="Aurora" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/linux/ch08-compress/","author":{"@type":"Person","name":"Rl.","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"第八章、文件与文件系统的压缩、打包与备份","description":"第八章、文件与文件系统的压缩、打包与备份8.1 压缩文件的用途与技术为什么需要压缩\n节省存储空间：压缩后的文件占用更少的磁盘空间\n提高传输效率：网络传输时减少时间和带宽消耗\n归档备份：将多个文件打包成单一文件便于管理\n\n压缩的原理压缩通过消除数据中的冗余信息来减小文件大小：\n\n无损压缩：可以完全恢复原始数据（gzip、bzip2、xz）\n有损压缩：牺牲部分质量换取更高压缩率（jpeg、mp3...","url":"https://blog.cnortles.top/notes/linux/ch08-compress/","keywords":"生信"}</script>
+  <script>
+  if (window.localStorage.getItem('ZYI_Theme_Mode')==='dark' || (window.localStorage.getItem('ZYI_Theme_Mode')==='Moss' && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+      document.querySelector("html").id = "ZYDark";
+  }
+</script>
+<link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="/custom/css/ZYDark.css"><script src="/custom/js/link-icon.js"></script><link rel="stylesheet" href="/custom/css/index.css"><link rel="stylesheet" href="/custom/css/links.css"><link rel="stylesheet" href="/custom/css/smooth-scroll.css"><link rel="stylesheet" href="/custom/css/ZYDark.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+<div class="l_body content" id="start" layout="page" type="tech" text-indent><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><img no-lazy class="avatar" src="https://blog.cnortles.top/img/7.jpg" onerror="javascript:this.classList.add('error');this.src='https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main"><img no-lazy height="32px" src="/img/t.png"/ onerror="javascript:this.classList.add('error');this.src='https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><div class="sub normal cap">愿极光，永不消逝。</div><div class="sub hover cap" style="opacity:0"> Ember of Synthetic Life</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="主页" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="装备" href="/equipment/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/notes" placeholder="在 Linux 中搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <widget class="widget-wrapper slide-up post-list">
+    <div class="widget-header dis-select">
+      <span class="name">标签</span>
+    </div>
+    <div class="widget-body fs14 tag-tree">
+      
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="">
+    
+  
+  <a class="link" href="/notes/">
+    <span class="toc-text">
+      
+        所有笔记
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="bash">
+    
+  
+  <a class="link" href="/notes/tags/bash/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        Bash
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="centos">
+    
+  
+  <a class="link" href="/notes/tags/centos/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        CentOS
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="linux">
+    
+  
+  <a class="link" href="/notes/tags/linux/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        Linux
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="shell">
+    
+  
+  <a class="link" href="/notes/tags/shell/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        Shell
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="vim">
+    
+  
+  <a class="link" href="/notes/tags/vim/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        vim
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="压缩">
+    
+  
+  <a class="link" href="/notes/tags/%E5%8E%8B%E7%BC%A9/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        压缩
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="命令行">
+    
+  
+  <a class="link" href="/notes/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        命令行
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="基础命令">
+    
+  
+  <a class="link" href="/notes/tags/%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        基础命令
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="备份">
+    
+  
+  <a class="link" href="/notes/tags/%E5%A4%87%E4%BB%BD/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        备份
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="学习方法">
+    
+  
+  <a class="link" href="/notes/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        学习方法
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="学习笔记">
+    
+  
+  <a class="link" href="/notes/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        学习笔记
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="安装">
+    
+  
+  <a class="link" href="/notes/tags/%E5%AE%89%E8%A3%85/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        安装
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="帮助系统">
+    
+  
+  <a class="link" href="/notes/tags/%E5%B8%AE%E5%8A%A9%E7%B3%BB%E7%BB%9F/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        帮助系统
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="打包">
+    
+  
+  <a class="link" href="/notes/tags/%E6%89%93%E5%8C%85/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        打包
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="操作系统">
+    
+  
+  <a class="link" href="/notes/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        操作系统
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="文件权限">
+    
+  
+  <a class="link" href="/notes/tags/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        文件权限
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="文件管理">
+    
+  
+  <a class="link" href="/notes/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        文件管理
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="文件系统">
+    
+  
+  <a class="link" href="/notes/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        文件系统
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="用户管理">
+    
+  
+  <a class="link" href="/notes/tags/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        用户管理
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="目录操作">
+    
+  
+  <a class="link" href="/notes/tags/%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        目录操作
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="硬件">
+    
+  
+  <a class="link" href="/notes/tags/%E7%A1%AC%E4%BB%B6/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        硬件
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="磁盘分区">
+    
+  
+  <a class="link" href="/notes/tags/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        磁盘分区
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="磁盘管理">
+    
+  
+  <a class="link" href="/notes/tags/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        磁盘管理
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="编辑器">
+    
+  
+  <a class="link" href="/notes/tags/%E7%BC%96%E8%BE%91%E5%99%A8/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        编辑器
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="计算机基础">
+    
+  
+  <a class="link" href="/notes/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        计算机基础
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="鸟哥">
+    
+  
+  <a class="link" href="/notes/tags/%E9%B8%9F%E5%93%A5/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        鸟哥
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+    </div>
+  </widget>
+
+
+<widget class="widget-wrapper slide-up recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/subscribe"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/notes/linux/ch00-computer-basics/"><span class="title">第零章、计算机概论</span></a><a class="item title" href="/notes/linux/ch01-linux-intro/"><span class="title">第一章、Linux是什么与如何学习</span></a><a class="item title" href="/notes/linux/ch02-partition/"><span class="title">第二章、主机规划与磁盘分区</span></a><a class="item title" href="/notes/linux/ch03-install/"><span class="title">第三章、安装 CentOS 7.x</span></a><a class="item title" href="/notes/linux/ch04-first-login/"><span class="title">第四章、首次登陆与线上求助</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="https://github.com/caoronglin" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-solid fa-github fa-brands fa-bounce"></i></a><a class="social" title="Bilibili" href="https://space.bilibili.com/555149182?spm_id_from=333.1007.0.0" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-brands fa-bilibili fa-bounce"></i></a><a class="social" title="Email" href="mailto:crl@cnortles.top" rel="noopener noreferrer"><i class="fa-solid fa-envelope fa-bounce"></i></a><a class="social" title="Comments" href="/comments" rel="noopener noreferrer"><i class="fa-solid fa-comment fa-bounce"></i></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner slide-up top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span>
+<a class="cap breadcrumb" href="/notebooks/">笔记本</a>
+
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/">Linux</a>
+
+</div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2023-12-31T16:00:00.000Z">2024-01-01</time></span><span class="sep updated"></span><span class="text updated">发布于：<time datetime="2023-12-31T16:00:00.000Z">2024-01-01</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第八章、文件与文件系统的压缩、打包与备份</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content slide-up"><h1 id="第八章、文件与文件系统的压缩、打包与备份"><a href="#第八章、文件与文件系统的压缩、打包与备份" class="headerlink" title="第八章、文件与文件系统的压缩、打包与备份"></a>第八章、文件与文件系统的压缩、打包与备份</h1><h2 id="8-1-压缩文件的用途与技术"><a href="#8-1-压缩文件的用途与技术" class="headerlink" title="8.1 压缩文件的用途与技术"></a>8.1 压缩文件的用途与技术</h2><h3 id="为什么需要压缩"><a href="#为什么需要压缩" class="headerlink" title="为什么需要压缩"></a>为什么需要压缩</h3><ol>
+<li><strong>节省存储空间</strong>：压缩后的文件占用更少的磁盘空间</li>
+<li><strong>提高传输效率</strong>：网络传输时减少时间和带宽消耗</li>
+<li><strong>归档备份</strong>：将多个文件打包成单一文件便于管理</li>
+</ol>
+<h3 id="压缩的原理"><a href="#压缩的原理" class="headerlink" title="压缩的原理"></a>压缩的原理</h3><p>压缩通过消除数据中的冗余信息来减小文件大小：</p>
+<ul>
+<li><strong>无损压缩</strong>：可以完全恢复原始数据（gzip、bzip2、xz）</li>
+<li><strong>有损压缩</strong>：牺牲部分质量换取更高压缩率（jpeg、mp3）</li>
+</ul>
+<h2 id="8-2-Linux-系统常见的压缩指令"><a href="#8-2-Linux-系统常见的压缩指令" class="headerlink" title="8.2 Linux 系统常见的压缩指令"></a>8.2 Linux 系统常见的压缩指令</h2><h3 id="常见压缩工具对比"><a href="#常见压缩工具对比" class="headerlink" title="常见压缩工具对比"></a>常见压缩工具对比</h3><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>扩展名</th>
+<th>压缩率</th>
+<th>速度</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>gzip</strong></td>
+<td>.gz</td>
+<td>中等</td>
+<td>快</td>
+<td>最常用，兼容性好</td>
+</tr>
+<tr>
+<td><strong>bzip2</strong></td>
+<td>.bz2</td>
+<td>高</td>
+<td>慢</td>
+<td>压缩率优于 gzip</td>
+</tr>
+<tr>
+<td><strong>xz</strong></td>
+<td>.xz</td>
+<td>最高</td>
+<td>最慢</td>
+<td>现代压缩标准</td>
+</tr>
+<tr>
+<td><strong>zip</strong></td>
+<td>.zip</td>
+<td>中等</td>
+<td>快</td>
+<td>Windows 兼容</td>
+</tr>
+<tr>
+<td><strong>compress</strong></td>
+<td>.Z</td>
+<td>低</td>
+<td>快</td>
+<td>已过时，很少使用</td>
+</tr>
+</tbody></table>
+<h3 id="gzip-和-zcat"><a href="#gzip-和-zcat" class="headerlink" title="gzip 和 zcat"></a>gzip 和 zcat</h3><p><strong>gzip - 最流行的压缩工具：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩文件（原始文件会被删除）</span></span><br><span class="line">gzip filename              <span class="comment"># 生成 filename.gz</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩时保留原始文件</span></span><br><span class="line">gzip -c filename &gt; filename.gz    <span class="comment"># 使用管道保留原文件</span></span><br><span class="line">gzip -k filename           <span class="comment"># 某些版本支持 -k (keep)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line">gunzip filename.gz         <span class="comment"># 或 gzip -d filename.gz</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用选项</span></span><br><span class="line">-1 ... -9                  <span class="comment"># 压缩级别，1最快/压缩率最低，9最慢/压缩率最高（默认6）</span></span><br><span class="line">-c                         <span class="comment"># 输出到标准输出，不删除原文件</span></span><br><span class="line">-d                         <span class="comment"># 解压缩</span></span><br><span class="line">-f                         <span class="comment"># 强制，覆盖现有文件</span></span><br><span class="line">-h                         <span class="comment"># 帮助</span></span><br><span class="line">-k                         <span class="comment"># 保留原文件（非所有版本支持）</span></span><br><span class="line">-l                         <span class="comment"># 列出压缩文件信息</span></span><br><span class="line">-L                         <span class="comment"># 显示许可证</span></span><br><span class="line">-n                         <span class="comment"># 不保存/恢复原始文件名和时间戳</span></span><br><span class="line">-N                         <span class="comment"># 保存/恢复原始文件名和时间戳（默认）</span></span><br><span class="line">-q                         <span class="comment"># 安静模式</span></span><br><span class="line">-r                         <span class="comment"># 递归处理目录（压缩目录下所有文件）</span></span><br><span class="line">-t                         <span class="comment"># 测试压缩文件的完整性</span></span><br><span class="line">-v                         <span class="comment"># 详细模式</span></span><br><span class="line">-V                         <span class="comment"># 显示版本</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">gzip -9 -k largefile.txt          <span class="comment"># 最高压缩级别，保留原文件</span></span><br><span class="line">gzip -r /path/to/directory/       <span class="comment"># 递归压缩目录下所有文件</span></span><br><span class="line">gzip -l file.gz                   <span class="comment"># 查看压缩信息</span></span><br><span class="line">gzip -t file.gz                   <span class="comment"># 测试文件完整性</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>zcat&#x2F;zmore&#x2F;zless - 不解压查看压缩文件：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看压缩文件内容（不解压）</span></span><br><span class="line">zcat file.gz                <span class="comment"># 等同于 cat，直接输出到屏幕</span></span><br><span class="line">zmore file.gz               <span class="comment"># 等同于 more，分页显示</span></span><br><span class="line">zless file.gz               <span class="comment"># 等同于 less，更好的分页</span></span><br><span class="line">zgrep <span class="string">&quot;pattern&quot;</span> file.gz     <span class="comment"># 在压缩文件中搜索</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># zcat 也可以查看 .Z 文件（compress 格式）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 zcat 输出重定向</span></span><br><span class="line">gzcat file.gz &gt; output.txt  <span class="comment"># 解压到文件</span></span><br><span class="line">zcat file.gz | grep pattern  <span class="comment"># 管道处理</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="bzip2-和-bzcat"><a href="#bzip2-和-bzcat" class="headerlink" title="bzip2 和 bzcat"></a>bzip2 和 bzcat</h3><p><strong>bzip2 - 更高压缩率：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩（默认删除原文件）</span></span><br><span class="line">bzip2 filename             <span class="comment"># 生成 filename.bz2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 保留原文件</span></span><br><span class="line">bzip2 -k filename</span><br><span class="line">bzip2 -c filename &gt; filename.bz2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line">bunzip2 filename.bz2       <span class="comment"># 或 bzip2 -d filename.bz2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用选项</span></span><br><span class="line">-1 ... -9                   <span class="comment"># 压缩级别（默认9，压缩率最高但最慢）</span></span><br><span class="line">-c                          <span class="comment"># 输出到标准输出</span></span><br><span class="line">-d                          <span class="comment"># 解压缩</span></span><br><span class="line">-f                          <span class="comment"># 强制</span></span><br><span class="line">-k                          <span class="comment"># 保留原文件</span></span><br><span class="line">-s                          <span class="comment"># 减少内存使用（较慢）</span></span><br><span class="line">-t                          <span class="comment"># 测试完整性</span></span><br><span class="line">-v                          <span class="comment"># 详细模式</span></span><br><span class="line">-z                          <span class="comment"># 压缩（默认）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">bzip2 -9 -k largefile.txt   <span class="comment"># 最高压缩级别，保留原文件</span></span><br><span class="line">bzip2 -t file.bz2          <span class="comment"># 测试文件完整性</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>bzcat&#x2F;bzmore&#x2F;bzless&#x2F;bzgrep：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不解压查看</span></span><br><span class="line">bzcat file.bz2              <span class="comment"># 直接输出</span></span><br><span class="line">bzmore file.bz2             <span class="comment"># 分页</span></span><br><span class="line">bzless file.bz2             <span class="comment"># 更好的分页</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索</span></span><br><span class="line">bzgrep <span class="string">&quot;pattern&quot;</span> file.bz2</span><br><span class="line">bzgrep <span class="string">&quot;pattern&quot;</span> *.bz2      <span class="comment"># 搜索多个文件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="xz-和-xzcat"><a href="#xz-和-xzcat" class="headerlink" title="xz 和 xzcat"></a>xz 和 xzcat</h3><p><strong>xz - 最高压缩率（现代标准）：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩（默认删除原文件）</span></span><br><span class="line">xz filename                <span class="comment"># 生成 filename.xz</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 保留原文件</span></span><br><span class="line">xz -k filename</span><br><span class="line">xz -c filename &gt; filename.xz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line">unxz filename.xz           <span class="comment"># 或 xz -d filename.xz</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用选项</span></span><br><span class="line">-0 ... -9                   <span class="comment"># 压缩级别（默认6，9是最佳但最慢）</span></span><br><span class="line">-e                          <span class="comment"># 极致压缩（比-9更慢更好）</span></span><br><span class="line">-c                          <span class="comment"># 输出到标准输出</span></span><br><span class="line">-d                          <span class="comment"># 解压缩</span></span><br><span class="line">-f                          <span class="comment"># 强制</span></span><br><span class="line">-k                          <span class="comment"># 保留原文件</span></span><br><span class="line">-l                          <span class="comment"># 列出压缩文件信息</span></span><br><span class="line">-t                          <span class="comment"># 测试完整性</span></span><br><span class="line">-v                          <span class="comment"># 详细模式</span></span><br><span class="line">-T NUM                      <span class="comment"># 使用NUM个线程（多核加速）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">xz -9 -k largefile.txt       <span class="comment"># 最高压缩级别，保留原文件</span></span><br><span class="line">xz -T4 largefile.txt         <span class="comment"># 使用4个线程加速</span></span><br><span class="line">xz -e file.txt               <span class="comment"># 极致压缩</span></span><br><span class="line">xz -l file.xz              <span class="comment"># 查看压缩信息</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>xzcat&#x2F;xzmore&#x2F;xzless&#x2F;xzgrep：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不解压查看</span></span><br><span class="line">xzcat file.xz               <span class="comment"># 直接输出</span></span><br><span class="line">xzmore file.xz              <span class="comment"># 分页</span></span><br><span class="line">xzless file.xz              <span class="comment"># 更好的分页</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索</span></span><br><span class="line">xzgrep <span class="string">&quot;pattern&quot;</span> file.xz</span><br><span class="line">xzgrep <span class="string">&quot;pattern&quot;</span> *.xz</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩工具对比示例"><a href="#压缩工具对比示例" class="headerlink" title="压缩工具对比示例"></a>压缩工具对比示例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建测试文件</span></span><br><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=test.file bs=1M count=100</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对比不同工具的压缩率和速度</span></span><br><span class="line"><span class="keyword">time</span> gzip -k test.file</span><br><span class="line"><span class="keyword">time</span> bzip2 -k test.file</span><br><span class="line"><span class="keyword">time</span> xz -k test.file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看结果</span></span><br><span class="line"><span class="built_in">ls</span> -lh test.file*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩率对比（示例结果）：</span></span><br><span class="line"><span class="comment"># 原始文件：    100M</span></span><br><span class="line"><span class="comment"># gzip (.gz)：   ~70M（最快）</span></span><br><span class="line"><span class="comment"># bzip2 (.bz2)：~65M（较慢）</span></span><br><span class="line"><span class="comment"># xz (.xz)：     ~60M（最慢但压缩率最高）</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8-3-打包指令：tar"><a href="#8-3-打包指令：tar" class="headerlink" title="8.3 打包指令：tar"></a>8.3 打包指令：tar</h2><h3 id="tar-命令概述"><a href="#tar-命令概述" class="headerlink" title="tar 命令概述"></a>tar 命令概述</h3><p>tar（Tape Archive）是 Linux&#x2F;Unix 系统中最常用的归档工具，将多个文件或目录打包成单一文件（称为 tar 归档或 tarball），常与压缩工具结合使用。</p>
+<p><strong>tar 的特点：</strong></p>
+<ul>
+<li>保留文件的权限、所有者、时间戳等信息</li>
+<li>支持多种压缩格式</li>
+<li>可以增量备份</li>
+<li>支持远程备份</li>
+</ul>
+<h3 id="tar-基本语法"><a href="#tar-基本语法" class="headerlink" title="tar 基本语法"></a>tar 基本语法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar [选项] [归档文件] [文件或目录...]</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用选项"><a href="#常用选项" class="headerlink" title="常用选项"></a>常用选项</h3><p><strong>操作模式（必须选其一）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-c</code></td>
+<td>创建新的归档文件 (create)</td>
+</tr>
+<tr>
+<td><code>-x</code></td>
+<td>从归档中提取文件 (extract)</td>
+</tr>
+<tr>
+<td><code>-t</code></td>
+<td>列出归档内容 (list)</td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td>追加文件到归档末尾 (append)</td>
+</tr>
+<tr>
+<td><code>-u</code></td>
+<td>仅追加比归档中更新的文件 (update)</td>
+</tr>
+<tr>
+<td><code>-A</code></td>
+<td>将另一个 tar 归档追加到当前归档</td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td>比较归档和文件系统的差异 (diff)</td>
+</tr>
+<tr>
+<td><code>--delete</code></td>
+<td>从归档中删除文件</td>
+</tr>
+</tbody></table>
+<p><strong>常用通用选项：</strong></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-v</code></td>
+<td>详细模式，显示处理过程 (verbose)</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>指定归档文件名，必须后跟文件名</td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>保留原始文件权限和属性 (preserve)</td>
+</tr>
+<tr>
+<td><code>-P</code></td>
+<td>使用绝对路径（小心使用）</td>
+</tr>
+<tr>
+<td><code>-C</code></td>
+<td>切换到指定目录再执行操作</td>
+</tr>
+<tr>
+<td><code>-z</code></td>
+<td>使用 gzip 压缩&#x2F;解压缩 (.gz)</td>
+</tr>
+<tr>
+<td><code>-j</code></td>
+<td>使用 bzip2 压缩&#x2F;解压缩 (.bz2)</td>
+</tr>
+<tr>
+<td><code>-J</code></td>
+<td>使用 xz 压缩&#x2F;解压缩 (.xz)</td>
+</tr>
+<tr>
+<td><code>--exclude</code></td>
+<td>排除特定文件或目录</td>
+</tr>
+<tr>
+<td><code>--exclude-from</code></td>
+<td>从文件中读取排除列表</td>
+</tr>
+<tr>
+<td><code>--files-from</code></td>
+<td>从文件中读取要处理的文件列表</td>
+</tr>
+<tr>
+<td><code>-h</code></td>
+<td>显示帮助信息</td>
+</tr>
+<tr>
+<td><code>--version</code></td>
+<td>显示版本信息</td>
+</tr>
+</tbody></table>
+<h3 id="tar-实战示例"><a href="#tar-实战示例" class="headerlink" title="tar 实战示例"></a>tar 实战示例</h3><p><strong>1. 创建归档：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 tar 归档（不压缩）</span></span><br><span class="line">tar -cvf archive.tar /path/to/directory</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 tar.gz 归档（gzip 压缩，最常用）</span></span><br><span class="line">tar -czvf archive.tar.gz /path/to/directory</span><br><span class="line">tar -czvf backup-$(<span class="built_in">date</span> +%Y%m%d).tar.gz ~/Documents</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 tar.bz2 归档（bzip2 压缩，压缩率更高）</span></span><br><span class="line">tar -cjvf archive.tar.bz2 /path/to/directory</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 tar.xz 归档（xz 压缩，压缩率最高）</span></span><br><span class="line">tar -cJvf archive.tar.xz /path/to/directory</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建归档并排除特定文件或目录</span></span><br><span class="line">tar -czvf backup.tar.gz /home/user --exclude=<span class="string">&#x27;*.log&#x27;</span> --exclude=<span class="string">&#x27;*.tmp&#x27;</span> --exclude=<span class="string">&#x27;cache&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从文件中读取排除列表</span></span><br><span class="line">tar -czvf backup.tar.gz /home/user --exclude-from=exclude.list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只包含特定文件类型</span></span><br><span class="line">tar -czvf scripts.tar.gz /home/user --include=<span class="string">&#x27;*.sh&#x27;</span> --include=<span class="string">&#x27;*.py&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩多个目录或文件</span></span><br><span class="line">tar -czvf backup.tar.gz /etc/nginx /var/www /home/user/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保留权限和属性创建归档</span></span><br><span class="line">tar -czvpf backup.tar.gz --same-owner /important/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建带时间戳的备份</span></span><br><span class="line">tar -czvf backup-$(<span class="built_in">date</span> +%Y%m%d_%H%M%S).tar.gz /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只备份比某个时间更新的文件</span></span><br><span class="line">tar -czN <span class="string">&quot;2024-01-01&quot;</span> -f recent.tar.gz /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建压缩归档到远程服务器（使用管道和 SSH）</span></span><br><span class="line">tar -czf - /local/data | ssh user@remote <span class="string">&quot;cat &gt; /backup/data.tar.gz&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 查看归档内容：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出 tar 归档内容</span></span><br><span class="line">tar -tvf archive.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出 tar.gz 归档内容</span></span><br><span class="line">tar -tzvf archive.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出 tar.bz2 归档内容</span></span><br><span class="line">tar -tjvf archive.tar.bz2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索归档中的特定文件</span></span><br><span class="line">tar -tzf archive.tar.gz | grep <span class="string">&quot;pattern&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看归档中特定文件的详细信息</span></span><br><span class="line">tar -tvf archive.tar path/to/file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归列出目录内容</span></span><br><span class="line">tar -tvf archive.tar --wildcards <span class="string">&quot;*.txt&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 解压归档：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解压 tar 归档到当前目录</span></span><br><span class="line">tar -xvf archive.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压 tar.gz 归档到当前目录（最常用）</span></span><br><span class="line">tar -xzvf archive.tar.gz</span><br><span class="line">tar -xzf archive.tar.gz          <span class="comment"># 不显示详细过程</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压 tar.bz2 归档</span></span><br><span class="line">tar -xjvf archive.tar.bz2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压 tar.xz 归档</span></span><br><span class="line">tar -xJvf archive.tar.xz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压到指定目录</span></span><br><span class="line">tar -xzvf archive.tar.gz -C /path/to/destination</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压特定文件</span></span><br><span class="line">tar -xzvf archive.tar.gz path/to/specific/file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压特定类型的文件</span></span><br><span class="line">tar -xzvf archive.tar.gz --wildcards <span class="string">&quot;*.txt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压并保留权限</span></span><br><span class="line">tar -xzvpf archive.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压并恢复原始所有者（需要 root）</span></span><br><span class="line"><span class="built_in">sudo</span> tar -xzvpf archive.tar.gz --same-owner</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压时显示进度条</span></span><br><span class="line">tar -xvf archive.tar --checkpoint=1000 --checkpoint-action=<span class="built_in">echo</span>=<span class="string">&quot;Extracted %u files&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压到远程服务器</span></span><br><span class="line"><span class="built_in">cat</span> archive.tar.gz | ssh user@remote <span class="string">&quot;tar -xzvf - -C /destination&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 追加和更新归档：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 追加文件到现有 tar 归档（仅适用于未压缩的 tar）</span></span><br><span class="line">tar -rvf archive.tar newfile.txt</span><br><span class="line">tar -rvf archive.tar /path/to/new/directory/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新归档中已存在的文件（只添加更新的文件）</span></span><br><span class="line">tar -uvf archive.tar updatedfile.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 追加归档到另一个归档（合并归档）</span></span><br><span class="line">tar -Af archive1.tar archive2.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意：不能直接追加到压缩归档（.gz/.bz2/.xz）</span></span><br><span class="line"><span class="comment"># 需要先解压，追加，再压缩</span></span><br><span class="line"><span class="comment"># 或使用管道（复杂，不推荐）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：安全地追加到压缩归档</span></span><br><span class="line">gunzip archive.tar.gz      <span class="comment"># 解压</span></span><br><span class="line">tar -rvf archive.tar newfile  <span class="comment"># 追加</span></span><br><span class="line">gzip archive.tar           <span class="comment"># 重新压缩</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 删除归档中的文件：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从 tar 归档中删除文件（仅适用于未压缩的 tar）</span></span><br><span class="line">tar --delete -f archive.tar file_to_delete.txt</span><br><span class="line">tar --delete -f archive.tar <span class="string">&quot;*.log&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除多个文件</span></span><br><span class="line">tar --delete -f archive.tar file1 file2 file3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意：不能直接删除压缩归档中的文件</span></span><br><span class="line"><span class="comment"># 需要先解压，删除，再压缩</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：从压缩归档中删除文件</span></span><br><span class="line">tar -xzvf archive.tar.gz            <span class="comment"># 解压到当前目录</span></span><br><span class="line"><span class="built_in">rm</span> file_to_delete.txt               <span class="comment"># 删除文件</span></span><br><span class="line">tar -czvf new_archive.tar.gz *      <span class="comment"># 重新打包压缩</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>6. 从归档中提取特定文件：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提取单个文件</span></span><br><span class="line">tar -xzvf archive.tar.gz path/to/file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取多个文件</span></span><br><span class="line">tar -xzvf archive.tar.gz file1.txt file2.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用通配符提取</span></span><br><span class="line">tar -xzvf archive.tar.gz --wildcards <span class="string">&quot;*.txt&quot;</span></span><br><span class="line">tar -xzvf archive.tar.gz --wildcards <span class="string">&quot;data/*.csv&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取到特定目录</span></span><br><span class="line">tar -xzvf archive.tar.gz -C /destination/directory file.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>7. 特殊用法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过管道使用 tar</span></span><br><span class="line"><span class="comment"># 备份到远程服务器</span></span><br><span class="line"><span class="comment"># 方式1：tar + ssh</span></span><br><span class="line">tar -czf - /local/dir | ssh user@remote <span class="string">&quot;cat &gt; /backup/backup.tar.gz&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式2：使用 rsync（更推荐）</span></span><br><span class="line">rsync -avz /local/dir/ user@remote:/backup/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从远程服务器恢复</span></span><br><span class="line"><span class="built_in">cat</span> backup.tar.gz | ssh user@remote <span class="string">&quot;cat &gt; -&quot;</span> | tar -xzf -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 tar 进行增量备份</span></span><br><span class="line"><span class="comment"># 创建快照文件</span></span><br><span class="line">tar -czf backup-full.tar.gz --listed-incremental=snapshot.file /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建增量备份（只备份变化的文件）</span></span><br><span class="line">tar -czf backup-incr.tar.gz --listed-incremental=snapshot.file /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并多个归档</span></span><br><span class="line"><span class="built_in">cat</span> archive1.tar archive2.tar &gt; combined.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分割大归档</span></span><br><span class="line">tar -czvf - /large/directory | <span class="built_in">split</span> -b 1G - backup.tar.gz.</span><br><span class="line"><span class="comment"># 会产生 backup.tar.gz.aa, backup.tar.gz.ab, ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分割的归档</span></span><br><span class="line"><span class="built_in">cat</span> backup.tar.gz.* | tar -xzvf -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建带有绝对路径的归档（小心使用）</span></span><br><span class="line">tar -czPvf backup.tar.gz /etc /var/log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 排除特定文件或目录</span></span><br><span class="line">tar -czvf backup.tar.gz /home --exclude=<span class="string">&#x27;*.mp4&#x27;</span> --exclude=<span class="string">&#x27;cache&#x27;</span> --exclude-vcs</span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩工具详解"><a href="#压缩工具详解" class="headerlink" title="压缩工具详解"></a>压缩工具详解</h3><h4 id="gzip-详解"><a href="#gzip-详解" class="headerlink" title="gzip 详解"></a>gzip 详解</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩级别测试</span></span><br><span class="line"><span class="comment"># 准备测试文件</span></span><br><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/urandom of=testfile bs=1M count=100</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不同压缩级别</span></span><br><span class="line"><span class="keyword">for</span> level <span class="keyword">in</span> 1 6 9; <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">time</span> gzip -<span class="variable">$&#123;level&#125;</span> -c testfile &gt; testfile.gz.<span class="variable">$&#123;level&#125;</span></span><br><span class="line">  <span class="built_in">ls</span> -lh testfile.gz.<span class="variable">$&#123;level&#125;</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看压缩文件信息</span></span><br><span class="line">gzip -l testfile.gz</span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line"><span class="comment"># compressed        uncompressed  ratio uncompressed_name</span></span><br><span class="line"><span class="comment">#     102400            1048576  90.2% testfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归压缩目录中的所有文件（保留目录结构，但不打包）</span></span><br><span class="line">find /path/to/dir -<span class="built_in">type</span> f -<span class="built_in">exec</span> gzip &#123;&#125; \;</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">find /path/to/dir -<span class="built_in">type</span> f | xargs gzip</span><br></pre></td></tr></table></figure>
+
+<h4 id="bzip2-详解"><a href="#bzip2-详解" class="headerlink" title="bzip2 详解"></a>bzip2 详解</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bzip2 通常比 gzip 压缩率更高但速度更慢</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 对比测试</span></span><br><span class="line"><span class="keyword">for</span> tool <span class="keyword">in</span> gzip bzip2; <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Testing <span class="variable">$tool</span>...&quot;</span></span><br><span class="line">  <span class="keyword">time</span> <span class="variable">$tool</span> -k testfile</span><br><span class="line">  <span class="built_in">ls</span> -lh testfile.*</span><br><span class="line">  <span class="variable">$tool</span> -d testfile.*</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># bzip2 的恢复功能（用于损坏的文件）</span></span><br><span class="line">bzip2recover corrupted.bz2</span><br><span class="line"></span><br><span class="line"><span class="comment"># bzip2 使用块压缩，可以并行处理（使用 pbzip2）</span></span><br><span class="line">pbzip2 -p4 file    <span class="comment"># 使用4个线程</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="xz-详解"><a href="#xz-详解" class="headerlink" title="xz 详解"></a>xz 详解</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># xz 提供最高的压缩率，但速度最慢</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩级别对比（0-9，默认6）</span></span><br><span class="line"><span class="keyword">for</span> level <span class="keyword">in</span> 0 6 9; <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Testing xz -<span class="variable">$level</span>...&quot;</span></span><br><span class="line">  <span class="keyword">time</span> xz -<span class="variable">$&#123;level&#125;</span> -k -c testfile &gt; testfile.xz.<span class="variable">$&#123;level&#125;</span></span><br><span class="line">  <span class="built_in">ls</span> -lh testfile.xz.<span class="variable">$&#123;level&#125;</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># xz 多线程压缩（更快）</span></span><br><span class="line">xz -T4 file            <span class="comment"># 使用4个线程</span></span><br><span class="line">pxz -9 file            <span class="comment"># 使用全部核心</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># xz 格式信息</span></span><br><span class="line">xz -l file.xz          <span class="comment"># 列出压缩信息</span></span><br><span class="line">xz -t file.xz          <span class="comment"># 测试完整性</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不同的压缩预设</span></span><br><span class="line">xz --lzma2=preset=9,dict=64MiB file   <span class="comment"># 使用大字典获得更好压缩率</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="现代压缩工具"><a href="#现代压缩工具" class="headerlink" title="现代压缩工具"></a>现代压缩工具</h3><h4 id="zstd-快速压缩"><a href="#zstd-快速压缩" class="headerlink" title="zstd - 快速压缩"></a>zstd - 快速压缩</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line"><span class="built_in">sudo</span> yum install zstd    <span class="comment"># CentOS/RHEL</span></span><br><span class="line"><span class="built_in">sudo</span> apt install zstd    <span class="comment"># Debian/Ubuntu</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># zstd 提供极快的压缩和解压速度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不同压缩级别（1-19，默认3，超高质量22）</span></span><br><span class="line">zstd -1 file             <span class="comment"># 快速压缩</span></span><br><span class="line">zstd -9 file             <span class="comment"># 高质量压缩</span></span><br><span class="line">zstd -19 file            <span class="comment"># 极致压缩</span></span><br><span class="line">zstd --ultra -22 file    <span class="comment"># 超高质量</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多线程</span></span><br><span class="line">zstd -T4 file            <span class="comment"># 4线程</span></span><br><span class="line">zstd -T0 file            <span class="comment"># 自动使用所有核心</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line">zstd -d file.zst</span><br><span class="line">unzstd file.zst</span><br><span class="line"></span><br><span class="line"><span class="comment"># 其他工具</span></span><br><span class="line">zstdcat file.zst         <span class="comment"># 不解压查看</span></span><br><span class="line">zstdgrep pattern file.zst</span><br><span class="line">zstdless file.zst</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对比测试</span></span><br><span class="line"><span class="keyword">for</span> level <span class="keyword">in</span> 1 3 9; <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">time</span> zstd -<span class="variable">$&#123;level&#125;</span> -k -c testfile &gt; testfile.zst.<span class="variable">$&#123;level&#125;</span></span><br><span class="line">  <span class="built_in">ls</span> -lh testfile.zst.<span class="variable">$&#123;level&#125;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="pigz-并行-gzip"><a href="#pigz-并行-gzip" class="headerlink" title="pigz - 并行 gzip"></a>pigz - 并行 gzip</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line"><span class="built_in">sudo</span> yum install pigz</span><br><span class="line"></span><br><span class="line"><span class="comment"># pigz 是 gzip 的并行实现，使用多核加速压缩</span></span><br><span class="line"></span><br><span class="line">pigz file                  <span class="comment"># 压缩（使用所有核心）</span></span><br><span class="line">pigz -p 4 file            <span class="comment"># 使用4个进程</span></span><br><span class="line">unpigz file.gz            <span class="comment"># 解压</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 保持与 gzip 兼容的选项</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="pbzip2-并行-bzip2"><a href="#pbzip2-并行-bzip2" class="headerlink" title="pbzip2 - 并行 bzip2"></a>pbzip2 - 并行 bzip2</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line"><span class="built_in">sudo</span> yum install pbzip2</span><br><span class="line"></span><br><span class="line"><span class="comment"># pbzip2 是 bzip2 的并行实现</span></span><br><span class="line"></span><br><span class="line">pbzip2 file               <span class="comment"># 压缩（使用所有核心）</span></span><br><span class="line">pbzip2 -p4 file          <span class="comment"># 使用4个进程</span></span><br><span class="line">pbzip2 -d file.bz2       <span class="comment"># 解压</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩性能对比测试脚本"><a href="#压缩性能对比测试脚本" class="headerlink" title="压缩性能对比测试脚本"></a>压缩性能对比测试脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># compression_benchmark.sh</span></span><br><span class="line"></span><br><span class="line">TEST_FILE=<span class="string">&quot;benchmark_test_file&quot;</span></span><br><span class="line">FILE_SIZE=<span class="string">&quot;100M&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建测试文件</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Creating test file (<span class="variable">$&#123;FILE_SIZE&#125;</span>)...&quot;</span></span><br><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/urandom of=<span class="variable">$&#123;TEST_FILE&#125;</span> bs=1M count=100 status=progress</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;==========================================&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Compression Benchmark&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;==========================================&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Original file size: <span class="subst">$(ls -lh $&#123;TEST_FILE&#125; | awk &#x27;&#123;print $5&#125;&#x27;)</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 gzip（级别 1, 6, 9）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;--- gzip ---&quot;</span></span><br><span class="line"><span class="keyword">for</span> level <span class="keyword">in</span> 1 6 9; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">&quot;Level <span class="variable">$&#123;level&#125;</span>: &quot;</span></span><br><span class="line">    <span class="keyword">time</span> (gzip -<span class="variable">$&#123;level&#125;</span> -k -c <span class="variable">$&#123;TEST_FILE&#125;</span> &gt; <span class="variable">$&#123;TEST_FILE&#125;</span>.gz.<span class="variable">$&#123;level&#125;</span>)</span><br><span class="line">    <span class="built_in">ls</span> -lh <span class="variable">$&#123;TEST_FILE&#125;</span>.gz.<span class="variable">$&#123;level&#125;</span> | awk <span class="string">&#x27;&#123;print &quot;Size:&quot;, $5&#125;&#x27;</span></span><br><span class="line">    <span class="built_in">rm</span> -f <span class="variable">$&#123;TEST_FILE&#125;</span>.gz.<span class="variable">$&#123;level&#125;</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 pigz（并行 gzip）</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">command</span> -v pigz &amp;&gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;--- pigz (parallel gzip) ---&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">&quot;Default (all cores): &quot;</span></span><br><span class="line">    <span class="keyword">time</span> (pigz -k -c <span class="variable">$&#123;TEST_FILE&#125;</span> &gt; <span class="variable">$&#123;TEST_FILE&#125;</span>.pigz)</span><br><span class="line">    <span class="built_in">ls</span> -lh <span class="variable">$&#123;TEST_FILE&#125;</span>.pigz | awk <span class="string">&#x27;&#123;print &quot;Size:&quot;, $5&#125;&#x27;</span></span><br><span class="line">    <span class="built_in">rm</span> -f <span class="variable">$&#123;TEST_FILE&#125;</span>.pigz</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 bzip2</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">command</span> -v bzip2 &amp;&gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;--- bzip2 ---&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">&quot;Default: &quot;</span></span><br><span class="line">    <span class="keyword">time</span> (bzip2 -k -c <span class="variable">$&#123;TEST_FILE&#125;</span> &gt; <span class="variable">$&#123;TEST_FILE&#125;</span>.bz2)</span><br><span class="line">    <span class="built_in">ls</span> -lh <span class="variable">$&#123;TEST_FILE&#125;</span>.bz2 | awk <span class="string">&#x27;&#123;print &quot;Size:&quot;, $5&#125;&#x27;</span></span><br><span class="line">    <span class="built_in">rm</span> -f <span class="variable">$&#123;TEST_FILE&#125;</span>.bz2</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 pbzip2（并行 bzip2）</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">command</span> -v pbzip2 &amp;&gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;--- pbzip2 (parallel bzip2) ---&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">&quot;Default: &quot;</span></span><br><span class="line">    <span class="keyword">time</span> (pbzip2 -k -c <span class="variable">$&#123;TEST_FILE&#125;</span> &gt; <span class="variable">$&#123;TEST_FILE&#125;</span>.pbz2)</span><br><span class="line">    <span class="built_in">ls</span> -lh <span class="variable">$&#123;TEST_FILE&#125;</span>.pbz2 | awk <span class="string">&#x27;&#123;print &quot;Size:&quot;, $5&#125;&#x27;</span></span><br><span class="line">    <span class="built_in">rm</span> -f <span class="variable">$&#123;TEST_FILE&#125;</span>.pbz2</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 xz</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">command</span> -v xz &amp;&gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;--- xz ---&quot;</span></span><br><span class="line">    <span class="keyword">for</span> level <span class="keyword">in</span> 0 6 9; <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> -n <span class="string">&quot;Level <span class="variable">$&#123;level&#125;</span>: &quot;</span></span><br><span class="line">        <span class="keyword">time</span> (xz -<span class="variable">$&#123;level&#125;</span> -k -c <span class="variable">$&#123;TEST_FILE&#125;</span> &gt; <span class="variable">$&#123;TEST_FILE&#125;</span>.xz.<span class="variable">$&#123;level&#125;</span>)</span><br><span class="line">        <span class="built_in">ls</span> -lh <span class="variable">$&#123;TEST_FILE&#125;</span>.xz.<span class="variable">$&#123;level&#125;</span> | awk <span class="string">&#x27;&#123;print &quot;Size:&quot;, $5&#125;&#x27;</span></span><br><span class="line">        <span class="built_in">rm</span> -f <span class="variable">$&#123;TEST_FILE&#125;</span>.xz.<span class="variable">$&#123;level&#125;</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 zstd</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">command</span> -v zstd &amp;&gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;--- zstd ---&quot;</span></span><br><span class="line">    <span class="keyword">for</span> level <span class="keyword">in</span> 1 3 9 19; <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> -n <span class="string">&quot;Level <span class="variable">$&#123;level&#125;</span>: &quot;</span></span><br><span class="line">        <span class="keyword">time</span> (zstd -<span class="variable">$&#123;level&#125;</span> -k -c <span class="variable">$&#123;TEST_FILE&#125;</span> &gt; <span class="variable">$&#123;TEST_FILE&#125;</span>.zst.<span class="variable">$&#123;level&#125;</span>)</span><br><span class="line">        <span class="built_in">ls</span> -lh <span class="variable">$&#123;TEST_FILE&#125;</span>.zst.<span class="variable">$&#123;level&#125;</span> | awk <span class="string">&#x27;&#123;print &quot;Size:&quot;, $5&#125;&#x27;</span></span><br><span class="line">        <span class="built_in">rm</span> -f <span class="variable">$&#123;TEST_FILE&#125;</span>.zst.<span class="variable">$&#123;level&#125;</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;==========================================&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Cleaning up...&quot;</span></span><br><span class="line"><span class="built_in">rm</span> -f <span class="variable">$&#123;TEST_FILE&#125;</span> <span class="variable">$&#123;TEST_FILE&#125;</span>.*</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Done!&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-tar-进行完整系统备份"><a href="#使用-tar-进行完整系统备份" class="headerlink" title="使用 tar 进行完整系统备份"></a>使用 tar 进行完整系统备份</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># full_system_backup.sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置变量</span></span><br><span class="line">BACKUP_DIR=<span class="string">&quot;/backup&quot;</span></span><br><span class="line">DATE=$(<span class="built_in">date</span> +%Y%m%d_%H%M%S)</span><br><span class="line">HOSTNAME=$(hostname)</span><br><span class="line">BACKUP_FILE=<span class="string">&quot;<span class="variable">$&#123;BACKUP_DIR&#125;</span>/<span class="variable">$&#123;HOSTNAME&#125;</span>_full_backup_<span class="variable">$&#123;DATE&#125;</span>.tar.gz&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 排除列表（不备份的内容）</span></span><br><span class="line">EXCLUDE_LIST=(</span><br><span class="line">    <span class="string">&quot;<span class="variable">$&#123;BACKUP_DIR&#125;</span>&quot;</span>          <span class="comment"># 不备份备份目录本身</span></span><br><span class="line">    <span class="string">&quot;/proc&quot;</span>                  <span class="comment"># 虚拟文件系统</span></span><br><span class="line">    <span class="string">&quot;/sys&quot;</span>                   <span class="comment"># 虚拟文件系统</span></span><br><span class="line">    <span class="string">&quot;/dev&quot;</span>                   <span class="comment"># 设备文件（udev 会自动创建）</span></span><br><span class="line">    <span class="string">&quot;/run&quot;</span>                   <span class="comment"># 运行时文件</span></span><br><span class="line">    <span class="string">&quot;/mnt&quot;</span>                   <span class="comment"># 挂载点</span></span><br><span class="line">    <span class="string">&quot;/media&quot;</span>                 <span class="comment"># 挂载点</span></span><br><span class="line">    <span class="string">&quot;/tmp&quot;</span>                   <span class="comment"># 临时文件</span></span><br><span class="line">    <span class="string">&quot;/var/tmp&quot;</span>              <span class="comment"># 临时文件</span></span><br><span class="line">    <span class="string">&quot;/var/cache&quot;</span>            <span class="comment"># 缓存</span></span><br><span class="line">    <span class="string">&quot;/var/log&quot;</span>              <span class="comment"># 日志（可选，建议单独备份）</span></span><br><span class="line">    <span class="string">&quot;*.swap&quot;</span>                <span class="comment"># swap 文件</span></span><br><span class="line">    <span class="string">&quot;*/lost+found&quot;</span>          <span class="comment"># 文件系统恢复目录</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建排除参数</span></span><br><span class="line">EXCLUDE_ARGS=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$&#123;EXCLUDE_LIST[@]&#125;</span>&quot;</span>; <span class="keyword">do</span></span><br><span class="line">    EXCLUDE_ARGS+=<span class="string">&quot;--exclude=<span class="variable">$&#123;item&#125;</span> &quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确保备份目录存在</span></span><br><span class="line"><span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$&#123;BACKUP_DIR&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始备份</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;========================================&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Starting Full System Backup&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Backup file: <span class="variable">$&#123;BACKUP_FILE&#125;</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Started at: <span class="subst">$(date)</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;========================================&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行备份</span></span><br><span class="line">tar -czvpf <span class="string">&quot;<span class="variable">$&#123;BACKUP_FILE&#125;</span>&quot;</span> \</span><br><span class="line">    <span class="variable">$&#123;EXCLUDE_ARGS&#125;</span> \</span><br><span class="line">    --one-file-system \</span><br><span class="line">    / 2&gt;<span class="string">&quot;<span class="variable">$&#123;BACKUP_FILE&#125;</span>.log&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查备份结果</span></span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;========================================&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Backup completed successfully!&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Backup file: <span class="variable">$&#123;BACKUP_FILE&#125;</span>&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Backup size: <span class="subst">$(du -h <span class="string">&quot;<span class="variable">$&#123;BACKUP_FILE&#125;</span>&quot;</span> | cut -f1)</span>&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Completed at: <span class="subst">$(date)</span>&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;========================================&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可选：删除旧备份（保留最近5个）</span></span><br><span class="line">    <span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$&#123;BACKUP_DIR&#125;</span>&quot;</span> || <span class="built_in">exit</span></span><br><span class="line">    <span class="built_in">ls</span> -t <span class="string">&quot;<span class="variable">$&#123;HOSTNAME&#125;</span>_full_backup_&quot;</span>*.tar.gz | <span class="built_in">tail</span> -n +6 | xargs -r <span class="built_in">rm</span> -f</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可选：将备份同步到远程服务器</span></span><br><span class="line">    <span class="comment"># rsync -avz --progress &quot;$&#123;BACKUP_FILE&#125;&quot; user@remote:/backups/</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">exit</span> 0</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;========================================&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Backup failed!&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Check log file: <span class="variable">$&#123;BACKUP_FILE&#125;</span>.log&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Failed at: <span class="subst">$(date)</span>&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;========================================&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-tar-进行增量备份"><a href="#使用-tar-进行增量备份" class="headerlink" title="使用 tar 进行增量备份"></a>使用 tar 进行增量备份</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># incremental_backup.sh</span></span><br><span class="line"></span><br><span class="line">SOURCE_DIR=<span class="string">&quot;/data&quot;</span></span><br><span class="line">BACKUP_DIR=<span class="string">&quot;/backup/incremental&quot;</span></span><br><span class="line">DATE=$(<span class="built_in">date</span> +%Y%m%d_%H%M%S)</span><br><span class="line">SNAPSHOT_FILE=<span class="string">&quot;<span class="variable">$&#123;BACKUP_DIR&#125;</span>/.snapshot&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确保备份目录存在</span></span><br><span class="line"><span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$&#123;BACKUP_DIR&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行增量备份</span></span><br><span class="line">tar -czvpf <span class="string">&quot;<span class="variable">$&#123;BACKUP_DIR&#125;</span>/incr_<span class="variable">$&#123;DATE&#125;</span>.tar.gz&quot;</span> \</span><br><span class="line">    --listed-incremental=<span class="string">&quot;<span class="variable">$&#123;SNAPSHOT_FILE&#125;</span>&quot;</span> \</span><br><span class="line">    <span class="string">&quot;<span class="variable">$&#123;SOURCE_DIR&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理旧备份（保留最近7天）</span></span><br><span class="line">find <span class="string">&quot;<span class="variable">$&#123;BACKUP_DIR&#125;</span>&quot;</span> -name <span class="string">&quot;incr_*.tar.gz&quot;</span> -mtime +7 -delete</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Incremental backup completed: <span class="variable">$&#123;BACKUP_DIR&#125;</span>/incr_<span class="variable">$&#123;DATE&#125;</span>.tar.gz&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="恢复备份"><a href="#恢复备份" class="headerlink" title="恢复备份"></a>恢复备份</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 完整恢复</span></span><br><span class="line">tar -xzvpf backup.tar.gz -C /</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复到指定目录（不覆盖根目录）</span></span><br><span class="line">tar -xzvpf backup.tar.gz -C /restore</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只恢复特定文件或目录</span></span><br><span class="line">tar -xzvpf backup.tar.gz path/to/specific/file</span><br><span class="line">tar -xzvpf backup.tar.gz --wildcards <span class="string">&quot;etc/nginx/*&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复时保留权限（需要 root）</span></span><br><span class="line"><span class="built_in">sudo</span> tar -xzvpf backup.tar.gz -C / --same-owner</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复增量备份</span></span><br><span class="line"><span class="comment"># 先恢复完整备份</span></span><br><span class="line">tar -xzvpf full_backup.tar.gz -C /</span><br><span class="line"><span class="comment"># 然后按顺序恢复增量备份</span></span><br><span class="line"><span class="keyword">for</span> backup <span class="keyword">in</span> incr_*.tar.gz; <span class="keyword">do</span></span><br><span class="line">  tar -xzvpf <span class="string">&quot;<span class="variable">$backup</span>&quot;</span> -C /</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复后检查文件系统完整性</span></span><br><span class="line">checksum_file=<span class="string">&quot;checksum.list&quot;</span></span><br><span class="line"><span class="keyword">if</span> [ -f <span class="string">&quot;<span class="variable">$checksum_file</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">md5sum</span> -c <span class="string">&quot;<span class="variable">$checksum_file</span>&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8-4-重点回顾"><a href="#8-4-重点回顾" class="headerlink" title="8.4 重点回顾"></a>8.4 重点回顾</h2><ol>
+<li><p><strong>压缩工具</strong>：</p>
+<ul>
+<li>gzip：速度快，兼容性好，压缩率中等</li>
+<li>bzip2：压缩率更高，速度较慢</li>
+<li>xz：压缩率最高，速度最慢</li>
+<li>zstd：速度极快，现代压缩标准</li>
+</ul>
+</li>
+<li><p><strong>tar 命令</strong>：</p>
+<ul>
+<li><code>-c</code> 创建，<code>-x</code> 解压，<code>-t</code> 查看，<code>-v</code> 详细，<code>-f</code> 指定文件</li>
+<li><code>-z</code> gzip，<code>-j</code> bzip2，<code>-J</code> xz 压缩</li>
+<li><code>--exclude</code> 排除文件，<code>--wildcards</code> 通配符</li>
+</ul>
+</li>
+<li><p><strong>备份策略</strong>：</p>
+<ul>
+<li>完整备份：备份所有数据</li>
+<li>增量备份：只备份变化的文件</li>
+<li>差异备份：备份自上次完整备份后变化的文件</li>
+</ul>
+</li>
+<li><p><strong>实用技巧</strong>：</p>
+<ul>
+<li>管道和 SSH 实现远程备份</li>
+<li>使用 find 和 tar 实现精细控制</li>
+<li>定期清理旧备份</li>
+<li>定期测试备份的可恢复性</li>
+</ul>
+</li>
+</ol>
+<h2 id="8-5-本章习题"><a href="#8-5-本章习题" class="headerlink" title="8.5 本章习题"></a>8.5 本章习题</h2><ol>
+<li><p>对比 gzip、bzip2、xz 三种压缩工具的压缩率和速度。</p>
+</li>
+<li><p>如何使用 tar 命令创建一个包含 &#x2F;etc 目录的压缩归档，排除所有 .log 文件？</p>
+</li>
+<li><p>如何不解压查看 tar.gz 文件的内容？</p>
+</li>
+<li><p>编写一个脚本，每天自动备份 &#x2F;home 目录，保留最近7天的备份。</p>
+</li>
+<li><p>如何使用 tar 和 ssh 将本地目录备份到远程服务器？</p>
+</li>
+<li><p>解释 tar 的增量备份功能，如何创建和恢复增量备份？</p>
+</li>
+<li><p>比较 zip 和 tar.gz 的异同，什么时候应该使用 zip？</p>
+</li>
+<li><p>有一个损坏的 tar.gz 文件，如何尝试恢复其中的数据？</p>
+</li>
+</ol>
+<h2 id="8-6-参考资料与延伸阅读"><a href="#8-6-参考资料与延伸阅读" class="headerlink" title="8.6 参考资料与延伸阅读"></a>8.6 参考资料与延伸阅读</h2><ul>
+<li><code>man tar</code></li>
+<li><code>man gzip</code></li>
+<li><code>man bzip2</code></li>
+<li><code>man xz</code></li>
+<li><code>man zstd</code></li>
+<li><a target="_blank" rel="noopener" href="https://www.gnu.org/software/tar/manual/">GNU Tar Manual</a></li>
+<li><a target="_blank" rel="noopener" href="https://linux.vbird.org/linux_basic/centos7/0240tarcompress.php">鸟哥的 Linux 私房菜 - 文件压缩与打包</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.tldp.org/LDP/sag/html/backup.html">Linux Backup and Recovery</a></li>
+</ul>
+
+
+  <div class="tag-list">
+    
+      
+      <a class="tag" href="/notes/tags/linux/">Linux</a>
+    
+      
+      <a class="tag" href="/notes/tags/%E5%8E%8B%E7%BC%A9/">压缩</a>
+    
+      
+      <a class="tag" href="/notes/tags/%E6%89%93%E5%8C%85/">打包</a>
+    
+      
+      <a class="tag" href="/notes/tags/%E5%A4%87%E4%BB%BD/">备份</a>
+    
+  </div>
+
+</article>
+<div class="article-footer slide-up">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文本文由rlcao编写，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+
+
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://blog.cnortles.top/notes/linux/ch08-compress" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://blog.cnortles.top/notes/linux/ch08-compress&title=第八章、文件与文件系统的压缩、打包与备份 - Aurora&summary=第八章、文件与文件系统的压缩、打包与备份8.1 压缩文件的用途与技术为什么需要压缩
+节省存储空间：压缩后的文件占用更少的磁盘空间
+提高传输效率：网络传输时减少时间和带宽消耗
+归档备份：将多个文件打包成单一文件便于管理
+
+压缩的原理压缩..."><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=第八章、文件与文件系统的压缩、打包与备份 - Aurora&amp;body=https://blog.cnortles.top/notes/linux/ch08-compress"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://blog.cnortles.top/notes/linux/ch08-compress"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body twikoo'>
+      
+
+<div id="twikoo_container"><svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg></div>
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/blog/categories/">分类</a><a href="/blog/tags/">标签</a><a href="/blog/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https://tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https://pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https://news.cnortles.top">新闻</a><a href="/subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/FelicxFoster/hexo-theme-stellar">Stellar</a>
+创建
+</span>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js"></script>
+<script>
+    loadStatistic("https://qexo.cnortles.top")
+</script>
+</br>
+<span id="runtime_span"></span>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var runtime_span = document.getElementById('runtime_span');
+    function show_runtime() {
+      // 调用定时器
+      setTimeout(show_runtime, 1000);
+      var seconds = 1000;
+      var minutes = seconds * 60;
+      var hours = minutes * 60;
+      var days = hours * 24;
+      var years = days * 365;
+      var today = new Date();
+      var todayYear = today.getFullYear();
+      var todayMonth = today.getMonth();
+      var todayDate = today.getDate();
+      var todayHour = today.getHours();
+      var todayMinute = today.getMinutes();
+      var todaySecond = today.getSeconds();
+      var t1 = Date.UTC(2025, 7, 1, 0, 0, 0); // UTC时间，月份从0开始
+      var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+      var diff = t2 - t1;
+      var diffYears = Math.floor(diff / years);
+      var diffDays = Math.floor((diff / days) - diffYears * 365);
+      var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+      var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+      var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+      // 更新显示时间的span元素内容
+      runtime_span.innerHTML = "🦉营业：" + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒🦉";
+    }
+    show_runtime(); // 初次调用函数以启动定时器
+  });
+</script>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="true"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0%E3%80%81%E6%96%87%E4%BB%B6%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8E%8B%E7%BC%A9%E3%80%81%E6%89%93%E5%8C%85%E4%B8%8E%E5%A4%87%E4%BB%BD"><span class="toc-text">第八章、文件与文件系统的压缩、打包与备份</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E7%9A%84%E7%94%A8%E9%80%94%E4%B8%8E%E6%8A%80%E6%9C%AF"><span class="toc-text">8.1 压缩文件的用途与技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%8E%8B%E7%BC%A9"><span class="toc-text">为什么需要压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-text">压缩的原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-Linux-%E7%B3%BB%E7%BB%9F%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8E%8B%E7%BC%A9%E6%8C%87%E4%BB%A4"><span class="toc-text">8.2 Linux 系统常见的压缩指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94"><span class="toc-text">常见压缩工具对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gzip-%E5%92%8C-zcat"><span class="toc-text">gzip 和 zcat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bzip2-%E5%92%8C-bzcat"><span class="toc-text">bzip2 和 bzcat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xz-%E5%92%8C-xzcat"><span class="toc-text">xz 和 xzcat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94%E7%A4%BA%E4%BE%8B"><span class="toc-text">压缩工具对比示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-3-%E6%89%93%E5%8C%85%E6%8C%87%E4%BB%A4%EF%BC%9Atar"><span class="toc-text">8.3 打包指令：tar</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tar-%E5%91%BD%E4%BB%A4%E6%A6%82%E8%BF%B0"><span class="toc-text">tar 命令概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tar-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-text">tar 基本语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9"><span class="toc-text">常用选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tar-%E5%AE%9E%E6%88%98%E7%A4%BA%E4%BE%8B"><span class="toc-text">tar 实战示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7%E8%AF%A6%E8%A7%A3"><span class="toc-text">压缩工具详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gzip-%E8%AF%A6%E8%A7%A3"><span class="toc-text">gzip 详解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bzip2-%E8%AF%A6%E8%A7%A3"><span class="toc-text">bzip2 详解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#xz-%E8%AF%A6%E8%A7%A3"><span class="toc-text">xz 详解</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%B0%E4%BB%A3%E5%8E%8B%E7%BC%A9%E5%B7%A5%E5%85%B7"><span class="toc-text">现代压缩工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#zstd-%E5%BF%AB%E9%80%9F%E5%8E%8B%E7%BC%A9"><span class="toc-text">zstd - 快速压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pigz-%E5%B9%B6%E8%A1%8C-gzip"><span class="toc-text">pigz - 并行 gzip</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pbzip2-%E5%B9%B6%E8%A1%8C-bzip2"><span class="toc-text">pbzip2 - 并行 bzip2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E6%80%A7%E8%83%BD%E5%AF%B9%E6%AF%94%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC"><span class="toc-text">压缩性能对比测试脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-tar-%E8%BF%9B%E8%A1%8C%E5%AE%8C%E6%95%B4%E7%B3%BB%E7%BB%9F%E5%A4%87%E4%BB%BD"><span class="toc-text">使用 tar 进行完整系统备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-tar-%E8%BF%9B%E8%A1%8C%E5%A2%9E%E9%87%8F%E5%A4%87%E4%BB%BD"><span class="toc-text">使用 tar 进行增量备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%81%A2%E5%A4%8D%E5%A4%87%E4%BB%BD"><span class="toc-text">恢复备份</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-4-%E9%87%8D%E7%82%B9%E5%9B%9E%E9%A1%BE"><span class="toc-text">8.4 重点回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-5-%E6%9C%AC%E7%AB%A0%E4%B9%A0%E9%A2%98"><span class="toc-text">8.5 本章习题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-6-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%E4%B8%8E%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><span class="toc-text">8.6 参考资料与延伸阅读</span></a></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":"blog.cnortles.top","officialHosts":["localhost","caoronglin.github.io","c.cnortles.top","cnortles.top"],"encoded":"YmxvZy5jbm9ydGxlcy50b3A="};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://cdn.cnortles.top/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script type="module">
+  const el = document.getElementById('twikoo_container');
+  util.viewportLazyload(el, load_twikoo, true);
+
+  function load_twikoo() {
+    if (!el) return;
+    utils.js('https://cdn.cnortles.top/npm/twikoo@1.6.44/dist/twikoo.all.min.js', {defer: true}).then(function () {
+      const path = el.getAttribute('comment_id') ?? decodeURI(window.location.pathname);
+      twikoo.init(Object.assign({"js":"https://cdn.cnortles.top/npm/twikoo@1.6.44/dist/twikoo.all.min.js","envId":"https://twikoo.cnortles.top"}, {
+        el: '#twikoo_container',
+        path: path,
+      }));
+    });
+  }
+</script>
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img ,.tk-content img:not([class*="emo"])`,
+    css: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script defer src="https://cdn.cnortles.top/npm/scrollreveal@4.0/dist/scrollreveal.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const slideUp = {
+      distance: `8px`,
+      duration: `500`,
+      interval: `50`,
+      scale: `1`,
+      opacity: 0,
+      easing: "ease-out"
+    };
+    ScrollReveal({ container: '.widgets' }).reveal('.slide-up', { ...slideUp });
+    ScrollReveal({ container: '.l_main' }).reveal('.slide-up', { ...slideUp });
+    ScrollReveal({ container: '.l_right' }).reveal('.slide-up', { ...slideUp });
+  });
+</script>
+<link rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+<script defer type="text/javascript" src="https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    mermaid.initialize(mermaid_config);
+  });
+</script><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+<script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/custom/js/smooth-scroll.js"></script><script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/custom/js/adjust-codeblock-height.js"></script><script src="/custom/js/link-icon.js"></script><script src="https://cdn.cnortles.top/npm/jquery/jquery.min.js"></script><script async data-pjax src="/custom/js/txmap.js"></script><script  src="/custom/js/back.js"></script><script type="text/javascript" src="/custom/js/ZYDark.js"></script>
+</div></body></html>

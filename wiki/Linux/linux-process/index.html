@@ -1,0 +1,1324 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  <link rel="canonical" href="https://blog.cnortles.top/wiki/Linux/linux-process/">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top/npm" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>Linux 基础入门：进程管理 - Aurora</title>
+
+  
+    <meta name="description" content="进程管理进程基础概念进程 (Process) 是程序的一次执行实例，是系统进行资源分配和调度的基本单位。每个进程都有独立的内存空间和系统资源。 进程与程序的区别   概念 定义 特点    程序 (Program) 存储在磁盘上的可执行文件 静态的、永久的   进程 (Process) 程序的运行实例 动态的、临时的   比喻：  程序 &#x3D; 菜谱 进程 &#x3D; 按照菜谱做菜的过程">
+<meta property="og:type" content="website">
+<meta property="og:title" content="进程管理">
+<meta property="og:url" content="https://blog.cnortles.top/wiki/Linux/linux-process/">
+<meta property="og:site_name" content="Aurora">
+<meta property="og:description" content="进程管理进程基础概念进程 (Process) 是程序的一次执行实例，是系统进行资源分配和调度的基本单位。每个进程都有独立的内存空间和系统资源。 进程与程序的区别   概念 定义 特点    程序 (Program) 存储在磁盘上的可执行文件 静态的、永久的   进程 (Process) 程序的运行实例 动态的、临时的   比喻：  程序 &#x3D; 菜谱 进程 &#x3D; 按照菜谱做菜的过程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg">
+<meta property="article:published_time" content="2026-02-16T16:05:55.889Z">
+<meta property="article:modified_time" content="2026-02-16T16:05:55.889Z">
+<meta property="article:author" content="Rl.">
+<meta property="article:tag" content="生信">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg">
+  
+  
+  
+  <meta name="keywords" content="生信">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="Aurora" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/wiki/Linux/linux-process/","author":{"@type":"Person","name":"Rl.","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"进程管理","description":"进程管理进程基础概念进程 (Process) 是程序的一次执行实例，是系统进行资源分配和调度的基本单位。每个进程都有独立的内存空间和系统资源。\n进程与程序的区别\n\n\n概念\n定义\n特点\n\n\n\n程序 (Program)\n存储在磁盘上的可执行文件\n静态的、永久的\n\n\n进程 (Process)\n程序的运行实例\n动态的、临时的\n\n\n比喻：\n\n程序 &#x3D; 菜谱\n进程 &#x3D; 按照菜谱做菜的...","url":"https://blog.cnortles.top/wiki/Linux/linux-process/","keywords":"生信"}</script>
+  <script>
+  if (window.localStorage.getItem('ZYI_Theme_Mode')==='dark' || (window.localStorage.getItem('ZYI_Theme_Mode')==='Moss' && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+      document.querySelector("html").id = "ZYDark";
+  }
+</script>
+<link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="/custom/css/ZYDark.css"><script src="/custom/js/link-icon.js"></script><link rel="stylesheet" href="/custom/css/index.css"><link rel="stylesheet" href="/custom/css/links.css"><link rel="stylesheet" href="/custom/css/smooth-scroll.css"><link rel="stylesheet" href="/custom/css/ZYDark.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+
+
+<div class="l_body content" id="start" layout="page" type="tech" text-indent><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><div class="icon"><img no-lazy class="icon" src="https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2779789.png" onerror="javascript:this.classList.add('error');this.src='https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><a class="title" href="/wiki/Linux/linux-basics"><div class="main">Linux 基础入门</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="主页" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="装备" href="/equipment/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/wiki/linux" placeholder="在 Linux 基础入门 中搜索..."></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<widget class="widget-wrapper doc-tree post-list"><div class="widget-body fs14"><a class="link" href="/wiki/Linux/linux-basics/#start"><span class="toc-text">Linux 基础入门</span></a><a class="link" href="/wiki/Linux/linux-filesystem/"><span class="toc-text">文件系统与目录结构</span></a><a class="link" href="/wiki/Linux/linux-permissions/"><span class="toc-text">文件权限管理</span></a><a class="link active" href="/wiki/Linux/linux-process/"><span class="toc-text">进程管理</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="link" href="/wiki/Linux/linux-shell/"><span class="toc-text">Shell 基础</span></a></div></widget>
+
+<widget class="widget-wrapper slide-up recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/subscribe"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/p/e8e1846f.shtml"><span class="title"><strong>Linux 基础入门</strong><span class="dot"></span>文件系统与目录结构</span></a><a class="item title" href="/p/74b9a2e8.shtml"><span class="title"><strong>Linux 基础入门</strong><span class="dot"></span>文件权限管理</span></a><a class="item title" href="/p/852cfab6.shtml"><span class="title"><strong>Linux 基础入门</strong><span class="dot"></span>进程管理</span></a><a class="item title" href="/p/8e5e54a1.shtml"><span class="title"><strong>Linux 基础入门</strong><span class="dot"></span>Shell 基础</span></a><a class="item title" href="/p/23c3e7ed.shtml"><span class="title"><strong>Linux 基础入门</strong><span class="dot"></span>Linux 基础入门</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="https://github.com/caoronglin" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-solid fa-github fa-brands fa-bounce"></i></a><a class="social" title="Bilibili" href="https://space.bilibili.com/555149182?spm_id_from=333.1007.0.0" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-brands fa-bilibili fa-bounce"></i></a><a class="social" title="Email" href="mailto:crl@cnortles.top" rel="noopener noreferrer"><i class="fa-solid fa-envelope fa-bounce"></i></a><a class="social" title="Comments" href="/comments" rel="noopener noreferrer"><i class="fa-solid fa-comment fa-bounce"></i></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner slide-up top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/Linux/linux-basics/">Linux 基础入门</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2026-02-16T16:05:55.889Z">2026-02-17</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>进程管理</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content slide-up"><h1 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h1><h2 id="进程基础概念"><a href="#进程基础概念" class="headerlink" title="进程基础概念"></a>进程基础概念</h2><p><strong>进程 (Process)</strong> 是程序的一次执行实例，是系统进行资源分配和调度的基本单位。每个进程都有独立的内存空间和系统资源。</p>
+<h3 id="进程与程序的区别"><a href="#进程与程序的区别" class="headerlink" title="进程与程序的区别"></a>进程与程序的区别</h3><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>定义</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>程序 (Program)</strong></td>
+<td>存储在磁盘上的可执行文件</td>
+<td>静态的、永久的</td>
+</tr>
+<tr>
+<td><strong>进程 (Process)</strong></td>
+<td>程序的运行实例</td>
+<td>动态的、临时的</td>
+</tr>
+</tbody></table>
+<p><strong>比喻</strong>：</p>
+<ul>
+<li>程序 &#x3D; 菜谱</li>
+<li>进程 &#x3D; 按照菜谱做菜的过程</li>
+</ul>
+<h3 id="进程的类型"><a href="#进程的类型" class="headerlink" title="进程的类型"></a>进程的类型</h3><div class="tag-plugin grid"  style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));"><div class="cell" style="">
+    <p><strong>按交互方式分类</strong></p><ul><li><p><strong>前台进程 (Foreground)</strong></p><ul><li>与用户直接交互</li><li>占据终端</li><li>可以接收键盘输入</li></ul></li><li><p><strong>后台进程 (Background)</strong></p><ul><li>在后台运行</li><li>不占据终端</li><li>适合长时间运行的任务</li></ul></li></ul>
+    </div>
+    <div class="cell" style="">
+    <p><strong>按启动方式分类</strong></p><ul><li><p><strong>交互式进程</strong></p><ul><li>由用户从终端启动</li><li>如：bash、vim、firefox</li></ul></li><li><p><strong>批处理进程</strong></p><ul><li>与终端无关，提交到作业队列</li><li>如：at、batch 启动的任务</li></ul></li><li><p><strong>守护进程 (Daemon)</strong></p><ul><li>系统启动时自动运行</li><li>一直在后台运行</li><li>通常以 ‘d’ 结尾命名</li><li>如：sshd、httpd、crond</li></ul></li></ul>
+    </div>
+    <div class="cell" style="">
+    <p><strong>按进程关系分类</strong></p><ul><li><p><strong>父进程 (Parent Process)</strong></p><ul><li>创建其他进程的进程</li></ul></li><li><p><strong>子进程 (Child Process)</strong></p><ul><li>被创建的进程</li><li>继承父进程的许多属性</li></ul></li><li><p><strong>孤儿进程 (Orphan Process)</strong></p><ul><li>父进程提前退出</li><li>被 init&#x2F;systemd 收养</li></ul></li><li><p><strong>僵尸进程 (Zombie Process)</strong></p><ul><li>已终止但未被父进程回收</li><li>占用少量资源</li></ul></li></ul>
+    </div>
+    </div>
+
+<h3 id="进程标识"><a href="#进程标识" class="headerlink" title="进程标识"></a>进程标识</h3><p>每个进程都有唯一的标识符：</p>
+<table>
+<thead>
+<tr>
+<th>标识符</th>
+<th>说明</th>
+<th>获取方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PID</strong> (Process ID)</td>
+<td>进程唯一标识</td>
+<td><code>echo $$</code></td>
+</tr>
+<tr>
+<td><strong>PPID</strong> (Parent PID)</td>
+<td>父进程 ID</td>
+<td><code>echo $PPID</code></td>
+</tr>
+<tr>
+<td><strong>PGID</strong> (Process Group ID)</td>
+<td>进程组 ID</td>
+<td><code>ps -o pgid= -p &lt;pid&gt;</code></td>
+</tr>
+<tr>
+<td><strong>SID</strong> (Session ID)</td>
+<td>会话 ID</td>
+<td><code>ps -o sid= -p &lt;pid&gt;</code></td>
+</tr>
+<tr>
+<td><strong>UID</strong> (User ID)</td>
+<td>进程所有者 ID</td>
+<td><code>ps -o uid= -p &lt;pid&gt;</code></td>
+</tr>
+<tr>
+<td><strong>EUID</strong> (Effective UID)</td>
+<td>有效用户 ID</td>
+<td><code>ps -o euid= -p &lt;pid&gt;</code></td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前 Shell 的 PID</span></span><br><span class="line"><span class="built_in">echo</span> $$</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前 Shell 的 PPID</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$PPID</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定进程的信息</span></span><br><span class="line">ps -f -p $$    <span class="comment"># 详细格式</span></span><br><span class="line">ps -o pid,ppid,cmd -p $$</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有进程树</span></span><br><span class="line">pstree</span><br><span class="line">pstree -p      <span class="comment"># 显示 PID</span></span><br><span class="line">pstree -u      <span class="comment"># 显示用户名</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h2><h3 id="ps-命令"><a href="#ps-命令" class="headerlink" title="ps 命令"></a>ps 命令</h3><p><code>ps</code> (Process Status) 是最基础的进程查看命令。</p>
+<div class="tag-plugin tabs"id="tab_8"><div class="nav-tabs"><div class="tab active"><a href="#tab_8-1">基本用法</a></div><div class="tab"><a href="#tab_8-2">输出字段解释</a></div><div class="tab"><a href="#tab_8-3">进程状态 (STAT)</a></div><div class="tab"><a href="#tab_8-4">高级用法</a></div></div><div class="tab-content"><div class="tab-pane active" id="tab_8-1"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前终端的进程</span></span><br><span class="line">ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有进程（BSD 风格）</span></span><br><span class="line">ps aux</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有进程（System V 风格）</span></span><br><span class="line">ps -ef</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示完整格式</span></span><br><span class="line">ps auxf    <span class="comment"># 树状格式</span></span><br><span class="line">ps -ejH    <span class="comment"># 进程树</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_8-2"><p><strong>BSD 风格 (ps aux)</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>USER</strong></td>
+<td>进程所有者</td>
+<td>启动进程的用户</td>
+</tr>
+<tr>
+<td><strong>PID</strong></td>
+<td>进程 ID</td>
+<td>唯一标识符</td>
+</tr>
+<tr>
+<td><strong>%CPU</strong></td>
+<td>CPU 使用率</td>
+<td>进程占用的 CPU 百分比</td>
+</tr>
+<tr>
+<td><strong>%MEM</strong></td>
+<td>内存使用率</td>
+<td>进程占用的物理内存百分比</td>
+</tr>
+<tr>
+<td><strong>VSZ</strong></td>
+<td>虚拟内存大小</td>
+<td>Virtual Memory Size (KB)</td>
+</tr>
+<tr>
+<td><strong>RSS</strong></td>
+<td>常驻内存大小</td>
+<td>Resident Set Size (KB)</td>
+</tr>
+<tr>
+<td><strong>TTY</strong></td>
+<td>控制终端</td>
+<td>进程关联的终端</td>
+</tr>
+<tr>
+<td><strong>STAT</strong></td>
+<td>进程状态</td>
+<td>见下方详细说明</td>
+</tr>
+<tr>
+<td><strong>START</strong></td>
+<td>启动时间</td>
+<td>进程开始运行的时间</td>
+</tr>
+<tr>
+<td><strong>TIME</strong></td>
+<td>CPU 时间</td>
+<td>进程累计使用的 CPU 时间</td>
+</tr>
+<tr>
+<td><strong>COMMAND</strong></td>
+<td>命令</td>
+<td>启动进程的命令及参数</td>
+</tr>
+</tbody></table>
+<p><strong>System V 风格 (ps -ef)</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>UID</strong></td>
+<td>用户 ID</td>
+</tr>
+<tr>
+<td><strong>PID</strong></td>
+<td>进程 ID</td>
+</tr>
+<tr>
+<td><strong>PPID</strong></td>
+<td>父进程 ID</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>CPU 使用率</td>
+</tr>
+<tr>
+<td><strong>STIME</strong></td>
+<td>开始时间</td>
+</tr>
+<tr>
+<td><strong>TTY</strong></td>
+<td>终端</td>
+</tr>
+<tr>
+<td><strong>TIME</strong></td>
+<td>CPU 时间</td>
+</tr>
+<tr>
+<td><strong>CMD</strong></td>
+<td>命令</td>
+</tr>
+</tbody></table></div><div class="tab-pane" id="tab_8-3"><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>R</strong></td>
+<td>Running &#x2F; Runnable</td>
+<td>正在运行或在运行队列中等待</td>
+</tr>
+<tr>
+<td><strong>S</strong></td>
+<td>Interruptible Sleep</td>
+<td>可中断睡眠，等待某个条件</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>Uninterruptible Sleep</td>
+<td>不可中断睡眠，通常在进行 I&#x2F;O</td>
+</tr>
+<tr>
+<td><strong>T</strong></td>
+<td>Stopped</td>
+<td>被信号停止（如 Ctrl+Z）</td>
+</tr>
+<tr>
+<td><strong>t</strong></td>
+<td>Tracing Stop</td>
+<td>被调试器跟踪停止</td>
+</tr>
+<tr>
+<td><strong>Z</strong></td>
+<td>Zombie</td>
+<td>僵尸进程，已终止但未被回收</td>
+</tr>
+<tr>
+<td><strong>X</strong></td>
+<td>Dead</td>
+<td>死亡进程（不应该看到）</td>
+</tr>
+</tbody></table>
+<p><strong>附加状态标志</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>标志</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>&lt;</strong></td>
+<td>高优先级</td>
+</tr>
+<tr>
+<td><strong>N</strong></td>
+<td>低优先级</td>
+</tr>
+<tr>
+<td><strong>L</strong></td>
+<td>有锁定页面（用于实时）</td>
+</tr>
+<tr>
+<td><strong>s</strong></td>
+<td>会话领导者</td>
+</tr>
+<tr>
+<td><strong>l</strong></td>
+<td>多线程</td>
+</tr>
+<tr>
+<td><strong>+</strong></td>
+<td>前台进程组</td>
+</tr>
+</tbody></table></div><div class="tab-pane" id="tab_8-4"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自定义输出格式</span></span><br><span class="line">ps -eo pid,ppid,cmd,%mem,%cpu --<span class="built_in">sort</span>=-%cpu | <span class="built_in">head</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找特定用户的进程</span></span><br><span class="line">ps -u username</span><br><span class="line">ps aux | grep ^username</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按内存使用排序</span></span><br><span class="line">ps aux --<span class="built_in">sort</span>=-%mem | <span class="built_in">head</span> -10</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按 CPU 使用排序</span></span><br><span class="line">ps aux --<span class="built_in">sort</span>=-%cpu | <span class="built_in">head</span> -10</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示进程树</span></span><br><span class="line">ps axjf</span><br><span class="line">ps -eo pid,ppid,cmd | <span class="built_in">sort</span> -n | <span class="built_in">head</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示线程</span></span><br><span class="line">ps -eLf</span><br><span class="line">ps aux -L</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结合其他命令</span></span><br><span class="line">ps aux | grep nginx | grep -v grep</span><br><span class="line">ps aux | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">uniq</span> -c | <span class="built_in">sort</span> -rn</span><br></pre></td></tr></table></figure></div></div></div>
+
+<h3 id="top-命令"><a href="#top-命令" class="headerlink" title="top 命令"></a>top 命令</h3><p><code>top</code> 提供动态的进程监控视图。</p>
+<details class="tag-plugin colorful folding" ><summary><p>top 命令详解</p>
+</summary><div class="body"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本使用</span></span><br><span class="line">top</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定刷新间隔（秒）</span></span><br><span class="line">top -d 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示特定用户的进程</span></span><br><span class="line">top -u username</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定进程</span></span><br><span class="line">top -p PID1,PID2,PID3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 批处理模式（用于脚本）</span></span><br><span class="line">top -b -n 1</span><br></pre></td></tr></table></figure>  <p><strong>交互命令</strong>（在 top 运行时按）：</p> <table> <thead> <tr> <th>按键</th> <th>功能</th> </tr> </thead> <tbody><tr> <td><code>?</code> &#x2F; <code>h</code></td> <td>帮助</td> </tr> <tr> <td><code>q</code></td> <td>退出</td> </tr> <tr> <td><code>Space</code></td> <td>立即刷新</td> </tr> <tr> <td><code>k</code></td> <td>终止进程（输入 PID）</td> </tr> <tr> <td><code>r</code></td> <td>修改进程优先级（renice）</td> </tr> <tr> <td><code>c</code></td> <td>切换显示完整命令</td> </tr> <tr> <td><code>M</code></td> <td>按内存使用排序</td> </tr> <tr> <td><code>P</code></td> <td>按 CPU 使用排序</td> </tr> <tr> <td><code>T</code></td> <td>按运行时间排序</td> </tr> <tr> <td><code>N</code></td> <td>按 PID 排序</td> </tr> <tr> <td><code>u</code></td> <td>过滤特定用户</td> </tr> <tr> <td><code>n</code></td> <td>设置显示进程数</td> </tr> <tr> <td><code>i</code></td> <td>切换显示空闲进程</td> </tr> <tr> <td><code>V</code></td> <td>树状显示</td> </tr> <tr> <td><code>t</code></td> <td>切换 CPU 状态显示</td> </tr> <tr> <td><code>m</code></td> <td>切换内存状态显示</td> </tr> <tr> <td><code>1</code></td> <td>显示每个 CPU 核心</td> </tr> <tr> <td><code>W</code></td> <td>保存配置到 ~&#x2F;.toprc</td> </tr> </tbody></table> <p><strong>输出字段说明</strong>：</p> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">top - 14:30:25 up 3 days, 2:15, 2 users,  load average: 0.52, 0.58, 0.59</span><br><span class="line">Tasks: 235 total,   1 running, 234 sleeping,   0 stopped,   0 zombie</span><br><span class="line">%Cpu(s):  5.2 us,  2.1 sy,  0.0 ni, 92.3 id,  0.2 wa,  0.0 hi,  0.2 si,  0.0 st</span><br><span class="line">KiB Mem :  8167844 total,  1234567 free,  3456789 used,  3476488 buff/cache</span><br><span class="line">KiB Swap:  2097148 total,  2097148 free,        0 used.  4321098 avail Mem</span><br><span class="line"></span><br><span class="line">  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND</span><br><span class="line"> 1234 alice     20   0  123456  78901  12345 S   5.2  1.0   2:34.56 firefox</span><br><span class="line"> ...</span><br></pre></td></tr></table></figure>  <table> <thead> <tr> <th>行&#x2F;字段</th> <th>说明</th> </tr> </thead> <tbody><tr> <td><strong>第1行</strong></td> <td>系统时间和运行时间</td> </tr> <tr> <td><code>14:30:25</code></td> <td>当前时间</td> </tr> <tr> <td><code>up 3 days, 2:15</code></td> <td>系统已运行时间</td> </tr> <tr> <td><code>2 users</code></td> <td>当前登录用户数</td> </tr> <tr> <td><code>load average</code></td> <td>1&#x2F;5&#x2F;15分钟平均负载</td> </tr> <tr> <td><strong>第2行</strong></td> <td>任务统计</td> </tr> <tr> <td><code>235 total</code></td> <td>总进程数</td> </tr> <tr> <td><code>1 running</code></td> <td>运行中</td> </tr> <tr> <td><code>234 sleeping</code></td> <td>睡眠中</td> </tr> <tr> <td><code>0 stopped</code></td> <td>已停止</td> </tr> <tr> <td><code>0 zombie</code></td> <td>僵尸进程</td> </tr> <tr> <td><strong>第3行</strong></td> <td>CPU 使用率</td> </tr> <tr> <td><code>us</code></td> <td>用户空间</td> </tr> <tr> <td><code>sy</code></td> <td>系统空间</td> </tr> <tr> <td><code>ni</code></td> <td>nice 调整后的用户空间</td> </tr> <tr> <td><code>id</code></td> <td>空闲</td> </tr> <tr> <td><code>wa</code></td> <td>I&#x2F;O 等待</td> </tr> <tr> <td><code>hi</code></td> <td>硬中断</td> </tr> <tr> <td><code>si</code></td> <td>软中断</td> </tr> <tr> <td><code>st</code></td> <td>被虚拟机偷走的时间</td> </tr> <tr> <td><strong>第4-5行</strong></td> <td>内存和交换空间</td> </tr> <tr> <td><strong>进程列表</strong></td> <td>各进程详情</td> </tr> </tbody></table> </div></details>
+
+<h2 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h2><h3 id="前台与后台进程"><a href="#前台与后台进程" class="headerlink" title="前台与后台进程"></a>前台与后台进程</h3><div class="tag-plugin tabs"id="tab_9"><div class="nav-tabs"><div class="tab active"><a href="#tab_9-1">后台运行</a></div><div class="tab"><a href="#tab_9-2">作业控制</a></div><div class="tab"><a href="#tab_9-3">nohup 和 disown</a></div></div><div class="tab-content"><div class="tab-pane active" id="tab_9-1"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在命令末尾加 &amp;，在后台运行</span></span><br><span class="line">long_running_command &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line"><span class="built_in">sleep</span> 60 &amp;</span><br><span class="line">./backup_script.sh &gt; output.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看后台作业</span></span><br><span class="line"><span class="built_in">jobs</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出示例：</span></span><br><span class="line">[1]  + running    <span class="built_in">sleep</span> 60</span><br><span class="line">[2]  - suspended  vim file.txt</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_9-2"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将前台作业挂起（暂停）</span></span><br><span class="line">Ctrl + Z</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看作业列表</span></span><br><span class="line"><span class="built_in">jobs</span></span><br><span class="line"><span class="built_in">jobs</span> -l     <span class="comment"># 显示 PID</span></span><br><span class="line"><span class="built_in">jobs</span> -p     <span class="comment"># 只显示 PID</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将后台作业切换到前台</span></span><br><span class="line"><span class="built_in">fg</span> %1       <span class="comment"># 作业号 1</span></span><br><span class="line"><span class="built_in">fg</span> %vim     <span class="comment"># 以 vim 开头的作业</span></span><br><span class="line"><span class="built_in">fg</span> %%       <span class="comment"># 当前作业（+）</span></span><br><span class="line"><span class="built_in">fg</span> %+       <span class="comment"># 当前作业</span></span><br><span class="line"><span class="built_in">fg</span> %-       <span class="comment"># 上一个作业</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将作业在后台继续运行</span></span><br><span class="line"><span class="built_in">bg</span> %1</span><br><span class="line"><span class="built_in">bg</span> %2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 杀死作业</span></span><br><span class="line"><span class="built_in">kill</span> %1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等待作业完成</span></span><br><span class="line"><span class="built_in">wait</span> %1</span><br><span class="line"><span class="built_in">echo</span> $?     <span class="comment"># 获取作业退出状态</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_9-3"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nohup - 忽略挂起信号，退出终端后继续运行</span></span><br><span class="line"><span class="built_in">nohup</span> <span class="built_in">command</span> &amp;</span><br><span class="line"><span class="built_in">nohup</span> ./script.sh &gt; output.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># nohup 会自动将输出重定向到 nohup.out（如果没有指定）</span></span><br><span class="line"><span class="built_in">nohup</span> python3 server.py &amp;</span><br><span class="line"><span class="comment"># 输出到 nohup.out</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># disown - 从当前 shell 的作业表中移除作业</span></span><br><span class="line"><span class="comment"># 这样退出 shell 时不会向作业发送 SIGHUP</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在后台运行</span></span><br><span class="line">long_running_task &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从作业表中移除</span></span><br><span class="line"><span class="built_in">disown</span></span><br><span class="line"><span class="comment"># 或指定作业</span></span><br><span class="line"><span class="built_in">disown</span> %1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者一开始就 disown</span></span><br><span class="line">(long_running_task &amp;)</span><br></pre></td></tr></table></figure></div></div></div>
+
+<h3 id="信号-Signals"><a href="#信号-Signals" class="headerlink" title="信号 (Signals)"></a>信号 (Signals)</h3><p>信号是进程间通信的一种机制，用于通知进程发生了某个事件。</p>
+<details class="tag-plugin colorful folding" ><summary><p>常用信号</p>
+</summary><div class="body"><table> <thead> <tr> <th>信号</th> <th>数值</th> <th>名称</th> <th>默认动作</th> <th>说明</th> </tr> </thead> <tbody><tr> <td>1</td> <td>SIGHUP</td> <td>Hangup</td> <td>终止</td> <td>终端挂起或控制进程结束</td> </tr> <tr> <td>2</td> <td>SIGINT</td> <td>Interrupt</td> <td>终止</td> <td>来自键盘的中断（Ctrl+C）</td> </tr> <tr> <td>3</td> <td>SIGQUIT</td> <td>Quit</td> <td>核心转储</td> <td>来自键盘的退出（Ctrl+\）</td> </tr> <tr> <td>6</td> <td>SIGABRT</td> <td>Abort</td> <td>核心转储</td> <td>调用 abort() 产生</td> </tr> <tr> <td>9</td> <td>SIGKILL</td> <td>Kill</td> <td>终止</td> <td>强制终止，不可捕获或忽略</td> </tr> <tr> <td>15</td> <td>SIGTERM</td> <td>Terminate</td> <td>终止</td> <td>正常终止信号（默认）</td> </tr> <tr> <td>18</td> <td>SIGCONT</td> <td>Continue</td> <td>继续</td> <td>继续执行暂停的进程</td> </tr> <tr> <td>19</td> <td>SIGSTOP</td> <td>Stop</td> <td>暂停</td> <td>暂停进程执行（Ctrl+Z）</td> </tr> <tr> <td>20</td> <td>SIGTSTP</td> <td>TTY Stop</td> <td>暂停</td> <td>终端停止信号</td> </tr> </tbody></table> <p><strong>关键信号详解</strong>：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># SIGHUP (1) - 终端断开信号</span></span><br><span class="line"><span class="comment"># 传统上，终端断开时向进程组发送 SIGHUP</span></span><br><span class="line"><span class="comment"># nohup 命令就是用来忽略这个信号的</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SIGINT (2) - 中断信号</span></span><br><span class="line"><span class="comment"># Ctrl+C 发送</span></span><br><span class="line"><span class="comment"># 进程可以捕获并优雅地退出</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SIGKILL (9) - 强制终止</span></span><br><span class="line"><span class="comment"># 不能被捕获、阻塞或忽略</span></span><br><span class="line"><span class="comment"># 进程无法清理资源，可能留下临时文件</span></span><br><span class="line"><span class="comment"># 最后手段，不是首选</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SIGTERM (15) - 终止信号</span></span><br><span class="line"><span class="comment"># kill 命令默认发送</span></span><br><span class="line"><span class="comment"># 可以被捕获，进程可以优雅地清理和退出</span></span><br><span class="line"><span class="comment"># 首选的正常终止方式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SIGSTOP (19) / SIGCONT (18)</span></span><br><span class="line"><span class="comment"># 暂停和继续执行</span></span><br><span class="line"><span class="comment"># SIGSTOP 不能被捕获或忽略</span></span><br></pre></td></tr></table></figure>  <p><strong>发送信号的方式</strong>：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># kill 命令</span></span><br><span class="line"><span class="built_in">kill</span> PID                    <span class="comment"># 发送 SIGTERM (15)</span></span><br><span class="line"><span class="built_in">kill</span> -9 PID                 <span class="comment"># 发送 SIGKILL (9)</span></span><br><span class="line"><span class="built_in">kill</span> -SIGKILL PID</span><br><span class="line"><span class="built_in">kill</span> -KILL PID</span><br><span class="line"></span><br><span class="line"><span class="comment"># 向多个进程发送信号</span></span><br><span class="line"><span class="built_in">kill</span> PID1 PID2 PID3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据进程名杀死</span></span><br><span class="line">killall process_name</span><br><span class="line">killall -9 process_name</span><br><span class="line">killall -u username process_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># pkill - 根据模式匹配</span></span><br><span class="line">pkill process_name</span><br><span class="line">pkill -f <span class="string">&quot;full command line&quot;</span></span><br><span class="line">pkill -u username</span><br><span class="line"></span><br><span class="line"><span class="comment"># 键盘快捷键</span></span><br><span class="line">Ctrl + C    <span class="comment"># 发送 SIGINT (2)</span></span><br><span class="line">Ctrl + Z    <span class="comment"># 发送 SIGTSTP (20)</span></span><br><span class="line">Ctrl + \    <span class="comment"># 发送 SIGQUIT (3)</span></span><br></pre></td></tr></table></figure>  <p><strong>捕获信号示例</strong>：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义清理函数</span></span><br><span class="line"><span class="function"><span class="title">cleanup</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;收到终止信号，正在清理...&quot;</span></span><br><span class="line">    <span class="comment"># 清理临时文件</span></span><br><span class="line">    <span class="built_in">rm</span> -f /tmp/my_script_temp_$$</span><br><span class="line">    <span class="comment"># 关闭资源</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;清理完成，退出&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 捕获信号</span></span><br><span class="line"><span class="built_in">trap</span> cleanup SIGTERM SIGINT SIGHUP</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主程序</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;程序运行中... (PID: $$)&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;临时文件: /tmp/my_script_temp_$$&quot;</span></span><br><span class="line"><span class="built_in">touch</span> /tmp/my_script_temp_$$</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟长时间运行的任务</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;工作中... <span class="subst">$(date)</span>&quot;</span></span><br><span class="line">    <span class="built_in">sleep</span> 5</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure></div></details>
+
+<h2 id="系统监控工具"><a href="#系统监控工具" class="headerlink" title="系统监控工具"></a>系统监控工具</h2><h3 id="htop-交互式进程查看器"><a href="#htop-交互式进程查看器" class="headerlink" title="htop - 交互式进程查看器"></a>htop - 交互式进程查看器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install htop    <span class="comment"># Debian/Ubuntu</span></span><br><span class="line"><span class="built_in">sudo</span> yum install htop        <span class="comment"># CentOS/RHEL</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">htop</span><br></pre></td></tr></table></figure>
+
+<p><strong>交互按键</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>F1</code> &#x2F; <code>?</code></td>
+<td>帮助</td>
+</tr>
+<tr>
+<td><code>F2</code> &#x2F; <code>S</code></td>
+<td>设置</td>
+</tr>
+<tr>
+<td><code>F3</code> &#x2F; <code>/</code></td>
+<td>搜索进程</td>
+</tr>
+<tr>
+<td><code>F4</code> &#x2F; <code>\\</code></td>
+<td>过滤器</td>
+</tr>
+<tr>
+<td><code>F5</code> &#x2F; <code>t</code></td>
+<td>树状显示</td>
+</tr>
+<tr>
+<td><code>F6</code></td>
+<td>选择排序字段</td>
+</tr>
+<tr>
+<td><code>F7</code> &#x2F; <code>[</code></td>
+<td>降低进程优先级 (nice +)</td>
+</tr>
+<tr>
+<td><code>F8</code> &#x2F; <code>]</code></td>
+<td>提高进程优先级 (nice -)</td>
+</tr>
+<tr>
+<td><code>F9</code> &#x2F; <code>k</code></td>
+<td>杀死进程</td>
+</tr>
+<tr>
+<td><code>F10</code> &#x2F; <code>q</code></td>
+<td>退出</td>
+</tr>
+<tr>
+<td><code>u</code></td>
+<td>按用户过滤</td>
+</tr>
+<tr>
+<td><code>M</code></td>
+<td>按内存排序</td>
+</tr>
+<tr>
+<td><code>P</code></td>
+<td>按 CPU 排序</td>
+</tr>
+<tr>
+<td><code>T</code></td>
+<td>按时间排序</td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>反转排序</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>显示&#x2F;隐藏线程</td>
+</tr>
+</tbody></table>
+<h3 id="vmstat-虚拟内存统计"><a href="#vmstat-虚拟内存统计" class="headerlink" title="vmstat - 虚拟内存统计"></a>vmstat - 虚拟内存统计</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本用法</span></span><br><span class="line">vmstat              <span class="comment"># 显示一次</span></span><br><span class="line">vmstat 1            <span class="comment"># 每秒更新</span></span><br><span class="line">vmstat 1 10         <span class="comment"># 每秒更新，共10次</span></span><br><span class="line">vmstat -s           <span class="comment"># 显示事件计数器</span></span><br><span class="line">vmstat -a           <span class="comment"># 显示活跃/非活跃内存</span></span><br><span class="line">vmstat -d           <span class="comment"># 显示磁盘统计</span></span><br><span class="line">vmstat -D           <span class="comment"># 显示磁盘活动摘要</span></span><br><span class="line">vmstat -p /dev/sda1 <span class="comment"># 显示特定分区统计</span></span><br><span class="line">vmstat -f           <span class="comment"># 显示 fork 统计</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出解释</span></span><br><span class="line">procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----</span><br><span class="line"> r  b   swpd   free   buff  cache   si   so    bi    bo   <span class="keyword">in</span>   cs us sy <span class="built_in">id</span> wa st</span><br><span class="line"> 2  0      0 123456  78901 456789    0    0    10    20  100  200  5  2 93  0  0</span><br><span class="line"></span><br><span class="line">procs:</span><br><span class="line">  r: 运行队列中的进程数</span><br><span class="line">  b: 等待 I/O 的进程数</span><br><span class="line"></span><br><span class="line">memory:</span><br><span class="line">  swpd: 使用的虚拟内存 (KB)</span><br><span class="line">  free: 空闲内存 (KB)</span><br><span class="line">  buff: 用作缓冲区的内存 (KB)</span><br><span class="line">  cache: 用作缓存的内存 (KB)</span><br><span class="line"></span><br><span class="line">swap:</span><br><span class="line">  si: 从磁盘交换入内存 (KB/s)</span><br><span class="line">  so: 从内存交换出到磁盘 (KB/s)</span><br><span class="line"></span><br><span class="line">io:</span><br><span class="line">  bi: 从块设备读取 (blocks/s)</span><br><span class="line">  bo: 写入块设备 (blocks/s)</span><br><span class="line"></span><br><span class="line">system:</span><br><span class="line">  <span class="keyword">in</span>: 中断数 (/s)</span><br><span class="line">  cs: 上下文切换数 (/s)</span><br><span class="line"></span><br><span class="line">cpu:</span><br><span class="line">  us: 用户空间时间 (%)</span><br><span class="line">  sy: 系统空间时间 (%)</span><br><span class="line">  <span class="built_in">id</span>: 空闲时间 (%)</span><br><span class="line">  wa: I/O 等待时间 (%)</span><br><span class="line">  st: 被虚拟机偷走的时间 (%)</span><br></pre></td></tr></table></figure>
+
+<h3 id="iostat-I-O-统计"><a href="#iostat-I-O-统计" class="headerlink" title="iostat - I&#x2F;O 统计"></a>iostat - I&#x2F;O 统计</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install sysstat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 基本用法</span></span><br><span class="line">iostat                <span class="comment"># 显示 CPU 和磁盘统计</span></span><br><span class="line">iostat 1              <span class="comment"># 每秒更新</span></span><br><span class="line">iostat 1 10           <span class="comment"># 每秒更新，共10次</span></span><br><span class="line">iostat -c             <span class="comment"># 只显示 CPU 统计</span></span><br><span class="line">iostat -d             <span class="comment"># 只显示磁盘统计</span></span><br><span class="line">iostat -x             <span class="comment"># 显示扩展统计</span></span><br><span class="line">iostat -m             <span class="comment"># 以 MB/s 显示</span></span><br><span class="line">iostat -k             <span class="comment"># 以 KB/s 显示</span></span><br><span class="line">iostat -p sda         <span class="comment"># 显示特定设备</span></span><br><span class="line">iostat -p ALL         <span class="comment"># 显示所有设备和分区</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出解释</span></span><br><span class="line">Linux 5.4.0-65-generic (hostname)   01/15/2024  _x86_64_  (4 CPU)</span><br><span class="line"></span><br><span class="line">avg-cpu:  %user   %<span class="built_in">nice</span> %system %iowait  %steal   %idle</span><br><span class="line">           5.23    0.01    2.15    0.50    0.00   92.11</span><br><span class="line"></span><br><span class="line">Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd</span><br><span class="line">sda               12.34        45.67        89.01         0.00    1234567    2345678          0</span><br><span class="line">sdb                0.12         1.23         0.45         0.00      12345       4567          0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩展统计 (iostat -x)</span></span><br><span class="line">Device            r/s     w/s     rkB/s     wkB/s   rrqm/s   wrqm/s  %rrqm  %wrqm r_await w_await aqu-sz rareq-sz wareq-sz  svctm  %util</span><br><span class="line">sda             2.34   10.00     45.67     89.01     0.12     3.45   4.89  25.67    3.45    8.90   0.12    19.52     8.90   0.80   0.98</span><br><span class="line"></span><br><span class="line"><span class="comment"># 字段说明</span></span><br><span class="line">avg-cpu:</span><br><span class="line">  %user    - 用户空间程序使用的 CPU 百分比</span><br><span class="line">  %<span class="built_in">nice</span>    - 带有 <span class="built_in">nice</span> 优先级的用户程序</span><br><span class="line">  %system  - 内核空间使用的 CPU 百分比</span><br><span class="line">  %iowait  - 等待 I/O 完成的时间百分比</span><br><span class="line">  %steal   - 虚拟机管理程序占用的时间</span><br><span class="line">  %idle    - CPU 空闲时间百分比</span><br><span class="line"></span><br><span class="line">Device:</span><br><span class="line">  tps      - 每秒传输次数 (I/O 请求数)</span><br><span class="line">  kB_read/s - 每秒读取的数据量 (KB)</span><br><span class="line">  kB_wrtn/s - 每秒写入的数据量 (KB)</span><br><span class="line">  kB_dscd/s - 每秒丢弃的数据量 (KB)</span><br><span class="line"></span><br><span class="line">扩展统计:</span><br><span class="line">  r/s      - 每秒读取请求数</span><br><span class="line">  w/s      - 每秒写入请求数</span><br><span class="line">  rkB/s    - 每秒读取 KB 数</span><br><span class="line">  wkB/s    - 每秒写入 KB 数</span><br><span class="line">  rrqm/s   - 每秒合并的读取请求</span><br><span class="line">  wrqm/s   - 每秒合并的写入请求</span><br><span class="line">  %rrqm    - 读取请求合并百分比</span><br><span class="line">  %wrqm    - 写入请求合并百分比</span><br><span class="line">  r_await  - 读取请求平均等待时间 (ms)</span><br><span class="line">  w_await  - 写入请求平均等待时间 (ms)</span><br><span class="line">  aqu-sz   - 平均队列长度</span><br><span class="line">  rareq-sz - 平均读取请求大小 (KB)</span><br><span class="line">  wareq-sz - 平均写入请求大小 (KB)</span><br><span class="line">  svctm    - 平均服务时间 (ms)</span><br><span class="line">  %util    - 设备带宽利用率</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他监控工具"><a href="#其他监控工具" class="headerlink" title="其他监控工具"></a>其他监控工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># dstat - 全能系统监控工具</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install dstat</span><br><span class="line">dstat                    <span class="comment"># 默认显示 CPU、磁盘、网络、系统负载</span></span><br><span class="line">dstat -y                 <span class="comment"># 带单位显示</span></span><br><span class="line">dstat --full            <span class="comment"># 完整统计</span></span><br><span class="line">dstat -cdngy 1          <span class="comment"># 显示 CPU、磁盘、网络、分页，每秒刷新</span></span><br><span class="line">dstat --output report.csv 1 60  <span class="comment"># 输出到 CSV 文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># sar - 系统活动报告</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install sysstat</span><br><span class="line">sar -u 1 10             <span class="comment"># CPU 使用率，每秒，共 10 次</span></span><br><span class="line">sar -r 1 10             <span class="comment"># 内存使用率</span></span><br><span class="line">sar -d 1 10             <span class="comment"># 块设备活动</span></span><br><span class="line">sar -n DEV 1 10         <span class="comment"># 网络设备统计</span></span><br><span class="line">sar -q 1 10             <span class="comment"># 队列长度和负载</span></span><br><span class="line">sar -A                  <span class="comment"># 所有统计</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看历史数据</span></span><br><span class="line">sar -f /var/log/sysstat/sa15  <span class="comment"># 查看 15 号的数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># nethogs - 按进程显示网络带宽</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install nethogs</span><br><span class="line"><span class="built_in">sudo</span> nethogs            <span class="comment"># 显示每个进程的网络使用</span></span><br><span class="line"><span class="built_in">sudo</span> nethogs eth0       <span class="comment"># 监控特定接口</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># iotop - I/O 监控</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install iotop</span><br><span class="line"><span class="built_in">sudo</span> iotop              <span class="comment"># 显示 I/O 使用情况</span></span><br><span class="line"><span class="built_in">sudo</span> iotop -o           <span class="comment"># 只显示有 I/O 的进程</span></span><br><span class="line"><span class="built_in">sudo</span> iotop -b -n 5      <span class="comment"># 批处理模式，采集 5 次</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># pidstat - 进程统计</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install sysstat</span><br><span class="line">pidstat                 <span class="comment"># CPU 统计</span></span><br><span class="line">pidstat -r              <span class="comment"># 内存统计</span></span><br><span class="line">pidstat -d              <span class="comment"># I/O 统计</span></span><br><span class="line">pidstat -w              <span class="comment"># 任务切换统计</span></span><br><span class="line">pidstat -u 1 5          <span class="comment"># CPU，每秒，5 次</span></span><br><span class="line">pidstat -t -p PID       <span class="comment"># 显示指定进程的线程</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># slabtop - 内核 slab 缓存监控</span></span><br><span class="line"><span class="keyword">time</span> slabtop</span><br><span class="line"></span><br><span class="line"><span class="comment"># vmstat - 虚拟内存统计（前面已介绍）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># perf - 性能分析工具</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install linux-tools-common linux-tools-generic</span><br><span class="line"><span class="built_in">sudo</span> perf top           <span class="comment"># 实时性能分析</span></span><br><span class="line"><span class="built_in">sudo</span> perf <span class="built_in">stat</span> -a <span class="built_in">sleep</span> 5   <span class="comment"># 5 秒系统级统计</span></span><br><span class="line"><span class="built_in">sudo</span> perf record -a -g -- <span class="built_in">sleep</span> 30   <span class="comment"># 记录 30 秒</span></span><br><span class="line"><span class="built_in">sudo</span> perf report        <span class="comment"># 查看报告</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="进程优先级"><a href="#进程优先级" class="headerlink" title="进程优先级"></a>进程优先级</h2><h3 id="nice-和-renice"><a href="#nice-和-renice" class="headerlink" title="nice 和 renice"></a>nice 和 renice</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nice - 以指定优先级启动进程</span></span><br><span class="line"><span class="comment"># 取值范围：-20（最高优先级）到 19（最低优先级）</span></span><br><span class="line"><span class="comment"># 默认：0</span></span><br><span class="line"><span class="comment"># 普通用户只能设置正 nice 值</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以低优先级运行</span></span><br><span class="line"><span class="built_in">nice</span> -n 10 long_running_task</span><br><span class="line"><span class="built_in">nice</span> --10 <span class="built_in">command</span>           <span class="comment"># 注意：--10 表示 -10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># renice - 修改运行中进程的优先级</span></span><br><span class="line">renice -n 5 -p PID          <span class="comment"># 修改指定进程</span></span><br><span class="line">renice -n 5 -u username     <span class="comment"># 修改某用户的所有进程</span></span><br><span class="line">renice -n 5 -g groupname    <span class="comment"># 修改某群组的所有进程</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看进程优先级</span></span><br><span class="line">ps -eo pid,ni,cmd | grep firefox</span><br><span class="line">pidstat -u -p PID           <span class="comment"># PR 列显示优先级</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># chrt - 实时调度策略</span></span><br><span class="line">chrt -f -p 99 PID           <span class="comment"># 设置 SCHED_FIFO，优先级 99</span></span><br><span class="line">chrt -r -p 50 PID           <span class="comment"># 设置 SCHED_RR，优先级 50</span></span><br><span class="line">chrt -o -p 0 PID            <span class="comment"># 设置 SCHED_OTHER（普通）</span></span><br><span class="line">chrt -p PID                 <span class="comment"># 查看调度策略</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="实践练习"><a href="#实践练习" class="headerlink" title="实践练习"></a>实践练习</h2><details class="tag-plugin colorful folding" ><summary><p>练习：找出最耗资源的进程</p>
+</summary><div class="body"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># find_heavy_processes.sh</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;=== CPU 使用率最高的 10 个进程 ===&quot;</span></span><br><span class="line">ps aux --<span class="built_in">sort</span>=-%cpu | <span class="built_in">head</span> -11 | <span class="built_in">tail</span> -10 | awk <span class="string">&#x27;&#123;printf &quot;%-10s %6s %5s %5s %s\n&quot;, $1, $2, $3, $4, $11&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;=== 内存使用率最高的 10 个进程 ===&quot;</span></span><br><span class="line">ps aux --<span class="built_in">sort</span>=-%mem | <span class="built_in">head</span> -11 | <span class="built_in">tail</span> -10 | awk <span class="string">&#x27;&#123;printf &quot;%-10s %6s %5s %5s %s\n&quot;, $1, $2, $3, $4, $11&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;=== 运行时间最长的 10 个进程 ===&quot;</span></span><br><span class="line">ps -eo user,pid,etime,cmd --<span class="built_in">sort</span>=etime | <span class="built_in">tail</span> -10</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;=== 当前用户的进程统计 ===&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;进程总数: <span class="subst">$(ps -u $USER -o pid= | wc -l)</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;CPU 使用: <span class="subst">$(ps aux | awk -v user=$USER &#x27;$1==user &#123;sum+=$3&#125; END &#123;print sum <span class="string">&quot;%&quot;</span>&#125;&#x27;)</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;内存使用: <span class="subst">$(ps aux | awk -v user=$USER &#x27;$1==user &#123;sum+=$4&#125; END &#123;print sum <span class="string">&quot;%&quot;</span>&#125;&#x27;)</span>&quot;</span></span><br></pre></td></tr></table></figure></div></details>
+
+<details class="tag-plugin colorful folding" ><summary><p>练习：监控系统并自动处理高负载</p>
+</summary><div class="body"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># monitor_and_act.sh</span></span><br><span class="line"></span><br><span class="line">LOG_FILE=<span class="string">&quot;/var/log/system_monitor.log&quot;</span></span><br><span class="line">CPU_THRESHOLD=80       <span class="comment"># CPU 使用率阈值</span></span><br><span class="line">MEM_THRESHOLD=90       <span class="comment"># 内存使用率阈值</span></span><br><span class="line">LOAD_THRESHOLD=$(<span class="built_in">nproc</span>)  <span class="comment"># 负载阈值（核心数）</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">log_message</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;[<span class="subst">$(date &#x27;+%Y-%m-%d %H:%M:%S&#x27;)</span>] <span class="variable">$1</span>&quot;</span> | <span class="built_in">tee</span> -a <span class="variable">$LOG_FILE</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取系统信息</span></span><br><span class="line"><span class="function"><span class="title">get_system_info</span></span>() &#123;</span><br><span class="line">    CPU_USAGE=$(top -bn1 | grep <span class="string">&quot;Cpu(s)&quot;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | <span class="built_in">cut</span> -d<span class="string">&#x27;%&#x27;</span> -f1)</span><br><span class="line">    MEM_USAGE=$(free | grep Mem | awk <span class="string">&#x27;&#123;printf &quot;%.1f&quot;, $3/$2 * 100.0&#125;&#x27;</span>)</span><br><span class="line">    LOAD_AVG=$(<span class="built_in">uptime</span> | awk -F<span class="string">&#x27;load average:&#x27;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span> | <span class="built_in">tr</span> -d <span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">    DISK_USAGE=$(<span class="built_in">df</span> -h / | <span class="built_in">tail</span> -1 | awk <span class="string">&#x27;&#123;print $5&#125;&#x27;</span> | <span class="built_in">tr</span> -d <span class="string">&#x27;%&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 杀死最耗 CPU 的用户进程</span></span><br><span class="line"><span class="function"><span class="title">kill_heavy_processes</span></span>() &#123;</span><br><span class="line">    log_message <span class="string">&quot;WARNING: High CPU usage detected (<span class="variable">$CPU_USAGE</span>%). Taking action...&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取最耗 CPU 的用户进程（排除 root 和系统进程）</span></span><br><span class="line">    HEAVY_PIDS=$(ps aux --<span class="built_in">sort</span>=-%cpu | grep -v <span class="string">&quot;^root\|^USER&quot;</span> | <span class="built_in">head</span> -5 | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> PID <span class="keyword">in</span> <span class="variable">$HEAVY_PIDS</span>; <span class="keyword">do</span></span><br><span class="line">        PROCESS_INFO=$(ps -p <span class="variable">$PID</span> -o pid,ppid,cmd,%cpu --no-headers 2&gt;/dev/null)</span><br><span class="line">        <span class="keyword">if</span> [ -n <span class="string">&quot;<span class="variable">$PROCESS_INFO</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">            log_message <span class="string">&quot;Killing process: <span class="variable">$PROCESS_INFO</span>&quot;</span></span><br><span class="line">            <span class="built_in">kill</span> -TERM <span class="variable">$PID</span> 2&gt;/dev/null</span><br><span class="line">            <span class="built_in">sleep</span> 2</span><br><span class="line">            <span class="comment"># 检查是否仍在运行</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">kill</span> -0 <span class="variable">$PID</span> 2&gt;/dev/null; <span class="keyword">then</span></span><br><span class="line">                log_message <span class="string">&quot;Process <span class="variable">$PID</span> still running, using SIGKILL&quot;</span></span><br><span class="line">                <span class="built_in">kill</span> -KILL <span class="variable">$PID</span> 2&gt;/dev/null</span><br><span class="line">            <span class="keyword">fi</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理内存缓存</span></span><br><span class="line"><span class="function"><span class="title">clean_memory</span></span>() &#123;</span><br><span class="line">    log_message <span class="string">&quot;WARNING: High memory usage detected (<span class="variable">$MEM_USAGE</span>%). Cleaning caches...&quot;</span></span><br><span class="line">    <span class="comment"># 需要 root 权限</span></span><br><span class="line">    <span class="keyword">if</span> [ $(<span class="built_in">id</span> -u) -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">sync</span></span><br><span class="line">        <span class="built_in">echo</span> 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line">        log_message <span class="string">&quot;Memory caches cleaned&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        log_message <span class="string">&quot;WARNING: Root privileges required to clean memory caches&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主监控循环</span></span><br><span class="line"><span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    log_message <span class="string">&quot;System monitor started (PID: $$)&quot;</span></span><br><span class="line">    log_message <span class="string">&quot;Thresholds - CPU: <span class="variable">$&#123;CPU_THRESHOLD&#125;</span>%, Memory: <span class="variable">$&#123;MEM_THRESHOLD&#125;</span>%, Load: <span class="variable">$&#123;LOAD_THRESHOLD&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">        get_system_info</span><br><span class="line"></span><br><span class="line">        log_message <span class="string">&quot;Status - CPU: <span class="variable">$&#123;CPU_USAGE&#125;</span>%, Memory: <span class="variable">$&#123;MEM_USAGE&#125;</span>%, Load: <span class="variable">$&#123;LOAD_AVG&#125;</span>, Disk: <span class="variable">$&#123;DISK_USAGE&#125;</span>%&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查阈值</span></span><br><span class="line">        <span class="keyword">if</span> (( $(echo &quot;<span class="variable">$CPU_USAGE</span> &gt; <span class="variable">$CPU_THRESHOLD</span>&quot; | bc -l) )); <span class="keyword">then</span></span><br><span class="line">            kill_heavy_processes</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (( $(echo &quot;<span class="variable">$MEM_USAGE</span> &gt; <span class="variable">$MEM_THRESHOLD</span>&quot; | bc -l) )); <span class="keyword">then</span></span><br><span class="line">            clean_memory</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 等待下次检查</span></span><br><span class="line">        <span class="built_in">sleep</span> 60</span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理退出信号</span></span><br><span class="line"><span class="built_in">trap</span> <span class="string">&#x27;log_message &quot;Monitor stopped&quot;; exit 0&#x27;</span> SIGTERM SIGINT</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">main</span><br></pre></td></tr></table></figure></div></details>
+
+<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.linux.com/training-tutorials/linux-process-management/">Linux Process Management</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/latest/filesystems/proc.html">Understanding Linux &#x2F;proc</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.gnu.org/software/libc/manual/html_node/Signal-Handling.html">Signal Handling in Linux</a></li>
+</ul>
+<div class="tag-plugin quot p"><p class="content"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from BoxIcons Solid by Atisa - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M3.691 6.292C5.094 4.771 7.217 4 10 4h1v2.819l-.804.161c-1.37.274-2.323.813-2.833 1.604A2.9 2.9 0 0 0 6.925 10H10a1 1 0 0 1 1 1v7c0 1.103-.897 2-2 2H3a1 1 0 0 1-1-1v-5l.003-2.919c-.009-.111-.199-2.741 1.688-4.789M20 20h-6a1 1 0 0 1-1-1v-5l.003-2.919c-.009-.111-.199-2.741 1.688-4.789C16.094 4.771 18.217 4 21 4h1v2.819l-.804.161c-1.37.274-2.323.813-2.833 1.604A2.9 2.9 0 0 0 17.925 10H21a1 1 0 0 1 1 1v7c0 1.103-.897 2-2 2"/></svg><span class="text">理解进程管理是系统管理的核心技能</span><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from BoxIcons Solid by Atisa - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.309 17.708C22.196 15.66 22.006 13.03 22 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.9 2.9 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292m-11.007 0C11.19 15.66 10.999 13.03 10.993 13V5a1 1 0 0 0-1-1h-6c-1.103 0-2 .897-2 2v7a1 1 0 0 0 1 1h3.078a2.9 2.9 0 0 1-.429 1.396c-.508.801-1.465 1.348-2.846 1.624l-.803.16V20h1c2.783 0 4.906-.771 6.309-2.292"/></svg></p></div>
+</article>
+<div class="article-footer slide-up">
+
+</div>
+
+<div class="related-wrap slide-up" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/Linux/linux-permissions/">文件权限管理</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/Linux/linux-shell/">Shell 基础</a></div></section></div>
+
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body twikoo'>
+      
+
+<div id="twikoo_container"><svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg></div>
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/blog/categories/">分类</a><a href="/blog/tags/">标签</a><a href="/blog/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https://tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https://pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https://news.cnortles.top">新闻</a><a href="/subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/FelicxFoster/hexo-theme-stellar">Stellar</a>
+创建
+</span>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js"></script>
+<script>
+    loadStatistic("https://qexo.cnortles.top")
+</script>
+</br>
+<span id="runtime_span"></span>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var runtime_span = document.getElementById('runtime_span');
+    function show_runtime() {
+      // 调用定时器
+      setTimeout(show_runtime, 1000);
+      var seconds = 1000;
+      var minutes = seconds * 60;
+      var hours = minutes * 60;
+      var days = hours * 24;
+      var years = days * 365;
+      var today = new Date();
+      var todayYear = today.getFullYear();
+      var todayMonth = today.getMonth();
+      var todayDate = today.getDate();
+      var todayHour = today.getHours();
+      var todayMinute = today.getMinutes();
+      var todaySecond = today.getSeconds();
+      var t1 = Date.UTC(2025, 7, 1, 0, 0, 0); // UTC时间，月份从0开始
+      var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+      var diff = t2 - t1;
+      var diffYears = Math.floor(diff / years);
+      var diffDays = Math.floor((diff / days) - diffYears * 365);
+      var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+      var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+      var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+      // 更新显示时间的span元素内容
+      runtime_span.innerHTML = "🦉营业：" + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒🦉";
+    }
+    show_runtime(); // 初次调用函数以启动定时器
+  });
+</script>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="true"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-text">进程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-text">进程基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">进程与程序的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">进程的类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%A0%87%E8%AF%86"><span class="toc-text">进程标识</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B"><span class="toc-text">查看进程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ps-%E5%91%BD%E4%BB%A4"><span class="toc-text">ps 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#top-%E5%91%BD%E4%BB%A4"><span class="toc-text">top 命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="toc-text">进程控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E5%8F%B0%E4%B8%8E%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8B"><span class="toc-text">前台与后台进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7-Signals"><span class="toc-text">信号 (Signals)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7"><span class="toc-text">系统监控工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#htop-%E4%BA%A4%E4%BA%92%E5%BC%8F%E8%BF%9B%E7%A8%8B%E6%9F%A5%E7%9C%8B%E5%99%A8"><span class="toc-text">htop - 交互式进程查看器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vmstat-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%BB%9F%E8%AE%A1"><span class="toc-text">vmstat - 虚拟内存统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iostat-I-O-%E7%BB%9F%E8%AE%A1"><span class="toc-text">iostat - I&#x2F;O 统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7"><span class="toc-text">其他监控工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">进程优先级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nice-%E5%92%8C-renice"><span class="toc-text">nice 和 renice</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E7%BB%83%E4%B9%A0"><span class="toc-text">实践练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><span class="toc-text">延伸阅读</span></a></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":"blog.cnortles.top","officialHosts":["localhost","caoronglin.github.io","c.cnortles.top","cnortles.top"],"encoded":"YmxvZy5jbm9ydGxlcy50b3A="};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://cdn.cnortles.top/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script type="module">
+  const el = document.getElementById('twikoo_container');
+  util.viewportLazyload(el, load_twikoo, true);
+
+  function load_twikoo() {
+    if (!el) return;
+    utils.js('https://cdn.cnortles.top/npm/twikoo@1.6.44/dist/twikoo.all.min.js', {defer: true}).then(function () {
+      const path = el.getAttribute('comment_id') ?? decodeURI(window.location.pathname);
+      twikoo.init(Object.assign({"js":"https://cdn.cnortles.top/npm/twikoo@1.6.44/dist/twikoo.all.min.js","envId":"https://twikoo.cnortles.top"}, {
+        el: '#twikoo_container',
+        path: path,
+      }));
+    });
+  }
+</script>
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img ,.tk-content img:not([class*="emo"])`,
+    css: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script defer src="https://cdn.cnortles.top/npm/scrollreveal@4.0/dist/scrollreveal.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const slideUp = {
+      distance: `8px`,
+      duration: `500`,
+      interval: `50`,
+      scale: `1`,
+      opacity: 0,
+      easing: "ease-out"
+    };
+    ScrollReveal({ container: '.widgets' }).reveal('.slide-up', { ...slideUp });
+    ScrollReveal({ container: '.l_main' }).reveal('.slide-up', { ...slideUp });
+    ScrollReveal({ container: '.l_right' }).reveal('.slide-up', { ...slideUp });
+  });
+</script>
+<link rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+<script defer type="text/javascript" src="https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    mermaid.initialize(mermaid_config);
+  });
+</script><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+<script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/custom/js/smooth-scroll.js"></script><script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/custom/js/adjust-codeblock-height.js"></script><script src="/custom/js/link-icon.js"></script><script src="https://cdn.cnortles.top/npm/jquery/jquery.min.js"></script><script async data-pjax src="/custom/js/txmap.js"></script><script  src="/custom/js/back.js"></script><script type="text/javascript" src="/custom/js/ZYDark.js"></script>
+</div></body></html>

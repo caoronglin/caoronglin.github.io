@@ -1,0 +1,2225 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/linux/ch06-file-management/">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top/npm" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>第六章、Linux 文件与目录管理 - Aurora</title>
+
+  
+    <meta name="description" content="第六章、Linux 文件与目录管理6.1 目录与路径目录的相关操作特殊目录符号   符号 含义    . 当前目录   .. 上级目录   - 上一次所在的目录   ~ 当前用户的主目录   ~username 指定用户的主目录   常见目录操作命令cd - 切换目录 12345cd &#x2F;etc                      # 切换到绝对路径cd ..&#x2F;..">
+<meta property="og:type" content="website">
+<meta property="og:title" content="第六章、Linux 文件与目录管理">
+<meta property="og:url" content="https://blog.cnortles.top/notes/linux/ch06-file-management/">
+<meta property="og:site_name" content="Aurora">
+<meta property="og:description" content="第六章、Linux 文件与目录管理6.1 目录与路径目录的相关操作特殊目录符号   符号 含义    . 当前目录   .. 上级目录   - 上一次所在的目录   ~ 当前用户的主目录   ~username 指定用户的主目录   常见目录操作命令cd - 切换目录 12345cd &#x2F;etc                      # 切换到绝对路径cd ..&#x2F;..">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg">
+<meta property="article:published_time" content="2023-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-31T16:00:00.000Z">
+<meta property="article:author" content="Rl.">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="文件管理">
+<meta property="article:tag" content="目录操作">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg">
+  
+  
+  
+  <meta name="keywords" content=",,">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="Aurora" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/linux/ch06-file-management/","author":{"@type":"Person","name":"Rl.","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"第六章、Linux 文件与目录管理","description":"第六章、Linux 文件与目录管理6.1 目录与路径目录的相关操作特殊目录符号\n\n\n符号\n含义\n\n\n\n.\n当前目录\n\n\n..\n上级目录\n\n\n-\n上一次所在的目录\n\n\n~\n当前用户的主目录\n\n\n~username\n指定用户的主目录\n\n\n常见目录操作命令cd - 切换目录\n12345cd /etc                      # 切换到绝对路径cd ../..           ...","url":"https://blog.cnortles.top/notes/linux/ch06-file-management/","keywords":"生信"}</script>
+  <script>
+  if (window.localStorage.getItem('ZYI_Theme_Mode')==='dark' || (window.localStorage.getItem('ZYI_Theme_Mode')==='Moss' && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+      document.querySelector("html").id = "ZYDark";
+  }
+</script>
+<link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="/custom/css/ZYDark.css"><script src="/custom/js/link-icon.js"></script><link rel="stylesheet" href="/custom/css/index.css"><link rel="stylesheet" href="/custom/css/links.css"><link rel="stylesheet" href="/custom/css/smooth-scroll.css"><link rel="stylesheet" href="/custom/css/ZYDark.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+<div class="l_body content" id="start" layout="page" type="tech" text-indent><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><img no-lazy class="avatar" src="https://blog.cnortles.top/img/7.jpg" onerror="javascript:this.classList.add('error');this.src='https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main"><img no-lazy height="32px" src="/img/t.png"/ onerror="javascript:this.classList.add('error');this.src='https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><div class="sub normal cap">愿极光，永不消逝。</div><div class="sub hover cap" style="opacity:0"> Ember of Synthetic Life</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="主页" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="装备" href="/equipment/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/notes" placeholder="在 Linux 中搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <widget class="widget-wrapper slide-up post-list">
+    <div class="widget-header dis-select">
+      <span class="name">标签</span>
+    </div>
+    <div class="widget-body fs14 tag-tree">
+      
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="">
+    
+  
+  <a class="link" href="/notes/">
+    <span class="toc-text">
+      
+        所有笔记
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="bash">
+    
+  
+  <a class="link" href="/notes/tags/bash/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        Bash
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="centos">
+    
+  
+  <a class="link" href="/notes/tags/centos/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        CentOS
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="linux">
+    
+  
+  <a class="link" href="/notes/tags/linux/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        Linux
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="shell">
+    
+  
+  <a class="link" href="/notes/tags/shell/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        Shell
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="vim">
+    
+  
+  <a class="link" href="/notes/tags/vim/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        vim
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="压缩">
+    
+  
+  <a class="link" href="/notes/tags/%E5%8E%8B%E7%BC%A9/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        压缩
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="命令行">
+    
+  
+  <a class="link" href="/notes/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        命令行
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="基础命令">
+    
+  
+  <a class="link" href="/notes/tags/%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        基础命令
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="备份">
+    
+  
+  <a class="link" href="/notes/tags/%E5%A4%87%E4%BB%BD/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        备份
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="学习方法">
+    
+  
+  <a class="link" href="/notes/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        学习方法
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="学习笔记">
+    
+  
+  <a class="link" href="/notes/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        学习笔记
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="安装">
+    
+  
+  <a class="link" href="/notes/tags/%E5%AE%89%E8%A3%85/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        安装
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="帮助系统">
+    
+  
+  <a class="link" href="/notes/tags/%E5%B8%AE%E5%8A%A9%E7%B3%BB%E7%BB%9F/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        帮助系统
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="打包">
+    
+  
+  <a class="link" href="/notes/tags/%E6%89%93%E5%8C%85/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        打包
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="操作系统">
+    
+  
+  <a class="link" href="/notes/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        操作系统
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="文件权限">
+    
+  
+  <a class="link" href="/notes/tags/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        文件权限
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="文件管理">
+    
+  
+  <a class="link" href="/notes/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        文件管理
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="文件系统">
+    
+  
+  <a class="link" href="/notes/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        文件系统
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="用户管理">
+    
+  
+  <a class="link" href="/notes/tags/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        用户管理
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="目录操作">
+    
+  
+  <a class="link" href="/notes/tags/%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        目录操作
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="硬件">
+    
+  
+  <a class="link" href="/notes/tags/%E7%A1%AC%E4%BB%B6/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        硬件
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="磁盘分区">
+    
+  
+  <a class="link" href="/notes/tags/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        磁盘分区
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="磁盘管理">
+    
+  
+  <a class="link" href="/notes/tags/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        磁盘管理
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="编辑器">
+    
+  
+  <a class="link" href="/notes/tags/%E7%BC%96%E8%BE%91%E5%99%A8/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        编辑器
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="计算机基础">
+    
+  
+  <a class="link" href="/notes/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        计算机基础
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="鸟哥">
+    
+  
+  <a class="link" href="/notes/tags/%E9%B8%9F%E5%93%A5/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        鸟哥
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+    </div>
+  </widget>
+
+
+<widget class="widget-wrapper slide-up recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/subscribe"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/notes/linux/ch00-computer-basics/"><span class="title">第零章、计算机概论</span></a><a class="item title" href="/notes/linux/ch01-linux-intro/"><span class="title">第一章、Linux是什么与如何学习</span></a><a class="item title" href="/notes/linux/ch02-partition/"><span class="title">第二章、主机规划与磁盘分区</span></a><a class="item title" href="/notes/linux/ch03-install/"><span class="title">第三章、安装 CentOS 7.x</span></a><a class="item title" href="/notes/linux/ch04-first-login/"><span class="title">第四章、首次登陆与线上求助</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="https://github.com/caoronglin" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-solid fa-github fa-brands fa-bounce"></i></a><a class="social" title="Bilibili" href="https://space.bilibili.com/555149182?spm_id_from=333.1007.0.0" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-brands fa-bilibili fa-bounce"></i></a><a class="social" title="Email" href="mailto:crl@cnortles.top" rel="noopener noreferrer"><i class="fa-solid fa-envelope fa-bounce"></i></a><a class="social" title="Comments" href="/comments" rel="noopener noreferrer"><i class="fa-solid fa-comment fa-bounce"></i></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner slide-up top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span>
+<a class="cap breadcrumb" href="/notebooks/">笔记本</a>
+
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/">Linux</a>
+
+</div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2023-12-31T16:00:00.000Z">2024-01-01</time></span><span class="sep updated"></span><span class="text updated">发布于：<time datetime="2023-12-31T16:00:00.000Z">2024-01-01</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第六章、Linux 文件与目录管理</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content slide-up"><h1 id="第六章、Linux-文件与目录管理"><a href="#第六章、Linux-文件与目录管理" class="headerlink" title="第六章、Linux 文件与目录管理"></a>第六章、Linux 文件与目录管理</h1><h2 id="6-1-目录与路径"><a href="#6-1-目录与路径" class="headerlink" title="6.1 目录与路径"></a>6.1 目录与路径</h2><h3 id="目录的相关操作"><a href="#目录的相关操作" class="headerlink" title="目录的相关操作"></a>目录的相关操作</h3><h4 id="特殊目录符号"><a href="#特殊目录符号" class="headerlink" title="特殊目录符号"></a>特殊目录符号</h4><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.</code></td>
+<td>当前目录</td>
+</tr>
+<tr>
+<td><code>..</code></td>
+<td>上级目录</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>上一次所在的目录</td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>当前用户的主目录</td>
+</tr>
+<tr>
+<td><code>~username</code></td>
+<td>指定用户的主目录</td>
+</tr>
+</tbody></table>
+<h4 id="常见目录操作命令"><a href="#常见目录操作命令" class="headerlink" title="常见目录操作命令"></a>常见目录操作命令</h4><p><strong><code>cd</code> - 切换目录</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc                      <span class="comment"># 切换到绝对路径</span></span><br><span class="line"><span class="built_in">cd</span> ../..                     <span class="comment"># 切换到上上级目录</span></span><br><span class="line"><span class="built_in">cd</span> ~                         <span class="comment"># 切换到主目录</span></span><br><span class="line"><span class="built_in">cd</span> -                         <span class="comment"># 切换到上次所在目录</span></span><br><span class="line"><span class="built_in">cd</span> /var/log &amp;&amp; <span class="built_in">pwd</span>           <span class="comment"># 组合使用</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>pwd</code> - 显示当前路径</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span>                          <span class="comment"># 显示逻辑路径（可能包含符号链接）</span></span><br><span class="line"><span class="built_in">pwd</span> -P                       <span class="comment"># 显示物理路径（解析符号链接）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>mkdir</code> - 创建目录</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="built_in">dirname</span>                <span class="comment"># 创建单个目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p a/b/c/d             <span class="comment"># 递归创建多级目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -m 700 private         <span class="comment"># 创建时指定权限</span></span><br><span class="line"><span class="built_in">mkdir</span> <span class="built_in">dir</span>&#123;1,2,3&#125;             <span class="comment"># 创建多个目录（花括号展开）</span></span><br><span class="line"><span class="built_in">mkdir</span> -v newdir              <span class="comment"># 显示创建过程</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>rmdir</code> - 删除空目录</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rmdir</span> emptydir               <span class="comment"># 删除空目录</span></span><br><span class="line"><span class="built_in">rmdir</span> -p a/b/c               <span class="comment"># 递归删除空目录</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>rm</code> - 删除文件或目录</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> file.txt                  <span class="comment"># 删除文件</span></span><br><span class="line"><span class="built_in">rm</span> -r directory              <span class="comment"># 递归删除目录</span></span><br><span class="line"><span class="built_in">rm</span> -rf directory             <span class="comment"># 强制递归删除（谨慎使用！）</span></span><br><span class="line"><span class="built_in">rm</span> -i file.txt               <span class="comment"># 删除前询问</span></span><br><span class="line"><span class="built_in">rm</span> -f *.<span class="built_in">log</span>                  <span class="comment"># 强制删除所有log文件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="PATH-环境变量"><a href="#PATH-环境变量" class="headerlink" title="PATH 环境变量"></a>PATH 环境变量</h3><h4 id="什么是-PATH"><a href="#什么是-PATH" class="headerlink" title="什么是 PATH"></a>什么是 PATH</h4><p><strong>PATH</strong> 是一个环境变量，指定了系统查找可执行程序的目录列表。当你在命令行输入一个命令时，系统会在 PATH 指定的目录中查找对应的程序。</p>
+<h4 id="查看-PATH"><a href="#查看-PATH" class="headerlink" title="查看 PATH"></a>查看 PATH</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$PATH</span>                   <span class="comment"># 显示PATH值</span></span><br><span class="line"><span class="built_in">printenv</span> PATH                <span class="comment"># 同上</span></span><br><span class="line"><span class="built_in">env</span> | grep PATH              <span class="comment"># 在环境变量中查找PATH</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>PATH 输出示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</span><br></pre></td></tr></table></figure>
+
+<h4 id="PATH-的搜索顺序"><a href="#PATH-的搜索顺序" class="headerlink" title="PATH 的搜索顺序"></a>PATH 的搜索顺序</h4><p>系统按照 PATH 中目录的顺序从左到右搜索命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/sbin → /usr/local/bin → /usr/sbin → /usr/bin → /sbin → /bin → ...</span><br></pre></td></tr></table></figure>
+
+<p><strong>第一个匹配的命令将被执行。</strong></p>
+<h4 id="修改-PATH"><a href="#修改-PATH" class="headerlink" title="修改 PATH"></a>修改 PATH</h4><p><strong>临时修改（当前终端会话）：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 追加目录到PATH</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/new/directory</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在PATH开头添加目录（优先搜索）</span></span><br><span class="line"><span class="built_in">export</span> PATH=/new/directory:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置全新的PATH</span></span><br><span class="line"><span class="built_in">export</span> PATH=/bin:/usr/bin:/usr/local/bin</span><br></pre></td></tr></table></figure>
+
+<p><strong>永久修改（对所有用户）：</strong><br>编辑 <code>/etc/profile</code> 或 <code>/etc/environment</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nano /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加：</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/opt/myapp/bin</span><br></pre></td></tr></table></figure>
+
+<p><strong>永久修改（仅对当前用户）：</strong><br>编辑 <code>~/.bashrc</code> 或 <code>~/.profile</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nano ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加：</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/.local/bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使修改生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看命令位置"><a href="#查看命令位置" class="headerlink" title="查看命令位置"></a>查看命令位置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> <span class="built_in">command</span>                <span class="comment"># 查找命令的可执行文件路径</span></span><br><span class="line"><span class="built_in">which</span> -a <span class="built_in">command</span>             <span class="comment"># 查找所有匹配的路径</span></span><br><span class="line">whereis <span class="built_in">command</span>              <span class="comment"># 查找命令的二进制、源码和手册位置</span></span><br><span class="line">whereis -b <span class="built_in">command</span>           <span class="comment"># 只找二进制文件</span></span><br><span class="line">whatis <span class="built_in">command</span>               <span class="comment"># 显示命令的简短描述</span></span><br><span class="line"><span class="built_in">type</span> <span class="built_in">command</span>                 <span class="comment"># 显示命令类型（别名、函数、内置、外部）</span></span><br><span class="line"><span class="built_in">type</span> -a <span class="built_in">command</span>              <span class="comment"># 显示所有匹配</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="PATH-相关技巧"><a href="#PATH-相关技巧" class="headerlink" title="PATH 相关技巧"></a>PATH 相关技巧</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查目录是否在PATH中</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$PATH</span> | grep -q <span class="string">&quot;/my/dir&quot;</span> &amp;&amp; <span class="built_in">echo</span> <span class="string">&quot;存在&quot;</span> || <span class="built_in">echo</span> <span class="string">&quot;不存在&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除PATH中的某个目录</span></span><br><span class="line"><span class="built_in">export</span> PATH=$(<span class="built_in">echo</span> <span class="variable">$PATH</span> | sed <span class="string">&#x27;s|/unwanted/dir:||&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 美化显示PATH（每行一个目录）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$PATH</span> | <span class="built_in">tr</span> <span class="string">&#x27;:&#x27;</span> <span class="string">&#x27;\n&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计PATH中有多少个目录</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$PATH</span> | <span class="built_in">tr</span> <span class="string">&#x27;:&#x27;</span> <span class="string">&#x27;\n&#x27;</span> | <span class="built_in">wc</span> -l</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-2-Linux-文件与目录管理"><a href="#6-2-Linux-文件与目录管理" class="headerlink" title="6.2 Linux 文件与目录管理"></a>6.2 Linux 文件与目录管理</h2><h3 id="文件与目录的检视：ls"><a href="#文件与目录的检视：ls" class="headerlink" title="文件与目录的检视：ls"></a>文件与目录的检视：ls</h3><h4 id="ls-命令详解"><a href="#ls-命令详解" class="headerlink" title="ls 命令详解"></a>ls 命令详解</h4><p><code>ls</code> (list) 命令用于列出目录内容，是使用最频繁的命令之一。</p>
+<p><strong>基本用法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span>                           <span class="comment"># 列出当前目录内容</span></span><br><span class="line"><span class="built_in">ls</span> /path/to/directory        <span class="comment"># 列出指定目录内容</span></span><br><span class="line"><span class="built_in">ls</span> file.txt                  <span class="comment"># 显示单个文件信息</span></span><br><span class="line"><span class="built_in">ls</span> file1 file2 dir1/         <span class="comment"># 列出多个文件/目录</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="常用选项"><a href="#常用选项" class="headerlink" title="常用选项"></a>常用选项</h4><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>全称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-l</code></td>
+<td>long</td>
+<td>使用长列表格式（详细信息）</td>
+</tr>
+<tr>
+<td><code>-a</code></td>
+<td>all</td>
+<td>显示所有文件，包括隐藏文件（以.开头）</td>
+</tr>
+<tr>
+<td><code>-A</code></td>
+<td>almost-all</td>
+<td>显示所有文件，但不包括 <code>.</code> 和 <code>..</code></td>
+</tr>
+<tr>
+<td><code>-h</code></td>
+<td>human-readable</td>
+<td>以人类可读的方式显示文件大小（K, M, G）</td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td>directory</td>
+<td>显示目录本身，而不是其内容</td>
+</tr>
+<tr>
+<td><code>-t</code></td>
+<td>time</td>
+<td>按修改时间排序（最新的在前）</td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td>reverse</td>
+<td>反向排序</td>
+</tr>
+<tr>
+<td><code>-S</code></td>
+<td>size</td>
+<td>按文件大小排序（最大的在前）</td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>inode</td>
+<td>显示文件的 inode 号</td>
+</tr>
+<tr>
+<td><code>-R</code></td>
+<td>recursive</td>
+<td>递归列出子目录内容</td>
+</tr>
+<tr>
+<td><code>-F</code></td>
+<td>classify</td>
+<td>在文件名后添加类型指示符（*&#x2F;&#x3D;@|）</td>
+</tr>
+<tr>
+<td><code>--color</code></td>
+<td></td>
+<td>使用颜色区分文件类型</td>
+</tr>
+</tbody></table>
+<h4 id="组合使用示例"><a href="#组合使用示例" class="headerlink" title="组合使用示例"></a>组合使用示例</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -la                       <span class="comment"># 显示所有文件（包括隐藏）的详细信息</span></span><br><span class="line"><span class="built_in">ls</span> -lh                       <span class="comment"># 以人类可读的方式显示详细信息</span></span><br><span class="line"><span class="built_in">ls</span> -ltr                      <span class="comment"># 按时间倒序排列（最老的在前）</span></span><br><span class="line"><span class="built_in">ls</span> -lS                       <span class="comment"># 按文件大小排序（最大的在前）</span></span><br><span class="line"><span class="built_in">ls</span> -ld /etc                  <span class="comment"># 显示 /etc 目录本身的信息</span></span><br><span class="line"><span class="built_in">ls</span> -R /path                  <span class="comment"># 递归列出所有子目录</span></span><br><span class="line"><span class="built_in">ls</span> -la --color=auto          <span class="comment"># 使用颜色显示（通常为默认设置）</span></span><br><span class="line"><span class="built_in">ls</span> -i                        <span class="comment"># 显示 inode 号</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="输出解析"><a href="#输出解析" class="headerlink" title="输出解析"></a>输出解析</h4><p><strong><code>ls -l</code> 输出格式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-rwxr-xr-x 1 user group 12345 Jan  1 10:00 filename</span><br><span class="line">│└┬┘└┬┘└┬┘ │  │    │     │    │   │    │</span><br><span class="line">│ │  │  │  │  │    │     │    │   │    └─ 文件名</span><br><span class="line">│ │  │  │  │  │    │     │    │   └────── 时间</span><br><span class="line">│ │  │  │  │  │    │     │    └────────── 日期</span><br><span class="line">│ │  │  │  │  │    │     └─────────────── 文件大小（字节）</span><br><span class="line">│ │  │  │  │  │    └───────────────────── 所属群组</span><br><span class="line">│ │  │  │  │  └────────────────────────── 所有者</span><br><span class="line">│ │  │  │  └───────────────────────────── 硬链接数</span><br><span class="line">│ │  │  └───────────────────────────────── 其他用户权限</span><br><span class="line">│ │  └─────────────────────────────────── 群组权限</span><br><span class="line">│ └────────────────────────────────────── 所有者权限</span><br><span class="line">└──────────────────────────────────────── 文件类型</span><br></pre></td></tr></table></figure>
+
+<p><strong>文件类型标识：</strong></p>
+<ul>
+<li><code>-</code> 普通文件</li>
+<li><code>d</code> 目录</li>
+<li><code>l</code> 符号链接</li>
+<li><code>b</code> 块设备</li>
+<li><code>c</code> 字符设备</li>
+<li><code>s</code> 套接字</li>
+<li><code>p</code> 管道</li>
+</ul>
+<h4 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h4><p><strong>1. 列出最近修改的文件：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -lt | <span class="built_in">head</span> -10            <span class="comment"># 最近修改的10个文件</span></span><br><span class="line"><span class="built_in">ls</span> -ltr | <span class="built_in">tail</span> -10           <span class="comment"># 最早修改的10个文件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 按大小排序：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -lS | <span class="built_in">head</span> -10            <span class="comment"># 最大的10个文件</span></span><br><span class="line"><span class="built_in">ls</span> -lSr | <span class="built_in">head</span> -10           <span class="comment"># 最小的10个文件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 查找大文件：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -lhS | grep -E <span class="string">&quot;^-.+[MG]&quot;</span>  <span class="comment"># 显示大于1MB的文件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 统计文件数量：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> | <span class="built_in">wc</span> -l                   <span class="comment"># 当前目录文件数</span></span><br><span class="line"><span class="built_in">ls</span> -a | <span class="built_in">wc</span> -l                <span class="comment"># 包括隐藏文件</span></span><br><span class="line"><span class="built_in">ls</span> -l | grep <span class="string">&quot;^-&quot;</span> | <span class="built_in">wc</span> -l     <span class="comment"># 只统计普通文件</span></span><br><span class="line"><span class="built_in">ls</span> -l | grep <span class="string">&quot;^d&quot;</span> | <span class="built_in">wc</span> -l     <span class="comment"># 只统计目录</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 显示文件大小总和：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l | awk <span class="string">&#x27;&#123;sum+=$5&#125; END &#123;print sum&#125;&#x27;</span>           <span class="comment"># 字节数</span></span><br><span class="line"><span class="built_in">ls</span> -l | awk <span class="string">&#x27;&#123;sum+=$5&#125; END &#123;printf &quot;%.2f MB\n&quot;, sum/1024/1024&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>6. 查找空文件或空目录：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l | grep <span class="string">&quot;^-\s*1\s.*\s0\s&quot;</span>  <span class="comment"># 空文件（硬链接数为1，大小为0）</span></span><br><span class="line">find . -<span class="built_in">type</span> f -empty              <span class="comment"># 更准确的空文件查找</span></span><br><span class="line">find . -<span class="built_in">type</span> d -empty              <span class="comment"># 空目录</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>7. 使用通配符列出特定文件：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> *.txt                     <span class="comment"># 所有txt文件</span></span><br><span class="line"><span class="built_in">ls</span> file?.txt                 <span class="comment"># file0.txt, file1.txt 等（单个字符）</span></span><br><span class="line"><span class="built_in">ls</span> file[0-9].txt             <span class="comment"># file0.txt 到 file9.txt</span></span><br><span class="line"><span class="built_in">ls</span> file[!0-9].txt            <span class="comment"># 不匹配数字的文件</span></span><br><span class="line"><span class="built_in">ls</span> &#123;a,b,c&#125;*.txt              <span class="comment"># 以a、b或c开头的txt文件</span></span><br><span class="line"><span class="built_in">ls</span> **/*.txt                  <span class="comment"># 递归查找所有txt文件（需要启用globstar）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>8. 结合其他命令使用：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找并删除旧文件</span></span><br><span class="line"><span class="built_in">ls</span> -t /path/*.<span class="built_in">log</span> | <span class="built_in">tail</span> -n +8 | xargs <span class="built_in">rm</span> -f</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打包最近修改的文件</span></span><br><span class="line"><span class="built_in">ls</span> -t | <span class="built_in">head</span> -20 | tar -czf recent.tar.gz -T -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制特定文件到另一目录</span></span><br><span class="line"><span class="built_in">ls</span> -d *.txt | xargs -I &#123;&#125; <span class="built_in">cp</span> &#123;&#125; /backup/</span><br></pre></td></tr></table></figure>
+
+<h3 id="复制、删除与移动：cp-rm-mv"><a href="#复制、删除与移动：cp-rm-mv" class="headerlink" title="复制、删除与移动：cp, rm, mv"></a>复制、删除与移动：cp, rm, mv</h3><h4 id="cp-复制"><a href="#cp-复制" class="headerlink" title="cp (复制)"></a>cp (复制)</h4><p><strong>基本语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> [选项] 源文件 目标文件</span><br><span class="line"><span class="built_in">cp</span> [选项] 源文件... 目标目录</span><br></pre></td></tr></table></figure>
+
+<p><strong>常用选项：</strong></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-a</code></td>
+<td>归档模式，保留所有属性（相当于 -dpR）</td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td>复制符号链接本身，而非指向的文件</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>强制覆盖</td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>覆盖前询问确认</td>
+</tr>
+<tr>
+<td><code>-l</code></td>
+<td>创建硬链接而非复制</td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>保留文件属性（时间戳、权限、所有者等）</td>
+</tr>
+<tr>
+<td><code>-r</code> &#x2F; <code>-R</code></td>
+<td>递归复制目录</td>
+</tr>
+<tr>
+<td><code>-s</code></td>
+<td>创建符号链接</td>
+</tr>
+<tr>
+<td><code>-u</code></td>
+<td>只在源文件比目标文件新或目标不存在时复制</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>显示详细过程</td>
+</tr>
+</tbody></table>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本复制</span></span><br><span class="line"><span class="built_in">cp</span> file.txt /backup/</span><br><span class="line"><span class="built_in">cp</span> file.txt /backup/newname.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保留属性</span></span><br><span class="line"><span class="built_in">cp</span> -p file.txt /backup/       <span class="comment"># 保留时间戳等属性</span></span><br><span class="line"><span class="built_in">cp</span> -a dir1/ dir2/             <span class="comment"># 归档模式复制整个目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归复制目录</span></span><br><span class="line"><span class="built_in">cp</span> -r /source/dir /destination/</span><br><span class="line"><span class="built_in">cp</span> -rv /source/dir /destination/  <span class="comment"># 显示详细过程</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 覆盖确认</span></span><br><span class="line"><span class="built_in">cp</span> -i file.txt /existing/path/  <span class="comment"># 覆盖前询问</span></span><br><span class="line"><span class="built_in">cp</span> -f file.txt /existing/path/  <span class="comment"># 强制覆盖</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 条件复制</span></span><br><span class="line"><span class="built_in">cp</span> -u /source/file /destination/  <span class="comment"># 只复制更新的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制多个文件</span></span><br><span class="line"><span class="built_in">cp</span> file1 file2 file3 /destination/</span><br><span class="line"><span class="built_in">cp</span> *.txt /backup/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制时显示进度（使用 pv 命令）</span></span><br><span class="line">pv source.iso | <span class="built_in">cp</span> /dev/stdin /dest/backup.iso</span><br></pre></td></tr></table></figure>
+
+<h4 id="rm-删除"><a href="#rm-删除" class="headerlink" title="rm (删除)"></a>rm (删除)</h4><p><strong>基本语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> [选项] 文件...</span><br></pre></td></tr></table></figure>
+
+<p><strong>常用选项：</strong></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-f</code></td>
+<td>强制删除，不提示</td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>删除前询问确认</td>
+</tr>
+<tr>
+<td><code>-r</code> &#x2F; <code>-R</code></td>
+<td>递归删除目录及其内容</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>显示详细过程</td>
+</tr>
+<tr>
+<td><code>--preserve-root</code></td>
+<td>不允许删除根目录（默认）</td>
+</tr>
+<tr>
+<td><code>--no-preserve-root</code></td>
+<td>允许删除根目录（极度危险！）</td>
+</tr>
+</tbody></table>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除文件</span></span><br><span class="line"><span class="built_in">rm</span> file.txt</span><br><span class="line"><span class="built_in">rm</span> file1 file2 file3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除前确认</span></span><br><span class="line"><span class="built_in">rm</span> -i file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制删除（不提示）</span></span><br><span class="line"><span class="built_in">rm</span> -f file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除目录</span></span><br><span class="line"><span class="built_in">rm</span> -r directory/</span><br><span class="line"><span class="built_in">rm</span> -rf directory/            <span class="comment"># 强制递归删除（谨慎使用！）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示删除过程</span></span><br><span class="line"><span class="built_in">rm</span> -rv directory/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除特定类型的文件</span></span><br><span class="line"><span class="built_in">rm</span> *.<span class="built_in">log</span></span><br><span class="line"><span class="built_in">rm</span> -rf /tmp/*.tmp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安全删除（覆盖后删除）</span></span><br><span class="line"><span class="built_in">shred</span> -u file.txt            <span class="comment"># 覆盖后删除（更安全）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除空目录</span></span><br><span class="line">find /path -<span class="built_in">type</span> d -empty -delete</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 N 天前的文件</span></span><br><span class="line">find /path -name <span class="string">&quot;*.log&quot;</span> -mtime +30 -delete</span><br></pre></td></tr></table></figure>
+
+<p>⚠️ <strong>极度危险命令（永远不要执行）：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /                     <span class="comment"># 删除整个系统！</span></span><br><span class="line"><span class="built_in">rm</span> -rf /*                    <span class="comment"># 同上</span></span><br><span class="line"><span class="built_in">rm</span> -rf ~                     <span class="comment"># 删除主目录</span></span><br><span class="line"><span class="built_in">rm</span> -rf .                     <span class="comment"># 删除当前目录</span></span><br><span class="line"><span class="built_in">rm</span> -rf .*                    <span class="comment"># 删除所有隐藏文件和上级目录</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="mv-移动-重命名"><a href="#mv-移动-重命名" class="headerlink" title="mv (移动&#x2F;重命名)"></a>mv (移动&#x2F;重命名)</h4><p><strong>基本语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> [选项] 源文件 目标文件    <span class="comment"># 重命名或移动单个文件</span></span><br><span class="line"><span class="built_in">mv</span> [选项] 源文件... 目标目录  <span class="comment"># 移动多个文件到目录</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>常用选项：</strong></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-f</code></td>
+<td>强制覆盖，不提示</td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>覆盖前询问确认</td>
+</tr>
+<tr>
+<td><code>-n</code></td>
+<td>不覆盖已存在的文件</td>
+</tr>
+<tr>
+<td><code>-u</code></td>
+<td>只在源文件比目标文件新或目标不存在时移动</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>显示详细过程</td>
+</tr>
+<tr>
+<td><code>--backup</code></td>
+<td>覆盖前创建备份</td>
+</tr>
+<tr>
+<td><code>--suffix</code></td>
+<td>指定备份文件的后缀</td>
+</tr>
+</tbody></table>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重命名文件</span></span><br><span class="line"><span class="built_in">mv</span> oldname.txt newname.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动文件</span></span><br><span class="line"><span class="built_in">mv</span> file.txt /destination/</span><br><span class="line"><span class="built_in">mv</span> file.txt /destination/newname.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动多个文件</span></span><br><span class="line"><span class="built_in">mv</span> file1 file2 file3 /destination/</span><br><span class="line"><span class="built_in">mv</span> *.txt /backup/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动目录</span></span><br><span class="line"><span class="built_in">mv</span> old_dir/ /new/location/</span><br><span class="line"><span class="built_in">mv</span> old_dir/ /new/location/new_name/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 覆盖确认</span></span><br><span class="line"><span class="built_in">mv</span> -i file.txt /existing/</span><br><span class="line"><span class="built_in">mv</span> -f file.txt /existing/    <span class="comment"># 强制覆盖</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 条件移动（只移动更新的文件）</span></span><br><span class="line"><span class="built_in">mv</span> -u /source/file /destination/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示详细过程</span></span><br><span class="line"><span class="built_in">mv</span> -v file.txt /destination/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安全移动（备份已存在的文件）</span></span><br><span class="line"><span class="built_in">mv</span> --backup=numbered file.txt /existing/</span><br><span class="line"><span class="built_in">mv</span> --suffix=.bak file.txt /existing/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 交互式移动（不覆盖）</span></span><br><span class="line"><span class="built_in">mv</span> -n file.txt /existing/</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件内容查阅"><a href="#文件内容查阅" class="headerlink" title="文件内容查阅"></a>文件内容查阅</h3><h4 id="直接检视文件内容"><a href="#直接检视文件内容" class="headerlink" title="直接检视文件内容"></a>直接检视文件内容</h4><p><strong><code>cat</code> (concatenate)</strong></p>
+<p>将文件内容输出到标准输出（屏幕）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> file.txt                 <span class="comment"># 显示文件内容</span></span><br><span class="line"><span class="built_in">cat</span> -n file.txt              <span class="comment"># 显示行号</span></span><br><span class="line"><span class="built_in">cat</span> -A file.txt              <span class="comment"># 显示特殊字符（$行尾，^I制表符）</span></span><br><span class="line"><span class="built_in">cat</span> -b file.txt              <span class="comment"># 对非空行编号</span></span><br><span class="line"><span class="built_in">cat</span> -E file.txt              <span class="comment"># 在行尾显示$</span></span><br><span class="line"><span class="built_in">cat</span> -T file.txt              <span class="comment"># 将制表符显示为^I</span></span><br><span class="line"><span class="built_in">cat</span> file1 file2              <span class="comment"># 连接多个文件</span></span><br><span class="line"><span class="built_in">cat</span> file1 file2 &gt; file3      <span class="comment"># 合并文件到新文件</span></span><br><span class="line"><span class="built_in">cat</span> &gt; file.txt               <span class="comment"># 创建文件并输入内容（Ctrl+D结束）</span></span><br><span class="line"><span class="built_in">cat</span> &gt;&gt; file.txt              <span class="comment"># 追加内容到文件</span></span><br></pre></td></tr></table></figure>
+
+<p>⚠️ <strong>注意</strong>：<code>cat</code> 适合查看小文件，大文件应该使用 <code>less</code> 或 <code>more</code>。</p>
+<p><strong><code>tac</code></strong></p>
+<p>反向输出文件内容（从最后一行开始）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tac</span> file.txt                 <span class="comment"># 反向显示文件内容（最后一行在前）</span></span><br><span class="line"><span class="built_in">tac</span> file.txt &gt; reversed.txt  <span class="comment"># 保存反向内容到新文件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>nl</code> (number lines)</strong></p>
+<p>添加行号显示文件内容，比 <code>cat -n</code> 更灵活。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nl</span> file.txt                  <span class="comment"># 显示文件并添加行号（非空行）</span></span><br><span class="line"><span class="built_in">nl</span> -b a file.txt             <span class="comment"># 所有行都编号（包括空行）</span></span><br><span class="line"><span class="built_in">nl</span> -b t file.txt             <span class="comment"># 只对非空行编号（默认）</span></span><br><span class="line"><span class="built_in">nl</span> -b pBRE file.txt          <span class="comment"># 对匹配正则表达式的行编号</span></span><br><span class="line"><span class="built_in">nl</span> -n <span class="built_in">ln</span> file.txt            <span class="comment"># 行号左对齐（默认）</span></span><br><span class="line"><span class="built_in">nl</span> -n rn file.txt            <span class="comment"># 行号右对齐</span></span><br><span class="line"><span class="built_in">nl</span> -n rz file.txt            <span class="comment"># 行号右对齐并补零</span></span><br><span class="line"><span class="built_in">nl</span> -w 5 file.txt             <span class="comment"># 设置行号宽度为5位</span></span><br><span class="line"><span class="built_in">nl</span> -s <span class="string">&quot;. &quot;</span> file.txt           <span class="comment"># 设置分隔符为&quot;. &quot;</span></span><br><span class="line"><span class="built_in">nl</span> -v 10 file.txt            <span class="comment"># 行号从10开始</span></span><br><span class="line"><span class="built_in">nl</span> -i 2 file.txt             <span class="comment"># 行号每次增加2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>more</code></strong></p>
+<p>分页显示文件内容，适合查看大文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">more file.txt                <span class="comment"># 分页显示文件</span></span><br><span class="line">more +10 file.txt            <span class="comment"># 从第10行开始显示</span></span><br><span class="line">more -10 file.txt            <span class="comment"># 每屏显示10行</span></span><br><span class="line"><span class="built_in">ls</span> -la | more                <span class="comment"># 管道结合使用</span></span><br><span class="line"><span class="built_in">cat</span> file.txt | more          <span class="comment"># 分页显示</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>在 more 中的操作：</strong></p>
+<ul>
+<li><code>空格</code> - 下一页</li>
+<li><code>Enter</code> - 下一行</li>
+<li><code>b</code> - 上一页</li>
+<li><code>/pattern</code> - 搜索</li>
+<li><code>q</code> - 退出</li>
+<li><code>=</code> - 显示当前行号</li>
+</ul>
+<p>⚠️ <strong>注意</strong>：<code>more</code> 不能向前翻页（只能用 <code>b</code>），现在一般使用 <code>less</code>。</p>
+<p><strong><code>less</code></strong> (推荐)</p>
+<p>更强大的分页显示工具，比 <code>more</code> 功能更丰富。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">less file.txt                <span class="comment"># 分页显示文件</span></span><br><span class="line">less +10 file.txt            <span class="comment"># 从第10行开始</span></span><br><span class="line">less -N file.txt             <span class="comment"># 显示行号</span></span><br><span class="line">less -S file.txt             <span class="comment"># 不换行，可左右滚动</span></span><br><span class="line">less -i file.txt             <span class="comment"># 搜索时忽略大小写</span></span><br><span class="line">less +F file.txt             <span class="comment"># 实时监控文件变化（类似tail -f）</span></span><br><span class="line"><span class="built_in">ls</span> -la | less                <span class="comment"># 管道结合使用</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>在 less 中的操作：</strong></p>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>↓</code> &#x2F; <code>Enter</code> &#x2F; <code>e</code> &#x2F; <code>j</code></td>
+<td>向下滚动一行</td>
+</tr>
+<tr>
+<td><code>↑</code> &#x2F; <code>y</code> &#x2F; <code>k</code></td>
+<td>向上滚动一行</td>
+</tr>
+<tr>
+<td><code>空格</code> &#x2F; <code>Page Down</code> &#x2F; <code>f</code></td>
+<td>向下翻页</td>
+</tr>
+<tr>
+<td><code>b</code> &#x2F; <code>Page Up</code></td>
+<td>向上翻页</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>向下翻半页</td>
+</tr>
+<tr>
+<td><code>u</code></td>
+<td>向上翻半页</td>
+</tr>
+<tr>
+<td><code>→</code> &#x2F; <code>←</code></td>
+<td>水平滚动（当使用 -S 时）</td>
+</tr>
+<tr>
+<td><code>g</code> &#x2F; <code>&lt;</code> &#x2F; <code>Home</code></td>
+<td>跳转到文件开头</td>
+</tr>
+<tr>
+<td><code>G</code> &#x2F; <code>&gt;</code> &#x2F; <code>End</code></td>
+<td>跳转到文件结尾</td>
+</tr>
+<tr>
+<td><code>= / Ctrl+G</code></td>
+<td>显示当前位置信息</td>
+</tr>
+<tr>
+<td><code>/pattern</code></td>
+<td>向下搜索</td>
+</tr>
+<tr>
+<td><code>?pattern</code></td>
+<td>向上搜索</td>
+</tr>
+<tr>
+<td><code>n</code></td>
+<td>跳到下一个匹配</td>
+</tr>
+<tr>
+<td><code>N</code></td>
+<td>跳到上一个匹配</td>
+</tr>
+<tr>
+<td><code>&amp;pattern</code></td>
+<td>只显示匹配的行</td>
+</tr>
+<tr>
+<td><code>:</code></td>
+<td>进入命令模式</td>
+</tr>
+<tr>
+<td><code>-N</code></td>
+<td>切换行号显示</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>退出</td>
+</tr>
+<tr>
+<td><code>Q</code></td>
+<td>退出，不保存标记</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>显示帮助</td>
+</tr>
+</tbody></table>
+<p><strong>less 的高级用法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同时查看多个文件</span></span><br><span class="line">less file1.txt file2.txt file3.txt</span><br><span class="line"><span class="comment"># 在less中：</span></span><br><span class="line"><span class="comment"># :n - 下一个文件</span></span><br><span class="line"><span class="comment"># :p - 上一个文件</span></span><br><span class="line"><span class="comment"># :e file.txt - 打开新文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标记位置</span></span><br><span class="line"><span class="comment"># m + 字母（如 ma）- 标记当前位置</span></span><br><span class="line"><span class="comment"># &#x27; + 字母（如 &#x27;a）- 跳转到标记</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 过滤内容</span></span><br><span class="line"><span class="comment"># &amp;pattern - 只显示匹配的行</span></span><br><span class="line"><span class="comment"># &amp; - 取消过滤</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑文件</span></span><br><span class="line"><span class="comment"># v - 用默认编辑器编辑文件</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="head-和-tail"><a href="#head-和-tail" class="headerlink" title="head 和 tail"></a>head 和 tail</h4><p><strong><code>head</code></strong> - 显示文件开头部分</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">head</span> file.txt                <span class="comment"># 显示前10行（默认）</span></span><br><span class="line"><span class="built_in">head</span> -n 20 file.txt          <span class="comment"># 显示前20行</span></span><br><span class="line"><span class="built_in">head</span> -20 file.txt            <span class="comment"># 同上（简写）</span></span><br><span class="line"><span class="built_in">head</span> -c 100 file.txt         <span class="comment"># 显示前100字节</span></span><br><span class="line"><span class="built_in">head</span> -n -5 file.txt          <span class="comment"># 显示除了最后5行的所有行</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>tail</code></strong> - 显示文件结尾部分</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> file.txt                <span class="comment"># 显示后10行（默认）</span></span><br><span class="line"><span class="built_in">tail</span> -n 20 file.txt          <span class="comment"># 显示后20行</span></span><br><span class="line"><span class="built_in">tail</span> -20 file.txt            <span class="comment"># 同上（简写）</span></span><br><span class="line"><span class="built_in">tail</span> -c 100 file.txt         <span class="comment"># 显示后100字节</span></span><br><span class="line"><span class="built_in">tail</span> -n +5 file.txt          <span class="comment"># 从第5行开始显示到末尾</span></span><br><span class="line"><span class="built_in">tail</span> -f file.txt             <span class="comment"># 实时追踪文件更新（常用！）</span></span><br><span class="line"><span class="built_in">tail</span> -F file.txt             <span class="comment"># 追踪文件，即使文件被重命名或删除也会重试</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>tail -f</code> 的典型用法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 实时监控日志文件</span></span><br><span class="line"><span class="built_in">tail</span> -f /var/log/syslog</span><br><span class="line"><span class="built_in">tail</span> -f /var/log/nginx/access.log</span><br><span class="line"><span class="built_in">tail</span> -f /var/log/apache2/error.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 监控多个日志文件</span></span><br><span class="line"><span class="built_in">tail</span> -f /var/log/syslog /var/log/auth.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结合grep过滤</span></span><br><span class="line"><span class="built_in">tail</span> -f /var/log/nginx/access.log | grep <span class="string">&quot;500&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 后台运行</span></span><br><span class="line"><span class="built_in">nohup</span> <span class="built_in">tail</span> -f /var/log/app.log &amp;</span><br></pre></td></tr></table></figure>
+
+<p><strong>head 和 tail 的组合使用：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示第10行</span></span><br><span class="line"><span class="built_in">head</span> -10 file.txt | <span class="built_in">tail</span> -1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示第10到20行</span></span><br><span class="line"><span class="built_in">head</span> -20 file.txt | <span class="built_in">tail</span> -11</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示中间某部分（使用sed更方便）</span></span><br><span class="line">sed -n <span class="string">&#x27;10,20p&#x27;</span> file.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件查找：find"><a href="#文件查找：find" class="headerlink" title="文件查找：find"></a>文件查找：find</h3><p><code>find</code> 命令是在目录层次结构中搜索文件的强大工具。</p>
+<h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find [搜索路径] [表达式]</span><br></pre></td></tr></table></figure>
+
+<p><strong>默认行为：</strong></p>
+<ul>
+<li>如果不指定路径，使用当前目录 <code>.</code></li>
+<li>递归搜索所有子目录</li>
+</ul>
+<h4 id="按名称查找"><a href="#按名称查找" class="headerlink" title="按名称查找"></a>按名称查找</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按精确名称查找</span></span><br><span class="line">find /path -name <span class="string">&quot;file.txt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 忽略大小写</span></span><br><span class="line">find /path -iname <span class="string">&quot;File.txt&quot;</span>  <span class="comment"># 匹配 file.txt, FILE.TXT, File.txt 等</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用通配符（需要引号）</span></span><br><span class="line">find /path -name <span class="string">&quot;*.txt&quot;</span>       <span class="comment"># 所有txt文件</span></span><br><span class="line">find /path -name <span class="string">&quot;file?.txt&quot;</span>  <span class="comment"># file0.txt, file1.txt 等</span></span><br><span class="line">find /path -name <span class="string">&quot;[ab]*&quot;</span>      <span class="comment"># 以a或b开头的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 排除特定名称</span></span><br><span class="line">find /path ! -name <span class="string">&quot;*.tmp&quot;</span>     <span class="comment"># 排除.tmp文件</span></span><br><span class="line">find /path -not -name <span class="string">&quot;*.log&quot;</span>  <span class="comment"># 排除.log文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 正则表达式</span></span><br><span class="line">find /path -regex <span class="string">&quot;.*/file[0-9]+\.txt&quot;</span></span><br><span class="line">find /path -iregex <span class="string">&quot;.*\.jpg&quot;</span>  <span class="comment"># 忽略大小写</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="按类型查找"><a href="#按类型查找" class="headerlink" title="按类型查找"></a>按类型查找</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文件类型</span></span><br><span class="line">find /path -<span class="built_in">type</span> f             <span class="comment"># 普通文件</span></span><br><span class="line">find /path -<span class="built_in">type</span> d             <span class="comment"># 目录</span></span><br><span class="line">find /path -<span class="built_in">type</span> l             <span class="comment"># 符号链接</span></span><br><span class="line">find /path -<span class="built_in">type</span> b             <span class="comment"># 块设备</span></span><br><span class="line">find /path -<span class="built_in">type</span> c             <span class="comment"># 字符设备</span></span><br><span class="line">find /path -<span class="built_in">type</span> s             <span class="comment"># 套接字</span></span><br><span class="line">find /path -<span class="built_in">type</span> p             <span class="comment"># 管道</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 组合条件</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -name <span class="string">&quot;*.log&quot;</span>  <span class="comment"># 所有log文件</span></span><br><span class="line">find /path -<span class="built_in">type</span> d -name <span class="string">&quot;test*&quot;</span>  <span class="comment"># 以test开头的目录</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="按大小查找"><a href="#按大小查找" class="headerlink" title="按大小查找"></a>按大小查找</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按文件大小</span></span><br><span class="line">find /path -size 10c           <span class="comment"># 正好10字节</span></span><br><span class="line">find /path -size 10k           <span class="comment"># 正好10KB</span></span><br><span class="line">find /path -size 10M           <span class="comment"># 正好10MB</span></span><br><span class="line">find /path -size 10G           <span class="comment"># 正好10GB</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 大小范围</span></span><br><span class="line">find /path -size +10M          <span class="comment"># 大于10MB</span></span><br><span class="line">find /path -size -10M          <span class="comment"># 小于10MB</span></span><br><span class="line">find /path -size +1M -size -10M  <span class="comment"># 1MB到10MB之间</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 组合</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -size +100M  <span class="comment"># 大于100MB的文件</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -size +1G -<span class="built_in">exec</span> <span class="built_in">ls</span> -lh &#123;&#125; \;  <span class="comment"># 显示大于1GB的文件</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="按时间查找"><a href="#按时间查找" class="headerlink" title="按时间查找"></a>按时间查找</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 访问时间（access）</span></span><br><span class="line">find /path -atime 7            <span class="comment"># 正好7天前访问过</span></span><br><span class="line">find /path -atime +7           <span class="comment"># 超过7天前访问过（7天前以上）</span></span><br><span class="line">find /path -atime -7           <span class="comment"># 最近7天内访问过</span></span><br><span class="line">find /path -amin +60           <span class="comment"># 超过60分钟前访问过</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改时间（modify）</span></span><br><span class="line">find /path -mtime 7            <span class="comment"># 正好7天前修改过</span></span><br><span class="line">find /path -mtime +7           <span class="comment"># 超过7天前修改过</span></span><br><span class="line">find /path -mtime -7           <span class="comment"># 最近7天内修改过</span></span><br><span class="line">find /path -mmin -30           <span class="comment"># 最近30分钟内修改过</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 状态改变时间（change）</span></span><br><span class="line">find /path -ctime 7            <span class="comment"># 正好7天前状态改变</span></span><br><span class="line">find /path -ctime +7           <span class="comment"># 超过7天前状态改变</span></span><br><span class="line">find /path -ctime -7           <span class="comment"># 最近7天内状态改变</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 空文件或目录</span></span><br><span class="line">find /path -empty              <span class="comment"># 空文件或空目录</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -empty      <span class="comment"># 空文件</span></span><br><span class="line">find /path -<span class="built_in">type</span> d -empty      <span class="comment"># 空目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 组合使用</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -mtime +30 -size +100M  <span class="comment"># 30天前修改且大于100MB</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -atime +365  <span class="comment"># 1年以上未访问的文件</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="按用户和群组查找"><a href="#按用户和群组查找" class="headerlink" title="按用户和群组查找"></a>按用户和群组查找</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按所有者</span></span><br><span class="line">find /path -user username      <span class="comment"># 属于指定用户的文件</span></span><br><span class="line">find /path -uid 1000           <span class="comment"># 属于指定UID的文件</span></span><br><span class="line">find /path ! -user root        <span class="comment"># 不属于root的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 按群组</span></span><br><span class="line">find /path -group groupname    <span class="comment"># 属于指定群组的文件</span></span><br><span class="line">find /path -gid 1000           <span class="comment"># 属于指定GID的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 无用户或无群组</span></span><br><span class="line">find /path -nouser             <span class="comment"># 没有用户的文件（删除用户后遗留）</span></span><br><span class="line">find /path -nogroup            <span class="comment"># 没有群组的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 组合</span></span><br><span class="line">find /path -user alice -group developers  <span class="comment"># 特定用户和群组</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="按权限查找"><a href="#按权限查找" class="headerlink" title="按权限查找"></a>按权限查找</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 精确权限匹配</span></span><br><span class="line">find /path -perm 644           <span class="comment"># 权限正好是644的文件</span></span><br><span class="line">find /path -perm /u=s          <span class="comment"># 有SUID位的文件</span></span><br><span class="line">find /path -perm /g=s          <span class="comment"># 有SGID位的文件</span></span><br><span class="line">find /path -perm /o=t          <span class="comment"># 有粘滞位的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 任意权限位（/）</span></span><br><span class="line">find /path -perm /222          <span class="comment"># 任何人有写权限（2=写）</span></span><br><span class="line">find /path -perm /111          <span class="comment"># 任何人有执行权限</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 所有权限位必须匹配（-）</span></span><br><span class="line">find /path -perm -444          <span class="comment"># 所有人至少有读权限</span></span><br><span class="line">find /path -perm -755          <span class="comment"># 至少755权限</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SUID/SGID/SBIT</span></span><br><span class="line">find /path -perm -4000         <span class="comment"># 有SUID位的文件</span></span><br><span class="line">find /path -perm -2000         <span class="comment"># 有SGID位的文件</span></span><br><span class="line">find /path -perm -1000         <span class="comment"># 有粘滞位的目录</span></span><br><span class="line">find /path -perm /6000         <span class="comment"># 有SUID或SGID位的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找所有特殊权限文件</span></span><br><span class="line">find / -perm /6000 -<span class="built_in">type</span> f 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+<h4 id="对找到的文件执行操作"><a href="#对找到的文件执行操作" class="headerlink" title="对找到的文件执行操作"></a>对找到的文件执行操作</h4><p><strong><code>-exec</code> 选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本语法</span></span><br><span class="line">find /path -name <span class="string">&quot;*.log&quot;</span> -<span class="built_in">exec</span> <span class="built_in">rm</span> &#123;&#125; \;</span><br><span class="line"><span class="comment"># &#123;&#125; 代表找到的文件</span></span><br><span class="line"><span class="comment"># \; 表示命令结束</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：删除30天前的日志</span></span><br><span class="line">find /var/log -name <span class="string">&quot;*.log&quot;</span> -mtime +30 -<span class="built_in">exec</span> <span class="built_in">rm</span> &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：修改权限</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">chmod</span> 644 &#123;&#125; \;</span><br><span class="line">find /path -<span class="built_in">type</span> d -<span class="built_in">exec</span> <span class="built_in">chmod</span> 755 &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：复制文件</span></span><br><span class="line">find /source -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">exec</span> <span class="built_in">cp</span> &#123;&#125; /backup/ \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：移动文件</span></span><br><span class="line">find /source -name <span class="string">&quot;*.tmp&quot;</span> -<span class="built_in">exec</span> <span class="built_in">mv</span> &#123;&#125; /tmp/ \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：重命名（使用-exec限制较多，通常使用管道+xargs或-find的-printf+sh）</span></span><br><span class="line">find /path -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">exec</span> <span class="built_in">mv</span> &#123;&#125; &#123;&#125;.bak \;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>-exec ... +</code> 选项（更高效）：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将多个文件作为参数一次性传递给命令（类似xargs）</span></span><br><span class="line">find /path -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">exec</span> <span class="built_in">rm</span> &#123;&#125; +</span><br><span class="line"><span class="comment"># 等效于: rm file1.txt file2.txt file3.txt...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：统计多个文件的总行数</span></span><br><span class="line">find . -name <span class="string">&quot;*.py&quot;</span> -<span class="built_in">exec</span> <span class="built_in">wc</span> -l &#123;&#125; +</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：计算总大小</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">du</span> -ch &#123;&#125; + | grep total</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>-ok</code> 选项（交互式）：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对每个文件执行命令前询问确认</span></span><br><span class="line">find /path -name <span class="string">&quot;*.log&quot;</span> -ok <span class="built_in">rm</span> &#123;&#125; \;</span><br><span class="line"><span class="comment"># 会提示: &quot;rm ...?&quot;  输入y确认，n跳过</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 适用于危险操作前的确认</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -ok <span class="built_in">chmod</span> 600 &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<h4 id="结合管道和-xargs"><a href="#结合管道和-xargs" class="headerlink" title="结合管道和 xargs"></a>结合管道和 xargs</h4><p>对于复杂的操作，可以将 find 的结果通过管道传递给 xargs 或其他命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本用法</span></span><br><span class="line">find /path -name <span class="string">&quot;*.log&quot;</span> | xargs <span class="built_in">rm</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理文件名中有空格的情况</span></span><br><span class="line">find /path -name <span class="string">&quot;*.log&quot;</span> -print0 | xargs -0 <span class="built_in">rm</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 限制每次处理的参数数量</span></span><br><span class="line">find /path -name <span class="string">&quot;*.txt&quot;</span> | xargs -n 10 -I &#123;&#125; <span class="built_in">cp</span> &#123;&#125; /backup/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结合其他命令</span></span><br><span class="line">find /path -name <span class="string">&quot;*.py&quot;</span> | xargs grep <span class="string">&quot;import&quot;</span></span><br><span class="line">find /path -<span class="built_in">type</span> f | xargs <span class="built_in">du</span> -h | <span class="built_in">sort</span> -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -exec 和管道的组合</span></span><br><span class="line">find /path -name <span class="string">&quot;*.log&quot;</span> -<span class="built_in">exec</span> <span class="built_in">ls</span> -lh &#123;&#125; \; | awk <span class="string">&#x27;&#123;print $5, $9&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="find-的优化技巧"><a href="#find-的优化技巧" class="headerlink" title="find 的优化技巧"></a>find 的优化技巧</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 限制搜索深度</span></span><br><span class="line">find /path -maxdepth 2 -name <span class="string">&quot;*.txt&quot;</span></span><br><span class="line">find /path -mindepth 2 -name <span class="string">&quot;*.txt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 排除某些目录</span></span><br><span class="line">find /path -name <span class="string">&quot;/path/to/exclude&quot;</span> -prune -o -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">print</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 使用 -xdev 不跨越文件系统</span></span><br><span class="line">find / -xdev -name <span class="string">&quot;*.txt&quot;</span>    <span class="comment"># 只在当前文件系统搜索</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 先搜索文件名再执行操作（效率更高）</span></span><br><span class="line">find /path -name <span class="string">&quot;*.log&quot;</span> -mtime +30 -delete</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 使用 -ls 代替 -exec ls（更快）</span></span><br><span class="line">find /path -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 并行处理（使用 GNU parallel）</span></span><br><span class="line">find /path -name <span class="string">&quot;*.txt&quot;</span> | parallel -j 4 gzip</span><br></pre></td></tr></table></figure>
+
+<h4 id="实用-find-命令合集"><a href="#实用-find-命令合集" class="headerlink" title="实用 find 命令合集"></a>实用 find 命令合集</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ===== 文件清理 =====</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除空文件</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -empty -delete</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除空目录</span></span><br><span class="line">find /path -<span class="built_in">type</span> d -empty -delete</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除N天前的文件</span></span><br><span class="line">find /path -mtime +30 -<span class="built_in">type</span> f -delete</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除大文件（超过1GB）</span></span><br><span class="line">find /path -size +1G -<span class="built_in">type</span> f -delete</span><br><span class="line"></span><br><span class="line"><span class="comment"># ===== 权限修复 =====</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量修改文件权限</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">chmod</span> 644 &#123;&#125; \;</span><br><span class="line">find /path -<span class="built_in">type</span> d -<span class="built_in">exec</span> <span class="built_in">chmod</span> 755 &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修复用户/群组</span></span><br><span class="line">find /path -user olduser -<span class="built_in">exec</span> <span class="built_in">chown</span> newuser &#123;&#125; \;</span><br><span class="line">find /path -group oldgroup -<span class="built_in">exec</span> <span class="built_in">chgrp</span> newgroup &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># ===== 查找特定文件 =====</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找最近修改的文件</span></span><br><span class="line">find /path -mtime -1 -<span class="built_in">type</span> f</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找最大的文件</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">ls</span> -lh &#123;&#125; \; | <span class="built_in">sort</span> -k5 -rh | <span class="built_in">head</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找重复文件（按MD5）</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">md5sum</span> &#123;&#125; \; | <span class="built_in">sort</span> | <span class="built_in">uniq</span> -d -w32</span><br><span class="line"></span><br><span class="line"><span class="comment"># ===== 批量操作 =====</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量重命名（删除特定后缀）</span></span><br><span class="line">find /path -name <span class="string">&quot;*.bak&quot;</span> -<span class="built_in">exec</span> rename <span class="string">&#x27;s/\.bak$//&#x27;</span> &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量压缩</span></span><br><span class="line">find /path -name <span class="string">&quot;*.log&quot;</span> -<span class="built_in">exec</span> gzip &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量转换编码</span></span><br><span class="line">find /path -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">exec</span> iconv -f GBK -t UTF-8 -o &#123;&#125;.utf8 &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量图片处理</span></span><br><span class="line">find /path -name <span class="string">&quot;*.jpg&quot;</span> -<span class="built_in">exec</span> convert &#123;&#125; -resize 800x600 &#123;&#125;.small.jpg \;</span><br></pre></td></tr></table></figure>
+
+<h3 id="本章重点总结"><a href="#本章重点总结" class="headerlink" title="本章重点总结"></a>本章重点总结</h3><ol>
+<li><strong>目录操作</strong>：cd, pwd, mkdir, rmdir, rm</li>
+<li><strong>文件操作</strong>：cp, mv, rm</li>
+<li><strong>内容查看</strong>：cat, tac, nl, more, less, head, tail</li>
+<li><strong>文件查找</strong>：find（按名称、类型、大小、时间、权限、用户等）</li>
+<li><strong>执行操作</strong>：-exec, -ok, xargs</li>
+<li><strong>PATH 环境变量</strong>：系统查找命令的路径列表</li>
+</ol>
+<h3 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h3><ol>
+<li>如何在目录树中快速切换？写出5种cd的用法。</li>
+<li>如何创建多级目录结构？如何同时创建多个目录？</li>
+<li>解释 <code>rm -rf</code> 的危险性。如何安全地删除文件？</li>
+<li>大文件应该用什么命令查看？如何实时监控日志文件？</li>
+<li>编写 find 命令：<ul>
+<li>查找 &#x2F;var&#x2F;log 中7天前的日志文件</li>
+<li>查找当前目录下大于100MB的文件</li>
+<li>查找 &#x2F;home 中不属于任何用户的文件</li>
+<li>查找所有设置了SUID位的文件</li>
+</ul>
+</li>
+<li>如何为自定义脚本添加执行权限并添加到PATH？</li>
+<li>使用 <code>find</code> 和 <code>tar</code> 组合备份最近修改的文件。</li>
+</ol>
+
+
+  <div class="tag-list">
+    
+      
+      <a class="tag" href="/notes/tags/linux/">Linux</a>
+    
+      
+      <a class="tag" href="/notes/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">文件管理</a>
+    
+      
+      <a class="tag" href="/notes/tags/%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">目录操作</a>
+    
+  </div>
+
+</article>
+<div class="article-footer slide-up">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文本文由rlcao编写，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+
+
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://blog.cnortles.top/notes/linux/ch06-file-management" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://blog.cnortles.top/notes/linux/ch06-file-management&title=第六章、Linux 文件与目录管理 - Aurora&summary=第六章、Linux 文件与目录管理6.1 目录与路径目录的相关操作特殊目录符号
+
+
+符号
+含义
+
+
+
+.
+当前目录
+
+
+..
+上级目录
+
+
+-
+上一次所在的目录
+
+
+~
+当前用户的主目录
+
+
+~username
+指定用户的主目录
+
+
+..."><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=第六章、Linux 文件与目录管理 - Aurora&amp;body=https://blog.cnortles.top/notes/linux/ch06-file-management"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://blog.cnortles.top/notes/linux/ch06-file-management"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body twikoo'>
+      
+
+<div id="twikoo_container"><svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg></div>
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/blog/categories/">分类</a><a href="/blog/tags/">标签</a><a href="/blog/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https://tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https://pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https://news.cnortles.top">新闻</a><a href="/subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/FelicxFoster/hexo-theme-stellar">Stellar</a>
+创建
+</span>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js"></script>
+<script>
+    loadStatistic("https://qexo.cnortles.top")
+</script>
+</br>
+<span id="runtime_span"></span>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var runtime_span = document.getElementById('runtime_span');
+    function show_runtime() {
+      // 调用定时器
+      setTimeout(show_runtime, 1000);
+      var seconds = 1000;
+      var minutes = seconds * 60;
+      var hours = minutes * 60;
+      var days = hours * 24;
+      var years = days * 365;
+      var today = new Date();
+      var todayYear = today.getFullYear();
+      var todayMonth = today.getMonth();
+      var todayDate = today.getDate();
+      var todayHour = today.getHours();
+      var todayMinute = today.getMinutes();
+      var todaySecond = today.getSeconds();
+      var t1 = Date.UTC(2025, 7, 1, 0, 0, 0); // UTC时间，月份从0开始
+      var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+      var diff = t2 - t1;
+      var diffYears = Math.floor(diff / years);
+      var diffDays = Math.floor((diff / days) - diffYears * 365);
+      var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+      var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+      var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+      // 更新显示时间的span元素内容
+      runtime_span.innerHTML = "🦉营业：" + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒🦉";
+    }
+    show_runtime(); // 初次调用函数以启动定时器
+  });
+</script>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="true"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%E3%80%81Linux-%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86"><span class="toc-text">第六章、Linux 文件与目录管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-%E7%9B%AE%E5%BD%95%E4%B8%8E%E8%B7%AF%E5%BE%84"><span class="toc-text">6.1 目录与路径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-text">目录的相关操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9B%AE%E5%BD%95%E7%AC%A6%E5%8F%B7"><span class="toc-text">特殊目录符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-text">常见目录操作命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PATH-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">PATH 环境变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-PATH"><span class="toc-text">什么是 PATH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B-PATH"><span class="toc-text">查看 PATH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PATH-%E7%9A%84%E6%90%9C%E7%B4%A2%E9%A1%BA%E5%BA%8F"><span class="toc-text">PATH 的搜索顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-PATH"><span class="toc-text">修改 PATH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4%E4%BD%8D%E7%BD%AE"><span class="toc-text">查看命令位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PATH-%E7%9B%B8%E5%85%B3%E6%8A%80%E5%B7%A7"><span class="toc-text">PATH 相关技巧</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-Linux-%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86"><span class="toc-text">6.2 Linux 文件与目录管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%9A%84%E6%A3%80%E8%A7%86%EF%BC%9Als"><span class="toc-text">文件与目录的检视：ls</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ls-%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="toc-text">ls 命令详解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9"><span class="toc-text">常用选项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">组合使用示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E8%A7%A3%E6%9E%90"><span class="toc-text">输出解析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="toc-text">实用技巧</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E3%80%81%E5%88%A0%E9%99%A4%E4%B8%8E%E7%A7%BB%E5%8A%A8%EF%BC%9Acp-rm-mv"><span class="toc-text">复制、删除与移动：cp, rm, mv</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cp-%E5%A4%8D%E5%88%B6"><span class="toc-text">cp (复制)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rm-%E5%88%A0%E9%99%A4"><span class="toc-text">rm (删除)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mv-%E7%A7%BB%E5%8A%A8-%E9%87%8D%E5%91%BD%E5%90%8D"><span class="toc-text">mv (移动&#x2F;重命名)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%9F%A5%E9%98%85"><span class="toc-text">文件内容查阅</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E6%A3%80%E8%A7%86%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="toc-text">直接检视文件内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#head-%E5%92%8C-tail"><span class="toc-text">head 和 tail</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%EF%BC%9Afind"><span class="toc-text">文件查找：find</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-text">基本语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E5%90%8D%E7%A7%B0%E6%9F%A5%E6%89%BE"><span class="toc-text">按名称查找</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E7%B1%BB%E5%9E%8B%E6%9F%A5%E6%89%BE"><span class="toc-text">按类型查找</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E5%A4%A7%E5%B0%8F%E6%9F%A5%E6%89%BE"><span class="toc-text">按大小查找</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E6%97%B6%E9%97%B4%E6%9F%A5%E6%89%BE"><span class="toc-text">按时间查找</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E7%94%A8%E6%88%B7%E5%92%8C%E7%BE%A4%E7%BB%84%E6%9F%A5%E6%89%BE"><span class="toc-text">按用户和群组查找</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E6%9D%83%E9%99%90%E6%9F%A5%E6%89%BE"><span class="toc-text">按权限查找</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E6%89%BE%E5%88%B0%E7%9A%84%E6%96%87%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%93%8D%E4%BD%9C"><span class="toc-text">对找到的文件执行操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E5%90%88%E7%AE%A1%E9%81%93%E5%92%8C-xargs"><span class="toc-text">结合管道和 xargs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#find-%E7%9A%84%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7"><span class="toc-text">find 的优化技巧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%94%A8-find-%E5%91%BD%E4%BB%A4%E5%90%88%E9%9B%86"><span class="toc-text">实用 find 命令合集</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E7%AB%A0%E9%87%8D%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-text">本章重点总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0%E9%A2%98"><span class="toc-text">练习题</span></a></li></ol></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":"blog.cnortles.top","officialHosts":["localhost","caoronglin.github.io","c.cnortles.top","cnortles.top"],"encoded":"YmxvZy5jbm9ydGxlcy50b3A="};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://cdn.cnortles.top/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script type="module">
+  const el = document.getElementById('twikoo_container');
+  util.viewportLazyload(el, load_twikoo, true);
+
+  function load_twikoo() {
+    if (!el) return;
+    utils.js('https://cdn.cnortles.top/npm/twikoo@1.6.44/dist/twikoo.all.min.js', {defer: true}).then(function () {
+      const path = el.getAttribute('comment_id') ?? decodeURI(window.location.pathname);
+      twikoo.init(Object.assign({"js":"https://cdn.cnortles.top/npm/twikoo@1.6.44/dist/twikoo.all.min.js","envId":"https://twikoo.cnortles.top"}, {
+        el: '#twikoo_container',
+        path: path,
+      }));
+    });
+  }
+</script>
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img ,.tk-content img:not([class*="emo"])`,
+    css: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script defer src="https://cdn.cnortles.top/npm/scrollreveal@4.0/dist/scrollreveal.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const slideUp = {
+      distance: `8px`,
+      duration: `500`,
+      interval: `50`,
+      scale: `1`,
+      opacity: 0,
+      easing: "ease-out"
+    };
+    ScrollReveal({ container: '.widgets' }).reveal('.slide-up', { ...slideUp });
+    ScrollReveal({ container: '.l_main' }).reveal('.slide-up', { ...slideUp });
+    ScrollReveal({ container: '.l_right' }).reveal('.slide-up', { ...slideUp });
+  });
+</script>
+<link rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+<script defer type="text/javascript" src="https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    mermaid.initialize(mermaid_config);
+  });
+</script><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+<script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/custom/js/smooth-scroll.js"></script><script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/custom/js/adjust-codeblock-height.js"></script><script src="/custom/js/link-icon.js"></script><script src="https://cdn.cnortles.top/npm/jquery/jquery.min.js"></script><script async data-pjax src="/custom/js/txmap.js"></script><script  src="/custom/js/back.js"></script><script type="text/javascript" src="/custom/js/ZYDark.js"></script>
+</div></body></html>

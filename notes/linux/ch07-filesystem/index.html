@@ -1,0 +1,2003 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/linux/ch07-filesystem/">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top" crossorigin><link rel="preconnect" href="https://cdn.cnortles.top/npm" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>第七章、Linux 磁盘与文件系统管理 - Aurora</title>
+
+  
+    <meta name="description" content="第七章、Linux 磁盘与文件系统管理7.1 认识 Linux 文件系统文件系统的特性什么是文件系统 文件系统是操作系统用于管理磁盘上的文件的方法和数据结构。它定义了文件的存储方式、命名规则、访问权限等。 Linux 支持的文件系统类型：    文件系统 特点 适用场景    ext2 传统 Linux 文件系统，无日志 简单嵌入式系统   ext3 ext2 + 日志功能 过渡使用   ext4">
+<meta property="og:type" content="website">
+<meta property="og:title" content="第七章、Linux 磁盘与文件系统管理">
+<meta property="og:url" content="https://blog.cnortles.top/notes/linux/ch07-filesystem/">
+<meta property="og:site_name" content="Aurora">
+<meta property="og:description" content="第七章、Linux 磁盘与文件系统管理7.1 认识 Linux 文件系统文件系统的特性什么是文件系统 文件系统是操作系统用于管理磁盘上的文件的方法和数据结构。它定义了文件的存储方式、命名规则、访问权限等。 Linux 支持的文件系统类型：    文件系统 特点 适用场景    ext2 传统 Linux 文件系统，无日志 简单嵌入式系统   ext3 ext2 + 日志功能 过渡使用   ext4">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg">
+<meta property="article:published_time" content="2023-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-31T16:00:00.000Z">
+<meta property="article:author" content="Rl.">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="文件系统">
+<meta property="article:tag" content="磁盘管理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg">
+  
+  
+  
+  <meta name="keywords" content=",,">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="Aurora" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/linux/ch07-filesystem/","author":{"@type":"Person","name":"Rl.","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"第七章、Linux 磁盘与文件系统管理","description":"第七章、Linux 磁盘与文件系统管理7.1 认识 Linux 文件系统文件系统的特性什么是文件系统\n文件系统是操作系统用于管理磁盘上的文件的方法和数据结构。它定义了文件的存储方式、命名规则、访问权限等。\nLinux 支持的文件系统类型：\n\n\n\n文件系统\n特点\n适用场景\n\n\n\next2\n传统 Linux 文件系统，无日志\n简单嵌入式系统\n\n\next3\next2 + 日志功能\n过渡使用\n\n\ne...","url":"https://blog.cnortles.top/notes/linux/ch07-filesystem/","keywords":"生信"}</script>
+  <script>
+  if (window.localStorage.getItem('ZYI_Theme_Mode')==='dark' || (window.localStorage.getItem('ZYI_Theme_Mode')==='Moss' && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+      document.querySelector("html").id = "ZYDark";
+  }
+</script>
+<link rel="preconnect" href="https://s1.hdslb.com/" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/medium.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" media="all" onload="this.media='all'" /><link rel="stylesheet" href="/custom/css/ZYDark.css"><script src="/custom/js/link-icon.js"></script><link rel="stylesheet" href="/custom/css/index.css"><link rel="stylesheet" href="/custom/css/links.css"><link rel="stylesheet" href="/custom/css/smooth-scroll.css"><link rel="stylesheet" href="/custom/css/ZYDark.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+<div class="l_body content" id="start" layout="page" type="tech" text-indent><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><img no-lazy class="avatar" src="https://blog.cnortles.top/img/7.jpg" onerror="javascript:this.classList.add('error');this.src='https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main"><img no-lazy height="32px" src="/img/t.png"/ onerror="javascript:this.classList.add('error');this.src='https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><div class="sub normal cap">愿极光，永不消逝。</div><div class="sub hover cap" style="opacity:0"> Ember of Synthetic Life</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="主页" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="装备" href="/equipment/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/notes" placeholder="在 Linux 中搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <widget class="widget-wrapper slide-up post-list">
+    <div class="widget-header dis-select">
+      <span class="name">标签</span>
+    </div>
+    <div class="widget-body fs14 tag-tree">
+      
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="">
+    
+  
+  <a class="link" href="/notes/">
+    <span class="toc-text">
+      
+        所有笔记
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="bash">
+    
+  
+  <a class="link" href="/notes/tags/bash/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        Bash
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="centos">
+    
+  
+  <a class="link" href="/notes/tags/centos/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        CentOS
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="linux">
+    
+  
+  <a class="link" href="/notes/tags/linux/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        Linux
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="shell">
+    
+  
+  <a class="link" href="/notes/tags/shell/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        Shell
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="vim">
+    
+  
+  <a class="link" href="/notes/tags/vim/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        vim
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="压缩">
+    
+  
+  <a class="link" href="/notes/tags/%E5%8E%8B%E7%BC%A9/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        压缩
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="命令行">
+    
+  
+  <a class="link" href="/notes/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        命令行
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="基础命令">
+    
+  
+  <a class="link" href="/notes/tags/%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        基础命令
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="备份">
+    
+  
+  <a class="link" href="/notes/tags/%E5%A4%87%E4%BB%BD/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        备份
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="学习方法">
+    
+  
+  <a class="link" href="/notes/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        学习方法
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="学习笔记">
+    
+  
+  <a class="link" href="/notes/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        学习笔记
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="安装">
+    
+  
+  <a class="link" href="/notes/tags/%E5%AE%89%E8%A3%85/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        安装
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="帮助系统">
+    
+  
+  <a class="link" href="/notes/tags/%E5%B8%AE%E5%8A%A9%E7%B3%BB%E7%BB%9F/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        帮助系统
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="打包">
+    
+  
+  <a class="link" href="/notes/tags/%E6%89%93%E5%8C%85/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        打包
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="操作系统">
+    
+  
+  <a class="link" href="/notes/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        操作系统
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="文件权限">
+    
+  
+  <a class="link" href="/notes/tags/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        文件权限
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="文件管理">
+    
+  
+  <a class="link" href="/notes/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        文件管理
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="文件系统">
+    
+  
+  <a class="link" href="/notes/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        文件系统
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="用户管理">
+    
+  
+  <a class="link" href="/notes/tags/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        用户管理
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="目录操作">
+    
+  
+  <a class="link" href="/notes/tags/%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        目录操作
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="硬件">
+    
+  
+  <a class="link" href="/notes/tags/%E7%A1%AC%E4%BB%B6/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        硬件
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="磁盘分区">
+    
+  
+  <a class="link" href="/notes/tags/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        磁盘分区
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="磁盘管理">
+    
+  
+  <a class="link" href="/notes/tags/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        磁盘管理
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="编辑器">
+    
+  
+  <a class="link" href="/notes/tags/%E7%BC%96%E8%BE%91%E5%99%A8/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        编辑器
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="计算机基础">
+    
+  
+  <a class="link" href="/notes/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        计算机基础
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+        
+  
+  
+  
+  
+  <div class="tag-subtree leaf-tag" data-tag="鸟哥">
+    
+  
+  <a class="link" href="/notes/tags/%E9%B8%9F%E5%93%A5/">
+    <span class="toc-text">
+      
+        
+        <span class="tagcon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"/><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"/></svg></span>
+        鸟哥
+      
+    </span>
+    <span class="toc-text tag-switcher-wrapper">
+      <span class="tag-switcher" />
+    </span>
+  </a>
+
+    
+  </div>
+
+      
+    </div>
+  </widget>
+
+
+<widget class="widget-wrapper slide-up recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/subscribe"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/notes/linux/ch00-computer-basics/"><span class="title">第零章、计算机概论</span></a><a class="item title" href="/notes/linux/ch01-linux-intro/"><span class="title">第一章、Linux是什么与如何学习</span></a><a class="item title" href="/notes/linux/ch02-partition/"><span class="title">第二章、主机规划与磁盘分区</span></a><a class="item title" href="/notes/linux/ch03-install/"><span class="title">第三章、安装 CentOS 7.x</span></a><a class="item title" href="/notes/linux/ch04-first-login/"><span class="title">第四章、首次登陆与线上求助</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="https://github.com/caoronglin" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-solid fa-github fa-brands fa-bounce"></i></a><a class="social" title="Bilibili" href="https://space.bilibili.com/555149182?spm_id_from=333.1007.0.0" target="_blank" rel="external nofollow noopener noreferrer"><i class="fa-brands fa-bilibili fa-bounce"></i></a><a class="social" title="Email" href="mailto:crl@cnortles.top" rel="noopener noreferrer"><i class="fa-solid fa-envelope fa-bounce"></i></a><a class="social" title="Comments" href="/comments" rel="noopener noreferrer"><i class="fa-solid fa-comment fa-bounce"></i></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner slide-up top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span>
+<a class="cap breadcrumb" href="/notebooks/">笔记本</a>
+
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/">Linux</a>
+
+</div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2023-12-31T16:00:00.000Z">2024-01-01</time></span><span class="sep updated"></span><span class="text updated">发布于：<time datetime="2023-12-31T16:00:00.000Z">2024-01-01</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第七章、Linux 磁盘与文件系统管理</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content slide-up"><h1 id="第七章、Linux-磁盘与文件系统管理"><a href="#第七章、Linux-磁盘与文件系统管理" class="headerlink" title="第七章、Linux 磁盘与文件系统管理"></a>第七章、Linux 磁盘与文件系统管理</h1><h2 id="7-1-认识-Linux-文件系统"><a href="#7-1-认识-Linux-文件系统" class="headerlink" title="7.1 认识 Linux 文件系统"></a>7.1 认识 Linux 文件系统</h2><h3 id="文件系统的特性"><a href="#文件系统的特性" class="headerlink" title="文件系统的特性"></a>文件系统的特性</h3><p><strong>什么是文件系统</strong></p>
+<p>文件系统是操作系统用于管理磁盘上的文件的方法和数据结构。它定义了文件的存储方式、命名规则、访问权限等。</p>
+<p><strong>Linux 支持的文件系统类型：</strong></p>
+<table>
+<thead>
+<tr>
+<th>文件系统</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>ext2</strong></td>
+<td>传统 Linux 文件系统，无日志</td>
+<td>简单嵌入式系统</td>
+</tr>
+<tr>
+<td><strong>ext3</strong></td>
+<td>ext2 + 日志功能</td>
+<td>过渡使用</td>
+</tr>
+<tr>
+<td><strong>ext4</strong></td>
+<td>现代标准，高性能，大容量支持</td>
+<td>通用场景，推荐</td>
+</tr>
+<tr>
+<td><strong>xfs</strong></td>
+<td>高性能，大文件支持，并行 I&#x2F;O</td>
+<td>大数据，数据库</td>
+</tr>
+<tr>
+<td><strong>btrfs</strong></td>
+<td>现代特性：快照、压缩、多设备</td>
+<td>高级用户</td>
+</tr>
+<tr>
+<td><strong>swap</strong></td>
+<td>交换分区&#x2F;文件</td>
+<td>虚拟内存</td>
+</tr>
+<tr>
+<td><strong>vfat&#x2F;fat32</strong></td>
+<td>Windows 兼容</td>
+<td>UEFI、移动设备</td>
+</tr>
+<tr>
+<td><strong>ntfs</strong></td>
+<td>Windows 文件系统</td>
+<td>双系统数据共享</td>
+</tr>
+<tr>
+<td><strong>nfs</strong></td>
+<td>网络文件系统</td>
+<td>文件共享</td>
+</tr>
+<tr>
+<td><strong>cifs&#x2F;smb</strong></td>
+<td>Windows 网络共享</td>
+<td>Samba 共享</td>
+</tr>
+</tbody></table>
+<h3 id="ext4-文件系统详解"><a href="#ext4-文件系统详解" class="headerlink" title="ext4 文件系统详解"></a>ext4 文件系统详解</h3><p><strong>ext4 的主要特性：</strong></p>
+<ol>
+<li><p><strong>更大的文件系统和文件</strong></p>
+<ul>
+<li>最大文件系统：1EB (Exabyte)</li>
+<li>最大文件大小：16TB</li>
+</ul>
+</li>
+<li><p><strong>Extents 存储方式</strong></p>
+<ul>
+<li>代替传统的块映射，提高大文件性能</li>
+<li>减少碎片</li>
+</ul>
+</li>
+<li><p><strong>日志校验和 (Journal Checksums)</strong></p>
+<ul>
+<li>提高日志可靠性</li>
+</ul>
+</li>
+<li><p><strong>向后兼容</strong></p>
+<ul>
+<li>可以挂载为 ext2&#x2F;ext3</li>
+</ul>
+</li>
+<li><p><strong>延迟分配 (Delayed Allocation)</strong></p>
+<ul>
+<li>提高性能，减少碎片</li>
+</ul>
+</li>
+</ol>
+<p><strong>ext4 关键参数：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 ext4 文件系统信息</span></span><br><span class="line">dumpe2fs /dev/sda1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调整文件系统参数</span></span><br><span class="line">tune2fs -l /dev/sda1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用/禁用日志</span></span><br><span class="line"><span class="comment"># ext4 默认启用日志</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调整预留块数（默认5%）</span></span><br><span class="line">tune2fs -m 1 /dev/sda1  <span class="comment"># 预留1%给 root</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="XFS-文件系统详解"><a href="#XFS-文件系统详解" class="headerlink" title="XFS 文件系统详解"></a>XFS 文件系统详解</h3><p><strong>XFS 的主要特性：</strong></p>
+<ol>
+<li><p><strong>高性能</strong></p>
+<ul>
+<li>优化的并行 I&#x2F;O</li>
+<li>适合大文件和高吞吐量</li>
+</ul>
+</li>
+<li><p><strong>可扩展性</strong></p>
+<ul>
+<li>在线扩展（无需卸载）</li>
+<li>最大支持 8EB 文件系统</li>
+</ul>
+</li>
+<li><p><strong>日志结构</strong></p>
+<ul>
+<li>元数据日志</li>
+<li>快速恢复</li>
+</ul>
+</li>
+<li><p><strong>分配组 (Allocation Groups)</strong></p>
+<ul>
+<li>提高并行性</li>
+<li>独立管理空间</li>
+</ul>
+</li>
+</ol>
+<p><strong>XFS 管理命令：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 XFS 文件系统</span></span><br><span class="line">mkfs.xfs /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建带标签的 XFS</span></span><br><span class="line">mkfs.xfs -L <span class="string">&quot;Data&quot;</span> /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 XFS 信息</span></span><br><span class="line">xfs_info /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩展 XFS 文件系统（在线）</span></span><br><span class="line">xfs_growfs /mnt/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修复 XFS</span></span><br><span class="line">xfs_repair /dev/sdb1</span><br><span class="line">xfs_repair -n /dev/sdb1  <span class="comment"># 只检查不修复</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>XFS vs ext4 选择建议：</strong></p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐文件系统</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>通用桌面系统</td>
+<td>ext4</td>
+</tr>
+<tr>
+<td>小型服务器</td>
+<td>ext4</td>
+</tr>
+<tr>
+<td>大型数据库</td>
+<td>XFS</td>
+</tr>
+<tr>
+<td>大数据处理</td>
+<td>XFS</td>
+</tr>
+<tr>
+<td>视频&#x2F;多媒体存储</td>
+<td>XFS</td>
+</tr>
+<tr>
+<td>虚拟化存储</td>
+<td>XFS</td>
+</tr>
+<tr>
+<td>容器镜像存储</td>
+<td>XFS</td>
+</tr>
+</tbody></table>
+<h2 id="7-2-文件系统的简单操作"><a href="#7-2-文件系统的简单操作" class="headerlink" title="7.2 文件系统的简单操作"></a>7.2 文件系统的简单操作</h2><h3 id="磁盘与目录的容量"><a href="#磁盘与目录的容量" class="headerlink" title="磁盘与目录的容量"></a>磁盘与目录的容量</h3><p><strong>df 命令 - 查看文件系统磁盘空间：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本用法</span></span><br><span class="line"><span class="built_in">df</span>                           <span class="comment"># 显示所有文件系统</span></span><br><span class="line"><span class="built_in">df</span> -h                        <span class="comment"># 人类可读格式（推荐）</span></span><br><span class="line"><span class="built_in">df</span> -H                        <span class="comment"># 使用1000而非1024为基底</span></span><br><span class="line"><span class="built_in">df</span> -T                        <span class="comment"># 显示文件系统类型</span></span><br><span class="line"><span class="built_in">df</span> -i                        <span class="comment"># 显示inode使用情况</span></span><br><span class="line"><span class="built_in">df</span> -l                        <span class="comment"># 仅显示本地文件系统</span></span><br><span class="line"><span class="built_in">df</span> -x tmpfs                  <span class="comment"># 排除特定类型</span></span><br><span class="line"><span class="built_in">df</span> /home                     <span class="comment"># 查看特定目录所在分区</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用组合</span></span><br><span class="line"><span class="built_in">df</span> -hT                       <span class="comment"># 人类可读 + 文件系统类型</span></span><br><span class="line"><span class="built_in">df</span> -h | grep -E <span class="string">&#x27;(Filesystem|/dev/)&#x27;</span>  <span class="comment"># 过滤显示</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>du 命令 - 查看目录&#x2F;文件大小：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本用法</span></span><br><span class="line"><span class="built_in">du</span>                           <span class="comment"># 显示目录及子目录大小</span></span><br><span class="line"><span class="built_in">du</span> -h                        <span class="comment"># 人类可读格式</span></span><br><span class="line"><span class="built_in">du</span> -s                        <span class="comment"># 仅显示总计（不显示子目录）</span></span><br><span class="line"><span class="built_in">du</span> -sh /path                 <span class="comment"># 查看目录总大小（最常用）</span></span><br><span class="line"><span class="built_in">du</span> -a                        <span class="comment"># 显示文件和目录</span></span><br><span class="line"><span class="built_in">du</span> --max-depth=1 /path       <span class="comment"># 只显示一层子目录</span></span><br><span class="line"><span class="built_in">du</span> --max-depth=2 /path       <span class="comment"># 只显示两层子目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用组合</span></span><br><span class="line"><span class="built_in">du</span> -sh /* 2&gt;/dev/null | <span class="built_in">sort</span> -h              <span class="comment"># 查看根目录下各文件夹大小</span></span><br><span class="line"><span class="built_in">du</span> -sh /home/* 2&gt;/dev/null | <span class="built_in">sort</span> -hr | <span class="built_in">head</span> -10  <span class="comment"># 查看home下最大的10个用户</span></span><br><span class="line"><span class="built_in">du</span> -ah /path | <span class="built_in">sort</span> -hr | <span class="built_in">head</span> -20           <span class="comment"># 找出最大的20个文件/目录</span></span><br><span class="line"><span class="built_in">du</span> -h --max-depth=1 /var | <span class="built_in">sort</span> -h           <span class="comment"># 查看/var下各子目录大小</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 排除特定目录</span></span><br><span class="line"><span class="built_in">du</span> -sh --exclude=<span class="string">&#x27;*.log&#x27;</span> /var/log</span><br><span class="line"><span class="built_in">du</span> -sh --exclude=<span class="string">&#x27;node_modules&#x27;</span> /project</span><br></pre></td></tr></table></figure>
+
+<p><strong>ln 命令 - 创建链接文件：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 硬链接（Hard Link）</span></span><br><span class="line"><span class="built_in">ln</span> original.txt hardlink.txt     <span class="comment"># 同一文件系统的硬链接</span></span><br><span class="line"><span class="built_in">ln</span> /path/to/file /another/path/link</span><br><span class="line"></span><br><span class="line"><span class="comment"># 软链接/符号链接（Symbolic Link）</span></span><br><span class="line"><span class="built_in">ln</span> -s original.txt symlink.txt   <span class="comment"># 最常用的链接</span></span><br><span class="line"><span class="built_in">ln</span> -s /path/to/file /path/to/link</span><br><span class="line"><span class="built_in">ln</span> -s /path/to/directory /path/to/linkname</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选项</span></span><br><span class="line">-f                              <span class="comment"># 强制，如果目标存在则覆盖</span></span><br><span class="line">-i                              <span class="comment"># 交互，覆盖前询问</span></span><br><span class="line">-v                              <span class="comment"># 详细模式，显示操作过程</span></span><br><span class="line">-n                              <span class="comment"># 将符号链接视为普通文件</span></span><br><span class="line">-s                              <span class="comment"># 创建符号链接</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用示例</span></span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/bin/myapp /usr/bin/myapp      <span class="comment"># 添加到PATH</span></span><br><span class="line"><span class="built_in">ln</span> -s /mnt/data/docs ~/Documents               <span class="comment"># 链接到数据盘</span></span><br><span class="line"><span class="built_in">ln</span> -s ~/dotfiles/.bashrc ~/.bashrc             <span class="comment"># 管理配置文件</span></span><br><span class="line"><span class="built_in">ln</span> -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  <span class="comment"># 设置时区</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看链接</span></span><br><span class="line"><span class="built_in">ls</span> -l                          <span class="comment"># 显示链接指向</span></span><br><span class="line"><span class="built_in">readlink</span> symlink.txt          <span class="comment"># 读取符号链接的目标</span></span><br><span class="line"><span class="built_in">readlink</span> -f symlink.txt       <span class="comment"># 递归解析到最终目标</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>硬链接 vs 软链接：</strong></p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>硬链接</th>
+<th>软链接（符号链接）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>本质</strong></td>
+<td>同一文件的不同名字</td>
+<td>指向另一个文件&#x2F;目录的快捷方式</td>
+</tr>
+<tr>
+<td><strong>inode</strong></td>
+<td>相同</td>
+<td>不同</td>
+</tr>
+<tr>
+<td><strong>跨文件系统</strong></td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>链接目录</strong></td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>原文件删除</strong></td>
+<td>数据仍然存在</td>
+<td>链接失效（悬空链接）</td>
+</tr>
+<tr>
+<td><strong>大小</strong></td>
+<td>与源文件相同</td>
+<td>很小（路径长度）</td>
+</tr>
+<tr>
+<td><strong>用途</strong></td>
+<td>文件备份、防止误删</td>
+<td>快捷方式、版本管理、系统配置</td>
+</tr>
+</tbody></table>
+<h2 id="7-3-磁盘的分区、格式化、检验与挂载"><a href="#7-3-磁盘的分区、格式化、检验与挂载" class="headerlink" title="7.3 磁盘的分区、格式化、检验与挂载"></a>7.3 磁盘的分区、格式化、检验与挂载</h2><h3 id="分区操作"><a href="#分区操作" class="headerlink" title="分区操作"></a>分区操作</h3><p><strong>lsblk - 列出块设备：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">lsblk                          <span class="comment"># 基本列出</span></span><br><span class="line">lsblk -a                       <span class="comment"># 显示空设备</span></span><br><span class="line">lsblk -f                       <span class="comment"># 显示文件系统</span></span><br><span class="line">lsblk -m                       <span class="comment"># 显示权限和所有者</span></span><br><span class="line">lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT,MODEL</span><br><span class="line">lsblk -p                       <span class="comment"># 显示完整路径</span></span><br><span class="line">lsblk -t                       <span class="comment"># 显示拓扑</span></span><br><span class="line">lsblk -b                       <span class="comment"># 以字节为单位</span></span><br><span class="line">lsblk --tree                   <span class="comment"># 树形显示</span></span><br><span class="line">lsblk -d                       <span class="comment"># 不显示从设备</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用组合</span></span><br><span class="line">lsblk -fpm                    <span class="comment"># 完整路径 + 文件系统 + 权限</span></span><br><span class="line">watch -n 1 lsblk              <span class="comment"># 实时监控</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>blkid - 查看块设备属性：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">blkid                          <span class="comment"># 显示所有块设备</span></span><br><span class="line">blkid /dev/sda1               <span class="comment"># 查看特定设备</span></span><br><span class="line">blkid -U UUID                 <span class="comment"># 根据UUID查找设备</span></span><br><span class="line">blkid -L LABEL                <span class="comment"># 根据标签查找设备</span></span><br><span class="line">blkid -t TYPE=ext4            <span class="comment"># 根据类型查找</span></span><br><span class="line">blkid -o device -t UUID=xxx   <span class="comment"># 只输出设备名</span></span><br><span class="line">blkid -o <span class="built_in">export</span> /dev/sda1     <span class="comment"># 导出为环境变量格式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用示例</span></span><br><span class="line">blkid | grep ext4             <span class="comment"># 查找ext4文件系统</span></span><br><span class="line">blkid -o <span class="built_in">export</span> | grep UUID <span class="comment"># 列出所有UUID</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="格式化（创建文件系统）"><a href="#格式化（创建文件系统）" class="headerlink" title="格式化（创建文件系统）"></a>格式化（创建文件系统）</h3><p><strong>mkfs 系列命令：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通用格式</span></span><br><span class="line">mkfs -t <span class="built_in">type</span> device</span><br><span class="line">mkfs.type device        <span class="comment"># 等效命令</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ext4 文件系统</span></span><br><span class="line">mkfs.ext4 /dev/sdb1</span><br><span class="line">mkfs -t ext4 /dev/sdb1</span><br><span class="line">mke2fs -t ext4 /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用选项</span></span><br><span class="line">mkfs.ext4 -L <span class="string">&quot;Data&quot;</span> /dev/sdb1           <span class="comment"># 设置卷标</span></span><br><span class="line">mkfs.ext4 -N 1000000 /dev/sdb1          <span class="comment"># 指定inode数量</span></span><br><span class="line">mkfs.ext4 -m 1 /dev/sdb1                <span class="comment"># 保留1%空间给root</span></span><br><span class="line">mkfs.ext4 -E stride=128 /dev/sdb1       <span class="comment"># RAID优化</span></span><br><span class="line">mkfs.ext4 -O ^metadata_csum /dev/sdb1   <span class="comment"># 禁用元数据校验</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># xfs 文件系统</span></span><br><span class="line">mkfs.xfs /dev/sdb1</span><br><span class="line">mkfs -t xfs /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用选项</span></span><br><span class="line">mkfs.xfs -L <span class="string">&quot;Data&quot;</span> /dev/sdb1            <span class="comment"># 设置卷标</span></span><br><span class="line">mkfs.xfs -f /dev/sdb1                   <span class="comment"># 强制格式化（覆盖）</span></span><br><span class="line">mkfs.xfs -d agcount=4 /dev/sdb1         <span class="comment"># 分配组数量</span></span><br><span class="line">mkfs.xfs -l size=128m /dev/sdb1         <span class="comment"># 日志大小</span></span><br><span class="line">mkfs.xfs -n size=64k /dev/sdb1          <span class="comment"># 命名空间大小</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># vfat/fat32（用于 UEFI 启动分区）</span></span><br><span class="line">mkfs.vfat -F 32 /dev/sda1</span><br><span class="line">mkfs.fat -F 32 -n <span class="string">&quot;EFI&quot;</span> /dev/sda1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 其他文件系统</span></span><br><span class="line">mkfs.btrfs /dev/sdb1</span><br><span class="line">mkfs.jfs /dev/sdb1</span><br><span class="line">mkfs.reiserfs /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建交换分区</span></span><br><span class="line">mkswap /dev/sda3</span><br><span class="line">mkswap -L <span class="string">&quot;Swap&quot;</span> /dev/sda3</span><br><span class="line">swapon /dev/sda3           <span class="comment"># 启用交换</span></span><br><span class="line">swapoff /dev/sda3          <span class="comment"># 关闭交换</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="检验文件系统"><a href="#检验文件系统" class="headerlink" title="检验文件系统"></a>检验文件系统</h3><p><strong>fsck - 文件系统检查：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本用法（危险：检查前必须先卸载！）</span></span><br><span class="line"><span class="comment"># 检查并修复ext4</span></span><br><span class="line">fsck.ext4 /dev/sda1</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">e2fsck /dev/sda1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查xfs（注意：xfs使用xfs_repair）</span></span><br><span class="line">xfs_repair /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用选项</span></span><br><span class="line">fsck -t ext4 /dev/sda1      <span class="comment"># 指定类型</span></span><br><span class="line">fsck -A                     <span class="comment"># 检查/etc/fstab中的所有</span></span><br><span class="line">fsck -a                     <span class="comment"># 自动修复（不询问）</span></span><br><span class="line">fsck -r                     <span class="comment"># 交互式修复</span></span><br><span class="line">fsck -n                     <span class="comment"># 只检查不修复（模拟运行）</span></span><br><span class="line">fsck -f                     <span class="comment"># 强制检查（即使看起来干净）</span></span><br><span class="line">fsck -v                     <span class="comment"># 详细模式</span></span><br><span class="line">fsck -y                     <span class="comment"># 对所有问题回答&quot;是&quot;（危险！）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 实际操作示例（必须卸载后检查）</span></span><br><span class="line"><span class="comment"># 对于根分区，需要进入救援模式或使用Live CD</span></span><br><span class="line">umount /dev/sda1</span><br><span class="line">fsck -f /dev/sda1</span><br><span class="line"><span class="comment"># 如果检查根分区，使用：</span></span><br><span class="line">shutdown -rF now           <span class="comment"># 重启并强制检查</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建包含坏块的列表</span></span><br><span class="line">e2fsck -c /dev/sda1         <span class="comment"># 只读扫描</span></span><br><span class="line">e2fsck -cc /dev/sda1        <span class="comment"># 非破坏性读写测试（慢）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查并修复xfs</span></span><br><span class="line">xfs_repair /dev/sdb1                   <span class="comment"># 必须卸载</span></span><br><span class="line">xfs_repair -n /dev/sdb1                <span class="comment"># 只检查</span></span><br><span class="line">xfs_repair -L /dev/sdb1               <span class="comment"># 强制修复（可能丢失数据）</span></span><br><span class="line">xfs_repair -o force_geometry /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查日志</span></span><br><span class="line">xfs_logprint /dev/sdb1</span><br></pre></td></tr></table></figure>
+
+<p><strong>坏块检测与处理：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检测坏块</span></span><br><span class="line">badblocks -s -v /dev/sda1              <span class="comment"># 只读检测</span></span><br><span class="line">badblocks -s -w -v /dev/sda1           <span class="comment"># 破坏性读写检测（会擦除数据！）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存坏块列表</span></span><br><span class="line">badblocks -s -v -o badblocks.list /dev/sda1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用坏块列表创建文件系统</span></span><br><span class="line">mkfs.ext4 -l badblocks.list /dev/sda1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或使用 e2fsck 标记坏块</span></span><br><span class="line">e2fsck -l badblocks.list /dev/sda1</span><br></pre></td></tr></table></figure>
+
+<h3 id="挂载文件系统"><a href="#挂载文件系统" class="headerlink" title="挂载文件系统"></a>挂载文件系统</h3><p><strong>基本挂载：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本挂载</span></span><br><span class="line">mount /dev/sdb1 /mnt/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定文件系统类型</span></span><br><span class="line">mount -t ext4 /dev/sdb1 /mnt/data</span><br><span class="line">mount -t ntfs /dev/sdb2 /mnt/windows</span><br><span class="line">mount -t vfat /dev/sdc1 /mnt/usb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用选项</span></span><br><span class="line">-o ro                        <span class="comment"># 只读挂载</span></span><br><span class="line">-o rw                        <span class="comment"># 读写挂载</span></span><br><span class="line">-o noatime                   <span class="comment"># 不更新访问时间</span></span><br><span class="line">-o nodiratime                <span class="comment"># 不更新目录访问时间</span></span><br><span class="line">-o <span class="built_in">sync</span>                      <span class="comment"># 同步写入</span></span><br><span class="line">-o async                     <span class="comment"># 异步写入</span></span><br><span class="line">-o auto                      <span class="comment"># 可被 auto 挂载</span></span><br><span class="line">-o noauto                    <span class="comment"># 不可被 auto 挂载</span></span><br><span class="line">-o user                      <span class="comment"># 允许普通用户挂载</span></span><br><span class="line">-o nouser                    <span class="comment"># 只允许 root 挂载</span></span><br><span class="line">-o <span class="built_in">exec</span>                      <span class="comment"># 允许执行文件</span></span><br><span class="line">-o noexec                    <span class="comment"># 禁止执行文件</span></span><br><span class="line">-o suid                      <span class="comment"># 允许 SUID/SGID</span></span><br><span class="line">-o nosuid                    <span class="comment"># 禁止 SUID/SGID</span></span><br><span class="line">-o remount                   <span class="comment"># 重新挂载</span></span><br><span class="line">-o <span class="built_in">bind</span>                      <span class="comment"># 绑定挂载</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">mount -o ro,remount /         <span class="comment"># 以只读方式重新挂载根分区</span></span><br><span class="line">mount -o noatime /dev/sdb1 /mnt/data</span><br><span class="line">mount -o uid=1000,gid=1000 /dev/sdc1 /mnt/usb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绑定挂载（将一个目录挂载到另一个位置）</span></span><br><span class="line">mount --<span class="built_in">bind</span> /var/log /mnt/logs</span><br><span class="line">mount --rbind /home /chroot/home  <span class="comment"># 递归绑定</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 移动挂载点</span></span><br><span class="line">mount --move /mnt/old /mnt/new</span><br></pre></td></tr></table></figure>
+
+<p><strong>卸载文件系统：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本卸载</span></span><br><span class="line">umount /mnt/data</span><br><span class="line">umount /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载时检查是否在使用中</span></span><br><span class="line">umount -f /mnt/data           <span class="comment"># 强制卸载（危险）</span></span><br><span class="line">umount -l /mnt/data           <span class="comment"># 懒卸载（立即生效，实际稍后执行）</span></span><br><span class="line">umount -r /mnt/data           <span class="comment"># 无法卸载时以只读重新挂载</span></span><br><span class="line">umount -a                     <span class="comment"># 卸载 /etc/fstab 中所有文件系统</span></span><br><span class="line">umount -a -t ext4             <span class="comment"># 卸载所有 ext4 文件系统</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理 &quot;device is busy&quot; 错误</span></span><br><span class="line"><span class="comment"># 1. 查找使用进程</span></span><br><span class="line">lsof /mnt/data</span><br><span class="line">fuser -<span class="built_in">mv</span> /mnt/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 杀死进程（小心使用）</span></span><br><span class="line">fuser -km /mnt/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 然后重新卸载</span></span><br><span class="line">umount /mnt/data</span><br></pre></td></tr></table></figure>
+
+<p><strong>自动挂载配置（&#x2F;etc&#x2F;fstab）：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fstab 格式说明</span></span><br><span class="line"><span class="comment"># &lt;设备&gt; &lt;挂载点&gt; &lt;文件系统&gt; &lt;选项&gt; &lt;dump&gt; &lt;fsck&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设备可以是：</span></span><br><span class="line"><span class="comment"># - 设备路径：/dev/sda1</span></span><br><span class="line"><span class="comment"># - UUID：UUID=xxxxx</span></span><br><span class="line"><span class="comment"># - 标签：LABEL=Data</span></span><br><span class="line"><span class="comment"># - 网络：//server/share</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用选项：</span></span><br><span class="line"><span class="comment"># defaults = rw, suid, dev, exec, auto, nouser, async</span></span><br><span class="line"><span class="comment"># noatime - 不更新访问时间</span></span><br><span class="line"><span class="comment"># nodiratime - 不更新目录访问时间</span></span><br><span class="line"><span class="comment"># ro - 只读</span></span><br><span class="line"><span class="comment"># rw - 读写</span></span><br><span class="line"><span class="comment"># auto - 可以被自动挂载</span></span><br><span class="line"><span class="comment"># noauto - 不会被自动挂载（可以用mount -a挂载）</span></span><br><span class="line"><span class="comment"># user - 允许普通用户挂载</span></span><br><span class="line"><span class="comment"># nouser - 只允许root挂载</span></span><br><span class="line"><span class="comment"># exec - 允许执行文件</span></span><br><span class="line"><span class="comment"># noexec - 不允许执行文件</span></span><br><span class="line"><span class="comment"># sync - 同步写入</span></span><br><span class="line"><span class="comment"># async - 异步写入</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># dump 字段：</span></span><br><span class="line"><span class="comment"># 0 - 不备份</span></span><br><span class="line"><span class="comment"># 1 - 每天备份</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># fsck 字段：</span></span><br><span class="line"><span class="comment"># 0 - 不检查</span></span><br><span class="line"><span class="comment"># 1 - 首先检查（根分区）</span></span><br><span class="line"><span class="comment"># 2 - 随后检查（其他分区）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 根分区</span></span><br><span class="line">UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx / ext4 defaults,noatime 0 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动分区</span></span><br><span class="line">UUID=yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy /boot ext4 defaults,noatime 0 2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 家目录</span></span><br><span class="line">UUID=zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz /home ext4 defaults,noatime 0 2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据分区</span></span><br><span class="line">UUID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa /data ext4 defaults,noatime,noexec 0 2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 交换分区</span></span><br><span class="line">UUID=bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb none swap sw 0 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 临时文件系统（内存中）</span></span><br><span class="line">tmpfs /tmp tmpfs defaults,nosuid,nodev,noexec 0 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绑定挂载</span></span><br><span class="line">/home/user/data /var/www/data none <span class="built_in">bind</span> 0 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># NFS 网络文件系统</span></span><br><span class="line">server:/export/share /mnt/share nfs defaults,_netdev 0 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># CIFS/SMB Windows 共享</span></span><br><span class="line">//windows/share /mnt/winshare cifs credentials=/root/.smbcred,iocharset=utf8 0 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>获取 UUID 和标签：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看所有设备的 UUID</span></span><br><span class="line">blkid</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看特定设备</span></span><br><span class="line">blkid /dev/sda1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找 UUID 对应的设备</span></span><br><span class="line">blkid -U xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找标签对应的设备</span></span><br><span class="line">blkid -L Data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为设备设置标签</span></span><br><span class="line"><span class="comment"># ext2/3/4</span></span><br><span class="line">e2label /dev/sda1 <span class="string">&quot;System&quot;</span></span><br><span class="line">tune2fs -L <span class="string">&quot;System&quot;</span> /dev/sda1</span><br><span class="line"></span><br><span class="line"><span class="comment"># xfs</span></span><br><span class="line">xfs_admin -L <span class="string">&quot;Data&quot;</span> /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># vfat/fat32</span></span><br><span class="line">fatlabel /dev/sdc1 <span class="string">&quot;USB_DRIVE&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看标签</span></span><br><span class="line">e2label /dev/sda1</span><br><span class="line">xfs_admin -l /dev/sdb1</span><br></pre></td></tr></table></figure>
+
+<p><strong>fstab 管理工具：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试 fstab 配置（不实际挂载）</span></span><br><span class="line">mount -fav</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 fstab 是否有错误</span></span><br><span class="line">findmnt --verify</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载 /etc/fstab 中的所有文件系统</span></span><br><span class="line">mount -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载特定类型的文件系统</span></span><br><span class="line">mount -a -t ext4</span><br><span class="line">mount -a -t nfs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 排除特定类型</span></span><br><span class="line">mount -a -t noext4</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前挂载</span></span><br><span class="line">mount | column -t</span><br><span class="line">findmnt</span><br><span class="line">findmnt -D  <span class="comment"># 显示目录树</span></span><br><span class="line">findmnt -f  <span class="comment"># 显示 fstab 配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示挂载点信息</span></span><br><span class="line">findmnt /mnt/data</span><br><span class="line">findmnt /dev/sdb1</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-4-设置开机挂载"><a href="#7-4-设置开机挂载" class="headerlink" title="7.4 设置开机挂载"></a>7.4 设置开机挂载</h2><h3 id="使用-etc-fstab"><a href="#使用-etc-fstab" class="headerlink" title="使用 &#x2F;etc&#x2F;fstab"></a>使用 &#x2F;etc&#x2F;fstab</h3><p>如前所述，<code>/etc/fstab</code> 是 Linux 系统中最常用的开机挂载配置方式。</p>
+<h3 id="使用-systemd-mount-单元"><a href="#使用-systemd-mount-单元" class="headerlink" title="使用 systemd mount 单元"></a>使用 systemd mount 单元</h3><p>对于使用 systemd 的系统，可以使用 mount 单元来管理挂载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建挂载单元文件</span></span><br><span class="line"><span class="built_in">sudo</span> nano /etc/systemd/system/mnt-data.mount</span><br><span class="line"></span><br><span class="line"><span class="comment"># 内容示例：</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=Data partition</span><br><span class="line">After=local-fs.target</span><br><span class="line"></span><br><span class="line">[Mount]</span><br><span class="line">What=/dev/disk/by-uuid/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</span><br><span class="line">Where=/mnt/data</span><br><span class="line">Type=ext4</span><br><span class="line">Options=defaults,noatime</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建自动挂载单元（可选）</span></span><br><span class="line"><span class="built_in">sudo</span> nano /etc/systemd/system/mnt-data.automount</span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=Automount Data partition</span><br><span class="line"></span><br><span class="line">[Automount]</span><br><span class="line">Where=/mnt/data</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用并启动</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl daemon-reload</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> mnt-data.mount</span><br><span class="line"><span class="built_in">sudo</span> systemctl start mnt-data.mount</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl status mnt-data.mount</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动挂载</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> mnt-data.automount</span><br><span class="line"><span class="built_in">sudo</span> systemctl start mnt-data.automount</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-5-内存交换空间（swap）的管理"><a href="#7-5-内存交换空间（swap）的管理" class="headerlink" title="7.5 内存交换空间（swap）的管理"></a>7.5 内存交换空间（swap）的管理</h2><h3 id="什么是-swap"><a href="#什么是-swap" class="headerlink" title="什么是 swap"></a>什么是 swap</h3><p>Swap（交换空间）是当物理内存不足时，系统用来临时存放数据的空间。可以是：</p>
+<ul>
+<li><strong>交换分区</strong>：专用的磁盘分区</li>
+<li><strong>交换文件</strong>：普通文件作为交换空间</li>
+</ul>
+<h3 id="查看-swap-状态"><a href="#查看-swap-状态" class="headerlink" title="查看 swap 状态"></a>查看 swap 状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 swap 使用情况</span></span><br><span class="line">free -h</span><br><span class="line">free -m</span><br><span class="line"></span><br><span class="line"><span class="comment"># 详细查看</span></span><br><span class="line">swapon -s</span><br><span class="line">swapon --show</span><br><span class="line">swapon --show=NAME,TYPE,SIZE,USED,PRIO</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> /proc/swaps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看内存和 swap 实时使用</span></span><br><span class="line">vmstat 1 10</span><br><span class="line">watch -n 1 free -h</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建交换分区"><a href="#创建交换分区" class="headerlink" title="创建交换分区"></a>创建交换分区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 创建分区（使用 fdisk 或 parted）</span></span><br><span class="line"><span class="built_in">sudo</span> fdisk /dev/sdb</span><br><span class="line"><span class="comment"># n -&gt; p -&gt; 回车 -&gt; 回车 -&gt; +8G -&gt; t -&gt; 82 -&gt; w</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 格式化 swap</span></span><br><span class="line"><span class="built_in">sudo</span> mkswap /dev/sdb1</span><br><span class="line"><span class="built_in">sudo</span> mkswap -L <span class="string">&quot;Swap&quot;</span> /dev/sdb1    <span class="comment"># 带标签</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 启用 swap</span></span><br><span class="line"><span class="built_in">sudo</span> swapon /dev/sdb1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 添加到 fstab 开机启用</span></span><br><span class="line"><span class="comment"># 获取 UUID</span></span><br><span class="line"><span class="built_in">sudo</span> blkid /dev/sdb1</span><br><span class="line"><span class="comment"># 添加到 /etc/fstab</span></span><br><span class="line">UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx none swap sw 0 0</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">/dev/sdb1 none swap sw 0 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 测试 fstab 配置</span></span><br><span class="line"><span class="built_in">sudo</span> swapon -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 设置 swap 优先级（多个 swap 时）</span></span><br><span class="line"><span class="built_in">sudo</span> swapon -p 10 /dev/sdb1    <span class="comment"># 优先级 10（越高越优先）</span></span><br><span class="line"><span class="comment"># 在 fstab 中：</span></span><br><span class="line">UUID=xxx none swap sw,pri=10 0 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建交换文件"><a href="#创建交换文件" class="headerlink" title="创建交换文件"></a>创建交换文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法 1：使用 dd（较慢）</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=/swapfile bs=1M count=8192 status=progress</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法 2：使用 fallocate（更快）</span></span><br><span class="line"><span class="built_in">sudo</span> fallocate -l 8G /swapfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置权限（重要！）</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 600 /swapfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化为 swap</span></span><br><span class="line"><span class="built_in">sudo</span> mkswap /swapfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用</span></span><br><span class="line"><span class="built_in">sudo</span> swapon /swapfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line"><span class="built_in">sudo</span> swapon --show</span><br><span class="line">free -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加到 fstab</span></span><br><span class="line"><span class="built_in">sudo</span> nano /etc/fstab</span><br><span class="line"><span class="comment"># 添加：</span></span><br><span class="line">/swapfile none swap sw 0 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line"><span class="built_in">sudo</span> swapoff -a</span><br><span class="line"><span class="built_in">sudo</span> swapon -a</span><br></pre></td></tr></table></figure>
+
+<h3 id="调整-swappiness"><a href="#调整-swappiness" class="headerlink" title="调整 swappiness"></a>调整 swappiness</h3><p><code>vm.swappiness</code> 参数控制系统使用 swap 的倾向：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前值</span></span><br><span class="line"><span class="built_in">cat</span> /proc/sys/vm/swappiness</span><br><span class="line">sysctl vm.swappiness</span><br><span class="line"></span><br><span class="line"><span class="comment"># 临时修改</span></span><br><span class="line"><span class="built_in">sudo</span> sysctl vm.swappiness=10</span><br><span class="line"></span><br><span class="line"><span class="comment"># 永久修改</span></span><br><span class="line"><span class="built_in">sudo</span> nano /etc/sysctl.conf</span><br><span class="line"><span class="comment"># 添加：</span></span><br><span class="line">vm.swappiness=10</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新加载配置</span></span><br><span class="line"><span class="built_in">sudo</span> sysctl -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推荐值：</span></span><br><span class="line"><span class="comment"># 0-20：服务器，尽可能避免使用 swap</span></span><br><span class="line"><span class="comment"># 30-60：桌面系统，平衡使用</span></span><br><span class="line"><span class="comment"># 60-100：对响应时间要求不高的系统</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除-swap"><a href="#删除-swap" class="headerlink" title="删除 swap"></a>删除 swap</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 交换分区</span></span><br><span class="line"><span class="built_in">sudo</span> swapoff /dev/sdb1</span><br><span class="line"><span class="comment"># 从 /etc/fstab 删除对应行</span></span><br><span class="line"><span class="built_in">sudo</span> fdisk /dev/sdb  <span class="comment"># 删除分区</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 交换文件</span></span><br><span class="line"><span class="built_in">sudo</span> swapoff /swapfile</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">rm</span> /swapfile</span><br><span class="line"><span class="comment"># 从 /etc/fstab 删除对应行</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-6-文件系统的特殊查看与操作"><a href="#7-6-文件系统的特殊查看与操作" class="headerlink" title="7.6 文件系统的特殊查看与操作"></a>7.6 文件系统的特殊查看与操作</h2><h3 id="磁盘配额（Quota）"><a href="#磁盘配额（Quota）" class="headerlink" title="磁盘配额（Quota）"></a>磁盘配额（Quota）</h3><p>用于限制用户或组对磁盘空间的使用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 quota 工具</span></span><br><span class="line"><span class="built_in">sudo</span> yum install quota</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 启用配额（编辑 /etc/fstab）</span></span><br><span class="line"><span class="comment"># 添加 usrquota 和/或 grpquota</span></span><br><span class="line">UUID=xxx /home ext4 defaults,usrquota,grpquota 0 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 重新挂载</span></span><br><span class="line"><span class="built_in">sudo</span> mount -o remount /home</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 创建配额数据库</span></span><br><span class="line"><span class="built_in">sudo</span> quotacheck -cug /home</span><br><span class="line"><span class="comment"># -c = 创建</span></span><br><span class="line"><span class="comment"># -u = 用户配额</span></span><br><span class="line"><span class="comment"># -g = 组配额</span></span><br><span class="line"><span class="comment"># -m = 不尝试重新挂载为只读</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 启用配额</span></span><br><span class="line"><span class="built_in">sudo</span> quotaon /home</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 查看配额状态</span></span><br><span class="line">quota -v username</span><br><span class="line">repquota /home</span><br><span class="line">repquota -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 设置用户配额</span></span><br><span class="line"><span class="built_in">sudo</span> edquota username</span><br><span class="line"><span class="comment"># 或者使用命令行</span></span><br><span class="line">setquota -u username 0 0 0 0 /home</span><br><span class="line"></span><br><span class="line"><span class="comment"># 7. 关闭配额</span></span><br><span class="line"><span class="built_in">sudo</span> quotaoff /home</span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用检查命令</span></span><br><span class="line">quotacheck -avugm             <span class="comment"># 检查并修复配额</span></span><br><span class="line">repquota -aug                 <span class="comment"># 报告所有用户和组的配额</span></span><br><span class="line">warnquota                     <span class="comment"># 向超过配额的用户发送邮件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="磁盘阵列（RAID）"><a href="#磁盘阵列（RAID）" class="headerlink" title="磁盘阵列（RAID）"></a>磁盘阵列（RAID）</h3><p>使用 mdadm 创建软件 RAID：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 mdadm</span></span><br><span class="line"><span class="built_in">sudo</span> yum install mdadm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看现有 RAID</span></span><br><span class="line"><span class="built_in">cat</span> /proc/mdstat</span><br><span class="line">mdadm --detail /dev/md0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 RAID 0（条带，性能最高，无冗余）</span></span><br><span class="line">mdadm --create /dev/md0 --level=0 --raid-devices=2 /dev/sdb1 /dev/sdc1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 RAID 1（镜像，冗余，容量减半）</span></span><br><span class="line">mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 RAID 5（分布式奇偶校验，容错1块盘）</span></span><br><span class="line">mdadm --create /dev/md0 --level=5 --raid-devices=3 /dev/sdb1 /dev/sdc1 /dev/sdd1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 RAID 6（双分布式奇偶校验，容错2块盘）</span></span><br><span class="line">mdadm --create /dev/md0 --level=6 --raid-devices=4 /dev/sdb1 /dev/sdc1 /dev/sdd1 /dev/sde1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 RAID 10（镜像+条带）</span></span><br><span class="line">mdadm --create /dev/md0 --level=10 --raid-devices=4 /dev/sdb1 /dev/sdc1 /dev/sdd1 /dev/sde1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建后格式化</span></span><br><span class="line">mkfs.ext4 /dev/md0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建挂载点并挂载</span></span><br><span class="line"><span class="built_in">mkdir</span> /mnt/raid</span><br><span class="line">mount /dev/md0 /mnt/raid</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加到 fstab</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;/dev/md0 /mnt/raid ext4 defaults 0 0&#x27;</span> &gt;&gt; /etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存 RAID 配置</span></span><br><span class="line">mdadm --detail --scan &gt;&gt; /etc/mdadm.conf</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">mdadm --detail --scan | <span class="built_in">sudo</span> <span class="built_in">tee</span> -a /etc/mdadm.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># RAID 管理命令</span></span><br><span class="line">mdadm --detail /dev/md0                 <span class="comment"># 查看详情</span></span><br><span class="line">mdadm --stop /dev/md0                   <span class="comment"># 停止 RAID</span></span><br><span class="line"><span class="built_in">cat</span> /proc/mdstat                        <span class="comment"># 查看状态</span></span><br><span class="line">mdadm --manage /dev/md0 --add /dev/sde1 <span class="comment"># 添加热备盘</span></span><br><span class="line">mdadm --manage /dev/md0 --remove /dev/sdb1 --fail /dev/sdb1  <span class="comment"># 标记故障并移除</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="逻辑卷管理（LVM）"><a href="#逻辑卷管理（LVM）" class="headerlink" title="逻辑卷管理（LVM）"></a>逻辑卷管理（LVM）</h3><p>LVM 提供灵活的磁盘空间管理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 LVM</span></span><br><span class="line"><span class="built_in">sudo</span> yum install lvm2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 LVM 信息</span></span><br><span class="line">pvs                         <span class="comment"># 查看物理卷</span></span><br><span class="line">vgs                         <span class="comment"># 查看卷组</span></span><br><span class="line">lvs                         <span class="comment"># 查看逻辑卷</span></span><br><span class="line">pvdisplay</span><br><span class="line">vgdisplay</span><br><span class="line">lvdisplay</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建物理卷（PV）</span></span><br><span class="line">pvcreate /dev/sdb1</span><br><span class="line">pvcreate /dev/sdc1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建卷组（VG）</span></span><br><span class="line">vgcreate vg_data /dev/sdb1 /dev/sdc1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩展卷组</span></span><br><span class="line">vgextend vg_data /dev/sdd1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建逻辑卷（LV）</span></span><br><span class="line">lvcreate -L 50G -n lv_www vg_data          <span class="comment"># 指定大小</span></span><br><span class="line">lvcreate -l 100%FREE -n lv_backup vg_data  <span class="comment"># 使用所有剩余空间</span></span><br><span class="line">lvcreate -l 50%VG -n lv_data vg_data       <span class="comment"># 使用卷组50%空间</span></span><br><span class="line">lvcreate -s -n lv_snap -L 10G /dev/vg_data/lv_www  <span class="comment"># 创建快照</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化逻辑卷</span></span><br><span class="line">mkfs.ext4 /dev/vg_data/lv_www</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /var/www</span><br><span class="line">mount /dev/vg_data/lv_www /var/www</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加到 fstab</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;/dev/mapper/vg_data-lv_www /var/www ext4 defaults,noatime 0 0&#x27;</span> &gt;&gt; /etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩展逻辑卷（在线，无需卸载）</span></span><br><span class="line">lvextend -L +50G /dev/vg_data/lv_www       <span class="comment"># 增加50G</span></span><br><span class="line">lvextend -L 100G /dev/vg_data/lv_www       <span class="comment"># 扩展到100G</span></span><br><span class="line">lvextend -l +100%FREE /dev/vg_data/lv_www <span class="comment"># 使用所有剩余空间</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩展文件系统</span></span><br><span class="line">resize2fs /dev/vg_data/lv_www             <span class="comment"># ext2/3/4</span></span><br><span class="line">xfs_growfs /var/www                       <span class="comment"># xfs（挂载点）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 缩小逻辑卷（ext4，必须先卸载）</span></span><br><span class="line">umount /var/www</span><br><span class="line">e2fsck -f /dev/vg_data/lv_www</span><br><span class="line">resize2fs /dev/vg_data/lv_www 50G</span><br><span class="line">lvreduce -L 50G /dev/vg_data/lv_www</span><br><span class="line">mount /dev/vg_data/lv_www /var/www</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除逻辑卷（先卸载，数据会丢失！）</span></span><br><span class="line">umount /var/www</span><br><span class="line">lvremove /dev/vg_data/lv_www</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除卷组（先删除所有逻辑卷）</span></span><br><span class="line">vgchange -an vg_data       <span class="comment"># 停用卷组</span></span><br><span class="line">vgremove vg_data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除物理卷</span></span><br><span class="line">pvremove /dev/sdb1</span><br><span class="line">pvremove /dev/sdc1</span><br><span class="line"></span><br><span class="line"><span class="comment"># LVM 快照（备份数据）</span></span><br><span class="line"><span class="comment"># 创建快照</span></span><br><span class="line">lvcreate -s -n lv_snap -L 50G /dev/vg_data/lv_www</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载快照</span></span><br><span class="line"><span class="built_in">mkdir</span> /mnt/snap</span><br><span class="line">mount /dev/vg_data/lv_snap /mnt/snap</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份数据</span></span><br><span class="line">tar czf backup.tar.gz -C /mnt/snap .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载并删除快照</span></span><br><span class="line">umount /mnt/snap</span><br><span class="line">lvremove /dev/vg_data/lv_snap</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复快照（如果原逻辑卷损坏）</span></span><br><span class="line"><span class="comment"># 注意：恢复后快照会被删除</span></span><br><span class="line"><span class="comment"># umount /var/www</span></span><br><span class="line"><span class="comment"># lvconvert --merge /dev/vg_data/lv_snap</span></span><br><span class="line"><span class="comment"># mount /dev/vg_data/lv_www /var/www</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-7-重点回顾"><a href="#7-7-重点回顾" class="headerlink" title="7.7 重点回顾"></a>7.7 重点回顾</h2><ol>
+<li><strong>文件系统</strong>：ext4（通用）、xfs（大容量）、swap（交换分区）</li>
+<li><strong>分区工具</strong>：fdisk（MBR）、gdisk（GPT）、parted（两者）</li>
+<li><strong>格式化</strong>：mkfs.ext4、mkfs.xfs、mkswap</li>
+<li><strong>文件系统检查</strong>：fsck、e2fsck、xfs_repair</li>
+<li><strong>挂载</strong>：mount、umount、&#x2F;etc&#x2F;fstab</li>
+<li><strong>磁盘配额</strong>：quota 限制用户&#x2F;组的磁盘使用</li>
+<li><strong>RAID</strong>：mdadm 创建软件磁盘阵列</li>
+<li><strong>LVM</strong>：灵活的磁盘空间管理，支持在线扩容</li>
+<li><strong>swap</strong>：交换分区或交换文件，用于虚拟内存</li>
+<li><strong>性能优化</strong>：noatime、日志模式、RAID、LVM 等</li>
+</ol>
+<h2 id="7-8-本章习题"><a href="#7-8-本章习题" class="headerlink" title="7.8 本章习题"></a>7.8 本章习题</h2><ol>
+<li><p>解释 ext4 和 xfs 文件系统的主要特点，什么情况下应该选择 xfs？</p>
+</li>
+<li><p>如何查看当前系统的磁盘分区和使用情况？</p>
+</li>
+<li><p>新添加了一块硬盘 &#x2F;dev&#x2F;sdb，请描述创建分区、格式化、挂载和配置开机自动挂载的完整步骤。</p>
+</li>
+<li><p>什么是 LVM？使用 LVM 有什么好处？</p>
+</li>
+<li><p>创建 RAID 1 阵列并配置为自动挂载的详细步骤是什么？</p>
+</li>
+<li><p>如何检查和修复 ext4 文件系统的错误？</p>
+</li>
+<li><p>系统内存不足，如何添加 swap 空间？描述创建 swap 文件的方法。</p>
+</li>
+<li><p>解释磁盘配额的作用，如何为用户设置磁盘配额限制？</p>
+</li>
+</ol>
+<h2 id="7-9-参考资料与延伸阅读"><a href="#7-9-参考资料与延伸阅读" class="headerlink" title="7.9 参考资料与延伸阅读"></a>7.9 参考资料与延伸阅读</h2><ul>
+<li><code>man mkfs</code></li>
+<li><code>man fsck</code></li>
+<li><code>man mount</code></li>
+<li><code>man lvm</code></li>
+<li><code>man mdadm</code></li>
+<li><code>man quota</code></li>
+<li><a target="_blank" rel="noopener" href="https://linux.vbird.org/linux_basic/centos7/0230filesystem.php">鸟哥的 Linux 私房菜 - 磁盘与文件系统管理</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.tldp.org/HOWTO/LVM-HOWTO/">LVM 指南</a></li>
+<li><a target="_blank" rel="noopener" href="https://raid.wiki.kernel.org/">RAID 技术详解</a></li>
+</ul>
+
+
+  <div class="tag-list">
+    
+      
+      <a class="tag" href="/notes/tags/linux/">Linux</a>
+    
+      
+      <a class="tag" href="/notes/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">文件系统</a>
+    
+      
+      <a class="tag" href="/notes/tags/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/">磁盘管理</a>
+    
+  </div>
+
+</article>
+<div class="article-footer slide-up">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文本文由rlcao编写，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+
+
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://blog.cnortles.top/notes/linux/ch07-filesystem" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://blog.cnortles.top/notes/linux/ch07-filesystem&title=第七章、Linux 磁盘与文件系统管理 - Aurora&summary=第七章、Linux 磁盘与文件系统管理7.1 认识 Linux 文件系统文件系统的特性什么是文件系统
+文件系统是操作系统用于管理磁盘上的文件的方法和数据结构。它定义了文件的存储方式、命名规则、访问权限等。
+Linux 支持的文件系统类..."><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=第七章、Linux 磁盘与文件系统管理 - Aurora&amp;body=https://blog.cnortles.top/notes/linux/ch07-filesystem"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://blog.cnortles.top/notes/linux/ch07-filesystem"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body twikoo'>
+      
+
+<div id="twikoo_container"><svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg></div>
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/blog/categories/">分类</a><a href="/blog/tags/">标签</a><a href="/blog/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https://tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https://pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https://news.cnortles.top">新闻</a><a href="/subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/FelicxFoster/hexo-theme-stellar">Stellar</a>
+创建
+</span>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js"></script>
+<script>
+    loadStatistic("https://qexo.cnortles.top")
+</script>
+</br>
+<span id="runtime_span"></span>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var runtime_span = document.getElementById('runtime_span');
+    function show_runtime() {
+      // 调用定时器
+      setTimeout(show_runtime, 1000);
+      var seconds = 1000;
+      var minutes = seconds * 60;
+      var hours = minutes * 60;
+      var days = hours * 24;
+      var years = days * 365;
+      var today = new Date();
+      var todayYear = today.getFullYear();
+      var todayMonth = today.getMonth();
+      var todayDate = today.getDate();
+      var todayHour = today.getHours();
+      var todayMinute = today.getMinutes();
+      var todaySecond = today.getSeconds();
+      var t1 = Date.UTC(2025, 7, 1, 0, 0, 0); // UTC时间，月份从0开始
+      var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+      var diff = t2 - t1;
+      var diffYears = Math.floor(diff / years);
+      var diffDays = Math.floor((diff / days) - diffYears * 365);
+      var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+      var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+      var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+      // 更新显示时间的span元素内容
+      runtime_span.innerHTML = "🦉营业：" + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒🦉";
+    }
+    show_runtime(); // 初次调用函数以启动定时器
+  });
+</script>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="true"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81Linux-%E7%A3%81%E7%9B%98%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="toc-text">第七章、Linux 磁盘与文件系统管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-%E8%AE%A4%E8%AF%86-Linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-text">7.1 认识 Linux 文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-text">文件系统的特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ext4-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3"><span class="toc-text">ext4 文件系统详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XFS-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3"><span class="toc-text">XFS 文件系统详解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9C"><span class="toc-text">7.2 文件系统的简单操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%9A%84%E5%AE%B9%E9%87%8F"><span class="toc-text">磁盘与目录的容量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-%E7%A3%81%E7%9B%98%E7%9A%84%E5%88%86%E5%8C%BA%E3%80%81%E6%A0%BC%E5%BC%8F%E5%8C%96%E3%80%81%E6%A3%80%E9%AA%8C%E4%B8%8E%E6%8C%82%E8%BD%BD"><span class="toc-text">7.3 磁盘的分区、格式化、检验与挂载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%8C%BA%E6%93%8D%E4%BD%9C"><span class="toc-text">分区操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%EF%BC%88%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%89"><span class="toc-text">格式化（创建文件系统）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E9%AA%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-text">检验文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-text">挂载文件系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4-%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E6%8C%82%E8%BD%BD"><span class="toc-text">7.4 设置开机挂载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-etc-fstab"><span class="toc-text">使用 &#x2F;etc&#x2F;fstab</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-systemd-mount-%E5%8D%95%E5%85%83"><span class="toc-text">使用 systemd mount 单元</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-5-%E5%86%85%E5%AD%98%E4%BA%A4%E6%8D%A2%E7%A9%BA%E9%97%B4%EF%BC%88swap%EF%BC%89%E7%9A%84%E7%AE%A1%E7%90%86"><span class="toc-text">7.5 内存交换空间（swap）的管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-swap"><span class="toc-text">什么是 swap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B-swap-%E7%8A%B6%E6%80%81"><span class="toc-text">查看 swap 状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%BA%A4%E6%8D%A2%E5%88%86%E5%8C%BA"><span class="toc-text">创建交换分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%BA%A4%E6%8D%A2%E6%96%87%E4%BB%B6"><span class="toc-text">创建交换文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E6%95%B4-swappiness"><span class="toc-text">调整 swappiness</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4-swap"><span class="toc-text">删除 swap</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-6-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%89%B9%E6%AE%8A%E6%9F%A5%E7%9C%8B%E4%B8%8E%E6%93%8D%E4%BD%9C"><span class="toc-text">7.6 文件系统的特殊查看与操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E9%85%8D%E9%A2%9D%EF%BC%88Quota%EF%BC%89"><span class="toc-text">磁盘配额（Quota）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97%EF%BC%88RAID%EF%BC%89"><span class="toc-text">磁盘阵列（RAID）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86%EF%BC%88LVM%EF%BC%89"><span class="toc-text">逻辑卷管理（LVM）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-7-%E9%87%8D%E7%82%B9%E5%9B%9E%E9%A1%BE"><span class="toc-text">7.7 重点回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-8-%E6%9C%AC%E7%AB%A0%E4%B9%A0%E9%A2%98"><span class="toc-text">7.8 本章习题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-9-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%E4%B8%8E%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><span class="toc-text">7.9 参考资料与延伸阅读</span></a></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":"blog.cnortles.top","officialHosts":["localhost","caoronglin.github.io","c.cnortles.top","cnortles.top"],"encoded":"YmxvZy5jbm9ydGxlcy50b3A="};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://cdn.cnortles.top/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script type="module">
+  const el = document.getElementById('twikoo_container');
+  util.viewportLazyload(el, load_twikoo, true);
+
+  function load_twikoo() {
+    if (!el) return;
+    utils.js('https://cdn.cnortles.top/npm/twikoo@1.6.44/dist/twikoo.all.min.js', {defer: true}).then(function () {
+      const path = el.getAttribute('comment_id') ?? decodeURI(window.location.pathname);
+      twikoo.init(Object.assign({"js":"https://cdn.cnortles.top/npm/twikoo@1.6.44/dist/twikoo.all.min.js","envId":"https://twikoo.cnortles.top"}, {
+        el: '#twikoo_container',
+        path: path,
+      }));
+    });
+  }
+</script>
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img ,.tk-content img:not([class*="emo"])`,
+    css: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script defer src="https://cdn.cnortles.top/npm/scrollreveal@4.0/dist/scrollreveal.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const slideUp = {
+      distance: `8px`,
+      duration: `500`,
+      interval: `50`,
+      scale: `1`,
+      opacity: 0,
+      easing: "ease-out"
+    };
+    ScrollReveal({ container: '.widgets' }).reveal('.slide-up', { ...slideUp });
+    ScrollReveal({ container: '.l_main' }).reveal('.slide-up', { ...slideUp });
+    ScrollReveal({ container: '.l_right' }).reveal('.slide-up', { ...slideUp });
+  });
+</script>
+<link rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+<script defer type="text/javascript" src="https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    mermaid.initialize(mermaid_config);
+  });
+</script><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+<script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/custom/js/smooth-scroll.js"></script><script type="text/javascript" src="/custom/js/ZYDark.js"></script><script src="/custom/js/adjust-codeblock-height.js"></script><script src="/custom/js/link-icon.js"></script><script src="https://cdn.cnortles.top/npm/jquery/jquery.min.js"></script><script async data-pjax src="/custom/js/txmap.js"></script><script  src="/custom/js/back.js"></script><script type="text/javascript" src="/custom/js/ZYDark.js"></script>
+</div></body></html>
