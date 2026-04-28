@@ -1,0 +1,172 @@
+/* 返回顶部按钮 */
+#back-to-top {
+  position: fixed;
+  right: 2.2rem;
+  bottom: 2.2rem;
+  z-index: 9999;
+  width: 48px;
+  height: 48px;
+  border: none;
+  outline: none;
+  background: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.35s cubic-bezier(0.4,0.2,0.2,1), box-shadow 0.2s, transform 0.2s, background 0.2s;
+  opacity: 0;
+  pointer-events: none;
+}
+#back-to-top.show {
+  opacity: 0.92;
+  pointer-events: auto;
+}
+#back-to-top:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  transform: translateY(-4px) scale(1.08) rotate(-8deg);
+  background: rgba(255,255,255,0.98);
+  opacity: 1;
+}
+#back-to-top svg {
+  display: block;
+}
+@media (max-width: 600px) {
+  #back-to-top {
+    right: 1.2rem;
+    bottom: 1.2rem;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* 标签颜色变量 */
+:root {
+  --tag-bg-color: #F2EEFD;
+  --tag-text-color: #835EEC;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tag-bg-color: #282433;
+    --tag-text-color: #A28BF2;
+  }
+}
+
+#post-meta {
+  font-size: 12px;
+  color: var(--text-p4);
+}
+
+/* 文章内链接下划线效果 */
+li:not([class]) a:not([class]),
+p:not([class]) a:not([class]),
+table a:not([class]) {
+  padding-bottom: 3px;
+  padding-right: 1px;
+  margin-right: 2px;
+  background: linear-gradient(0, var(--theme-link-opa), var(--theme-link-opa)) no-repeat center bottom / 100% 2px;
+}
+
+/* 选中文本使用超链接高亮的背景色 */
+::selection {
+  background: var(--theme-link-opa);
+}
+
+/* 输入框提示伪元素 */
+.el-input.el-input--small.el-input-group.el-input-group--prepend::before {
+  display: none;
+  position: absolute;
+  top: -60px;
+  white-space: nowrap;
+  border-radius: 10px;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 14px 18px;
+  background: #444;
+  color: #fff;
+  z-index: 9999;
+}
+.el-input.el-input--small.el-input-group.el-input-group--prepend::after {
+  display: none;
+  content: '';
+  position: absolute;
+  border: 12px solid transparent;
+  border-top-color: #444;
+  left: 50%;
+  transform: translate(-50%, -48px);
+  z-index: 9999;
+}
+.el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(1):before { content: '输入QQ号会自动获取昵称和头像🐧'; }
+.el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(2):before { content: '收到回复将会发送到您的邮箱📧'; }
+.el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(3):before { content: '填写后可以点击昵称访问您的网站🔗'; }
+
+.el-input.el-input--small.el-input-group.el-input-group--prepend:focus-within::before,
+.el-input.el-input--small.el-input-group.el-input-group--prepend:focus-within::after {
+  display: block;
+}
+
+/* 文章卡片 & 页面毛玻璃效果 — 与导航栏一致的 Stellar 风格 */
+.post-card,
+.bloglist-item,
+.category-post,
+.l_main .article,
+.l_main .wiki-content,
+.l_main .note {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(210, 220, 235, 0.45) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important;
+  transition: box-shadow .3s, transform .3s, border-color .3s;
+}
+.post-card:hover,
+.bloglist-item:hover,
+.category-post:hover {
+  border-color: hsla(88, 76%, 40%, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .post-card,
+[data-theme="dark"] .bloglist-item,
+[data-theme="dark"] .category-post,
+[data-theme="dark"] .l_main .article,
+[data-theme="dark"] .l_main .wiki-content,
+[data-theme="dark"] .l_main .note {
+  background: rgba(24, 28, 40, 0.78) !important;
+  border-color: rgba(148, 163, 184, 0.12) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.22) !important;
+}
+[data-theme="dark"] .post-card:hover,
+[data-theme="dark"] .bloglist-item:hover,
+[data-theme="dark"] .category-post:hover {
+  border-color: hsla(88, 76%, 40%, 0.2) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 打印样式优化 */
+@media print {
+  .l_left, .l_right, .top.bread-nav.footnote,
+  div#read-next, div#post-ai, div#related-posts,
+  div#comments, section#license, section#share,
+  #link-icon, footer, .markdownIt-Anchor { display: none; }
+  .md-text psw { color: unset; background: unset; border: 3px dashed var(--block-border); }
+  .article.banner { background: none; border-bottom: 1px dashed var(--block-border); }
+  .banner, .banner.top { border-radius: 0; }
+  .banner .bottom, table { padding: 0rem; }
+  #start { display: unset; }
+  p, h1, h2, h3, h4, h5, h6 { margin: 0 !important; }
+  img { max-height: 100vh; }
+  .md-text { max-width: 100%; line-height: unset; }
+}
+
+/* 隐藏部分评论区无用按钮 */
+.timeline .tk-comments-count,
+.timeline .tk-icon,
+.timeline .tk-action-icon {
+  display: none !important;
+}
+.timeline .tk-comment { margin-bottom: 1rem; }
+.timeline .tk-content { padding: 1rem; border-radius: 8px; background: rgba(248, 249, 250, 0.5); }
