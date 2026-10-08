@@ -1,0 +1,1319 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/bio/生信学习/参看文档/ch46/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin="">
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta="">单细胞分析实践 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="单细胞分析实践编者导语本板块是单细胞分析的实践部分：实验设计中的关键决策（测序深度、批次与混样策略）、 scanpy 的环境管理与使用原则，以及实际工作流（质控、标准化、特征选择、降维、 聚类、批次校正、可视化）。 本章与本书多数章节不同：它没有图，也没有可提取的公式与案例。 这不是编者的省略，而是源材料本身的限制——抓取到的 scanpy 与最佳实践 文档均为纯文本 Markdown，其中的插图" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="单细胞分析实践" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/bio/%E7%94%9F%E4%BF%A1%E5%AD%A6%E4%B9%A0/%E5%8F%82%E7%9C%8B%E6%96%87%E6%A1%A3/ch46/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="单细胞分析实践编者导语本板块是单细胞分析的实践部分：实验设计中的关键决策（测序深度、批次与混样策略）、 scanpy 的环境管理与使用原则，以及实际工作流（质控、标准化、特征选择、降维、 聚类、批次校正、可视化）。 本章与本书多数章节不同：它没有图，也没有可提取的公式与案例。 这不是编者的省略，而是源材料本身的限制——抓取到的 scanpy 与最佳实践 文档均为纯文本 Markdown，其中的插图" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/assets/web-ext/anndata.png" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-10-04T16:00:00.000Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-05T06:26:26.000Z" data-stellar-page-meta="">
+<meta property="article:tag" content="教材" data-stellar-page-meta="">
+<meta property="article:tag" content="生信" data-stellar-page-meta="">
+<meta property="article:tag" content="第五编" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/assets/web-ext/anndata.png" data-stellar-page-meta=""><meta name="twitter:title" content="单细胞分析实践" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content="生信,教材,第五编" data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"WebPage","@id":"https://blog.cnortles.top/notes/bio/%E7%94%9F%E4%BF%A1%E5%AD%A6%E4%B9%A0/%E5%8F%82%E7%9C%8B%E6%96%87%E6%A1%A3/ch46/","name":"单细胞分析实践","description":"单细胞分析实践编者导语本板块是单细胞分析的实践部分：实验设计中的关键决策（测序深度、批次与混样策略）、 scanpy 的环境管理与使用原则，以及实际工作流（质控、标准化、特征选择、降维、 聚类、批次校正、可视化）。 本章与本书多数章节不同：它没有图，也没有可提取的公式与案例。 这不是编者的省略...","url":"https://blog.cnortles.top/notes/bio/%E7%94%9F%E4%BF%A1%E5%AD%A6%E4%B9%A0/%E5%8F%82%E7%9C%8B%E6%96%87%E6%A1%A3/ch46/","isPartOf":{"@type":"WebSite","name":"麟跃云起","url":"https://blog.cnortles.top"}}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer=""></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent=""><div data-stellar-runtime-region="" id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar"><div class="site-workspace">
+<aside data-stellar-runtime-region="" id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail="">
+<header class="brand-header brand-header--regular"><div class="brand-navigation"><a class="brand-navigation__back cap" href="/notebooks/"><span class="ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"></path></svg></span><span>所有笔记本</span></a></div><div class="brand-wrap"><a class="brand-image brand-image--icon" href="/notes/bio/"><img no-lazy="" src="/img/bio.png" alt="" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;"></a><a class="brand-title" href="/notes/bio/"><div class="brand-name">bio</div></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search" data-search-domain="notebook:bio" data-search-domain-label="bio" data-search-domain-blog="false">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"></path><circle cx="14" cy="11" r="4"></circle></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail="">
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="/" title="主页" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"></path><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="/wiki/" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"></path><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"></path><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"></path><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="/equipment/" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"></path><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="/friends/" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--tagtree" data-widget-id="leftbar:0:tagtree" data-presentation="leftbar">
+
+
+<widget class="widget-wrapper slide-up tag-tree-widget" data-notebook="bio" data-expand-active="true">
+  
+    <div class="widget-header dis-select">
+      <span class="name">标签</span>
+      
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection tag-tree" data-layout="list" data-variant="nav" data-density="compact"><div class="tag-subtree is-leaf is-expanded" data-tag="">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active tag-tree__link" href="/notes/bio/" title="所有笔记" aria-current="page">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">所</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">所有笔记</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div><div class="tag-subtree is-parent" data-tag="bio">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/bio/" title="bio">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">bio</span>
+      
+      
+    </span>
+  
+  <span class="tag-switcher-wrapper"><span class="tag-switcher"></span></span>
+  
+</a>
+<div class="tag-subtree is-leaf" data-tag="bio/alignment">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/bio/alignment/" title="alignment" style="--ui-item-depth:1;">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">alignment</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div><div class="tag-subtree is-leaf" data-tag="bio/pipeline">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/bio/pipeline/" title="pipeline" style="--ui-item-depth:1;">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">pipeline</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div><div class="tag-subtree is-leaf" data-tag="bio/rna-seq">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/bio/rna-seq/" title="RNA-seq" style="--ui-item-depth:1;">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">RNA-seq</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div><div class="tag-subtree is-leaf" data-tag="bio/启航计划">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/bio/%E5%90%AF%E8%88%AA%E8%AE%A1%E5%88%92/" title="启航计划" style="--ui-item-depth:1;">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">启航计划</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div></div><div class="tag-subtree is-leaf" data-tag="教材">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/%E6%95%99%E6%9D%90/" title="教材">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">教材</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div><div class="tag-subtree is-leaf" data-tag="生信">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/%E7%94%9F%E4%BF%A1/" title="生信">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">生信</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div><div class="tag-subtree is-leaf" data-tag="生信入门课程">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/%E7%94%9F%E4%BF%A1%E5%85%A5%E9%97%A8%E8%AF%BE%E7%A8%8B/" title="生信入门课程">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">生信入门课程</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div><div class="tag-subtree is-leaf" data-tag="第一编">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/%E7%AC%AC%E4%B8%80%E7%BC%96/" title="第一编">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第一编</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div><div class="tag-subtree is-leaf" data-tag="第三编">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/%E7%AC%AC%E4%B8%89%E7%BC%96/" title="第三编">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第三编</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div><div class="tag-subtree is-leaf" data-tag="第二编">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/%E7%AC%AC%E4%BA%8C%E7%BC%96/" title="第二编">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第二编</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div><div class="tag-subtree is-leaf" data-tag="第五编">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/%E7%AC%AC%E4%BA%94%E7%BC%96/" title="第五编">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第五编</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div><div class="tag-subtree is-leaf" data-tag="第六编">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/%E7%AC%AC%E5%85%AD%E7%BC%96/" title="第六编">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第六编</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div><div class="tag-subtree is-leaf" data-tag="第四编">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight tag-tree__link" href="/notes/bio/tags/%E7%AC%AC%E5%9B%9B%E7%BC%96/" title="第四编">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m14.092 10.75l-.75 2.5H9.908l.75-2.5z"></path><path fill="currentColor" fill-rule="evenodd" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464m7.752 2.818a.75.75 0 0 1 .502.934l-.61 2.034h3.434l.74-2.465a.75.75 0 0 1 1.436.43l-.61 2.035H18a.75.75 0 0 1 0 1.5h-2.342l-.75 2.5H17a.75.75 0 0 1 0 1.5h-2.542l-.74 2.465a.75.75 0 0 1-1.436-.43l.61-2.035H9.458l-.74 2.465a.75.75 0 1 1-1.436-.43l.61-2.035H6a.75.75 0 0 1 0-1.5h2.342l.75-2.5H7a.75.75 0 0 1 0-1.5h2.542l.74-2.465a.75.75 0 0 1 .934-.503" clip-rule="evenodd"></path></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第四编</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+</div></div></div>
+  
+</widget>
+
+
+</div><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:1:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="/subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="/notes/bio/%E7%94%9F%E4%BF%A1%E5%AD%A6%E4%B9%A0/%E5%8D%95%E7%BB%86%E8%83%9E/%E5%8D%95%E7%BB%86%E8%83%9E/" title="生信学习库完整教材">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">生</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">生信学习库完整教材</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="/notes/bio/gene_FIP37_paralogs_20250623/" title="大豆 FIP37/WTAP 同源基因家族分析（V4 版本）">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">大</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">大豆 FIP37/WTAP 同源基因家族分析（V4 版本）</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="/notes/bio/%E5%89%8D%E8%A8%80/" title="前言">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">前</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">前言</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="/notes/bio/%E7%94%9F%E4%BF%A1%E5%AD%A6%E4%B9%A0/%E5%8F%82%E7%9C%8B%E6%96%87%E6%A1%A3/" title="参看文档">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">参</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">参看文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="/notes/bio/%E7%94%9F%E4%BF%A1%E5%AD%A6%E4%B9%A0/%E5%8F%82%E7%9C%8B%E6%96%87%E6%A1%A3/a1-glossary/" title="附录一　术语表">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">附</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">附录一　术语表</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail="">
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="/settings/" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https://cdn.cnortles.top/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"></path><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"></path></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"></path><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"></path></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region="" class="site-main" id="main">
+
+
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notebooks/">笔记本</a>
+
+
+<span class="sep"></span>
+<a class="cap breadcrumb" href="/notes/bio/">生信</a>
+
+</div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2026-10-05T06:26:26.000Z">2026-10-05</time></span><span class="sep updated"></span><span class="text updated">发布于：<time datetime="2026-10-04T16:00:00.000Z">2026-10-05</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>单细胞分析实践</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="单细胞分析实践"><a href="#单细胞分析实践" class="headerlink" title="单细胞分析实践"></a>单细胞分析实践</h1><h2 id="编者导语"><a href="#编者导语" class="headerlink" title="编者导语"></a>编者导语</h2><p>本板块是单细胞分析的实践部分：实验设计中的关键决策（测序深度、批次与混样策略）、 scanpy 的环境管理与使用原则，以及实际工作流（质控、标准化、特征选择、降维、 聚类、批次校正、可视化）。 <strong>本章与本书多数章节不同：它没有图，也没有可提取的公式与案例。</strong> 这不是编者的省略，而是源材料本身的限制——抓取到的 scanpy 与最佳实践 文档均为纯文本 Markdown，其中的插图是远程引用、未随文档保存。 编者不去拿别的图来凑数，也不假装这里有例题。 真实的流程图与结果图请直接查 scanpy 官方文档站。 scanpy 的 API 逐条参数已移入附录，不占正文。<br>前置：<a href="/notes/bio/%E7%94%9F%E4%BF%A1%E5%AD%A6%E4%B9%A0/%E5%8F%82%E7%9C%8B%E6%96%87%E6%A1%A3/ch13/" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>ch13</a>、<a href="/notes/bio/%E7%94%9F%E4%BF%A1%E5%AD%A6%E4%B9%A0/%E5%8F%82%E7%9C%8B%E6%96%87%E6%A1%A3/ch34/" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>ch34</a>。</p>
+<div class="tag-plugin colorful note" color="blue"><div class="title"><strong><p>编者注·本板块导读</p>
+</strong></div><div class="body"><p><strong>图</strong> 0 张　<strong>案例</strong> 0 处　<strong>行间公式</strong> 0 个。以下清单由正文自动扫出，均为原书内容，未新增。</p><p><strong>图</strong>：本板块正文未包含可提取的图片。scanpy 官方文档抓取到的 Markdown 里不含图片，这是源材料本身的限制，不是编者遗漏。</p><p><strong>案例</strong>：本板块以方法与算法推导为主，原书未给出可提取的例题。</p><p><strong>公式</strong>：本板块不涉及需要推导的数学表达式。</p><p>本板块由以下原始章节合并而成：<code>ch46</code>。</p></div></div>
+
+
+
+<h3 id="Prior-art"><a href="#Prior-art" class="headerlink" title="Prior art"></a>Prior art</h3><p>Single-cell analysis has evolved from a niche area of interest into a well-established field of study. As a result, we are certainly not the first to produce a book on this subject, nor to provide guides and tutorials. In the sections that follow, we review two notable and ongoing initiatives aimed at teaching single-cell analysis, highlighting both their similarities to and differences from this book.</p>
+<h4 id="Bioconductor-OSCA-and-OSTA-books-¶"><a href="#Bioconductor-OSCA-and-OSTA-books-¶" class="headerlink" title="Bioconductor OSCA and OSTA books ¶"></a>Bioconductor OSCA and OSTA books ¶</h4><p>Orchestrating Single-Cell Analysis with Bioconductor (Bioconductor OSCA) Amezquita et al., 2022, available online at https:// bioconductor.org/books/release/OSCA/, is an online book designed to teach common workflows for analyzing of single-cell RNA- Sequencing (scRNA-seq) data using the R based Bioconductor ecosystem Huber et al., 2015. An accompanying paper with the same title Amezquita et al., 2020 provides an overview of single-cell analysis with Bioconductor, while the online book offers more in-depth coverage, featuring detailed explanations and extensive code examples.</p>
+<p>The OSCA book is highly comprehensive in its treatment of basic scRNA-seq analysis, offering clear explanations and detailed workflow examples. However, it does not extend to other single-cell omics, such as single-cell ATAC-seq (scATAC-seq). Spatial transcriptomics is addressed separately in the complementary book Orchestrating Spatially-Resolved Transcriptomics Analysis with Bioconductor (Bioconductor OSTA), available at https:// lmweber.org/OSTA-book/.</p>
+<p>As both books are tailored to the Bioconductor ecosystem, they exclusively use tools available within Bioconductor. While these tools are highly effective, they may not always provide the most optimal solution for every analysis, as acknowledged by the books themselves. Overall, the Bioconductor books are particularly well-suited for individuals with a foundational knowledge of R and a strong background in biology who wish to learn how to analyze single-cell and spatial transcriptomics data within the Bioconductor framework.</p>
+<h4 id="Current-best-practices-in-single-cell-RNA-seq-analysis-a-tutorial-¶"><a href="#Current-best-practices-in-single-cell-RNA-seq-analysis-a-tutorial-¶" class="headerlink" title="Current best practices in single-cell RNA-seq analysis: a tutorial ¶"></a>Current best practices in single-cell RNA-seq analysis: a tutorial ¶</h4><p>Current Best Practices in Single-Cell RNA-Seq Analysis: A Tutorial Luecken &amp; Theis, 2019 by Malte Lücken and Fabian Theis introduces best practices for scRNA-seq analysis. Its key contribution lies in not only reviewing potential analysis steps but also recommending best practices based on independent benchmarks. When specific best-practice guidelines are unavailable, the authors provide general recommendations for analysis approaches. The fundamental idea of focusing on independent benchmarks inspired our work substantially. The paper is complemented by an example analysis of mouse intestinal epithelium regions from Haber et al. Haber et al., 2017.</p>
+<p>In comparison to Bioconductor OSCA, this paper and its associated analysis are not constrained by a specific tool ecosystem, offering a broader perspective on the range of topics covered. However, the accompanying example analysis lacks beginner-friendliness and has become outdated. Analogously to Bioconductor OSCA, Lücken &amp; Theis do not address newer developments such as RNA velocity, spatial transcriptomics, or multi-omics.</p>
+<p>Despite these limitations, we highly recommend this paper as a valuable introduction to the field and as a guide to initial best practices in scRNA-seq analysis. The chapters in this book build on the latest best practices, offering an updated perspective on the field. Furthermore, the workflows in this book are explained in greater detail, providing readers with the background information necessary to effectively apply the methods. We advise against relying on the example case study provided with the paper and instead encourage readers to explore the detailed chapters in this book for a more comprehensive and up to date understanding.</p>
+<p>References¶</p>
+<ol>
+<li>Amezquita, R., Lun, A., Hicks, S., &amp; Raphael, G. (2022). Orchestrating Single-Cell Analysis with Bioconductor . <a target="_blank" rel="noopener" href="https://bioconductor.org/books/release/OSCA/" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>https://bioconductor.org/books/release/OSCA/</a></li>
+<li>Huber, W., Carey, V. J., Gentleman, R., Anders, S., Carlson, M., Carvalho, B. S., Bravo, H. C., Davis, S., Gatto, L., Girke, T., Gottardo, R., Hahne, F., Hansen, K. D., Irizarry, R. A., Lawrence, M., Love, M. I., MacDonald, J., Obenchain, V., Oleś, A. K., … Morgan, M. (2015). Orchestrating high-throughput genomic analysis with Bioconductor. Nature Methods , 12 (2), 115–121. 10.1038/nmeth.3252</li>
+<li>Amezquita, R. A., Lun, A. T. L., Becht, E., Carey, V. J., Carpp, L. N., Geistlinger, L., Marini, F., Rue-Albrecht, K., Risso, D., Soneson, C., Waldron, L., Pagès, H., Smith, M. L., Huber, W., Morgan, M., Gottardo, R., &amp; Hicks, S. C. (2020). Orchestrating single-cell analysis with Bioconductor. Nature Methods , 17 (2), 137–145. 10.1038/s41592-019-0654-x</li>
+<li>Luecken, M. D., &amp; Theis, F. J. (2019). Current best practices in single-cell term<code>RNA</code>-seq analysis: a tutorial. Molecular Systems Biology , 15 (6), e8746. <a target="_blank" rel="noopener" href="https://doi.org/10.15252/msb.20188746" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>https://doi.org/10.15252/msb.20188746</a></li>
+<li>Haber, A. L., Biton, M., Rogel, N., Herbst, R. H., Shekhar, K., Smillie, C., Burgin, G., Delorey, T. M., Howitt, M. R., Katz, Y., Tirosh, I., Beyaz, S., Dionne, D., Zhang, M., Raychowdhury, R., Garrett, W. S., Rozenblatt-Rosen, O., Shi, H. N., Yilmaz, O., … Regev, A. (2017). A single-cell survey of the small intestinal epithelium. Nature , 551 (7680), 333–339. 10.1038/nature24489</li>
+</ol>
+<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><h4 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h4><h3 id="Installation-1"><a href="#Installation-1" class="headerlink" title="Installation"></a>Installation</h3><p>To use <code>scanpy</code> from another project, install it using your favourite environment manager:</p>
+<p>Adding <code>scanpy[leiden]</code> to your dependencies is enough. See below for how to use Scanpy’s Development Version.</p>
+<p>If you prefer to exclusively use pip run:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install 'scanpy[leiden]'</span><br></pre></td></tr></tbody></table></figure>
+
+<p>After installing installing e.g. Miniconda, run:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ conda install -c conda-forge scanpy python-igraph leidenalg</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Pull Scanpy from PyPI:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install scanpy</span><br></pre></td></tr></tbody></table></figure>
+
+<p>If you use Hatch or pip, the extra <code>[leiden]</code> installs two packages that are needed for popular parts of scanpy but aren’t requirements: igraph[Csárdi and Nepusz, 2006] and leiden[Traag et al., 2019]. If you use conda, you should to add these dependencies to your environment individually.</p>
+<h4 id="Development-Version"><a href="#Development-Version" class="headerlink" title="Development Version"></a>Development Version</h4><p>To work with the latest version on GitHub: clone the repository and <code>cd</code> into its root directory.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gh repo clone scverse/scanpy</span><br><span class="line">$ cd scanpy</span><br></pre></td></tr></tbody></table></figure>
+
+<p>To use one of the predefined Hatch environments in <code>hatch.toml</code> , run either <code>hatch test [args]</code> or <code>hatch run [env:]command [...args]</code> , e.g.:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hatch test -p               # run tests in parallel</span><br><span class="line">$ hatch run docs:build        # build docs</span><br><span class="line">$ hatch run towncrier:create  # create changelog entry</span><br></pre></td></tr></tbody></table></figure>
+
+<p>If you are using <code>pip&gt;=21.3</code> , an editable install can be made:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ python -m venv .venv</span><br><span class="line">$ source .venv/bin/activate</span><br><span class="line">$ pip install --group=dev --group=test -e .</span><br></pre></td></tr></tbody></table></figure>
+
+<p>If you want to let <code>conda</code> handle the installations of dependencies, do:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ pipx install beni</span><br><span class="line">$ beni pyproject.toml &gt; environment.yml</span><br><span class="line">$ conda env create -f environment.yml</span><br><span class="line">$ conda activate scanpy</span><br><span class="line">$ pip install --group=dev --group=test --group=doc -e .</span><br></pre></td></tr></tbody></table></figure>
+
+<p>For instructions on how to work with the code, see the contribution guide.</p>
+<h4 id="GPU-acceleration"><a href="#GPU-acceleration" class="headerlink" title="GPU acceleration"></a>GPU acceleration</h4><p>If you have a GPU, consider rapids-singlecell, which mirrors the scanpy API with order-of-magnitude speedups. See its documentation for installation and usage instructions.</p>
+<h4 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h4><p>If you’re using Docker, you can use e.g. the image gcfntnu/scanpy from Docker Hub.</p>
+<h4 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h4><p>If you get a <code>Permission denied</code> error, never use <code>sudo pip</code> . Instead, use virtual environments or:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install --user scanpy</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Usage-Principles"><a href="#Usage-Principles" class="headerlink" title="Usage Principles"></a>Usage Principles</h3><h4 id="Contents-1"><a href="#Contents-1" class="headerlink" title="Contents"></a>Contents</h4><h3 id="Usage-Principles-1"><a href="#Usage-Principles-1" class="headerlink" title="Usage Principles"></a>Usage Principles</h3><p>Import Scanpy as:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import scanpy as sc</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h4><p>The typical workflow consists of subsequent calls of data analysis tools in <code>sc.tl</code> , e.g.:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.tl.umap(adata, **tool_params)  # embed a neighborhood graph of the data using UMAP</span><br></pre></td></tr></tbody></table></figure>
+
+<p>where <code>adata</code> is an <code>AnnData</code> object. Each of these calls adds annotation to an expression matrix X, which stores n_obs observations (cells) of n_vars variables (genes). For each tool, there typically is an associated plotting function in <code>sc.pl</code> :</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.pl.umap(adata, **plotting_params)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>If you pass <code>show=False</code> , a <code>Axes</code> instance is returned and you have all of matplotlib’s detailed configuration possibilities.</p>
+<p>To facilitate writing memory-efficient pipelines, by default, Scanpy tools operate inplace on <code>adata</code> and return <code>None</code> – this also allows to easily transition to out-of-memory pipelines. If you want to return a copy of the <code>AnnData</code> object and leave the passed <code>adata</code> unchanged, pass <code>copy=True</code> or <code>inplace=False</code> .</p>
+<h4 id="AnnData"><a href="#AnnData" class="headerlink" title="AnnData"></a>AnnData</h4><p>Scanpy is based on <code>anndata</code> , which provides the <code>AnnData</code> class.</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/web-ext/anndata.png" alt="https://falexwolf.de/img/scanpy/anndata.svg" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>At the most basic level, an <code>AnnData</code> object <code>adata</code> stores a data matrix <code>adata.X</code> , annotation of observations <code>adata.obs</code> and variables <code>adata.var</code> as <code>pd.DataFrame</code> and unstructured annotation <code>adata.uns</code> as <code>dict</code> . Names of observations and variables can be accessed via <code>adata.obs_names</code> and <code>adata.var_names</code> , respectively. <code>AnnData</code> objects can be sliced like dataframes, for example, <code>adata_subset = adata[:, list_of_gene_names]</code> . For more, see this blog post.</p>
+<p>To read a data file to an <code>AnnData</code> object, call:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adata = sc.read_h5ad(filename).  # or sc.read_zarr(filename)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>to initialize an <code>AnnData</code> object. Possibly add further annotation using, e.g., <code>pd.read_csv</code> :</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">anno = pd.read_csv(filename_sample_annotation)</span><br><span class="line">adata.obs['cell_groups'] = anno['cell_groups']  # categorical annotation of type pandas.Categorical</span><br><span class="line">adata.obs['time'] = anno['time']                # numerical annotation of type float</span><br><span class="line"># alternatively, you could also set the whole dataframe</span><br><span class="line"># adata.obs = anno</span><br></pre></td></tr></tbody></table></figure>
+
+<p>To write, use:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adata.write_h5ad(filename)</span><br><span class="line">adata.write_zarr(filename)</span><br><span class="line">adata.write_csvs(filename)</span><br><span class="line">adata.write_loom(filename)</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="How-to"><a href="#How-to" class="headerlink" title="How to"></a>How to</h3><h3 id="How-to-1"><a href="#How-to-1" class="headerlink" title="How to"></a>How to</h3><p>This section contains short examples on how to perform specific tasks with scanpy.</p>
+<h3 id="Cell-Cycle-Scoring-and-Regression"><a href="#Cell-Cycle-Scoring-and-Regression" class="headerlink" title="Cell-Cycle Scoring and Regression"></a>Cell-Cycle Scoring and Regression</h3><h3 id="Cell-Cycle-Scoring-and-Regression-1"><a href="#Cell-Cycle-Scoring-and-Regression-1" class="headerlink" title="Cell-Cycle Scoring and Regression"></a>Cell-Cycle Scoring and Regression</h3><p>This is a Scanpy demo that shows how to regress cell cycle effect, following the approach showed in Seurat’s vignette. As for the R example, toy dataset consists of murine hematopoietic progenitors from Nestorowa et al., Blood 2016. The files of the Seurat tutorial – used here for reasons of benchmarking – can be downloaded here. A more recent version of the dataset can be downloaded here.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from __future__ import annotations</span><br><span class="line"></span><br><span class="line">import zipfile</span><br><span class="line"></span><br><span class="line">import pooch</span><br><span class="line">import scanpy as sc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sc.logging.print_header()</span><br></pre></td></tr></tbody></table></figure>
+
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pooch</td>
+<td>1.8.2 (v1.8.2)</td>
+</tr>
+<tr>
+<td>scanpy</td>
+<td>1.11.4</td>
+</tr>
+<tr>
+<td>Component</td>
+<td>Info</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>3.13.7 (main, Aug 15 2025, 12:34:02) [GCC 15.2.1 20250813]</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Linux-6.16.8-zen1-1-zen-x86_64-with-glibc2.42</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>16 logical CPU cores</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>No GPU found</td>
+</tr>
+<tr>
+<td>Updated</td>
+<td>2025-09-22 08:42</td>
+</tr>
+</tbody></table></div>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>Dependency</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>toolz</td>
+<td>1.0.0</td>
+</tr>
+<tr>
+<td>cloudpickle</td>
+<td>3.1.1</td>
+</tr>
+<tr>
+<td>Jinja2</td>
+<td>3.1.6</td>
+</tr>
+<tr>
+<td>sphinxcontrib-applehelp</td>
+<td>2.0.0</td>
+</tr>
+<tr>
+<td>pyparsing</td>
+<td>3.2.5</td>
+</tr>
+<tr>
+<td>debugpy</td>
+<td>1.8.17</td>
+</tr>
+<tr>
+<td>ipython</td>
+<td>9.5.0</td>
+</tr>
+<tr>
+<td>sphinxcontrib-htmlhelp</td>
+<td>2.1.0</td>
+</tr>
+<tr>
+<td>parso</td>
+<td>0.8.5</td>
+</tr>
+<tr>
+<td>legacy-api-wrap</td>
+<td>1.4.1</td>
+</tr>
+<tr>
+<td>decorator</td>
+<td>5.2.1</td>
+</tr>
+<tr>
+<td>Pygments</td>
+<td>2.19.2</td>
+</tr>
+<tr>
+<td>matplotlib</td>
+<td>3.10.6</td>
+</tr>
+<tr>
+<td>cycler</td>
+<td>0.12.1</td>
+</tr>
+<tr>
+<td>pytz</td>
+<td>2025.2</td>
+</tr>
+<tr>
+<td>numpy</td>
+<td>2.3.3</td>
+</tr>
+<tr>
+<td>platformdirs</td>
+<td>4.4.0</td>
+</tr>
+<tr>
+<td>comm</td>
+<td>0.2.3</td>
+</tr>
+<tr>
+<td>jedi</td>
+<td>0.19.2</td>
+</tr>
+<tr>
+<td>PyYAML</td>
+<td>6.0.2</td>
+</tr>
+<tr>
+<td>python-dateutil</td>
+<td>2.9.0.post0</td>
+</tr>
+<tr>
+<td>sphinxcontrib-jsmath</td>
+<td>1.0.1</td>
+</tr>
+<tr>
+<td>six</td>
+<td>1.17.0</td>
+</tr>
+<tr>
+<td>llvmlite</td>
+<td>0.45.0</td>
+</tr>
+<tr>
+<td>numba</td>
+<td>0.62.0</td>
+</tr>
+<tr>
+<td>threadpoolctl</td>
+<td>3.6.0</td>
+</tr>
+<tr>
+<td>joblib</td>
+<td>1.5.2</td>
+</tr>
+<tr>
+<td>scipy</td>
+<td>1.16.2</td>
+</tr>
+<tr>
+<td>ipykernel</td>
+<td>6.30.1</td>
+</tr>
+<tr>
+<td>dask</td>
+<td>2025.9.1</td>
+</tr>
+<tr>
+<td>stack-data</td>
+<td>0.6.3</td>
+</tr>
+<tr>
+<td>MarkupSafe</td>
+<td>3.0.2</td>
+</tr>
+<tr>
+<td>jupyter_core</td>
+<td>5.8.1</td>
+</tr>
+<tr>
+<td>natsort</td>
+<td>8.4.0</td>
+</tr>
+<tr>
+<td>texttable</td>
+<td>1.7.0</td>
+</tr>
+<tr>
+<td>h5py</td>
+<td>3.14.0</td>
+</tr>
+<tr>
+<td>pyzmq</td>
+<td>27.1.0</td>
+</tr>
+<tr>
+<td>tblib</td>
+<td>3.1.0</td>
+</tr>
+<tr>
+<td>sphinxcontrib-devhelp</td>
+<td>2.0.0</td>
+</tr>
+<tr>
+<td>pandas</td>
+<td>2.3.2</td>
+</tr>
+<tr>
+<td>traitlets</td>
+<td>5.14.3</td>
+</tr>
+<tr>
+<td>packaging</td>
+<td>25.0</td>
+</tr>
+<tr>
+<td>anndata</td>
+<td>0.11.3</td>
+</tr>
+<tr>
+<td>tornado</td>
+<td>6.5.2</td>
+</tr>
+<tr>
+<td>pure_eval</td>
+<td>0.2.3</td>
+</tr>
+<tr>
+<td>sphinxcontrib-serializinghtml</td>
+<td>2.0.0</td>
+</tr>
+<tr>
+<td>sphinxcontrib-qthelp</td>
+<td>2.0.0</td>
+</tr>
+<tr>
+<td>asttokens</td>
+<td>3.0.0</td>
+</tr>
+<tr>
+<td>kiwisolver</td>
+<td>1.4.9</td>
+</tr>
+<tr>
+<td>tqdm</td>
+<td>4.67.1</td>
+</tr>
+<tr>
+<td>executing</td>
+<td>2.2.1</td>
+</tr>
+<tr>
+<td>psutil</td>
+<td>7.1.0</td>
+</tr>
+<tr>
+<td>pillow</td>
+<td>11.3.0</td>
+</tr>
+<tr>
+<td>charset-normalizer</td>
+<td>3.4.3</td>
+</tr>
+<tr>
+<td>wcwidth</td>
+<td>0.2.13</td>
+</tr>
+<tr>
+<td>igraph</td>
+<td>0.11.9</td>
+</tr>
+<tr>
+<td>scikit-learn</td>
+<td>1.7.2</td>
+</tr>
+<tr>
+<td>session-info2</td>
+<td>0.2.2</td>
+</tr>
+<tr>
+<td>prompt_toolkit</td>
+<td>3.0.52</td>
+</tr>
+<tr>
+<td>leidenalg</td>
+<td>0.10.2</td>
+</tr>
+<tr>
+<td>jupyter_client</td>
+<td>8.6.3</td>
+</tr>
+</tbody></table></div>
+<p>Load data</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p_zip = pooch.retrieve(</span><br><span class="line">    "https://www.dropbox.com/s/3dby3bjsaf5arrw/cell_cycle_vignette_files.zip?dl=1",</span><br><span class="line">    known_hash="sha256:6557fe2a2761d1550d41edf61b26c6d5ec9b42b4933d56c3161164a595f145ab",</span><br><span class="line">    path="../data",</span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Load cell cycle genes defined in Tirosh et al, 2015. It is a list of 97 genes, represented by their gene symbol. The list here is for humans, in case of alternate organism, a list of ortologues should be compiled. There are major differences in the way Scanpy and Seurat manage data, in particular we need to filter out cell cycle genes that are not present in our dataset to avoid errors.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">with zipfile.ZipFile(p_zip, "r") as f_zip:</span><br><span class="line">    f_csv = zipfile.Path(f_zip, "nestorawa_forcellcycle_expressionMatrix.txt").open()</span><br><span class="line">    adata = sc.read_csv(f_csv, delimiter="\t").T</span><br><span class="line">    cell_cycle_genes = zipfile.Path(f_zip, "regev_lab_cell_cycle_genes.txt").read_text().splitlines()</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Here we define two lists, genes associated to the S phase and genes associated to the G2M phase</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s_genes = [x for x in cell_cycle_genes[:43] if x in adata.var_names]</span><br><span class="line">g2m_genes = [x for x in cell_cycle_genes[43:] if x in adata.var_names]</span><br><span class="line">cell_cycle_genes = [*s_genes, *g2m_genes]</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Standard filters applied. Note that we do not extract variable genes and work on the whole dataset, instead. This is because, for this demo, almost 70 cell cycle genes would not be scored as variable. Cell cycle scoring on ~20 genes is ineffective.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sc.pp.filter_cells(adata, min_genes=200)</span><br><span class="line">sc.pp.filter_genes(adata, min_cells=3)</span><br><span class="line">sc.pp.normalize_total(adata, target_sum=1e4)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Log-transformation of data and scaling should always be performed before scoring</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.pp.log1p(adata)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>We here perform cell cycle scoring. The function is actually a wrapper to <code>scanpy.tl.score_genes()</code> , which is launched twice, to score separately S and G2M phases. Both <code>scanpy.tl.score_genes()</code> and <code>scanpy.tl.score_genes_cell_cycle()</code> are a port from Seurat and are supposed to work in a very similar way. To score a gene list, the algorithm calculates the difference of mean expression of the given list and the mean expression of reference genes. To build the reference, the function randomly chooses a bunch of genes matching the distribution of the expression of the given list. Cell cycle scoring adds three slots in data, a score for S phase, a score for G2M phase and the predicted cell cycle phase.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.tl.score_genes_cell_cycle(adata, s_genes=s_genes, g2m_genes=g2m_genes)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Here comes another difference from Seurat. The R package stores raw data, scaled data and variable genes information in separate slots, Scanpy instead keeps only one snapshot of the data. This implies that PCA is always calculated on the entire dataset. In order to calculate PCA reduction using only a subset of genes (like <code>cell_cycle_genes</code> ), a trick should be used. Basically we create a dummy object to store information of PCA projection, which is then reincorporated into original dataset.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adata_cc_genes = adata[:, cell_cycle_genes].copy()</span><br><span class="line">sc.tl.pca(adata_cc_genes)</span><br><span class="line">sc.pl.pca(adata_cc_genes, color="phase")</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://scanpy.scverse.org/en/stable/_images/1d57a6a6f897c88b6acfc435bbfeb70798036d973008ed199b9b93305844c407.png" alt="../_images/1d57a6a6f897c88b6acfc435bbfeb70798036d973008ed199b9b93305844c407.png" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;" width="624" height="431" data-stellar-image-dimensions="true" data-stellar-image-color="{&quot;size&quot;:64,&quot;hsla&quot;:[88.0514,25.1555,92.2098,1]}" data-stellar-image-source="https://scanpy.scverse.org/en/stable/_images/1d57a6a6f897c88b6acfc435bbfeb70798036d973008ed199b9b93305844c407.png"></p>
+<p>As in the original vignette, cells can be easily separated by their cell cycle status when cell cycle genes are used. Now we can regress out both S score and G2M score.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.pp.regress_out(adata, ["S_score", "G2M_score"])</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Finally, we reproject dataset using cell cycle genes again. Since we regressed the scores, no effect of cell cycle is now evident.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adata_cc_genes = adata[:, cell_cycle_genes].copy()</span><br><span class="line">sc.tl.pca(adata_cc_genes)</span><br><span class="line">sc.pl.pca(adata_cc_genes, color="phase")</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Using-other-kNN-libraries-in-Scanpy"><a href="#Using-other-kNN-libraries-in-Scanpy" class="headerlink" title="Using other kNN libraries in Scanpy"></a>Using other kNN libraries in Scanpy</h3><h3 id="Using-other-kNN-libraries-in-Scanpy-1"><a href="#Using-other-kNN-libraries-in-Scanpy-1" class="headerlink" title="Using other kNN libraries in Scanpy"></a>Using other kNN libraries in Scanpy</h3><p>Since Scanpy was released, there has been quite some development in the space of approximate nearest neighbor detection.</p>
+<p>In our example, we’re going to use Annoy:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from __future__ import annotations</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">%pip install -qU "pip"</span><br><span class="line">%pip install -q "scanpy" "sklearn-ann[annoy]"</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Note: you may need to restart the kernel to use updated packages.</span><br><span class="line">Note: you may need to restart the kernel to use updated packages.</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import scanpy as sc</span><br><span class="line">from sklearn_ann.kneighbors.annoy import AnnoyTransformer  # noqa: F401</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sc.logging.print_header()</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scanpy==1.10.0rc2.dev0+g48b495d9.d20240222 anndata==0.10.5.post1 umap==0.5.5 numpy==1.26.4 scipy==1.12.0 pandas==2.2.0 scikit-learn==1.4.1.post1 statsmodels==0.14.1 igraph==0.11.4 pynndescent==0.5.11</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Our nearest neighbors implementation uses the PCA embedding by default, so let’s pre-compute that:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adata_default = sc.datasets.paul15()</span><br><span class="line">sc.pp.pca(adata_default)</span><br><span class="line">adata_annoy, adata_pynnd = adata_default.copy(), adata_default.copy()</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WARNING: In Scanpy 0.*, this returned logarithmized data. Now it returns non-logarithmized data.</span><br></pre></td></tr></tbody></table></figure>
+
+<p>The best way to use a third-party approximate nearest neighbors implementation is to use <code>sklearn-ann</code> . It provides kNN Transformer classes wrapping several popular approximate nearest neighbor libraries.</p>
+<p>Explicitly setting the <code>transformer</code> parameter allows customizing how this function behaves.</p>
+<p>By default, for small datasets, Scanpy just calculates all distances. Setting the transformer parameter to <code>"pynndescent"</code> makes Scanpy always use its default for large datasets.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%timeit sc.pp.neighbors(adata_default, n_neighbors=15)</span><br><span class="line">%timeit sc.pp.neighbors(adata_pynnd, transformer="pynndescent", n_neighbors=15)</span><br><span class="line">%timeit sc.pp.neighbors(adata_annoy, transformer=AnnoyTransformer(15))</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">29.3 ms ± 1.53 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)</span><br><span class="line">683 ms ± 28.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)</span><br><span class="line">50.1 ms ± 350 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Looks like Annoy is quite a bit faster than PyNNDescent (but of course not as fast as Scanpy’s brute-force shortcut on a small dataset like this).</p>
+<p>Let’s see if Leidenalg and UMAP get reasonable results when using each of the kNN graphs.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for adata in [adata_default, adata_annoy, adata_pynnd]:</span><br><span class="line">    sc.tl.leiden(adata, flavor="igraph")</span><br><span class="line">    sc.tl.umap(adata)</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">with plt.ioff():</span><br><span class="line">    fig, axs = plt.subplots(1, 3, figsize=(18, 5), layout="constrained")</span><br><span class="line">sc.pl.umap(adata_default, color="leiden", ax=axs[0], show=False, title="Default")</span><br><span class="line">sc.pl.umap(adata_pynnd, color="leiden", ax=axs[1], show=False, title="PyNNDescent")</span><br><span class="line">sc.pl.umap(adata_annoy, color="leiden", ax=axs[2], show=False, title="Annoy")</span><br><span class="line">fig</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://scanpy.scverse.org/en/stable/_images/ad8d8a4b869e02ab2b2ca1c0cddab9f8150214bfc27e6036a49ab5d854f5983c.png" alt="../_images/ad8d8a4b869e02ab2b2ca1c0cddab9f8150214bfc27e6036a49ab5d854f5983c.png" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;" width="1811" height="511" data-stellar-image-dimensions="true" data-stellar-image-color="{&quot;size&quot;:64,&quot;hsla&quot;:[353.5626,7.57,93.9854,1]}" data-stellar-image-source="https://scanpy.scverse.org/en/stable/_images/ad8d8a4b869e02ab2b2ca1c0cddab9f8150214bfc27e6036a49ab5d854f5983c.png"></p>
+<p>The results look sensible enough. Both embedding and community detection show some differences but are qualitatively the same:</p>
+<p>The more narrow branch is divided into clusters length-wise, the wider one also horizontally, and the small subpopulation is detected by both community detection and embedding.</p>
+<p>This indicates that the underlying graph is similar enough to capture these features of the dataset.</p>
+<h3 id="Plotting-with-Marsilea"><a href="#Plotting-with-Marsilea" class="headerlink" title="Plotting with Marsilea"></a>Plotting with Marsilea</h3><h4 id="Contents-2"><a href="#Contents-2" class="headerlink" title="Contents"></a>Contents</h4><h3 id="Plotting-with-Marsilea-1"><a href="#Plotting-with-Marsilea-1" class="headerlink" title="Plotting with Marsilea"></a>Plotting with Marsilea</h3><p>Marsilea is a visualization library that allows user to create composable visualization in a declarative way.</p>
+<p>You can use it to create many scanpy plots with easy customization.</p>
+<p>Let’s first load the PBMC datdaset</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from __future__ import annotations</span><br><span class="line"></span><br><span class="line">import numpy as np</span><br><span class="line">import scanpy as sc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pbmc = sc.datasets.pbmc3k_processed().raw.to_adata()</span><br><span class="line">pbmc</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">AnnData object with n_obs × n_vars = 2638 × 13714</span><br><span class="line">    obs: 'n_genes', 'percent_mito', 'n_counts', 'louvain'</span><br><span class="line">    var: 'n_cells'</span><br><span class="line">    uns: 'draw_graph', 'louvain', 'louvain_colors', 'neighbors', 'pca', 'rank_genes_groups'</span><br><span class="line">    obsm: 'X_pca', 'X_tsne', 'X_umap', 'X_draw_graph_fr'</span><br><span class="line">    obsp: 'distances', 'connectivities'</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Define the cells and markers that we want to draw</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">cell_markers = {</span><br><span class="line">    "CD4 T cells": ["IL7R"],</span><br><span class="line">    "CD14+ Monocytes": ["CD14", "LYZ"],</span><br><span class="line">    "B cells": ["MS4A1"],</span><br><span class="line">    "CD8 T cells": ["CD8A"],</span><br><span class="line">    "NK cells": ["GNLY", "NKG7"],</span><br><span class="line">    "FCGR3A+ Monocytes": ["FCGR3A", "MS4A7"],</span><br><span class="line">    "Dendritic cells": ["FCER1A", "CST3"],</span><br><span class="line">    "Megakaryocytes": ["PPBP"],</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">cells, markers = [], []</span><br><span class="line">for c, ms in cell_markers.items():</span><br><span class="line">    cells += [c] * len(ms)</span><br><span class="line">    markers += ms</span><br><span class="line"></span><br><span class="line">uni_cells = list(cell_markers.keys())</span><br><span class="line">cell_colors = [</span><br><span class="line">    "#568564",</span><br><span class="line">    "#DC6B19",</span><br><span class="line">    "#F72464",</span><br><span class="line">    "#005585",</span><br><span class="line">    "#9876DE",</span><br><span class="line">    "#405559",</span><br><span class="line">    "#58DADA",</span><br><span class="line">    "#F85959",</span><br><span class="line">]</span><br><span class="line">cmapper = dict(zip(uni_cells, cell_colors, strict=True))</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Import Marsilea</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import marsilea as ma</span><br><span class="line">import marsilea.plotter as mp</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Heatmap"><a href="#Heatmap" class="headerlink" title="Heatmap"></a>Heatmap</h4><p>Here is the minimum example to create a heatmap with Marsilea, it does nothing besides create a heatmap. You can adjust the main plot size by setting <code>height</code> and <code>width</code> , the unit is inches.</p>
+<p>We will start adding components to this main plot step by step.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">exp = pbmc[:, markers].X.toarray()</span><br><span class="line"></span><br><span class="line">m = ma.Heatmap(exp, cmap="viridis", height=3.5, width=3)</span><br><span class="line">m.render()</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://scanpy.scverse.org/en/stable/_images/ba1422e2b60f77f4c59fc07a3c5ba6e7f359b149f5b44d7efe832e736794d28e.png" alt="../_images/ba1422e2b60f77f4c59fc07a3c5ba6e7f359b149f5b44d7efe832e736794d28e.png" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;" width="320" height="370" data-stellar-image-dimensions="true" data-stellar-image-color="{&quot;size&quot;:64,&quot;hsla&quot;:[278.3421,42.6182,30.3859,1]}" data-stellar-image-source="https://scanpy.scverse.org/en/stable/_images/ba1422e2b60f77f4c59fc07a3c5ba6e7f359b149f5b44d7efe832e736794d28e.png"></p>
+<p>To replicate the scanpy heatmap, we can first divide the heatmap by cell types.</p>
+<p>The <code>group_rows</code> method can group heatmap by group labels, the first argument is used to label the row, the <code>order</code> defines the display order of each cell type from top to bottom.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">m.group_rows(pbmc.obs["louvain"], order=uni_cells)</span><br><span class="line">m.render()</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://scanpy.scverse.org/en/stable/_images/2ad8c5624f6b1b9c504a9523579d15ea2f93a9fd5b609091b38786f953fe046b.png" alt="../_images/2ad8c5624f6b1b9c504a9523579d15ea2f93a9fd5b609091b38786f953fe046b.png" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;" width="320" height="370" data-stellar-image-dimensions="true" data-stellar-image-color="{&quot;size&quot;:64,&quot;hsla&quot;:[277.5681,33.5816,35.2696,1]}" data-stellar-image-source="https://scanpy.scverse.org/en/stable/_images/2ad8c5624f6b1b9c504a9523579d15ea2f93a9fd5b609091b38786f953fe046b.png"></p>
+<p>Now we can label each chunks with cell types and the columns with marker names.</p>
+<p>You can use <code>add_left</code> or <code>add_*</code> to add a plotter to anyside of your main plot. In Marsilea, a plot instance is called plotter.</p>
+<p>When you add a plotter, you can easily adjust its size and the padding between adjcent plot using <code>size</code> and <code>pad</code> .</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Create plotters</span><br><span class="line">chunk = mp.Chunk(uni_cells, rotation=0, align="center")</span><br><span class="line">colors = mp.Colors(list(pbmc.obs["louvain"]), palette=cmapper)</span><br><span class="line">label_markers = mp.Labels(markers)</span><br><span class="line"></span><br><span class="line"># Add to the heatmap</span><br><span class="line">m.add_left(colors, size=0.1, pad=0.1)</span><br><span class="line">m.add_left(chunk)</span><br><span class="line">m.add_top(label_markers, pad=0.1)</span><br><span class="line">m.render()</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://scanpy.scverse.org/en/stable/_images/da883131a1fe9eb22a8c860e07c36a34e00e64e4442b006d9dde552fc2a40ead.png" alt="../_images/da883131a1fe9eb22a8c860e07c36a34e00e64e4442b006d9dde552fc2a40ead.png" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;" width="506" height="461" data-stellar-image-dimensions="true" data-stellar-image-color="{&quot;size&quot;:64,&quot;hsla&quot;:[278.3141,16.8718,64.7938,1]}" data-stellar-image-source="https://scanpy.scverse.org/en/stable/_images/da883131a1fe9eb22a8c860e07c36a34e00e64e4442b006d9dde552fc2a40ead.png"></p>
+<p>You may want to add dendrogram to display the similarity among cell types.</p>
+<p>You can use <code>add_dendrogram</code> , we will add it to the right side, but you can also add it to the left side if you want.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">m.add_dendrogram("right", add_base=False)</span><br><span class="line">m.render()</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://scanpy.scverse.org/en/stable/_images/d81354fd0bdf8a72378abcefbc182d8285486fa17d8bd53f0c1f47b6cd1d28c4.png" alt="../_images/d81354fd0bdf8a72378abcefbc182d8285486fa17d8bd53f0c1f47b6cd1d28c4.png" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;" width="548" height="461" data-stellar-image-dimensions="true" data-stellar-image-color="{&quot;size&quot;:64,&quot;hsla&quot;:[278.3962,16.6469,67.4614,1]}" data-stellar-image-source="https://scanpy.scverse.org/en/stable/_images/d81354fd0bdf8a72378abcefbc182d8285486fa17d8bd53f0c1f47b6cd1d28c4.png"></p>
+<p>The legend is still mising, you can use <code>add_legends</code> to add all legends at once. Marsilea will automatically layout all the legends.</p>
+<p>In the end, you can you <code>add_title</code> to add a title.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">m.add_legends()</span><br><span class="line">m.add_title("Expression Profile")</span><br><span class="line">m.render()</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://scanpy.scverse.org/en/stable/_images/2d213968ea3f453f2cae74ae49e17f1fec45a53a476ae046b14010f283eda1a7.png" alt="../_images/2d213968ea3f453f2cae74ae49e17f1fec45a53a476ae046b14010f283eda1a7.png" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;" width="771" height="489" data-stellar-image-dimensions="true" data-stellar-image-color="{&quot;size&quot;:64,&quot;hsla&quot;:[277.565,15.2859,76.5196,1]}" data-stellar-image-source="https://scanpy.scverse.org/en/stable/_images/2d213968ea3f453f2cae74ae49e17f1fec45a53a476ae046b14010f283eda1a7.png"></p>
+<p>OK, let’s wrap up all the code in below. There are few things you should notice in Marsilea:</p>
+<ul>
+<li>Always call <code>render()</code> in the end to actually render the plot.</li>
+<li>The order of <code>add_*</code> operation decides the order of plotters. But <code>group_rows</code> and <code>group_cols</code> can be called anytime.</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">m = ma.Heatmap(exp, cmap="viridis", height=4, width=3)</span><br><span class="line">m.group_rows(pbmc.obs["louvain"], order=uni_cells)</span><br><span class="line"></span><br><span class="line">m.add_left(</span><br><span class="line">    mp.Colors(list(pbmc.obs["louvain"]), palette=cmapper),</span><br><span class="line">    size=0.1,</span><br><span class="line">    pad=0.1,</span><br><span class="line">)</span><br><span class="line">m.add_left(mp.Chunk(uni_cells, rotation=0, align="center"))</span><br><span class="line">m.add_top(mp.Labels(markers), pad=0.1)</span><br><span class="line">m.add_dendrogram("right", add_base=False)</span><br><span class="line"></span><br><span class="line">m.add_legends()</span><br><span class="line">m.add_title("Expression Profile")</span><br><span class="line">m.render()</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://scanpy.scverse.org/en/stable/_images/4d8511ed85ad86dbf378823408503c528a42a79cd98b0e04f7be0f949decd72d.png" alt="../_images/4d8511ed85ad86dbf378823408503c528a42a79cd98b0e04f7be0f949decd72d.png" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;" width="771" height="539" data-stellar-image-dimensions="true" data-stellar-image-color="{&quot;size&quot;:64,&quot;hsla&quot;:[277.2817,15.5072,75.9538,1]}" data-stellar-image-source="https://scanpy.scverse.org/en/stable/_images/4d8511ed85ad86dbf378823408503c528a42a79cd98b0e04f7be0f949decd72d.png"></p>
+<p>Now that we’ve covered some basics of Marsilea, we’ll see how it can be used to create custom plots similar to <code>scanpy</code> ’s existing methods:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">agg = sc.get.aggregate(pbmc[:, markers], by="louvain", func=["mean", "count_nonzero"])</span><br><span class="line">agg.obs["cell_counts"] = pbmc.obs["louvain"].value_counts()</span><br><span class="line">agg</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AnnData object with n_obs × n_vars = 8 × 12</span><br><span class="line">    obs: 'louvain', 'cell_counts'</span><br><span class="line">    var: 'n_cells'</span><br><span class="line">    layers: 'mean', 'count_nonzero'</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">agg_exp = agg.layers["mean"]</span><br><span class="line">agg_count = agg.layers["count_nonzero"]</span><br><span class="line">agg_cell_counts = agg.obs["cell_counts"].to_numpy()</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Matrixplot"><a href="#Matrixplot" class="headerlink" title="Matrixplot"></a>Matrixplot</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">h, w = agg_exp.shape</span><br><span class="line"></span><br><span class="line">m = ma.Heatmap(</span><br><span class="line">    agg_exp,</span><br><span class="line">    height=h / 3,</span><br><span class="line">    width=w / 3,</span><br><span class="line">    cmap="Blues",</span><br><span class="line">    linewidth=0.5,</span><br><span class="line">    linecolor="lightgray",</span><br><span class="line">    label="Expression",</span><br><span class="line">)</span><br><span class="line">m.add_right(mp.Labels(agg.obs["louvain"], align="center"), pad=0.1)</span><br><span class="line">m.add_top(mp.Labels(markers), pad=0.1)</span><br><span class="line">m.group_cols(cells, order=uni_cells)</span><br><span class="line">m.add_top(mp.Chunk(uni_cells, fill_colors=cell_colors, rotation=90))</span><br><span class="line">m.add_left(mp.Numbers(agg_cell_counts, color="#EEB76B", label="Count"))</span><br><span class="line">m.add_dendrogram("right", pad=0.1)</span><br><span class="line">m.add_legends()</span><br><span class="line">m.render()</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://scanpy.scverse.org/en/stable/_images/4391834d507f58697345693f7e02b03afbb9057c3fe0d8386df4a8596d54803d.png" alt="../_images/4391834d507f58697345693f7e02b03afbb9057c3fe0d8386df4a8596d54803d.png" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;" width="914" height="557" data-stellar-image-dimensions="true" data-stellar-image-color="{&quot;size&quot;:64,&quot;hsla&quot;:[236.1236,6.8288,90.5094,1]}" data-stellar-image-source="https://scanpy.scverse.org/en/stable/_images/4391834d507f58697345693f7e02b03afbb9057c3fe0d8386df4a8596d54803d.png"></p>
+<h4 id="Dot-plot"><a href="#Dot-plot" class="headerlink" title="Dot plot"></a>Dot plot</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">size = agg_count / agg_cell_counts[:, np.newaxis]</span><br><span class="line">m = ma.SizedHeatmap(</span><br><span class="line">    size=size,</span><br><span class="line">    color=agg_exp,</span><br><span class="line">    cluster_data=size,</span><br><span class="line">    height=h / 3,</span><br><span class="line">    width=w / 3,</span><br><span class="line">    edgecolor="lightgray",</span><br><span class="line">    cmap="Blues",</span><br><span class="line">    size_legend_kws=dict(</span><br><span class="line">        colors="#538bbf",</span><br><span class="line">        title="Fraction of cells\nin groups (%)",</span><br><span class="line">        labels=["20%", "40%", "60%", "80%", "100%"],</span><br><span class="line">        show_at=[0.2, 0.4, 0.6, 0.8, 1.0],</span><br><span class="line">    ),</span><br><span class="line">    color_legend_kws=dict(title="Mean expression\nin group"),</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">m.add_top(mp.Labels(markers), pad=0.1)</span><br><span class="line">m.add_top(mp.Chunk(uni_cells, fill_colors=cell_colors, rotation=90))</span><br><span class="line">m.group_cols(cells, order=uni_cells)</span><br><span class="line"></span><br><span class="line">m.add_right(mp.Labels(agg.obs["louvain"], align="center"), pad=0.1)</span><br><span class="line">m.add_left(mp.Numbers(agg_cell_counts, color="#EEB76B", label="Count"), size=0.5, pad=0.1)</span><br><span class="line">m.add_dendrogram("right", pad=0.1)</span><br><span class="line">m.add_legends()</span><br><span class="line">m.render()</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://scanpy.scverse.org/en/stable/_images/e1ed4633b95cd6bec57e431a9b5349d46a96ac78dd24940d173cd3fca0428694.png" alt="../_images/e1ed4633b95cd6bec57e431a9b5349d46a96ac78dd24940d173cd3fca0428694.png" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;" width="923" height="584" data-stellar-image-dimensions="true" data-stellar-image-color="{&quot;size&quot;:64,&quot;hsla&quot;:[295.1165,3.2761,90.6648,1]}" data-stellar-image-source="https://scanpy.scverse.org/en/stable/_images/e1ed4633b95cd6bec57e431a9b5349d46a96ac78dd24940d173cd3fca0428694.png"></p>
+<h4 id="Tracksplot"><a href="#Tracksplot" class="headerlink" title="Tracksplot"></a>Tracksplot</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">tp = ma.ZeroHeightCluster(exp.T, width=20)</span><br><span class="line">tp_anno = ma.ZeroHeight(width=1)</span><br><span class="line"></span><br><span class="line">tp.group_cols(pbmc.obs["louvain"], order=uni_cells, spacing=0.005)</span><br><span class="line">tp.add_dendrogram("top", add_base=False, size=1)</span><br><span class="line">for row in exp.T:</span><br><span class="line">    area = mp.Area(</span><br><span class="line">        row,</span><br><span class="line">        add_outline=False,</span><br><span class="line">        alpha=1,</span><br><span class="line">        group_kws={"color": cell_colors},</span><br><span class="line">    )</span><br><span class="line">    tp.add_bottom(area, size=0.4, pad=0.1)</span><br><span class="line">tp.add_bottom(mp.Colors(pbmc.obs["louvain"], palette=cmapper), size=0.1, pad=0.1)</span><br><span class="line">tp.add_bottom(mp.Chunk(uni_cells, rotation=90))</span><br><span class="line"></span><br><span class="line">(tp + 0.1 + tp_anno).render()</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://scanpy.scverse.org/en/stable/_images/a8fd5ce09328052fe68df76c87130f355b9a63a46d81cbfd679a2c87cb6ab4e7.png" alt="../_images/a8fd5ce09328052fe68df76c87130f355b9a63a46d81cbfd679a2c87cb6ab4e7.png" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;" width="2161" height="898" data-stellar-image-dimensions="true" data-stellar-image-color="{&quot;size&quot;:64,&quot;hsla&quot;:[16.9367,9.4254,95.2446,1]}" data-stellar-image-source="https://scanpy.scverse.org/en/stable/_images/a8fd5ce09328052fe68df76c87130f355b9a63a46d81cbfd679a2c87cb6ab4e7.png"></p>
+<h4 id="Stacked-Violin"><a href="#Stacked-Violin" class="headerlink" title="Stacked Violin"></a>Stacked Violin</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">from matplotlib.cm import ScalarMappable</span><br><span class="line">from matplotlib.colors import Normalize</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">gene_data = []</span><br><span class="line">cdata = []</span><br><span class="line">for row, gene_name in zip(exp.T, markers[:5], strict=True):</span><br><span class="line">    # Transform data to wide-format, marsilea only supports wide-format</span><br><span class="line">    pdata = (</span><br><span class="line">        pd.DataFrame({"exp": row, "cell_type": pbmc.obs["louvain"]})  # noqa: PD010</span><br><span class="line">        .reset_index(drop=True)</span><br><span class="line">        .pivot(columns="cell_type", values="exp")</span><br><span class="line">    )</span><br><span class="line">    gene_data.append([gene_name, pdata])</span><br><span class="line">    cdata.append(pdata.median())</span><br><span class="line"></span><br><span class="line"># Create color mappable</span><br><span class="line">cdata = pd.concat(cdata, axis=1).T</span><br><span class="line">vmin, vmax = np.asarray(cdata).min(), np.asarray(cdata).max()</span><br><span class="line">sm = ScalarMappable(norm=Normalize(vmin=vmin, vmax=vmax), cmap="Blues")</span><br><span class="line"></span><br><span class="line">sv = ma.ZeroHeightCluster(agg_exp.T, width=3)</span><br><span class="line">sv_anno = ma.ZeroHeight(width=1)</span><br><span class="line"></span><br><span class="line">for gene_name, pdata in gene_data:</span><br><span class="line">    # Calculate the color to display</span><br><span class="line">    palette = sm.to_rgba(pdata.median()).tolist()</span><br><span class="line">    sv.add_bottom(</span><br><span class="line">        mp.Violin(</span><br><span class="line">            pdata,</span><br><span class="line">            inner=None,</span><br><span class="line">            linecolor=".7",</span><br><span class="line">            linewidth=0.5,</span><br><span class="line">            density_norm="width",</span><br><span class="line">            palette=palette,</span><br><span class="line">        ),</span><br><span class="line">        size=0.5,</span><br><span class="line">        pad=0.1,</span><br><span class="line">        legend=False,</span><br><span class="line">    )</span><br><span class="line">    sv_anno.add_bottom(mp.Title(gene_name, align="left"), size=0.5, pad=0.1)</span><br><span class="line"></span><br><span class="line">sv.add_bottom(mp.Labels(cdata.columns))</span><br><span class="line">sv.add_dendrogram("top")</span><br><span class="line"></span><br><span class="line"># To fake a legend</span><br><span class="line">sv.add_bottom(</span><br><span class="line">    mp.ColorMesh(</span><br><span class="line">        cdata,</span><br><span class="line">        cmap="Blues",</span><br><span class="line">        cbar_kws={"title": "Median expression\nin group", "orientation": "horizontal"},</span><br><span class="line">    ),</span><br><span class="line">    size=0,</span><br><span class="line">)</span><br><span class="line">comp = sv + 0.1 + sv_anno</span><br><span class="line">comp.add_legends()</span><br><span class="line">comp.render()</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://scanpy.scverse.org/en/stable/_images/28915039aa4b875685c8d73a7139b94924f2a96e9041916eaeb5d593c3bace11.png" alt="../_images/28915039aa4b875685c8d73a7139b94924f2a96e9041916eaeb5d593c3bace11.png" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;" width="664" height="551" data-stellar-image-dimensions="true" data-stellar-image-color="{&quot;size&quot;:64,&quot;hsla&quot;:[207.4775,10.5656,97.3908,1]}" data-stellar-image-source="https://scanpy.scverse.org/en/stable/_images/28915039aa4b875685c8d73a7139b94924f2a96e9041916eaeb5d593c3bace11.png"></p>
+<h4 id="More-information"><a href="#More-information" class="headerlink" title="More information"></a>More information</h4><p>Other plots are possible with Marsilea by creating new plotter. See Marsilea’s documention to learn how.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import session_info</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">session_info.show(dependencies=True)</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Tutorials"><a href="#Tutorials" class="headerlink" title="Tutorials"></a>Tutorials</h3><h4 id="Contents-3"><a href="#Contents-3" class="headerlink" title="Contents"></a>Contents</h4><h3 id="Tutorials-1"><a href="#Tutorials-1" class="headerlink" title="Tutorials"></a>Tutorials</h3><p>See also</p>
+<p>For more tutorials featuring scanpy and other scverse ecosystem tools, check out the curated set of tutorials at scverse.org/learn</p>
+<h4 id="Basic-workflows"><a href="#Basic-workflows" class="headerlink" title="Basic workflows"></a>Basic workflows</h4><ul>
+<li>Basics<ul>
+<li>Preprocessing and clustering</li>
+<li>Preprocessing and clustering 3k PBMCs (legacy workflow)</li>
+<li>Integrating data using ingest and BBKNN</li>
+</ul>
+</li>
+</ul>
+<h4 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h4><ul>
+<li>Plotting<ul>
+<li>Core plotting functions</li>
+<li>Customizing Scanpy plots</li>
+</ul>
+</li>
+</ul>
+<h4 id="Trajectory-inference"><a href="#Trajectory-inference" class="headerlink" title="Trajectory inference"></a>Trajectory inference</h4><p>See also</p>
+<p>For more powerful tools for analysing single cell dynamics, check out the scverse ecosystem packages:</p>
+<ul>
+<li><p>CellRank</p>
+</li>
+<li><p>Dynamo</p>
+</li>
+<li><p>Trajectories</p>
+<ul>
+<li>Trajectory inference for hematopoiesis in mouse</li>
+</ul>
+</li>
+</ul>
+<h4 id="Experimental"><a href="#Experimental" class="headerlink" title="Experimental"></a>Experimental</h4><ul>
+<li>Experimental<ul>
+<li>How to preprocess UMI count data with analytic Pearson residuals</li>
+<li>Using <code>dask</code> with Scanpy</li>
+</ul>
+</li>
+</ul>
+<h4 id="Older-tutorials"><a href="#Older-tutorials" class="headerlink" title="Older tutorials"></a>Older tutorials</h4><p>A number of older tutorials can be found at:</p>
+<ul>
+<li>The <code>scanpy_usage</code> repository</li>
+</ul>
+<p>See also</p>
+<p>Scanpy used to have tutorials for its (now deprecated) spatial data functionality. For up-to-date tutorials on working with spatial data, see:</p>
+<ul>
+<li>SquidPy Tutorials</li>
+<li>SpatialData tutorials</li>
+<li>Scverse ecosystem spatial tutorials</li>
+</ul>
+
+
+
+  <div class="article-tags slide-up">
+    
+      <a class="tag" href="/notes/bio/tags/%E7%94%9F%E4%BF%A1/"><svg class="icon" viewBox="0 0 1 1" data-icon="default:hashtag" aria-hidden="true"></svg>生信</a>
+    
+      <a class="tag" href="/notes/bio/tags/%E6%95%99%E6%9D%90/"><svg class="icon" viewBox="0 0 1 1" data-icon="default:hashtag" aria-hidden="true"></svg>教材</a>
+    
+      <a class="tag" href="/notes/bio/tags/%E7%AC%AC%E4%BA%94%E7%BC%96/"><svg class="icon" viewBox="0 0 1 1" data-icon="default:hashtag" aria-hidden="true"></svg>第五编</a>
+    
+  </div>
+
+</article>
+
+  <div class="article-share slide-up" id="share">
+    <div class="body">
+      <div class="social-wrap dis-select"><a class="social share-item qrcode ui-interactive is-icon-only" onclick="util.toggle(&quot;share-qrcode&quot;)" aria-label="分享文章: QR Code" title="分享文章: QR Code"><span class="share-item__icon ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M10.553 13.447c-.424-.424-.95-.596-1.535-.675c-.553-.074-1.25-.074-2.086-.074H5.827c-.58 0-1.065 0-1.459.037c-.411.04-.795.124-1.146.34c-.345.21-.634.5-.845.844c-.216.352-.3.735-.34 1.147C2 15.459 2 15.944 2 16.525v.068c0 .884 0 1.597.055 2.17c.056.592.175 1.108.459 1.571c.288.47.682.864 1.152 1.152c.463.284.979.403 1.57.46C5.81 22 6.524 22 7.407 22h.07c.58 0 1.064 0 1.458-.037c.412-.04.795-.124 1.147-.34c.344-.21.633-.5.844-.844c.216-.352.3-.736.34-1.147c.037-.394.037-.879.037-1.46v-1.104c0-.836 0-1.533-.074-2.086c-.079-.584-.251-1.111-.675-1.535m-1.62-11.41c.412.04.795.124 1.147.34c.344.21.633.5.844.845c.216.351.3.735.34 1.146c.037.394.037.879.037 1.46v1.104c0 .836 0 1.533-.074 2.086c-.079.584-.251 1.111-.675 1.535s-.95.596-1.535.675c-.553.074-1.25.074-2.086.074H5.827c-.58 0-1.065 0-1.459-.037c-.411-.04-.795-.124-1.146-.34a2.56 2.56 0 0 1-.845-.844c-.216-.352-.3-.735-.34-1.147C2 8.54 2 8.056 2 7.475v-.068c0-.884 0-1.597.055-2.17c.056-.592.175-1.108.459-1.571c.288-.47.682-.864 1.152-1.152c.463-.284.979-.403 1.57-.46C5.81 2 6.524 2 7.407 2h.07c.58 0 1.064 0 1.458.037M16.593 2h-.068c-.58 0-1.065 0-1.46.037c-.41.04-.794.124-1.146.34c-.344.21-.633.5-.844.845c-.216.351-.3.735-.34 1.146c-.037.394-.037.879-.037 1.46v1.104c0 .836 0 1.533.074 2.086c.079.584.251 1.111.675 1.535s.95.596 1.535.675c.553.074 1.25.074 2.086.074h1.105c.58 0 1.065 0 1.459-.037c.411-.04.795-.124 1.146-.34c.345-.21.634-.5.845-.844c.216-.352.3-.735.34-1.147C22 8.54 22 8.056 22 7.475v-.068c0-.884 0-1.597-.055-2.17c-.056-.592-.175-1.108-.459-1.571a3.5 3.5 0 0 0-1.152-1.152c-.463-.284-.979-.403-1.57-.46C18.19 2 17.477 2 16.594 2" opacity=".5"></path><path fill="currentColor" d="M14.093 21.302a.698.698 0 1 1-1.396 0v-2.79h1.396z" opacity=".4"></path><path fill="currentColor" d="M21.302 12.698a.7.7 0 0 0-.697.697v3.256H22v-3.256a.7.7 0 0 0-.698-.697" opacity=".5"></path><path fill="currentColor" d="M16.076 16.617c-.076.184-.076.417-.076.883s0 .699.076.883a1 1 0 0 0 .541.54c.184.077.417.077.883.077s.699 0 .883-.076a1 1 0 0 0 .54-.541c.077-.184.077-.417.077-.883s0-.699-.076-.883a1 1 0 0 0-.541-.54C18.199 16 17.966 16 17.5 16s-.699 0-.883.076a1 1 0 0 0-.54.541"></path><path fill="currentColor" d="M22 18.535v-.023h-1.396c0 .443 0 .74-.016.97c-.015.224-.043.333-.073.405a1.16 1.16 0 0 1-.629.63c-.072.029-.18.056-.405.072c-.23.015-.527.016-.97.016h-1.86V22h1.883c.414 0 .759 0 1.042-.02a2.6 2.6 0 0 0 .844-.175a2.56 2.56 0 0 0 1.384-1.384c.112-.27.156-.549.176-.844c.02-.283.02-.628.02-1.042" opacity=".7"></path><path fill="currentColor" d="M12.697 16.616v.035h1.396c0-.668 0-1.116.035-1.458c.034-.33.093-.482.16-.583a1.2 1.2 0 0 1 .321-.32c.101-.068.254-.128.584-.161c.342-.035.79-.036 1.458-.036h1.86v-1.395h-1.896c-.623 0-1.142 0-1.563.043c-.44.044-.85.142-1.218.388c-.28.187-.519.426-.706.706c-.246.368-.343.777-.388 1.217c-.043.421-.043.94-.043 1.564" opacity=".6"></path><path fill="currentColor" d="M5.508 18.69c.219.155.528.155 1.146.155c.619 0 .928 0 1.146-.155a.8.8 0 0 0 .2-.199c.154-.218.154-.527.154-1.146s0-.927-.155-1.146A.8.8 0 0 0 7.8 16c-.218-.155-.527-.155-1.146-.155s-.927 0-1.146.155a.8.8 0 0 0-.199.2c-.155.218-.155.527-.155 1.145c0 .619 0 .928.155 1.146a.8.8 0 0 0 .2.2M6.654 8.155c-.618 0-.927 0-1.146-.155a.8.8 0 0 1-.199-.2c-.155-.217-.155-.527-.155-1.145c0-.619 0-.928.155-1.146a.8.8 0 0 1 .2-.2c.218-.154.527-.154 1.145-.154c.619 0 .928 0 1.146.155a.8.8 0 0 1 .2.199c.154.218.154.527.154 1.146s0 .928-.155 1.146A.8.8 0 0 1 7.8 8c-.218.155-.527.155-1.146.155M16.2 8c.218.155.527.155 1.146.155s.927 0 1.146-.155a.8.8 0 0 0 .199-.199c.155-.218.155-.528.155-1.146c0-.619 0-.928-.155-1.146a.8.8 0 0 0-.2-.2c-.218-.154-.527-.154-1.145-.154c-.619 0-.928 0-1.146.155a.8.8 0 0 0-.2.199c-.154.218-.154.527-.154 1.146s0 .928.155 1.146A.8.8 0 0 0 16.2 8"></path></svg></span></a><a class="social share-item weibo ui-interactive is-icon-only" href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fblog.cnortles.top%2Fnotes%2Fbio%2F%25E7%2594%259F%25E4%25BF%25A1%25E5%25AD%25A6%25E4%25B9%25A0%2F%25E5%258F%2582%25E7%259C%258B%25E6%2596%2587%25E6%25A1%25A3%2Fch46%2F&amp;title=%E5%8D%95%E7%BB%86%E8%83%9E%E5%88%86%E6%9E%90%E5%AE%9E%E8%B7%B5%20-%20%E9%BA%9F%E8%B7%83%E4%BA%91%E8%B5%B7&amp;summary=%E5%8D%95%E7%BB%86%E8%83%9E%E5%88%86%E6%9E%90%E5%AE%9E%E8%B7%B5%E7%BC%96%E8%80%85%E5%AF%BC%E8%AF%AD%E6%9C%AC%E6%9D%BF%E5%9D%97%E6%98%AF%E5%8D%95%E7%BB%86%E8%83%9E%E5%88%86%E6%9E%90%E7%9A%84%E5%AE%9E%E8%B7%B5%E9%83%A8%E5%88%86%EF%BC%9A%E5%AE%9E%E9%AA%8C%E8%AE%BE%E8%AE%A1%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E5%86%B3%E7%AD%96%EF%BC%88%E6%B5%8B%E5%BA%8F%E6%B7%B1%E5%BA%A6%E3%80%81%E6%89%B9%E6%AC%A1%E4%B8%8E%E6%B7%B7%E6%A0%B7%E7%AD%96%E7%95%A5%EF%BC%89%E3%80%81%20scanpy%20%E7%9A%84%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8%E5%8E%9F%E5%88%99%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%AE%9E%E9%99%85%E5%B7%A5%E4%BD%9C%E6%B5%81%EF%BC%88%E8%B4%A8%E6%8E%A7%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96%E3%80%81%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E3%80%81%E9%99%8D%E7%BB%B4%E3%80%81%20%E8%81%9A%E7%B1%BB%E3%80%81%E6%89%B9%E6%AC%A1%E6%A0%A1%E6%AD%A3%E3%80%81%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%89%E3%80%82%20%E6%9C%AC%E7%AB%A0%E4%B8%8E%E6%9C%AC%E4%B9%A6%E5%A4%9A%E6%95%B0%E7%AB%A0%E8%8A%82..." target="_blank" rel="external nofollow noopener noreferrer" aria-label="分享文章: Weibo" title="分享文章: Weibo"><span class="share-item__icon ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Simple Icons - https://creativecommons.org/publicdomain/zero/1.0/ --><path fill="currentColor" d="M10.098 20.323c-3.977.391-7.414-1.406-7.672-4.02-.259-2.609 2.759-5.047 6.74-5.441 3.979-.394 7.413 1.404 7.671 4.018.259 2.6-2.759 5.049-6.737 5.439l-.002.004zM9.05 17.219c-.384.616-1.208.884-1.829.602-.612-.279-.793-.991-.406-1.593.379-.595 1.176-.861 1.793-.601.622.263.82.972.442 1.592zm1.27-1.627c-.141.237-.449.353-.689.253-.236-.09-.313-.361-.177-.586.138-.227.436-.346.672-.24.239.09.315.36.18.601l.014-.028zm.176-2.719c-1.893-.493-4.033.45-4.857 2.118-.836 1.704-.026 3.591 1.886 4.21 1.983.64 4.318-.341 5.132-2.179.8-1.793-.201-3.642-2.161-4.149zm7.563-1.224c-.346-.105-.57-.18-.405-.615.375-.977.42-1.804 0-2.404-.781-1.112-2.915-1.053-5.364-.03 0 0-.766.331-.571-.271.376-1.217.315-2.224-.27-2.809-1.338-1.337-4.869.045-7.888 3.08C1.309 10.87 0 13.273 0 15.348c0 3.981 5.099 6.395 10.086 6.395 6.536 0 10.888-3.801 10.888-6.82 0-1.822-1.547-2.854-2.915-3.284v.01zm1.908-5.092c-.766-.856-1.908-1.187-2.96-.962-.436.09-.706.511-.616.932.09.42.511.691.932.602.511-.105 1.067.044 1.442.465.376.421.466.977.316 1.473-.136.406.089.856.51.992.405.119.857-.105.992-.512.33-1.021.12-2.178-.646-3.035l.03.045zm2.418-2.195c-1.576-1.757-3.905-2.419-6.054-1.968-.496.104-.812.587-.706 1.081.104.496.586.813 1.082.707 1.532-.331 3.185.15 4.296 1.383 1.112 1.246 1.429 2.943.947 4.416-.165.48.106 1.007.586 1.157.479.165.991-.104 1.157-.586.675-2.088.241-4.478-1.338-6.235l.03.045z"></path></svg></span></a><a class="social share-item email ui-interactive is-icon-only" href="mailto:?subject=%E5%8D%95%E7%BB%86%E8%83%9E%E5%88%86%E6%9E%90%E5%AE%9E%E8%B7%B5%20-%20%E9%BA%9F%E8%B7%83%E4%BA%91%E8%B5%B7&amp;body=https%3A%2F%2Fblog.cnortles.top%2Fnotes%2Fbio%2F%25E7%2594%259F%25E4%25BF%25A1%25E5%25AD%25A6%25E4%25B9%25A0%2F%25E5%258F%2582%25E7%259C%258B%25E6%2596%2587%25E6%25A1%25A3%2Fch46%2F" aria-label="分享文章: Email" title="分享文章: Email"><span class="share-item__icon ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M3.172 5.172C2 6.343 2 8.229 2 12s0 5.657 1.172 6.828C4.343 20 6.229 20 10 20h4c3.771 0 5.657 0 6.828-1.172C22 17.657 22 15.771 22 12s0-5.657-1.172-6.828C19.657 4 17.771 4 14 4h-4C6.229 4 4.343 4 3.172 5.172m15.404 2.348a.75.75 0 0 1-.096 1.056l-2.196 1.83c-.887.739-1.605 1.338-2.24 1.746-.66.424-1.303.693-2.044.693s-1.384-.269-2.045-.693c-.634-.408-1.352-1.007-2.239-1.745L5.52 8.576a.75.75 0 1 1 .96-1.152l2.159 1.799c.933.777 1.58 1.315 2.128 1.667.529.34.888.455 1.233.455s.704-.115 1.233-.455c.547-.352 1.195-.89 2.128-1.667l2.159-1.8a.75.75 0 0 1 1.056.097" clip-rule="evenodd"></path></svg></span></a></div>
+      <div class="share-qrcode" id="share-qrcode" style="opacity:0;height:0"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&amp;data=https%3A%2F%2Fblog.cnortles.top%2Fnotes%2Fbio%2F%25E7%2594%259F%25E4%25BF%25A1%25E5%25AD%25A6%25E4%25B9%25A0%2F%25E5%258F%2582%25E7%259C%258B%25E6%2596%2587%25E6%25A1%25A3%2Fch46%2F" onerror="this.onerror=null;this.src=&quot;/images/stellar-error.491ee870f4940739.svg&quot;"></div>
+    </div>
+  </div>
+
+<div class="article-footer slide-up">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文本文由rlcao编写，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section></div>
+
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/tags/">标签</a><a href="/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="/comments/">留言板</a><a href="/links/">我的朋友们</a><a href="/about/">关于我</a><a target="_blank" rel="noopener" href="https://icp.gov.moe/?keyword=2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https://tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https://pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https://news.cnortles.top">新闻</a><a href="/subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main></div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region="" class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"></path></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"></path><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"></path></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region="" class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"></path><circle cx="14" cy="11" r="4"></circle></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden="">
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden="">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden="">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label=""></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/bio/%E7%94%9F%E4%BF%A1%E5%AD%A6%E4%B9%A0/%E5%8F%82%E7%9C%8B%E6%96%87%E6%A1%A3/ch46/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer=""></script>
+<script data-stellar-script="core" defer="" src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style="" rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"单细胞分析实践","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&amp;runtime=1"></script>
+
+
+<!-- inject -->
+<script defer="" src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer="" src="/js/navigation-init.js?v=2.0.0"></script>
+</div>
+
+</body></html>

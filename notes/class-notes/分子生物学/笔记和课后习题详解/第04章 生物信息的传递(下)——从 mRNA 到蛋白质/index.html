@@ -1,0 +1,1022 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC04%E7%AB%A0%20%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92(%E4%B8%8B)%E2%80%94%E2%80%94%E4%BB%8E%20mRNA%20%E5%88%B0%E8%9B%8B%E7%99%BD%E8%B4%A8/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>第4章 生物信息的传递(下)——从 mRNA 到蛋白质 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="第4章 生物信息的传递(下)——从 mRNA 到蛋白质——从 mRNA 到蛋白质 4.1 复习笔记【知识概览】 三联子密码 遗传密码 遗传密码的性质 tRNA 的三叶草二级结构 tRNA 的三级结构——倒 L 形 tRNA tRNA 的种类 tRNA 的功能 氨酰 tRNA 合成酶 核糖体 RNA(rRNA) 核糖体的结构 核糖体 核糖体的3个tRNA结合位点 核糖体的功能 从 mRNA 到 蛋" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第4章 生物信息的传递(下)——从 mRNA 到蛋白质" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC04%E7%AB%A0%20%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92(%E4%B8%8B)%E2%80%94%E2%80%94%E4%BB%8E%20mRNA%20%E5%88%B0%E8%9B%8B%E7%99%BD%E8%B4%A8/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="第4章 生物信息的传递(下)——从 mRNA 到蛋白质——从 mRNA 到蛋白质 4.1 复习笔记【知识概览】 三联子密码 遗传密码 遗传密码的性质 tRNA 的三叶草二级结构 tRNA 的三级结构——倒 L 形 tRNA tRNA 的种类 tRNA 的功能 氨酰 tRNA 合成酶 核糖体 RNA(rRNA) 核糖体的结构 核糖体 核糖体的3个tRNA结合位点 核糖体的功能 从 mRNA 到 蛋" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/images/ch04-%E5%9B%BE4-1.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-09-17T16:00:00.000Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.150Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="习题" data-stellar-page-meta="">
+<meta property="article:tag" content="分子生物学" data-stellar-page-meta="">
+<meta property="article:tag" content="考研真题" data-stellar-page-meta="">
+<meta property="article:tag" content="课程" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/images/ch04-%E5%9B%BE4-1.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第4章 生物信息的传递(下)——从 mRNA 到蛋白质" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content=",,," data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC04%E7%AB%A0%20%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92(%E4%B8%8B)%E2%80%94%E2%80%94%E4%BB%8E%20mRNA%20%E5%88%B0%E8%9B%8B%E7%99%BD%E8%B4%A8/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"第4章 生物信息的传递(下)——从 mRNA 到蛋白质","description":"第4章 生物信息的传递(下)——从 mRNA 到蛋白质——从 mRNA 到蛋白质\n4.1 复习笔记【知识概览】\n三联子密码\n遗传密码\n遗传密码的性质\ntRNA 的三叶草二级结构\ntRNA 的三级结构——倒 L 形\ntRNA\ntRNA 的种类\ntRNA 的功能\n氨酰 tRNA 合成酶\n核糖体 RNA(rRNA)\n核糖体的结构\n核糖体\n核糖体的3个tRNA结合位点\n核糖体的功能\n从\nmRNA\n到...","url":"https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC04%E7%AB%A0%20%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92(%E4%B8%8B)%E2%80%94%E2%80%94%E4%BB%8E%20mRNA%20%E5%88%B0%E8%9B%8B%E7%99%BD%E8%B4%A8/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC04%E7%AB%A0%20%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92(%E4%B8%8B)%E2%80%94%E2%80%94%E4%BB%8E%20mRNA%20%E5%88%B0%E8%9B%8B%E7%99%BD%E8%B4%A8/">第4章 生物信息的传递(下)——从 mRNA 到蛋白质</a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-09-17T16:00:00.000Z">2026-09-18</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.150Z">2026-10-08</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第4章 生物信息的传递(下)——从 mRNA 到蛋白质</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="第4章-生物信息的传递-下-——从-mRNA-到蛋白质"><a href="#第4章-生物信息的传递-下-——从-mRNA-到蛋白质" class="headerlink" title="第4章 生物信息的传递(下)——从 mRNA 到蛋白质"></a>第4章 生物信息的传递(下)——从 mRNA 到蛋白质</h1><p>——从 mRNA 到蛋白质</p>
+<h2 id="4-1-复习笔记"><a href="#4-1-复习笔记" class="headerlink" title="4.1 复习笔记"></a>4.1 复习笔记</h2><p>【知识概览】</p>
+<p>三联子密码</p>
+<p>遗传密码</p>
+<p>遗传密码的性质</p>
+<p>tRNA 的三叶草二级结构</p>
+<p>tRNA 的三级结构——倒 L 形</p>
+<p>tRNA</p>
+<p>tRNA 的种类</p>
+<p>tRNA 的功能</p>
+<p>氨酰 tRNA 合成酶</p>
+<p>核糖体 RNA(rRNA)</p>
+<p>核糖体的结构</p>
+<p>核糖体</p>
+<p>核糖体的3个tRNA结合位点</p>
+<p>核糖体的功能</p>
+<p>从</p>
+<p>mRNA</p>
+<p>到</p>
+<p>蛋</p>
+<p>白</p>
+<p>质</p>
+<p>氨基酸的活化</p>
+<p>原核生物翻译起始过程</p>
+<p>翻译的起始</p>
+<p>蛋白质合成过程</p>
+<p>真核生物翻译起始过程</p>
+<p>原核生物与真核生物翻译起始的差异</p>
+<p>肽链的延伸</p>
+<p>过程</p>
+<p>肽链的终止</p>
+<p>释放因子(RF)</p>
+<p>原核生物和真核生物蛋白质合成的总结</p>
+<p>蛋白质多肽链合成后的加工和折叠</p>
+<p>蛋白质合成的抑制剂</p>
+<p>翻译-运转同步机制</p>
+<p>蛋白质的定向运输</p>
+<p>翻译后运转机制</p>
+<p>核定位蛋白的运转机制</p>
+<p>泛素化修饰介导的蛋白质降解</p>
+<p>蛋白质的修饰、降解与稳定性研究。</p>
+<p>蛋白质的 SUMO 化修饰</p>
+<p>蛋白质的 NEDD 化修饰</p>
+<p>蛋白质的一级结构对蛋白质稳定性的影响</p>
+<p>【重难点归纳】</p>
+<h2 id="一、遗传密码"><a href="#一、遗传密码" class="headerlink" title="一、遗传密码"></a>一、遗传密码</h2><h2 id="1-三联子密码"><a href="#1-三联子密码" class="headerlink" title="1. 三联子密码"></a>1. 三联子密码</h2><p>三联子密码即密码子或三联体密码子(遗传密码)，是指存在于 mRNA 上能翻译成蛋白质多肽链上的一个氨基酸的 3 个连续的核苷酸。</p>
+<h2 id="2-遗传密码的性质"><a href="#2-遗传密码的性质" class="headerlink" title="2. 遗传密码的性质"></a>2. 遗传密码的性质</h2><p>表 4-1 遗传密码的性质</p>
+<div class="md-table-scroll"><table><tbody><tr><td>特性</td><td>具体含义</td></tr><tr><td>连续性</td><td>编码一条肽链的所有密码子都是从5'端起始密码子开始,到3'端终止密码一个接一个地呈线性排列,密码子之间无间隔也无交叉</td></tr><tr><td>简并性</td><td>由一种以上的密码子编码同一个氨基酸的现象;一种氨基酸有两种或两种以上的密码子称为同义密码子,只有甲硫氨酸(Met)和色氨酸(Trp)仅由一个密码子编码</td></tr><tr><td>变偶性</td><td>密码子和反密码子前两位碱基进行严格的配对。第三位碱基可以有一定的变动性,有一定的自由度(表4-2)</td></tr><tr><td>通用性与特殊性</td><td>所有生物几乎都使用同一套密码子,但线粒体DNA以及少数生物基因组的密码子有差异</td></tr></tbody></table></div>
+
+<p>表 4-2 反密码子与密码子碱基配对的”摆动”规则</p>
+<div class="md-table-scroll"><table><tbody><tr><td>反密码子5'碱基(第1位碱基)</td><td>C</td><td>A</td><td>U</td><td>G</td><td>I</td></tr><tr><td>密码子3'碱基(第3位碱基)</td><td>G</td><td>U</td><td>A或G</td><td>C或U</td><td>U、C或A</td></tr></tbody></table></div>
+
+<p>注：I表示次黄嘌呤，这是一种特殊碱基。</p>
+<h2 id="二、tRNA"><a href="#二、tRNA" class="headerlink" title="二、tRNA"></a>二、tRNA</h2><h2 id="1-tRNA-的三叶草二级结构"><a href="#1-tRNA-的三叶草二级结构" class="headerlink" title="1. tRNA 的三叶草二级结构"></a>1. tRNA 的三叶草二级结构</h2><p>tRNA 的二级结构十分稳定，呈三叶草形，双螺旋区构成了叶柄，突环区形成三叶草的三片叶子。三叶草结构由二氢尿嘧啶环、反密码子环、额外环、TψC 环和受体臂组成。</p>
+<p>(1)二氢尿嘧啶环(D 环/DHU 环)</p>
+<p>含有二氢尿嘧啶(DHU)，由8~12个核苷酸组成，与tRNA分子的其余部分相连。</p>
+<p>(2) 反密码子环</p>
+<p>由 3 个碱基构成反密码子，与密码子配对。</p>
+<p>(3)额外环(可变环)</p>
+<p>位于 TψC 和反密码子环之间，其大小往往是 tRNA 分类的重要指标。</p>
+<p>(4) $\mathrm{T}\psi \mathrm{C}$ 环</p>
+<p>ψ 表示假尿嘧啶。</p>
+<p>(5) 受体臂</p>
+<p>接受氨基酸的位点，其3’端末端是CCA—OH序列，能接受活化的氨基酸。</p>
+<h2 id="2-tRNA-的三级结构——倒-L-形"><a href="#2-tRNA-的三级结构——倒-L-形" class="headerlink" title="2. tRNA 的三级结构——倒 L 形"></a>2. tRNA 的三级结构——倒 L 形</h2><p>tRNA 的倒 L 形三级结构靠二级结构中未配对碱基之间形成的氢键维持，与 AA-tRNA 合成酶对 tRNA 的识别有关。结构模型如下：</p>
+<p>(1) 受体臂位于倒 L 形分子的一端，反密码子臂则处于相反的一端。</p>
+<p>(2) 受体臂与 TψC 臂构成第一个双螺旋，即倒”L”上面的一横，D 臂与之垂直。</p>
+<p>(3) D 臂和反密码子臂构成第二个双螺旋, 即倒”L”的一竖。</p>
+<h2 id="3-tRNA-的种类"><a href="#3-tRNA-的种类" class="headerlink" title="3. tRNA 的种类"></a>3. tRNA 的种类</h2><p>(1) 起始 tRNA 和延伸 tRNA</p>
+<p>①起始 tRNA</p>
+<p>起始 tRNA 是一类能特异地识别 mRNA 模板上起始密码子的 tRNA，即第一个进入核糖</p>
+<p>体与 mRNA 起始密码子结合的 tRNA。</p>
+<p>a. 原核生物起始 tRNA 携带甲酰甲硫氨酸(fMet)。</p>
+<p>b. 真核生物起始 tRNA 携带甲硫氨酸(Met)。</p>
+<h2 id="②延伸-tRNA"><a href="#②延伸-tRNA" class="headerlink" title="②延伸 tRNA"></a>②延伸 tRNA</h2><p>延伸 tRNA 是指除了起始 tRNA 以外，参与肽链延伸的 tRNA。</p>
+<h2 id="2-同工-tRNA"><a href="#2-同工-tRNA" class="headerlink" title="(2) 同工 tRNA"></a>(2) 同工 tRNA</h2><p>一种氨基酸对应于多种密码子，同工 tRNA 就是能携带某种氨基酸对应的多种密码子的 tRNA，它们能被同一种氨酰 - tRNA 合成酶识别。</p>
+<h2 id="3-校正-tRNA"><a href="#3-校正-tRNA" class="headerlink" title="(3)校正 tRNA"></a>(3)校正 tRNA</h2><p>校正 tRNA 是指能校正无义突变及错义突变的 tRNA。</p>
+<h2 id="①无义突变"><a href="#①无义突变" class="headerlink" title="①无义突变"></a>①无义突变</h2><p>无义突变是指一种导致有义密码子转变成终止密码子(UAG、UGA、UAA)的突变，通常会使得翻译的多肽链缩短而合成无功能、无意义的多肽链。</p>
+<p>无义突变的校正 tRNA 可通过改变反密码子区校正无义突变，但必须通过与释放因子竞争识别密码子来实现。</p>
+<h2 id="②错义突变"><a href="#②错义突变" class="headerlink" title="②错义突变"></a>②错义突变</h2><p>错义突变是指三联体密码子突变导致蛋白质中原来的氨基酸被另一种氨基酸所取代的一种突变。该突变产生的效应从零到基因产物的完全失活，主要取决于氨基酸在产物中的位置以及取代氨基酸和原先氨基酸的性质。</p>
+<p>错义突变的校正 tRNA 通过反密码子区的改变而把正确的氨基酸加到肽链上。</p>
+<h2 id="4-tRNA-的功能"><a href="#4-tRNA-的功能" class="headerlink" title="4. tRNA 的功能"></a>4. tRNA 的功能</h2><p>tRNA 在翻译过程中起到了解码的功能，即携带并转运氨基酸到核糖体，在 mRNA 指导下合成蛋白质。</p>
+<h2 id="5-氨酰-tRNA-合成酶"><a href="#5-氨酰-tRNA-合成酶" class="headerlink" title="5. 氨酰 tRNA 合成酶"></a>5. 氨酰 tRNA 合成酶</h2><p>氨酰 tRNA 合成酶指催化 tRNA 与其对应的氨基酸相结合，并对两者都具有高度专一性的酶。</p>
+<h2 id="三、核糖体"><a href="#三、核糖体" class="headerlink" title="三、核糖体"></a>三、核糖体</h2><h2 id="1-核糖体的结构"><a href="#1-核糖体的结构" class="headerlink" title="1. 核糖体的结构"></a>1. 核糖体的结构</h2><p>核糖体是合成蛋白质的场所，由大小两个亚基组成，主要包括核糖体蛋白(r-蛋白)和核糖体 rRNA(rRNA)。原核细胞与真核细胞核糖体的结构如表 4-3 所示。</p>
+<p>表 4-3 原核细胞和真核细胞核糖体的结构</p>
+<div class="md-table-scroll"><table><tbody><tr><td rowspan="2" colspan="2">化学组成</td><td colspan="2">原核细胞核糖体(70S)</td><td colspan="2">真核细胞核糖体(80S)</td></tr><tr><td>小亚基</td><td>大亚基</td><td>小亚基</td><td>大亚基</td></tr><tr><td colspan="2">沉降系数</td><td>30S</td><td>50S</td><td>40S</td><td>60S</td></tr><tr><td rowspan="2">r-蛋白</td><td>种类</td><td>21种</td><td>36种</td><td>33种</td><td>49种</td></tr><tr><td>占比</td><td colspan="2">1/3</td><td colspan="2">2/5</td></tr><tr><td rowspan="2">rRNA</td><td>种类</td><td>16S</td><td>23S、5S</td><td>18S</td><td>28S、5.8S、5S</td></tr><tr><td>占比</td><td colspan="2">2/3</td><td colspan="2">3/5</td></tr></tbody></table></div>
+
+<h2 id="1-核糖体-RNA-rRNA"><a href="#1-核糖体-RNA-rRNA" class="headerlink" title="(1) 核糖体 RNA(rRNA)"></a>(1) 核糖体 RNA(rRNA)</h2><p>①5S rRNA：存在两个保守序列，一个与 tRNA 相互识别，一个与 50S 核糖体大亚基互补。</p>
+<p>②16S rRNA：能够与 mRNA、50S 亚基以及 P 位和 A 位的 tRNA 的反密码子直接作用。保守序列 ACCUCCUUA 与 mRNA 的 5’ 端富含嘌呤的序列互补；靠近 3’ 端的一段保守序列与 23S rRNA 互补，结合 30S 和 50S 亚基。</p>
+<p>③23S rRNA：核糖体大亚基的主要成分，能催化肽键的形成。</p>
+<p>④5.8S rRNA：是真核生物核糖体大亚基特有的 rRNA，含有修饰碱基以及与 tRNA 作用的识别序列。</p>
+<p>⑤18S rRNA：酵母 18S rRNA 的 3’ 端与大肠杆菌 16S rRNA 有广泛的同源性。</p>
+<p>⑥28S rRNA: 功能不详。</p>
+<p>(2)核糖体的3个tRNA结合位点</p>
+<p>①A 位点：新掺入的氨酰 tRNA 的结合位点。</p>
+<p>②P 位点：延伸中的肽酰 tRNA 结合位点。</p>
+<p>③E 位点(去位/排出位): 释放已经卸载了氨基酸的 tRNA 的位点。真核生物核糖体无 E 位点。</p>
+<p>tRNA 的移动顺序是从 A 位到 P 位再到 E 位，每一个 tRNA 的结合位点都横跨核糖体的两个亚基，位于亚基之间的交界面处。</p>
+<h2 id="2-核糖体的功能"><a href="#2-核糖体的功能" class="headerlink" title="2. 核糖体的功能"></a>2. 核糖体的功能</h2><p>①包括多个活性中心：mRNA 结合位点、A 位、P 位、肽基转移位点、形成肽键的部位（转肽酶中心）、延伸因子结合位点。</p>
+<p>②核糖体小亚基的功能：特异性识别模板 mRNA（识别起始部位、密码子与反密码子互作）。</p>
+<p>③核糖体大亚基的功能：负责携带氨基酸和 tRNA，包括肽键的形成，AA-tRNA、肽酰 tRNA 的结合等。</p>
+<p>④蛋白质表达控制：正常细胞可能通过调整特定核糖体的数量来控制蛋白质的表达量。</p>
+<h2 id="四、蛋白质合成过程"><a href="#四、蛋白质合成过程" class="headerlink" title="四、蛋白质合成过程"></a>四、蛋白质合成过程</h2><h2 id="1-氨基酸的活化"><a href="#1-氨基酸的活化" class="headerlink" title="1. 氨基酸的活化"></a>1. 氨基酸的活化</h2><p>①氨基酸的活化是指在氨酰 tRNA 合成酶的作用下，氨基酸与特异的 tRNA 形成活化的 AA-tRNA 的过程。氨酰 tRNA 合成酶能催化氨基酸的羧基与 tRNA 3’ 端腺苷酸核糖基上 3’—OH 形成二酯键，生成 AA-tRNA，该酶具有绝对专一性和校正活性。反应式为</p>
+<p>$$<br>\mathrm{AA+tRNA+ATP} \xrightarrow {\text { 氨酰tRNA合成酶 }} \mathrm{AA-tRNA+AMP+PPi}<br>$$</p>
+<p>②起始氨酰 tRNA: fMet - tRNA $^{fMet}$ (原核生物)、Met - tRNAi $^{Met}$ (真核生物)。</p>
+<h2 id="2-翻译的起始"><a href="#2-翻译的起始" class="headerlink" title="2. 翻译的起始"></a>2. 翻译的起始</h2><p>(1) 原核生物翻译起始过程</p>
+<p>①所需的成分</p>
+<p>30S 小亚基、50S 大亚基、模板 mRNA、fMet - tRNA $^{fMet}$ 、翻译起始因子（IF-1、IF-2 和 IF-3）、GTP、Mg $^{2+}$ 。</p>
+<h2 id="②原核生物翻译起始的过程"><a href="#②原核生物翻译起始的过程" class="headerlink" title="②原核生物翻译起始的过程"></a>②原核生物翻译起始的过程</h2><p>a. 30S 小亚基与 IF-3、IF-1 结合，促使大小亚基分离。然后 30S 小亚基借助 16S rRNA 3’ 端与 mRNA 的 SD 序列互补，与 mRNA 模板结合，形成 30S·mRNA·IF-1·IF-3 复合物。</p>
+<p>b. IF-2 与 GTP 结合，fMet-tRNA $^{fMet}$ 进入 P 位，与上述复合物结合，形成 30S 起始复合物。起始密码子与反密码子识别。</p>
+<p>c. 30S 起始复合物再与 50S 大亚基结合，GTP 水解成 GDP，释放翻译起始因子，形成 70S 起始复合物。</p>
+<h2 id="2-真核生物翻译起始过程"><a href="#2-真核生物翻译起始过程" class="headerlink" title="(2) 真核生物翻译起始过程"></a>(2) 真核生物翻译起始过程</h2><p>①在 eIF2 及 GTP 的介导下 Met-tRNAi $^{Met}$ 首先与结合有 eIF3 的核糖体 40S 小亚基结合，在帽子结合蛋白 (eIF4E) 作用下与 mRNA 5’ 端结合，eIF4A、eIF4B 通过衔接蛋白 (eIF4G) 结合到 eIF4E 上，mRNA 3’ 端通过 poly(A) 结合蛋白 (PABP) 结合到 eIF4G 上，形成的 40S 起始复合物沿 mRNA 移动，扫描到核糖体结合位点 (RBS)，识别 AUG 起始密码子，消耗 ATP。</p>
+<p>②在 eIF5 作用下，60S 大亚基与 40S 复合物结合形成 80S 起始复合物，GTP 水解，起始因子离开，消耗 ATP。</p>
+<h2 id="3-原核生物与真核生物翻译起始的差异"><a href="#3-原核生物与真核生物翻译起始的差异" class="headerlink" title="(3) 原核生物与真核生物翻译起始的差异"></a>(3) 原核生物与真核生物翻译起始的差异</h2><p>原核生物与真核生物翻译起始的机制相差不大，但存在一些细小的差异。主要包括以下几个方面。</p>
+<p>①原核生物核糖体为 70S，大亚基 50S，小亚基 30S；真核生物核糖体为 80S，大亚基 60S，小亚基 40S。</p>
+<p>②原核生物起始 tRNA 是 fMet - tRNA $^{fMet}$ ；而真核生物的起始 tRNA 是 Met - tRNAi $^{Met}$ ，不被甲酰化。</p>
+<p>③原核生物只有3个起始因子，真核生物有较多的起始因子参与。</p>
+<p>④原核生物 mRNA 有 SD 序列；大多数真核生物 mRNA 不含有 SD 序列，RBS 位于起始密码子 AUG 附近。</p>
+<p>⑤原核生物 mRNA 先与 30S 小亚基结合，再与 fMet - tRNA $^{fMet}$ 结合，最后与 50S 大亚基结合生成 70S 起始复合物；而真核生物 Met - tRNAi $^{Met}$ 先与 40S 小亚基结合，再与模板 mRNA 结合，沿 mRNA 扫描发现 AUG，最后与 60S 大亚基结合生成 80S 起始复合物。</p>
+<p>⑥真核生物 40S 小亚基从 mRNA 5’ 端移向 RBS 过程中，需消耗 ATP。</p>
+<h2 id="3-肽链的延伸"><a href="#3-肽链的延伸" class="headerlink" title="3. 肽链的延伸"></a>3. 肽链的延伸</h2><p>原核细胞和真核细胞的蛋白质延伸机制相似。起始复合物生成后，第一个氨基酸(fMet/Met-tRNA)与核糖体结合后就开始肽链的延伸过程。</p>
+<h2 id="1-进位"><a href="#1-进位" class="headerlink" title="(1) 进位"></a>(1) 进位</h2><p>与 mRNA 起始密码子下一个三联体密码子相对应的 AA-tRNA 进入核糖体的 A 位上，该过程需要 GTP、延伸因子 EF-Tu、 $Mg^{2+}$ 。</p>
+<h2 id="2-成肽"><a href="#2-成肽" class="headerlink" title="(2) 成肽"></a>(2) 成肽</h2><p>在肽基转移酶的催化下，A 位上的 AA-tRNA 氨基对 P 位的起始 tRNA（即 fMet-tRNA $^{fMet}$ ）的羰基亲核进攻，形成肽键。</p>
+<h2 id="3-移位"><a href="#3-移位" class="headerlink" title="(3)移位"></a>(3)移位</h2><p>核糖体沿着 mRNA 的 3’ 端移动，二肽酰 - tRNA₂ 从 A 位移到 P 位，A 位腾空，原来脱酰基的 tRNA 由 P 位进入 E 位并离开核糖体。真核生物核糖体无 E 位点，脱酰基 tRNA 直接从 P 位点离开核糖体。</p>
+<p>肽链的延伸就是氨基酸进位、转肽和移位不断循环，使肽链不断延长的过程。</p>
+<h2 id="4-肽链的终止"><a href="#4-肽链的终止" class="headerlink" title="4. 肽链的终止"></a>4. 肽链的终止</h2><h2 id="1-过程"><a href="#1-过程" class="headerlink" title="(1) 过程"></a>(1) 过程</h2><p>核糖体沿 mRNA 滑动，使多肽链延长，直到终止密码子（UAA、UAG 或 UGA）进入 A 位，此时没有相应的 AA-tRNA 与之结合，释放因子（RF）识别并结合终止密码子，P 位点上多肽链与 tRNA 之间的二酯键被水解，新生肽链被释放，mRNA、空载 tRNA、RF 脱离核糖体，核糖体大、小亚基解体，蛋白质合成结束。</p>
+<h2 id="2-释放因子-RF"><a href="#2-释放因子-RF" class="headerlink" title="(2) 释放因子(RF)"></a>(2) 释放因子(RF)</h2><p>RF 具有 GTP 酶活性，催化 GTP 水解，使肽链与核糖体解离。释放因子分为两类。</p>
+<p>① I 类释放因子：识别终止密码子，催化新合成的多肽链从 P 位的 tRNA 中释放出来。</p>
+<p>②Ⅱ类释放因子：具有 GTP 酶活性，在多肽链释放后刺激Ⅰ类释放因子从核糖体中解离出来。</p>
+<h2 id="5-原核生物和真核生物蛋白质合成的总结"><a href="#5-原核生物和真核生物蛋白质合成的总结" class="headerlink" title="5. 原核生物和真核生物蛋白质合成的总结"></a>5. 原核生物和真核生物蛋白质合成的总结</h2><p>表 4-4 原核生物和真核生物蛋白质生物合成所需组分及因子</p>
+<div class="md-table-scroll"><table><tbody><tr><td colspan="2">蛋白质合成过程</td><td>原核生物</td><td>真核生物</td></tr><tr><td colspan="2">氨基酸活化</td><td colspan="2">氨基酸、tRNA、氨酰-tRNA合成酶、ATP、 $Mg^{2+}$ </td></tr><tr><td colspan="2">肽链起始</td><td>mRNA的起始密码、模板mRNA的SD序列、fMet-tRNA $^{fMet}$ 、30S亚基、50S亚基、IF-1、IF-2、IF-3、GTP、 $Mg^{2+}$ </td><td>mRNA的起始密码子、5′帽子结构、Met-tRNAi $^{Met}$ 、40S亚基、60S亚基、eIF1~eIF6、GTP、ATP、 $Mg^{2+}$ </td></tr><tr><td rowspan="3">肽链延长</td><td>氨酰-tRNA的结合</td><td>70S核糖体、mRNA的密码、氨酰-tRNA</td><td>80S核糖体、mRNA的密码、氨酰-tRNA</td></tr><tr><td>肽键形成</td><td>EF-Tu、EF-Ts、GTP肽基转移酶、 $Mg^{2+}$ </td><td>eEF1A、eEF1B、GTP肽基转移酶、 $Mg^{2+}$ </td></tr><tr><td>移位</td><td>EF-G、GTP</td><td>eEF2、GTP</td></tr><tr><td colspan="2">肽链终止和释放</td><td>70S核糖体、mRNA的终止密码、RF-1、RF-2、RF-3、GTP、 $Mg^{2+}$ </td><td>80S核糖体、mRNA的终止密码、eRF1、eRF3、GTP、 $Mg^{2+}$ </td></tr></tbody></table></div>
+
+<p>表 4-5 原核生物和真核生物蛋白质合成全过程对比</p>
+<div class="md-table-scroll"><table><tbody><tr><td>项目</td><td>原核生物蛋白质合成</td><td>真核生物蛋白质合成</td></tr><tr><td>核糖体</td><td>70S(50S+30S)</td><td>80S(60S+40S)</td></tr><tr><td>氨基酸的活化</td><td colspan="2">AA+tRNA+ATP $\xrightarrow{\text{氨酰 tRNA 合成酶}}$ AA-tRNA+AMP+PPi氨酰 tRNA 合成酶对底物氨基酸和 tRNA 都有高度特异性,还有校正活性</td></tr><tr><td>起始氨基酰 tRNA</td><td>fMet - tRNAtMet</td><td>Met - tRNAtMet</td></tr><tr><td>合成原料</td><td colspan="2">氨基酸</td></tr><tr><td>适配器</td><td colspan="2">各种 tRNA</td></tr><tr><td>模板(mRNA)</td><td>多顺反子 mRNA;转录后很少加工;转录、翻译和 mRNA 的降解可同时发生</td><td>单顺反子 mRNA;转录后进行首、尾修饰及剪接;mRNA 核内合成,加工后进入胞液,再作模板</td></tr><tr><td rowspan="7">肽链合成起始</td><td>起始因子:3种IF(IF-1、IF-2、IF-3)</td><td>起始因子:10余种(eIF)</td></tr><tr><td>起始密码:AUG(少数是GUG,偶尔是UUG)</td><td>mRNA的起始密码:AUG</td></tr><tr><td>SD序列:有</td><td>无SD序列,依赖mRNA 5'端帽子</td></tr><tr><td>1核糖体大小亚基分离:IF-3、IF-1与小亚基结合促进大小亚基分离</td><td>1核糖体大小亚基分离:eIF3、eIF2B与小亚基结合,在eIF6参与下,促进80S解离成大小亚基</td></tr><tr><td>2mRNA在小亚基定位结合:30S小亚基首先与翻译起始因子IF-1、IF-3结合,通过SD序列与mRNA模板结合</td><td>2在eIF2B的作用下,eIF2与GTP结合;在其他eIF的参与下, $Met-tRNAi^{Met}$ 与结合了GTP的eIF2共同结合于小亚基的P位</td></tr><tr><td>3fMet- $tRNA^{fMet}$ -IF-2-GTP结合到mRNA上,形成30S起始复合物</td><td>3核糖体小亚基与mRNA 5'端结合,沿着3'端扫描识别起始密码子AUG</td></tr><tr><td>4与核糖体大亚基结合,IF-2结合的GTP水解,促使3种IF释放,形成70S起始复合物</td><td>4核糖小亚基在eIF5和GTP的作用下与大亚基结合形成80S起始复合物</td></tr><tr><td>肽链延长</td><td colspan="2">进位:氨酰-tRNA进入并结合到核糖体A位成肽:转肽酶催化两个氨基酸间肽键形成的反应移位:核糖体沿着mRNA的移位</td></tr><tr><td>肽链合成终止</td><td>释放因子3种:RF-1识别UAA、UAG;RF-2识别UAA、UGA;RF-3协助RF-1、2</td><td>释放因子2种:eRF1识别所有终止密码;eRF3借助GTP的能量,帮助eRF1的释放</td></tr></tbody></table></div>
+
+<h2 id="五、蛋白质多肽链合成后的加工和折叠"><a href="#五、蛋白质多肽链合成后的加工和折叠" class="headerlink" title="五、蛋白质多肽链合成后的加工和折叠"></a>五、蛋白质多肽链合成后的加工和折叠</h2><h2 id="1-蛋白质前体的加工"><a href="#1-蛋白质前体的加工" class="headerlink" title="1. 蛋白质前体的加工"></a>1. 蛋白质前体的加工</h2><p>表 4-6 蛋白质前体的加工方式</p>
+<div class="md-table-scroll"><table><tbody><tr><td colspan="2">加工方式</td><td>加工过程</td></tr><tr><td colspan="2">N端修饰</td><td>在多肽链合成之前,N端的fMet被脱甲酰化酶除去甲酰基,Met被氨基肽酶切除</td></tr><tr><td colspan="2">二硫键的形成</td><td>蛋白质合成后通过两个半胱氨酸的氧化作用生成二硫键</td></tr><tr><td rowspan="5">氨基酸残基的化学修饰</td><td>磷酸化</td><td>由蛋白激酶催化,发生在丝氨酸、苏氨酸和酪氨酸上</td></tr><tr><td>糖基化</td><td>使多肽转变成糖蛋白,由内质网中的糖基化酶催化。N-糖基化发生在天冬氨酸上,O-糖基化发生在丝氨酸和苏氨酸上</td></tr><tr><td>甲基化</td><td>由甲基转移酶催化,N-甲基化发生在精氨酸、谷氨酰胺、组氨酸上;O-甲基化发生在谷氨酸和天冬氨酸上</td></tr><tr><td>乙酰化</td><td>由乙酰基转移酶催化,发生在赖氨酸侧链上</td></tr><tr><td>泛素化和类泛素化修饰</td><td>发生在赖氨酸残基侧链上,由E1、E2、E3一系列酶催化</td></tr><tr><td colspan="2">切除新生肽链中的非功能片段</td><td>多肽链生成后经专一性蛋白酶催化,切除部分肽段,导致酶原激活,才能显示出生物活性</td></tr></tbody></table></div>
+
+<h2 id="2-蛋白质的折叠"><a href="#2-蛋白质的折叠" class="headerlink" title="2. 蛋白质的折叠"></a>2. 蛋白质的折叠</h2><p>一级结构的蛋白质分子需经过折叠后形成一定的三维空间结构，才能发挥生物学功能。多数蛋白质是边翻译边折叠的，需酶（二硫键异构酶、脯氨酰顺反异构酶）和分子伴侣。</p>
+<p>细胞中的某些蛋白质分子可以识别正在合成的多肽链或部分折叠的多肽并与这些多肽的某些部位结合，从而帮助多肽移动、折叠或装配，这类分子本身并不参与最终产物的形成，称为分子伴侣。分子伴侣在序列上没有相关性，在进化上十分保守。细胞内至少存在两种分子伴侣家族。</p>
+<h2 id="1-热休克蛋白"><a href="#1-热休克蛋白" class="headerlink" title="(1) 热休克蛋白"></a>(1) 热休克蛋白</h2><p>热休克蛋白是一类热应激蛋白，包括 HSP70、HSP40 和 GrpE 三个家族，能促进自发折叠的蛋白质形成天然的空间构象。</p>
+<h2 id="2-伴侣素"><a href="#2-伴侣素" class="headerlink" title="(2)伴侣素"></a>(2)伴侣素</h2><p>伴侣素包括 HSP60 和 HSP10，主要为非自发性折叠蛋白提供能折叠形成天然结构的微环境。</p>
+<h2 id="六、蛋白质合成的抑制剂"><a href="#六、蛋白质合成的抑制剂" class="headerlink" title="六、蛋白质合成的抑制剂"></a>六、蛋白质合成的抑制剂</h2><p>多种抗生素和毒蛋白能在不同步骤上抑制蛋白质合成。表4-7列出一些蛋白质合成的抑制剂及其抑制原理。</p>
+<p>表 4-7 常用的蛋白质合成抑制剂抑制肽链生物合成的原理</p>
+<div class="md-table-scroll"><table><tbody><tr><td>抗生素/毒素</td><td>目标细胞</td><td>作用位点</td><td>作用原理</td></tr><tr><td>氯霉素</td><td>原核</td><td>50S亚基肽基转移酶中心</td><td>阻断A位点的氨酰-tRNA为进行肽基转移反应的正确定位,抑制肽键形成</td></tr><tr><td>红霉素</td><td>原核</td><td>50S亚基多肽出口通道</td><td>封闭多肽链从核糖体的出口,阻遏翻译</td></tr><tr><td>四环素</td><td>原核</td><td>30S亚基A位点</td><td>阻断氨酰tRNA结合到A位,使肽链延伸受阻</td></tr><tr><td>卡那霉素</td><td>原核</td><td>30S亚基</td><td>干扰AA-tRNA与核糖体结合引起读码错误</td></tr><tr><td>青霉素</td><td>原核</td><td>肽聚糖转肽酶</td><td>抑制细菌细胞壁的合成</td></tr><tr><td>嘌呤霉素</td><td rowspan="3">原核、真核</td><td>大亚基肽基转移酶中心</td><td>氨酰-tRNA的结构类似物,易和核糖体的A位结合,从而使蛋白质合成提前终止</td></tr><tr><td>潮霉素</td><td>30S亚基A位点附近</td><td>阻挠A位点tRNA到P位点的位移</td></tr><tr><td>链霉素</td><td>作用于30S亚基</td><td>干扰氨酰tRNA与核糖体的结合;导致mRNA的错读</td></tr></tbody></table></div>
+
+<h2 id="七、蛋白质的定向运输"><a href="#七、蛋白质的定向运输" class="headerlink" title="七、蛋白质的定向运输"></a>七、蛋白质的定向运输</h2><p>核糖体是蛋白质合成的场所，但是蛋白质合成后需经过复杂机制，定向输送到最终发挥生物功能的细胞靶部位，这一过程称为蛋白质的靶向输送。根据氨基酸序列中的分拣信号，蛋白质运输途径分为两类。</p>
+<h2 id="1-翻译-运转同步机制"><a href="#1-翻译-运转同步机制" class="headerlink" title="1. 翻译 - 运转同步机制"></a>1. 翻译 - 运转同步机制</h2><p>蛋白质定位的信息存在于蛋白质本身的结构中，能和细胞膜上特定的受体作用最终得到表达，即蛋白质跨膜转运的信号存在于 mRNA 中。在起始密码子后，有一段编码疏水性氨基酸序列的 RNA 区域，这个氨基酸序列就被称为信号序列。翻译－运转同步机制需要信号肽的参与。</p>
+<h2 id="1-信号肽"><a href="#1-信号肽" class="headerlink" title="(1) 信号肽"></a>(1) 信号肽</h2><p>信号肽是指新合成的多肽链上用于指导蛋白质跨膜转运的 N 端氨基酸序列，但有时不一定在 N 端。它负责把蛋白质引导至不同的转运系统，随后信号肽被信号肽酶切除。信号</p>
+<p>①中部带有10~15个高度疏水氨基酸；</p>
+<p>②在靠近该序列 N 端常常有几个带正电荷的碱性氨基酸；</p>
+<p>③在其 C 端靠近蛋白酶切割位点处常带有数个极性氨基酸，离切割位点最近的氨基酸往往带有很短的侧链（丙氨酸或甘氨酸）。</p>
+<p>(2) 新生蛋白通过同步运转途径进入内质网内腔的主要过程</p>
+<p>信号识别蛋白(SRP)与停靠蛋白(DP，又称SRP受体蛋白)介导了蛋白质的跨膜运输过程，蛋白质的转运主要有以下几个过程。</p>
+<p>①蛋白质首先在核糖体中生成，当多肽链延伸至70个氨基酸左右时，N端的信号序列与SRP结合使肽链延伸暂停；</p>
+<p>②该 SRP-核糖体复合体受信号肽控制移到内质网上，SRP 与 DP 结合，蛋白质合成的延伸又重新开始；</p>
+<p>③多肽链通过转运装置进入内质网腔后，信号肽酶切除信号肽，多肽链进行折叠、糖基化等加工过程形成成熟的蛋白质，运输到相应的细胞器中。</p>
+<h2 id="2-翻译后运转机制"><a href="#2-翻译后运转机制" class="headerlink" title="2. 翻译后运转机制"></a>2. 翻译后运转机制</h2><p>游离核糖体上合成的蛋白质必须先合成并释放到胞质后才能被转运。通过这条途径输送的蛋白质包括定位于细胞核、线粒体、叶绿体和过氧化物酶体的蛋白质。</p>
+<h2 id="1-线粒体蛋白质的跨膜运转"><a href="#1-线粒体蛋白质的跨膜运转" class="headerlink" title="(1) 线粒体蛋白质的跨膜运转"></a>(1) 线粒体蛋白质的跨膜运转</h2><p>线粒体蛋白是由核 DNA 编码的，在胞质中的核糖体上合成后释放到细胞质基质，随后转运至线粒体中。</p>
+<p>①游离核糖体释放前体蛋白，前体蛋白在分子伴侣 HSP70 的帮助下解折叠。</p>
+<p>②解折叠的前体蛋白通过 N 端的前导肽同线粒体外膜上的受体蛋白(Tom 受体复合物)识别，并在受体(或附近)的内外膜接触点处利用 ATP 水解提供的能量驱动前体蛋白进入转运蛋白的运输通道(Tom 和 Tim 组成的膜通道)，然后由电化学梯度驱动穿过内膜，进入线粒体基质。</p>
+<p>③在基质中，由 mHSP70 继续维持前体蛋白的解折叠状态。然后在 HSP60 的帮助下，前体蛋白进行正确折叠，最后由蛋白水解酶切除前导肽，成为成熟的线粒体基质蛋白。</p>
+<h2 id="2-叶绿体蛋白质的跨膜运转"><a href="#2-叶绿体蛋白质的跨膜运转" class="headerlink" title="(2) 叶绿体蛋白质的跨膜运转"></a>(2) 叶绿体蛋白质的跨膜运转</h2><p>叶绿体定位信号肽含有两部分，第一部分决定该蛋白质能否进入叶绿体基质；第二部分决定该蛋白能否进入类囊体。转运过程与线粒体蛋白类似。一般进入叶绿体基质后切除一个叶绿体基质引导肽，进入类囊体腔后切除第二部分。</p>
+<h2 id="3-核定位蛋白的运转机制"><a href="#3-核定位蛋白的运转机制" class="headerlink" title="3. 核定位蛋白的运转机制"></a>3. 核定位蛋白的运转机制</h2><h2 id="1-物质进出细胞核的方式"><a href="#1-物质进出细胞核的方式" class="headerlink" title="(1) 物质进出细胞核的方式"></a>(1) 物质进出细胞核的方式</h2><p>①相对分子质量较小的蛋白质可自由通过核孔复合体(NPC)或采取被动扩散的方式进入细胞核。</p>
+<p>②相对分子质量大的蛋白质通过核定位信号序列(NLS)和出核信号序列(NES)进行入核和出核的转运。</p>
+<h2 id="2-运输受体"><a href="#2-运输受体" class="headerlink" title="(2) 运输受体"></a>(2) 运输受体</h2><p>运输受体可分为输入蛋白(如输入蛋白 $\alpha\beta$ ) 和输出蛋白。运输受体能够识别底物蛋白的 NLS 和 NES。</p>
+<h2 id="3-运转过程"><a href="#3-运转过程" class="headerlink" title="(3) 运转过程"></a>(3) 运转过程</h2><p>①α 和 β 组成异源二聚体，α 亚基与核蛋白的 NLS 结合，β 亚基与 NPC 作用。</p>
+<p>②由 $\alpha$ 、 $\beta$ 和 Ran(小单体 G 蛋白) 这 3 个蛋白组成的运输复合物通过 Ran GTP 酶水解 GTP 提供的能量，进入细胞核。</p>
+<p>③α 和 β 亚基解离，核蛋白与 α 亚基解离，核蛋白释放，α、β 通过核孔复合体返回细胞质中，准备新一轮蛋白质运转。</p>
+<h2 id="八、蛋白质的修饰、降解与稳定性研究"><a href="#八、蛋白质的修饰、降解与稳定性研究" class="headerlink" title="八、蛋白质的修饰、降解与稳定性研究"></a>八、蛋白质的修饰、降解与稳定性研究</h2><h2 id="1-泛素化修饰介导的蛋白质降解"><a href="#1-泛素化修饰介导的蛋白质降解" class="headerlink" title="1. 泛素化修饰介导的蛋白质降解"></a>1. 泛素化修饰介导的蛋白质降解</h2><h2 id="1’-泛素"><a href="#1’-泛素" class="headerlink" title="(1’)泛素"></a>(1’)泛素</h2><p>泛素是一种存在于所有真核生物中的小蛋白，它的主要功能是标记需要分解掉的蛋白质，使其被水解。当附有泛素的蛋白质移动到蛋白酶处时，蛋白酶将该蛋白质水解。</p>
+<h2 id="2-泛素化修饰的级联反应"><a href="#2-泛素化修饰的级联反应" class="headerlink" title="(2)泛素化修饰的级联反应"></a>(2)泛素化修饰的级联反应</h2><p>①由 ATP 供能，泛素的 C 末端与非特异性泛素激活酶 E1 的半胱氨酸残基共价结合，形成 E1-泛素复合体。</p>
+<p>②E1 - 泛素复合体将泛素转移给泛素结合酶 E2，E2 可以直接将泛素转移到靶蛋白赖氨酸残基的 $\varepsilon$ -氨基上。</p>
+<p>③在通常情况下，靶蛋白泛素化需要一个特异的泛素蛋白连接酶 E3，当第一个泛素分子在 E3 的催化下连接到靶蛋白上以后，另外一些泛素分子相继与前一个泛素分子的赖氨酸残基相连，逐渐形成一条多聚泛素链。</p>
+<p>④泛素化的靶蛋白被蛋白酶体逐步降解。多聚泛素也解聚为单个泛素分子，重新被利用。</p>
+<h2 id="2-蛋白质的-SUMO-化修饰"><a href="#2-蛋白质的-SUMO-化修饰" class="headerlink" title="2. 蛋白质的 SUMO 化修饰"></a>2. 蛋白质的 SUMO 化修饰</h2><p>SUMO 化修饰(SUMOylation)是指小泛素化修饰，是指细胞内一些与泛素化修饰相类似的反应，由小泛素相关修饰物(SUMO)介导，把 SUMO 转移到底物的赖氨酸残基上，稳定靶蛋白使其免受降解的过程。SUMO 化修饰能够阻止泛素化引起的蛋白质降解。SUMO 化修饰可参与转录调节、核转运、维持基因组完整性及信号转导等多种细胞内活动，它是一种重要的多功能蛋白质翻译后修饰方式。</p>
+<h2 id="3-蛋白质的-NEDD-化修饰"><a href="#3-蛋白质的-NEDD-化修饰" class="headerlink" title="3. 蛋白质的 NEDD 化修饰"></a>3. 蛋白质的 NEDD 化修饰</h2><p>NEDD 化修饰(NEDDylation)是指 NEDD8(类泛素蛋白修饰分子)在体内固有酶簇作用下被共价结合到底物蛋白上，参与蛋白质翻译后修饰的过程，其发生机制与泛素化相似，但不会引起蛋白质的降解，主要通过修饰作用调节蛋白质的功能。</p>
+<h2 id="4-蛋白质的一级结构对蛋白质稳定性的影响"><a href="#4-蛋白质的一级结构对蛋白质稳定性的影响" class="headerlink" title="4. 蛋白质的一级结构对蛋白质稳定性的影响"></a>4. 蛋白质的一级结构对蛋白质稳定性的影响</h2><p>成熟多肽 N 端的第一个氨基酸残基对蛋白质的稳定有影响，当 N 端是 Met、Gly、Ala、Set、Thr 和 Val 时，稳定；当 N 端为 Lys、Arg 时，最不稳定，很快被降解。</p>
+<h2 id="4-2-课后习题详解"><a href="#4-2-课后习题详解" class="headerlink" title="4.2 课后习题详解"></a>4.2 课后习题详解</h2><h2 id="1-简述破译遗传密码的主要过程"><a href="#1-简述破译遗传密码的主要过程" class="headerlink" title="1. 简述破译遗传密码的主要过程"></a>1. 简述破译遗传密码的主要过程</h2><p>答：遗传密码经历以下几个破译历程。</p>
+<h2 id="1-三联体密码的提出"><a href="#1-三联体密码的提出" class="headerlink" title="(1)三联体密码的提出"></a>(1)三联体密码的提出</h2><p>1954 年，物理学家 George Gamov 根据 DNA 中存在四种核苷酸和蛋白质中存在 20 种氨</p>
+<p>基酸的对应关系，通过数学推理，得出三个核苷酸编码一个氨基酸的结论。</p>
+<h2 id="2-遗传密码子的验证"><a href="#2-遗传密码子的验证" class="headerlink" title="(2) 遗传密码子的验证"></a>(2) 遗传密码子的验证</h2><p>①1961 年，Crick 及其同事用噬菌体做实验，证明遗传密码中三个碱基编码一个氨基酸。</p>
+<p>②1961 年，Nirenberg 等用大肠杆菌的无细胞蛋白质合成体系，在平行的 20 个体系中分别加入含有 19 种非放射性标记的氨基酸和 1 种放射性标记的氨基酸。利用多聚核苷酸磷酸化酶合成了只有一种核苷酸成分的 mRNA，即多聚 poly(U)、poly(C)、poly(A) 和 poly(G)。结果发现 poly(U) 指导了多聚苯丙氨酸的合成，poly(C) 编码了多聚脯氨酸，poly(A) 编码了多聚赖氨酸，而 poly(G) 没有蛋白质的合成是因为它形成了复杂的二级结构。</p>
+<p>③Nirenberg 及 Ochoa 等又用各种随机共聚物或特定序列的共聚物作为模板合成多肽，如用 poly(UG) 作为模板则合成了 Cys 和 Val 交替重复出现的多肽链，说明密码子由三个碱基组成，但三联体密码子的精确顺序还无法确定。</p>
+<p>④Nirenberg 和 Leder 用核糖体结合技术来解决密码问题。以人工合成的三核苷酸如 UUU、UCU、UGU 等为模板，在含有核糖体、AA-tRNA 的适当离子强度的反应液中保温，然后使反应液通过硝酸纤维素滤膜，不结合核糖体的可以通过，从而将已结合到核糖体上的 AA-tRNA 与未结合的 AA-tRNA 分开，从模板三核苷酸与氨基酸的关系可测知该氨基酸的密码子。</p>
+<h2 id="2-遗传密码有哪些特性？说出遗传密码简并性的生物学意义"><a href="#2-遗传密码有哪些特性？说出遗传密码简并性的生物学意义" class="headerlink" title="2. 遗传密码有哪些特性？说出遗传密码简并性的生物学意义"></a>2. 遗传密码有哪些特性？说出遗传密码简并性的生物学意义</h2><h2 id="答：-1-遗传密码的特性"><a href="#答：-1-遗传密码的特性" class="headerlink" title="答：(1)遗传密码的特性"></a>答：(1)遗传密码的特性</h2><p>核酸中的核苷酸残基序列与蛋白质中的氨基酸残基序列之间存在着对应的关系，连续的3个核苷酸残基序列为一个密码子，即遗传密码，代表了一个氨基酸。其特性如表4-8所示。</p>
+<p>表 4-8 遗传密码的特性</p>
+<div class="md-table-scroll"><table><tbody><tr><td>特性</td><td>具体含义</td></tr><tr><td>连续性</td><td>编码一条肽链的所有密码子都是从5'端起始密码子开始,到3'端终止密码一个接一个地呈线性排列,密码子之间无间隔也无交叉</td></tr><tr><td>简并性</td><td>由一种以上的密码子编码同一个氨基酸的现象;一种氨基酸有两种或两种以上的密码子称为同义密码子,只有Met和Trp仅由一个密码子编码</td></tr><tr><td>变偶性</td><td>密码子和反密码子配对时,前两位碱基进行严格的配对,第三位碱基可以有一定的变动性,有一定的自由度</td></tr><tr><td>通用性与特殊性</td><td>所有生物几乎都使用同一套密码子,但线粒体以及少数生物基因组的密码子有差异</td></tr></tbody></table></div>
+
+<h2 id="2-遗传密码简并性的生物学意义"><a href="#2-遗传密码简并性的生物学意义" class="headerlink" title="(2)遗传密码简并性的生物学意义"></a>(2)遗传密码简并性的生物学意义</h2><p>编码同一氨基酸的密码子称为同义密码子，同义密码子的第一、第二位核苷酸大多是相同的，只是第三位不同。如果密码子第三位核苷酸发生改变，并不一定影响所翻译出的氨基酸种类。遗传密码简并性的生物学意义有以下几方面：</p>
+<p>①减少了变异对生物的影响，减少有害突变。</p>
+<p>②增加了密码子中碱基改变仍然编码原来氨基酸的可靠性。</p>
+<p>③可使 DNA 上碱基组成有较大变动余地，对生物物种的稳定有一定的意义。</p>
+<h2 id="3-终止密码子主要有哪几种？"><a href="#3-终止密码子主要有哪几种？" class="headerlink" title="3. 终止密码子主要有哪几种？"></a>3. 终止密码子主要有哪几种？</h2><p>答：终止密码子共有三种，分别为 UAA、UAG 和 UGA。多肽链合成的终止需要终止密码子和释放因子(RF)参与作用。tRNA 只能识别氨基酸密码子，不能识别终止密码子，需由释放因子来识别终止密码子。原核生物有三个释放因子，其中 RF-1 识别 UAA 和 UAG，RF-2 识别 UAA 和 UGA。</p>
+<h2 id="4-tRNA-在组成和结构上有哪些特点？"><a href="#4-tRNA-在组成和结构上有哪些特点？" class="headerlink" title="4. tRNA 在组成和结构上有哪些特点？"></a>4. tRNA 在组成和结构上有哪些特点？</h2><p>答：tRNA 是具有携带并转运氨基酸功能的小分子核糖核酸，其组成和结构上的特点如下所述。</p>
+<p>(1)tRNA 是由约 74~95 个核苷酸组成的单股 RNA。</p>
+<p>(2) 含有修饰碱基，如假尿嘧啶(ψ)核苷、甲基化的嘌呤和嘧啶核苷、二氢尿嘧啶和胸腺嘧啶(T)核苷等。</p>
+<p>(3) 所有的 tRNA 二级结构均为三叶草形(图 4-1)，该结构的基本组成部分如下：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch04-%E5%9B%BE4-1.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-1 tRNA的三叶草形二级结构</p>
+<p>①DHU 环：含有二氢尿嘧啶(DHU)，由 8～12 个核苷酸组成，与 tRNA 分子的其余部分相连。</p>
+<p>②反密码子环：由 3 个碱基构成反密码子，与密码子配对。其大小往往是 tRNA 分类的重要指标。</p>
+<p>③额外环(可变环): 位于 $\mathrm{T} \psi \mathrm{C}$ 和反密码子环之间。</p>
+<p>④TψC 环：ψ 表示假尿嘧啶。</p>
+<p>⑤受体臂：接受氨基酸的位点，其3’端末端是CCA—OH序列，能接受活化的氨基酸。</p>
+<p>(4)tRNA 三级结构为倒 L 形(图 4-2)。</p>
+<p>tRNA 的倒 L 形三级结构靠氢键来维持。结构特点如下：</p>
+<p>①受体臂位于倒 L 形分子的一端，反密码子臂则处于相反的一端。</p>
+<p>②受体臂与 $\mathrm{T}\psi \mathrm{C}$ 臂构成第一个双螺旋，即倒”L”上面的一横，D臂与之垂直。</p>
+<p>③D臂和反密码子臂构成第二个双螺旋，即倒”L”的一竖。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch04-%E5%9B%BE4-2.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-2 tRNA的倒L形三级结构</p>
+<h2 id="5-tRNA-如何转运活化氨基酸至-mRNA-模板上"><a href="#5-tRNA-如何转运活化氨基酸至-mRNA-模板上" class="headerlink" title="5. tRNA 如何转运活化氨基酸至 mRNA 模板上?"></a>5. tRNA 如何转运活化氨基酸至 mRNA 模板上?</h2><p>答：(1) 氨基酸的活化是指在氨酰 tRNA 合成酶 (AA - tRNA 合成酶) 的作用下，氨基酸与特异的 tRNA 形成活化的 AA - tRNA 的过程。反应式为</p>
+<p>$$<br>\mathrm{AA} + \mathrm{tRNA} + \mathrm{ATP} \xrightarrow {\text { 氨酰 } \mathrm{tRNA} \text { 合成酶 }} \mathrm{AA} - \mathrm{tRNA} + \mathrm{AMP} + \mathrm{PPi}<br>$$</p>
+<p>(2) 氨酰 - tRNA 结合 GTP 的起始因子 IF - 2 · GTP (或延伸因子 EF - Tu · GTP) 形成三元复合物。</p>
+<p>(3) 氨酰 - tRNA 上的反密码子通过碱基互补配对的原则识别 mRNA 上相应的密码子，与起始复合物的 P(A) 位点结合（只有第一个活化的氨基酸进入 P 位点，肽链延伸过程中的氨酰 - tRNA 都进入 A 位点），从而将活化的氨基酸转运至 mRNA 模板上。</p>
+<h2 id="6-原核生物与真核生物的核糖体组成有哪些异同点？"><a href="#6-原核生物与真核生物的核糖体组成有哪些异同点？" class="headerlink" title="6. 原核生物与真核生物的核糖体组成有哪些异同点？"></a>6. 原核生物与真核生物的核糖体组成有哪些异同点？</h2><p>答：核糖体又称核蛋白体，由 rRNA 和蛋白质组成，是指导蛋白质合成的大分子机器。</p>
+<h2 id="1-原核生物与真核生物的核糖体的相同点"><a href="#1-原核生物与真核生物的核糖体的相同点" class="headerlink" title="(1) 原核生物与真核生物的核糖体的相同点"></a>(1) 原核生物与真核生物的核糖体的相同点</h2><p>原核生物与真核生物的核糖体的基本构造相同，都是由大小两个亚基组成，主要包括核糖体蛋白(r-蛋白)、核糖体 RNA(rRNA)。</p>
+<p>(2) 原核生物与真核生物的核糖体的不同点 (表 4-9)</p>
+<p>表 4-9 原核生物和真核生物的核糖体的不同点</p>
+<div class="md-table-scroll"><table><tbody><tr><td rowspan="2" colspan="2">化学组成</td><td colspan="2">原核生物核糖体(70S)</td><td colspan="2">真核生物核糖体(80S)</td></tr><tr><td>小亚基</td><td>大亚基</td><td>小亚基</td><td>大亚基</td></tr><tr><td colspan="2">沉降系数</td><td>30S</td><td>50S</td><td>40S</td><td>60S</td></tr><tr><td rowspan="2">r-蛋白</td><td>种类</td><td>21种</td><td>36种</td><td>33种</td><td>49种</td></tr><tr><td>占比</td><td colspan="2">1/3</td><td colspan="2">2/5</td></tr><tr><td rowspan="2">rRNA</td><td>种类</td><td>16S</td><td>23S、5S</td><td>18S</td><td>28S、5.8S、5S</td></tr><tr><td>占比</td><td colspan="2">2/3</td><td colspan="2">3/5</td></tr></tbody></table></div>
+
+<ol>
+<li>什么是 SD 序列，其功能是什么？</li>
+</ol>
+<h2 id="答：-1-SD序列"><a href="#答：-1-SD序列" class="headerlink" title="答：(1)SD序列"></a>答：(1)SD序列</h2><p>细菌的 mRNA 通常含有一段富含嘌呤碱基的序列，称为 SD 序列。SD 序列是 mRNA 中结合原核生物核糖体的保守序列，它位于起始密码子 AUG 序列上游约 10 个碱基处，能与原核生物 16S rRNA 进行碱基互补性识别，从而起始翻译作用。</p>
+<h2 id="2-SD-序列的功能"><a href="#2-SD-序列的功能" class="headerlink" title="(2) SD 序列的功能"></a>(2) SD 序列的功能</h2><p>①SD 序列与 30S 亚基上 16S rRNA 3’ 端反向互补，将 mRNA 的 AUG 起始密码子置于核糖体的适当位置，起始翻译。</p>
+<p>②SD 序列与 30S 亚基上 16S rRNA 序列互补的程度，以及从起始密码子 AUG 到嘌呤片段的距离影响翻译起始的效率。不同基因的 mRNA 有不同的 SD 序列，它们与 16S rRNA 的结合能力不同，从而可以控制单位时间内翻译过程中起始复合物形成的数目，最终控制翻译的速度。</p>
+<h2 id="8-核糖体主要有哪些活性中心"><a href="#8-核糖体主要有哪些活性中心" class="headerlink" title="8. 核糖体主要有哪些活性中心?"></a>8. 核糖体主要有哪些活性中心?</h2><p>答：核糖体有多个活性中心，包括：</p>
+<h2 id="1-mRNA-结合位点"><a href="#1-mRNA-结合位点" class="headerlink" title="(1) mRNA 结合位点"></a>(1) mRNA 结合位点</h2><p>mRNA 结合位点位于核糖体小亚基上，在肽基转移位点附近，其功能是结合 mRNA 和 IF 因子。</p>
+<h2 id="2-AA-tRNA-结合位点-A-位"><a href="#2-AA-tRNA-结合位点-A-位" class="headerlink" title="(2) AA - tRNA 结合位点 (A 位)"></a>(2) AA - tRNA 结合位点 (A 位)</h2><p>A 位是新到来的 AA-tRNA 的结合位点。</p>
+<p>(3) 延伸中的肽酰 - tRNA 结合位点 (P 位)</p>
+<p>P 位即肽酰基位点，是延伸中的肽酰 - tRNA 结合位点。</p>
+<h2 id="4-去氨酰-tRNA-释放位点-E-位"><a href="#4-去氨酰-tRNA-释放位点-E-位" class="headerlink" title="(4) 去氨酰 - tRNA 释放位点 (E 位)"></a>(4) 去氨酰 - tRNA 释放位点 (E 位)</h2><p>E 位是延伸过程中的多肽链转移到 AA-tRNA 上释放 tRNA 的位点，即去氨酰-tRNA 通过 E 位脱出，被释放到核糖体外的细胞质基质中。</p>
+<h2 id="5-转肽酶中心"><a href="#5-转肽酶中心" class="headerlink" title="(5)转肽酶中心"></a>(5)转肽酶中心</h2><p>位于 P 位和 A 位的连接处，是形成肽键的部位。</p>
+<h2 id="6-延伸因子-EF-G-结合位点"><a href="#6-延伸因子-EF-G-结合位点" class="headerlink" title="(6) 延伸因子 EF-G 结合位点"></a>(6) 延伸因子 EF-G 结合位点</h2><p>肽酰 - tRNA 从 A 位转移到 P 位相关转移酶的结合位点。</p>
+<p>(7)与蛋白质合成有关的其他的起始因子、延伸因子和终止因子的结合位点。</p>
+<h2 id="9-真核生物与原核生物在翻译的起始过程中有哪些不同？"><a href="#9-真核生物与原核生物在翻译的起始过程中有哪些不同？" class="headerlink" title="9. 真核生物与原核生物在翻译的起始过程中有哪些不同？"></a>9. 真核生物与原核生物在翻译的起始过程中有哪些不同？</h2><p>答：真核生物与原核生物在翻译的起始过程中的区别如表4-10所示。</p>
+<p>表 4-10 真核生物与原核生物在翻译起始过程中的区别</p>
+<div class="md-table-scroll"><table><tbody><tr><td>比较项目</td><td>真核生物</td><td>原核生物</td></tr><tr><td>起始氨酰 - tRNA</td><td> $Met - tRNAi^{Met}$ ,且 $Met - tRNAi^{Met}$ 不发生甲酰化</td><td> $fMet - tRNA^{fMet}$ </td></tr><tr><td>起始因子</td><td>多种起始因子</td><td>IF-1、IF-2 和 IF-3</td></tr><tr><td>有无 SD 序列</td><td>无</td><td>有</td></tr><tr><td>起始识别机制</td><td>扫描机制识别起始密码</td><td>通过 SD 序列与 mRNA 模板结合</td></tr><tr><td>起始复合物形成顺序</td><td>核糖体 40S 小亚基先与 $Met - tRNAi^{Met}$ 结合,再与 mRNA 模板结合</td><td>核糖体 30S 小亚基先通过 SD 序列与 mRNA 模板结合,再与 $fMet - tRNA^{fMet}$ 结合</td></tr><tr><td>消耗能量</td><td>消耗 ATP</td><td>不消耗 ATP</td></tr></tbody></table></div>
+
+<h2 id="10-链霉素为什么能够抑制蛋白质的合成？"><a href="#10-链霉素为什么能够抑制蛋白质的合成？" class="headerlink" title="10. 链霉素为什么能够抑制蛋白质的合成？"></a>10. 链霉素为什么能够抑制蛋白质的合成？</h2><p>答：链霉素是一种碱性三糖，可以以多种方式抑制原核生物核糖体合成蛋白质。</p>
+<p>链霉素的作用位点在 30S 亚基上，通过与 A 位点紧密结合，阻断转肽酶的作用，干扰 fMet-tRNA 与核糖体的结合，从而阻断 A 位点的氨酰-tRNA 为进行肽基转移反应的正确定位，阻止蛋白质合成的正确起始，使新肽链的形成受阻；也会导致 mRNA 的错误，从而抑制蛋白质合成。</p>
+<h2 id="11-哪些抗生素只能特异性地作用于原核生物核糖体？哪些只作用于真核生物核糖体？哪些能同时抑制原核和真核生物核糖体？"><a href="#11-哪些抗生素只能特异性地作用于原核生物核糖体？哪些只作用于真核生物核糖体？哪些能同时抑制原核和真核生物核糖体？" class="headerlink" title="11. 哪些抗生素只能特异性地作用于原核生物核糖体？哪些只作用于真核生物核糖体？哪些能同时抑制原核和真核生物核糖体？"></a>11. 哪些抗生素只能特异性地作用于原核生物核糖体？哪些只作用于真核生物核糖体？哪些能同时抑制原核和真核生物核糖体？</h2><p>答：蛋白质生物合成的抑制剂主要是一些抗生素，抗生素对蛋白质合成的抑制作用可能是阻止 mRNA 与核糖体的结合，或阻止 AA-tRNA 与核糖体结合，或干扰 AA-tRNA 与核糖体结合而产生错读等。但不同的抗生素作用的对象并不完全相同。</p>
+<p>(1) 红霉素、四环素、氯霉素和卡那霉素只能特异性地与原核生物核糖体发生作用，从而阻遏原核生物蛋白质的合成，抑制细菌生长。</p>
+<p>(2) 放线菌酮、白喉毒素只作用于真核生物核糖体。</p>
+<p>(3) 嘌呤霉素、潮霉素和链霉素既能与原核生物核糖体结合，又能与真核生物核糖体结合，它们妨碍细胞内蛋白质合成，影响细胞生长。</p>
+<h2 id="12-什么是分子伴侣，有哪些重要功能？"><a href="#12-什么是分子伴侣，有哪些重要功能？" class="headerlink" title="12. 什么是分子伴侣，有哪些重要功能？"></a>12. 什么是分子伴侣，有哪些重要功能？</h2><h2 id="答：-1-分子伴侣"><a href="#答：-1-分子伴侣" class="headerlink" title="答：(1) 分子伴侣"></a>答：(1) 分子伴侣</h2><p>分子伴侣是一类序列上没有相关性但有共同功能的蛋白质，在细胞内能帮助其他多肽进行正确地折叠、组装、运转和成熟，本身并不参与最终产物的形成。分子伴侣在进化上十分保守，目前认为细胞内至少有两类分子伴侣家族，即热休克蛋白家族和伴侣素。</p>
+<h2 id="2-分子伴侣的重要功能"><a href="#2-分子伴侣的重要功能" class="headerlink" title="(2) 分子伴侣的重要功能"></a>(2) 分子伴侣的重要功能</h2><p>①分子伴侣参与新生肽链的形成。分子伴侣在蛋白合成过程中，能识别与稳定多肽链部分折叠的构象，从而参与新生肽链的折叠与装配。</p>
+<p>②分子伴侣参与蛋白质的跨膜转运。分子伴侣与新生肽链结合，阻止新生肽链折叠成天然构象或聚集，使新生肽链保持能够跨膜转运出去的分子构象，使其成为不折叠或部分折叠的状态，并且不被细胞内蛋白酶水解，利于跨膜转运。</p>
+<p>③分子伴侣参与生物机体的应激反应。分子伴侣在应激反应中的作用首先是恢复细胞转录和翻译的机能。</p>
+<p>④分子伴侣参与遗传物质的复制转录及生物信号转导。</p>
+<p>⑤分子伴侣还参与细胞器和细胞核结构的发生、细胞骨架的组装、细胞周期与凋亡的调控、机体免疫、生物大分子的降解以及细胞衰老等生命过程。</p>
+<h2 id="13-什么是信号肽？它在序列组成上有哪些特点，有何功能？"><a href="#13-什么是信号肽？它在序列组成上有哪些特点，有何功能？" class="headerlink" title="13. 什么是信号肽？它在序列组成上有哪些特点，有何功能？"></a>13. 什么是信号肽？它在序列组成上有哪些特点，有何功能？</h2><h2 id="答：-1-信号肽"><a href="#答：-1-信号肽" class="headerlink" title="答：(1)信号肽"></a>答：(1)信号肽</h2><p>在起始密码子之后，有一段编码疏水性氨基酸序列的 RNA 区域，长度不等，一般为 13～36 个氨基酸残基，该氨基酸序列被称为信号肽序列，它负责把蛋白质引导至不同的转运系统。</p>
+<h2 id="2-信号肽在序列组成上的特点"><a href="#2-信号肽在序列组成上的特点" class="headerlink" title="(2)信号肽在序列组成上的特点"></a>(2)信号肽在序列组成上的特点</h2><p>①一般带有10~15个疏水氨基酸；</p>
+<p>②在靠近该序列 N 端疏水氨基酸区上游带有 1 个或数个带正电荷的氨基酸；</p>
+<p>③在其 C 末端靠近蛋白酶切割位点处常带有数个极性氨基酸，离切割位点最近的那个氨基酸往往带有很短的侧链（丙氨酸或甘氨酸）。</p>
+<h2 id="3-信号肽的功能"><a href="#3-信号肽的功能" class="headerlink" title="(3) 信号肽的功能"></a>(3) 信号肽的功能</h2><p>信号肽将蛋白质引导到细胞内不同膜结构的亚细胞器内(内质网、线粒体等)。</p>
+<ol>
+<li>简述线粒体和叶绿体蛋白质的跨膜运转机制。</li>
+</ol>
+<p>答：(1) 线粒体蛋白质跨膜运转机制</p>
+<p>线粒体蛋白是由核 DNA 编码的，在胞质中的核糖体上合成后释放到细胞质基质，随后转运至线粒体中。它的转运有如下的过程：</p>
+<p>①游离核糖体释放前体蛋白，前体蛋白在分子伴侣 HSP70 的帮助下解折叠。</p>
+<p>②解折叠的前体蛋白通过 N 端的前导肽同线粒体外膜上的受体蛋白(Tom 受体复合物)识别，并在受体(或附近)的内外膜接触点处利用 ATP 水解提供的能量驱动前体蛋白进入转运蛋白的运输通道(Tom 和 Tim 组成的膜通道)，然后由电化学梯度驱动穿过内膜，进入线粒体基质。</p>
+<p>③在基质中，由 mHSP70 继续维持前体蛋白的解折叠状态。然后在 HSP60 的帮助下，前体蛋白进行正确折叠，最后由蛋白水解酶切除前导肽，成为成熟的线粒体基质蛋白。</p>
+<h2 id="2-叶绿体蛋白质跨膜运转机制"><a href="#2-叶绿体蛋白质跨膜运转机制" class="headerlink" title="(2) 叶绿体蛋白质跨膜运转机制"></a>(2) 叶绿体蛋白质跨膜运转机制</h2><p>叶绿体定位信号肽一般有两部分，第一部分决定该蛋白质能否进入叶绿体基质，第二部分决定该蛋白质能否进入类囊体。叶绿体蛋白质是在翻译完成后进行转运的，转运过程中不涉及蛋白质的合成。叶绿体蛋白质的跨膜运转机制有以下几个步骤：</p>
+<p>①胞质中游离核糖体上合成叶绿体多肽。</p>
+<p>②叶绿体多肽在脱离核糖体后折叠成具有三级结构的蛋白质分子。</p>
+<p>③叶绿体多肽上某些特定位点与叶绿体膜上特有的特异受体位点结合，产生跨膜通道，进入叶绿体基质。</p>
+<p>④在位于叶绿体基质内的可溶性活性蛋白水解酶的作用下，叶绿体多肽的第一部分跨膜信号肽被切除，并在第二部分信号肽的引导下，跨过类囊体膜，进入类囊体。</p>
+<p>⑤切除第二部分信号肽，成为成熟的叶绿体蛋白质。</p>
+<ol>
+<li>蛋白质有哪些翻译后加工修饰，其作用机制和生物学功能是什么？</li>
+</ol>
+<p>答：蛋白质翻译后的加工修饰及其作用机制与生物学功能如表4-11所示。</p>
+<p>表 4-11 蛋白质翻译后的加工方式</p>
+<div class="md-table-scroll"><table><tbody><tr><td colspan="2">加工方式</td><td>加工机制</td><td>生物学功能</td></tr><tr><td colspan="2">N端修饰</td><td>在多肽链合成之前,N端的fMet被脱甲酰化酶除去甲酰基,Met被氨基肽酶切除</td><td>N端修饰使得新生蛋白质转变成有功能的蛋白质</td></tr><tr><td colspan="2">二硫键的形成</td><td>蛋白质合成后通过两个半胱氨酸的氧化作用生成二硫键</td><td>二硫键的正确形成对维持蛋白质的天然构象起重要作用</td></tr><tr><td rowspan="3">氨基酸残基的化学修饰</td><td>磷酸化</td><td>由蛋白激酶催化,发生在丝氨酸、苏氨酸和酪氨酸上</td><td>蛋白质磷酸化是生物体内一种普遍的调节方式,在细胞信号转导的过程中起重要作用</td></tr><tr><td>糖基化</td><td>使多肽转变成糖蛋白,由内质网中的糖基化酶催化。N-糖基化发生在天冬氨酸上,O-糖基化发生在丝氨酸和苏氨酸上</td><td>糖基化是蛋白质的重要修饰作用,能调节蛋白质的功能</td></tr><tr><td>甲基化</td><td>由甲基转移酶催化,N-甲基化发生在精氨酸、谷氨酰胺、组氨酸上;O-甲基化发生在谷氨酸和天冬氨酸上</td><td>某些组蛋白残基通过甲基化可以抑制或激活基因表达,从而形成表观遗传</td></tr><tr><td rowspan="2">氨基酸残基的化学修饰</td><td>乙酰化</td><td>由乙酰基转移酶催化,发生在赖氨酸侧链上</td><td>蛋白质乙酰化是细胞控制基因表达,调节蛋白质活性或生理过程的一种修饰作用</td></tr><tr><td>泛素化和类泛素化修饰</td><td>发生在赖氨酸残基侧链上,由E1、E2、E3一系列酶催化</td><td>参与多种生物功能的调控,在蛋白质的定位、代谢、功能、调节和降解中发挥重要作用</td></tr><tr><td colspan="2">切除新生肽链中的非功能片段</td><td>多肽链生成后经专一性蛋白酶催化,切除部分肽段,导致酶原激活,才能显示出生物活性</td><td>前体蛋白质转变成成熟蛋白质,发挥生物学功能</td></tr></tbody></table></div>
+
+<h2 id="16-什么是核定位信号序列，其主要功能是什么？"><a href="#16-什么是核定位信号序列，其主要功能是什么？" class="headerlink" title="16. 什么是核定位信号序列，其主要功能是什么？"></a>16. 什么是核定位信号序列，其主要功能是什么？</h2><h2 id="答：-1-核定位信号序列"><a href="#答：-1-核定位信号序列" class="headerlink" title="答：(1)核定位信号序列"></a>答：(1)核定位信号序列</h2><p>核定位信号序列(NLS)是能与入核载体相互作用，将蛋白质运进细胞核内的氨基酸序列，是蛋白质中的一种常见的结构域。NLS可以位于核蛋白的任何部位，也能够引导其他非核蛋白进入细胞核。</p>
+<h2 id="2-核定位信号序列的主要功能"><a href="#2-核定位信号序列的主要功能" class="headerlink" title="(2) 核定位信号序列的主要功能"></a>(2) 核定位信号序列的主要功能</h2><p>与入核载体相互作用，将分散在细胞内的核蛋白重新引导运入核内。蛋白质向核内运输具体过程为：</p>
+<p>①输入蛋白 $\alpha$ 和输入蛋白 $\beta$ 组成异源二聚体， $\alpha$ 亚基与核蛋白的 NLS 相结合； $\beta$ 亚基与 NPC 作用。</p>
+<p>②由 $\alpha$ 、 $\beta$ 和 Ran 3 个蛋白组成的运输复合物停靠在核孔处，依靠 Ran GTP 酶水解 GTP 提供的能量进入细胞核。</p>
+<p>③α 和 β 亚基解离，核蛋白与 α 亚基解离，核蛋白被释放，α、β 通过核孔复合体返回细胞质中，准备新一轮蛋白质运转。</p>
+<h2 id="4-3-名校考研真题详解"><a href="#4-3-名校考研真题详解" class="headerlink" title="4.3 名校考研真题详解"></a>4.3 名校考研真题详解</h2><h2 id="一、选择题"><a href="#一、选择题" class="headerlink" title="一、选择题"></a>一、选择题</h2><ol>
+<li>下面哪一个是蛋白质合成的起始密码子？（）[扬州大学2018研]<br>A. UAA B. UAG C. UGA D. AUG</li>
+</ol>
+<h2 id="【答案】D"><a href="#【答案】D" class="headerlink" title="【答案】D"></a>【答案】D</h2><p>【解析】遗传密码子共64个，包括61个编码氨基酸的密码子和3个终止密码子(UAA、UAG和UGA)。其中密码子AUG比较特殊，既是起始密码子，又是甲硫氨酸的密码子。因此答案选D。</p>
+<ol>
+<li>核糖体的 A 位点是( )。[扬州大学 2018 研]<br>A. 真核 mRNA 加工位点 B. tRNA 离开原核生物核糖体的位点<br>C. 氨基酰进入核糖体的位点 D. 肽基酰占据核糖体的位点</li>
+</ol>
+<h2 id="【答案】C"><a href="#【答案】C" class="headerlink" title="【答案】C"></a>【答案】C</h2><p>【解析】核糖体上存在3个位点：A位是新到来的AA-tRNA的结合位点；P位即肽酰基位点，是延伸中的肽酰-tRNA结合位点；E位主要位于大亚基，是延伸过程中的多肽链转移到 AA-tRNA 上释放 tRNA 的位点，即去氨酰-tRNA 通过 E 位脱出，被释放到核糖体外的细胞质基质中。因此答案选 C。</p>
+<ol>
+<li>原核生物翻译的起始氨基酸是（）。[扬州大学 2018 研]</li>
+</ol>
+<p>A. 组氨酸 B. 甲酰甲硫氨酸 C. 甲硫氨酸 D. 色氨酸</p>
+<p>【答案】B</p>
+<p>【解析】真核生物与原核生物的起始密码相同，均为 AUG。但在翻译过程中，真核生物的起始氨基酸是甲硫氨酸，而原核生物是甲酰甲硫氨酸。因此答案选 B。</p>
+<ol>
+<li>关于核糖体的移位，叙述正确的是（）。[南京林业大学 2017 研]</li>
+</ol>
+<p>A. 空载 tRNA 的脱落发生在”A”位上</p>
+<p>B. 核糖体沿 mRNA 的 $3’\rightarrow5’$ 方向相对移动</p>
+<p>C. 核糖体沿 mRNA 的 $5’\rightarrow3’$ 方向相对移动</p>
+<p>D. 核糖体在 mRNA 上一次移动的距离相当于二个核苷酸的长度</p>
+<p>【解析】核糖体移位时，核糖体沿 mRNA 的 $5’\rightarrow3’$ 方向相对移动一个密码子的距离。空载 tRNA 的脱落发生在”E”位上。因此答案选 C。</p>
+<ol>
+<li>蛋白质生物合成的方向是（）。[南京林业大学 2017 研]</li>
+</ol>
+<p>A. 从 C→N 端</p>
+<p>B. 定点双向进行</p>
+<p>C. 从 N 端、C 端同时进行</p>
+<p>D. 从 N→C 端</p>
+<p>【答案】D</p>
+<p>【解析】蛋白质生物合成的方向是从 N 端到 C 端，核糖体在 mRNA 上移动的方向是 5’ 端 → 3’ 端。因此答案选 D。</p>
+<ol>
+<li>核糖体的 E 位点是（）。[浙江工业大学 2015 研]</li>
+</ol>
+<p>A. 真核 mRNA 加工位点</p>
+<p>B. tRNA 离开原核生物核糖体的位点</p>
+<p>C. 核糖体中受 EcoR I 限制的位点</p>
+<p>D. 电化学电势驱动转运的位点</p>
+<p>【答案】B</p>
+<p>【解析】原核生物核糖体的 E 位是延伸过程中的多肽链转移到 AA-tRNA 上释放 tRNA 的位点，即去氨酰-tRNA 通过 E 位脱出，被释放到核糖体外的细胞质基质中。因此答案选 B。</p>
+<ol>
+<li>无义密码子的功能是（）。[电子科技大学 2015 研]</li>
+</ol>
+<p>A. 编码 n 种氨基酸中的每一种</p>
+<p>B. 使 mRNA 附着于任一核糖体上</p>
+<p>C. 编码每一种正常的氨基酸</p>
+<p>D. 规定 mRNA 中被编码信息的终止</p>
+<p>【答案】D</p>
+<p>【解析】无义密码子又称终止密码子，不编码任何氨基酸，不能与 tRNA 的反密码子配对，但能被终止因子或释放因子识别，终止肽链的合成。终止密码子包括 UAG、UAA、UGA 3 种。因此答案选 D。</p>
+<ol>
+<li>信号识别颗粒(SRP)的作用是( )。[河北大学 2014 研]</li>
+</ol>
+<p>A. 指导 RNA 拼接 B. 在蛋白质的共翻译运转中发挥作用</p>
+<p>C. 指引核糖体大小亚基结合 D. 指导转录终止</p>
+<p>【答案】B</p>
+<p>【解析】在新生蛋白质翻译-运转同步机制中，信号识别颗粒(SRP)与停靠蛋白(DP，又称SRP受体蛋白)介导了蛋白质的跨膜运输过程。故SRP在蛋白质的共翻译运转中发挥作</p>
+<p>用。因此答案选 B。</p>
+<ol>
+<li>与 mRNA 的 $5’ - \mathrm{GCU} - 3’$ 密码子对应的 tRNA 的反密码子是( )。[湖南农业大学 2012 研] A. $5’ - \mathrm{CGA} - 3’$ B. $5’ - \mathrm{IGC} - 3’$ C. $5’ - \mathrm{CIG} - 3’$ D. $5’ - \mathrm{CGI} - 3’$</li>
+</ol>
+<p>【解析】密码子与反密码子的阅读方向均为 $5’\rightarrow3’$ ，两者反向平行配对。按照碱基互补配对的原则以及密码子的摆动假说，当 mRNA 的密码子 $5’-GCU-3’$ 时，tRNA 的反密码子可为 $5’-AGC-3’$ 或 $5’-IGC-3’$ 。因此答案选 B。</p>
+<ol>
+<li>维持蛋白质螺旋结构稳定主要靠哪种化学键？（）[浙江大学 2010 研]</li>
+</ol>
+<p>A. 离子键 B. 氢键 C. 疏水键 D. 二硫键</p>
+<p>【解析】蛋白质 $\alpha$ 螺旋结构属于蛋白质二级结构，肽链上的所有氨基酸残基均参与氢键的形成以维持螺旋结构的稳定。氢键是维持蛋白质螺旋结构的主要作用力。因此答案选 B。</p>
+<ol>
+<li>在细菌的蛋白质翻译过程中 EF-Ts 因子的作用是( )。[南京大学 2009 研]</li>
+</ol>
+<p>A. 将 EF-Tu·GDP 转变为其活性形式</p>
+<p>B. 促使氨酰 tRNA 和核糖体的 A 位点结合</p>
+<p>C. 将 GTP 转变为 GDP</p>
+<p>D. 将肽酰 tRNA 从 A 位点移动到 P 位点</p>
+<p>【答案】A</p>
+<p>【解析】在原核生物翻译过程中需要3个延伸因子：EF-Tu、EF-Ts和EF-G。EF-Tu与fMet-tRNA以外的AA-tRNA及GTP作用生成AA-tRNA·EF-Tu·GTP复合物，然后结合到核糖体的A位上；EF-Ts帮助无活性的EF-Tu·GDP再生为有活性的EF-Tu·GTP复合物，进入新一轮循环；EF-G是移位必需的蛋白质因子，在GTP参与下使肽酰tRNA从A位点移动到P位点。因此答案选A。</p>
+<ol>
+<li>关于核糖体，下列哪项是错误的？（）[中山大学 2008 研]<br>A. 原核生物的核糖体由 5S、5.6S、16S、26S rRNA 组成<br>B. 原核生物的核糖体由 3 种 rRNA 组成<br>C. 真核生物的核糖体由 5S、5.8S、18S、28S rRNA 组成<br>D. 真核生物的核糖体共 80S<br>E. 真核生物的核糖体的小亚基是 40S</li>
+</ol>
+<p>【解析】原核生物的核糖体为 70S（小亚基是 30S，大亚基是 50S），由 5S、16S 和 23S rRNA 组成；真核生物的核糖体为 80S（小亚基是 40S，大亚基是 60S），由 5S、5.8S、18S 和 28S rRNA 组成。因此答案选 A。</p>
+<p>13.（多选）下面关于 tRNA 的描述，正确的是( )。[浙江工业大学 2018 研]</p>
+<p>A. 二级结构为三叶草型</p>
+<p>B. 三级结构为倒 L 型</p>
+<p>C. 含有多种稀有碱基</p>
+<p>D. 每个氨基酸对应唯一一个 tRNA</p>
+<p>E. 每个 tRNA 对应唯一一个密码子</p>
+<p>【答案】ABCE</p>
+<p>【解析】tRNA 的二级结构为三叶草结构，三级结构为倒”L”型。tRNA 含有多种稀有碱基，每一个 tRNA 对应一个氨基酸。但是一个氨基酸可以有多个密码子，即可对应多个 tRNA。因此答案选 ABCE。</p>
+<p>14.（多选）tRNA 连接氨基酸的部位是在( )。[北京科技大学 2008 研]</p>
+<p>A. 2’—OH B. 3’—OH C. 3’—P D. 5’—P</p>
+<h2 id="【答案】AB"><a href="#【答案】AB" class="headerlink" title="【答案】AB"></a>【答案】AB</h2><p>【解析】tRNA 的 3’ 端都是以 CCA—OH 结束，该位点是 tRNA 与相应氨基酸结合的位点，最后一个碱基的 3’ 或 2’ 自由羟基（—OH）可以被氨酰化，用来连接氨基酸，最终形成氨酰 - tRNA。</p>
+<h2 id="二、填空题"><a href="#二、填空题" class="headerlink" title="二、填空题"></a>二、填空题</h2><ol>
+<li>当蛋白质分子被贴上____标签后，就表示它将被迅速降解，最终由蛋白酶体将其水解成7~9个氨基酸组成的小片段。[安徽师范大学2018研]</li>
+</ol>
+<h2 id="【答案】泛素化"><a href="#【答案】泛素化" class="headerlink" title="【答案】泛素化"></a>【答案】泛素化</h2><p>【解析】蛋白质被泛素化标记后，被标记的蛋白质被运送到蛋白降解体系中进行降解。</p>
+<ol>
+<li>三叶草的 tRNA 分子上有 4 条根据它们结构或已知功能命名的臂，分别是 ____、____、____ 和 ____。[安徽师范大学 2017 研]</li>
+</ol>
+<p>【答案】氨基酸受体臂；TψC臂；反密码子臂；二氢尿嘧啶臂（D臂）</p>
+<p>【解析】氨基酸受体臂是接受氨基酸的位点，其3’端末端是CCA—OH序列；TψC臂是根据3个核苷酸来命名的，其中ψ表示拟尿嘧啶；反密码子臂含有反密码子；二氢尿嘧啶臂（D臂）含有二氢尿嘧啶。</p>
+<ol>
+<li>蛋白质的磷酸化位点通常是____氨酸、____氨酸和____氨酸。[西北农林科技大学2015研]</li>
+</ol>
+<p>【答案】丝；苏；酪</p>
+<p>【解析】蛋白质磷酸化是指由蛋白质激酶催化 ATP 的磷酸基转移到底物蛋白质氨基酸残基(丝氨酸、苏氨酸、酪氨酸)上的过程。蛋白质磷酸化是调节和控制蛋白质活力和功能的最基本、最普遍，也是最重要的机制。</p>
+<ol>
+<li>蛋白质的生物合成是以____为模板，以____为原料直接供体，以____为合成场所。[电子科技大学2014研]</li>
+</ol>
+<p>【答案】mRNA；氨酰-tRNA；核糖体</p>
+<ol>
+<li>多种密码子编码一个氨基酸的现象，称为____。[北京交通大学2007研；南京大学2011研]</li>
+</ol>
+<p>【答案】密码子的简并性</p>
+<ol>
+<li>氨酰 tRNA 合成酶既能识别 tRNA，也能识别相应的____。[中山大学 2008 研]</li>
+</ol>
+<h2 id="【答案】氨基酸"><a href="#【答案】氨基酸" class="headerlink" title="【答案】氨基酸"></a>【答案】氨基酸</h2><p>【解析】氨酰 tRNA 合成酶既要能识别 tRNA，又要能识别相应的氨基酸，它对二者都具有高度的专一性。</p>
+<ol>
+<li>在大肠杆菌中，许多蛋白质的降解是通过一个____来实现的。真核蛋白的降解依赖于一个只有____个氨基酸残基、其序列高度保守的____。[北京大学2008研]</li>
+</ol>
+<p>【答案】依赖于 ATP 的蛋白酶；76；泛素</p>
+<p>【解析】生物体内蛋白质的降解是一个有序的过程。在大肠杆菌中，蛋白质的降解是通过一个依赖于 ATP 的蛋白酶(称为 Lon)来实现的。当细胞中出现错误的蛋白质或半衰期很短的蛋白质时，该酶就被激活。Lon 蛋白酶每切除一个肽键消耗两分子 ATP。在真核生物中，蛋白质的降解可能主要依赖于泛素。泛素是一类低相对分子质量的蛋白质，它只有 76</p>
+<p>个氨基酸残基且序列高度保守。</p>
+<ol>
+<li>在反密码子与密码子的相互作用中，反密码子 IGA 可识别的密码子有 ____，____ 和 ____。[厦门大学 2008 研]</li>
+</ol>
+<p>【答案】UCA；UCC；UCU</p>
+<p>【解析】根据摆动假说，在密码子与反密码子的配对中，前两对严格遵守碱基配对原则，第三对碱基有一定的自由度，可以”摆动”。当反密码子的第一位是I时，密码子第三位碱基可为U、C、A。</p>
+<h2 id="三、判断题"><a href="#三、判断题" class="headerlink" title="三、判断题"></a>三、判断题</h2><ol>
+<li>在真核细胞中肽链合成终止的原因是已达到 mRNA 分子的尽头。（）[西北农林科技大学 2015 研]</li>
+</ol>
+<h2 id="【答案】错"><a href="#【答案】错" class="headerlink" title="【答案】错"></a>【答案】错</h2><p>【解析】真核细胞中肽链合成终止的原因是 mRNA 上出现终止密码子，终止密码子被释放因子所识别，导致翻译的终止。</p>
+<ol>
+<li>许多蛋白质的三维结构是由其分子伴侣决定的。（）[北京科技大学 2009 研]</li>
+</ol>
+<h2 id="【答案】错-1"><a href="#【答案】错-1" class="headerlink" title="【答案】错"></a>【答案】错</h2><p>【解析】蛋白质的一级结构是蛋白质形成高级结构的基础，一级结构决定高级结构，因此蛋白质的氨基酸序列决定了蛋白质的三维结构。分子伴侣能够帮助多肽折叠成具有特定构象的三维结构，但无法决定蛋白质的空间结构。</p>
+<ol>
+<li>核糖体不仅存在于细胞质中，也存在于线粒体和叶绿体中。（）[厦门大学2008研]</li>
+</ol>
+<h2 id="【答案】对"><a href="#【答案】对" class="headerlink" title="【答案】对"></a>【答案】对</h2><p>【解析】线粒体和叶绿体属于半自主细胞器，它们含有能编码自身所需蛋白质的基因，同时还含有核糖体。</p>
+<ol>
+<li>由于密码子是不重叠的，故所有基因都是不重叠的。（）[中山大学2008研]</li>
+</ol>
+<h2 id="【答案】错-2"><a href="#【答案】错-2" class="headerlink" title="【答案】错"></a>【答案】错</h2><ol>
+<li>所有信号肽的位置都在新生肽的 N 端。（）[中国科学院研究生院 2007 研]</li>
+</ol>
+<h2 id="【答案】错-3"><a href="#【答案】错-3" class="headerlink" title="【答案】错"></a>【答案】错</h2><p>【解析】信号肽是指存在于蛋白质多肽链上的在起始密码子之后能启动蛋白质转运的一段多肽序列，该序列常位于蛋白质的氨基末端，但也可以位于中部或其他地方。</p>
+<h2 id="四、名词解释题"><a href="#四、名词解释题" class="headerlink" title="四、名词解释题"></a>四、名词解释题</h2><ol>
+<li>信号肽[南京林业大学2017研；浙江工业大学2019研]</li>
+</ol>
+<p>答：信号肽是指在起始密码子之后，有一段编码疏水性氨基酸序列的 RNA 区域，长度不等，一般为 13～36 个氨基酸残基，该氨基酸序列被称为信号肽序列，它负责把蛋白质引导到含不同膜结构的亚细胞器中。</p>
+<ol>
+<li>密码子的简并性(codon degeneracy)[江苏大学2009研；山东师范大学2012研；中国计量大学2019研；浙江工业大学2019研]</li>
+</ol>
+<p>答：密码子的简并性(codon degeneracy)是指同一种氨基酸有两个或更多密码子的现象（但色氨酸和甲硫氨酸仅有一个密码子），对应于同一氨基酸的密码子称为同义密码子。密码子的简并性减少了变异对生物的影响，减少了有害突变，同时在物种的稳定上起重要的作用。</p>
+<ol>
+<li>分子伴侣(molecular chaperone)[浙江工业大学2013研；中国科学院大学2013研；暨南大学2015研；中国计量大学2019研]</li>
+</ol>
+<p>答：分子伴侣(molecular chaperone)是一类序列上没有相关性但有共同功能的蛋白质，它可以识别正在合成的多肽或部分折叠的多肽并与这些多肽的某些部位结合，从而帮助多肽移动、折叠或装配，这类分子本身并不参与最终产物的形成。分子伴侣在进化上十分保守，细胞内至少有两类分子伴侣家族，即热休克蛋白家族和伴侣素。</p>
+<h2 id="4-多聚核糖体-宁波大学-2018-研"><a href="#4-多聚核糖体-宁波大学-2018-研" class="headerlink" title="4. 多聚核糖体[宁波大学 2018 研]"></a>4. 多聚核糖体[宁波大学 2018 研]</h2><p>答：多聚核糖体是指合成蛋白质时，多个核糖体串联附着在一条 mRNA 分子上形成的似念珠状的结构。在合成蛋白质时，核糖体并不是单独工作的，常以多聚核糖体的形式存在。一般来说，mRNA 的长度越长，上面可附着的核糖体数量也就越多。多聚核糖体的形成使肽链生物合成高速度、高效率进行。</p>
+<h2 id="5-无义突变-nonsense-emutation-深圳大学2008研；浙江工业大学2018研"><a href="#5-无义突变-nonsense-emutation-深圳大学2008研；浙江工业大学2018研" class="headerlink" title="5. 无义突变(nonsense emutation)[深圳大学2008研；浙江工业大学2018研]"></a>5. 无义突变(nonsense emutation)[深圳大学2008研；浙江工业大学2018研]</h2><p>答：无义突变(nonsense emutation)是指一种将有义密码子转变成终止密码子(UAG、UGA、UAA)的突变，通常会导致翻译的提前结束，生成无功能或无意义的多肽链。无义突变的校正 tRNA 可通过改变反密码子区校正无义突变。</p>
+<h2 id="6-Amber-mutation-武汉大学-2017-研"><a href="#6-Amber-mutation-武汉大学-2017-研" class="headerlink" title="6. Amber mutation[武汉大学 2017 研]"></a>6. Amber mutation[武汉大学 2017 研]</h2><p>答：Amber mutation 的中文名称为琥珀突变，是指由于一对或几对碱基对的改变而使决定某一氨基酸的密码子变为终止密码子 UAG 的一种无义突变。琥珀突变是三种终止密码子突变之一。这种终止突变会造成肽链合成提前终止，通常也是致死突变。</p>
+<h2 id="7-Aminoacyl-tRNA-synthetase-武汉大学-2017-研"><a href="#7-Aminoacyl-tRNA-synthetase-武汉大学-2017-研" class="headerlink" title="7. Aminoacyl - tRNA synthetase[武汉大学 2017 研]"></a>7. Aminoacyl - tRNA synthetase[武汉大学 2017 研]</h2><p>答：aminoacyl-tRNA synthetase 的中文名称是氨酰 tRNA 合成酶，又称氨酰 tRNA 连接酶。氨基酸的活化是在氨酰 tRNA 合成酶（AA-tRNA 合成酶）的作用下，氨基酸与特异的 tRNA 形成活化的 AA-tRNA 的过程。氨酰 tRNA 合成酶能催化氨基酸的羧基与 tRNA 3’ 端腺苷酸核糖基上 3’—OH 形成二酯键，生成氨酰-tRNA。该酶具有绝对专一性和校正活性。</p>
+<h2 id="8-反密码子-华中农业大学-2017-研；南京林业大学-2017-研"><a href="#8-反密码子-华中农业大学-2017-研；南京林业大学-2017-研" class="headerlink" title="8. 反密码子[华中农业大学 2017 研；南京林业大学 2017 研]"></a>8. 反密码子[华中农业大学 2017 研；南京林业大学 2017 研]</h2><p>答：反密码子是指位于 tRNA 反密码环中部、可与 mRNA 中的三联体密码子形成碱基配对的三个相邻碱基，在蛋白质的合成中起解读密码、将特异的氨基酸引入合成位点的作用。</p>
+<h2 id="9-SD-序列-Shine-Dalgarno-sEquence-北京大学-2010-研；华东理工大学-2017-研"><a href="#9-SD-序列-Shine-Dalgarno-sEquence-北京大学-2010-研；华东理工大学-2017-研" class="headerlink" title="9. SD 序列 (Shine Dalgarno sEquence) [北京大学 2010 研；华东理工大学 2017 研]"></a>9. SD 序列 (Shine Dalgarno sEquence) [北京大学 2010 研；华东理工大学 2017 研]</h2><p>答：SD 序列(Shine Dalgarno sequence)是指存在于原核生物 mRNA 起始密码子上游 7～12 个核苷酸处的富含嘌呤的保守片段，能与 16S rRNA 3’ 端富含嘧啶的区域进行碱基互补性的识别，所以可将 mRNA 的 AUG 起始密码子置于核糖体的适当位置，以便起始翻译作用。</p>
+<h2 id="10-Ubiquitination-Modification-武汉大学-2016-研"><a href="#10-Ubiquitination-Modification-武汉大学-2016-研" class="headerlink" title="10. Ubiquitination Modification [武汉大学 2016 研]"></a>10. Ubiquitination Modification [武汉大学 2016 研]</h2><p>答：Ubiquitination modification 的中文名称是泛素化修饰，是指泛素分子在一系列特殊的酶的作用下，将细胞内的蛋白质分类，从中选出靶蛋白分子，并对靶蛋白进行特异性修饰的过程。这些特殊的酶包括泛素激活酶、结合酶、连接酶和降解酶等。泛素化修饰在蛋白质的定位、代谢、功能调节和降解中都起着十分重要的作用。</p>
+<h2 id="11-移码突变-江苏大学2016研"><a href="#11-移码突变-江苏大学2016研" class="headerlink" title="11. 移码突变[江苏大学2016研]"></a>11. 移码突变[江苏大学2016研]</h2><p>答：移码突变是一种突变类型。当一个或几个非三整倍数的核苷酸残基插入或缺失时，会引起突变位点以后的三联子密码阅读框发生改变，导致以后编码的氨基酸都发生错误，这</p>
+<p>种突变类型就称为移码突变。</p>
+<h2 id="12-开放阅读框架-浙江农林大学-2016-研"><a href="#12-开放阅读框架-浙江农林大学-2016-研" class="headerlink" title="12. 开放阅读框架[浙江农林大学 2016 研]"></a>12. 开放阅读框架[浙江农林大学 2016 研]</h2><p>答：开放阅读框架(ORF)是指一组连续的含有三联子密码的能够翻译成为多肽链的核苷酸序列，从起始密码子到终止密码子的阅读框可编码完整的多肽链，其间不存在使翻译中断的终止密码子。</p>
+<h2 id="13-热休克蛋白-heat-Shock-Protein-军事医学科学院-2012-研"><a href="#13-热休克蛋白-heat-Shock-Protein-军事医学科学院-2012-研" class="headerlink" title="13. 热休克蛋白(heat Shock Protein) [军事医学科学院 2012 研]"></a>13. 热休克蛋白(heat Shock Protein) [军事医学科学院 2012 研]</h2><p>答：热休克蛋白(heat shock protein)是指细胞在应激原特别是高温环境诱导下所生成的一组蛋白质。它是一类应激反应性蛋白，包括HSP70、HSP60、HSP90以及小分子量HSP家族。热休克蛋白广泛存在于原核及真核细胞中，作为许多结构和功能蛋白质的”分子伴侣”，促使某些能自发折叠的蛋白质正确折叠形成天然空间构象。</p>
+<h2 id="五、简答题"><a href="#五、简答题" class="headerlink" title="五、简答题"></a>五、简答题</h2><h2 id="1-试述核基因组编码线粒体蛋白的跨膜运转机制。-青岛大学2017研"><a href="#1-试述核基因组编码线粒体蛋白的跨膜运转机制。-青岛大学2017研" class="headerlink" title="1. 试述核基因组编码线粒体蛋白的跨膜运转机制。[青岛大学2017研]"></a>1. 试述核基因组编码线粒体蛋白的跨膜运转机制。[青岛大学2017研]</h2><p>答：线粒体蛋白质的跨膜运转机制如下：</p>
+<p>(1) 游离核糖体释放前体蛋白，前体蛋白在分子伴侣 HSP70 的帮助下解折叠。</p>
+<p>(2) 解折叠的前体蛋白通过 N 端的前导肽同线粒体外膜上的受体蛋白(Tom 受体复合物)识别，并在受体(或附近)的内外膜接触点处利用 ATP 水解提供的能量驱动前体蛋白进入转运蛋白的运输通道(Tom 和 Tim 组成的膜通道)，然后由电化学梯度驱动穿过内膜，进入线粒体基质。</p>
+<p>(3) 在基质中, 由 mHSP70 继续维持前体蛋白的解折叠状态; 然后在 HSP60 的帮助下, 前体蛋白进行正确折叠, 最后由蛋白水解酶切除前导肽, 成为成熟的线粒体基质蛋白。</p>
+<ol>
+<li>蛋白质合成后的加工修饰有哪些内容？[暨南大学 2015 研]</li>
+</ol>
+<p>答：参见本章课后习题详解第15题答案。</p>
+<ol>
+<li>遗传密码有哪些特点？请简述。[武汉大学2015研]</li>
+</ol>
+<p>相关试题：简述三联体密码子的特点有哪些？[军事医学科学院2012研]</p>
+<p>答：参见本章课后习题详解第2题答案。</p>
+<ol>
+<li>核糖体在蛋白质翻译过程中有些功能位点？各自起什么作用？[山东师范大学2012研]</li>
+</ol>
+<p>答：参见本章课后习题详解第8题答案。</p>
+<ol>
+<li>简述蛋白质生物合成的过程。[重庆大学 2012 研]</li>
+</ol>
+<p>答：蛋白质的生物合成主要包括4个步骤。</p>
+<h2 id="1-氨基酸的活化-1"><a href="#1-氨基酸的活化-1" class="headerlink" title="(1) 氨基酸的活化"></a>(1) 氨基酸的活化</h2><p>在氨酰 tRNA 合成酶的作用下，氨基酸与特异的 tRNA 形成活化的 AA-tRNA。AA-tRNA 合成酶能催化氨基酸的羧基与 tRNA 3’ 端腺苷酸核糖基上 3’—OH 形成二酯键，生成氨酰-tRNA（AA-tRNA），该酶具有绝对专一性和校正活性。</p>
+<h2 id="2-肽链的起始"><a href="#2-肽链的起始" class="headerlink" title="(2)肽链的起始"></a>(2)肽链的起始</h2><p>①原核生物肽链的起始过程</p>
+<p>a. 30S 小亚基与 IF-3、IF-1 结合，促使大小亚基分离。然后 30S 小亚基借助 16S rRNA 3’ 端与 mRNA 的 SD 序列互补，与 mRNA 模板结合，形成 30S·mRNA·IF-1·IF-3 复合物。</p>
+<p>b. IF-2 与 GTP 结合，fMet-tRNA $^{fMet}$ 进入 P 位点，与上述复合物结合，形成 30S 起始复合物。起始密码子与反密码子识别。</p>
+<p>c. 30S 起始复合物再与 50S 大亚基结合，GTP 水解为 GDP，释放 IF-1 和 IF-2，形成 70S 起始复合物。</p>
+<h2 id="②真核生物肽链的起始过程"><a href="#②真核生物肽链的起始过程" class="headerlink" title="②真核生物肽链的起始过程"></a>②真核生物肽链的起始过程</h2><p>a. 在 eIF2 及 GTP 的介导下 Met-tRNAi $^{Met}$ 首先与结合有 eIF3 的核糖体 40S 小亚基结合，在帽子结合蛋白 (eIF4E) 作用下与 mRNA 5’ 端结合，eIF4A、eIF4B 通过衔接蛋白 (eIF4G) 结合到 eIF4E 上，mRNA 3’ 端通过 poly(A) 结合蛋白 (PABP) 结合到 eIF4G 上，形成的 40S 起始复合物沿 mRNA 移动，扫描到核糖体结合位点 (RBS)，识别 AUG 起始密码子，消耗 ATP。</p>
+<p>b. 在 eIF5 作用下，60S 大亚基与 40S 复合物结合形成 80S 起始复合物，GTP 水解，起始因子离开，消耗 ATP。</p>
+<h2 id="3-肽链的延伸-1"><a href="#3-肽链的延伸-1" class="headerlink" title="(3)肽链的延伸"></a>(3)肽链的延伸</h2><p>原核细胞和真核细胞的蛋白质延伸机制相似。起始复合物生成后，第一个氨基酸(fMet/Met-tRNA)与核糖体结合后就开始肽链的延伸过程。延伸过程包括后续AA-tRNA的进位、肽键的生成和移位三个步骤，需要延伸因子的参与，其中原核生物的延伸因子为EF-Tu、EF-Ts和EF-G，真核生物细胞的延伸因子为eEF1和eEF2。</p>
+<h2 id="4-肽链的终止-1"><a href="#4-肽链的终止-1" class="headerlink" title="(4) 肽链的终止"></a>(4) 肽链的终止</h2><p>核糖体沿 mRNA 移动，使多肽链延长，直到遇到终止密码子(UAA、UAG 或 UGA)，此时没有相应的 AA-tRNA 与之结合，只有释放因子(RF)能与之识别。RF 能切开肽酰-tRNA 中连接 tRNA 和肽链羧基端(C 端)氨基酸的酯键，导致新生肽链和 tRNA 从核糖体上释放，核糖体大、小亚基解体，蛋白质合成结束。</p>
+<h2 id="6-蛋白质生物合成体系主要包括哪些成分？各有何作用？-苏州大学2008研"><a href="#6-蛋白质生物合成体系主要包括哪些成分？各有何作用？-苏州大学2008研" class="headerlink" title="6. 蛋白质生物合成体系主要包括哪些成分？各有何作用？[苏州大学2008研]"></a>6. 蛋白质生物合成体系主要包括哪些成分？各有何作用？[苏州大学2008研]</h2><p>答：(1)蛋白质生物合成体系主要包括核糖体、氨酰 tRNA 合成酶、氨基酸、tRNA、mRNA、ATP、GTP、肽基转移酶、起始因子、延伸因子和释放因子等成分。</p>
+<h2 id="2-各成分的作用如下"><a href="#2-各成分的作用如下" class="headerlink" title="(2) 各成分的作用如下"></a>(2) 各成分的作用如下</h2><p>①核糖体是蛋白质合成的场所。</p>
+<p>②氨酰 tRNA 合成酶催化氨基酸的羧基与 tRNA 3’ 端腺苷酸核糖基上的 3’—OH 形成二酯键，使氨基酸与 tRNA 形成活化的氨酰 - tRNA。</p>
+<p>③氨基酸是蛋白质合成的原料。</p>
+<p>④tRNA 是模板与氨基酸之间的接合体，可借由自身的反密码子识别 mRNA 上的密码子，将氨基酸准确无误地运送到核糖体中，起运输氨基酸的作用。</p>
+<p>⑤mRNA 是蛋白质合成的模板，承载了要编码的遗传信息，以三联子密码的形式被阅读，表达相应的蛋白质。</p>
+<p>⑥ATP 或 GTP 为翻译提供能量。</p>
+<p>⑦起始因子促进翻译的起始；延伸因子参与肽链的延伸；释放因子能识别终止密码子并与之结合，水解 P 位上多肽链与 tRNA 之间的二酯键，从而使新生的肽链和 tRNA 从核糖体上释放，随后核糖体大小亚基解体，蛋白质合成结束。</p>
+<p>⑧肽基转移酶将 A 位点上的 AA-tRNA 转移到 P 位点上，与肽酰-tRNA 上的氨基酸作用形成肽键。</p>
+<h2 id="六、论述题"><a href="#六、论述题" class="headerlink" title="六、论述题"></a>六、论述题</h2><ol>
+<li>论述真核生物和原核生物在翻译起始的异同。[暨南大学 2019 研]</li>
+</ol>
+<p>答：(1)真核生物和原核生物翻译起始的相同点</p>
+<p>真核生物和原核生物翻译(蛋白质合成)起始机制基本相同，都包括核糖体的解离，小亚基起始复合物的形成和肽链起始复合物的形成。</p>
+<h2 id="2-真核生物和原核生物翻译起始的不同点"><a href="#2-真核生物和原核生物翻译起始的不同点" class="headerlink" title="(2)真核生物和原核生物翻译起始的不同点"></a>(2)真核生物和原核生物翻译起始的不同点</h2><h2 id="参见本章课后习题详解第9题答案"><a href="#参见本章课后习题详解第9题答案" class="headerlink" title="参见本章课后习题详解第9题答案"></a>参见本章课后习题详解第9题答案</h2><h2 id="2-论述蛋白的泛素化降解过程。-河北大学-2014-研"><a href="#2-论述蛋白的泛素化降解过程。-河北大学-2014-研" class="headerlink" title="2. 论述蛋白的泛素化降解过程。[河北大学 2014 研]"></a>2. 论述蛋白的泛素化降解过程。[河北大学 2014 研]</h2><h2 id="相关试题：蛋白质降解的泛素化修饰的三个过程及作用是什么？-北京大学2010研"><a href="#相关试题：蛋白质降解的泛素化修饰的三个过程及作用是什么？-北京大学2010研" class="headerlink" title="相关试题：蛋白质降解的泛素化修饰的三个过程及作用是什么？[北京大学2010研]"></a>相关试题：蛋白质降解的泛素化修饰的三个过程及作用是什么？[北京大学2010研]</h2><p>答：泛素是一类低相对分子质量，序列高度保守，与蛋白质降解有关的蛋白质，它的主要功能是标记需要分解掉的蛋白质，使其被蛋白酶水解。泛素化是指泛素分子在泛素激活酶、结合酶和连接酶的作用下，对靶蛋白进行特异性修饰的过程，经泛素化后的蛋白一般走向降解途径。蛋白质的泛素化降解过程包括以下几个步骤。</p>
+<h2 id="1-泛素激活酶-E1-黏附在泛素分子上激活泛素"><a href="#1-泛素激活酶-E1-黏附在泛素分子上激活泛素" class="headerlink" title="(1) 泛素激活酶 E1 黏附在泛素分子上激活泛素"></a>(1) 泛素激活酶 E1 黏附在泛素分子上激活泛素</h2><p>泛素活化酶 E1 催化泛素 C 末端的 Gly 形成 Ub-腺苷酸中间产物，激活的泛素 C 末端被转移到 E1 酶内 Cys 残基的一SH 上，形成高能硫酯键。此过程需要 ATP 提供能量。</p>
+<h2 id="2-E1-酶将激活的泛素分子转移到泛素结合酶-E2-上"><a href="#2-E1-酶将激活的泛素分子转移到泛素结合酶-E2-上" class="headerlink" title="(2) E1 酶将激活的泛素分子转移到泛素结合酶 E2 上"></a>(2) E1 酶将激活的泛素分子转移到泛素结合酶 E2 上</h2><p>含有高能硫酯键的泛素转移到泛素结合酶 E2 的 Cys 残基上，E2 可以直接将泛素转移到靶蛋白赖氨酸残基的 $\varepsilon-$ 氨基上。</p>
+<h2 id="3-E2-酶和泛素连接酶-E3-共同识别靶蛋白来进行泛素化修饰"><a href="#3-E2-酶和泛素连接酶-E3-共同识别靶蛋白来进行泛素化修饰" class="headerlink" title="(3) E2 酶和泛素连接酶 E3 共同识别靶蛋白来进行泛素化修饰"></a>(3) E2 酶和泛素连接酶 E3 共同识别靶蛋白来进行泛素化修饰</h2><p>靶蛋白泛素化需要一个特异的泛素蛋白连接酶 E3，当第一个泛素分子在 E3 的催化下连接到靶蛋白上以后，另外一些泛素分子相继与前一个泛素分子的赖氨酸残基相连，逐渐形成一条多聚泛素链。</p>
+<p>蛋白质泛素化以后，26S蛋白酶体识别泛素化靶蛋白，ATP水解驱动泛素移除，靶蛋白解折叠，转入26S蛋白酶体的催化中心，蛋白降解发生在26S蛋白酶体内部。进入26S蛋白酶体内的靶蛋白被多次切割，最后形成若干个长度为3~22个氨基酸残基的肽段。</p>
+<h2 id="3-什么是核糖体？它具有什么功能？什么是多核糖体？请比较原核生物与真核生物核糖体的差异。-浙江理工大学2009研"><a href="#3-什么是核糖体？它具有什么功能？什么是多核糖体？请比较原核生物与真核生物核糖体的差异。-浙江理工大学2009研" class="headerlink" title="3. 什么是核糖体？它具有什么功能？什么是多核糖体？请比较原核生物与真核生物核糖体的差异。[浙江理工大学2009研]"></a>3. 什么是核糖体？它具有什么功能？什么是多核糖体？请比较原核生物与真核生物核糖体的差异。[浙江理工大学2009研]</h2><h2 id="答：-1-核糖体的概念"><a href="#答：-1-核糖体的概念" class="headerlink" title="答：(1)核糖体的概念"></a>答：(1)核糖体的概念</h2><p>核糖体是一个致密的核糖核蛋白颗粒，由大小两个亚基组成，每个亚基包含一个相对分子质量较大的 rRNA 和许多不同的蛋白质分子，这些分子大都以单拷贝的形式存在。大分子 rRNA 能在特定位点与蛋白质结合，完成核糖体不同亚基的组装。</p>
+<h2 id="2-核糖体的功能-1"><a href="#2-核糖体的功能-1" class="headerlink" title="(2)核糖体的功能"></a>(2)核糖体的功能</h2><p>①核糖体是合成蛋白质的场所。在多肽合成过程中，tRNA 将其所对应的氨基酸携带到核糖体上的相应位点，并与 mRNA 进行专一性互补配对，完成蛋白质的合成过程。</p>
+<p>②容纳携带肽链的 tRNA——肽酰 - tRNA，并使之处于肽键易于生成的位置上，利于多肽链的形成。</p>
+<p>③核糖体包括多个活性中心，即 mRNA 结合部位、结合或接受 AA-tRNA 部位（A 位）、结合或接受肽基 tRNA 的部位（P 位）、肽基转移部位及形成肽键的部位（转肽酶中心）和各种延伸因子的结合位点。</p>
+<h2 id="3-多核糖体的概念"><a href="#3-多核糖体的概念" class="headerlink" title="(3) 多核糖体的概念"></a>(3) 多核糖体的概念</h2><p>蛋白质合成时，多个甚至几十个核糖体串联附着在一条 mRNA 分子上，mRNA 分子与小亚基凹沟处结合，再与大亚基结合，形成一串，称为多核糖体。mRNA 的长度越长，上面可附着的核糖体数量也就越多。多核糖体的形成使肽链生物合成高速度、高效率进行。</p>
+<h2 id="4-原核生物与真核生物核糖体的差异"><a href="#4-原核生物与真核生物核糖体的差异" class="headerlink" title="(4) 原核生物与真核生物核糖体的差异"></a>(4) 原核生物与真核生物核糖体的差异</h2><p>参见本章课后习题详解第6题答案。</p>
+<ol>
+<li>试述遗传密码的特性和在基因传递中的意义，以及遗传密码是如何被破译的。[中国科学院亚热带农业生态研究所2009研]</li>
+</ol>
+<p>答：(1)遗传密码的特性及其在基因传递中的意义</p>
+<h2 id="①遗传密码的连续性"><a href="#①遗传密码的连续性" class="headerlink" title="①遗传密码的连续性"></a>①遗传密码的连续性</h2><p>遗传密码以 $5’\rightarrow3’$ 方向、非重复、无标点的方式编码在核酸分子上。阅读 mRNA 时以密码子为单位，连续阅读，密码间无间断也没有重叠。因此要正确阅读密码，必须从起始密码子开始，按一定的读码框架连续读下去，直至遇到终止密码子为止。</p>
+<h2 id="②遗传密码的简并性"><a href="#②遗传密码的简并性" class="headerlink" title="②遗传密码的简并性"></a>②遗传密码的简并性</h2><p>一种氨基酸有两种或两种以上的密码子，对应于同一氨基酸的密码子称为同义密码子。除甲硫氨酸(AUG)和色氨酸(UGG)只有一个密码子外，其他氨基酸都有一个以上的密码子。密码的简并性可以减少有害突变，在物种的稳定性上起一定作用，还可以保证翻译的速率。</p>
+<h2 id="③遗传密码的变偶性"><a href="#③遗传密码的变偶性" class="headerlink" title="③遗传密码的变偶性"></a>③遗传密码的变偶性</h2><p>在密码子与反密码子的配对中，前两对碱基严格遵守碱基互补配对原则，但第三对碱基有一定的自由度，可以”摆动”，因而使某些 tRNA 可以识别 1 个以上的密码子。tRNA 识别密码子的个数由反密码子的第一个碱基的性质决定。</p>
+<p>a. 反密码子第一位碱基为 A 或 C 时，只能识别 1 种密码，分别为 U、G；</p>
+<p>b. 反密码子第一位碱基为 G 或 U 时，可以识别 2 种密码，分别为 U 和 C，A 和 G；</p>
+<p>c. 反密码子第一位碱基为 I(次黄嘌呤)时，可识别 3 种密码(U、C、A)。</p>
+<p>如果有几个密码子同时编码一个氨基酸，凡是第一、二位碱基不同的密码子都对应于各自独立的 tRNA。</p>
+<h2 id="④遗传密码的通用性与特殊性"><a href="#④遗传密码的通用性与特殊性" class="headerlink" title="④遗传密码的通用性与特殊性"></a>④遗传密码的通用性与特殊性</h2><p>a. 通用性：所有生物包括低等和高等生物，病毒、细菌及真核生物，几乎都使用同一套密码子。密码子的通用性说明生物有共同的起源，有助于生物进化的研究。</p>
+<p>b. 特殊性：线粒体及少数生物基因组的密码子的编码方式与通常的遗传密码有所不同。</p>
+<h2 id="2-遗传密码的破译"><a href="#2-遗传密码的破译" class="headerlink" title="(2) 遗传密码的破译"></a>(2) 遗传密码的破译</h2><p>参见本章课后习题详解第1题答案。</p>
+<p>（2）公司第一大股东李文斌先生、李晓华女士分别向浙江省宁波市鄞州人民法院提起上诉，现将浙江省宁波市鄞州人民法院提起上诉。</p>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+    <div class="widget-header dis-select">
+      <span class="name">本文目录</span>
+      <button type="button" class="cap-action ui-interactive card-hover card-hover--spotlight" data-shell-action="toggle-toc" aria-label="Toggle table of contents" aria-pressed="false"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></span></button>
+    </div>
+  
+  <div class="widget-body"><ol class="toc ui-collection-adapter"><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-1-%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-text">4.1 复习笔记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%80%E3%80%81%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81"><span class="toc-text">一、遗传密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E4%B8%89%E8%81%94%E5%AD%90%E5%AF%86%E7%A0%81"><span class="toc-text">1. 三联子密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-text">2. 遗传密码的性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%8C%E3%80%81tRNA"><span class="toc-text">二、tRNA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-tRNA-%E7%9A%84%E4%B8%89%E5%8F%B6%E8%8D%89%E4%BA%8C%E7%BA%A7%E7%BB%93%E6%9E%84"><span class="toc-text">1. tRNA 的三叶草二级结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-tRNA-%E7%9A%84%E4%B8%89%E7%BA%A7%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E5%80%92-L-%E5%BD%A2"><span class="toc-text">2. tRNA 的三级结构——倒 L 形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-tRNA-%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="toc-text">3. tRNA 的种类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A1%E5%BB%B6%E4%BC%B8-tRNA"><span class="toc-text">②延伸 tRNA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%90%8C%E5%B7%A5-tRNA"><span class="toc-text">(2) 同工 tRNA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E6%A0%A1%E6%AD%A3-tRNA"><span class="toc-text">(3)校正 tRNA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A0%E6%97%A0%E4%B9%89%E7%AA%81%E5%8F%98"><span class="toc-text">①无义突变</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A1%E9%94%99%E4%B9%89%E7%AA%81%E5%8F%98"><span class="toc-text">②错义突变</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-tRNA-%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">4. tRNA 的功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-%E6%B0%A8%E9%85%B0-tRNA-%E5%90%88%E6%88%90%E9%85%B6"><span class="toc-text">5. 氨酰 tRNA 合成酶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%89%E3%80%81%E6%A0%B8%E7%B3%96%E4%BD%93"><span class="toc-text">三、核糖体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E6%A0%B8%E7%B3%96%E4%BD%93%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-text">1. 核糖体的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E6%A0%B8%E7%B3%96%E4%BD%93-RNA-rRNA"><span class="toc-text">(1) 核糖体 RNA(rRNA)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%A0%B8%E7%B3%96%E4%BD%93%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">2. 核糖体的功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%9B%9B%E3%80%81%E8%9B%8B%E7%99%BD%E8%B4%A8%E5%90%88%E6%88%90%E8%BF%87%E7%A8%8B"><span class="toc-text">四、蛋白质合成过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E6%B0%A8%E5%9F%BA%E9%85%B8%E7%9A%84%E6%B4%BB%E5%8C%96"><span class="toc-text">1. 氨基酸的活化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E7%BF%BB%E8%AF%91%E7%9A%84%E8%B5%B7%E5%A7%8B"><span class="toc-text">2. 翻译的起始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A1%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%BF%BB%E8%AF%91%E8%B5%B7%E5%A7%8B%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">②原核生物翻译起始的过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%BF%BB%E8%AF%91%E8%B5%B7%E5%A7%8B%E8%BF%87%E7%A8%8B"><span class="toc-text">(2) 真核生物翻译起始过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E4%B8%8E%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%BF%BB%E8%AF%91%E8%B5%B7%E5%A7%8B%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="toc-text">(3) 原核生物与真核生物翻译起始的差异</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E8%82%BD%E9%93%BE%E7%9A%84%E5%BB%B6%E4%BC%B8"><span class="toc-text">3. 肽链的延伸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E8%BF%9B%E4%BD%8D"><span class="toc-text">(1) 进位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%88%90%E8%82%BD"><span class="toc-text">(2) 成肽</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E7%A7%BB%E4%BD%8D"><span class="toc-text">(3)移位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-%E8%82%BD%E9%93%BE%E7%9A%84%E7%BB%88%E6%AD%A2"><span class="toc-text">4. 肽链的终止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E8%BF%87%E7%A8%8B"><span class="toc-text">(1) 过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%87%8A%E6%94%BE%E5%9B%A0%E5%AD%90-RF"><span class="toc-text">(2) 释放因子(RF)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%92%8C%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E8%9B%8B%E7%99%BD%E8%B4%A8%E5%90%88%E6%88%90%E7%9A%84%E6%80%BB%E7%BB%93"><span class="toc-text">5. 原核生物和真核生物蛋白质合成的总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%94%E3%80%81%E8%9B%8B%E7%99%BD%E8%B4%A8%E5%A4%9A%E8%82%BD%E9%93%BE%E5%90%88%E6%88%90%E5%90%8E%E7%9A%84%E5%8A%A0%E5%B7%A5%E5%92%8C%E6%8A%98%E5%8F%A0"><span class="toc-text">五、蛋白质多肽链合成后的加工和折叠</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E8%9B%8B%E7%99%BD%E8%B4%A8%E5%89%8D%E4%BD%93%E7%9A%84%E5%8A%A0%E5%B7%A5"><span class="toc-text">1. 蛋白质前体的加工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%9A%84%E6%8A%98%E5%8F%A0"><span class="toc-text">2. 蛋白质的折叠</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E7%83%AD%E4%BC%91%E5%85%8B%E8%9B%8B%E7%99%BD"><span class="toc-text">(1) 热休克蛋白</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E4%BC%B4%E4%BE%A3%E7%B4%A0"><span class="toc-text">(2)伴侣素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%85%AD%E3%80%81%E8%9B%8B%E7%99%BD%E8%B4%A8%E5%90%88%E6%88%90%E7%9A%84%E6%8A%91%E5%88%B6%E5%89%82"><span class="toc-text">六、蛋白质合成的抑制剂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%83%E3%80%81%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%9A%84%E5%AE%9A%E5%90%91%E8%BF%90%E8%BE%93"><span class="toc-text">七、蛋白质的定向运输</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E7%BF%BB%E8%AF%91-%E8%BF%90%E8%BD%AC%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6"><span class="toc-text">1. 翻译 - 运转同步机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E4%BF%A1%E5%8F%B7%E8%82%BD"><span class="toc-text">(1) 信号肽</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E7%BF%BB%E8%AF%91%E5%90%8E%E8%BF%90%E8%BD%AC%E6%9C%BA%E5%88%B6"><span class="toc-text">2. 翻译后运转机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E7%BA%BF%E7%B2%92%E4%BD%93%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%9A%84%E8%B7%A8%E8%86%9C%E8%BF%90%E8%BD%AC"><span class="toc-text">(1) 线粒体蛋白质的跨膜运转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%8F%B6%E7%BB%BF%E4%BD%93%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%9A%84%E8%B7%A8%E8%86%9C%E8%BF%90%E8%BD%AC"><span class="toc-text">(2) 叶绿体蛋白质的跨膜运转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E6%A0%B8%E5%AE%9A%E4%BD%8D%E8%9B%8B%E7%99%BD%E7%9A%84%E8%BF%90%E8%BD%AC%E6%9C%BA%E5%88%B6"><span class="toc-text">3. 核定位蛋白的运转机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E7%89%A9%E8%B4%A8%E8%BF%9B%E5%87%BA%E7%BB%86%E8%83%9E%E6%A0%B8%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-text">(1) 物质进出细胞核的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E8%BF%90%E8%BE%93%E5%8F%97%E4%BD%93"><span class="toc-text">(2) 运输受体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E8%BF%90%E8%BD%AC%E8%BF%87%E7%A8%8B"><span class="toc-text">(3) 运转过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%85%AB%E3%80%81%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%9A%84%E4%BF%AE%E9%A5%B0%E3%80%81%E9%99%8D%E8%A7%A3%E4%B8%8E%E7%A8%B3%E5%AE%9A%E6%80%A7%E7%A0%94%E7%A9%B6"><span class="toc-text">八、蛋白质的修饰、降解与稳定性研究</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E6%B3%9B%E7%B4%A0%E5%8C%96%E4%BF%AE%E9%A5%B0%E4%BB%8B%E5%AF%BC%E7%9A%84%E8%9B%8B%E7%99%BD%E8%B4%A8%E9%99%8D%E8%A7%A3"><span class="toc-text">1. 泛素化修饰介导的蛋白质降解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1%E2%80%99-%E6%B3%9B%E7%B4%A0"><span class="toc-text">(1’)泛素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%B3%9B%E7%B4%A0%E5%8C%96%E4%BF%AE%E9%A5%B0%E7%9A%84%E7%BA%A7%E8%81%94%E5%8F%8D%E5%BA%94"><span class="toc-text">(2)泛素化修饰的级联反应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%9A%84-SUMO-%E5%8C%96%E4%BF%AE%E9%A5%B0"><span class="toc-text">2. 蛋白质的 SUMO 化修饰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%9A%84-NEDD-%E5%8C%96%E4%BF%AE%E9%A5%B0"><span class="toc-text">3. 蛋白质的 NEDD 化修饰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%9A%84%E4%B8%80%E7%BA%A7%E7%BB%93%E6%9E%84%E5%AF%B9%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%A8%B3%E5%AE%9A%E6%80%A7%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">4. 蛋白质的一级结构对蛋白质稳定性的影响</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-2-%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3"><span class="toc-text">4.2 课后习题详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E7%AE%80%E8%BF%B0%E7%A0%B4%E8%AF%91%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81%E7%9A%84%E4%B8%BB%E8%A6%81%E8%BF%87%E7%A8%8B"><span class="toc-text">1. 简述破译遗传密码的主要过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E4%B8%89%E8%81%94%E4%BD%93%E5%AF%86%E7%A0%81%E7%9A%84%E6%8F%90%E5%87%BA"><span class="toc-text">(1)三联体密码的提出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81%E5%AD%90%E7%9A%84%E9%AA%8C%E8%AF%81"><span class="toc-text">(2) 遗传密码子的验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81%E6%9C%89%E5%93%AA%E4%BA%9B%E7%89%B9%E6%80%A7%EF%BC%9F%E8%AF%B4%E5%87%BA%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81%E7%AE%80%E5%B9%B6%E6%80%A7%E7%9A%84%E7%94%9F%E7%89%A9%E5%AD%A6%E6%84%8F%E4%B9%89"><span class="toc-text">2. 遗传密码有哪些特性？说出遗传密码简并性的生物学意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AD%94%EF%BC%9A-1-%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-text">答：(1)遗传密码的特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81%E7%AE%80%E5%B9%B6%E6%80%A7%E7%9A%84%E7%94%9F%E7%89%A9%E5%AD%A6%E6%84%8F%E4%B9%89"><span class="toc-text">(2)遗传密码简并性的生物学意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E7%BB%88%E6%AD%A2%E5%AF%86%E7%A0%81%E5%AD%90%E4%B8%BB%E8%A6%81%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%EF%BC%9F"><span class="toc-text">3. 终止密码子主要有哪几种？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-tRNA-%E5%9C%A8%E7%BB%84%E6%88%90%E5%92%8C%E7%BB%93%E6%9E%84%E4%B8%8A%E6%9C%89%E5%93%AA%E4%BA%9B%E7%89%B9%E7%82%B9%EF%BC%9F"><span class="toc-text">4. tRNA 在组成和结构上有哪些特点？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-tRNA-%E5%A6%82%E4%BD%95%E8%BD%AC%E8%BF%90%E6%B4%BB%E5%8C%96%E6%B0%A8%E5%9F%BA%E9%85%B8%E8%87%B3-mRNA-%E6%A8%A1%E6%9D%BF%E4%B8%8A"><span class="toc-text">5. tRNA 如何转运活化氨基酸至 mRNA 模板上?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#6-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E4%B8%8E%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%9A%84%E6%A0%B8%E7%B3%96%E4%BD%93%E7%BB%84%E6%88%90%E6%9C%89%E5%93%AA%E4%BA%9B%E5%BC%82%E5%90%8C%E7%82%B9%EF%BC%9F"><span class="toc-text">6. 原核生物与真核生物的核糖体组成有哪些异同点？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E4%B8%8E%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%9A%84%E6%A0%B8%E7%B3%96%E4%BD%93%E7%9A%84%E7%9B%B8%E5%90%8C%E7%82%B9"><span class="toc-text">(1) 原核生物与真核生物的核糖体的相同点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AD%94%EF%BC%9A-1-SD%E5%BA%8F%E5%88%97"><span class="toc-text">答：(1)SD序列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-SD-%E5%BA%8F%E5%88%97%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">(2) SD 序列的功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#8-%E6%A0%B8%E7%B3%96%E4%BD%93%E4%B8%BB%E8%A6%81%E6%9C%89%E5%93%AA%E4%BA%9B%E6%B4%BB%E6%80%A7%E4%B8%AD%E5%BF%83"><span class="toc-text">8. 核糖体主要有哪些活性中心?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-mRNA-%E7%BB%93%E5%90%88%E4%BD%8D%E7%82%B9"><span class="toc-text">(1) mRNA 结合位点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-AA-tRNA-%E7%BB%93%E5%90%88%E4%BD%8D%E7%82%B9-A-%E4%BD%8D"><span class="toc-text">(2) AA - tRNA 结合位点 (A 位)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-%E5%8E%BB%E6%B0%A8%E9%85%B0-tRNA-%E9%87%8A%E6%94%BE%E4%BD%8D%E7%82%B9-E-%E4%BD%8D"><span class="toc-text">(4) 去氨酰 - tRNA 释放位点 (E 位)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-%E8%BD%AC%E8%82%BD%E9%85%B6%E4%B8%AD%E5%BF%83"><span class="toc-text">(5)转肽酶中心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#6-%E5%BB%B6%E4%BC%B8%E5%9B%A0%E5%AD%90-EF-G-%E7%BB%93%E5%90%88%E4%BD%8D%E7%82%B9"><span class="toc-text">(6) 延伸因子 EF-G 结合位点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#9-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E4%B8%8E%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%9C%A8%E7%BF%BB%E8%AF%91%E7%9A%84%E8%B5%B7%E5%A7%8B%E8%BF%87%E7%A8%8B%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="toc-text">9. 真核生物与原核生物在翻译的起始过程中有哪些不同？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#10-%E9%93%BE%E9%9C%89%E7%B4%A0%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%A4%9F%E6%8A%91%E5%88%B6%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%9A%84%E5%90%88%E6%88%90%EF%BC%9F"><span class="toc-text">10. 链霉素为什么能够抑制蛋白质的合成？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-%E5%93%AA%E4%BA%9B%E6%8A%97%E7%94%9F%E7%B4%A0%E5%8F%AA%E8%83%BD%E7%89%B9%E5%BC%82%E6%80%A7%E5%9C%B0%E4%BD%9C%E7%94%A8%E4%BA%8E%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E6%A0%B8%E7%B3%96%E4%BD%93%EF%BC%9F%E5%93%AA%E4%BA%9B%E5%8F%AA%E4%BD%9C%E7%94%A8%E4%BA%8E%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E6%A0%B8%E7%B3%96%E4%BD%93%EF%BC%9F%E5%93%AA%E4%BA%9B%E8%83%BD%E5%90%8C%E6%97%B6%E6%8A%91%E5%88%B6%E5%8E%9F%E6%A0%B8%E5%92%8C%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E6%A0%B8%E7%B3%96%E4%BD%93%EF%BC%9F"><span class="toc-text">11. 哪些抗生素只能特异性地作用于原核生物核糖体？哪些只作用于真核生物核糖体？哪些能同时抑制原核和真核生物核糖体？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E5%AD%90%E4%BC%B4%E4%BE%A3%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E9%87%8D%E8%A6%81%E5%8A%9F%E8%83%BD%EF%BC%9F"><span class="toc-text">12. 什么是分子伴侣，有哪些重要功能？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AD%94%EF%BC%9A-1-%E5%88%86%E5%AD%90%E4%BC%B4%E4%BE%A3"><span class="toc-text">答：(1) 分子伴侣</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%88%86%E5%AD%90%E4%BC%B4%E4%BE%A3%E7%9A%84%E9%87%8D%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-text">(2) 分子伴侣的重要功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#13-%E4%BB%80%E4%B9%88%E6%98%AF%E4%BF%A1%E5%8F%B7%E8%82%BD%EF%BC%9F%E5%AE%83%E5%9C%A8%E5%BA%8F%E5%88%97%E7%BB%84%E6%88%90%E4%B8%8A%E6%9C%89%E5%93%AA%E4%BA%9B%E7%89%B9%E7%82%B9%EF%BC%8C%E6%9C%89%E4%BD%95%E5%8A%9F%E8%83%BD%EF%BC%9F"><span class="toc-text">13. 什么是信号肽？它在序列组成上有哪些特点，有何功能？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AD%94%EF%BC%9A-1-%E4%BF%A1%E5%8F%B7%E8%82%BD"><span class="toc-text">答：(1)信号肽</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E4%BF%A1%E5%8F%B7%E8%82%BD%E5%9C%A8%E5%BA%8F%E5%88%97%E7%BB%84%E6%88%90%E4%B8%8A%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-text">(2)信号肽在序列组成上的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E4%BF%A1%E5%8F%B7%E8%82%BD%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">(3) 信号肽的功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%8F%B6%E7%BB%BF%E4%BD%93%E8%9B%8B%E7%99%BD%E8%B4%A8%E8%B7%A8%E8%86%9C%E8%BF%90%E8%BD%AC%E6%9C%BA%E5%88%B6"><span class="toc-text">(2) 叶绿体蛋白质跨膜运转机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#16-%E4%BB%80%E4%B9%88%E6%98%AF%E6%A0%B8%E5%AE%9A%E4%BD%8D%E4%BF%A1%E5%8F%B7%E5%BA%8F%E5%88%97%EF%BC%8C%E5%85%B6%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">16. 什么是核定位信号序列，其主要功能是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AD%94%EF%BC%9A-1-%E6%A0%B8%E5%AE%9A%E4%BD%8D%E4%BF%A1%E5%8F%B7%E5%BA%8F%E5%88%97"><span class="toc-text">答：(1)核定位信号序列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%A0%B8%E5%AE%9A%E4%BD%8D%E4%BF%A1%E5%8F%B7%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-text">(2) 核定位信号序列的主要功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-3-%E5%90%8D%E6%A0%A1%E8%80%83%E7%A0%94%E7%9C%9F%E9%A2%98%E8%AF%A6%E8%A7%A3"><span class="toc-text">4.3 名校考研真题详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%80%E3%80%81%E9%80%89%E6%8B%A9%E9%A2%98"><span class="toc-text">一、选择题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91D"><span class="toc-text">【答案】D</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91C"><span class="toc-text">【答案】C</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91AB"><span class="toc-text">【答案】AB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%8C%E3%80%81%E5%A1%AB%E7%A9%BA%E9%A2%98"><span class="toc-text">二、填空题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91%E6%B3%9B%E7%B4%A0%E5%8C%96"><span class="toc-text">【答案】泛素化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91%E6%B0%A8%E5%9F%BA%E9%85%B8"><span class="toc-text">【答案】氨基酸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%89%E3%80%81%E5%88%A4%E6%96%AD%E9%A2%98"><span class="toc-text">三、判断题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91%E9%94%99"><span class="toc-text">【答案】错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91%E9%94%99-1"><span class="toc-text">【答案】错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91%E5%AF%B9"><span class="toc-text">【答案】对</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91%E9%94%99-2"><span class="toc-text">【答案】错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91%E9%94%99-3"><span class="toc-text">【答案】错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%9B%9B%E3%80%81%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A%E9%A2%98"><span class="toc-text">四、名词解释题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-%E5%A4%9A%E8%81%9A%E6%A0%B8%E7%B3%96%E4%BD%93-%E5%AE%81%E6%B3%A2%E5%A4%A7%E5%AD%A6-2018-%E7%A0%94"><span class="toc-text">4. 多聚核糖体[宁波大学 2018 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-%E6%97%A0%E4%B9%89%E7%AA%81%E5%8F%98-nonsense-emutation-%E6%B7%B1%E5%9C%B3%E5%A4%A7%E5%AD%A62008%E7%A0%94%EF%BC%9B%E6%B5%99%E6%B1%9F%E5%B7%A5%E4%B8%9A%E5%A4%A7%E5%AD%A62018%E7%A0%94"><span class="toc-text">5. 无义突变(nonsense emutation)[深圳大学2008研；浙江工业大学2018研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#6-Amber-mutation-%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6-2017-%E7%A0%94"><span class="toc-text">6. Amber mutation[武汉大学 2017 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#7-Aminoacyl-tRNA-synthetase-%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6-2017-%E7%A0%94"><span class="toc-text">7. Aminoacyl - tRNA synthetase[武汉大学 2017 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#8-%E5%8F%8D%E5%AF%86%E7%A0%81%E5%AD%90-%E5%8D%8E%E4%B8%AD%E5%86%9C%E4%B8%9A%E5%A4%A7%E5%AD%A6-2017-%E7%A0%94%EF%BC%9B%E5%8D%97%E4%BA%AC%E6%9E%97%E4%B8%9A%E5%A4%A7%E5%AD%A6-2017-%E7%A0%94"><span class="toc-text">8. 反密码子[华中农业大学 2017 研；南京林业大学 2017 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#9-SD-%E5%BA%8F%E5%88%97-Shine-Dalgarno-sEquence-%E5%8C%97%E4%BA%AC%E5%A4%A7%E5%AD%A6-2010-%E7%A0%94%EF%BC%9B%E5%8D%8E%E4%B8%9C%E7%90%86%E5%B7%A5%E5%A4%A7%E5%AD%A6-2017-%E7%A0%94"><span class="toc-text">9. SD 序列 (Shine Dalgarno sEquence) [北京大学 2010 研；华东理工大学 2017 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#10-Ubiquitination-Modification-%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6-2016-%E7%A0%94"><span class="toc-text">10. Ubiquitination Modification [武汉大学 2016 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-%E7%A7%BB%E7%A0%81%E7%AA%81%E5%8F%98-%E6%B1%9F%E8%8B%8F%E5%A4%A7%E5%AD%A62016%E7%A0%94"><span class="toc-text">11. 移码突变[江苏大学2016研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-%E5%BC%80%E6%94%BE%E9%98%85%E8%AF%BB%E6%A1%86%E6%9E%B6-%E6%B5%99%E6%B1%9F%E5%86%9C%E6%9E%97%E5%A4%A7%E5%AD%A6-2016-%E7%A0%94"><span class="toc-text">12. 开放阅读框架[浙江农林大学 2016 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#13-%E7%83%AD%E4%BC%91%E5%85%8B%E8%9B%8B%E7%99%BD-heat-Shock-Protein-%E5%86%9B%E4%BA%8B%E5%8C%BB%E5%AD%A6%E7%A7%91%E5%AD%A6%E9%99%A2-2012-%E7%A0%94"><span class="toc-text">13. 热休克蛋白(heat Shock Protein) [军事医学科学院 2012 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%94%E3%80%81%E7%AE%80%E7%AD%94%E9%A2%98"><span class="toc-text">五、简答题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E8%AF%95%E8%BF%B0%E6%A0%B8%E5%9F%BA%E5%9B%A0%E7%BB%84%E7%BC%96%E7%A0%81%E7%BA%BF%E7%B2%92%E4%BD%93%E8%9B%8B%E7%99%BD%E7%9A%84%E8%B7%A8%E8%86%9C%E8%BF%90%E8%BD%AC%E6%9C%BA%E5%88%B6%E3%80%82-%E9%9D%92%E5%B2%9B%E5%A4%A7%E5%AD%A62017%E7%A0%94"><span class="toc-text">1. 试述核基因组编码线粒体蛋白的跨膜运转机制。[青岛大学2017研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E6%B0%A8%E5%9F%BA%E9%85%B8%E7%9A%84%E6%B4%BB%E5%8C%96-1"><span class="toc-text">(1) 氨基酸的活化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E8%82%BD%E9%93%BE%E7%9A%84%E8%B5%B7%E5%A7%8B"><span class="toc-text">(2)肽链的起始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A1%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E8%82%BD%E9%93%BE%E7%9A%84%E8%B5%B7%E5%A7%8B%E8%BF%87%E7%A8%8B"><span class="toc-text">②真核生物肽链的起始过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E8%82%BD%E9%93%BE%E7%9A%84%E5%BB%B6%E4%BC%B8-1"><span class="toc-text">(3)肽链的延伸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-%E8%82%BD%E9%93%BE%E7%9A%84%E7%BB%88%E6%AD%A2-1"><span class="toc-text">(4) 肽链的终止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#6-%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%94%9F%E7%89%A9%E5%90%88%E6%88%90%E4%BD%93%E7%B3%BB%E4%B8%BB%E8%A6%81%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%88%90%E5%88%86%EF%BC%9F%E5%90%84%E6%9C%89%E4%BD%95%E4%BD%9C%E7%94%A8%EF%BC%9F-%E8%8B%8F%E5%B7%9E%E5%A4%A7%E5%AD%A62008%E7%A0%94"><span class="toc-text">6. 蛋白质生物合成体系主要包括哪些成分？各有何作用？[苏州大学2008研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%90%84%E6%88%90%E5%88%86%E7%9A%84%E4%BD%9C%E7%94%A8%E5%A6%82%E4%B8%8B"><span class="toc-text">(2) 各成分的作用如下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%85%AD%E3%80%81%E8%AE%BA%E8%BF%B0%E9%A2%98"><span class="toc-text">六、论述题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%92%8C%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%BF%BB%E8%AF%91%E8%B5%B7%E5%A7%8B%E7%9A%84%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="toc-text">(2)真核生物和原核生物翻译起始的不同点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%8F%82%E8%A7%81%E6%9C%AC%E7%AB%A0%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3%E7%AC%AC9%E9%A2%98%E7%AD%94%E6%A1%88"><span class="toc-text">参见本章课后习题详解第9题答案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E8%AE%BA%E8%BF%B0%E8%9B%8B%E7%99%BD%E7%9A%84%E6%B3%9B%E7%B4%A0%E5%8C%96%E9%99%8D%E8%A7%A3%E8%BF%87%E7%A8%8B%E3%80%82-%E6%B2%B3%E5%8C%97%E5%A4%A7%E5%AD%A6-2014-%E7%A0%94"><span class="toc-text">2. 论述蛋白的泛素化降解过程。[河北大学 2014 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%9B%B8%E5%85%B3%E8%AF%95%E9%A2%98%EF%BC%9A%E8%9B%8B%E7%99%BD%E8%B4%A8%E9%99%8D%E8%A7%A3%E7%9A%84%E6%B3%9B%E7%B4%A0%E5%8C%96%E4%BF%AE%E9%A5%B0%E7%9A%84%E4%B8%89%E4%B8%AA%E8%BF%87%E7%A8%8B%E5%8F%8A%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F-%E5%8C%97%E4%BA%AC%E5%A4%A7%E5%AD%A62010%E7%A0%94"><span class="toc-text">相关试题：蛋白质降解的泛素化修饰的三个过程及作用是什么？[北京大学2010研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E6%B3%9B%E7%B4%A0%E6%BF%80%E6%B4%BB%E9%85%B6-E1-%E9%BB%8F%E9%99%84%E5%9C%A8%E6%B3%9B%E7%B4%A0%E5%88%86%E5%AD%90%E4%B8%8A%E6%BF%80%E6%B4%BB%E6%B3%9B%E7%B4%A0"><span class="toc-text">(1) 泛素激活酶 E1 黏附在泛素分子上激活泛素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-E1-%E9%85%B6%E5%B0%86%E6%BF%80%E6%B4%BB%E7%9A%84%E6%B3%9B%E7%B4%A0%E5%88%86%E5%AD%90%E8%BD%AC%E7%A7%BB%E5%88%B0%E6%B3%9B%E7%B4%A0%E7%BB%93%E5%90%88%E9%85%B6-E2-%E4%B8%8A"><span class="toc-text">(2) E1 酶将激活的泛素分子转移到泛素结合酶 E2 上</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-E2-%E9%85%B6%E5%92%8C%E6%B3%9B%E7%B4%A0%E8%BF%9E%E6%8E%A5%E9%85%B6-E3-%E5%85%B1%E5%90%8C%E8%AF%86%E5%88%AB%E9%9D%B6%E8%9B%8B%E7%99%BD%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%B3%9B%E7%B4%A0%E5%8C%96%E4%BF%AE%E9%A5%B0"><span class="toc-text">(3) E2 酶和泛素连接酶 E3 共同识别靶蛋白来进行泛素化修饰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E4%BB%80%E4%B9%88%E6%98%AF%E6%A0%B8%E7%B3%96%E4%BD%93%EF%BC%9F%E5%AE%83%E5%85%B7%E6%9C%89%E4%BB%80%E4%B9%88%E5%8A%9F%E8%83%BD%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%9A%E6%A0%B8%E7%B3%96%E4%BD%93%EF%BC%9F%E8%AF%B7%E6%AF%94%E8%BE%83%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E4%B8%8E%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E6%A0%B8%E7%B3%96%E4%BD%93%E7%9A%84%E5%B7%AE%E5%BC%82%E3%80%82-%E6%B5%99%E6%B1%9F%E7%90%86%E5%B7%A5%E5%A4%A7%E5%AD%A62009%E7%A0%94"><span class="toc-text">3. 什么是核糖体？它具有什么功能？什么是多核糖体？请比较原核生物与真核生物核糖体的差异。[浙江理工大学2009研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AD%94%EF%BC%9A-1-%E6%A0%B8%E7%B3%96%E4%BD%93%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">答：(1)核糖体的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%A0%B8%E7%B3%96%E4%BD%93%E7%9A%84%E5%8A%9F%E8%83%BD-1"><span class="toc-text">(2)核糖体的功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E5%A4%9A%E6%A0%B8%E7%B3%96%E4%BD%93%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">(3) 多核糖体的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E4%B8%8E%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E6%A0%B8%E7%B3%96%E4%BD%93%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="toc-text">(4) 原核生物与真核生物核糖体的差异</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A0%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%80%A7"><span class="toc-text">①遗传密码的连续性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A1%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81%E7%9A%84%E7%AE%80%E5%B9%B6%E6%80%A7"><span class="toc-text">②遗传密码的简并性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A2%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81%E7%9A%84%E5%8F%98%E5%81%B6%E6%80%A7"><span class="toc-text">③遗传密码的变偶性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A3%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81%E7%9A%84%E9%80%9A%E7%94%A8%E6%80%A7%E4%B8%8E%E7%89%B9%E6%AE%8A%E6%80%A7"><span class="toc-text">④遗传密码的通用性与特殊性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%81%97%E4%BC%A0%E5%AF%86%E7%A0%81%E7%9A%84%E7%A0%B4%E8%AF%91"><span class="toc-text">(2) 遗传密码的破译</span></a></li></ol></div>
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC04%E7%AB%A0%20%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92(%E4%B8%8B)%E2%80%94%E2%80%94%E4%BB%8E%20mRNA%20%E5%88%B0%E8%9B%8B%E7%99%BD%E8%B4%A8/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第4章 生物信息的传递(下)——从 mRNA 到蛋白质","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

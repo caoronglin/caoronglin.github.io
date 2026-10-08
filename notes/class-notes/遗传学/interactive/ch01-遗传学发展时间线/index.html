@@ -1,0 +1,835 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/class-notes/%E9%81%97%E4%BC%A0%E5%AD%A6/interactive/ch01-%E9%81%97%E4%BC%A0%E5%AD%A6%E5%8F%91%E5%B1%95%E6%97%B6%E9%97%B4%E7%BA%BF/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="遗传学发展时间线 · 第一章 绪论    :root{     --primary:#1677ff; --primary-1:#e6f4ff; --primary-6:#1677ff; --primary-7:#0958d9;     --bg:#f5f7fa; --card:#ffffff; --border:#e8ecf2; --text:#1f2329; --text-2:#5c6" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/class-notes/%E9%81%97%E4%BC%A0%E5%AD%A6/interactive/ch01-%E9%81%97%E4%BC%A0%E5%AD%A6%E5%8F%91%E5%B1%95%E6%97%B6%E9%97%B4%E7%BA%BF/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="遗传学发展时间线 · 第一章 绪论    :root{     --primary:#1677ff; --primary-1:#e6f4ff; --primary-6:#1677ff; --primary-7:#0958d9;     --bg:#f5f7fa; --card:#ffffff; --border:#e8ecf2; --text:#1f2329; --text-2:#5c6" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-10-08T04:55:06.238Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.238Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content="生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学" data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/class-notes/%E9%81%97%E4%BC%A0%E5%AD%A6/interactive/ch01-%E9%81%97%E4%BC%A0%E5%AD%A6%E5%8F%91%E5%B1%95%E6%97%B6%E9%97%B4%E7%BA%BF/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"麟跃云起","description":"\n\n\n\n\n遗传学发展时间线 · 第一章 绪论\n\n  :root{\n    --primary:#1677ff; --primary-1:#e6f4ff; --primary-6:#1677ff; --primary-7:#0958d9;\n    --bg:#f5f7fa; --card:#ffffff; --border:#e8ecf2; --text:#1f2329; --text-2:#...","url":"https://blog.cnortles.top/notes/class-notes/%E9%81%97%E4%BC%A0%E5%AD%A6/interactive/ch01-%E9%81%97%E4%BC%A0%E5%AD%A6%E5%8F%91%E5%B1%95%E6%97%B6%E9%97%B4%E7%BA%BF/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/class-notes/%E9%81%97%E4%BC%A0%E5%AD%A6/interactive/ch01-%E9%81%97%E4%BC%A0%E5%AD%A6%E5%8F%91%E5%B1%95%E6%97%B6%E9%97%B4%E7%BA%BF/"></a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-10-08T04:55:06.238Z">2026-10-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.238Z">2026-10-08</time></span></div>
+</div></div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up">
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>遗传学发展时间线 · 第一章 绪论</title>
+<style>
+  :root{
+    --primary:#1677ff; --primary-1:#e6f4ff; --primary-6:#1677ff; --primary-7:#0958d9;
+    --bg:#f5f7fa; --card:#ffffff; --border:#e8ecf2; --text:#1f2329; --text-2:#5c6470; --text-3:#8a929e;
+    --s1:#8c9aab; --s2:#4c6ef5; --s3:#12b886; --s4:#f59f00;
+    --ok:#52c41a; --err:#ff4d4f; --radius:8px; --shadow:0 1px 2px rgba(0,0,0,.03),0 2px 8px rgba(0,0,0,.04);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#16181d; --card:#1f2329; --border:#2c3138; --text:#e8eaed; --text-2:#a9b0ba; --text-3:#7b838e;
+           --primary-1:#111d33; --shadow:0 1px 2px rgba(0,0,0,.3); }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.65; font-size:14px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:20px 16px 40px}
+  /* ---------- header ---------- */
+  .hero{
+    background:linear-gradient(135deg,#1677ff 0%,#40a9ff 55%,#69c0ff 100%);
+    border-radius:12px;padding:22px 24px;color:#fff;margin-bottom:18px;
+    box-shadow:0 4px 16px rgba(22,119,255,.18);
+  }
+  .hero h1{margin:0 0 6px;font-size:21px;font-weight:600;letter-spacing:.3px}
+  .hero p{margin:0;font-size:13px;opacity:.92}
+  .stats{display:flex;gap:22px;margin-top:16px;flex-wrap:wrap}
+  .stat b{display:block;font-size:22px;font-weight:600;line-height:1.2}
+  .stat span{font-size:12px;opacity:.88}
+  /* ---------- section ---------- */
+  .sec{margin-bottom:22px}
+  .sec-title{font-size:15px;font-weight:600;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+  .sec-title::before{content:"";width:3px;height:15px;border-radius:2px;background:var(--primary)}
+  .sec-hint{font-size:12px;color:var(--text-3);font-weight:400;margin-left:auto}
+  /* ---------- stage cards ---------- */
+  .stages{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media(max-width:640px){.stages{grid-template-columns:repeat(2,1fr)}}
+  .stage{
+    background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);
+    padding:12px 12px 11px;cursor:pointer;transition:.18s;position:relative;overflow:hidden;
+  }
+  .stage:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .stage .bar{position:absolute;left:0;top:0;bottom:0;width:3px}
+  .stage .nm{font-size:13.5px;font-weight:600;margin-bottom:3px;padding-left:8px}
+  .stage .yr{font-size:11.5px;color:var(--text-3);padding-left:8px;font-variant-numeric:tabular-nums}
+  .stage.on{border-color:var(--primary);background:var(--primary-1)}
+  .stage .ct{position:absolute;right:10px;top:11px;font-size:11px;color:var(--text-3);
+    background:var(--bg);border-radius:10px;padding:1px 7px;font-variant-numeric:tabular-nums}
+  /* ---------- timeline ---------- */
+  .tl{position:relative;padding-left:26px;margin-top:4px}
+  .tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(180deg,var(--s1),var(--s2),var(--s3),var(--s4));opacity:.35;border-radius:1px}
+  .ev{position:relative;margin-bottom:8px}
+  .ev .dot{position:absolute;left:-26px;top:12px;width:11px;height:11px;border-radius:50%;
+    border:2.5px solid var(--card);box-shadow:0 0 0 1.5px currentColor;background:currentColor}
+  .ev-card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:9px 13px;cursor:pointer;transition:.15s;
+  }
+  .ev-card:hover{border-color:var(--primary);box-shadow:var(--shadow)}
+  .ev-row{display:flex;align-items:baseline;gap:10px}
+  .ev-yr{font-weight:600;font-size:13px;font-variant-numeric:tabular-nums;min-width:42px;color:var(--primary-6)}
+  .ev-ti{font-size:13.5px;font-weight:500;flex:1}
+  .ev-tag{font-size:10.5px;padding:1px 7px;border-radius:9px;background:var(--bg);color:var(--text-3);white-space:nowrap}
+  .ev-more{max-height:0;overflow:hidden;transition:max-height .25s ease;font-size:12.5px;color:var(--text-2)}
+  .ev.open .ev-more{max-height:220px;margin-top:7px;padding-top:7px;border-top:1px dashed var(--border)}
+  .hidden{display:none!important}
+  /* ---------- quiz ---------- */
+  .quiz{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px}
+  .q-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:12.5px;color:var(--text-3)}
+  .q-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:14px}
+  .q-bar i{display:block;height:100%;background:var(--primary);width:0;transition:width .3s}
+  .q-stem{font-size:14.5px;font-weight:500;margin-bottom:12px;line-height:1.6}
+  .opt{
+    border:1.5px solid var(--border);border-radius:var(--radius);padding:9px 13px;margin-bottom:8px;
+    cursor:pointer;transition:.15s;display:flex;gap:10px;align-items:flex-start;font-size:13.5px;
+  }
+  .opt:hover{border-color:var(--primary);background:var(--primary-1)}
+  .opt .k{font-weight:600;color:var(--text-3);min-width:16px}
+  .opt.sel{border-color:var(--primary);background:var(--primary-1)}
+  .opt.right{border-color:var(--ok);background:rgba(82,196,26,.09)}
+  .opt.wrong{border-color:var(--err);background:rgba(255,77,79,.09)}
+  .opt.right .k{color:var(--ok)} .opt.wrong .k{color:var(--err)}
+  .fb{margin-top:11px;padding:10px 13px;border-radius:var(--radius);font-size:13px;line-height:1.7;display:none}
+  .fb.show{display:block}
+  .fb.y{background:rgba(82,196,26,.09);border-left:3px solid var(--ok)}
+  .fb.n{background:rgba(255,77,79,.09);border-left:3px solid var(--err)}
+  .fb b{font-weight:600}
+  .btns{display:flex;gap:9px;margin-top:14px;flex-wrap:wrap}
+  button{
+    font-family:inherit;font-size:13.5px;border-radius:var(--radius);border:1px solid var(--border);
+    background:var(--card);color:var(--text);padding:7px 17px;cursor:pointer;transition:.15s;
+  }
+  button:hover{border-color:var(--primary);color:var(--primary)}
+  button.pri{background:var(--primary);border-color:var(--primary);color:#fff}
+  button.pri:hover{background:var(--primary-7);color:#fff}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .done{text-align:center;padding:18px 8px}
+  .done .big{font-size:38px;font-weight:600;color:var(--primary)}
+  .done .sub{color:var(--text-2);font-size:13.5px;margin-top:2px}
+  .history{margin-top:12px;font-size:12px;color:var(--text-3);border-top:1px dashed var(--border);padding-top:10px}
+  .history table{width:100%;border-collapse:collapse;font-size:12px}
+  .history td{padding:3px 4px;border-bottom:1px solid var(--border);color:var(--text-2)}
+  .history td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+  .foot{text-align:center;font-size:11.5px;color:var(--text-3);margin-top:22px;line-height:1.8}
+</style>
+
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>遗传学发展时间线</h1>
+    <p>刘祖洞《遗传学》（第4版）· 第一章 绪论 &nbsp;|&nbsp; 点击阶段筛选 · 点击事件查看详情</p>
+    <div class="stats">
+      <div class="stat"><b>4</b><span>发展阶段</span></div>
+      <div class="stat"><b id="nEv">36</b><span>里程碑事件</span></div>
+      <div class="stat"><b>1809</b><span>起点（拉马克）</span></div>
+      <div class="stat"><b id="nQ">6</b><span>自测题</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="sec-title">四个发展阶段<span class="sec-hint">再点一次取消筛选</span></h2>
+    <div class="stages" id="stages"></div>
+  </div>
+
+  <div class="sec">
+    <h2 class="sec-title">里程碑事件<span class="sec-hint" id="filterHint"></span></h2>
+    <div class="tl" id="tl"></div>
+  </div>
+
+  <div class="sec">
+    <h2 class="sec-title">自测 · 第一章</h2>
+    <div class="quiz" id="quiz"></div>
+  </div>
+
+  <div class="foot">
+    零依赖单文件 · 数据仅存于本机浏览器 localStorage<br>
+    内容依据教材第一章整理
+  </div>
+</div>
+
+<script>
+/* ============ 数据 ============ */
+const STAGES = [
+  {id:0, nm:"达尔文时期", yr:"19世纪初 — 1900", color:"var(--s1)", key:"#8c9aab"},
+  {id:1, nm:"孟德尔时期", yr:"1900 — 1950",    color:"var(--s2)", key:"#4c6ef5"},
+  {id:2, nm:"分子遗传时期", yr:"1950 — 2000",  color:"var(--s3)", key:"#12b886"},
+  {id:3, nm:"基因组时期", yr:"2000 — 至今",    color:"var(--s4)", key:"#f59f00"}
+];
+
+const EVENTS = [
+  {y:1809, s:0, t:"拉马克提出获得性状遗传学说", tag:"进化", d:"法国学者拉马克提出「用进废退」的获得性状遗传学说，认为生物性状会主动适应环境并按适应方向进化。分子遗传学发展后该学说逐渐被抛弃，但表观遗传学兴起后其思想被重新审视。"},
+  {y:1822, s:0, t:"奈特开展豌豆杂交试验", tag:"杂交", d:"英国植物学家奈特对豌豆红花/白花性状进行杂交试验，首先得到近似 3:1 的分离比结果。但受时代局限，未能突破当时的科学局限。"},
+  {y:1859, s:0, t:"达尔文《物种起源》", tag:"进化", d:"提出自然选择、生存斗争的进化学说。虽然能解释生物进化现象，但达尔文未能说明发生生物变异的根本原因和生物生存的基本机制。"},
+  {y:1866, s:0, t:"孟德尔发表《植物杂交试验》", tag:"★奠基", d:"孟德尔以豌豆为主要材料，历时 8 年（1858—1865）试验，应用统计方法分析数据，提出遗传因子分离和重组假设。论文发表后未受重视，沉睡 34 年。"},
+  {y:1869, s:0, t:"米歇尔分离出核酸", tag:"分子", d:"瑞士生物学家米歇尔从白细胞的细胞核中分离出核酸，是核酸化学研究的起点。"},
+  {y:1882, s:0, t:"弗莱明记录染色体行为", tag:"细胞", d:"德国胚胎学家弗莱明记录了染色体在有丝分裂中的行为，奠定了细胞遗传学的研究基础。"},
+  {y:1900, s:1, t:"孟德尔定律再发现", tag:"★学科诞生", d:"德弗里斯（月见草等）、科伦斯（玉米和豌豆）、切尔马克（豌豆）三位植物学家在不同地点、不同材料上得出与孟德尔相同的规律并引用其工作。遗传学与这个「再发现」一起诞生。"},
+  {y:1903, s:1, t:"Boveri–Sutton 染色体理论", tag:"细胞", d:"美国生物学家萨顿和德国生物学家博韦里发现孟德尔关于遗传因子的描述与减数分裂中染色体行为相符，提出染色体是遗传物质载体的假设。"},
+  {y:1905, s:1, t:"加洛德发现尿黑酸症", tag:"医学", d:"英国医生加洛德发现尿黑酸症，开创了人类医学遗传研究。"},
+  {y:1906, s:1, t:"贝特森定名 genetics", tag:"术语", d:"英国遗传学家贝特森积极推广孟德尔理论，并首次将研究生物性状遗传和变异的新学科定名为遗传学（genetics）。"},
+  {y:1908, s:1, t:"哈代–温伯格定律", tag:"群体", d:"德国物理学家温伯格和英国数学家哈代分别发现遗传平衡定律，奠定了群体遗传学研究的重要基础。"},
+  {y:1909, s:1, t:"约翰森提出「gene」", tag:"术语", d:"丹麦植物学家约翰森提出 gene 一词，用于描述孟德尔所说的遗传因子。"},
+  {y:1910, s:1, t:"摩尔根揭示基因直线排列", tag:"★经典", d:"美国遗传学家摩尔根利用果蝇为材料，与斯特蒂文特、布里奇斯、马勒等研究性状遗传方式，得出连锁交换定律，确定基因直线排列在染色体上。同时期埃默森等在玉米工作中得到同样结论，形成以染色体学说为核心的基因论。"},
+  {y:1928, s:1, t:"格里菲斯肺炎双球菌实验", tag:"分子", d:"英国生物学家格里菲斯通过肺炎双球菌实验发现了在细菌之间转移的遗传物质（转化现象）。"},
+  {y:1941, s:1, t:"「一个基因一个酶」学说", tag:"★功能", d:"美国遗传学家比德尔和塔特姆利用粗糙链孢霉的生化突变型提出「一个基因一个酶」假说，把基因与蛋白质的功能结合起来。"},
+  {y:1944, s:1, t:"艾弗里证明遗传物质是 DNA", tag:"★本质", d:"美国细菌学家艾弗里与麦克劳德、麦卡蒂等从肺炎链球菌转化实验中发现转化因子是 DNA 而不是蛋白质。1952 年赫尔希和蔡斯用噬菌体感染实验进一步证实。"},
+  {y:1950, s:2, t:"查加夫法则", tag:"分子", d:"奥地利生物化学家查加夫发现不同物种 DNA 碱基组成不同，但每种 DNA 中 A=T、G=C，为双螺旋结构提供化学依据。"},
+  {y:1950, s:2, t:"麦克林托克发现转座子", tag:"★跳跃基因", d:"美国细胞遗传学家麦克林托克首次报道玉米籽粒色斑不稳定遗传，发现基因在染色体上可移动的性质。"},
+  {y:1953, s:2, t:"Watson–Crick DNA 双螺旋", tag:"★分子遗传学开端", d:"美国分子生物学家沃森和英国分子生物学家克里克发现 DNA 双螺旋结构，阐明遗传物质的自体复制，开创了分子遗传学这一新领域。"},
+  {y:1956, s:2, t:"人类 23 对染色体", tag:"细胞", d:"美籍华裔科学家蒋有兴和瑞典细胞学家莱万发现人类共有 23 对染色体。"},
+  {y:1961, s:2, t:"操纵子模型", tag:"调控", d:"法国生物学家雅各布和莫诺利用大肠杆菌提出操纵子模型，揭示了基因表达受到环境因素的调控。"},
+  {y:1966, s:2, t:"遗传密码破译", tag:"★中心法则", d:"美国生物化学家尼伦伯格等揭示了遗传密码，确立遗传信息传递规则。"},
+  {y:1974, s:2, t:"简悦威：DNA 分析用于遗传测试", tag:"医学", d:"美籍华裔医学家简悦威成功将 DNA 分析技术应用于 α-地中海贫血患者的遗传测试，并进一步应用于多种孟德尔疾病的产前诊断。"},
+  {y:1976, s:2, t:"利根川进：基因重排", tag:"调控", d:"日本生物学家利根川进揭示在 B 细胞成熟过程中免疫球蛋白基因通过基因重排实现基因表达调控。"},
+  {y:1977, s:2, t:"DNA 测序技术建立", tag:"技术", d:"英国生物化学家桑格和美国生物学家吉尔伯特等建立 DNA 测序技术。"},
+  {y:1977, s:2, t:"断裂基因（内含子）", tag:"★基因结构", d:"美国遗传学家夏普和英国分子生物学家罗伯茨观察到腺病毒基因的断裂现象，揭示真核基因的编码序列被内含子间隔开的重要特点。"},
+  {y:1985, s:2, t:"PCR 技术", tag:"技术", d:"美国生物化学家穆里斯等创建 PCR 技术，成功实现体外 DNA 的快速扩增。"},
+  {y:1990, s:2, t:"人类基因组计划启动", tag:"★基因组", d:"HGP 正式启动，来自美国、英国、法国、德国、日本和中国的六国科学家参与其中。"},
+  {y:1997, s:2, t:"克隆羊「多莉」", tag:"克隆", d:"英国罗斯林研究所培育出转基因克隆羊「多莉」。"},
+  {y:1998, s:2, t:"RNA 干扰现象", tag:"调控", d:"美国生物学家法尔和梅洛等揭示了 RNA 干扰（RNAi）现象。"},
+  {y:2001, s:3, t:"人类基因组草图公布", tag:"★基因组学时代", d:"国际人类基因组计划合作组织（HUGO）和美国塞莱拉公司分别在《自然》和《科学》上同时公布人类基因组草图图谱及初步分析结果。"},
+  {y:2003, s:3, t:"ENCODE 与表观基因组计划", tag:"基因组注释", d:"NHGRI 启动「DNA 元件的百科全书」（ENCODE）计划，旨在编写人类基因组「元件目录」；同年人类表观基因组计划实施，目标是绘制 DNA 甲基化可变位点图谱。"},
+  {y:2005, s:3, t:"二代测序商业化 / 首个 GWAS", tag:"技术·统计", d:"罗氏 454 测序系统开始商业化运行，代表第二代测序技术的普及；同年爱德华兹团队利用全基因组关联分析（GWAS）完成年龄相关性黄斑变性易感因素筛选，是关联分析方法的首项标志性成果。"},
+  {y:2006, s:3, t:"iPS 诱导多能干细胞", tag:"细胞重编程", d:"日本学者山中伸弥将 4 种转录因子编码基因导入小鼠成纤维细胞，首次成功将已分化体细胞重编程为诱导多能干细胞（iPS cells）。同年 TCGA 癌症基因组图谱计划启动。"},
+  {y:2007, s:3, t:"NIPT 无创产前筛查", tag:"医学", d:"中国香港中文大学病理学家卢煜明利用孕妇外周血成功进行 21 三体的无创产前筛查。同年中国完成首个汉族男性全基因组测序。"},
+  {y:2008, s:3, t:"千人基因组计划", tag:"基因组", d:"由英国 Sanger 研究所、中国深圳华大基因研究院、美国 NHGRI 发起，测定全球 27 个族群 2500 人基因组，目标建成开放公共的人类基因组参照数据库。"},
+  {y:2010, s:3, t:"首例人造生命 Synthia", tag:"合成生物学", d:"美国克雷格文特尔研究所宣布世界首例人造生命 Synthia 诞生——只含人工合成基因组序列、能够自我复制的人造生物体。"},
+  {y:2012, s:3, t:"CRISPR/Cas9 基因编辑", tag:"★基因编辑", d:"卡彭蒂耶和杜德娜成功开发 CRISPR/Cas9 系统并应用于真核细胞基因编辑；2013 年张锋首次将其应用于哺乳动物和人类细胞，迅速带动全球多物种基因编辑。"},
+  {y:2016, s:3, t:"TWAS 全转录组关联分析", tag:"统计", d:"美国加州大学洛杉矶分校波格丹等建立与 GWAS 相似的全转录组关联分析方法，利用转录组范围关联研究确定基因表达与性状的关联关系。"},
+  {y:2017, s:3, t:"免疫治疗走向临床", tag:"医学", d:"FDA 先后通过抗 PD-1 抗体 Keytruda 用于 MSI-H/dMMR 肿瘤，以及 CAR-T 疗法 Kymriah 用于儿童和年轻成人 B 细胞急性淋巴细胞白血病。"},
+  {y:2018, s:3, t:"克隆猕猴", tag:"克隆", d:"中国科学院神经科学研究所孙强团队利用体细胞核移植技术克隆出两只猕猴，首次实现非人灵长类动物的体细胞克隆。"}
+];
+
+const QUIZ = [
+  {q:"遗传学作为独立学科诞生的标志是？", o:["孟德尔 1866 年发表《植物杂交试验》","1900 年孟德尔定律的再发现","1903 年 Boveri–Sutton 提出染色体理论","1906 年贝特森定名 genetics"], a:1,
+   e:"孟德尔论文发表后沉睡 34 年；1900 年德弗里斯、科伦斯、切尔马克分别在不同地点、不同材料上得出相同结论并引用孟德尔工作，遗传学与这个「再发现」一起诞生。"},
+  {q:"下列哪项**不属于**教材划分的遗传学发展阶段？", o:["达尔文时期","孟德尔时期","分子遗传时期","表观遗传时期"], a:3,
+   e:"教材划分为四阶段：达尔文时期、孟德尔时期、分子遗传时期、基因组时期。表观遗传学是当今研究热点，但不是教材划分的发展阶段名称。"},
+  {q:"达尔文进化论的主要局限是什么？", o:["否认生物会发生变异","未说明发生生物变异的根本原因和生存机制","未提出自然选择概念","主张获得性状遗传"], a:1,
+   e:"教材明确指出：达尔文学说虽能解释生物进化现象，但受学科发展局限，没有能够解释发生生物变异的根本原因和生物生存的基本机制。"},
+  {q:"「一基因一酶」学说与「DNA 是遗传物质」的证明，哪个在先？", o:["一基因一酶在先（1941）","DNA 是遗传物质在先（1944）","两者同年","都不对"], a:0,
+   e:"比德尔和塔特姆 1941 年用粗糙链孢霉生化突变型提出「一个基因一个酶」；艾弗里等 1944 年才通过肺炎链球菌转化实验证明遗传物质是 DNA。先建立基因—蛋白质功能联系，再确证化学本质。"},
+  {q:"镰状细胞贫血的研究思路属于？", o:["正向遗传学","反向遗传学","都不是","两者结合"], a:0,
+   e:"正向遗传学是「从表型变异到基因型变异」：先分离病变蛋白 → 据肽链氨基酸序列推测 DNA 序列 → cDNA 文库筛选编码基因 → 染色体定位。反向遗传学的例子是亨廷顿舞蹈症。"},
+  {q:"下列关于表观遗传的说法，正确的是？", o:["伴随 DNA 序列的改变","发生在 DNA 序列不变时的可遗传基因功能改变","只存在于植物中","属于经典遗传学范畴"], a:1,
+   e:"表观遗传指在未发生基因组 DNA 序列改变的情况下，基因功能发生的可遗传改变，包括 DNA 甲基化、RNA 干扰、组蛋白修饰等。它正因「序列不变也可遗传」而对传统基因学说构成挑战。"}
+];
+
+/* ============ localStorage ============ */
+const LSK = "genetics_ch01_v1";
+function load(){ try{ return JSON.parse(localStorage.getItem(LSK)) || {records:[],best:0,total:0}; }catch(e){ return {records:[],best:0,total:0}; } }
+function save(s){ try{ localStorage.setItem(LSK, JSON.stringify(s)); }catch(e){} }
+let store = load();
+
+/* ============ 渲染阶段卡片 ============ */
+let filter = null;
+const elStages = document.getElementById('stages');
+STAGES.forEach(s=>{
+  const n = EVENTS.filter(e=>e.s===s.id).length;
+  const d = document.createElement('div');
+  d.className='stage'; d.style.color=s.key;
+  d.innerHTML = `<div class="bar" style="background:${s.key}"></div>
+    <div class="ct">${n}</div>
+    <div class="nm" style="color:var(--text)">${s.nm}</div>
+    <div class="yr">${s.yr}</div>`;
+  d.onclick = ()=>{ filter = (filter===s.id)?null:s.id; renderStages(); renderTL(); };
+  elStages.appendChild(d);
+});
+function renderStages(){
+  [...elStages.children].forEach((c,i)=> c.classList.toggle('on', filter===i));
+}
+
+/* ============ 渲染时间线 ============ */
+const elTL = document.getElementById('tl');
+function renderTL(){
+  elTL.innerHTML='';
+  const list = EVENTS.filter(e=> filter===null || e.s===filter).sort((a,b)=>a.y-b.y);
+  document.getElementById('filterHint').textContent =
+    filter===null ? `共 ${list.length} 条 · 全时段` : `${STAGES[filter].nm} · ${list.length} 条`;
+  list.forEach(e=>{
+    const st = STAGES[e.s];
+    const d = document.createElement('div');
+    d.className='ev'; d.style.color = st.key;
+    d.innerHTML = `<div class="dot"></div>
+      <div class="ev-card">
+        <div class="ev-row">
+          <span class="ev-yr">${e.y}</span>
+          <span class="ev-ti">${e.t}</span>
+          <span class="ev-tag">${e.tag}</span>
+        </div>
+        <div class="ev-more">${e.d}</div>
+      </div>`;
+    d.querySelector('.ev-card').onclick = ()=> d.classList.toggle('open');
+    elTL.appendChild(d);
+  });
+}
+
+/* ============ 自测 ============ */
+let qi=0, sel=null, answered=false, score=0, log=[];
+const elQ = document.getElementById('quiz');
+function renderQuiz(){
+  if(qi >= QUIZ.length){ return renderDone(); }
+  const q = QUIZ[qi];
+  elQ.innerHTML = `
+    <div class="q-top"><span>第 ${qi+1} / ${QUIZ.length} 题</span><span>本轮得分 ${score}</span></div>
+    <div class="q-bar"><i style="width:${qi/QUIZ.length*100}%"></i></div>
+    <div class="q-stem">${q.q}</div>
+    <div id="opts">${q.o.map((o,i)=>
+      `<div class="opt" data-i="${i}"><span class="k">${"ABCD"[i]}</span><span>${o}</span></div>`).join('')}</div>
+    <div class="fb" id="fb"></div>
+    <div class="btns" id="btns"></div>`;
+  elQ.querySelectorAll('.opt').forEach(el=>{
+    el.onclick = ()=>{
+      if(answered) return;
+      sel = +el.dataset.i;
+      elQ.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));
+      el.classList.add('sel');
+      elQ.querySelector('#btns').innerHTML = '<button class="pri" id="sub">提交答案</button>';
+      elQ.querySelector('#sub').onclick = submit;
+    };
+  });
+}
+function submit(){
+  if(answered || sel===null) return;
+  answered = true;
+  const q = QUIZ[qi], ok = sel===q.a;
+  if(ok) score++;
+  log.push({q:qi, sel:sel, ok:ok});
+  elQ.querySelectorAll('.opt').forEach(el=>{
+    const i=+el.dataset.i;
+    el.classList.remove('sel');
+    if(i===q.a) el.classList.add('right');
+    else if(i===sel) el.classList.add('wrong');
+  });
+  const fb = elQ.querySelector('#fb');
+  fb.className = 'fb show ' + (ok?'y':'n');
+  fb.innerHTML = `<b>${ok?'✓ 正确':'✗ 再想想'}</b>　正确答案：${"ABCD"[q.a]}<br>${q.e}`;
+  elQ.querySelector('#btns').innerHTML =
+    `<button class="pri" id="nx">${qi===QUIZ.length-1?'查看结果':'下一题'}</button>`;
+  elQ.querySelector('#nx').onclick = ()=>{ qi++; sel=null; answered=false; renderQuiz(); };
+}
+function renderDone(){
+  const pct = Math.round(score/QUIZ.length*100);
+  store.total++; store.best = Math.max(store.best, score);
+  store.records.unshift({d:new Date().toLocaleString('zh-CN',{hour12:false}).slice(0,16), s:score, n:QUIZ.length});
+  store.records = store.records.slice(0,20);
+  save(store);
+  elQ.innerHTML = `
+    <div class="done">
+      <div class="big">${score} / ${QUIZ.length}</div>
+      <div class="sub">正确率 ${pct}%　·　历史最高 ${store.best} / ${QUIZ.length}　·　累计练习 ${store.total} 次</div>
+      <div class="btns" style="justify-content:center;margin-top:16px">
+        <button class="pri" id="again">再练一次</button>
+        <button id="clr">清空记录</button>
+      </div>
+      ${store.records.length>1 ? `<div class="history">
+        <div style="margin-bottom:6px">练习历史（最近 ${Math.min(store.records.length,20)} 次）</div>
+        <table>${store.records.map(r=>`<tr><td>${r.d}</td><td>${r.s} / ${r.n}</td></tr>`).join('')}</table>
+      </div>` : ''}
+    </div>`;
+  elQ.querySelector('#again').onclick = ()=>{ qi=0;sel=null;answered=false;score=0;log=[];renderQuiz(); };
+  elQ.querySelector('#clr').onclick = ()=>{
+    if(confirm('确定清空本机保存的练习记录？')){
+      store={records:[],best:0,total:0}; save(store); renderDone();
+    }
+  };
+}
+
+/* ============ init ============ */
+document.getElementById('nEv').textContent = EVENTS.length;
+document.getElementById('nQ').textContent = QUIZ.length;
+renderStages(); renderTL(); renderQuiz();
+</script>
+
+
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+    <div class="widget-header dis-select">
+      <span class="name">本文目录</span>
+      <button type="button" class="cap-action ui-interactive card-hover card-hover--spotlight" data-shell-action="toggle-toc" aria-label="Toggle table of contents" aria-pressed="false"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></span></button>
+    </div>
+  
+  <div class="widget-body"><ol class="toc ui-collection-adapter"><li class="toc-item toc-level-2"><a class="toc-link ui-interactive"><span class="toc-text">四个发展阶段再点一次取消筛选</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive"><span class="toc-text">里程碑事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive"><span class="toc-text">自测 · 第一章</span></a></li></ol></div>
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/class-notes/%E9%81%97%E4%BC%A0%E5%AD%A6/interactive/ch01-%E9%81%97%E4%BC%A0%E5%AD%A6%E5%8F%91%E5%B1%95%E6%97%B6%E9%97%B4%E7%BA%BF/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

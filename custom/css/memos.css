@@ -1,0 +1,80 @@
+/* 说说（Memos）侧边栏组件
+ *
+ * 右栏宽 264px，Memos 正文与时间戳容易横向溢出，
+ * 这里收敛排版：正文限 3 行、单行截断标题。
+ *
+ * 作用域限定在 .tag-plugin.timeline[data-service="ds-memos"]，
+ * 不会影响主题自带的 .timenode 与其他 timeline 组件。
+ */
+
+.tag-plugin.timeline[data-service="ds-memos"] {
+  overflow-x: hidden;
+  word-break: break-word;
+}
+
+.tag-plugin.timeline[data-service="ds-memos"] .timenode {
+  padding-left: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+/* 时间戳：窄栏里换行显示更易读 */
+.tag-plugin.timeline[data-service="ds-memos"] .timenode > .header {
+  display: block;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--sp-text-p3, #8898aa);
+  opacity: 0.85;
+  white-space: normal;
+  word-break: break-all;
+}
+
+/* 正文：最多 3 行，超出省略 */
+.tag-plugin.timeline[data-service="ds-memos"] .timenode > .body {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--sp-text-p1, inherit);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.tag-plugin.timeline[data-service="ds-memos"] .timenode > .body p {
+  margin: 0 0 0.35rem;
+}
+
+.tag-plugin.timeline[data-service="ds-memos"] .timenode > .body p:last-child {
+  margin-bottom: 0;
+}
+
+/* 正文内的图片、代码块等重元素在窄栏里缩到容器宽 */
+.tag-plugin.timeline[data-service="ds-memos"] .timenode img,
+.tag-plugin.timeline[data-service="ds-memos"] .timenode pre,
+.tag-plugin.timeline[data-service="ds-memos"] .timenode table {
+  max-width: 100%;
+  height: auto;
+}
+
+.tag-plugin.timeline[data-service="ds-memos"] .timenode pre {
+  overflow-x: auto;
+  font-size: 0.75rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* 时间线竖线 */
+.tag-plugin.timeline[data-service="ds-memos"] .timenode::before {
+  left: 0.2rem;
+}
+
+/* 空状态 */
+.tag-plugin.timeline[data-service="ds-memos"]:empty::after {
+  content: '暂时没有动态';
+  display: block;
+  padding: 12px 0;
+  font-size: 0.82rem;
+  color: var(--sp-text-p3, #8898aa);
+  text-align: center;
+}

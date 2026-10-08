@@ -1,0 +1,1009 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/wiki/bsa-seq/ch04-algorithm/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>BSA-Seq：第四章、核心算法：显著 SV 方法与阈值模拟 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="BSA-Seq 原理、项目结构、上游 GATK4 流程、核心算法与 CLI 参考" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第四章、核心算法：显著 SV 方法与阈值模拟" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/wiki/bsa-seq/ch04-algorithm/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="BSA-Seq 原理、项目结构、上游 GATK4 流程、核心算法与 CLI 参考" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第四章、核心算法：显著 SV 方法与阈值模拟" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content="算法,Fisher精确检验,模拟,阈值,滑窗,G统计量" data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"WebPage","@id":"https://blog.cnortles.top/wiki/bsa-seq/ch04-algorithm/","name":"第四章、核心算法：显著 SV 方法与阈值模拟","description":"BSA-Seq 原理、项目结构、上游 GATK4 流程、核心算法与 CLI 参考","url":"https://blog.cnortles.top/wiki/bsa-seq/ch04-algorithm/","isPartOf":{"@type":"WebSite","name":"麟跃云起","url":"https://blog.cnortles.top"}}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular"><div class="brand-navigation"><a class="brand-navigation__back cap" href="/wiki/"><span class="ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"/></svg></span><span>所有项目</span></a></div><div class="brand-navigation-rail">
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" href="&#x2F;wiki&#x2F;" title="所有项目" aria-label="所有项目">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"/></svg></span>
+  
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+</div><div class="brand-wrap"><a class="brand-title" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;"><div class="brand-name">BSA-Seq</div></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search" data-search-domain="wiki:bsa-seq" data-search-domain-label="BSA-Seq" data-search-domain-blog="false">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;" title="主页" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--tree" data-widget-id="leftbar:0:tree" data-presentation="leftbar" data-leftbar-rail>
+
+
+<widget class="widget-wrapper doc-tree-widget" data-wiki="bsa-seq">
+  
+  <div class="widget-body"><section class="widget-section"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch01-background&#x2F;" title="第一章、BSA-Seq 与三种分析方法的原理">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第一章、BSA-Seq 与三种分析方法的原理</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch02-project-structure&#x2F;" title="第二章、项目结构与运行环境">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第二章、项目结构与运行环境</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch03-input-data&#x2F;" title="第三章、输入数据与上游 GATK4 流程">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第三章、输入数据与上游 GATK4 流程</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch04-algorithm&#x2F;" title="第四章、核心算法：显著 SV 方法与阈值模拟" aria-current="page">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第四章、核心算法：显著 SV 方法与阈值模拟</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch05-pipeline&#x2F;" title="第五章、主流程源码走读">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第五章、主流程源码走读</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch06-cli-reference&#x2F;" title="第六章、命令行参数全解">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第六章、命令行参数全解</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch08-case-study-rice&#x2F;" title="第八章、论文案例：水稻冷害 QTL 与降采样验证">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第八章、论文案例：水稻冷害 QTL 与降采样验证</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch07-outputs&#x2F;" title="第七章、输出文件与结果解读">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第七章、输出文件与结果解读</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch09-api-reference&#x2F;" title="第九章、函数速查表">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第九章、函数速查表</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch10-troubleshooting&#x2F;" title="第十章、排错、性能与已知问题">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第十章、排错、性能与已知问题</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch11-related-methods-kmer&#x2F;" title="第十一章、相关方法：无参考基因组的 k-mer BSA">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第十一章、相关方法：无参考基因组的 k-mer BSA</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;" title="PyBSASeq 项目解读目录">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">P</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">PyBSASeq 项目解读目录</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></section></div>
+  
+</widget>
+
+
+</div><div class="widget-instance widget-instance--related" data-widget-id="leftbar:1:related" data-presentation="leftbar" data-leftbar-rail>
+
+<widget class="widget-wrapper slide-up related-summary-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">更多：生信</span>
+      
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="summary" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;%E7%94%9F%E4%BF%A1%E5%AD%A6%E7%AC%94%E8%AE%B0&#x2F;" title="生信学笔记">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">生</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">生信学笔记</span>
+      <span class="ui-collection__description">生信学习过程中的概念、方法与流程沉淀</span>
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/bsa-seq/ch01-background/">BSA-Seq</a>
+</div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2026-10-08T04:55:06.000Z">2026-10-08</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第四章、核心算法：显著 SV 方法与阈值模拟</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="第四章、核心算法：显著-SV-方法与阈值模拟"><a href="#第四章、核心算法：显著-SV-方法与阈值模拟" class="headerlink" title="第四章、核心算法：显著 SV 方法与阈值模拟"></a>第四章、核心算法：显著 SV 方法与阈值模拟</h1><p>本章按”数据流顺序”拆解 PyBSASeq 的算法。读懂这一章，代码就只剩下搬运工作了。</p>
+<h2 id="4-1-第一步：结构变异（SV）过滤"><a href="#4-1-第一步：结构变异（SV）过滤" class="headerlink" title="4.1 第一步：结构变异（SV）过滤"></a>4.1 第一步：结构变异（SV）过滤</h2><p>原始 GATK4 输出里有大量噪声位点，直接用会把假阳性灌进统计。程序分三个函数依次清洗，</p>
+<p><strong>每一类被剔除的位点都会单独存成 CSV</strong>（在 <code>Results/FilteredSVs/{样本名}/</code> 下），</p>
+<p>便于事后审计 —— 这是这个工具做得比较贴心的地方。</p>
+<h3 id="4-1-1-sv-filtering-：结构层面的清洗"><a href="#4-1-1-sv-filtering-：结构层面的清洗" class="headerlink" title="4.1.1 sv_filtering()：结构层面的清洗"></a>4.1.1 <code>sv_filtering()</code>：结构层面的清洗</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>规则</th>
+<th>落盘文件</th>
+<th>是否剔除</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>CHROM 不在选定的染色体列表里（未定位 scaffold 等）</td>
+<td><code>ignored.csv</code></td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>2</td>
+<td>任意列为 NA</td>
+<td><code>na.csv</code></td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>3a</td>
+<td>ALT 含 ≥2 个逗号（3 个以上等位基因）</td>
+<td><code>3alts.csv</code></td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>3b</td>
+<td>ALT 含 1 个逗号且<strong>两池 REF 读段都为 0</strong>（<code>"0,x,y"</code>）</td>
+<td><code>real_2alts_{before,after}.csv</code></td>
+<td><strong>保留</strong>（改写）</td>
+</tr>
+<tr>
+<td>3c</td>
+<td>ALT 含 1 个逗号且两池 REF 读段不为 0</td>
+<td><code>2alts_het.csv</code></td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>4a</td>
+<td>单 ALT 且两池 REF 读段都为 0（<code>"0,x"</code>）</td>
+<td><code>fake_1alt.csv</code></td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>4b</td>
+<td>单 ALT 且至少一池有 REF 读段</td>
+<td><code>real_1alt.csv</code></td>
+<td>保留</td>
+</tr>
+<tr>
+<td>5</td>
+<td>REF 或 ALT 含 <code>*</code>，或长度 &gt;1（InDel）</td>
+<td><code>indel.csv</code></td>
+<td><strong>仅记录，保留</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>任一池的位点深度 LD = ADREF + ADALT 为 0</td>
+<td><code>0ld.csv</code></td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>7</td>
+<td>两池 GT 都是纯合、且两池纯合基因型相同</td>
+<td><code>gt_ad.csv</code></td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>8</td>
+<td>GT 里的碱基既不是 REF 也不是 ALT</td>
+<td><code>gt.csv</code></td>
+<td>剔除</td>
+</tr>
+</tbody></table></div>
+<p>几个值得单独说的设计：</p>
+<p><strong>① 2-ALT 位点的”挽救”</strong>（3b）**</p>
+<p><code>REF/ALT = A/G,T</code>（REF 读段为 0）这种情况，本质上就是一个<strong>二态位点</strong>，</p>
+<p>只是 GATK 把第二个等位基因写成 ALT 的第二项。程序把它降维成普通位点：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df_2_alts_real[fb_ad] = df_2_alts_real[fb_ad].<span class="built_in">str</span>.<span class="built_in">slice</span>(start=<span class="number">2</span>)      <span class="comment"># 去掉开头的 "0,"</span></span><br><span class="line">df_2_alts_real[[<span class="string">'REF'</span>, <span class="string">'ALT'</span>]] = df_2_alts_real.ALT.<span class="built_in">str</span>.split(<span class="string">','</span>, expand=<span class="literal">True</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>而被剔掉的 <code>2alts_het.csv</code> 是 REF 读段非零的情况，更可能是杂合、重复序列或测序错误。</p>
+<p><strong>② InDel 被保留而不是剔除</strong>（第 5 步）</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">indel_1 = df[(df.REF.<span class="built_in">str</span>.contains(<span class="string">r'\*'</span>)) | (df.ALT.<span class="built_in">str</span>.contains(<span class="string">r'\*'</span>))]</span><br><span class="line">indel_2 = df[(df.REF.<span class="built_in">str</span>.<span class="built_in">len</span>()&gt;<span class="number">1</span>) | (df.ALT.<span class="built_in">str</span>.<span class="built_in">len</span>()&gt;<span class="number">1</span>)]</span><br><span class="line">df_indel = pd.concat([indel_1, indel_2])</span><br><span class="line">df_indel.to_csv(...)      <span class="comment"># 只落盘</span></span><br><span class="line"><span class="comment"># df = df.drop(index=indel_2.index)     ← 被注释掉了，说明作者试过剔除</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>这也是为什么代码里到处用 <strong>SV（structural variant）</strong> 而不是 <strong>SNP</strong> 作为术语：</p>
+<p>2020 年论文里分析的是 SNP 和小 InDel，但脚本刻意做得更通用。论文里也提到：</p>
+<blockquote>
+<p>it has only been tested for analysis of the SNP and small InDel calling data,<br>it should be able to handle the GATK4-generated copy number variant and<br>structural variant data as well.</p>
+</blockquote>
+<p><strong>③ GT/AD 一致性检查</strong>（第 7、8 步）</p>
+<ul>
+<li>第 7 步剔除的是”两池都是同种纯合”的位点 —— 这类位点在两个池之间不可能有频率差异，<br>留着只会稀释 sSV/totalSV 比值。</li>
+<li>第 8 步剔除 GT 里出现第三种碱基的位点 —— 那是多等位或比对错误的信号。</li>
+</ul>
+<h3 id="4-1-2-sv-filtering-final-read-filter-：测序质量层面的清洗"><a href="#4-1-2-sv-filtering-final-read-filter-：测序质量层面的清洗" class="headerlink" title="4.1.2 sv_filtering_final() + read_filter()：测序质量层面的清洗"></a>4.1.2 <code>sv_filtering_final()</code> + <code>read_filter()</code>：测序质量层面的清洗</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>规则</th>
+<th>落盘文件</th>
+<th>是否剔除</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>任一池 GQ &lt; <code>gq_value</code>（<code>-c</code> 第一个值，默认 20）</td>
+<td><code>svs_lowq.csv</code></td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>2</td>
+<td>两池都满足 ALT/REF &gt; 2</td>
+<td><code>highratio.csv</code></td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>3</td>
+<td>两池都满足 ALT/REF &lt; 0.5</td>
+<td><code>lowratio.csv</code></td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>4</td>
+<td>任一池 LD &gt; mean + 3×std</td>
+<td><code>repetitive_seq.csv</code></td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>5</td>
+<td>任一池 LD &lt; 3</td>
+<td><code>lowread.csv</code></td>
+<td>剔除</td>
+</tr>
+<tr>
+<td>6</td>
+<td>两池 GT 不同</td>
+<td><code>gt_nm.csv</code></td>
+<td>仅记录</td>
+</tr>
+<tr>
+<td>7</td>
+<td>一池 ALT/REF&gt;2、另一池 &lt;0.5（强反向富集）</td>
+<td><code>highly_ed.csv</code></td>
+<td>仅记录</td>
+</tr>
+<tr>
+<td>8</td>
+<td>一池 REF=0、另一池 ALT=0（两池互补纯合）</td>
+<td><code>bulk_homo_svs.csv</code></td>
+<td>仅记录</td>
+</tr>
+</tbody></table></div>
+<p>设计意图：</p>
+<ul>
+<li>规则 2、3 是”两端都同向”的位点 —— 不是两池之间的差异，而是共同的偏倚（例如都偏向 ALT），<br>大概率是参考基因组差异或重复序列。</li>
+<li>规则 4 是<strong>重复序列过滤</strong>：高深度异常通常是重复元件造成的假比对。<br>使用 <code>mean + 3σ</code> 的<strong>单侧</strong>离群判据。</li>
+<li>规则 7 的 <code>highly_ed.csv</code> 和规则 8 的 <code>bulk_homo_svs.csv</code> <strong>不剔除</strong>，<br>它们是”最像真信号”的位点，作者特意留档供人工核查。</li>
+</ul>
+<h2 id="4-2-第二步：显著-SV（sSV）的判定"><a href="#4-2-第二步：显著-SV（sSV）的判定" class="headerlink" title="4.2 第二步：显著 SV（sSV）的判定"></a>4.2 第二步：显著 SV（sSV）的判定</h2><p>对每个过滤后的 SV，构建 2×2 列联表：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">              REF        ALT</span><br><span class="line">第一池 sb    ADREF1     ADALT1</span><br><span class="line">第二池 fb    ADREF2     ADALT2</span><br></pre></td></tr></tbody></table></figure>
+
+<p>用 <strong>Fisher 精确检验</strong>（不是卡方，也不是 G 检验）计算 p 值：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p &lt; alpha（默认 0.01）  →  该 SV 记为 sSV（显著 SV）</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="为什么用-Fisher-而不用-G-检验-卡方"><a href="#为什么用-Fisher-而不用-G-检验-卡方" class="headerlink" title="为什么用 Fisher 而不用 G 检验/卡方"></a>为什么用 Fisher 而不用 G 检验/卡方</h3><p>论文的论证是：</p>
+<blockquote>
+<p>For the same set of 2×2 contingency table, the p-value calculated via either G-test<br>or chi-square test is less than that calculated via Fisher’s exact test, even for<br>sample sizes in the hundreds. To decrease the chance of false positives, Fisher’s<br>exact test was used to identify the likely trait-associated SNPs here.</p>
+</blockquote>
+<p>也就是说 G 检验和卡方在小样本下都会<strong>偏乐观</strong>（p 值偏小），而测序深度的分布天然高度不均，</p>
+<p>相当一部分位点的 AD 计数很小（例如 <code>"1,2"</code>）。Fisher 精确检验不依赖大样本近似，更保守也更准。</p>
+<h3 id="向量化实现"><a href="#向量化实现" class="headerlink" title="向量化实现"></a>向量化实现</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fisher <span class="keyword">import</span> pvalue_npy</span><br><span class="line">__, __, df[<span class="string">'FE_P'</span>] = pvalue_npy(fb_ad_alt_arr, fb_ad_ref_arr, sb_ad_alt_arr, sb_ad_ref_arr)</span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>fisher</code> 模块一次吃四个 numpy 数组，几十万位点秒级完成。</p>
+<p>若没装 <code>fisher</code>，程序回落到逐行 <code>scipy.stats.fisher_exact</code>（源码 <code>sv_ci_scipy()</code>），</p>
+<p>结果相同但<strong>慢好几个数量级</strong>。</p>
+<h2 id="4-3-第三步：另外两条曲线的统计量"><a href="#4-3-第三步：另外两条曲线的统计量" class="headerlink" title="4.3 第三步：另外两条曲线的统计量"></a>4.3 第三步：另外两条曲线的统计量</h2><h3 id="Δ-AF-：等位基因频率差"><a href="#Δ-AF-：等位基因频率差" class="headerlink" title="Δ(AF)：等位基因频率差"></a>Δ(AF)：等位基因频率差</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fb_af = ADALT1 / LD1                    # LD = ADREF + ADALT</span><br><span class="line">sb_af = ADALT2 / LD2</span><br><span class="line">Delta_AF = sb_af - fb_af</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>有亲本信息（两文件，或 <code>--parent ref</code>）：保留<strong>符号</strong></li>
+<li>无亲本信息（单文件）：取<strong>绝对值</strong> <code>|Delta_AF|</code></li>
+<li><code>-c …,-1</code>（<code>mirror_index = -1</code>）可以把整条曲线<strong>镜像翻转</strong>，用于和另一条曲线叠图比较</li>
+</ul>
+<h3 id="G-统计量"><a href="#G-统计量" class="headerlink" title="G 统计量"></a>G 统计量</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">g_statistic_array</span>(<span class="params">o1, o3, o2, o4</span>):</span><br><span class="line">    e1 = np.where(o1+o2+o3+o4!=<span class="number">0</span>, (o1+o2)*(o1+o3)/(o1+o2+o3+o4), <span class="number">0</span>)</span><br><span class="line">    e2 = np.where(o1+o2+o3+o4!=<span class="number">0</span>, (o1+o2)*(o2+o4)/(o1+o2+o3+o4), <span class="number">0</span>)</span><br><span class="line">    e3 = np.where(o1+o2+o3+o4!=<span class="number">0</span>, (o3+o4)*(o1+o3)/(o1+o2+o3+o4), <span class="number">0</span>)</span><br><span class="line">    e4 = np.where(o1+o2+o3+o4!=<span class="number">0</span>, (o3+o4)*(o2+o4)/(o1+o2+o3+o4), <span class="number">0</span>)</span><br><span class="line">    llr = <span class="number">2</span>*O*ln(O/E)   <span class="comment"># 逐格，O/E&gt;0 才计算，否则记 0</span></span><br><span class="line">    <span class="keyword">return</span> llr1+llr2+llr3+llr4</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p><strong>读代码的坑</strong>：函数签名是 <code>(o1, o3, o2, o4)</code>，而调用处写的是<br><code>g_statistic_array(fb_ref, fb_alt, sb_ref, sb_alt)</code>。实际映射是<br><code>o1=fb_ref, o2=sb_ref, o3=fb_alt, o4=sb_alt</code> —— 即表格的行是”等位基因”、<br>列是”混池”，和直觉相反。好在 G 统计量在矩阵转置下不变，<strong>数值结果正确</strong>，<br>但重构这段代码时务必注意。</p>
+</blockquote>
+<h2 id="4-4-第四步：无效假设模拟（算法的心脏）"><a href="#4-4-第四步：无效假设模拟（算法的心脏）" class="headerlink" title="4.4 第四步：无效假设模拟（算法的心脏）"></a>4.4 第四步：无效假设模拟（算法的心脏）</h2><p>所有阈值都靠<strong>模拟</strong>得到，而模拟的关键是：在没有真实关联（H0）时，</p>
+<p>一个 SV 在两个混池里的 ALT 频率应该是多少？</p>
+<h3 id="4-4-1-sm-allelefreq-：从群体结构推出-H0-的等位频率"><a href="#4-4-1-sm-allelefreq-：从群体结构推出-H0-的等位频率" class="headerlink" title="4.4.1 sm_allelefreq()：从群体结构推出 H0 的等位频率"></a>4.4.1 <code>sm_allelefreq()</code>：从群体结构推出 H0 的等位频率</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pop  = [<span class="number">0.0</span>, <span class="number">0.5</span>, <span class="number">1.0</span>]                  <span class="comment"># AA, Aa, aa 个体携带的 ALT 比例</span></span><br><span class="line"><span class="keyword">if</span> pop_struc == <span class="string">'F2'</span>:  prob = [<span class="number">0.25</span>, <span class="number">0.5</span>, <span class="number">0.25</span>]</span><br><span class="line"><span class="keyword">elif</span> pop_struc == <span class="string">'RIL'</span>: prob = [<span class="number">0.5</span>, <span class="number">0.0</span>, <span class="number">0.5</span>]</span><br><span class="line"><span class="keyword">elif</span> pop_struc == <span class="string">'BC'</span>:  prob = [<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> __ <span class="keyword">in</span> <span class="built_in">range</span>(rep):</span><br><span class="line">    alt_freq = np.random.choice(pop, bulk_size, p=prob).mean()</span><br><span class="line">    freq_list.append(alt_freq)</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">sum</span>(freq_list)/<span class="built_in">len</span>(freq_list)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>思路：从分离群体里抽 <code>bulk_size</code> 个个体，每个个体的 ALT 携带比例由基因型决定</p>
+<p>（AA=0、Aa=0.5、aa=1），按孟德尔比例采样后取均值 —— 这就是 H0 下混池的期望 ALT 频率。</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>群体类型</th>
+<th>AA : Aa : aa</th>
+<th>H0 下 ALT 频率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F2</td>
+<td>0.25 : 0.50 : 0.25</td>
+<td><strong>0.50</strong></td>
+</tr>
+<tr>
+<td>RIL（重组自交系）</td>
+<td>0.50 : 0.00 : 0.50</td>
+<td><strong>0.50</strong></td>
+</tr>
+<tr>
+<td>BC（回交）</td>
+<td>0.50 : 0.50 : 0.00</td>
+<td><strong>0.25</strong></td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p><strong>BC 的隐含假设</strong>：<code>prob=[0.5,0.5,0]</code> 固定给出 0.25，即假定”回交到 REF 亲本”。<br>若实验是回交到 ALT 亲本（H0 频率应为 0.75），需要用 <code>--parent ref</code> 模式<br>或先交换 REF/ALT。论文里写的 “0.75/0.25” 也印证了这个二义性。</p>
+</blockquote>
+<p>程序对 fb 和 sb 分别算一次（<code>fb_freq</code> / <code>sb_freq</code>），因为两个池的个体数不同。</p>
+<h3 id="4-4-2-二项抽样：模拟-AD-值"><a href="#4-4-2-二项抽样：模拟-AD-值" class="headerlink" title="4.4.2 二项抽样：模拟 AD 值"></a>4.4.2 二项抽样：模拟 AD 值</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">'sm_fb_ad_alt'</span>] = np.random.binomial(df[fb_ld], fb_freq)   <span class="comment"># 用真实深度 + H0 频率</span></span><br><span class="line">df[<span class="string">'sm_fb_ad_ref'</span>] = df[fb_ld] - df[<span class="string">'sm_fb_ad_alt'</span>]</span><br><span class="line">df[<span class="string">'sm_sb_ad_alt'</span>] = np.random.binomial(df[sb_ld], sb_freq)</span><br><span class="line">df[<span class="string">'sm_sb_ad_ref'</span>] = df[sb_ld] - df[<span class="string">'sm_sb_ad_alt'</span>]</span><br></pre></td></tr></tbody></table></figure>
+
+<p>即：<strong>保留每个位点的真实测序深度，只把等位频率换成 H0 频率</strong>。</p>
+<p>论文里的公式：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">smADALT = Binomial(DP, alleleFreq)</span><br><span class="line">smADREF = DP − smADALT</span><br></pre></td></tr></tbody></table></figure>
+
+<p>用模拟出来的 AD 再做一次 Fisher 检验，得到 <code>sm_FE_P</code>。</p>
+<p>如果 H0 下某个 SV 都能算得”显著”，说明这个位点天然容易假阳性 —— 阈值必须把这点扣除。</p>
+<h2 id="4-5-第五步：三层阈值体系"><a href="#4-5-第五步：三层阈值体系" class="headerlink" title="4.5 第五步：三层阈值体系"></a>4.5 第五步：三层阈值体系</h2><p>这是最容易混淆的部分。程序一共算<strong>三层</strong>阈值：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">┌─ 全局层（基因/染色体级别）</span><br><span class="line">│   resampling: 从全量 SV 里有放回抽样 sv_per_sw 个 SV</span><br><span class="line">│   重复 rep 次，取分位数</span><br><span class="line">│   → thrshld_fe (sSV/totalSV 比值阈值, 99.5 百分位)</span><br><span class="line">│   → thrshld_gs (G 统计量阈值, 99.5 百分位)</span><br><span class="line">│   → thrshld_af (Δ(AF) 两侧 CI, [0.5, 99.5] 百分位)</span><br><span class="line">│   → thrshld_af_abs (|Δ(AF)| 阈值, 99.5 百分位)</span><br><span class="line">│</span><br><span class="line">├─ SV 层（每个位点各自的阈值，用于画品红色参考线）</span><br><span class="line">│   sv_ci(): 对每个 SV 单独做 rep 次模拟 → 该位点的 CI / 分位点</span><br><span class="line">│   sv_ci_gw(): 对上面这些"逐位点阈值"取均值 → 一条水平参考线</span><br><span class="line">│</span><br><span class="line">└─ 滑窗层（最终判决用的阈值）</span><br><span class="line">    thresholds_sw(): 只对某个候选峰所在滑窗内的 SV 做 rep 次模拟</span><br><span class="line">    → Threshold_sSV / Threshold_GS / Threshold_DAF</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="5-1-为什么要”重抽样”求全局阈值"><a href="#5-1-为什么要”重抽样”求全局阈值" class="headerlink" title="5.1 为什么要”重抽样”求全局阈值"></a>5.1 为什么要”重抽样”求全局阈值</h3><p>论文给了非常实际的理由：</p>
+<blockquote>
+<p>It takes around two minutes to calculate the threshold of a single sliding window<br>via simulation … and calculating a threshold for every sliding window of the SNP<br>dataset via simulation would take a very long time.</p>
+</blockquote>
+<p>作者的数据集有 <strong>34,919 个滑窗</strong>，每个 2 分钟 → 需要一个月以上。</p>
+<p>所以先用<strong>重抽样</strong>得到一个”全局阈值”粗筛出候选峰，再只对候选峰做<strong>滑窗特异阈值</strong>精筛。</p>
+<p>两步走把计算量降了几个数量级。</p>
+<h3 id="5-2-全局阈值的样本量：sv-per-sw"><a href="#5-2-全局阈值的样本量：sv-per-sw" class="headerlink" title="5.2 全局阈值的样本量：sv_per_sw"></a>5.2 全局阈值的样本量：<code>sv_per_sw</code></h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sv_per_sw = <span class="built_in">int</span>(<span class="built_in">len</span>(bulk_df_di.index) * sw_size / <span class="built_in">sum</span>(chrmSzL))</span><br></pre></td></tr></tbody></table></figure>
+
+<p>即”平均每个 2 Mb 滑窗里有多少个（独立的）SV”：</p>
+<p>（独立 SV 总数）×（滑窗大小）/（全基因组总长）。论文实测平均 6984 个。</p>
+<p>论文还提到一个反直觉的现象：</p>
+<blockquote>
+<p>we tried different sample sizes for the genome-wide threshold calculation,<br>and the results demonstrated that increasing the sample size decreased the threshold.</p>
+</blockquote>
+<p>样本量越大，比值的抽样方差越小，99.5 百分位就越低 —— 所以用平均样本量是合理折中。</p>
+<h3 id="5-3-模拟时用更宽松的-P-值（sm-alpha）"><a href="#5-3-模拟时用更宽松的-P-值（sm-alpha）" class="headerlink" title="5.3 模拟时用更宽松的 P 值（sm_alpha）"></a>5.3 模拟时用更宽松的 P 值（<code>sm_alpha</code>）</h3><p>注意 <code>-v alpha,smalpha</code> 是两个不同的数：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>默认值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>alpha</code></td>
+<td>0.01</td>
+<td>真实数据上判定 sSV 的 p 值阈值</td>
+</tr>
+<tr>
+<td><code>sm_alpha</code></td>
+<td><strong>0.05</strong>（代码默认；README 写 0.01，论文正文写 0.10）</td>
+<td><strong>模拟数据</strong>上判定 sSV 的 p 值阈值</td>
+</tr>
+</tbody></table></div>
+<p>论文解释了为什么要故意放宽：</p>
+<blockquote>
+<p>A higher cut-off p-value (0.01 is used in the real SNP dataset) is used here,<br>resulting in the identification of more significant SNPs from the simulated<br>SNP sub-dataset, hence a higher threshold and less false positives.</p>
+</blockquote>
+<p>逻辑闭环：模拟时更容易判为 sSV → 算出的比值阈值<strong>更高</strong> → 真数据判显著更严格 → 假阳性更少。</p>
+<blockquote>
+<p>⚠️ 论文的默认值与代码不一致（论文正文 0.10、README 0.01、代码 0.05）。<br>复现时请显式指定 <code>-v 0.01,0.10</code> 或 <code>-v 0.01,0.05</code>，不要依赖默认。</p>
+</blockquote>
+<h3 id="5-4-threshold-txt-的-9-个数字"><a href="#5-4-threshold-txt-的-9-个数字" class="headerlink" title="5.4 threshold.txt 的 9 个数字"></a>5.4 <code>threshold.txt</code> 的 9 个数字</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#1 thrshld_fe      sSV/totalSV 比值阈值（全局）</span><br><span class="line">#2 thrshld_gs      G 统计量阈值（全局）</span><br><span class="line">#3 thrshld_af_n    Δ(AF) 的 CI 下界</span><br><span class="line">#4 thrshld_af_p    Δ(AF) 的 CI 上界</span><br><span class="line">#5 thrshld_af_abs  |Δ(AF)| 阈值（无亲本信息时使用）</span><br><span class="line">#6 sv_ci_af_lb     SV 层 Δ(AF) CI 下界（画线用）</span><br><span class="line">#7 sv_ci_af_ub     SV 层 Δ(AF) CI 上界（画线用）</span><br><span class="line">#8 sv_ci_gs        SV 层 G 统计量阈值（画线用）</span><br><span class="line">#9 sv_ci_af_abs    SV 层 |Δ(AF)| 阈值（画线用）</span><br></pre></td></tr></tbody></table></figure>
+
+<p>实测样例（水稻 chr9 前 3 Mb，<code>-r 100</code>）：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0.03783356258596973 1.3288686178847384 -0.022200169128212457 0.019951754801823558</span><br><span class="line">0.2288475862457121 -0.6104082537609875 0.604376395068709 7.852325248123475 0.6650200949802907</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这个文件是 <code>-a True</code>（只重绘图）模式的<strong>唯一输入依赖</strong>之一。</p>
+<h2 id="4-6-第六步：SV-独立性（DI）与-Durbin-Watson"><a href="#4-6-第六步：SV-独立性（DI）与-Durbin-Watson" class="headerlink" title="4.6 第六步：SV 独立性（DI）与 Durbin-Watson"></a>4.6 第六步：SV 独立性（DI）与 Durbin-Watson</h2><h3 id="问题：物理上相邻的-SV-不是独立观测"><a href="#问题：物理上相邻的-SV-不是独立观测" class="headerlink" title="问题：物理上相邻的 SV 不是独立观测"></a>问题：物理上相邻的 SV 不是独立观测</h3><p>BSA-Seq 的 SVs 沿染色体排列，相邻位点落在同一单倍型块里，<strong>高度相关</strong>。</p>
+<p>直接拿几十万个 SV 去算 Fisher 检验会严重高估自由度、低估方差，阈值算不准。</p>
+<h3 id="解法一：DI（Distance-Independence）"><a href="#解法一：DI（Distance-Independence）" class="headerlink" title="解法一：DI（Distance Independence）"></a>解法一：DI（Distance Independence）</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">di</span>(<span class="params">df, frag_size</span>):</span><br><span class="line">    <span class="comment"># DSTNC = 当前 SV 与上一个 SV 的物理距离</span></span><br><span class="line">    <span class="comment"># 距离 ≥ frag_size  → DI = 1（独立代表位点）</span></span><br><span class="line">    <span class="comment"># 否则累积距离，直到累计 ≥ frag_size 才再标记一个 DI = 1</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>即按物理距离<strong>抽稀</strong>：每 <code>frag_size</code> bp 里只保留一个代表位点。</p>
+<p><code>bulk_df_di = bulk_df[bulk_df.DI==1]</code> 之后的数据才是”近似独立”的样本。</p>
+<h3 id="解法二：用-Durbin-Watson-自动定-frag-size"><a href="#解法二：用-Durbin-Watson-自动定-frag-size" class="headerlink" title="解法二：用 Durbin-Watson 自动定 frag_size"></a>解法二：用 Durbin-Watson 自动定 <code>frag_size</code></h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">dw</span>(<span class="params">df</span>):</span><br><span class="line">    <span class="comment"># 对每条染色体做 OLS: LD ~ POS，检验残差的 Durbin-Watson 统计量</span></span><br><span class="line">    <span class="keyword">if</span> dw_fb &lt; <span class="number">1.5</span> <span class="keyword">or</span> dw_sb &lt; <span class="number">1.5</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span>          <span class="comment"># 残差存在自相关 → 位点不独立 → 需要继续加大 frag_size</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_seg_size</span>(<span class="params">df</span>):</span><br><span class="line">    <span class="keyword">if</span> dw(df) == <span class="literal">False</span>: <span class="keyword">return</span> <span class="number">1</span>                  <span class="comment"># 已经独立，无需抽稀</span></span><br><span class="line">    i_seg_size = sr_length                        <span class="comment"># 从 -l 起（默认 100）</span></span><br><span class="line">    <span class="keyword">while</span> dw(df[DI==<span class="number">1</span>]) == <span class="literal">True</span>:</span><br><span class="line">        i_seg_size += <span class="built_in">int</span>(<span class="number">0.5</span> * sr_length)        <span class="comment"># 每次 +50</span></span><br><span class="line">        <span class="keyword">if</span> i_seg_size &gt;= max_seg_size:            <span class="comment"># 上限 1000（源码硬编码）</span></span><br><span class="line">            <span class="keyword">return</span> max_seg_size</span><br><span class="line">    <span class="keyword">return</span> i_seg_size</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>逻辑</strong>：测序深度沿染色体若存在系统性起伏（GC 偏倚、重复序列、拷贝数变异等），</p>
+<p>残差就会有自相关，说明位点不能当作独立样本。DW 统计量的经验阈值取 1.5。</p>
+<p>这个循环每次迭代都会打印最终的 <code>seg_size</code>（实测水稻小数据里打印的是 <code>150</code>）。</p>
+<h3 id="解法三：分段平均（-seg-step）"><a href="#解法三：分段平均（-seg-step）" class="headerlink" title="解法三：分段平均（--seg_step）"></a>解法三：分段平均（<code>--seg_step</code>）</h3><p>当 <code>seg_size &gt; 1</code> 且 <code>--seg_step &gt; 0</code> 且装了 <code>fisher</code> 时，程序走</p>
+<p><code>average_seg_statistics()</code>：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">steps = <span class="built_in">int</span>(seg_size / ncrmntl_stp)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(steps):</span><br><span class="line">    df[<span class="string">'Seg'</span>] = (df.POS + ncrmntl_stp*i) // seg_size     <span class="comment"># 不同偏移量切段</span></span><br><span class="line">    df = seg_statistics(df)                              <span class="comment"># 段内平均 AD 后重算统计量</span></span><br><span class="line">df[<span class="string">'Delta_AF'</span>] = np.mean(daf_arr, axis=<span class="number">0</span>)                <span class="comment"># 多个偏移的结果再平均</span></span><br><span class="line">df[<span class="string">'G_S'</span>]      = np.mean(gs_arr, axis=<span class="number">0</span>)</span><br><span class="line">df[<span class="string">'FE_P'</span>]     = np.mean(fep_arr, axis=<span class="number">0</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>即对 SV 做<strong>重叠分段</strong>（段长 <code>seg_size</code>，偏移步长 <code>seg_step</code>），</p>
+<p>每段内先把 AD 求平均得到”段级 AD”，再算 Fisher/G/Δ —— 相当于进一步降噪。</p>
+<p>结果存到 <code>Results/sv_fagz_di.csv</code>，后续所有统计都改用它。</p>
+<h2 id="4-7-第七步：峰的识别与显著性验证"><a href="#4-7-第七步：峰的识别与显著性验证" class="headerlink" title="4.7 第七步：峰的识别与显著性验证"></a>4.7 第七步：峰的识别与显著性验证</h2><h3 id="7-1-峰的识别（bsaseq-plot-内部）"><a href="#7-1-峰的识别（bsaseq-plot-内部）" class="headerlink" title="7.1 峰的识别（bsaseq_plot() 内部）"></a>7.1 峰的识别（<code>bsaseq_plot()</code> 内部）</h3><p>滑窗遍历时同步做<strong>峰检测</strong>状态机：</p>
+<ul>
+<li>若某滑窗的 <code>sSV/totalSV ≥ thrshld_fe</code> 且高于左右邻居 → 记为一个候选峰（<code>zigzag</code>）</li>
+<li>连续超阈值的滑窗合并成一段”显著区域”（<code>sv_region</code>），记录起止坐标、峰列表、滑窗个数</li>
+<li>一段超阈值区域内若有多个峰，<strong>只保留最高的那个</strong>作为该区域的代表峰</li>
+<li>结果写入 <code>Results/sv_region.csv</code>（列：<code>CHROM, Start, End, Peaks, NumOfSWs</code>）</li>
+</ul>
+<blockquote>
+<p>这正是程序结尾那段提示的含义：<em>If two or more peaks/valleys and all the values in<br>between are beyond the confidence intervals/thresholds, only the highest peak or the<br>lowerest valley will be identified as the peak/valley of this region.</em><br>想看同区域内的其他峰，要用 <code>-e/--region</code> 把区域切小后重跑。</p>
+</blockquote>
+<h3 id="7-2-候选峰筛选（pk-list-）"><a href="#7-2-候选峰筛选（pk-list-）" class="headerlink" title="7.2 候选峰筛选（pk_list()）"></a>7.2 候选峰筛选（<code>pk_list()</code>）</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> sub_l[<span class="number">3</span>] != [] <span class="keyword">and</span> sub_l[<span class="number">4</span>] &gt; <span class="number">10</span>:      <span class="comment"># 区域内滑窗数 &gt; 10 才做验证</span></span><br><span class="line">    tempL = peak(sub_l[<span class="number">3</span>])                <span class="comment"># 取 sSV/totalSV 最高的滑窗</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>&gt; 10</code> 是为了避免只有一两个滑窗的”孤立尖刺”进入验证。</p>
+<h3 id="7-3-滑窗特异阈值验证（accurate-threshold-sw-）"><a href="#7-3-滑窗特异阈值验证（accurate-threshold-sw-）" class="headerlink" title="7.3 滑窗特异阈值验证（accurate_threshold_sw()）"></a>7.3 滑窗特异阈值验证（<code>accurate_threshold_sw()</code>）</h3><p>对每个候选峰所在的滑窗：</p>
+<ol>
+<li>用<strong>该窗口内</strong>的 SV 重新模拟 <code>rep</code> 次 → <code>thresholds_sw()</code> 得到该窗口专属阈值</li>
+<li>重算该窗口的 <code>sSV/totalSV</code>、<code>GS</code>、<code>DAF</code></li>
+<li>对窗口内每个 SV 的 <code>fb_af</code> 与 <code>sb_af</code> 做<strong>配对 t 检验</strong>：</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__, pvalue_tt = ttest_rel(peak_sw[fb_af], peak_sw[sb_af])</span><br></pre></td></tr></tbody></table></figure>
+
+<ol>
+<li>输出四个显著性判据（0/1）：</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">peak_df[<span class="string">'Significance_sSV'</span>] = np.where(peak_df[<span class="string">'sSV/totalSV'</span>] &gt; peak_df[<span class="string">'Threshold_sSV'</span>], <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">peak_df[<span class="string">'Significance_GS'</span>]  = np.where(peak_df.GS &gt; peak_df.Threshold_GS, <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">peak_df[<span class="string">'Significance_AF'</span>]  = np.where((peak_df.DAF &gt; DAF_CI_UB) | (peak_df.DAF &lt; DAF_CI_LB), <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">peak_df[<span class="string">'Significance_TT'</span>]  = np.where(peak_df[<span class="string">'pvalue_tt'</span>] &lt; alpha, <span class="number">1</span>, <span class="number">0</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>（无亲本信息时第 3 条退化为 <code>DAF &gt; Threshold_DAF</code>，单侧绝对值比较。）</p>
+<p>最终写入 <code>Results/{时间戳}/BSASeq.csv</code>。</p>
+<h2 id="4-8-一个容易被忽略的细节：滑窗特异性阈值解决的是”假阳性”"><a href="#4-8-一个容易被忽略的细节：滑窗特异性阈值解决的是”假阳性”" class="headerlink" title="4.8 一个容易被忽略的细节：滑窗特异性阈值解决的是”假阳性”"></a>4.8 一个容易被忽略的细节：滑窗特异性阈值解决的是”假阳性”</h2><p>论文用真实数据给了一个漂亮的例子：</p>
+<ul>
+<li>第 3 号染色体上的第一个候选峰，<code>sSV/totalSV = 0.0929</code>，<br>略高于全局阈值 <code>0.087</code> —— 按全局阈值看是”显著”的；</li>
+<li>但该滑窗只有 <strong>2,260 个 SNP</strong>，不到平均水平（6,984）的 1/3；</li>
+<li>用<strong>滑窗特异阈值</strong>一算，这个峰立刻被判为<strong>假阳性</strong>。</li>
+</ul>
+<p>反过来，SNP 数特别多的滑窗阈值会<strong>低于</strong>全局阈值，</p>
+<p>所以”比值低于全局阈值但 SNP 数极多”的区域可能是<strong>假阴性</strong> —— 不过论文认为</p>
+<p>这类区域比值本身就低，说明表型效应很小，漏掉可以接受：</p>
+<blockquote>
+<p>these genomic regions should have very small phenotypic effects judged by their low<br>sSNP/totalSNP ratios.</p>
+</blockquote>
+<p>→ 下一章：<a href="ch05-pipeline.md" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>第五章、主流程源码走读</a></p>
+</article>
+
+
+<div class="article-footer slide-up">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文本文由rlcao编写，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section></div>
+
+<div class="related-wrap slide-up" id="read-next"><section class="body"><div class="item" id="prev"><div class="note"><svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-left" aria-hidden="true"></svg> 回顾上一篇</div><a href="/wiki/bsa-seq/ch03-input-data/">第三章、输入数据与上游 GATK4 流程</a></div><div class="item" id="next"><div class="note">接下来阅读 <svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-right" aria-hidden="true"></svg></div><a href="/wiki/bsa-seq/ch05-pipeline/">第五章、主流程源码走读</a></div></section></div>
+
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main></div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/wiki/bsa-seq/ch04-algorithm/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第四章、核心算法：显著 SV 方法与阈值模拟","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

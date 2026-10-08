@@ -1,0 +1,735 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC12%E7%AB%A0%20%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>第12章 网络系统管理 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="[!info] 现行教材 · 第 2 版本页为现行考试依据的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。  第12章 网络系统管理网络系统管理是计算机网络发展的必然产物，它随着计算机网络的发展而发展。随着计算机网络的组成越来越复杂，网络互连的规模越来越大，连网设备越来越" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第12章 网络系统管理" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC12%E7%AB%A0%20%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="[!info] 现行教材 · 第 2 版本页为现行考试依据的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。  第12章 网络系统管理网络系统管理是计算机网络发展的必然产物，它随着计算机网络的发展而发展。随着计算机网络的组成越来越复杂，网络互连的规模越来越大，连网设备越来越" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-09-17T16:00:00.000Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.353Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="信息系统管理工程师" data-stellar-page-meta="">
+<meta property="article:tag" content="第2版教程" data-stellar-page-meta="">
+<meta property="article:tag" content="考证" data-stellar-page-meta="">
+<meta property="article:tag" content="软考" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第12章 网络系统管理" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content=",,," data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC12%E7%AB%A0%20%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"第12章 网络系统管理","description":"\n[!info] 现行教材 · 第 2 版本页为现行考试依据的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。\n\n第12章 网络系统管理网络系统管理是计算机网络发展的必然产物，它随着计算机网络的发展而发展。随着计算机网络的组成越来越复杂，网络互连的规模越来越大，连网设备...","url":"https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC12%E7%AB%A0%20%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC12%E7%AB%A0%20%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">第12章 网络系统管理</a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-09-17T16:00:00.000Z">2026-09-18</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.353Z">2026-10-08</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第12章 网络系统管理</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><blockquote>
+<p>[!info] 现行教材 · 第 2 版<br>本页为<strong>现行考试依据</strong>的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。<br>考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。</p>
+</blockquote>
+<h1 id="第12章-网络系统管理"><a href="#第12章-网络系统管理" class="headerlink" title="第12章 网络系统管理"></a>第12章 网络系统管理</h1><p>网络系统管理是计算机网络发展的必然产物，它随着计算机网络的发展而发展。随着计算机网络的组成越来越复杂，网络互连的规模越来越大，连网设备越来越多样化，网络提供的应用越来越丰富，对网络系统管理持续提出了越来越高的要求。网络系统管理涉及网络的基本概念、日常管理、资源管理、应用管理和安全管理等方面。</p>
+<h2 id="12-1-网络管理基础"><a href="#12-1-网络管理基础" class="headerlink" title="12.1 网络管理基础"></a>12.1 网络管理基础</h2><p>网络管理是指对网络的运行状态进行监测和控制，并能提供有效、可靠、安全、经济的服务。网络管理完成两个主要基本任务，即对网络的运行状态进行监测和对网络的运行进行控制。通过监测可以了解当前网络状态是否正常，是否出现危机和故障；通过控制可以对网络资源进行合理分配，优化网络性能，保证网络服务质量。监测是控制的前提，控制是监测的结果。因此网络管理就是对网络的监测和控制。</p>
+<h2 id="12-1-1-网络管理概述"><a href="#12-1-1-网络管理概述" class="headerlink" title="12.1.1 网络管理概述"></a>12.1.1 网络管理概述</h2><p>网络系统管理是一项复杂而关键的任务，通过有效管理和维护网络系统，确保其能够提供稳定高效的网络服务，并保护网络免受各种威胁和攻击。网络系统管理的重要性在新时代背景下愈发凸显，它能够为组织提供一个强大的工具，以满足不断增长的网络需求，并确保信息资产的安全性和保密性等。</p>
+<p>随着网络技术的高速发展，网络管理的范围涉及网络中的通信活动，以及网络的规划、部署实现、运营和维护等相关方面，因此，网络管理也变得越来越重要，主要体现在以下三方面。</p>
+<p>（1）网络设备的复杂化使得网络管理变得更加复杂。网络设备复杂化包含两个含义：一是网络设备功能更加复杂；二是设备与系统厂商众多，产品规格不统一。因此，网络管理无法采用传统手工方式完成，必须利用先进有效的自动管理手段。</p>
+<p>（2）网络的经济效益越来越依赖网络的有效管理。网络已经成为一个极其庞大而复杂的系统，如果没有一个有力的网络管理作为支撑，当网络系统出现异常时，会给网络用户带来麻烦，甚至对网络运营者产生经济或其他损失。</p>
+<p>（3）先进可靠的网络管理也是网络本身发展的必然结果。当前人们对网络的依赖越来越强，个人通过网络电话、社交发布、媒体资源获取、电子邮件等进行信息沟通和共享，组织通过网络发布产品信息、获取商业情报、实施流程管理、实现辅助决策等。在这种情况下，网络要求具有更高的可靠性和安全性，能及时有效地发现故障和解决故障，以保证网络的正常运行。</p>
+<h2 id="12-1-2-网络管理目标"><a href="#12-1-2-网络管理目标" class="headerlink" title="12.1.2 网络管理目标"></a>12.1.2 网络管理目标</h2><p>网络管理的目标是使网络达到最优状态，即使网络中的资源得到更加有效的利用。网络管理应维护网络的正常运行，当网络出现故障时能及时报告和处理，并协调、保持网络系统的高效运行，包括通过监控网络性能，调整网络运行配置，提高网络性能；通过网络管理系统，预测潜在的网络故障，采取必要的措施加以预防和处理，保障网络稳定；借助有效的性能尺度和评估方法，扩充和规划网络的发展等。网络管理的根本目标是最大限度地满足网络管理者和网络用户对计算机网络的有效性、可靠性、开放性、综合性、安全性和经济性等要求。</p>
+<p>（1）有效性。网络要能准确而及时地传递信息，即网络服务要有质量保证，减少停机时间，缩短响应时间，提高网络设备利用率。</p>
+<p>（2）可靠性。网络必须保证能够持续稳定地运行，要具有对各种故障以及灾害的抵御能力和一定的自愈能力。</p>
+<p>（3）开放性。网络要能够兼容不同类型的设备，适应各种新技术。</p>
+<p>（4）综合性。网络不能是单一化的，要能提供各种不同的综合业务功能，如多媒体传输、视频点播等。</p>
+<p>（5）安全性。网络要对所传输的信息具有可靠的安全保障，防止计算机病毒和非法入侵者的破坏，避免由于管理者的误操作而破坏网络的正常运行等。</p>
+<p>（6）经济性。要减少网络运行成本，并提高网络效率。</p>
+<h2 id="12-1-3-网络管理对象"><a href="#12-1-3-网络管理对象" class="headerlink" title="12.1.3 网络管理对象"></a>12.1.3 网络管理对象</h2><p>在网络管理中会涉及网络的各种资源，主要分为两大类，即硬件资源和软件资源。</p>
+<p>硬件资源是指物理介质、计算机设备和网络互连设备等。物理介质通常是物理层和数据链路层设备，如网卡、双绞线、同轴电缆、光纤等。计算机设备包括处理机、打印机、存储设备和其他计算机外围设备。网络互连设备包括中继器、网桥、交换机、路由器和网关等。</p>
+<p>软件资源主要包括操作系统、应用软件和通信软件。通信软件指实现通信协议的软件，如FDDI、ATM这些网络就大量采用了通信软件保证其正常运行。另外，软件资源还包括路由器软件、网桥软件和交换机软件等。</p>
+<p>在网络环境下的资源一般用”被管对象”（Managed Object，MO）来表示。国际标准化组织（International Organization for Standardization，ISO）认为，被管对象是从开放式系统互连（Open System Interconnection，OSI）角度所看到的OSI环境下的资源，这些资源可以通过使用OSI管理标准而被管理。网络中的资源一般都可用被管对象来描述，例如，网络中的路由器就可以用被管对象来描述，说明它的制造商和路由表的结构。此外，对网络中的软件、服务及网络中的一些事件也都可用被管对象来描述。</p>
+<p>被管对象的集合被称为管理信息库（Management Information Base，MIB），网络中所有相关的被管对象信息都集中在MIB中。但要注意的是，MIB只是一个概念上的数据库，在实际网络中并不存在这样一个库。目前网络管理系统的实现，主要依靠被管对象和MIB，所以它们是网络管理中非常重要的概念。</p>
+<h2 id="12-1-4-网络管理标准"><a href="#12-1-4-网络管理标准" class="headerlink" title="12.1.4 网络管理标准"></a>12.1.4 网络管理标准</h2><p>目前，正在应用的网络管理标准种类较多，其中主要标准分别是 OSI 参考模型、TCP/IP 参考模型、TMN 参考模型、IEEE LAN/WAN 以及基于 Web 的管理等。</p>
+<p>在20世纪80年代末，随着对网络管理系统的迫切需求和网络管理技术的日趋发展，ISO开始制定关于网络管理的国际标准。ISO首先在1989年颁布了ISO DIS 7498-4（X.700）文件，定义了网络管理的基本概念和总体框架；之后在1991年发布的两个文件中规定了网络管理提供的服务和网络管理协议，即ISO 9595公共管理信息服务定义（Common Management Information Service, CMIS）和ISO 9596公共管理信息协议规范（Common Management Information Protocol, CMIP）；在1992年公布的ISO 10164文件中规定了系统管理功能（System Management Functions, SMFs），ISO 10165文件则定义了管理信息结构（Structure of Management Information, SMI）。这些文件共同组成了ISO的网络管理标准。由于这是一个非常复杂的协议体系，因而有关ISO管理的实现进展缓慢，至今少有适用的网络产品。</p>
+<p>20世纪90年代初，随着Internet的快速发展，TCP/IP网络管理的研究非常活跃。TCP/IP网络管理最初使用的是1987年11月提出的简单网关监控协议（Simple Gateway Monitoring Protocol，SGMP），并在此基础上发展为简单网络管理协议第一版（Simple Network Management Protocol，SNMPv1），陆续公布在1990年和1991年的几个RFC（Request For Comments）文件中，即RFC 1155（SMI）、RFC 1157（SNMP）、RFC 1212（MIB定义）和RFC 1213（MIB-II规范）。由于其简单且易于实现，SNMPv1得到了许多制造商的支持，因此，SNMP得到了广泛应用，并成为网络管理事实上的标准。在SNMPv1基础上不断改进其功能，支持分布式网络管理，扩展了数据类型，可以实现大量数据的同时传输，提高了效率和性能，丰富了故障处理能力，增加了集合处理功能，特别是加强了网络管理的安全性，分别于1993年推出了SNMPv2（RFC 1902-1908），1999年推出了SNMPv3（RFC 2570-2575）。</p>
+<p>1991年产生了远程网络监控RMONv1（Remote Monitoring），至1995年发展为RMONv2。这组标准定义了监控局域网网络通信的管理信息库，是SNMP管理信息库的扩充，与SNMP配合可以提供更有效的管理性能，得到了广泛引用。</p>
+<p>为了适应电信网络的管理需要，国际电信联盟（ITU-T）在1989年定义了电信网络管理标准（Telecommunication Management Network，TMN），即M.30建议蓝皮书。TMN最初是为了满足电信服务供应商管理电信网络的需要。TMN是国际电信联盟的标准，它的基础是OSI CMIP/CMIS规范。TMN扩展了管理的概念，使管理超出了管理网络和网络组件的范畴，它同时解决服务和商业配置的问题。</p>
+<p>电气和电子工程师协会（IEEE）定义了局域网的管理标准，即 IEEE 802.1b LAN/MAN 管理标准。这个标准用于管理物理层和数据链路层的 OSI 设备，因此叫作 CMOL（CMIP over LLC）。</p>
+<p>基于互联网的管理是以Web技术为基础的，目前没有相关的标准。两种比较流行的技术是基于Web的企业管理（Web-Based Enterprise Management，WBEM）和Java管理扩展（Java Management eXtension，JMX）。桌面管理任务组（Desk Management Task Force，DMTF）专为</p>
+<p>WBEM 开发标准，致力于将各种不同的管理协议集成在一起。DMTF 选择了面向对象的管理模型，即通用信息模型。JMX 在单一的规程下对管理结构和管理服务进行定义，它由原先的 Java 管理 API（JMAPI）发展而来。JMX 是由 Sun Microsystems 公司开发，基于 Java 互联网小程序的专用子集，它运行在网络组件中。</p>
+<h2 id="12-2-网络日常管理"><a href="#12-2-网络日常管理" class="headerlink" title="12.2 网络日常管理"></a>12.2 网络日常管理</h2><p>网络日常管理是指对网络的常规维护和运营管理，确保网络的正常运行和安全稳定。网络日常管理涉及监控网络设备和服务的运行状态，及时发现和解决故障，以确保网络的高可用性和稳定性。通过实施维护和升级计划，网络管理员能够保持网络设备的良好工作状态，并定期备份和恢复数据，以防止重要数据的丢失。网络日常管理主要分为局域网管理、广域网管理、互联网管理和无线网管理。</p>
+<h2 id="12-2-1-局域网管理"><a href="#12-2-1-局域网管理" class="headerlink" title="12.2.1 局域网管理"></a>12.2.1 局域网管理</h2><p>局域网（LAN）是指在较小区域范围内且具备相同或相近安全要求的网络，通常用于各类组织内部办公环境、生产管理等。局域网管理是确保局域网正常运行和安全稳定的关键步骤。局域网管理主要包括网络设备管理、网络拓扑管理和网络安全管理等。网络设备管理包括对交换机、路由器等网络设备的配置和监控。网络拓扑管理包括对局域网内各设备的布局和连接进行规划和管理。网络安全管理包括入侵检测、访问控制等措施，以保护局域网的安全性。</p>
+<p>（1）网络设备管理。网络设备管理是局域网管理的基础，主要包括交换机、路由器等网络设备的配置和监控等，主要管理任务包括：</p>
+<p>- 设备配置：对网络设备进行基本配置，包括设置IP地址、子网掩码、网关等，确保设备能够正确通信。</p>
+<p>- 设备监控：监控网络设备的运行状态，包括CPU利用率、内存利用率、接口状态等，及时发现并解决设备故障。</p>
+<p>- 设备升级：定期检查网络设备的固件版本，及时升级以修复安全漏洞和获得新功能。</p>
+<p>- 配置备份：定期备份网络设备的配置文件，以便在设备故障或配置丢失时快速恢复。</p>
+<p>（2）网络拓扑管理。网络拓扑管理是对局域网内各设备的布局和连接进行规划和管理等，主要管理任务包括：</p>
+<p>● 设备布局：根据局域网的规模和需求，合理布置设备的位置和数量等，确保网络信号的传输质量和覆盖范围。</p>
+<p>- 网络连接：配置网络设备之间的物理连接和逻辑连接等，确保数据能够顺畅地流动。</p>
+<p>- VLAN划分：根据不同部门或功能的需求，划分虚拟局域网（VLAN），实现网络分隔和安全隔离。</p>
+<p>- 路由配置：配置路由器的路由表等，确保数据能够正确地从源地址到达目的地址。</p>
+<p>（3）网络安全管理。网络安全管理是保护局域网免受攻击和数据泄露的关键措施，主要管</p>
+<h2 id="理任务包括"><a href="#理任务包括" class="headerlink" title="理任务包括"></a>理任务包括</h2><p>- 访问控制：设置访问控制列表（ACL）和用户权限等，限制非授权用户的访问。</p>
+<p>- 防火墙配置：配置防火墙规则，过滤入站和出站的数据流量，阻止恶意攻击和未经授权等的访问。</p>
+<p>- 入侵检测系统（Intrusion Detection System，IDS）：部署IDS来监测和识别潜在的入侵行为，及时采取措施阻止攻击。</p>
+<p>- 病毒防护：安装杀毒软件，及时更新病毒库，定期扫描和清除病毒，保护局域网内的设备和数据安全。</p>
+<p>- 安全培训：定期组织网络安全培训，提高员工的安全意识和应对能力，减少安全漏洞。</p>
+<h2 id="12-2-2-广域网管理"><a href="#12-2-2-广域网管理" class="headerlink" title="12.2.2 广域网管理"></a>12.2.2 广域网管理</h2><p>广域网（WAN）是指跨越较大地理范围的互联网，通常用于连接不同地理位置的分支机构。广域网管理主要包括带宽管理、远程连接管理和故障管理等。带宽管理可以通过流量调度、链路负载均衡等方式优化带宽的使用；远程连接管理可以通过虚拟专线、VPN等方式提供安全可靠的远程访问服务；故障管理包括网络故障诊断、备份恢复等措施，以确保广域网的稳定性。广域网管理主要分为网络设备管理、链路管理和网络安全管理等。</p>
+<p>（1）网络设备管理。网络设备管理是广域网管理的基础，主要包括路由器、交换机、调制解调器等网络设备的配置和监控，主要管理任务与局域网的网络设备管理相同。</p>
+<p>（2）链路管理。链路是连接广域网中不同地点的物理连接，链路管理是确保链路的稳定和可靠运行的关键任务，主要管理任务包括：</p>
+<p>- 带宽管理：监控和管理链路的带宽利用率等，确保带宽分配合理，避免过载和拥塞。</p>
+<p>- 故障管理：定期检查链路的状态和质量等，及时发现并解决链路故障，确保数据能够顺利传输。</p>
+<p>- 延迟和丢包管理：监控链路的延迟和丢包率，优化网络配置和调整传输策略，提高数据传输的效率和可靠性。</p>
+<p>- 链路备份与冗余：配置链路备份与冗余，当主链路故障时，能够自动切换到备用链路，确保业务的连续性和可用性。</p>
+<p>（3）网络安全管理。网络安全管理是保护广域网免受攻击和数据泄露的关键措施，主要管理任务包括：</p>
+<p>- 防火墙配置：配置防火墙规则，过滤入站和出站的数据流量，阻止恶意攻击和未经授权的访问等。</p>
+<p>- 虚拟专用网（Virtual Private Network，VPN）：部署VPN技术，加密数据传输，保障数据的机密性和完整性等。</p>
+<p>- 入侵检测和防御系统（IDS/Intrusion Prevention System，IPS）：部署IDS/IPS来监测和防御潜在的入侵行为，及时采取措施阻止攻击等。</p>
+<p>- 访问控制：设置访问控制列表（ACL）和用户权限，限制非授权用户的访问等。</p>
+<p>- 安全培训：定期组织网络安全培训，提高员工的安全意识和应对能力，减少安全漏洞。</p>
+<h2 id="12-2-3-互联网管理"><a href="#12-2-3-互联网管理" class="headerlink" title="12.2.3 互联网管理"></a>12.2.3 互联网管理</h2><p>互联网即全球范围的网络，由多个自治系统（Autonomous System，AS）组成。互联网管理主要包括域名管理、路由管理和安全管理。域名管理包括域名注册、解析等措施，以保证网站的可访问性；路由管理包括路由器配置、路由表更新等操作，以确保数据在互联网中传输正常；安全管理包括防火墙配置、入侵检测等措施，以保护互联网的安全性。</p>
+<p>（1）自治系统（AS）管理。自治系统是互联网中的一个重要概念，它是一组具有相同路由策略的网络设备的集合。自治系统管理是互联网管理的基础，主要管理任务包括：</p>
+<p>- AS配置：对自治系统进行基本配置，包括设置AS号、路由器的自治系统标识等，确保自治系统能够正确通信。</p>
+<p>- AS监控：监控自治系统的运行状态，包括AS内部路由表的大小、路由器的负载情况等，及时发现并解决AS内部的问题。</p>
+<p>- AS协商：与其他自治系统进行协商，建立对等关系，交换路由信息，确保互联网的连通性和稳定性。</p>
+<p>- AS备份：定期备份自治系统的配置文件和路由信息，以便在设备故障或配置丢失时快速恢复。</p>
+<p>（2）路由管理。路由是互联网中数据包传输的关键环节，路由管理是确保路由的稳定和可靠运行的关键任务，主要管理任务包括：</p>
+<p>- 路由配置：对路由器进行基本配置，包括设置静态路由、动态路由协议等，确保路由器能够正确转发数据。</p>
+<p>- 路由监控：监控路由器的路由表、转发表等，及时发现并解决路由故障，确保数据能够顺利传输。</p>
+<p>- 路由优化：优化路由器的路由策略，减少路由器之间的跳数和延迟，提高数据传输的效率和可靠性。</p>
+<p>- 路由备份：配置路由备份，当主路由器故障时，能够自动切换到备用路由器，确保业务的连续性和可用性。</p>
+<p>（3）互联网安全管理。互联网安全管理是保护互联网免受攻击和数据泄露的关键措施，主要管理任务包括：</p>
+<p>- 防御策略配置：配置防火墙、入侵检测和防御系统（IDS/IPS）等安全设备，过滤入站和出站的数据流量，阻止恶意攻击和未经授权的访问。</p>
+<p>- 安全漏洞管理：定期检查互联网设备的安全漏洞，及时升级固件或应用补丁，修复已知的安全漏洞。</p>
+<p>- 安全事件监控：监控互联网设备的安全事件，包括入侵行为、异常流量等，及时采取措施阻止攻击。</p>
+<p>- 安全培训：定期组织网络安全培训，提高员工的安全意识和应对能力，减少安全漏洞。</p>
+<h2 id="12-2-4-无线网管理"><a href="#12-2-4-无线网管理" class="headerlink" title="12.2.4 无线网管理"></a>12.2.4 无线网管理</h2><p>无线网是指基于无线技术建立的网络，提供无线接入服务，已经成为现代生活和工作中不可或缺的一部分。无线网管理主要包括信号覆盖管理、频谱管理和安全管理。信号覆盖管理包括无线信号的布局和调整，以提供稳定的无线覆盖范围；频谱管理包括分配和调度无线信道资源，以减少干扰和提高无线网络的性能；安全管理包括无线接入认证、数据加密等措施，以确保无线网络的安全性和隐私性。通过网络拓扑规划、AP配置管理、客户端管理、频谱管理、安全管理和性能监控与优化等措施，可以提高无线网络的性能和安全性，满足用户的无线网络使用需求。</p>
+<p>（1）网络拓扑规划。在进行无线网管理之前，需要进行网络拓扑规划，包括确定无线接入点（Access Point，AP）的位置和覆盖范围，以及确定无线信号的强度和频率。通过合理规划网络拓扑，可以避免无线信号的干扰和覆盖范围的不足。</p>
+<p>（2）AP 配置管理。配置无线接入点是无线网管理的关键任务之一。管理员需要设置 AP 的基本参数，包括无线网络名称（Service Set Identifier，SSID）、安全认证方式（如 WPA2）、密码等。此外，还需要配置 AP 的信道和传输功率，以确保无线信号的稳定传输和覆盖范围。</p>
+<p>（3）客户端管理。网络管理员还需要管理连接到无线网络的客户端设备，包括监控客户端设备的连接状态、信号强度等，并及时解决客户端设备的连接问题。此外，还需要限制未经授权的设备连接到无线网络，以确保网络的安全性。</p>
+<p>（4）频谱管理。管理员需要监控无线频谱的使用情况，及时发现并解决频谱干扰问题。可以使用专业的频谱分析仪来监测频谱的使用情况，并采取相应的措施，如调整无线信道、使用干扰消除技术等，以提高无线网络的性能和可靠性。</p>
+<p>（5）安全管理。管理员需要采取一系列安全措施来保护无线网络免受未经授权的访问和攻击，包括使用强密码、启用网络加密、限制无线访问点的范围等。此外，还需要定期更新无线设备的固件和应用程序，以修复已知的安全漏洞。</p>
+<p>（6）性能监控与优化。管理员需要定期监控无线网络的性能，包括带宽利用率、延迟、丢包率等指标。通过监控性能，可以及时发现并解决无线网络的性能问题。此外，还可以采取一些优化措施，如调整无线信道、优化无线覆盖范围等，以提高无线网络的性能和可靠性。</p>
+<h2 id="12-3-网络资源管理"><a href="#12-3-网络资源管理" class="headerlink" title="12.3 网络资源管理"></a>12.3 网络资源管理</h2><p>网络资源管理是指对网络中的各种资源进行规划、配置、监控和优化的过程。通过合理管理网络资源，可以确保资源的高效利用、平衡分配，并为用户提供稳定、可靠的网络服务。网络资源管理的目标是提高网络性能、增强用户体验和降低成本。网络资源管理涉及管理网络中的各种资源，如 IP 地址、子网划分、路由配置和带宽分配等。网络管理员需要根据网络需求进行合理的资源规划和分配，以最大限度地提高网络性能和扩展性。通过有效管理网络资源，组织可以更好地满足不同用户的需求，并提供高效的网络服务。网络资源管理主要包括带宽资源管理、地址资源管理、虚拟资源管理等。</p>
+<h2 id="12-3-1-带宽资源管理"><a href="#12-3-1-带宽资源管理" class="headerlink" title="12.3.1 带宽资源管理"></a>12.3.1 带宽资源管理</h2><p>带宽是网络中传输数据的能力，通常以每秒传输的数据量（比特/秒）来衡量，带宽决定了网络连接的速度和容量，是衡量网络性能的重要指标之一，合理管理带宽资源可以确保网络流量的平衡分配和高效利用。不同类型的应用程序和服务对带宽需求不同，例如实时视频、文件传输、网页浏览等。根据应用程序需求和用户需求，合理分配和配置带宽资源，有效地管理和配置网络资源的带宽，以确保网络流量的合理分配和优化使用。</p>
+<p>带宽资源管理主要包括带宽分配、带宽控制和带宽优化。带宽分配策略可以根据不同的需求进行动态分配，以满足不同应用的带宽需求；带宽控制可以通过流量限制、流量调度等方式来控制带宽的使用；带宽优化可以通过使用带宽整合技术、拥塞控制算法等手段来提高带宽的利用效率。通过流量监控与分析、优先级和限制、流量整形与调度以及定期审查与优化，可以有效地管理和配置网络资源的带宽，提高网络性能并提升用户体验。</p>
+<p>（1）流量监控与分析。定期监控网络流量，并进行流量分析是有效管理带宽资源的关键步骤。通常使用流量监控工具来收集数据，并通过分析工具来识别瓶颈、高峰时段等问题，并根据分析结果，优化带宽分配和调整网络策略。</p>
+<p>（2）优先级和限制。根据应用程序的重要性和用户需求，设置优先级和限制。为关键应用程序分配更高的带宽，并限制非关键应用程序的带宽使用，从而确保关键任务的顺利进行，并避免网络拥塞。</p>
+<p>（3）流量整形与调度。使用流量整形和调度技术等来控制网络流量。通过设置带宽限制、队列管理和流量调度算法，可以平衡网络流量，提高网络性能和用户体验。</p>
+<p>（4）定期审查与优化。定期审查带宽资源配置，并根据实际需求进行优化。随着业务需求的变化，可能需要重新评估带宽资源分配，并进行相应的调整。</p>
+<h2 id="12-3-2-地址资源管理"><a href="#12-3-2-地址资源管理" class="headerlink" title="12.3.2 地址资源管理"></a>12.3.2 地址资源管理</h2><p>地址资源是指在网络中用于标识设备和主机的唯一标识符，是指网络中设备的网络地址。常见的地址资源包括IPv4地址和IPv6地址，正确配置和管理地址资源对于确保网络设备和用户能够正确通信至关重要。地址资源管理主要包括地址规划、地址分配和地址转换等。地址规划是指根据网络规模和拓扑结构，合理划分地址空间；地址分配是指为网络中的设备分配合适的地址，以确保地址的有效使用和避免地址冲突；地址转换可以通过网络地址转换（NAT）技术来实现，将私有地址转换成公网地址，实现IP地址的灵活使用。通过地址规划、IP地址分配、子网划分、IP地址管理工具和定期审查与优化，可以有效地管理和配置网络资源的地址，确保网络通信的顺畅运行。</p>
+<p>（1）地址规划。在进行网络规划时，需要合理分配和规划可用的地址范围。根据组织需求、网络规模和未来扩展需求，确定所需的IP地址数量，并分配给不同的子网或区域。</p>
+<p>（2）IP地址分配。根据规划好的IP地址范围，为每个设备或主机分配唯一的IP地址。可以使用静态IP分配或动态IP分配（如DHCP）来实现。确保每个设备都有正确配置的IP地址，并避免冲突。</p>
+<p>（3）子网划分。根据组织需求和网络拓扑，将IP地址范围划分为不同的子网。每个子网都有自己的IP地址范围和子网掩码。确保子网划分合理，并根据需要进行调整和优化。</p>
+<p>（4）IP地址管理工具。使用IP地址管理工具帮助管理和跟踪IP地址分配情况。这些工具可以帮助记录和监控IP地址的使用情况，并提供报表和警报功能，以便及时发现和解决IP地址资源问题。</p>
+<p>（5）定期审查与优化。定期审查地址资源配置，并根据实际需求进行优化。随着网络变化和设备增加，可能需要重新评估地址资源分配，并进行相应的调整。</p>
+<h2 id="12-3-3-虚拟资源管理"><a href="#12-3-3-虚拟资源管理" class="headerlink" title="12.3.3 虚拟资源管理"></a>12.3.3 虚拟资源管理</h2><p>虚拟资源是通过软件技术模拟出来的计算机网络资源，包括计算虚拟资源、存储虚拟资源和网络虚拟资源。网络虚拟资源是指通过虚拟化技术将物理网络划分为多个虚拟网络，实现网络资源的隔离和管理。网络虚拟资源管理主要包括虚拟资源的分配、监控和调度。虚拟资源的分配策略可以根据需求进行静态或动态分配，以满足不同应用的需求；虚拟资源的监控可以实时监测资源的使用情况，为调度提供参考依据；虚拟资源的调度可以通过优化算法来实现，提高资源的利用效率和系统性能。网络虚拟资源的主要管理任务包括虚拟资源的分配、虚拟资源的监控与调度、虚拟资源的容错与备份、虚拟资源的安全管理。</p>
+<p>（1）虚拟资源的分配。虚拟资源的分配应遵循公平性、高效性和灵活性的原则。公平性要求资源在各用户之间分配均匀，避免资源的过度占用；高效性要求资源分配过程快速、准确，以提高资源利用效率；灵活性要求资源可以根据需求进行动态分配，以适应不同的应用场景。</p>
+<p>（2）虚拟资源的监控与调度。虚拟资源的监控是指对资源的实时监测，包括资源的利用率、负载情况等。通过监控可以及时发现资源的使用情况，以便进行合理的资源调度。资源调度是根据监控结果，对资源进行合理调度，以提高资源利用效率和系统性能。</p>
+<p>（3）虚拟资源的容错与备份。虚拟资源的容错是指在资源故障时，能够及时切换到备用资源，保证系统的连续性和可用性。容错可以通过冗余部署、故障恢复等机制来实现。备份是指将虚拟资源的数据进行备份，以防止数据丢失或损坏。备份可以通过定期备份、增量备份等方式来实现。</p>
+<p>（4）虚拟资源的安全管理。虚拟资源的安全管理包括对资源的访问控制、数据加密、漏洞修复等措施，以保护资源的安全性和机密性。访问控制可以通过权限管理、身份认证等方式来实现；数据加密可以通过对数据进行加密处理，以保护数据的机密性；漏洞修复可以通过及时更新补丁、加强安全策略等方式来实现。</p>
+<p>虚拟资源管理的趋势是向自动化、智能化发展。通过引入机器学习、人工智能等技术，实现资源的自动分配和优化，提高资源管理的效率和质量。自动化和智能化的发展可以减少人工干预，提高资源管理的自动化程度和智能化水平。</p>
+<h2 id="12-4-网络应用管理"><a href="#12-4-网络应用管理" class="headerlink" title="12.4 网络应用管理"></a>12.4 网络应用管理</h2><p>网络应用管理包括安装、配置和维护各种网络应用程序，如邮件服务器、文件服务器和数据库服务器等。网络管理员需要确保这些应用程序的正常运行，并根据需要进行升级和扩展。他们还需要确保应用程序的安全性，防止未经授权访问和数据泄露等安全威胁。网络应用管理是网络系统管理中非常重要的管理工作，常见的网络应用服务有动态主机配置协议（Dynamic Host Configuration Protocol, DHCP）应用管理、域名系统（Domain Name System, DNS）服务器管理、文件服务器管理、打印服务器、邮件管理系统和门户网站管理等。</p>
+<h2 id="12-4-1-DHCP应用管理"><a href="#12-4-1-DHCP应用管理" class="headerlink" title="12.4.1 DHCP应用管理"></a>12.4.1 DHCP应用管理</h2><p>DHCP 服务器是采用动态主机配置协议（DHCP），对网络中的 IP 地址自动动态分配的服务器，旨在通过服务器集中管理网络上使用的 IP 地址和其他相关配置的详细信息，以减少管理地址配置的复杂性。DHCP（动态主机配置协议）是用于自动分配 IP 地址和其他网络配置参数的协议。在网络应用管理中，管理员需要配置并管理 DHCP 服务器，包括设置 IP 地址池、分配规则、租期等。通过 DHCP 应用管理，可以简化网络配置，提高网络管理效率。通过配置 DHCP 服务器、定义 IP 地址范围、配置网络参数、设置租约时间、监控和管理以及考虑安全性，可以有效地管理和配置 DHCP，并简化网络设备的部署和维护。</p>
+<p>（1）定义IP地址范围。根据组织需求和网络规模，定义可用的IP地址范围。确保该范围不与其他静态分配的IP地址冲突，并足够满足所有设备的需求。同时，可以设置保留IP地址以供特定设备使用。</p>
+<p>（2）配置网络参数。配置子网掩码、默认网关、DNS服务器等。这些参数将帮助设备正确地连接到网络并进行通信。</p>
+<p>（3）设置租约时间。租约时间是指 DHCP 服务器分配给设备的 IP 地址的有效期。根据组织需求和网络设备的使用情况，设置适当的租约时间。较短的租约时间可以更快地回收未使用的 IP 地址，而较长的租约时间可以减少设备重新获取 IP 地址的频率。</p>
+<p>（4）监控和管理。定期监控 DHCP 服务器，确保其正常运行并满足网络设备的需求。检查 IP 地址池中可用地址的数量，及时处理资源不足或冲突问题。同时，定期审查和更新 DHCP 配置，以适应网络变化和需求变化。</p>
+<p>（5）安全性配置。为了确保网络安全，可以采取一些安全措施来保护 DHCP 服务器，例如限制对 DHCP 服务器的访问、启用身份验证、使用安全协议等。</p>
+<h2 id="12-4-2-DNS服务器管理"><a href="#12-4-2-DNS服务器管理" class="headerlink" title="12.4.2 DNS服务器管理"></a>12.4.2 DNS服务器管理</h2><p>域名系统（DNS）是一种TCP/IP的标准服务，负责IP地址和域名之间的转换。DNS服务允许网络上的客户机注册和解析DNS域名。这些名称用于为搜索和访问网络上的计算机提供定位。</p>
+<p>域名服务器负责控制本地数据库中的名字解析。DNS 的数据库结构形成一个倒立的树状结构，树的每一个节点都表示整个分布式数据库中的一个分区（域），每个域可再进一步划分成子分区（域）。每个节点有一个至多达 63 个字符长的标识，命名标识中一律不区分大小写。节点的域名是从根到当前域所经过的所有节点的标记名，从右到左排列，并用点（”.”）分隔。域名树上的每一个节点必须有唯一的域名。每个域名对应一个IP地址，一个IP地址可以对应多个域名。</p>
+<p>在网络应用管理中，管理员需要配置和管理DNS服务器，包括添加和管理域名解析记录、设置域名转发和反向解析、进行缓存管理等。通过DNS服务器管理，可以实现高效的域名解析和网络通信。通过配置DNS服务器、设置区域、添加资源记录、配置转发器、监控和管理以及考虑安全性，可以有效地管理和配置DNS，并确保用户能够准确地访问所需的网络资源。</p>
+<p>（1）配置DNS服务器。选择合适的DNS软件（如BIND、MicrosoftDNS等）并进行安装和配置。确保服务器与网络设备连接，并具有足够的资源来处理域名解析请求。</p>
+<p>（2）设置区域。在DNS服务器上设置区域（zone），每个区域对应一个或多个域名。根据组织需求和网络规模，设置主区域（master zone）和从属区域（slave zone）。确保每个区域都有正确的起始授权机构（Start Of Authority，SOA）记录和名称服务器（Name Server，NS）记录。</p>
+<p>（3）添加资源记录。为每个区域添加适当的资源记录。常见的资源记录类型包括A记录（将主机名映射到IPv4地址）、AAAA记录（将主机名映射到IPv6地址）、CNAME记录（提供别名）、MX记录（指定邮件交换器）等。根据需要添加和管理这些记录。</p>
+<p>（4）配置转发器。如果DNS服务器需要与其他DNS服务器进行通信，可以配置转发器（forwarder）。转发器将未知的域名解析请求转发给其他DNS服务器，以获取所需的解析结果。确保配置正确的转发器地址和设置适当的超时时间。</p>
+<p>（5）监控和管理。定期监控DNS服务器，确保其正常运行并满足网络设备的需求。检查域名解析请求的响应时间和准确性。同时，定期审查和更新DNS配置，以适应网络变化和需求变化。</p>
+<p>（6）安全性配置。为了确保网络安全，可以采取一些安全措施来保护DNS服务器，例如，限制对DNS服务器的访问、启用防火墙规则、使用安全传输协议等。</p>
+<h2 id="12-4-3-文件服务器管理"><a href="#12-4-3-文件服务器管理" class="headerlink" title="12.4.3 文件服务器管理"></a>12.4.3 文件服务器管理</h2><p>文件服务器是用于存储和共享文件的服务器。在网络应用管理中，管理员需要配置和管理文件服务器，包括设置文件共享权限、创建用户账号、管理文件夹和文件、定期备份等。通过文件服务器管理，可以实现高效的文件共享和安全的文件存储。通过配置文件服务器、设置共享目录、定期备份、安全性配置、监控和管理以及容灾和恢复，可以有效地管理和配置文件服务器，并确保数据的安全性和可用性。</p>
+<p>（1）配置文件服务器。选择合适的操作系统和文件系统，并进行安装和配置。确保服务器与网络设备连接，并具有足够的存储空间来满足组织的需求。</p>
+<p>（2）设置共享目录。在文件服务器上设置共享目录，以便用户可以访问和共享文件。根据组织需求和安全策略，设置适当的访问权限，并确保只有授权用户可以访问共享目录。</p>
+<p>（3）定期备份。设置定期备份计划，并选择合适的备份介质（如磁带、硬盘等）。同时，测试并验证备份数据的可恢复性。</p>
+<p>（4）安全性配置。为了确保数据安全，可以采取一些安全措施来保护文件服务器，例如，限制对文件服务器的访问，启用防火墙规则，使用加密传输协议（如SFTP）等。同时，定期审查和更新安全策略，以适应不断变化的威胁环境。</p>
+<p>（5）监控和管理。定期监控文件服务器，确保其正常运行并满足组织的需求。检查存储空间的使用情况，及时处理资源不足或冲突问题。同时，定期审查和更新文件共享权限，以确保只有授权用户可以访问和共享文件。</p>
+<p>（6）容灾和恢复。制订容灾计划，并设置合适的备份策略。考虑使用冗余存储、备份服务器等技术来确保数据的可用性和快速恢复能力。定期测试容灾计划，并进行恢复演练以验证其有效性。</p>
+<h2 id="12-4-4-打印系统管理"><a href="#12-4-4-打印系统管理" class="headerlink" title="12.4.4 打印系统管理"></a>12.4.4 打印系统管理</h2><p>打印服务器是用于管理和控制打印机的服务器，网络打印系统是用于管理和控制组织中的打印设备和打印任务的关键应用。在网络应用管理中，管理员需要配置和管理打印服务器，包括添加和配置打印机、设置打印队列、监控打印作业、进行打印资源的管理等。通过打印服务器管理，可以实现统一管理和控制打印任务，提高打印效率。通过配置网络打印服务器、添加和管理打印机、设置访问权限、配置队列和优先级、监控和管理以及安全性配置，可以有效地管理和配置网络打印系统，并满足用户的需求。</p>
+<p>（1）配置网络打印服务器。选择合适的操作系统和打印服务器软件，并进行安装和配置。确保服务器与网络设备连接，并具有足够的资源来处理打印任务。</p>
+<p>（2）添加和管理打印机。在网络打印服务器上添加和管理打印机。根据组织需求和用户需求，选择合适的打印机型号，并配置适当的默认设置（如纸张大小、颜色模式等）。确保每个用户都能够访问所需的打印机。</p>
+<p>（3）设置访问权限。根据组织安全策略，设置适当的访问权限。确保只有授权用户可以访问特定的打印机，并限制对敏感文档的访问权限。同时，定期审查和更新访问权限，以适应组织变化和需求变化。</p>
+<p>（4）配置队列和优先级。为了更好地管理打印任务，可以配置打印队列和优先级。根据用户需求和打印机资源，设置适当的队列和优先级规则。确保高优先级的任务能够及时得到处理。</p>
+<p>（5）监控和管理。定期监控打印系统，确保其正常运行并满足用户需求。检查打印机状态、打印任务队列和资源使用情况。同时，定期审查和更新打印设置，以适应组织变化和需求变化。</p>
+<p>（6）安全性配置。为了确保数据安全，可以采取一些安全措施来保护打印系统，例如，限制对打印服务器的访问、启用防火墙规则、使用加密传输协议等。同时，定期审查和更新安全策略，以适应不断变化的威胁环境。</p>
+<h2 id="12-4-5-邮件系统管理"><a href="#12-4-5-邮件系统管理" class="headerlink" title="12.4.5 邮件系统管理"></a>12.4.5 邮件系统管理</h2><p>电子邮件是 Internet 服务的重要组成部分，随着 Internet 技术日新月异的发展，电子邮件以其方便、快速、廉价的特点越来越赢得人们的喜爱。邮件管理系统中有两个重要的服务器：SMTP（发件）服务器和 POP3（收件）服务器。安装和配置电子邮件服务器的主要工作就是对这两个服务器（逻辑上的）进行操作。人们平时在发送邮件时，其实只是把邮件发送到发件服务器上，而服务器使用一种叫作”存储转发”的技术，把它收到的电子邮件排队，依次发送到收件服务器上面，而邮件就一直存储在收件服务器上，直到收件人收信或直接删除。</p>
+<p>在网络应用管理中，管理员需要配置和管理邮件服务器，包括设置邮件接收和发送规则、管理用户账号、备份和恢复邮件数据等。通过邮件管理系统，可以实现有效的邮件组织和管理。通过配置邮件服务器、设置域名和邮箱、配置收发规则、设置备份策略、安全性配置以及监控和管理，可以有效地管理和配置邮件管理系统，并满足用户的需求。</p>
+<p>（1）配置邮件服务器。选择合适的邮件服务器软件，并进行安装和配置。确保服务器与网络设备连接，并具有足够的资源来处理电子邮件通信。</p>
+<p>（2）设置域名和邮箱。在邮件服务器上设置域名和邮箱。根据组织需求，设置合适的域名，并为每个用户创建相应的邮箱。确保每个用户都能够访问自己的邮箱，并设置适当的访问权限。</p>
+<p>（3）配置收发规则。根据组织需求和安全策略，配置收发规则。例如，设置垃圾邮件过滤规则、白名单/黑名单规则等。确保只有合法的电子邮件能够进入用户的收件箱，并减少垃圾邮件对系统资源的消耗。</p>
+<p>（4）设置备份策略。定期备份是确保数据安全性的重要步骤。设置定期备份计划，并选择合适的备份介质（如磁带、硬盘等）。同时，测试并验证备份数据的可恢复性。</p>
+<p>（5）安全性配置。为了确保电子邮件通信的安全，可以采取一些安全措施来保护邮件管理系统，例如，启用加密传输协议、设置访问控制规则、启用身份验证等。同时，定期审查和更新安全策略，以适应不断变化的威胁环境。</p>
+<p>（6）监控和管理。定期监控邮件管理系统，确保其正常运行并满足用户需求。检查邮箱存储空间的使用情况、邮件传输状态和系统资源消耗情况。同时，定期审查和更新邮箱设置和访问权限，以适应组织变化和需求变化。</p>
+<h2 id="12-4-6-门户网站管理"><a href="#12-4-6-门户网站管理" class="headerlink" title="12.4.6 门户网站管理"></a>12.4.6 门户网站管理</h2><p>门户网站是一个集成多种信息和服务的网站，旨在为用户提供方便的访问和导航。门户网站管理是指对门户网站进行规划、组织、实施和监控的过程。门户网站管理涉及对内容、用户体验、安全性和性能等方面的管理和维护。在网络应用管理中，管理员需配置和管理门户网站服务器，包括设置网站结构、发布和管理内容、处理用户反馈等。通过门户网站管理，可以提供用户友好的访问界面和丰富的信息服务。</p>
+<p>通过确定目标和需求、选择合适的平台、设计用户界面、配置功能模块、管理内容、安全性配置以及监控和维护，可以有效地管理和配置门户网站，并提供用户友好的访问和信息交流平台。</p>
+<p>（1）确定目标和需求。确定希望通过门户网站实现的目标，并了解用户的需求。这将有助于确定网站的功能、内容和设计。</p>
+<p>（2）选择合适的平台。根据目标和需求，选择合适的门户网站平台。确保选择具有良好可扩展性、易用性和安全性的平台。</p>
+<p>（3）设计用户界面。考虑用户体验、导航结构和页面布局。确保信息易于查找，并提供清</p>
+<p>晰而吸引人的内容展示。</p>
+<p>（4）配置功能模块。根据目标和需求，配置适当的功能模块，如新闻发布、论坛、博客、在线支付等。确保功能模块与目标和用户需求相匹配，并提供良好的用户体验。</p>
+<p>（5）管理内容。定期更新和管理门户网站的内容。确保提供准确、及时和有价值的信息。使用内容管理系统（CMS）来简化内容发布和维护过程。</p>
+<p>（6）安全性配置。采取一些安全措施来保护网站免受潜在威胁，如使用强密码、定期备份数据、更新软件补丁等。</p>
+<p>（7）监控和维护。定期监控门户网站，确保其正常运行并满足用户需求。检查网站性能、链接可达性、访问日志和错误日志。同时，定期审查和更新功能模块、插件和主题，以适应组织变化和需求变化。</p>
+<h2 id="12-5-网络安全"><a href="#12-5-网络安全" class="headerlink" title="12.5 网络安全"></a>12.5 网络安全</h2><p>网络安全是指网络系统的硬件、软件及其系统中的数据受到保护，不因偶然的或者恶意的原因而遭受到破坏、更改和泄露，系统连续、可靠、正常地运行，网络服务不中断。网络安全管理是网络系统管理的重要组成部分，涉及配置和管理网络安全设备，如防火墙和入侵检测系统，以及制定安全策略和措施来保护网络免受威胁和攻击。网络管理员需要定期更新防病毒软件和安全补丁，监视网络流量和异常行为，实施访问控制和用户认证等安全措施。通过综合应用这些安全措施，网络管理员能够保障网络系统和用户数据的安全。</p>
+<p>在网络的世界中，网络安全不仅关乎个人隐私和数据的安全，也关乎国家安全和经济稳定。为了保护网络信息的安全可靠，除了运用法律和管理手段外，还需依靠技术方法来实现。任何形式的网络服务都会存在安全方面的风险，问题是如何将风险降到最低程度。目前有基于加解密技术的数字证书、网络防火墙、入侵监测与防御系统、网络攻防演练和网络安全态势感知平台等多种技术和防护措施。通过综合运用这些手段，可以建立一个安全可靠的网络系统，保护用户数据和系统资源免受各种网络威胁和攻击的侵害。</p>
+<h2 id="12-5-1-加解密与数字证书"><a href="#12-5-1-加解密与数字证书" class="headerlink" title="12.5.1 加解密与数字证书"></a>12.5.1 加解密与数字证书</h2><p>数字证书用于验证通信方的身份和确保数据的完整性，是网络安全的基石。通过使用加密算法，可以将敏感数据转化为不易被窃取和篡改的形式，确保数据的机密性和完整性。同时，数字证书用于验证通信双方的身份信息，防止身份伪造和数据被篡改。</p>
+<p>加解密技术通过使用密码算法保护数据机密性，对称加密和非对称加密是常见的加解密技术，哈希函数用于验证数据完整性，而数字证书用于验证通信方身份和确保数据完整性。</p>
+<p>（1）加解密技术。加解密技术是通过使用密码算法将明文转换为密文，以保护数据的机密性。加密是将明文转换为不可读的密文，解密则是将密文还原为明文。在加解密过程中，使用一个或多个密钥来进行转换。</p>
+<p>（2）对称加密。对称加密使用相同的密钥来进行加解密操作。发送方和接收方必须共享同一个密钥。常见的对称加密算法有 DES、AES 等。对称加密具有高效性能，但密钥分发和管理可能存在安全隐患。</p>
+<p>（3）非对称加密。非对称加密使用一对相关联的密钥：公钥和私钥。公钥用于加密数据，而私钥用于解密数据。发送方使用接收方的公钥进行加密，只有接收方拥有相应的私钥才能解开数据。常见的非对称加密算法有RSA、ECC等。非对称加密提供了更好的安全性和密钥管理机制。</p>
+<p>（4）哈希函数。哈希函数是一种将任意长度的数据转换为固定长度哈希值的算法。哈希函数具有单向性，即无法从哈希值还原出原始数据。常见的哈希函数有MD5、SHA-1、SHA-256等。哈希函数常用于验证数据完整性和生成数字签名。</p>
+<p>（5）数字证书。数字证书是一种用于验证通信方身份和确保数据完整性的安全工具。数字证书由认证机构（Certificate Authority，CA）颁发，包含通信方的公钥和其他身份信息，并由CA使用其私钥进行签名。接收方可以使用CA的公钥来验证数字证书的真实性，并使用其中的公钥进行加密操作。</p>
+<h2 id="12-5-2-防火墙管理"><a href="#12-5-2-防火墙管理" class="headerlink" title="12.5.2 防火墙管理"></a>12.5.2 防火墙管理</h2><p>防火墙是一种位于网络边界的安全设备，它对两个或多个网络之间的通信进行控制。它可以根据预先设定的规则来允许或拒绝特定类型的流量通过，常用于网络安全的第一道防线。通过配置防火墙规则，可以限制对网络资源的访问，并保护敏感数据免受未经授权的访问。防火墙是一种非常有效的网络安全模型，通过它可以隔离风险区域（即非信任网络）与安全区域（信任网络）的连接，同时不会影响人们对风险区域的访问。防火墙的作用是监控进出网络的信息，仅让安全的、符合规则的信息进入内部网络，为用户提供一个安全的网络环境。</p>
+<p>防火墙管理的主要任务包括确定安全策略、了解网络拓扑、配置访问控制列表、启用日志记录和监控、定期更新和升级、进行漏洞扫描和渗透测试等。</p>
+<p>（1）确定安全策略。在开始配置防火墙之前，需要明确安全策略，包括确定哪些类型的流量应该被允许通过，哪些应该被拒绝。组织可以根据其需求和风险评估来制定安全策略。</p>
+<p>（2）了解网络拓扑。在配置防火墙之前，了解网络拓扑非常重要。这将帮助组织确定哪些设备和应用程序需要被保护，并确定防火墙的最佳部署位置等。</p>
+<p>（3）配置访问控制列表（ACL）。ACL是防火墙规则的基础。通过配置ACL，组织可以定义允许或拒绝特定IP地址、端口或协议的流量。组织需要确保ACL规则与安全策略的一致性，并定期审查和更新这些规则。</p>
+<p>（4）启用日志记录和监控。启用防火墙的日志记录功能非常重要，以便及时检测和应对潜在的安全事件。监控防火墙日志，并设置警报可以获得网络异常活动。</p>
+<p>（5）定期更新和升级。网络威胁不断演变，因此定期更新和升级防火墙软件非常重要。组织需要确保及时安装最新的安全补丁和固件，以提高防火墙的安全性。</p>
+<p>（6）进行漏洞扫描和渗透测试。定期进行漏洞扫描和渗透测试是评估防火墙安全性的重要步骤。这将帮助组织发现潜在的漏洞并采取相应措施来修复它们。</p>
+<h2 id="12-5-3-入侵检测与防御"><a href="#12-5-3-入侵检测与防御" class="headerlink" title="12.5.3 入侵检测与防御"></a>12.5.3 入侵检测与防御</h2><p>入侵检测是一种主动保护自己免受攻击的网络安全技术。作为防火墙的合理补充，入侵检测技术能够帮助系统对付网络攻击，扩展系统管理员的安全管理能力（包括安全审计、监视、攻击识别和响应），提高信息安全基础结构的完整性。它从计算机网络系统中的若干关键点收集信息，并分析这些信息。入侵检测被认为是防火墙之后的第二道安全闸门，在不影响网络性能的情况下能对网络进行监测。</p>
+<p>防火墙是实施访问控制策略的系统，对流经的网络流量进行检查，拦截不符合安全策略的数据包。入侵检测技术（IDS）通过监视网络或系统资源，寻找违反安全策略的行为或攻击迹象，并发出警报。传统的防火墙旨在拒绝那些明显可疑的网络流量，但仍然允许某些流量通过，因此防火墙对于很多入侵攻击仍然无计可施。绝大多数 IDS 系统都是被动的，而不是主动的。也就是说，在攻击实际发生之前，它们往往无法预先发出警报。入侵防护系统（IPS）则倾向于提供主动防护，其设计宗旨是预先对入侵活动和攻击性网络流量进行拦截，避免其造成损失，而不是简单地在恶意流量传送时或传送后才发出警报。IPS 是通过直接嵌入到网络流量中来实现这一功能的，即通过一个网络端口接收来自外部系统的流量，经过检查，确认其中不包含异常活动或可疑内容后，再通过另外一个端口将它传送到内部系统中。这样一来，有问题的数据包以及所有来自同一数据流的后续数据包，都能在 IPS 设备中被清除。</p>
+<p>入侵检测系统（IDS）、入侵防御系统（IPS）提供了多种功能和特点，帮助管理员有效地监测和防御网络入侵，保护网络系统的安全。</p>
+<p>入侵检测系统（IDS）主要功能包括：</p>
+<p>- 监测并分析用户和系统的活动；</p>
+<p>- 核查系统配置和漏洞；</p>
+<p>- 评估系统关键资源和数据文件的完整性；</p>
+<p>- 识别已知的攻击行为；</p>
+<p>- 统计分析异常行为；</p>
+<p>- 操作系统日志管理。</p>
+<p>入侵防御系统（IPS）主要功能包括：</p>
+<p>- 嵌入式运行。只有以嵌入模式运行的IPS设备才能够实现实时的安全防护，实时阻拦所有可疑的数据包，并对该数据流的剩余部分进行拦截。</p>
+<p>- 深入分析和控制。IPS必须具有深入分析能力，以确定哪些恶意流量已经被拦截，根据攻击类型、策略等来确定哪些流量应该被拦截。</p>
+<p>- 入侵特征库。高质量的入侵特征库是IPS高效运行的必要条件，IPS还应该定期升级入侵特征库，并快速应用到所有传感器。</p>
+<p>- 高效处理能力。IPS必须具有高效处理数据包的能力，对整个网络性能的影响保持在最低水平。</p>
+<h2 id="12-5-4-网络攻防演练"><a href="#12-5-4-网络攻防演练" class="headerlink" title="12.5.4 网络攻防演练"></a>12.5.4 网络攻防演练</h2><p>网络安全攻防演练是提高组织网络安全能力的重要手段，是一种实践性的训练活动，旨在提高组织对网络安全威胁的应对能力。通过模拟真实攻击场景，演练参与者可以了解攻击者的思维方式和技术手段，并学习如何有效地防御和应对网络攻击，不断提升对网络攻击的应对能力，保护关键信息资产的安全。网络攻防演练的主要活动包括确定目标、设计攻击场景、确定参与者、进行演练、收集反馈、分析总结和持续改进等。</p>
+<p>（1）确定目标。在进行网络安全攻防演练之前，需要明确演练的目标和范围，例如，测试特定系统或应用程序的安全性，评估团队的响应能力等。明确目标有助于确定演练的重点和设计相应的攻击场景。</p>
+<p>（2）设计攻击场景。根据目标确定的范围，设计合适的攻击场景。这些场景可以包括钓鱼邮件、恶意软件传播、系统入侵等。确保场景具有现实性，并考虑不同类型的威胁和攻击手段。</p>
+<p>（3）确定参与者。确定参与演练的人员和角色，包括攻击者、防御团队、系统管理员等。每个角色都有不同的职责和任务，以模拟真实的攻击和防御情况。</p>
+<p>（4）进行演练。在演练过程中，攻击者将尝试利用各种技术手段攻击目标系统，防御团队则负责检测、分析和应对这些攻击。演练可以包括实时监控、日志分析、事件响应等环节。</p>
+<p>（5）收集反馈。在演练结束后，收集参与者的反馈和观察结果。这有助于评估演练的效果，并发现改进的空间。重点关注参与者在攻击和防御过程中遇到的问题和挑战。</p>
+<p>（6）分析总结。根据收集到的反馈和观察结果，进行演练结果的分析总结。评估参与者的表现、系统的弱点以及防御策略的有效性。根据分析结果制订改进计划，并进行相应的修复和加固工作。</p>
+<p>（7）持续改进。网络安全攻防演练是一个持续改进的过程。根据分析总结中提出的问题和建议，及时修复系统漏洞和加强安全策略，并定期进行新一轮的演练。</p>
+<h2 id="12-5-5-网络安全态势感知平台"><a href="#12-5-5-网络安全态势感知平台" class="headerlink" title="12.5.5 网络安全态势感知平台"></a>12.5.5 网络安全态势感知平台</h2><p>网络安全态势感知平台是一种基于最新技术的安全工具，用于实时监测、分析和预测网络安全威胁。通过实时监测、威胁分析、智能预警、可视化展示、自动化响应、高级威胁预测和合规性与报告等功能，它能够帮助组织及时发现和应对潜在的攻击，提高网络安全防护水平。</p>
+<p>（1）实时监测。网络安全态势感知平台能够实时监测组织内外的网络流量、日志和事件数据。通过收集和分析这些数据，可以及时发现网络异常活动、入侵行为和其他潜在威胁等。</p>
+<p>（2）威胁分析。网络安全态势感知平台利用先进的威胁情报和分析技术，对收集到的数据进行深入分析。它可以识别出已知攻击模式、恶意软件、漏洞利用等，并提供相应的警报和建议。</p>
+<p>（3）智能预警。基于机器学习和人工智能技术，网络安全态势感知平台可以自动学习正常网络行为模式，并识别出异常活动。它能够生成智能预警，帮助管理员及时发现并应对潜在的威胁。</p>
+<p>（4）可视化展示。网络安全态势感知平台提供直观的可视化界面，将复杂的安全数据转化为易于理解的图表、图形和报表。管理员可以通过这些可视化展示，快速了解网络安全状况，并做出相应决策。</p>
+<p>（5）自动化响应。网络安全态势感知平台可以与其他安全设备和系统集成，实现自动化响应。例如，它可以自动阻断恶意流量、隔离受感染的主机并触发警报，通知相关人员。</p>
+<p>（6）高级威胁预测。网络安全态势感知平台利用大数据分析和机器学习算法，能够预测未来可能发生的高级威胁。它可以通过分析历史数据、行业情报和趋势提前发现潜在的攻击，并采取相应措施进行防范。</p>
+<p>（7）合规性与报告。网络安全态势感知平台能够生成合规性报告，帮助组织满足法规和合规要求。它可以记录和跟踪安全事件、响应措施和修复进展，并生成详尽的报告供审核和审计使用。</p>
+<h2 id="12-6-本章练习"><a href="#12-6-本章练习" class="headerlink" title="12.6 本章练习"></a>12.6 本章练习</h2><ol>
+<li>选择题</li>
+</ol>
+<p>（1）局域网管理中，通常不包括：____。</p>
+<p>A. 网络设备管理</p>
+<p>B. 网络拓扑管理</p>
+<p>C. 网络安全管理</p>
+<p>D. 自治系统管理</p>
+<p>参考答案：D</p>
+<p>(2) 网络中所有相关的被管对象信息都集中在____中。</p>
+<p>A. 数据湖</p>
+<p>B. 管理信息库（MIB）</p>
+<p>C. 虚拟专用网（VPN）</p>
+<p>D. 域名系统（DNS）</p>
+<p>参考答案：B</p>
+<p>(3) ____不属于 DHCP 应用管理活动。</p>
+<p>A. 配置转发器</p>
+<p>B. 定义 IP 地址范围</p>
+<p>C. 设置租约时间</p>
+<p>D. 配置 DHCP 服务器</p>
+<p>参考答案：A</p>
+<p>(4) SHA-256 属于 ____。</p>
+<p>A. 加密技术</p>
+<p>B. 对称算法</p>
+<h2 id="信息系统管理工程师教程（第2版）"><a href="#信息系统管理工程师教程（第2版）" class="headerlink" title="信息系统管理工程师教程（第2版）"></a>信息系统管理工程师教程（第2版）</h2><p>C. 哈希函数<br>D. 非对称算法</p>
+<p>参考答案: C</p>
+<p>(5)____不属于入侵防御系统 IPS 的主要功能。</p>
+<p>A. 核查系统配置和漏洞</p>
+<p>B. 高质量的入侵特征库</p>
+<p>C. 以嵌入式模式运行</p>
+<p>D. 高效处理数据包</p>
+<p>参考答案：A</p>
+<h2 id="2-思考题"><a href="#2-思考题" class="headerlink" title="2. 思考题"></a>2. 思考题</h2><p>（1）网络管理的目标是什么？</p>
+<p>（2）网络资源管理主要包括什么？其作用是什么？参考答案：略</p>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+    <div class="widget-header dis-select">
+      <span class="name">本文目录</span>
+      <button type="button" class="cap-action ui-interactive card-hover card-hover--spotlight" data-shell-action="toggle-toc" aria-label="Toggle table of contents" aria-pressed="false"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></span></button>
+    </div>
+  
+  <div class="widget-body"><ol class="toc ui-collection-adapter"><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-1-%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86%E5%9F%BA%E7%A1%80"><span class="toc-text">12.1 网络管理基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-1-1-%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86%E6%A6%82%E8%BF%B0"><span class="toc-text">12.1.1 网络管理概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-1-2-%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86%E7%9B%AE%E6%A0%87"><span class="toc-text">12.1.2 网络管理目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-1-3-%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="toc-text">12.1.3 网络管理对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-1-4-%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86%E6%A0%87%E5%87%86"><span class="toc-text">12.1.4 网络管理标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-2-%E7%BD%91%E7%BB%9C%E6%97%A5%E5%B8%B8%E7%AE%A1%E7%90%86"><span class="toc-text">12.2 网络日常管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-2-1-%E5%B1%80%E5%9F%9F%E7%BD%91%E7%AE%A1%E7%90%86"><span class="toc-text">12.2.1 局域网管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%90%86%E4%BB%BB%E5%8A%A1%E5%8C%85%E6%8B%AC"><span class="toc-text">理任务包括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-2-2-%E5%B9%BF%E5%9F%9F%E7%BD%91%E7%AE%A1%E7%90%86"><span class="toc-text">12.2.2 广域网管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-2-3-%E4%BA%92%E8%81%94%E7%BD%91%E7%AE%A1%E7%90%86"><span class="toc-text">12.2.3 互联网管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-2-4-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%AE%A1%E7%90%86"><span class="toc-text">12.2.4 无线网管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-3-%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"><span class="toc-text">12.3 网络资源管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-3-1-%E5%B8%A6%E5%AE%BD%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"><span class="toc-text">12.3.1 带宽资源管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-3-2-%E5%9C%B0%E5%9D%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"><span class="toc-text">12.3.2 地址资源管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-3-3-%E8%99%9A%E6%8B%9F%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"><span class="toc-text">12.3.3 虚拟资源管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-4-%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%AE%A1%E7%90%86"><span class="toc-text">12.4 网络应用管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-4-1-DHCP%E5%BA%94%E7%94%A8%E7%AE%A1%E7%90%86"><span class="toc-text">12.4.1 DHCP应用管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-4-2-DNS%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%A1%E7%90%86"><span class="toc-text">12.4.2 DNS服务器管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-4-3-%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%A1%E7%90%86"><span class="toc-text">12.4.3 文件服务器管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-4-4-%E6%89%93%E5%8D%B0%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="toc-text">12.4.4 打印系统管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-4-5-%E9%82%AE%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="toc-text">12.4.5 邮件系统管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-4-6-%E9%97%A8%E6%88%B7%E7%BD%91%E7%AB%99%E7%AE%A1%E7%90%86"><span class="toc-text">12.4.6 门户网站管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-5-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8"><span class="toc-text">12.5 网络安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-5-1-%E5%8A%A0%E8%A7%A3%E5%AF%86%E4%B8%8E%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="toc-text">12.5.1 加解密与数字证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-5-2-%E9%98%B2%E7%81%AB%E5%A2%99%E7%AE%A1%E7%90%86"><span class="toc-text">12.5.2 防火墙管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-5-3-%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B8%8E%E9%98%B2%E5%BE%A1"><span class="toc-text">12.5.3 入侵检测与防御</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-5-4-%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%BC%94%E7%BB%83"><span class="toc-text">12.5.4 网络攻防演练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-5-5-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E5%B9%B3%E5%8F%B0"><span class="toc-text">12.5.5 网络安全态势感知平台</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#12-6-%E6%9C%AC%E7%AB%A0%E7%BB%83%E4%B9%A0"><span class="toc-text">12.6 本章练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%95%99%E7%A8%8B%EF%BC%88%E7%AC%AC2%E7%89%88%EF%BC%89"><span class="toc-text">信息系统管理工程师教程（第2版）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-text">2. 思考题</span></a></li></ol></div>
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC12%E7%AB%A0%20%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第12章 网络系统管理","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

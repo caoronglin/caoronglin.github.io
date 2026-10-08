@@ -1,0 +1,1312 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/wiki/Linux/ch04-first-login/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>Linux 基础入门：第四章、首次登陆与线上求助 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="Linux 操作系统基础概念、历史、发行版介绍及计算机基础" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第四章、首次登陆与线上求助" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/wiki/Linux/ch04-first-login/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="Linux 操作系统基础概念、历史、发行版介绍及计算机基础" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第四章、首次登陆与线上求助" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content="Linux,基础命令,帮助系统" data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"WebPage","@id":"https://blog.cnortles.top/wiki/Linux/ch04-first-login/","name":"第四章、首次登陆与线上求助","description":"Linux 操作系统基础概念、历史、发行版介绍及计算机基础","url":"https://blog.cnortles.top/wiki/Linux/ch04-first-login/","isPartOf":{"@type":"WebSite","name":"麟跃云起","url":"https://blog.cnortles.top"}}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular"><div class="brand-navigation"><a class="brand-navigation__back cap" href="/wiki/"><span class="ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"/></svg></span><span>所有项目</span></a></div><div class="brand-navigation-rail">
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" href="&#x2F;wiki&#x2F;" title="所有项目" aria-label="所有项目">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"/></svg></span>
+  
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+</div><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;wiki&#x2F;Linux&#x2F;"><img no-lazy src="&#x2F;img&#x2F;linux-logo.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a><a class="brand-title" href="&#x2F;wiki&#x2F;Linux&#x2F;"><div class="brand-name">Linux 基础入门</div><div class="brand-tagline cap">从零开始学习 Linux</div></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search" data-search-domain="wiki:Linux" data-search-domain-label="Linux 基础入门" data-search-domain-blog="false">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;" title="主页" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;wiki&#x2F;" title="文档" aria-current="page" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--tree" data-widget-id="leftbar:0:tree" data-presentation="leftbar" data-leftbar-rail>
+
+
+<widget class="widget-wrapper doc-tree-widget" data-wiki="Linux">
+  
+  <div class="widget-body"><section class="widget-section"><div class="widget-header dis-select"><span class="name">...</span></div><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch00-computer-basics&#x2F;" title="第零章、计算机概论">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第零章、计算机概论</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch01-linux-intro&#x2F;" title="第一章、Linux是什么与如何学习">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第一章、Linux是什么与如何学习</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch02-partition&#x2F;" title="第二章、主机规划与磁盘分区">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第二章、主机规划与磁盘分区</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch03-install&#x2F;" title="第三章、安装 CentOS 7.x">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第三章、安装 CentOS 7.x</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active" href="&#x2F;wiki&#x2F;Linux&#x2F;ch04-first-login&#x2F;" title="第四章、首次登陆与线上求助" aria-current="page">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第四章、首次登陆与线上求助</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch06-file-management&#x2F;" title="第六章、Linux 文件与目录管理">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第六章、Linux 文件与目录管理</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch07-filesystem&#x2F;" title="第七章、Linux 磁盘与文件系统管理">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第七章、Linux 磁盘与文件系统管理</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch08-compress&#x2F;" title="第八章、文件与文件系统的压缩、打包与备份">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第八章、文件与文件系统的压缩、打包与备份</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch05-permissions&#x2F;" title="第五章、Linux 的文件权限与目录配置">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第五章、Linux 的文件权限与目录配置</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch10-bash&#x2F;" title="第十章、认识与学习BASH">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第十章、认识与学习BASH</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;" title="Linux 学习笔记目录">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">L</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">Linux 学习笔记目录</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch09-vim&#x2F;" title="第九章、vim 程序编辑器">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第九章、vim 程序编辑器</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></section></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/Linux/ch00-computer-basics/">Linux 基础入门</a>
+</div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2023-12-31T16:00:00.000Z">2024-01-01</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第四章、首次登陆与线上求助</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="第四章、首次登陆与线上求助"><a href="#第四章、首次登陆与线上求助" class="headerlink" title="第四章、首次登陆与线上求助"></a>第四章、首次登陆与线上求助</h1><h2 id="4-1-首次登陆系统"><a href="#4-1-首次登陆系统" class="headerlink" title="4.1 首次登陆系统"></a>4.1 首次登陆系统</h2><h3 id="开机与登陆"><a href="#开机与登陆" class="headerlink" title="开机与登陆"></a>开机与登陆</h3><ol>
+<li><strong>开机</strong>：按下电源键，系统开始引导</li>
+<li><strong>登陆界面</strong>：图形界面或命令行界面</li>
+<li><strong>输入账号密码</strong>：<ul>
+<li>账号：安装时创建的用户名</li>
+<li>密码：输入时不会显示任何字符（安全机制）</li>
+</ul>
+</li>
+</ol>
+<h3 id="命令行界面-CLI"><a href="#命令行界面-CLI" class="headerlink" title="命令行界面 (CLI)"></a>命令行界面 (CLI)</h3><p>如果进入的是图形界面，可以打开<strong>终端 (Terminal)</strong> 来使用命令行。</p>
+<p><strong>打开终端的方法：</strong></p>
+<ul>
+<li>桌面右键 → 打开终端</li>
+<li>应用程序菜单 → 系统工具 → 终端</li>
+<li>快捷键：<code>Ctrl + Alt + T</code>（Ubuntu）</li>
+</ul>
+<h3 id="基础操作指令"><a href="#基础操作指令" class="headerlink" title="基础操作指令"></a>基础操作指令</h3><h4 id="1-显示日期：date"><a href="#1-显示日期：date" class="headerlink" title="1. 显示日期：date"></a>1. 显示日期：<code>date</code></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">date</span>                          <span class="comment"># 显示当前日期时间</span></span><br><span class="line"><span class="built_in">date</span> +%Y/%m/%d               <span class="comment"># 格式化输出：2024/01/01</span></span><br><span class="line"><span class="built_in">date</span> +%H:%M:%S               <span class="comment"># 格式化输出：14:30:00</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="2-显示日历：cal"><a href="#2-显示日历：cal" class="headerlink" title="2. 显示日历：cal"></a>2. 显示日历：<code>cal</code></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cal                          <span class="comment"># 显示当月日历</span></span><br><span class="line">cal 2024                     <span class="comment"># 显示整年日历</span></span><br><span class="line">cal 1 2024                   <span class="comment"># 显示指定月份（2024年1月）</span></span><br><span class="line">cal -3                       <span class="comment"># 显示前中后三个月</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="3-简单计算器：bc"><a href="#3-简单计算器：bc" class="headerlink" title="3. 简单计算器：bc"></a>3. 简单计算器：<code>bc</code></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bc                           <span class="comment"># 进入交互式计算器</span></span><br><span class="line">scale=3                      <span class="comment"># 设置小数位数为3</span></span><br><span class="line">1/3                          <span class="comment"># 输出：0.333</span></span><br><span class="line">10+20*2                      <span class="comment"># 输出：50</span></span><br><span class="line">quit                         <span class="comment"># 退出bc</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>使用管道直接计算：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"1+2+3"</span> | bc              <span class="comment"># 输出：6</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"scale=2; 10/3"</span> | bc      <span class="comment"># 输出：3.33</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="4-重要的热键"><a href="#4-重要的热键" class="headerlink" title="4. 重要的热键"></a>4. 重要的热键</h4><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>热键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Tab</code></td>
+<td>命令/文件名自动补全（按两下显示所有选项）</td>
+</tr>
+<tr>
+<td><code>Ctrl + C</code></td>
+<td>终止当前运行的程序</td>
+</tr>
+<tr>
+<td><code>Ctrl + D</code></td>
+<td>退出当前终端（输入EOF）</td>
+</tr>
+<tr>
+<td><code>Ctrl + L</code></td>
+<td>清屏（等同于 <code>clear</code> 命令）</td>
+</tr>
+<tr>
+<td><code>Ctrl + A</code></td>
+<td>光标移动到行首</td>
+</tr>
+<tr>
+<td><code>Ctrl + E</code></td>
+<td>光标移动到行尾</td>
+</tr>
+<tr>
+<td><code>Ctrl + U</code></td>
+<td>删除光标前所有内容</td>
+</tr>
+<tr>
+<td><code>Ctrl + K</code></td>
+<td>删除光标后所有内容</td>
+</tr>
+<tr>
+<td><code>Ctrl + R</code></td>
+<td>搜索历史命令</td>
+</tr>
+<tr>
+<td><code>↑</code> / <code>↓</code></td>
+<td>浏览历史命令</td>
+</tr>
+</tbody></table></div>
+<h4 id="5-错误查看"><a href="#5-错误查看" class="headerlink" title="5. 错误查看"></a>5. 错误查看</h4><p>当命令输入错误时，系统会显示错误信息：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 命令不存在</span></span><br><span class="line">$ cmdnotfound</span><br><span class="line">bash: cmdnotfound: <span class="built_in">command</span> not found</span><br><span class="line"></span><br><span class="line"><span class="comment"># 权限不足</span></span><br><span class="line">$ /etc/shadow</span><br><span class="line">bash: /etc/shadow: Permission denied</span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件不存在</span></span><br><span class="line">$ <span class="built_in">cat</span> /notexist</span><br><span class="line"><span class="built_in">cat</span>: /notexist: No such file or directory</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="4-2-文字模式下指令的下达"><a href="#4-2-文字模式下指令的下达" class="headerlink" title="4.2 文字模式下指令的下达"></a>4.2 文字模式下指令的下达</h2><h3 id="指令的基本格式"><a href="#指令的基本格式" class="headerlink" title="指令的基本格式"></a>指令的基本格式</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> [-options] [arguments]</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><strong>command</strong>：指令名称（如 <code>ls</code>, <code>cp</code>, <code>mv</code>）</li>
+<li><strong>-options</strong>：选项，通常以 <code>-</code> 或 <code>--</code> 开头</li>
+<li><strong>arguments</strong>：参数，指令操作的对象</li>
+</ul>
+<h3 id="基础指令详解"><a href="#基础指令详解" class="headerlink" title="基础指令详解"></a>基础指令详解</h3><h4 id="1-列出文件和目录：ls"><a href="#1-列出文件和目录：ls" class="headerlink" title="1. 列出文件和目录：ls"></a>1. 列出文件和目录：<code>ls</code></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span>                           <span class="comment"># 列出当前目录内容</span></span><br><span class="line"><span class="built_in">ls</span> -l                        <span class="comment"># 详细列表格式</span></span><br><span class="line"><span class="built_in">ls</span> -a                        <span class="comment"># 显示所有文件（包括隐藏文件）</span></span><br><span class="line"><span class="built_in">ls</span> -la                       <span class="comment"># 组合选项：详细+所有文件</span></span><br><span class="line"><span class="built_in">ls</span> -lh                       <span class="comment"># 人类可读的文件大小（K, M, G）</span></span><br><span class="line"><span class="built_in">ls</span> -ltr                      <span class="comment"># 按时间倒序排列</span></span><br><span class="line"><span class="built_in">ls</span> /etc                      <span class="comment"># 列出指定目录内容</span></span><br><span class="line"><span class="built_in">ls</span> *.txt                     <span class="comment"># 列出所有txt文件（通配符）</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>输出示例：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r-- 1 user group 1234 Jan  1 10:00 file.txt</span><br><span class="line">drwxr-xr-x 2 user group 4096 Jan  1 09:00 directory/</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="2-切换目录：cd"><a href="#2-切换目录：cd" class="headerlink" title="2. 切换目录：cd"></a>2. 切换目录：<code>cd</code></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/user                <span class="comment"># 切换到指定目录</span></span><br><span class="line"><span class="built_in">cd</span> ~                         <span class="comment"># 切换到用户主目录</span></span><br><span class="line"><span class="built_in">cd</span>                           <span class="comment"># 同上（默认回到主目录）</span></span><br><span class="line"><span class="built_in">cd</span> ..                        <span class="comment"># 切换到上级目录</span></span><br><span class="line"><span class="built_in">cd</span> ../..                     <span class="comment"># 切换到上上级目录</span></span><br><span class="line"><span class="built_in">cd</span> -                         <span class="comment"># 切换到上一次所在的目录</span></span><br><span class="line"><span class="built_in">cd</span> /                         <span class="comment"># 切换到根目录</span></span><br><span class="line"><span class="built_in">cd</span> ~/Documents               <span class="comment"># 切换到主目录下的Documents</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="3-显示当前目录：pwd"><a href="#3-显示当前目录：pwd" class="headerlink" title="3. 显示当前目录：pwd"></a>3. 显示当前目录：<code>pwd</code></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span>                          <span class="comment"># 显示当前完整路径</span></span><br><span class="line"><span class="built_in">pwd</span> -P                       <span class="comment"># 显示物理路径（解析所有符号链接）</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="4-创建目录：mkdir"><a href="#4-创建目录：mkdir" class="headerlink" title="4. 创建目录：mkdir"></a>4. 创建目录：<code>mkdir</code></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="built_in">dirname</span>                <span class="comment"># 创建一个目录</span></span><br><span class="line"><span class="built_in">mkdir</span> dir1 dir2 dir3         <span class="comment"># 同时创建多个目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p parent/child        <span class="comment"># 递归创建多级目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -m 755 mydir           <span class="comment"># 创建时指定权限</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="5-删除文件或目录：rm"><a href="#5-删除文件或目录：rm" class="headerlink" title="5. 删除文件或目录：rm"></a>5. 删除文件或目录：<code>rm</code></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> file.txt                  <span class="comment"># 删除文件</span></span><br><span class="line"><span class="built_in">rm</span> file1 file2               <span class="comment"># 删除多个文件</span></span><br><span class="line"><span class="built_in">rm</span> -i file.txt               <span class="comment"># 交互模式（删除前询问）</span></span><br><span class="line"><span class="built_in">rm</span> -f file.txt               <span class="comment"># 强制删除（不提示，忽略不存在文件）</span></span><br><span class="line"><span class="built_in">rm</span> -r directory              <span class="comment"># 递归删除目录及其内容</span></span><br><span class="line"><span class="built_in">rm</span> -rf directory             <span class="comment"># 强制递归删除（危险命令！）</span></span><br><span class="line"><span class="built_in">rm</span> *.<span class="built_in">log</span>                     <span class="comment"># 删除所有log文件</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>⚠️ <strong>警告：</strong> <code>rm -rf /</code> 会删除整个系统！使用时要特别小心。</p>
+<h4 id="6-复制文件或目录：cp"><a href="#6-复制文件或目录：cp" class="headerlink" title="6. 复制文件或目录：cp"></a>6. 复制文件或目录：<code>cp</code></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> source.txt dest.txt       <span class="comment"># 复制文件</span></span><br><span class="line"><span class="built_in">cp</span> file.txt /path/to/        <span class="comment"># 复制到目录</span></span><br><span class="line"><span class="built_in">cp</span> file1 file2 /dest/        <span class="comment"># 复制多个文件到目录</span></span><br><span class="line"><span class="built_in">cp</span> -i file.txt dest.txt      <span class="comment"># 覆盖前询问</span></span><br><span class="line"><span class="built_in">cp</span> -f file.txt dest.txt      <span class="comment"># 强制覆盖</span></span><br><span class="line"><span class="built_in">cp</span> -r dir1 dir2              <span class="comment"># 递归复制目录</span></span><br><span class="line"><span class="built_in">cp</span> -a dir1 dir2              <span class="comment"># 归档模式（保留权限、时间戳等）</span></span><br><span class="line"><span class="built_in">cp</span> -v <span class="built_in">source</span> dest            <span class="comment"># 显示详细信息</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="7-移动或重命名文件：mv"><a href="#7-移动或重命名文件：mv" class="headerlink" title="7. 移动或重命名文件：mv"></a>7. 移动或重命名文件：<code>mv</code></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> oldname newname           <span class="comment"># 重命名文件</span></span><br><span class="line"><span class="built_in">mv</span> file.txt /path/to/        <span class="comment"># 移动文件</span></span><br><span class="line"><span class="built_in">mv</span> file1 file2 /dest/        <span class="comment"># 移动多个文件</span></span><br><span class="line"><span class="built_in">mv</span> dir1 /path/to/            <span class="comment"># 移动目录</span></span><br><span class="line"><span class="built_in">mv</span> -i <span class="built_in">source</span> dest            <span class="comment"># 覆盖前询问</span></span><br><span class="line"><span class="built_in">mv</span> -f <span class="built_in">source</span> dest            <span class="comment"># 强制覆盖</span></span><br><span class="line"><span class="built_in">mv</span> -v <span class="built_in">source</span> dest            <span class="comment"># 显示详细信息</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="8-查看文件内容"><a href="#8-查看文件内容" class="headerlink" title="8. 查看文件内容"></a>8. 查看文件内容</h4><p><strong><code>cat</code> - 显示整个文件内容</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> file.txt                 <span class="comment"># 显示文件内容</span></span><br><span class="line"><span class="built_in">cat</span> -n file.txt              <span class="comment"># 显示行号</span></span><br><span class="line"><span class="built_in">cat</span> -A file.txt              <span class="comment"># 显示特殊字符</span></span><br><span class="line"><span class="built_in">cat</span> file1 file2 &gt; file3      <span class="comment"># 合并文件</span></span><br><span class="line"><span class="built_in">cat</span> &gt; file.txt               <span class="comment"># 创建文件并输入内容</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>less</code> - 分页浏览（推荐）</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">less file.txt                <span class="comment"># 分页查看</span></span><br><span class="line"><span class="comment"># 在 less 中的操作：</span></span><br><span class="line"><span class="comment"># 空格 / PageDown - 下一页</span></span><br><span class="line"><span class="comment"># b / PageUp - 上一页</span></span><br><span class="line"><span class="comment"># /pattern - 搜索</span></span><br><span class="line"><span class="comment"># n - 下一个匹配</span></span><br><span class="line"><span class="comment"># q - 退出</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>head</code> - 显示文件开头</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">head</span> file.txt                <span class="comment"># 显示前10行</span></span><br><span class="line"><span class="built_in">head</span> -n 20 file.txt          <span class="comment"># 显示前20行</span></span><br><span class="line"><span class="built_in">head</span> -20 file.txt            <span class="comment"># 同上</span></span><br><span class="line"><span class="built_in">head</span> -c 100 file.txt         <span class="comment"># 显示前100字节</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>tail</code> - 显示文件结尾</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> file.txt                <span class="comment"># 显示后10行</span></span><br><span class="line"><span class="built_in">tail</span> -n 20 file.txt          <span class="comment"># 显示后20行</span></span><br><span class="line"><span class="built_in">tail</span> -f file.txt             <span class="comment"># 实时跟踪文件更新（常用）</span></span><br><span class="line"><span class="built_in">tail</span> -f /var/log/syslog      <span class="comment"># 实时查看系统日志</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>wc</code> - 统计文件</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">wc</span> file.txt                  <span class="comment"># 输出行数、词数、字节数</span></span><br><span class="line"><span class="built_in">wc</span> -l file.txt               <span class="comment"># 只显示行数</span></span><br><span class="line"><span class="built_in">wc</span> -w file.txt               <span class="comment"># 只显示词数</span></span><br><span class="line"><span class="built_in">wc</span> -c file.txt               <span class="comment"># 只显示字节数</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>sort</code> - 排序</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sort</span> file.txt                <span class="comment"># 按字母顺序排序</span></span><br><span class="line"><span class="built_in">sort</span> -r file.txt             <span class="comment"># 逆序排序</span></span><br><span class="line"><span class="built_in">sort</span> -n file.txt             <span class="comment"># 按数字排序</span></span><br><span class="line"><span class="built_in">sort</span> -u file.txt             <span class="comment"># 去重并排序</span></span><br><span class="line"><span class="built_in">sort</span> -t: -k3 -n /etc/passwd  <span class="comment"># 按第3字段（UID）数字排序</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>uniq</code> - 去重</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uniq</span> file.txt                <span class="comment"># 删除相邻的重复行</span></span><br><span class="line"><span class="built_in">uniq</span> -c file.txt             <span class="comment"># 统计每行出现的次数</span></span><br><span class="line"><span class="built_in">uniq</span> -d file.txt             <span class="comment"># 只显示重复的行</span></span><br><span class="line"><span class="built_in">uniq</span> -u file.txt             <span class="comment"># 只显示不重复的行</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="搜索与查找"><a href="#搜索与查找" class="headerlink" title="搜索与查找"></a>搜索与查找</h3><p><strong><code>find</code> - 查找文件（强大但较慢）</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">find /path -name <span class="string">"file.txt"</span>          <span class="comment"># 按名称查找</span></span><br><span class="line">find /path -name <span class="string">"*.txt"</span>             <span class="comment"># 查找所有txt文件</span></span><br><span class="line">find /path -<span class="built_in">type</span> d -name <span class="string">"dir"</span>       <span class="comment"># 查找目录</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -size +100M       <span class="comment"># 查找大于100M的文件</span></span><br><span class="line">find /path -mtime -7                 <span class="comment"># 查找7天内修改过的文件</span></span><br><span class="line">find /path -user username            <span class="comment"># 查找属于某用户的文件</span></span><br><span class="line">find /path -perm 644                 <span class="comment"># 查找特定权限的文件</span></span><br><span class="line">find /path -name <span class="string">"*.log"</span> -delete     <span class="comment"># 查找并删除</span></span><br><span class="line">find /path -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">ls</span> -l {} \; <span class="comment"># 对找到的文件执行命令</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>locate</code> - 快速查找（基于数据库）</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">locate filename              <span class="comment"># 快速查找文件</span></span><br><span class="line">locate -i filename           <span class="comment"># 忽略大小写</span></span><br><span class="line">locate <span class="string">'*.txt'</span>               <span class="comment"># 支持通配符</span></span><br><span class="line"><span class="built_in">sudo</span> updatedb                <span class="comment"># 更新locate数据库</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>grep</code> - 文本搜索（常用）</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">"pattern"</span> file.txt              <span class="comment"># 在文件中搜索</span></span><br><span class="line">grep -i <span class="string">"pattern"</span> file.txt           <span class="comment"># 忽略大小写</span></span><br><span class="line">grep -v <span class="string">"pattern"</span> file.txt           <span class="comment"># 显示不匹配的行</span></span><br><span class="line">grep -n <span class="string">"pattern"</span> file.txt           <span class="comment"># 显示行号</span></span><br><span class="line">grep -r <span class="string">"pattern"</span> /path/             <span class="comment"># 递归搜索目录</span></span><br><span class="line">grep -l <span class="string">"pattern"</span> *.txt              <span class="comment"># 只显示包含匹配的文件名</span></span><br><span class="line">grep -E <span class="string">"pattern1|pattern2"</span> file.txt <span class="comment"># 扩展正则表达式（或）</span></span><br><span class="line">grep -c <span class="string">"pattern"</span> file.txt           <span class="comment"># 统计匹配行数</span></span><br><span class="line">grep <span class="string">"^start"</span> file.txt               <span class="comment"># 以start开头</span></span><br><span class="line">grep <span class="string">"end$"</span> file.txt                 <span class="comment"># 以end结尾</span></span><br><span class="line">ps aux | grep <span class="string">"nginx"</span>                <span class="comment"># 管道结合使用</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>which</code> / <code>whereis</code> - 查找命令位置</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> <span class="built_in">ls</span>                     <span class="comment"># 查找命令的可执行文件位置</span></span><br><span class="line"><span class="built_in">which</span> -a python              <span class="comment"># 查找所有匹配的路径</span></span><br><span class="line">whereis <span class="built_in">ls</span>                   <span class="comment"># 查找命令的二进制、源码和man手册位置</span></span><br><span class="line">whereis -b <span class="built_in">ls</span>                <span class="comment"># 只找二进制文件</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h3><p><strong><code>uname</code> - 系统信息</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -a                     <span class="comment"># 显示所有系统信息</span></span><br><span class="line"><span class="built_in">uname</span> -r                     <span class="comment"># 显示内核版本</span></span><br><span class="line"><span class="built_in">uname</span> -m                     <span class="comment"># 显示机器硬件名称</span></span><br><span class="line"><span class="built_in">uname</span> -n                     <span class="comment"># 显示主机名</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>hostname</code> - 主机名</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hostname                     <span class="comment"># 显示主机名</span></span><br><span class="line">hostname -i                  <span class="comment"># 显示IP地址</span></span><br><span class="line">hostnamectl                  <span class="comment"># 显示和修改主机名信息</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>whoami</code> / <code>who</code> / <code>w</code> - 用户信息</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">whoami</span>                       <span class="comment"># 显示当前用户名</span></span><br><span class="line"><span class="built_in">who</span>                          <span class="comment"># 显示已登录用户</span></span><br><span class="line"><span class="built_in">who</span> am i                     <span class="comment"># 显示当前终端信息</span></span><br><span class="line">w                            <span class="comment"># 显示登录用户及其正在执行的操作</span></span><br><span class="line"><span class="built_in">users</span>                        <span class="comment"># 显示用户名列表</span></span><br><span class="line">last                         <span class="comment"># 显示最近登录记录</span></span><br><span class="line">lastlog                      <span class="comment"># 显示所有用户的最后登录时间</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>df</code> - 磁盘空间</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span>                           <span class="comment"># 显示文件系统磁盘使用情况</span></span><br><span class="line"><span class="built_in">df</span> -h                        <span class="comment"># 人类可读格式（推荐）</span></span><br><span class="line"><span class="built_in">df</span> -T                        <span class="comment"># 显示文件系统类型</span></span><br><span class="line"><span class="built_in">df</span> -i                        <span class="comment"># 显示inode使用情况</span></span><br><span class="line"><span class="built_in">df</span> -h /home                  <span class="comment"># 查看特定目录所在分区的空间</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>du</code> - 目录大小</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">du</span>                           <span class="comment"># 显示目录大小</span></span><br><span class="line"><span class="built_in">du</span> -h                        <span class="comment"># 人类可读格式</span></span><br><span class="line"><span class="built_in">du</span> -sh /path                 <span class="comment"># 查看目录总大小（推荐）</span></span><br><span class="line"><span class="built_in">du</span> -h --max-depth=1 /path    <span class="comment"># 只显示一层子目录大小</span></span><br><span class="line"><span class="built_in">du</span> -ah /path | <span class="built_in">sort</span> -rh | <span class="built_in">head</span> -20  <span class="comment"># 找出最大的20个文件/目录</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>free</code> - 内存使用</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">free                         <span class="comment"># 显示内存使用情况</span></span><br><span class="line">free -h                      <span class="comment"># 人类可读格式（推荐）</span></span><br><span class="line">free -m                      <span class="comment"># 以MB为单位显示</span></span><br><span class="line">free -g                      <span class="comment"># 以GB为单位显示</span></span><br><span class="line">free -s 5                    <span class="comment"># 每5秒刷新一次</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>top</code> / <code>htop</code> - 系统进程</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">top                          <span class="comment"># 实时显示系统进程（按q退出）</span></span><br><span class="line">top -u username              <span class="comment"># 只显示某用户的进程</span></span><br><span class="line">top -p PID                   <span class="comment"># 只显示指定PID的进程</span></span><br><span class="line">top -d 5                     <span class="comment"># 每5秒刷新</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>在 top 中可用的操作：</p>
+<ul>
+<li><code>P</code> - 按CPU使用率排序</li>
+<li><code>M</code> - 按内存使用率排序</li>
+<li><code>T</code> - 按运行时间排序</li>
+<li><code>k</code> - 杀死进程</li>
+<li><code>q</code> - 退出</li>
+</ul>
+<p><strong><code>ps</code> - 进程状态</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ps                           <span class="comment"># 显示当前终端的进程</span></span><br><span class="line">ps aux                       <span class="comment"># 显示所有进程的详细信息（推荐）</span></span><br><span class="line">ps -ef                       <span class="comment"># 全格式显示所有进程</span></span><br><span class="line">ps aux | grep nginx          <span class="comment"># 查找特定进程</span></span><br><span class="line">ps aux --<span class="built_in">sort</span>=-%cpu          <span class="comment"># 按CPU使用率排序</span></span><br><span class="line">ps aux --<span class="built_in">sort</span>=-%mem          <span class="comment"># 按内存使用率排序</span></span><br><span class="line">ps -u username               <span class="comment"># 查看某用户的进程</span></span><br><span class="line">ps -p PID -o pid,ppid,cmd,%cpu,%mem  <span class="comment"># 显示指定PID的特定信息</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>lscpu</code> / <code>cat /proc/cpuinfo</code> - CPU信息</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lscpu                        <span class="comment"># 显示CPU架构信息</span></span><br><span class="line"><span class="built_in">cat</span> /proc/cpuinfo            <span class="comment"># 详细的CPU信息</span></span><br><span class="line"><span class="built_in">cat</span> /proc/cpuinfo | grep <span class="string">"model name"</span>  <span class="comment"># 查看CPU型号</span></span><br><span class="line"><span class="built_in">cat</span> /proc/cpuinfo | grep -c <span class="string">"processor"</span>  <span class="comment"># 查看CPU核心数</span></span><br><span class="line"><span class="built_in">nproc</span>                        <span class="comment"># 显示可用CPU核心数</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>lsblk</code> / <code>fdisk</code> - 磁盘信息</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lsblk                        <span class="comment"># 列出所有块设备</span></span><br><span class="line"><span class="built_in">df</span> -h                        <span class="comment"># 查看磁盘使用情况</span></span><br><span class="line">lsblk -f                     <span class="comment"># 显示文件系统类型</span></span><br><span class="line">fdisk -l                     <span class="comment"># 查看磁盘分区表（需要root权限）</span></span><br><span class="line"><span class="built_in">cat</span> /proc/partitions         <span class="comment"># 查看分区信息</span></span><br><span class="line">blkid                        <span class="comment"># 查看块设备的UUID</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>ifconfig</code> / <code>ip</code> / <code>ss</code> - 网络信息</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ifconfig                     <span class="comment"># 显示网络接口信息</span></span><br><span class="line">ip addr                      <span class="comment"># 显示IP地址（现代命令）</span></span><br><span class="line">ip <span class="built_in">link</span>                      <span class="comment"># 显示网络接口状态</span></span><br><span class="line">ip route                     <span class="comment"># 显示路由表</span></span><br><span class="line">ss -tuln                     <span class="comment"># 显示监听端口</span></span><br><span class="line">netstat -tuln                <span class="comment"># 显示网络连接</span></span><br><span class="line">ping google.com              <span class="comment"># 测试网络连通性</span></span><br><span class="line">curl ifconfig.me             <span class="comment"># 查看公网IP</span></span><br><span class="line">hostname -I                  <span class="comment"># 查看本机IP地址</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>env</code> / <code>printenv</code> - 环境变量</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">env</span>                          <span class="comment"># 显示所有环境变量</span></span><br><span class="line"><span class="built_in">printenv</span>                     <span class="comment"># 显示所有环境变量</span></span><br><span class="line"><span class="built_in">printenv</span> PATH                <span class="comment"># 显示特定环境变量</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$PATH</span>                   <span class="comment"># 显示PATH变量</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$HOME</span>                   <span class="comment"># 显示家目录</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$USER</span>                   <span class="comment"># 显示当前用户</span></span><br><span class="line"><span class="built_in">export</span> VAR=value             <span class="comment"># 设置环境变量</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>history</code> - 命令历史</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span>                      <span class="comment"># 显示命令历史</span></span><br><span class="line"><span class="built_in">history</span> | less               <span class="comment"># 分页显示</span></span><br><span class="line"><span class="built_in">history</span> | grep <span class="string">"apt"</span>         <span class="comment"># 搜索历史命令</span></span><br><span class="line">!100                         <span class="comment"># 执行历史第100条命令</span></span><br><span class="line">!!                           <span class="comment"># 执行上一条命令</span></span><br><span class="line">!apt                         <span class="comment"># 执行最近以apt开头的命令</span></span><br><span class="line"><span class="built_in">history</span> -c                   <span class="comment"># 清除历史记录</span></span><br><span class="line"><span class="built_in">history</span> -w                   <span class="comment"># 将历史写入文件</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="关机与重启"><a href="#关机与重启" class="headerlink" title="关机与重启"></a>关机与重启</h3><p><strong><code>shutdown</code> - 安全关机</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">shutdown now                 <span class="comment"># 立即关机</span></span><br><span class="line">shutdown +5                  <span class="comment"># 5分钟后关机</span></span><br><span class="line">shutdown 14:00               <span class="comment"># 指定时间关机</span></span><br><span class="line">shutdown -r now              <span class="comment"># 立即重启</span></span><br><span class="line">shutdown -r +5               <span class="comment"># 5分钟后重启</span></span><br><span class="line">shutdown -c                  <span class="comment"># 取消关机计划</span></span><br><span class="line">shutdown -h now              <span class="comment"># 立即关机并停止电源</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>reboot</code> / <code>poweroff</code> / <code>halt</code></strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">reboot                       <span class="comment"># 重启</span></span><br><span class="line">poweroff                     <span class="comment"># 关机并断电</span></span><br><span class="line">halt                         <span class="comment"># 停止系统（不断电）</span></span><br><span class="line">init 0                       <span class="comment"># 关机</span></span><br><span class="line">init 6                       <span class="comment"># 重启</span></span><br><span class="line">systemctl reboot             <span class="comment"># 使用systemctl重启</span></span><br><span class="line">systemctl poweroff           <span class="comment"># 使用systemctl关机</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>sync</code> - 同步数据到磁盘</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sync</span>                         <span class="comment"># 将内存中的数据写入磁盘</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>⚠️ <strong>重要提示</strong>：关机或重启前，建议先执行 <code>sync</code> 命令，确保数据已写入磁盘。</p>
+<h2 id="4-3-Linux系统的线上求助man-page与info-page"><a href="#4-3-Linux系统的线上求助man-page与info-page" class="headerlink" title="4.3 Linux系统的线上求助man page与info page"></a>4.3 Linux系统的线上求助man page与info page</h2><h3 id="man-page-手册页"><a href="#man-page-手册页" class="headerlink" title="man page 手册页"></a>man page 手册页</h3><p>Linux 系统内置了详细的帮助文档，称为 <strong>manual pages（手册页）</strong>，简称 man page。</p>
+<h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">man <span class="built_in">command</span>                  <span class="comment"># 查看命令的手册页</span></span><br><span class="line">man <span class="built_in">ls</span>                       <span class="comment"># 查看ls命令的帮助</span></span><br><span class="line">man -f <span class="built_in">command</span>               <span class="comment"># 查看命令的简短描述（等同于 whatis）</span></span><br><span class="line">man -k keyword               <span class="comment"># 搜索包含关键词的手册页（等同于 apropos）</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="手册页的分类（Sections）"><a href="#手册页的分类（Sections）" class="headerlink" title="手册页的分类（Sections）"></a>手册页的分类（Sections）</h4><p>手册页分为不同的章节：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>章节</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>用户命令（普通用户可执行的命令）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>系统调用（内核提供的函数）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>库函数（程序库中的函数）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>特殊文件（通常在 /dev 中的设备）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>文件格式和规范（如 /etc/passwd）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>游戏和屏保</td>
+</tr>
+<tr>
+<td>7</td>
+<td>杂项（包括宏包和约定）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>系统管理命令（通常需要 root 权限）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>内核例程</td>
+</tr>
+</tbody></table></div>
+<p><strong>指定章节查看：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man 1 <span class="built_in">ls</span>                     <span class="comment"># 查看第1章节的ls命令</span></span><br><span class="line">man 5 passwd                 <span class="comment"># 查看第5章节的passwd文件格式</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="手册页中的导航"><a href="#手册页中的导航" class="headerlink" title="手册页中的导航"></a>手册页中的导航</h4><p>进入 man page 后，可以使用以下按键导航：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>空格</code> / <code>Page Down</code></td>
+<td>向下翻页</td>
+</tr>
+<tr>
+<td><code>Page Up</code> / <code>b</code></td>
+<td>向上翻页</td>
+</tr>
+<tr>
+<td><code>↓</code> / <code>Enter</code></td>
+<td>向下滚动一行</td>
+</tr>
+<tr>
+<td><code>↑</code></td>
+<td>向上滚动一行</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>跳转到开头</td>
+</tr>
+<tr>
+<td><code>G</code></td>
+<td>跳转到结尾</td>
+</tr>
+<tr>
+<td><code>/keyword</code></td>
+<td>向下搜索关键词</td>
+</tr>
+<tr>
+<td><code>?keyword</code></td>
+<td>向上搜索关键词</td>
+</tr>
+<tr>
+<td><code>n</code></td>
+<td>跳转到下一个匹配</td>
+</tr>
+<tr>
+<td><code>N</code></td>
+<td>跳转到上一个匹配</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>显示帮助</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>退出 man page</td>
+</tr>
+</tbody></table></div>
+<h4 id="手册页的结构"><a href="#手册页的结构" class="headerlink" title="手册页的结构"></a>手册页的结构</h4><p>一个典型的 man page 包含以下部分：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NAME                        # 命令名称和简要描述</span><br><span class="line">SYNOPSIS                    # 语法格式</span><br><span class="line">DESCRIPTION                 # 详细描述</span><br><span class="line">OPTIONS                     # 选项说明</span><br><span class="line">EXAMPLES                    # 示例</span><br><span class="line">EXIT STATUS                 # 退出状态码</span><br><span class="line">SEE ALSO                    # 相关参考</span><br><span class="line">BUGS                        # 已知问题</span><br><span class="line">AUTHOR                      # 作者信息</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="info-page-信息页"><a href="#info-page-信息页" class="headerlink" title="info page 信息页"></a>info page 信息页</h3><p>GNU 项目开发的另一种帮助系统，比 man page 更详细，支持超链接导航。</p>
+<h4 id="基本用法-1"><a href="#基本用法-1" class="headerlink" title="基本用法"></a>基本用法</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">info <span class="built_in">command</span>                 <span class="comment"># 查看命令的info文档</span></span><br><span class="line">info <span class="built_in">ls</span>                      <span class="comment"># 查看ls的info文档</span></span><br><span class="line">info                         <span class="comment"># 进入info主菜单</span></span><br><span class="line">info coreutils               <span class="comment"># 查看核心工具集的info文档</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="导航按键"><a href="#导航按键" class="headerlink" title="导航按键"></a>导航按键</h4><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Enter</code></td>
+<td>跟随光标下的超链接</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>跳转到下一个链接</td>
+</tr>
+<tr>
+<td><code>n</code></td>
+<td>下一节</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>上一节</td>
+</tr>
+<tr>
+<td><code>u</code></td>
+<td>上一级</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>返回上一页</td>
+</tr>
+<tr>
+<td><code>空格</code></td>
+<td>向下翻页</td>
+</tr>
+<tr>
+<td><code>Del</code> / <code>Page Up</code></td>
+<td>向上翻页</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>搜索</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>退出</td>
+</tr>
+<tr>
+<td><code>?</code> / <code>h</code></td>
+<td>显示帮助</td>
+</tr>
+</tbody></table></div>
+<h4 id="info-page-的优点"><a href="#info-page-的优点" class="headerlink" title="info page 的优点"></a>info page 的优点</h4><ol>
+<li><strong>超链接导航</strong>：可以像浏览网页一样跳转</li>
+<li><strong>层级结构</strong>：清晰的章节组织</li>
+<li><strong>更详细的说明</strong>：通常比 man page 更详尽</li>
+<li><strong>示例丰富</strong>：提供更多使用示例</li>
+</ol>
+<h3 id="其他求助方式"><a href="#其他求助方式" class="headerlink" title="其他求助方式"></a>其他求助方式</h3><h4 id="1-–help-选项"><a href="#1-–help-选项" class="headerlink" title="1. –help 选项"></a>1. –help 选项</h4><p>大多数命令都支持 <code>--help</code> 选项，显示简要帮助：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> --<span class="built_in">help</span></span><br><span class="line"><span class="built_in">cp</span> --<span class="built_in">help</span></span><br><span class="line">systemctl --<span class="built_in">help</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>优点：</p>
+<ul>
+<li>快速查看，无需进入 man page</li>
+<li>显示常用选项</li>
+<li>适合快速参考</li>
+</ul>
+<h4 id="2-whatis-命令"><a href="#2-whatis-命令" class="headerlink" title="2. whatis 命令"></a>2. whatis 命令</h4><p>显示命令的简要描述：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">whatis <span class="built_in">ls</span>                    <span class="comment"># ls (1)              - list directory contents</span></span><br><span class="line">whatis <span class="built_in">cp</span>                    <span class="comment"># cp (1)              - copy files and directories</span></span><br><span class="line">whatis man                   <span class="comment"># man (1)             - an interface to the on-line reference manuals</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="3-apropos-命令"><a href="#3-apropos-命令" class="headerlink" title="3. apropos 命令"></a>3. apropos 命令</h4><p>通过关键词搜索相关的命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apropos editor               <span class="comment"># 搜索与编辑器相关的命令</span></span><br><span class="line">apropos copy                 <span class="comment"># 搜索与复制相关的命令</span></span><br><span class="line">apropos <span class="string">"list directory"</span>     <span class="comment"># 支持多词搜索</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="4-在线资源"><a href="#4-在线资源" class="headerlink" title="4. 在线资源"></a>4. 在线资源</h4><ul>
+<li><strong>官方文档</strong>：各发行版的官方 Wiki 和文档</li>
+<li><strong>Stack Overflow</strong>：技术问答社区</li>
+<li><strong>GitHub</strong>：开源项目托管平台</li>
+<li><strong>Linux 中国</strong>：中文 Linux 社区</li>
+<li><strong>鸟哥的 Linux 私房菜</strong>：经典教程网站</li>
+</ul>
+<h4 id="5-usr-share-doc-目录"><a href="#5-usr-share-doc-目录" class="headerlink" title="5. /usr/share/doc 目录"></a>5. /usr/share/doc 目录</h4><p>许多软件包会在此目录下安装额外的文档：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> /usr/share/doc/           <span class="comment"># 查看已安装的文档</span></span><br><span class="line"><span class="built_in">ls</span> /usr/share/doc/bash/      <span class="comment"># 查看 bash 的额外文档</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="帮助系统的选择建议"><a href="#帮助系统的选择建议" class="headerlink" title="帮助系统的选择建议"></a>帮助系统的选择建议</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>快速查看命令用法</td>
+<td><code>command --help</code></td>
+</tr>
+<tr>
+<td>查看详细文档</td>
+<td><code>man command</code></td>
+</tr>
+<tr>
+<td>查看GNU工具的详细说明</td>
+<td><code>info command</code></td>
+</tr>
+<tr>
+<td>不知道命令名字</td>
+<td><code>apropos keyword</code></td>
+</tr>
+<tr>
+<td>快速了解命令功能</td>
+<td><code>whatis command</code></td>
+</tr>
+<tr>
+<td>搜索具体问题的解决方案</td>
+<td>在线搜索</td>
+</tr>
+</tbody></table></div>
+<h3 id="实践练习"><a href="#实践练习" class="headerlink" title="实践练习"></a>实践练习</h3><ol>
+<li>使用 <code>man</code> 查看 <code>ls</code> 命令的手册页，找出如何按时间排序的选项</li>
+<li>使用 <code>info</code> 查看 <code>coreutils</code> 的文档</li>
+<li>使用 <code>apropos</code> 搜索与 “delete” 相关的命令</li>
+<li>使用 <code>whatis</code> 查看常用命令（cat, grep, find, chmod）的功能描述</li>
+<li>比较 <code>man ls</code> 和 <code>ls --help</code> 的输出差异</li>
+</ol>
+<h2 id="4-4-超简单文书编辑器：nano"><a href="#4-4-超简单文书编辑器：nano" class="headerlink" title="4.4 超简单文书编辑器：nano"></a>4.4 超简单文书编辑器：nano</h2><h3 id="nano-简介"><a href="#nano-简介" class="headerlink" title="nano 简介"></a>nano 简介</h3><p><strong>nano</strong> 是一个简单易用的文本编辑器，适合初学者。它比 vi/vim 更容易上手。</p>
+<h3 id="启动-nano"><a href="#启动-nano" class="headerlink" title="启动 nano"></a>启动 nano</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nano                         <span class="comment"># 打开新文件</span></span><br><span class="line">nano filename.txt            <span class="comment"># 打开或创建文件</span></span><br><span class="line">nano +10 filename.txt        <span class="comment"># 打开文件并跳到第10行</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="界面说明"><a href="#界面说明" class="headerlink" title="界面说明"></a>界面说明</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GNU nano 2.9.3               filename.txt</span><br><span class="line"></span><br><span class="line">[文件内容显示区域]</span><br><span class="line"></span><br><span class="line">^G 帮助    ^O 保存    ^W 搜索    ^K 剪切    ^J 对齐</span><br><span class="line">^X 退出    ^R 读取    ^Y 上一页   ^C 位置    ^T 拼写</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><code>^</code> 表示 <code>Ctrl</code> 键</li>
+<li><code>^G</code> = <code>Ctrl + G</code></li>
+</ul>
+<h4 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h4><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Ctrl + G</code></td>
+<td>显示帮助</td>
+</tr>
+<tr>
+<td><code>Ctrl + O</code></td>
+<td>保存文件</td>
+</tr>
+<tr>
+<td><code>Ctrl + X</code></td>
+<td>退出 nano</td>
+</tr>
+<tr>
+<td><code>Ctrl + R</code></td>
+<td>插入其他文件</td>
+</tr>
+<tr>
+<td><code>Ctrl + W</code></td>
+<td>搜索</td>
+</tr>
+<tr>
+<td><code>Ctrl + V</code> / <code>Page Down</code></td>
+<td>下一页</td>
+</tr>
+<tr>
+<td><code>Ctrl + Y</code> / <code>Page Up</code></td>
+<td>上一页</td>
+</tr>
+<tr>
+<td><code>Ctrl + K</code></td>
+<td>剪切当前行</td>
+</tr>
+<tr>
+<td><code>Ctrl + U</code></td>
+<td>粘贴</td>
+</tr>
+<tr>
+<td><code>Ctrl + J</code></td>
+<td>对齐当前段落</td>
+</tr>
+<tr>
+<td><code>Ctrl + C</code></td>
+<td>显示光标位置</td>
+</tr>
+<tr>
+<td><code>Ctrl + T</code></td>
+<td>拼写检查</td>
+</tr>
+<tr>
+<td><code>Ctrl + _</code> / <code>Ctrl + /</code></td>
+<td>跳到指定行</td>
+</tr>
+<tr>
+<td><code>Alt + U</code></td>
+<td>撤销</td>
+</tr>
+<tr>
+<td><code>Alt + E</code></td>
+<td>重做</td>
+</tr>
+</tbody></table></div>
+<h4 id="编辑操作"><a href="#编辑操作" class="headerlink" title="编辑操作"></a>编辑操作</h4><ol>
+<li><strong>移动光标</strong>：使用方向键</li>
+<li><strong>输入文本</strong>：直接打字</li>
+<li><strong>删除</strong>：使用 <code>Backspace</code> 或 <code>Delete</code></li>
+<li><strong>保存</strong>：<code>Ctrl + O</code>，然后按 <code>Enter</code> 确认</li>
+<li><strong>退出</strong>：<code>Ctrl + X</code>，如有修改会提示保存</li>
+</ol>
+<h4 id="搜索和替换"><a href="#搜索和替换" class="headerlink" title="搜索和替换"></a>搜索和替换</h4><p><strong>搜索：</strong></p>
+<ol>
+<li>按 <code>Ctrl + W</code></li>
+<li>输入要搜索的文本</li>
+<li>按 <code>Enter</code></li>
+<li>按 <code>Alt + W</code> 查找下一个</li>
+</ol>
+<p><strong>替换：</strong></p>
+<ol>
+<li>按 <code>Ctrl + \</code></li>
+<li>输入要搜索的文本，按 <code>Enter</code></li>
+<li>输入替换文本，按 <code>Enter</code></li>
+<li>按 <code>Y</code> 确认替换，<code>N</code> 跳过，<code>A</code> 全部替换</li>
+</ol>
+<h3 id="nano-配置"><a href="#nano-配置" class="headerlink" title="nano 配置"></a>nano 配置</h3><h4 id="配置文件位置"><a href="#配置文件位置" class="headerlink" title="配置文件位置"></a>配置文件位置</h4><ul>
+<li>系统级配置：<code>/etc/nanorc</code></li>
+<li>用户级配置：<code>~/.nanorc</code></li>
+</ul>
+<h4 id="常用配置选项"><a href="#常用配置选项" class="headerlink" title="常用配置选项"></a>常用配置选项</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示行号</span></span><br><span class="line"><span class="built_in">set</span> linenumbers</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动缩进</span></span><br><span class="line"><span class="built_in">set</span> autoindent</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用空格代替Tab</span></span><br><span class="line"><span class="built_in">set</span> tabstospaces</span><br><span class="line"><span class="built_in">set</span> tabsize 4</span><br><span class="line"></span><br><span class="line"><span class="comment"># 语法高亮（nano 2.1.5+）</span></span><br><span class="line">include <span class="string">"/usr/share/nano/*.nanorc"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 平滑滚动</span></span><br><span class="line"><span class="built_in">set</span> smooth</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示光标位置</span></span><br><span class="line"><span class="built_in">set</span> constantshow</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用鼠标</span></span><br><span class="line"><span class="built_in">set</span> mouse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动换行</span></span><br><span class="line"><span class="built_in">set</span> wordwrap</span><br><span class="line"></span><br><span class="line"><span class="comment"># 制表符宽度</span></span><br><span class="line"><span class="built_in">set</span> tabsize 4</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="nano-与-vi-vim-的选择"><a href="#nano-与-vi-vim-的选择" class="headerlink" title="nano 与 vi/vim 的选择"></a>nano 与 vi/vim 的选择</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>编辑器</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>nano</strong></td>
+<td>简单易学，界面直观</td>
+<td>功能相对简单</td>
+<td>新手入门，简单编辑</td>
+</tr>
+<tr>
+<td><strong>vi/vim</strong></td>
+<td>功能强大，效率高</td>
+<td>学习曲线陡峭</td>
+<td>专业用户，频繁编辑</td>
+</tr>
+</tbody></table></div>
+<p><strong>建议：</strong></p>
+<ul>
+<li>初学者先用 nano 入门</li>
+<li>熟练后学习 vim，提高工作效率</li>
+<li>服务器环境通常都有 vi，nano 可能需要额外安装</li>
+</ul>
+<h3 id="实践练习-1"><a href="#实践练习-1" class="headerlink" title="实践练习"></a>实践练习</h3><ol>
+<li>使用 nano 创建一个文本文件，输入一些内容，保存并退出</li>
+<li>使用 nano 打开系统配置文件（如 <code>/etc/hosts</code>），观察界面</li>
+<li>在 nano 中使用搜索功能查找特定文本</li>
+<li>配置 nano 的行号显示和语法高亮</li>
+<li>比较 nano 和 vim 的使用体验</li>
+</ol>
+<h2 id="4-5-正确的关机方法"><a href="#4-5-正确的关机方法" class="headerlink" title="4.5 正确的关机方法"></a>4.5 正确的关机方法</h2><h3 id="为什么需要正确关机"><a href="#为什么需要正确关机" class="headerlink" title="为什么需要正确关机"></a>为什么需要正确关机</h3><p>Linux 是多用户、多任务系统，后台可能有许多进程在运行。直接断电可能导致：</p>
+<ul>
+<li><strong>数据丢失</strong>：未写入磁盘的数据会丢失</li>
+<li><strong>文件系统损坏</strong>：正在写入的文件可能损坏</li>
+<li><strong>系统不稳定</strong>：下次启动可能出现错误</li>
+</ul>
+<h3 id="查看系统状态"><a href="#查看系统状态" class="headerlink" title="查看系统状态"></a>查看系统状态</h3><p>在关机前，可以先查看系统状态：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">who</span>                          <span class="comment"># 查看当前登录的用户</span></span><br><span class="line">w                            <span class="comment"># 查看用户及其活动</span></span><br><span class="line">ps aux                       <span class="comment"># 查看运行的进程</span></span><br><span class="line">top                          <span class="comment"># 实时查看系统状态</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="关机命令"><a href="#关机命令" class="headerlink" title="关机命令"></a>关机命令</h3><h4 id="shutdown（推荐）"><a href="#shutdown（推荐）" class="headerlink" title="shutdown（推荐）"></a>shutdown（推荐）</h4><p>功能最强大的关机命令，可以定时关机、重启，并发送通知给所有用户。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 立即关机</span></span><br><span class="line">shutdown now</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定时关机（10分钟后）</span></span><br><span class="line">shutdown +10</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定时间关机</span></span><br><span class="line">shutdown 14:00</span><br><span class="line"></span><br><span class="line"><span class="comment"># 立即重启</span></span><br><span class="line">shutdown -r now</span><br><span class="line">shutdown -r +5 <span class="string">"System will reboot in 5 minutes"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 关机并停止电源（需要硬件支持）</span></span><br><span class="line">shutdown -h now</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消关机计划</span></span><br><span class="line">shutdown -c</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>发送消息给所有用户：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown +10 <span class="string">"System will shutdown for maintenance in 10 minutes. Please save your work."</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="poweroff"><a href="#poweroff" class="headerlink" title="poweroff"></a>poweroff</h4><p>直接关闭系统并切断电源。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">poweroff                     <span class="comment"># 关机并断电</span></span><br><span class="line">poweroff -f                  <span class="comment"># 强制关机</span></span><br><span class="line">poweroff -p                  <span class="comment"># 关机并断电（默认）</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="halt"><a href="#halt" class="headerlink" title="halt"></a>halt</h4><p>停止系统运行，但不一定断电。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">halt                         <span class="comment"># 停止系统</span></span><br><span class="line">halt -p                      <span class="comment"># 停止系统并断电</span></span><br><span class="line">halt -f                      <span class="comment"># 强制停止</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="reboot"><a href="#reboot" class="headerlink" title="reboot"></a>reboot</h4><p>重启系统。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reboot                       <span class="comment"># 重启</span></span><br><span class="line">reboot now                   <span class="comment"># 立即重启</span></span><br><span class="line">reboot -f                    <span class="comment"># 强制重启</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="init"><a href="#init" class="headerlink" title="init"></a>init</h4><p>通过改变运行级别来关机或重启。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">init 0                       <span class="comment"># 关机（运行级别0）</span></span><br><span class="line">init 6                       <span class="comment"># 重启（运行级别6）</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="运行级别（Runlevel）"><a href="#运行级别（Runlevel）" class="headerlink" title="运行级别（Runlevel）"></a>运行级别（Runlevel）</h3><p>Linux 系统有不同的运行级别，对应不同的系统状态：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>运行级别</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>关机</td>
+</tr>
+<tr>
+<td>1</td>
+<td>单用户模式（救援模式）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>多用户模式（无网络）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>完全多用户模式（命令行）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>保留，未使用</td>
+</tr>
+<tr>
+<td>5</td>
+<td>图形界面模式</td>
+</tr>
+<tr>
+<td>6</td>
+<td>重启</td>
+</tr>
+</tbody></table></div>
+<p><strong>查看当前运行级别：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">runlevel                     <span class="comment"># 显示之前的和当前的运行级别</span></span><br><span class="line"><span class="built_in">who</span> -r                       <span class="comment"># 显示当前运行级别</span></span><br><span class="line">systemctl get-default        <span class="comment"># 查看默认启动目标</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>切换运行级别：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">init 3                       <span class="comment"># 切换到命令行模式</span></span><br><span class="line">init 5                       <span class="comment"># 切换到图形界面</span></span><br><span class="line">systemctl isolate multi-user.target  <span class="comment"># 切换到多用户目标</span></span><br><span class="line">systemctl isolate graphical.target   <span class="comment"># 切换到图形目标</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="使用-systemd-管理电源"><a href="#使用-systemd-管理电源" class="headerlink" title="使用 systemd 管理电源"></a>使用 systemd 管理电源</h3><p>现代 Linux 发行版（如 CentOS 7+、Ubuntu 15+）使用 systemd 作为初始化系统。</p>
+<p><strong>关机：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl poweroff           <span class="comment"># 关机</span></span><br><span class="line">systemctl halt               <span class="comment"># 停止系统</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>重启：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl reboot             <span class="comment"># 重启</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>挂起和休眠：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">suspend</span>            <span class="comment"># 挂起（保存到内存）</span></span><br><span class="line">systemctl hibernate          <span class="comment"># 休眠（保存到硬盘）</span></span><br><span class="line">systemctl hybrid-sleep       <span class="comment"># 混合睡眠</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li><strong>保存工作</strong>：关机前确保所有重要数据已保存</li>
+<li><strong>通知用户</strong>：多用户系统应提前通知其他用户</li>
+<li><strong>关闭程序</strong>：尽量正常关闭应用程序</li>
+<li><strong>避免强制关机</strong>：除非系统无响应，否则不要使用强制关机</li>
+<li><strong>定期重启</strong>：长期运行的系统建议定期重启以清理内存</li>
+</ol>
+<h3 id="实践练习-2"><a href="#实践练习-2" class="headerlink" title="实践练习"></a>实践练习</h3><ol>
+<li>查看当前系统的运行级别</li>
+<li>使用 <code>shutdown</code> 命令设置 10 分钟后关机，然后取消</li>
+<li>查看 <code>reboot</code> 命令的手册页</li>
+<li>使用 <code>systemctl</code> 查看系统的电源管理命令</li>
+<li>了解你的系统的默认运行级别（目标）</li>
+</ol>
+<h2 id="4-6-重点回顾"><a href="#4-6-重点回顾" class="headerlink" title="4.6 重点回顾"></a>4.6 重点回顾</h2><ul>
+<li>Linux 系统有图形界面和命令行界面两种操作方式</li>
+<li>基础命令：<code>date</code>, <code>cal</code>, <code>bc</code>, <code>ls</code>, <code>cd</code>, <code>pwd</code>, <code>mkdir</code>, <code>rm</code>, <code>cp</code>, <code>mv</code>, <code>cat</code>, <code>less</code>, <code>head</code>, <code>tail</code></li>
+<li>重要热键：<code>Tab</code>（补全），<code>Ctrl+C</code>（中断），<code>Ctrl+D</code>（退出）</li>
+<li>使用 <code>man</code>, <code>info</code>, <code>--help</code> 获取帮助</li>
+<li>文本编辑器 nano：简单易学，适合初学者</li>
+<li>正确关机很重要，使用 <code>shutdown</code>, <code>reboot</code>, <code>poweroff</code> 等命令</li>
+</ul>
+<h2 id="4-7-本章习题"><a href="#4-7-本章习题" class="headerlink" title="4.7 本章习题"></a>4.7 本章习题</h2><ol>
+<li>如何查看当前日期和时间？如何显示2024年的日历？</li>
+<li>列出当前目录下所有文件（包括隐藏文件）的详细信息。</li>
+<li>如何在后台运行一个程序？如何终止它？</li>
+<li>使用 man 查看 <code>cp</code> 命令的手册页，找出如何保留文件属性的选项。</li>
+<li>使用 nano 创建一个文件，输入一些内容，保存并退出。</li>
+<li>系统将在10分钟后关机，如何取消这个关机计划？</li>
+<li>解释 <code>df</code>, <code>du</code>, <code>free</code> 命令的区别。</li>
+<li>如何查看系统的内存使用情况？如何查看磁盘使用情况？</li>
+</ol>
+<h2 id="4-8-参考资料与延伸阅读"><a href="#4-8-参考资料与延伸阅读" class="headerlink" title="4.8 参考资料与延伸阅读"></a>4.8 参考资料与延伸阅读</h2><ul>
+<li><code>man man</code> - 查看 man 命令的手册页</li>
+<li><code>man intro</code> - Linux 简介</li>
+<li><a target="_blank" rel="noopener" href="https://man.linuxde.net/" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>Linux 命令大全</a></li>
+<li><a target="_blank" rel="noopener" href="https://linuxcommand.org/" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>Linux 命令行大全</a></li>
+</ul>
+</article>
+
+
+<div class="article-footer slide-up">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文本文由rlcao编写，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section></div>
+
+<div class="related-wrap slide-up" id="read-next"><section class="body"><div class="item" id="prev"><div class="note"><svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-left" aria-hidden="true"></svg> 回顾上一篇</div><a href="/wiki/Linux/ch03-install/">第三章、安装 CentOS 7.x</a></div><div class="item" id="next"><div class="note">接下来阅读 <svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-right" aria-hidden="true"></svg></div><a href="/wiki/Linux/ch06-file-management/">第六章、Linux 文件与目录管理</a></div></section></div>
+
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main></div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/wiki/Linux/ch04-first-login/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第四章、首次登陆与线上求助","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

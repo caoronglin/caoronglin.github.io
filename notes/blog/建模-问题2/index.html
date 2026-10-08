@@ -1,0 +1,743 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/blog/%E5%BB%BA%E6%A8%A1-%E9%97%AE%E9%A2%982/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>建模-问题2 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="建模-问题2NIPT最佳检测时间点分析工具 - 详细解析一、代码概述该工具是一个针对NIPT（无创产前胎儿染色体检测）的最佳检测时间点分析系统，主要解决不同BMI孕妇的Y染色体浓度随孕周变化规律问题，通过数据建模确定各BMI分组的最佳检测孕周。系统采用中文拼音重命名函数和变量，便于中文用户理解，同时包含详细的中文注释。 二、核心功能流程 数据清洗与预处理：处理原始NIPT检测数据 BMI分组：按临" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="建模-问题2" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/blog/%E5%BB%BA%E6%A8%A1-%E9%97%AE%E9%A2%982/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="建模-问题2NIPT最佳检测时间点分析工具 - 详细解析一、代码概述该工具是一个针对NIPT（无创产前胎儿染色体检测）的最佳检测时间点分析系统，主要解决不同BMI孕妇的Y染色体浓度随孕周变化规律问题，通过数据建模确定各BMI分组的最佳检测孕周。系统采用中文拼音重命名函数和变量，便于中文用户理解，同时包含详细的中文注释。 二、核心功能流程 数据清洗与预处理：处理原始NIPT检测数据 BMI分组：按临" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/q2_fen_xi_tu.png?x-oss-process=image/watermark,type_d3F5LW1pY3JvaGVp,size_9,text_Q1JM,color_FFFFFF,shadow_50,t_80,g_se,x_10,y_10" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-10-08T04:55:06.032Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2025-09-05T17:09:02.000Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="yuque" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/q2_fen_xi_tu.png?x-oss-process=image/watermark,type_d3F5LW1pY3JvaGVp,size_9,text_Q1JM,color_FFFFFF,shadow_50,t_80,g_se,x_10,y_10" data-stellar-page-meta=""><meta name="twitter:title" content="建模-问题2" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content="" data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/blog/%E5%BB%BA%E6%A8%A1-%E9%97%AE%E9%A2%982/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"建模-问题2","description":"建模-问题2NIPT最佳检测时间点分析工具 - 详细解析一、代码概述该工具是一个针对NIPT（无创产前胎儿染色体检测）的最佳检测时间点分析系统，主要解决不同BMI孕妇的Y染色体浓度随孕周变化规律问题，通过数据建模确定各BMI分组的最佳检测孕周。系统采用中文拼音重命名函数和变量，便于中文用户理解，同时包含详细的中文注释。\n二、核心功能流程\n数据清洗与预处理：处理原始NIPT检测数据\nBMI分组...","url":"https://blog.cnortles.top/notes/blog/%E5%BB%BA%E6%A8%A1-%E9%97%AE%E9%A2%982/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/blog/%E5%BB%BA%E6%A8%A1-%E9%97%AE%E9%A2%982/">建模-问题2</a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-10-08T04:55:06.032Z">2026-10-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-09-05T17:09:02.000Z">2025-09-06</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>建模-问题2</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="建模-问题2"><a href="#建模-问题2" class="headerlink" title="建模-问题2"></a>建模-问题2</h1><h1 id="NIPT最佳检测时间点分析工具-详细解析"><a href="#NIPT最佳检测时间点分析工具-详细解析" class="headerlink" title="NIPT最佳检测时间点分析工具 - 详细解析"></a>NIPT最佳检测时间点分析工具 - 详细解析</h1><h2 id="一、代码概述"><a href="#一、代码概述" class="headerlink" title="一、代码概述"></a>一、代码概述</h2><p>该工具是一个针对NIPT（无创产前胎儿染色体检测）的最佳检测时间点分析系统，主要解决<strong>不同BMI孕妇的Y染色体浓度随孕周变化规律</strong>问题，通过数据建模确定各BMI分组的最佳检测孕周。系统采用中文拼音重命名函数和变量，便于中文用户理解，同时包含详细的中文注释。</p>
+<h2 id="二、核心功能流程"><a href="#二、核心功能流程" class="headerlink" title="二、核心功能流程"></a>二、核心功能流程</h2><ol>
+<li><strong>数据清洗与预处理</strong>：处理原始NIPT检测数据</li>
+<li><strong>BMI分组</strong>：按临床标准将孕妇分为不同BMI组</li>
+<li><strong>模型训练</strong>：建立Y染色体浓度预测模型</li>
+<li><strong>风险评估</strong>：通过蒙特卡洛仿真计算各孕周风险</li>
+<li><strong>结果可视化</strong>：生成临床决策图表和报告</li>
+</ol>
+<h2 id="三、关键字段说明"><a href="#三、关键字段说明" class="headerlink" title="三、关键字段说明"></a>三、关键字段说明</h2><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>处理方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>检测孕周</strong></td>
+<td>数值</td>
+<td>孕妇接受NIPT检测时的孕周</td>
+<td>特殊处理”11w+6”等格式，转换为小数(11.857周)</td>
+</tr>
+<tr>
+<td><strong>孕妇BMI</strong></td>
+<td>数值</td>
+<td>孕妇体重指数(BMI=体重/身高²)</td>
+<td>范围校验(10-60)，缺失值用中位数填补</td>
+</tr>
+<tr>
+<td><strong>Y染色体浓度</strong></td>
+<td>数值</td>
+<td>男胎NIPT检测的关键指标</td>
+<td>取对数变换(log1p)作为目标变量</td>
+</tr>
+<tr>
+<td><strong>孕妇代码</strong></td>
+<td>字符串</td>
+<td>唯一标识孕妇的ID</td>
+<td>用于去重，仅保留首次检测数据</td>
+</tr>
+<tr>
+<td><strong>bmi_zu</strong></td>
+<td>分类</td>
+<td>BMI分组标签</td>
+<td>按临床标准分为7个组别</td>
+</tr>
+<tr>
+<td><strong>最佳孕周</strong></td>
+<td>数值</td>
+<td>综合风险最低的检测时间点</td>
+<td>通过风险评估计算得出</td>
+</tr>
+<tr>
+<td><strong>成功率</strong></td>
+<td>百分比</td>
+<td>预测Y染色体浓度≥阈值的概率</td>
+<td>蒙特卡洛仿真计算</td>
+</tr>
+<tr>
+<td><strong>阈值</strong></td>
+<td>数值</td>
+<td>Y染色体浓度检测下限</td>
+<td>动态确定(通常为30%分位数)</td>
+</tr>
+</tbody></table></div>
+<h2 id="四、模型使用与评估"><a href="#四、模型使用与评估" class="headerlink" title="四、模型使用与评估"></a>四、模型使用与评估</h2><h3 id="1-使用的模型：LightGBM回归模型"><a href="#1-使用的模型：LightGBM回归模型" class="headerlink" title="1. 使用的模型：LightGBM回归模型"></a>1. 使用的模型：LightGBM回归模型</h3><p><strong>模型特点</strong>：</p>
+<ul>
+<li>高效的梯度提升决策树(GBDT)实现</li>
+<li>适合中小型数据集</li>
+<li>天然支持特征重要性评估</li>
+<li>能处理特征交互关系</li>
+</ul>
+<p><strong>特征工程</strong>：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基础特征</span></span><br><span class="line">- 孕妇BMI</span><br><span class="line">- 检测孕周</span><br><span class="line"></span><br><span class="line"><span class="comment"># 高级特征</span></span><br><span class="line">- bmi_yunzhou_jiao_hu = BMI × 检测孕周 (交互项)</span><br><span class="line">- bmi_ping_fang = BMI² (非线性关系)</span><br><span class="line">- yunzhou_ping_fang = 检测孕周² (非线性关系)</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>目标变量</strong>：</p>
+<ul>
+<li><p><code>log_y = np.log1p(Y染色体浓度)</code></p>
+</li>
+<li><p>采用对数变换解决右偏分布问题</p>
+</li>
+<li><p>预测后通过<code>np.expm1()</code>转换回原始尺度</p>
+</li>
+</ul>
+<h3 id="2-模型参数配置"><a href="#2-模型参数配置" class="headerlink" title="2. 模型参数配置"></a>2. 模型参数配置</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">can_shu = {</span><br><span class="line">    <span class="string">'num_leaves'</span>: <span class="number">31</span>,       <span class="comment"># 控制树复杂度</span></span><br><span class="line">    <span class="string">'learning_rate'</span>: <span class="number">0.05</span>,  <span class="comment"># 学习率</span></span><br><span class="line">    <span class="string">'max_depth'</span>: <span class="number">6</span>,         <span class="comment"># 最大深度</span></span><br><span class="line">    <span class="string">'min_child_samples'</span>: <span class="number">20</span>,<span class="comment"># 叶子节点最小样本数</span></span><br><span class="line">    <span class="string">'subsample'</span>: <span class="number">0.8</span>,       <span class="comment"># 训练样本采样率</span></span><br><span class="line">    <span class="string">'colsample_bytree'</span>: <span class="number">0.8</span>,<span class="comment"># 特征采样率</span></span><br><span class="line">    <span class="string">'n_estimators'</span>: <span class="number">500</span>,    <span class="comment"># 树的数量</span></span><br><span class="line">    <span class="string">'early_stopping'</span>: <span class="number">50</span>    <span class="comment"># 早停机制</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="3-模型评估指标"><a href="#3-模型评估指标" class="headerlink" title="3. 模型评估指标"></a>3. 模型评估指标</h3><ul>
+<li><p><strong>RMSE (均方根误差)</strong>：预测Y染色体浓度与实际值的差异</p>
+</li>
+<li><p>值越小表示预测精度越高</p>
+</li>
+<li><p>公式：<code>√(Σ(实际值 - 预测值)²/n)</code></p>
+</li>
+<li><p><strong>R² (决定系数)</strong>：模型解释的方差比例</p>
+</li>
+<li><p>值越接近1表示模型拟合越好</p>
+</li>
+<li><p>公式：<code>1 - (残差平方和/总平方和)</code></p>
+</li>
+</ul>
+<p><strong>典型输出</strong>：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">模型训练完成: RMSE=0.0421, R²=0.8735</span><br></pre></td></tr></tbody></table></figure>
+
+<p>表示模型能解释约87%的Y染色体浓度变化，预测精度较高。</p>
+<h2 id="五、风险评估核心逻辑"><a href="#五、风险评估核心逻辑" class="headerlink" title="五、风险评估核心逻辑"></a>五、风险评估核心逻辑</h2><h3 id="1-蒙特卡洛仿真流程"><a href="#1-蒙特卡洛仿真流程" class="headerlink" title="1. 蒙特卡洛仿真流程"></a>1. 蒙特卡洛仿真流程</h3><ol>
+<li><strong>生成虚拟样本</strong>：</li>
+</ol>
+<ul>
+<li>对每个BMI组，通过KDE或均匀分布生成1000个虚拟BMI值</li>
+<li>遍历孕周区间(10-26周，步长0.25)</li>
+</ul>
+<ol start="2">
+<li><strong>预测Y染色体浓度</strong>：</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log_yu_ce = mo_xing.predict(X_yu_ce)</span><br><span class="line">yu_ce_zhi = np.expm1(log_yu_ce)  <span class="comment"># 转换回原始尺度</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="3">
+<li><strong>模拟检测误差</strong>：</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xiang_dui_cha = np.random.normal(<span class="number">1.0</span>, <span class="number">0.10</span>, size=<span class="built_in">len</span>(yu_ce_zhi))</span><br><span class="line">dai_cha_yu_ce = yu_ce_zhi * xiang_dui_cha  <span class="comment"># 添加10%随机误差</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="4">
+<li><strong>计算成功率</strong>：</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cheng_gong_lv[i] = np.mean(dai_cha_yu_ce &gt;= cheng_gong_yu_zhi)</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><code>cheng_gong_yu_zhi</code> = max(0.04, 实际值30%分位数)</li>
+</ul>
+<ol start="5">
+<li><strong>计算综合风险</strong>：</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 孕周风险权重（BMI调整）</span></span><br><span class="line"><span class="keyword">if</span> yunzhou &lt; <span class="number">10</span>: quan_zhong = <span class="number">100.0</span> * bmi_yin_zi</span><br><span class="line"><span class="keyword">elif</span> <span class="number">10</span> &lt;= yunzhou &lt; <span class="number">12</span>: quan_zhong = (<span class="number">20.0</span> - (yunzhou - <span class="number">10</span>) * <span class="number">8.0</span>) * bmi_yin_zi</span><br><span class="line"><span class="keyword">elif</span> <span class="number">12</span> &lt;= yunzhou &lt; <span class="number">14</span>: quan_zhong = (<span class="number">4.0</span> - (yunzhou - <span class="number">12</span>) * <span class="number">2.0</span>) * bmi_yin_zi</span><br><span class="line"><span class="keyword">elif</span> <span class="number">14</span> &lt;= yunzhou &lt; <span class="number">18</span>: quan_zhong = <span class="number">1.0</span> * bmi_yin_zi</span><br><span class="line"><span class="keyword">elif</span> <span class="number">18</span> &lt;= yunzhou &lt; <span class="number">22</span>: quan_zhong = (<span class="number">1.0</span> + (yunzhou - <span class="number">18</span>) * <span class="number">0.3</span>) * bmi_yin_zi</span><br><span class="line"><span class="keyword">else</span>: quan_zhong = (<span class="number">2.2</span> + (yunzhou - <span class="number">22</span>) * <span class="number">0.5</span>) * bmi_yin_zi</span><br><span class="line"></span><br><span class="line"><span class="comment"># 综合风险 = (1 - 成功率) × 风险权重</span></span><br><span class="line">feng_xian_zhi[i] = (<span class="number">1</span> - cheng_gong_lv[i]) * quan_zhong</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="2-BMI风险调整因子"><a href="#2-BMI风险调整因子" class="headerlink" title="2. BMI风险调整因子"></a>2. BMI风险调整因子</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>BMI范围</th>
+<th>风险调整因子</th>
+<th>临床意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;24</td>
+<td>1.0</td>
+<td>标准风险</td>
+</tr>
+<tr>
+<td>24-28</td>
+<td>1.05</td>
+<td>轻度增加</td>
+</tr>
+<tr>
+<td>28-32</td>
+<td>1.15</td>
+<td>中度增加</td>
+</tr>
+<tr>
+<td>≥32</td>
+<td>1.3</td>
+<td>显著增加</td>
+</tr>
+</tbody></table></div>
+<h3 id="3-最佳孕周选择策略"><a href="#3-最佳孕周选择策略" class="headerlink" title="3. 最佳孕周选择策略"></a>3. 最佳孕周选择策略</h3><ol>
+<li>首先找到风险值最低的孕周</li>
+<li>根据BMI设定优先窗口：</li>
+</ol>
+<ul>
+<li>极重度肥胖(BMI≥36)：优先11.5-16周</li>
+<li>重度肥胖(BMI≥32)：优先12.0-16.5周</li>
+<li>轻度肥胖(BMI≥28)：优先12.5-17周</li>
+<li>正常体重：优先13.0-18周</li>
+</ul>
+<ol start="3">
+<li>在优先窗口内选择风险最低的孕周</li>
+</ol>
+<h2 id="六、临床决策输出示例"><a href="#六、临床决策输出示例" class="headerlink" title="六、临床决策输出示例"></a>六、临床决策输出示例</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">============================================================</span><br><span class="line">临床决策建议</span><br><span class="line">============================================================</span><br><span class="line">BMI组                  样本量  最佳孕周  成功率    阈值      临床建议</span><br><span class="line">体重过轻(&lt;18.5)          45    13.5  98.7%  0.04  早期检测窗口</span><br><span class="line">正常体重(18.5-24)        210   14.2  96.3%  0.04  标准检测窗口</span><br><span class="line">超重(24-28)             128   13.8  94.1%  0.04  早期检测窗口</span><br><span class="line">轻度肥胖(28-32)         76    13.2  91.5%  0.05  早期检测窗口</span><br><span class="line">中度肥胖(32-36)         35    12.7  87.2%  0.06  早期检测窗口</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>解读</strong>：</p>
+<ul>
+<li>体重过轻孕妇：建议<strong>13.5周</strong>检测，成功率98.7%</li>
+<li>正常体重孕妇：建议<strong>14.2周</strong>检测，成功率96.3%</li>
+<li>肥胖孕妇：BMI越高，<strong>最佳孕周越早</strong>（中度肥胖仅12.7周）</li>
+<li>肥胖孕妇的<strong>检测阈值更高</strong>（中度肥胖0.06 vs 正常0.04），表明需要更高Y染色体浓度才能可靠检测</li>
+</ul>
+<h2 id="七、可视化输出"><a href="#七、可视化输出" class="headerlink" title="七、可视化输出"></a>七、可视化输出</h2><p>生成的图表包含：</p>
+<ol>
+<li><strong>双Y轴曲线</strong>：</li>
+</ol>
+<ul>
+<li>左Y轴：红色曲线表示<strong>综合风险值</strong></li>
+<li>右Y轴：蓝色虚线表示<strong>检测成功率</strong></li>
+</ul>
+<ol start="2">
+<li><strong>关键标记</strong>：</li>
+</ol>
+<ul>
+<li>金色标记：最佳检测孕周点</li>
+<li>灰色虚线：12周(临床最低要求)和14周(理想窗口起点)</li>
+</ul>
+<ol start="3">
+<li><strong>分组展示</strong>：每个BMI组一个子图，清晰展示不同BMI人群的差异</li>
+</ol>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/q2_fen_xi_tu.png?x-oss-process=image/watermark,type_d3F5LW1pY3JvaGVp,size_9,text_Q1JM,color_FFFFFF,shadow_50,t_80,g_se,x_10,y_10" alt="q2_fen_xi_tu" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<h2 id="八、技术亮点"><a href="#八、技术亮点" class="headerlink" title="八、技术亮点"></a>八、技术亮点</h2><ol>
+<li><strong>深度数据清洗</strong>：</li>
+</ol>
+<ul>
+<li>智能处理”11w+6”等特殊孕周格式</li>
+<li>严格的逻辑校验(孕周8-40周，BMI10-60)</li>
+<li>保留首次检测数据避免重复</li>
+</ul>
+<ol start="2">
+<li><strong>临床导向特征工程</strong>：</li>
+</ol>
+<ul>
+<li>BMI与孕周的交互项捕捉复杂关系</li>
+<li>多项式特征捕获非线性趋势</li>
+<li>对数变换处理偏态分布</li>
+</ul>
+<ol start="3">
+<li><strong>创新风险评估模型</strong>：</li>
+</ol>
+<ul>
+<li>蒙特卡洛仿真考虑检测误差</li>
+<li>动态阈值设定(30%分位数)</li>
+<li>BMI与孕周联合风险权重</li>
+</ul>
+<ol start="4">
+<li><strong>个性化临床建议</strong>：</li>
+</ol>
+<ul>
+<li>按BMI分组提供定制化建议</li>
+<li>明确区分”早期/标准/延迟”检测窗口</li>
+<li>量化成功率与风险值</li>
+</ul>
+<h2 id="九、应用场景"><a href="#九、应用场景" class="headerlink" title="九、应用场景"></a>九、应用场景</h2><ol>
+<li><strong>临床决策支持</strong>：帮助医生为不同BMI孕妇推荐最佳检测时间</li>
+<li><strong>实验室质控</strong>：识别低成功率孕周，优化检测流程</li>
+<li><strong>患者咨询</strong>：向肥胖孕妇解释为何需要更早检测</li>
+<li><strong>研究分析</strong>：探索BMI与胎儿DNA浓度的定量关系</li>
+</ol>
+<p>此工具通过数据驱动的方法，解决了NIPT检测中的关键临床问题，特别针对肥胖孕妇这一高风险群体提供了科学的检测时间建议，可显著提高检测成功率，减少假阴性风险。</p>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+    <div class="widget-header dis-select">
+      <span class="name">本文目录</span>
+      <button type="button" class="cap-action ui-interactive card-hover card-hover--spotlight" data-shell-action="toggle-toc" aria-label="Toggle table of contents" aria-pressed="false"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></span></button>
+    </div>
+  
+  <div class="widget-body"><ol class="toc ui-collection-adapter"><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%80%E3%80%81%E4%BB%A3%E7%A0%81%E6%A6%82%E8%BF%B0"><span class="toc-text">一、代码概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%8C%E3%80%81%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E6%B5%81%E7%A8%8B"><span class="toc-text">二、核心功能流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%89%E3%80%81%E5%85%B3%E9%94%AE%E5%AD%97%E6%AE%B5%E8%AF%B4%E6%98%8E"><span class="toc-text">三、关键字段说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%9B%9B%E3%80%81%E6%A8%A1%E5%9E%8B%E4%BD%BF%E7%94%A8%E4%B8%8E%E8%AF%84%E4%BC%B0"><span class="toc-text">四、模型使用与评估</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#1-%E4%BD%BF%E7%94%A8%E7%9A%84%E6%A8%A1%E5%9E%8B%EF%BC%9ALightGBM%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B"><span class="toc-text">1. 使用的模型：LightGBM回归模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#2-%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="toc-text">2. 模型参数配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#3-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-text">3. 模型评估指标</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%94%E3%80%81%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0%E6%A0%B8%E5%BF%83%E9%80%BB%E8%BE%91"><span class="toc-text">五、风险评估核心逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E4%BB%BF%E7%9C%9F%E6%B5%81%E7%A8%8B"><span class="toc-text">1. 蒙特卡洛仿真流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#2-BMI%E9%A3%8E%E9%99%A9%E8%B0%83%E6%95%B4%E5%9B%A0%E5%AD%90"><span class="toc-text">2. BMI风险调整因子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#3-%E6%9C%80%E4%BD%B3%E5%AD%95%E5%91%A8%E9%80%89%E6%8B%A9%E7%AD%96%E7%95%A5"><span class="toc-text">3. 最佳孕周选择策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%85%AD%E3%80%81%E4%B8%B4%E5%BA%8A%E5%86%B3%E7%AD%96%E8%BE%93%E5%87%BA%E7%A4%BA%E4%BE%8B"><span class="toc-text">六、临床决策输出示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%83%E3%80%81%E5%8F%AF%E8%A7%86%E5%8C%96%E8%BE%93%E5%87%BA"><span class="toc-text">七、可视化输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%85%AB%E3%80%81%E6%8A%80%E6%9C%AF%E4%BA%AE%E7%82%B9"><span class="toc-text">八、技术亮点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B9%9D%E3%80%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">九、应用场景</span></a></li></ol></div>
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/blog/%E5%BB%BA%E6%A8%A1-%E9%97%AE%E9%A2%982/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"建模-问题2","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

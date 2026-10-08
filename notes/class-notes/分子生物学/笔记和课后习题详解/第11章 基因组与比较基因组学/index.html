@@ -1,0 +1,676 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC11%E7%AB%A0%20%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B8%8E%E6%AF%94%E8%BE%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>第11章 基因组与比较基因组学 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="第11章 基因组与比较基因组学11.1 复习笔记【知识概览】基因组的相关概念 遗传图 人类基因组计划 物理图 转录图 全序列图 基因组与比较基因组学 Sanger DNA 序列测定 高通量 DNA 序列分析技术 基因组 DNA 大片段文库的构建 鸟枪法序列测定技术及其改良 Sanger 测序法的改进及新一代测序技术 新测序平台的应用。 单核苷酸多态性(SNP)研究 高通量测序在染色体构象俘获技术上" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第11章 基因组与比较基因组学" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC11%E7%AB%A0%20%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B8%8E%E6%AF%94%E8%BE%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="第11章 基因组与比较基因组学11.1 复习笔记【知识概览】基因组的相关概念 遗传图 人类基因组计划 物理图 转录图 全序列图 基因组与比较基因组学 Sanger DNA 序列测定 高通量 DNA 序列分析技术 基因组 DNA 大片段文库的构建 鸟枪法序列测定技术及其改良 Sanger 测序法的改进及新一代测序技术 新测序平台的应用。 单核苷酸多态性(SNP)研究 高通量测序在染色体构象俘获技术上" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-09-17T16:00:00.000Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.151Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="习题" data-stellar-page-meta="">
+<meta property="article:tag" content="分子生物学" data-stellar-page-meta="">
+<meta property="article:tag" content="考研真题" data-stellar-page-meta="">
+<meta property="article:tag" content="课程" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第11章 基因组与比较基因组学" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content=",,," data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC11%E7%AB%A0%20%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B8%8E%E6%AF%94%E8%BE%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"第11章 基因组与比较基因组学","description":"第11章 基因组与比较基因组学11.1 复习笔记【知识概览】基因组的相关概念\n遗传图\n人类基因组计划\n物理图\n转录图\n全序列图\n基因组与比较基因组学\nSanger DNA 序列测定\n高通量 DNA 序列分析技术\n基因组 DNA 大片段文库的构建\n鸟枪法序列测定技术及其改良\nSanger 测序法的改进及新一代测序技术\n新测序平台的应用。\n单核苷酸多态性(SNP)研究\n高通量测序在染色体构象俘获...","url":"https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC11%E7%AB%A0%20%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B8%8E%E6%AF%94%E8%BE%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC11%E7%AB%A0%20%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B8%8E%E6%AF%94%E8%BE%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6/">第11章 基因组与比较基因组学</a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-09-17T16:00:00.000Z">2026-09-18</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.151Z">2026-10-08</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第11章 基因组与比较基因组学</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="第11章-基因组与比较基因组学"><a href="#第11章-基因组与比较基因组学" class="headerlink" title="第11章 基因组与比较基因组学"></a>第11章 基因组与比较基因组学</h1><h2 id="11-1-复习笔记"><a href="#11-1-复习笔记" class="headerlink" title="11.1 复习笔记"></a>11.1 复习笔记</h2><h2 id="【知识概览】"><a href="#【知识概览】" class="headerlink" title="【知识概览】"></a>【知识概览】</h2><p>基因组的相关概念</p>
+<p>遗传图</p>
+<p>人类基因组计划</p>
+<p>物理图</p>
+<p>转录图</p>
+<p>全序列图</p>
+<p>基因组与比较基因组学</p>
+<p>Sanger DNA 序列测定</p>
+<p>高通量 DNA 序列分析技术</p>
+<p>基因组 DNA 大片段文库的构建</p>
+<p>鸟枪法序列测定技术及其改良</p>
+<p>Sanger 测序法的改进及新一代测序技术</p>
+<p>新测序平台的应用。</p>
+<p>单核苷酸多态性(SNP)研究</p>
+<p>高通量测序在染色体构象俘获技术上的应用</p>
+<p>核糖体图谱测序和多核糖体图谱测序</p>
+<p>其他代表性基因组</p>
+<p>比较基因组学研究</p>
+<h2 id="【重难点归纳】"><a href="#【重难点归纳】" class="headerlink" title="【重难点归纳】"></a>【重难点归纳】</h2><h2 id="一、人类基因组计划"><a href="#一、人类基因组计划" class="headerlink" title="一、人类基因组计划"></a>一、人类基因组计划</h2><h2 id="1-基因组的相关概念"><a href="#1-基因组的相关概念" class="headerlink" title="1. 基因组的相关概念"></a>1. 基因组的相关概念</h2><h2 id="1-基因组学"><a href="#1-基因组学" class="headerlink" title="(1)基因组学"></a>(1)基因组学</h2><p>基因组学是阐明整个基因组的结构与功能关系以及基因之间相互作用的科学，能够系统全面地研究生命现象。基因组学包括结构基因组学、功能基因组学和比较基因组学。</p>
+<h2 id="2-人类基因组计划"><a href="#2-人类基因组计划" class="headerlink" title="(2) 人类基因组计划"></a>(2) 人类基因组计划</h2><p>人类基因组计划(HGP)于20世纪90年代启动，计划测定人类单倍体染色体中约30亿个碱基对组成的核苷酸序列，从而绘制人类基因组图谱，并且辨识其载有的基因及其序列，达到破译人类遗传信息的最终目的。HGP绘制了四张图：遗传图、物理图、转录图和全序列图。</p>
+<h2 id="2-遗传图"><a href="#2-遗传图" class="headerlink" title="2. 遗传图"></a>2. 遗传图</h2><p>遗传图又称连锁图，是指基因或 DNA 标志在染色体上的相对位置与遗传距离。</p>
+<h2 id="1-遗传距离"><a href="#1-遗传距离" class="headerlink" title="(1)遗传距离"></a>(1)遗传距离</h2><p>遗传距离是指两个遗传位点之间的交换或重组频率厘摩(cM)，cM值越大，表示两者之间的距离越远。</p>
+<h2 id="2-遗传标记"><a href="#2-遗传标记" class="headerlink" title="(2) 遗传标记"></a>(2) 遗传标记</h2><p>①第一代 DNA 遗传标记是 RFLP(限制性片段长度多态性)和 RAPD(随机扩增多态 DNA)。</p>
+<p>②第二代 DNA 遗传标记是短的串联重复序列，包括小卫星 DNA、微卫星 DNA。</p>
+<p>③第三代 DNA 遗传标记是单核苷酸多态性(SNP)标记。SNP 是指在基因组水平上由单个核苷酸变异所造成的 DNA 序列多态性，包括单个碱基的缺失和插入，但以单个核苷酸的替换最常见。</p>
+<h2 id="3-意义"><a href="#3-意义" class="headerlink" title="(3) 意义"></a>(3) 意义</h2><p>遗传图的建立为人类疾病相关基因的分离克隆奠定了基础，有利于进行遗传性疾病的基因分析。</p>
+<h2 id="3-物理图"><a href="#3-物理图" class="headerlink" title="3. 物理图"></a>3. 物理图</h2><p>物理图是指以已知核苷酸序列的 DNA 片段(序列标签位点, STS)为”路标”, 以碱基对作为基本测量单位(图距)的基因组图, 是采用分子生物学方法直接将基因或 DNA 分子标记标定在基因组实际位置的图谱。</p>
+<h2 id="1-主要内容"><a href="#1-主要内容" class="headerlink" title="(1)主要内容"></a>(1)主要内容</h2><p>建立相互重叠连接的”相连 DNA 片段群”，并用 PCR 方法予以证实。</p>
+<h2 id="2-意义"><a href="#2-意义" class="headerlink" title="(2) 意义"></a>(2) 意义</h2><p>DNA 物理图是顺序测定的基础，也可理解为指导 DNA 测序的蓝图。</p>
+<h2 id="4-转录图"><a href="#4-转录图" class="headerlink" title="4. 转录图"></a>4. 转录图</h2><p>转录图(cDNA 图)又称表达序列标签(EST)图，是指以 EST 为标记，根据转录顺序的位置和距离绘制的图谱。即把细胞内染色体或 DNA 上所有基因定位在染色体或 DNA 基因组的不同位置上，用来表示 DNA 上哪些核苷酸序列可以编码蛋白质。</p>
+<h2 id="5-全序列图"><a href="#5-全序列图" class="headerlink" title="5. 全序列图"></a>5. 全序列图</h2><p>全序列图即整个人类基因组的 30 亿个核苷酸序列图，是分子水平上最高层次的、最详尽的物理图。它代表了全人类的基因组信息，是基因分析和诊断的参考源泉。</p>
+<h2 id="二、高通量-DNA-序列分析技术"><a href="#二、高通量-DNA-序列分析技术" class="headerlink" title="二、高通量 DNA 序列分析技术"></a>二、高通量 DNA 序列分析技术</h2><h2 id="1-Sanger-DNA-序列测定-第一代-DNA-测序技术"><a href="#1-Sanger-DNA-序列测定-第一代-DNA-测序技术" class="headerlink" title="1. Sanger DNA 序列测定(第一代 DNA 测序技术)"></a>1. Sanger DNA 序列测定(第一代 DNA 测序技术)</h2><p>Sanger 测序法能够测定 DNA 的一级结构，其基本原理如下：</p>
+<p>①利用 DNA 聚合酶，以待测单链 DNA 为模板，以 4 种 dNTP（其中一种含有放射性标记 $^{32}$ P）为底物，加入引物，建立四种相互独立的测序反应体系。在每个反应体系中分别加入一种不同的 ddNTP 作为链延伸终止剂。</p>
+<p>②在测序引物引导下，按照碱基配对原则， $^{32}$ P 随引物掺入到新合成链中。当 ddNTP 掺入时，由于 ddNTP 没有 3’—OH 基团，故不与下一个 dNTP 结合，从而使链延伸终止。ddNTP 在不同位置掺入就可产生一系列不同长度的新的 DNA 链。</p>
+<p>③用高分辨率的变性聚丙烯酰胺凝胶电泳分离四个体系中的反应产物，由于每一个体系中只加一种 ddNTP（如 ddATP），则该管中各种长度的 DNA 都终止于该种碱基（如 A）处，所以凝胶电泳中该泳道不同带的 DNA 3’末端都为同一种双脱氧碱基。</p>
+<p>④经放射自显影检测后，从凝胶底部到顶部按 $5’\rightarrow3’$ 方向读出新合成链的序列，由此推测待测模板链的序列。</p>
+<h2 id="2-基因组-DNA-大片段文库的构建"><a href="#2-基因组-DNA-大片段文库的构建" class="headerlink" title="2. 基因组 DNA 大片段文库的构建"></a>2. 基因组 DNA 大片段文库的构建</h2><p>BAC(细菌染色体克隆载体)是一种装载 DNA 大片段的克隆载体系统，用于人、动物和植物基因组文库的构建。该质粒主要包括 oriS、repE 和 parA、parB 等成分。BAC 具有插入片段较大、嵌合率低、遗传稳定性好、易于操作等优点。BAC 克隆系的构建是大规模 DNA 测序的基础。</p>
+<h2 id="3-鸟枪法序列测定技术及其改良"><a href="#3-鸟枪法序列测定技术及其改良" class="headerlink" title="3. 鸟枪法序列测定技术及其改良"></a>3. 鸟枪法序列测定技术及其改良</h2><p>全基因组鸟枪法测序是直接将整个基因组打成不同大小的 DNA 片段，构建 BAC 文库，然后对文库进行随机测序，最后运用生物信息学方法将测序片段拼接成全基因组序列。</p>
+<h2 id="1-构建完整全基因组序列的策略"><a href="#1-构建完整全基因组序列的策略" class="headerlink" title="(1) 构建完整全基因组序列的策略"></a>(1) 构建完整全基因组序列的策略</h2><p>①建立高度随机、插入片段大小为1~2kb左右的基因组文库。</p>
+<p>②高效、大规模的末端测序。对文库中每一个克隆进行两端测序。</p>
+<p>③序列集合，即开发新的序列拼装软件最大限度地排除错误的连锁匹配。</p>
+<p>④填补缺口。</p>
+<h2 id="2-鸟枪法的优点和局限"><a href="#2-鸟枪法的优点和局限" class="headerlink" title="(2)鸟枪法的优点和局限"></a>(2)鸟枪法的优点和局限</h2><p>优点：测序速度快、无需提供相关的遗传图谱和物理图谱。</p>
+<p>局限：拼接组装困难，高等真核生物基因组中重复序列的存在会导致组装错误。</p>
+<h2 id="4-Sanger-测序法的改进及新一代测序技术"><a href="#4-Sanger-测序法的改进及新一代测序技术" class="headerlink" title="4. Sanger 测序法的改进及新一代测序技术"></a>4. Sanger 测序法的改进及新一代测序技术</h2><p>由于 Sanger 测序成本高通量低，故发展了第二代和第三代测序技术。第二代测序技术的核心思想是边合成边测序，即通过捕捉新合成末端的标记来确定 DNA 的序列；第三代测序技术是单分子测序技术以及正在快速发展中的纳米孔测序技术。现有的技术平台主要包括 Illumina 分析仪、ABI SOLiD 系统、单分子测序系统以及新型建库技术 10X Genomics。</p>
+<h2 id="三、新测序平台的应用"><a href="#三、新测序平台的应用" class="headerlink" title="三、新测序平台的应用"></a>三、新测序平台的应用</h2><h2 id="1-单核苷酸多态性-SNP-研究"><a href="#1-单核苷酸多态性-SNP-研究" class="headerlink" title="1. 单核苷酸多态性(SNP)研究"></a>1. 单核苷酸多态性(SNP)研究</h2><p>具体参见第 2 章复习笔记部分中 SNP 的理论与应用。</p>
+<h2 id="2-高通量测序在染色体构象俘获技术上的应用"><a href="#2-高通量测序在染色体构象俘获技术上的应用" class="headerlink" title="2. 高通量测序在染色体构象俘获技术上的应用"></a>2. 高通量测序在染色体构象俘获技术上的应用</h2><p>染色体构象俘获技术能够对细胞中染色体的空间排布以及相互作用进行研究，与此相关的技术方法可以检测不同染色体上的基因位点或同一条染色体上间隔的基因位点间在三维结构上的相互作用。</p>
+<h2 id="3-核糖体图谱测序和多核糖体图谱测序"><a href="#3-核糖体图谱测序和多核糖体图谱测序" class="headerlink" title="3. 核糖体图谱测序和多核糖体图谱测序"></a>3. 核糖体图谱测序和多核糖体图谱测序</h2><p>两种测序方法都能有效地检测全基因组范围内的翻译效率。</p>
+<p>①核糖体图谱测序检测的是被核糖体保护而没有被 RNA 酶消化的 mRNA 片段，对这些片段建库进行测序即为核糖体测序。其优点是可以定位翻译起始位点和 mRNA 上核糖体的分布情况。</p>
+<p>②多核糖体图谱测序的制备是在蔗糖梯度中将细胞裂解并沉降，从而将不同数量核糖体的 mRNA 分子分离出来，以此来找到高效翻译状态的 mRNA。若要进行后续的翻译组研究还需将分离得到的多核糖体 RNA 添加接头后测序。多核糖体图谱测序检测的是富集多核糖体的 mRNA 序列，优点是测序的结果与蛋白质表达水平更具有相关性。</p>
+<h2 id="四、其他代表性基因组"><a href="#四、其他代表性基因组" class="headerlink" title="四、其他代表性基因组"></a>四、其他代表性基因组</h2><p>目前，随着测序技术的不断改善和测序成本的持续降低，基因组序列数据每年呈指数形式增长，近年来全世界每年能够完成近4万个物种的基因组测序，现在研究较为清楚的基因组有大肠杆菌基因组、酵母基因组以及拟南芥基因组等。</p>
+<h2 id="五、比较基因组学研究"><a href="#五、比较基因组学研究" class="headerlink" title="五、比较基因组学研究"></a>五、比较基因组学研究</h2><p>比较基因组学是指基于基因组图谱和测序技术基础上，对已知的基因和基因组结构进行比较，来了解基因功能、表达机理和生物进化的学科。比较基因组学通过模式生物基因组之间或模式生物基因组与人类基因组之间的比较与鉴定，为研究生物进化和预测新基因的功能提供依据。</p>
+<h2 id="11-2-课后习题详解"><a href="#11-2-课后习题详解" class="headerlink" title="11.2 课后习题详解"></a>11.2 课后习题详解</h2><h2 id="1-简述人类基因组计划的科学意义"><a href="#1-简述人类基因组计划的科学意义" class="headerlink" title="1. 简述人类基因组计划的科学意义"></a>1. 简述人类基因组计划的科学意义</h2><p>答：人类基因组计划(HGP)于20世纪90年代启动，计划测定人类单倍体染色体中约30亿个碱基对组成的核苷酸序列，从而绘制人类基因组图谱，并且辨识其载有的基因及其序列，达到破译人类遗传信息的最终目的。人类基因组计划具有重大的科学价值和意义。</p>
+<p>(1) 获得人类全部基因序列将有助于人类认识许多遗传疾病以及癌症等重大疾病的致病机理，为分子诊断、基因治疗等新方法提供理论依据。在不远的将来，可根据每个人 DNA 序列的差异，了解不同个体对疾病的抵抗能力，依照每个人的”基因特点”对症下药，这便是 21 世纪的医学，即个体化医学。更重要的是，通过基因治疗，不但可以预防当事人日后发生疾病，还可预防其后代发生同样的疾病。</p>
+<p>(2) 破译生命密码的人类基因组计划有助于人们对基因的表达调控有更深入的了解。人体内真正发挥作用的是蛋白质，人类功能基因组学便是应用基因组学的知识和工具去了解影响发育和整个生物体特定序列的表达谱。HGP 就如同生命周期表，它不再是从研究个别基因着手，而是力求在细胞水平解决基因组问题，同时研究所有基因及其表达产物，以建立对生命现象的整体认识。目前，研究者已着手通过 DNA 芯片等新技术对基因的表达展开全面研究，也通过蛋白质芯片的制作，标准化双向蛋白质凝胶电泳、色谱、质谱等分析手段对人类可能存在的几十万种蛋白质或多肽的特征和功能进行研究。在未来，蛋白质组的研究将导致药物开发方面的实质性突破，以使人类真正攻克癌症等顽疾。人类基因图谱对揭示人类发展、进化的历史具有重要意义。</p>
+<h2 id="2-请分析人类基因组计划的发展趋势"><a href="#2-请分析人类基因组计划的发展趋势" class="headerlink" title="2. 请分析人类基因组计划的发展趋势"></a>2. 请分析人类基因组计划的发展趋势</h2><p>答：人类基因组计划的发展趋势表现在以下几个方面。</p>
+<p>(1)随着人类基因组计划的完成，人类基因组中储藏的有关人类生存和繁衍的全部遗传信息被破译，它将帮助人类了解各种生理过程的内在机制，揭开癌症等严重危害人类健康的疾病的生理及分子机制，并最终为疾病的预防及治疗提供理论基础。</p>
+<p>(2)随着计算机分析处理能力的提高以及序列分析流程的不断改进和优化，”后基因组时代”已经到来，科研重心已从揭示基因组DNA的序列转移到在整体水平上对基因组功能的研究，从单一的基因或蛋白质的研究转向全面分析基因组功能的系统研究，诞生了功能基因组学和结构基因组学等新的学科，如蛋白质组学、蛋白质结构基因组学和RNA组学等。在以基因组学、蛋白组学和代谢组学为核心的各类”组学”研究基础上开展的系统生物学研究是现在研究的前沿方向，有助于解决诸如粮食短缺、环境污染、能源资源匮乏、生态平衡失调、生物物种消亡等一系列世界难题。</p>
+<p>(3)随着人类基因组研究的迅速进展，生物技术产业也获得了空前规模的发展，推动世界经济的发展。</p>
+<ol>
+<li>试述大肠杆菌基因组和真核生物基因组的主要区别。</li>
+</ol>
+<p>答：大肠杆菌基因组和真核生物基因组的主要区别如表11-1所示。</p>
+<p>表 11-1 大肠杆菌基因组和真核生物基因组的主要区别</p>
+<div class="md-table-scroll"><table><tbody><tr><td>比较方面</td><td>大肠杆菌基因组</td><td>真核生物基因组</td></tr><tr><td>基因组大小</td><td>基因组小,为双链环状分子</td><td>基因组庞大,远大于原核生物的基因组</td></tr><tr><td>染色体的组成和结构</td><td>裸露的DNA分子,不和蛋白质固定结合</td><td>染色体DNA和蛋白质稳定结合,基本结构单位是核小体</td></tr><tr><td>重复序列数量</td><td>结构简练,非编码重复序列极少</td><td>存在大量的重复序列,所占的基因组比率高,且含有90%以上的非编码序列</td></tr><tr><td>基因排列</td><td>功能相关的基因高度集中,形成操纵子</td><td>功能相关的基因多处于分散状态,被内含子隔开,呈断裂基因形式;同时存在大量的顺式作用元件,包括启动子、增强子、沉默子等,不存在操纵子</td></tr><tr><td>基因组复制</td><td>只有一个固定的复制起点,且向两个方向同时进行</td><td>有多个复制子,可同时起始复制,保证了复制的速度</td></tr><tr><td>基因组转录</td><td>转录翻译同时进行;转录产物为多顺反子mRNA,再翻译成多个蛋白质</td><td>存在断裂基因,包括外显子和内含子,转录和翻译在时间和空间上被分开;转录产物为单顺反子mRNA,一个顺反子对应一条肽链</td></tr><tr><td>其他区别</td><td>有重叠基因,即同一段DNA含有两种不同蛋白质的信息</td><td>DNA具有多态性;具有端粒结构,能保护线性DNA的完整复制、稳定染色体末端结构,防止染色体间末端连接和决定细胞的寿命</td></tr></tbody></table></div>
+
+<ol>
+<li>区分遗传图谱和物理图谱，试述这两项技术的优缺点。<br>答：遗传图谱描述的是基因的相对位置，物理图谱描述的是具体的碱基位置。</li>
+</ol>
+<h2 id="1-遗传图谱"><a href="#1-遗传图谱" class="headerlink" title="(1) 遗传图谱"></a>(1) 遗传图谱</h2><p>遗传图谱又称连锁图，是指基因或 DNA 标志在染色体上的相对位置与遗传距离。遗传距离是通过遗传连锁分析确定的，以基因或 DNA 片段的交换或重组频率厘摩（cM）来表示。遗传图的绘制是人类基因组研究的第一步，即以染色体上某一点为遗传标记，以与之相伴遗传的特征为对象，经连锁分析，将编码该特征的基因定位于染色体特定位置。</p>
+<h2 id="①优点"><a href="#①优点" class="headerlink" title="①优点"></a>①优点</h2><p>方法简单直接，可以大致了解各个基因或 DNA 片段之间的相对距离与方向，遗传图谱的建立为人类疾病相关基因的分离克隆奠定了基础。</p>
+<h2 id="②缺点"><a href="#②缺点" class="headerlink" title="②缺点"></a>②缺点</h2><p>分辨率有限、精确性不高。遗传图谱是根据等位基因在减数分裂中的重组频率来确定其在基因组中的顺序和相对距离，解像度(分辨率)低，大约只能达到100万碱基对(1Mb)的水平；人类只能研究少数减数分裂事件，不能获得大量子代个体；染色体上存在重组热点，影响临近区段遗传图谱的准确性。</p>
+<h2 id="2-物理图谱"><a href="#2-物理图谱" class="headerlink" title="(2) 物理图谱"></a>(2) 物理图谱</h2><p>物理图谱是指利用限制性内切酶将染色体切成片段，以已知核苷酸序列的 DNA 片段为”路标”，以碱基对(bp、kb、Mb)作为基本测量单位(图距)的基因组图谱。绘制基因组物理图谱最为有效的方法是序列标签位点技术(STS)，物理图谱的主要内容是建立相互重叠连接的”相连 DNA 片段群”，并用 PCR 方法予以证实。人类基因组最粗略的物理图谱是染色体的条带染色模式，最精细的图谱是 DNA 完整碱基序列模式。</p>
+<h2 id="①优点-1"><a href="#①优点-1" class="headerlink" title="①优点"></a>①优点</h2><p>物理图谱的构建不需要检测等位基因的差异，具有多型性或没有多型性的标记均能利用，可将标记直接定位在基因库中的某一位点，与遗传图谱相比，其分辨率更高，图谱标记更多。</p>
+<h2 id="②缺点-1"><a href="#②缺点-1" class="headerlink" title="②缺点"></a>②缺点</h2><p>限制酶作图只能应用于相对较小的 DNA 分子；荧光原位杂交作图难以操作，数据积累慢，一次实验定位的标记不超过 3～4 个；克隆重叠群构建费时费力；指纹作图会出现错误。</p>
+<h2 id="5-什么是-FISH-技术，如何利用它来构建基因组的物理图谱？"><a href="#5-什么是-FISH-技术，如何利用它来构建基因组的物理图谱？" class="headerlink" title="5. 什么是 FISH 技术，如何利用它来构建基因组的物理图谱？"></a>5. 什么是 FISH 技术，如何利用它来构建基因组的物理图谱？</h2><h2 id="答：-1-FISH-技术的定义"><a href="#答：-1-FISH-技术的定义" class="headerlink" title="答：(1)FISH 技术的定义"></a>答：(1)FISH 技术的定义</h2><p>FISH 技术即荧光原位杂交技术，是指根据核酸分子碱基互补配对的原则，用特殊的荧光素标记 DNA 探针，然后在染色体、细胞或组织切片标本上进行 DNA 杂交，来检测细胞内 DNA 或 RNA 特定序列是否存在的一种非放射性原位杂交方法。FISH 技术具有安全、快速、检测的信号强、杂交特异性高和可多重染色等特点。</p>
+<h2 id="2-利用-FISH-技术构建基因组物理图谱的方法"><a href="#2-利用-FISH-技术构建基因组物理图谱的方法" class="headerlink" title="(2) 利用 FISH 技术构建基因组物理图谱的方法"></a>(2) 利用 FISH 技术构建基因组物理图谱的方法</h2><p>用 FISH 技术可直接检测 DNA 在染色体上的位置，所确定的位置是基因在染色体上实际的物理位置。</p>
+<p>FISH 技术构建基因组物理图谱的实验流程为 FISH 样本制备、探针制备、探针标记、杂交、染色体显带、荧光显微镜检测。</p>
+<p>例如可选用分裂中期的细胞染色体作为标本。分裂中期的染色体处于高度浓缩状态，有可分辨的染色体带型及明显的着丝粒位置，通过测定原位杂交所显示的荧光信号所处的位置与染色体短臂末端的相对距离，经过比例换算，可将分子标记标定在连锁图上。</p>
+<h2 id="6-鸟枪测序法的技术原理是什么？"><a href="#6-鸟枪测序法的技术原理是什么？" class="headerlink" title="6. 鸟枪测序法的技术原理是什么？"></a>6. 鸟枪测序法的技术原理是什么？</h2><p>答：鸟枪测序法是一种分析大片段基因组 DNA 序列的策略，其技术原理是在获得一定的遗传及物理图谱信息的基础上，将基因组按染色体分开后，将它全部打乱，切成大小不同的片段，辅以一定数量的 10kb 的克隆和 BAC 克隆的末端测序，然后测定每个小片段序列，最终利用计算机对这些切片进行排序和组装，并确定它们在基因组中的正确位置。在对某基因组文库全部克隆片段进行末端序列测定过程中，未测到的碱基数（缺口）与已测定的总碱基数相关，并随着已测定碱基数的增加迅速减小，当随机测定的碱基数达到基因组大小的 5 倍时，基因组中未测定的碱基数仅占基因组总碱基数的 0.67%。</p>
+<h2 id="7-什么是蛋白质组学，什么是转录组学？简述这两个领域里最主要的研究手段"><a href="#7-什么是蛋白质组学，什么是转录组学？简述这两个领域里最主要的研究手段" class="headerlink" title="7. 什么是蛋白质组学，什么是转录组学？简述这两个领域里最主要的研究手段"></a>7. 什么是蛋白质组学，什么是转录组学？简述这两个领域里最主要的研究手段</h2><h2 id="答：-1-蛋白质组学"><a href="#答：-1-蛋白质组学" class="headerlink" title="答：(1)蛋白质组学"></a>答：(1)蛋白质组学</h2><h2 id="①蛋白质组学的概念"><a href="#①蛋白质组学的概念" class="headerlink" title="①蛋白质组学的概念"></a>①蛋白质组学的概念</h2><p>蛋白质组学源于蛋白质与基因组学两个词的组合，包括一种细胞乃至一种生物所表达的全部蛋白质。它是研究蛋白质组的科学，是对特定时间或特定环境条件下，细胞内完整表达状况的研究，即以细胞、组织或机体在特定情况下表达的蛋白质（即蛋白质组）为研究对象，分析细胞内动态变化的蛋白质组成、表达水平与修饰状态，了解蛋白质之间的相互关系与作用，并且在整体水平上研究蛋白质调控的活动规律，由此获得关于疾病发生、发展及细胞代谢等过程的整体认识。</p>
+<h2 id="②蛋白质组学最主要的研究手段"><a href="#②蛋白质组学最主要的研究手段" class="headerlink" title="②蛋白质组学最主要的研究手段"></a>②蛋白质组学最主要的研究手段</h2><p>a. 蛋白质质谱分析技术是一种将质谱仪用于研究蛋白质的技术，其原理是样品分子发</p>
+<p>生离子化后，根据离子间质荷比的差异来分离并确定样品分子量。</p>
+<p>b. 双向电泳技术是分离大量混合蛋白质组分的最有效方法，依赖于蛋白质的等电点和相对分子质量。在以两性电解质为介质的电泳体系中，不同等电点的蛋白质会聚集在介质上不同的区域从而被分离；在 SDS 凝胶电场中，不同相对分子质量的蛋白质将位于凝胶的不同区段而得到分离。</p>
+<h2 id="2-转录组学"><a href="#2-转录组学" class="headerlink" title="(2)转录组学"></a>(2)转录组学</h2><h2 id="①转录组学的概念"><a href="#①转录组学的概念" class="headerlink" title="①转录组学的概念"></a>①转录组学的概念</h2><p>转录组学是功能基因组学研究的重要组成部分，是从整体水平上研究生物细胞中转录组的发生和变化规律的科学，即它研究的是细胞中所有基因转录及转录调控规律。</p>
+<h2 id="②转录组学最主要的研究手段"><a href="#②转录组学最主要的研究手段" class="headerlink" title="②转录组学最主要的研究手段"></a>②转录组学最主要的研究手段</h2><p>a. 基于杂交技术的手段，主要是指芯片技术。将芯片与待研究的 cDNA 或其他样品杂交，经过计算机扫描和数据处理，便可以观察到成千上万个基因在不同组织或同一组织不同发育时期或不同生理条件下的表达情况。</p>
+<p>b. 基于测序的方法，包括基因表达系列分析(SAGE)、表达序列标签(EST)技术和大规模平行信号测序系统(MPSS)。</p>
+<h2 id="8-简述新一代测序各平台的优点和缺点及适用领域"><a href="#8-简述新一代测序各平台的优点和缺点及适用领域" class="headerlink" title="8. 简述新一代测序各平台的优点和缺点及适用领域"></a>8. 简述新一代测序各平台的优点和缺点及适用领域</h2><p>答：新一代测序各平台包括 Illumina 基因组分析仪、ABI SOLiD 和单分子测序等。这些平台的优点、缺点和适用领域如表 11-2 所示。</p>
+<p>表 11-2 新一代测序平台比较</p>
+<div class="md-table-scroll"><table><tbody><tr><td>平台</td><td>文库/模板准备</td><td>测序反应</td><td>读长/碱基</td><td>测序时间/天</td><td>测序通量/Gb</td><td>优点</td><td>缺点</td><td>生物学应用</td></tr><tr><td>IlluminaHiseq/Nova Seq</td><td>片段化桥连PCR</td><td>可逆末端终止</td><td>75或100</td><td>3,2</td><td>150,6000</td><td>目前运用最广的平台</td><td>样本倍增力低</td><td>重测序</td></tr><tr><td>SOLiD 3</td><td>片段化乳胶PCR</td><td>连接测序</td><td>50</td><td>7,14</td><td>120</td><td>双碱基编码提供内部纠错机制</td><td>测序时间长</td><td>重测序</td></tr><tr><td>Nanopore</td><td>单分子</td><td>电信号测序</td><td>1M</td><td>2</td><td>40G</td><td>读长最长测序</td><td>高错误率</td><td>全长转录组测序</td></tr><tr><td>PacificBiosciences</td><td>片段化单分子</td><td>DNA聚合酶测序</td><td>20k</td><td>&lt;1</td><td>1</td><td>读长最长</td><td>中等误率</td><td>全长转录组测序RNA-Seq</td></tr></tbody></table></div>
+
+<h2 id="9-新一代测序较之芯片技术优点有哪些"><a href="#9-新一代测序较之芯片技术优点有哪些" class="headerlink" title="9. 新一代测序较之芯片技术优点有哪些?"></a>9. 新一代测序较之芯片技术优点有哪些?</h2><p>答：新一代测序较之芯片技术的优点主要表现在高通量和低成本上。</p>
+<p>(1) 新一代测序通过对全基因组或者特定区域进行重测序能够发现个体间的诸如单核苷酸变体(SNV)以及结构变体(SV)等遗传差异。</p>
+<p>(2)通过对标签 SNP 进行 GWAS(全基因组相关分析)，能找出不与周围 SNP 连锁的位点。</p>
+<p>(3)通过对大量的体细胞突变进行系统性深度序列分析，能阐明疾病的发生机制。</p>
+<p>(4)能区分序列的边界以及高度相似的序列，对全基因组的覆盖率更敏感、更完整。</p>
+<p>(5)序列测定的高通量特性使人类能大规模鉴定各种顺式调节因子并研究其功能，探索</p>
+<p>生命现象的调节机制。</p>
+<p>(6)新一代测序具有更高的敏感性和精确度，能发现新的转录物和变异体，准确定位转录起始位点。</p>
+<p>(7) 新一代测序适合小 RNA 测序，可以鉴定 miRNA 并对靶 mRNA 进行分析。</p>
+<ol>
+<li>试述结合各种基因组学方法和已有数据还能进一步探索哪些生物学问题。</li>
+</ol>
+<p>答：(1)以全基因组测序为目标的结构基因组学，有助于人们在基因组学、蛋白质组学、分子细胞生物学以及生物体水平上探究生命现象，对疾病机理的阐明以及疾病的防治有重要应用意义。</p>
+<p>(2) 以基因功能鉴定为目标的功能基因组学，可根据同源性方法将人类基因组与模式生物基因组进行比较，有助于分析人类基因的功能，也有助于区别人类和其他生物的本质差异，进而探索遗传的奥秘。</p>
+<p>(3) 毒理基因组学能快速全面地检测出化合物和生物体相互作用后的基因表达方式，再通过生物信息学的方法对化合物的毒性进行定性分析，为传统毒理学检测筛选更多的生物学标志物，解释有毒物质的制毒机理，降低风险评价的不确定性。</p>
+<p>(4) 研究营养基因组的问题。营养基因组学主要在分子水平以及人群水平上研究膳食营养与基因间的交互作用及其对人类健康的影响；并将致力于建立个体基因组结构特征上的膳食干预方法和营养保健手段，提出更具个性化的营养策略，使营养研究的结果能够更有效地应用于疾病的预防，达到促进人类健康的目的。</p>
+<h2 id="11-3-名校考研真题详解"><a href="#11-3-名校考研真题详解" class="headerlink" title="11.3 名校考研真题详解"></a>11.3 名校考研真题详解</h2><h2 id="一、选择题"><a href="#一、选择题" class="headerlink" title="一、选择题"></a>一、选择题</h2><ol>
+<li>人类基因组的大小大约是( )。[河北大学2016研]<br>A. $3.0 \times 10^{9}bp$ B. $6.0 \times 10^{9}bp$ C. $3.0 \times 10^{6}bp$ D. $4.2 \times 10^{6}bp$</li>
+</ol>
+<p>【答案】A</p>
+<p>【解析】人类基因组含有约30亿个DNA碱基对。因此答案选A。</p>
+<ol>
+<li>EST(expressed sequence tags)序列本质上是( )。[南京大学2008研；电子科技大学2015研] A. 基因组 DNA B. cDNA 序列 C. mRNA 序列 D. 多肽序列</li>
+</ol>
+<p>【解析】EST(expressed sequence tags)的中文名称是表达序列标签，是通过对随机选择的cDNA克隆进行5’或3’端一次测序所获得的核苷酸序列，代表了完整基因的一小部分。来自某一组织的足够数量的ESTs可代表某种组织中基因的表达情况。因此答案选B。</p>
+<h2 id="二、填空题"><a href="#二、填空题" class="headerlink" title="二、填空题"></a>二、填空题</h2><ol>
+<li>目前商业上常用的 DNA 测序方式是由 Sanger 发明的____。[电子科技大学 2013 研]<br>【答案】双脱氧链终止法</li>
+</ol>
+<p>【解析】双脱氧链终止法主要用于 DNA 基因分析，它是现在应用最多的核酸测序技术（即第一代 DNA 测序技术），由 Sanger 等于 1977 年发明。</p>
+<ol>
+<li>DNA 的物理图谱是 DNA 分子的 ____ 片段的排列顺序。[电子科技大学 2009 研]</li>
+</ol>
+<p>【答案】限制性内切酶酶解</p>
+<p>【解析】人类基因组的物理图谱是指以已知核苷酸序列的 DNA 片段为”路标”，以碱基对作为基本测量单位(图距)的基因组图。限制性内切酶在 DNA 链上的切口是以特异序列为基础的，核苷酸序列不同的 DNA 经酶切后产生不同长度的 DNA 片段，由此而构成独特的酶切图谱。</p>
+<ol>
+<li>蛋白质组学研究某一物种、个体、器官、组织或细胞在特定条件、特定时间所表达的全部蛋白质图谱。通常采用____方法将蛋白质分离，然后采用____技术进行鉴定。[北京大学2008研]</li>
+</ol>
+<p>【答案】双向凝胶电泳；质谱</p>
+<h2 id="三、判断题"><a href="#三、判断题" class="headerlink" title="三、判断题"></a>三、判断题</h2><ol>
+<li>高等生物基因组中含有大量的不编码蛋白质的序列，因此基因组的大小与其进化程度并不一一对应。（）[浙江大学2010研]</li>
+</ol>
+<h2 id="【答案】对"><a href="#【答案】对" class="headerlink" title="【答案】对"></a>【答案】对</h2><p>【解析】蛋白质组比基因组更复杂，蛋白质组中存在的蛋白质数目远多于基因组中存在的基因数目，基因组的大小并不代表其进化程度。</p>
+<ol>
+<li>鸟枪法是一种检测单核苷酸多态性(SNP)的常用方法。( ) [中国科学院研究生院 2007 研]</li>
+</ol>
+<h2 id="【答案】错"><a href="#【答案】错" class="headerlink" title="【答案】错"></a>【答案】错</h2><p>【解析】鸟枪法是将目的 DNA 随机地处理成大小不同的片段，再将这些片段的序列连接起来的测序方法。SNP 是指在基因组水平上由单个核苷酸的变异所引起的 DNA 序列多态性。SNP 不再以 DNA 片段的长度变化作为检测手段，而直接以序列变异作为标记。</p>
+<h2 id="四、名词解释题"><a href="#四、名词解释题" class="headerlink" title="四、名词解释题"></a>四、名词解释题</h2><ol>
+<li>随机扩增多态性 DNA (randomly amplified polymorphic DNA, RAPD) [青岛大学 2016 研]</li>
+</ol>
+<p>答：随机扩增多态性 DNA (randomly amplified polymorphic DNA, RAPD) 是由美国人 Williams 和 Welsh 等于 1990 年利用 PCR 技术发展起来的一种 DNA 多态性标记。它利用随机引物对目的基因组 DNA 进行 PCR 扩增，扩增产物经电泳分离后显色，分析扩增产物 DNA 片段的多态性。RAPD 反映了基因组相应片段由于碱基发生缺失、插入、突变、重排等所引发的 DNA 多态性。随机扩增多态性 DNA 是第一代 DNA 遗传标记。</p>
+<h2 id="2-BLAST-电子科技大学-2016-研"><a href="#2-BLAST-电子科技大学-2016-研" class="headerlink" title="2. BLAST[电子科技大学 2016 研]"></a>2. BLAST[电子科技大学 2016 研]</h2><p>答：在生物信息学中，BLAST 英语全称是 Basic Local Alignment Search Tool，它是一个用来比对生物序列的一级结构（如不同蛋白质的氨基酸序列或不同基因的 DNA 序列）的算法。在一个已知包含若干序列的数据库中，BLAST 可以让研究者在其中寻找与其感兴趣的序列相同或类似的序列。BLAST 可被广泛用于分析生物信息。</p>
+<h2 id="3-功能基因组学-重庆大学-2015-研"><a href="#3-功能基因组学-重庆大学-2015-研" class="headerlink" title="3. 功能基因组学[重庆大学 2015 研]"></a>3. 功能基因组学[重庆大学 2015 研]</h2><p>答：功能基因组学又称为后基因组学，是利用结构基因组所提供的信息，分析和鉴定基因组中所有基因的功能的学科。功能基因组学发展和应用新的实验手段，通过在基因组或系统水平上全面分析基因的功能，使得生物学研究从对单一基因或蛋白质的研究转向对多个基因或蛋白质的系统研究。</p>
+<h2 id="4-SNP-武汉大学2013研"><a href="#4-SNP-武汉大学2013研" class="headerlink" title="4. SNP[武汉大学2013研]"></a>4. SNP[武汉大学2013研]</h2><p>答：SNP 全称为 Single Nucleotide Polymorphisms，中文名称是单核苷酸多态性，是指在基因组水平上由单个核苷酸的变异，包括转换、颠换、缺失和插入，形成的遗传标记，其数量很多，多态性丰富。SNP 是人类可遗传的变异中最常见的一种，占所有已知多态性的 90% 以上。SNP 所表现的多态性只涉及单个碱基的变异，这种变异一般由单个碱基的转换或颠换引起。</p>
+<h2 id="5-比较基因组学-电子科技大学-2012-研"><a href="#5-比较基因组学-电子科技大学-2012-研" class="headerlink" title="5. 比较基因组学[电子科技大学 2012 研]"></a>5. 比较基因组学[电子科技大学 2012 研]</h2><p>答：比较基因组学是指在基因组图谱和测序技术的基础上，对已知的基因和基因组结构进行比较，来了解基因功能、表达机理和生物进化的学科。比较基因组学利用模式生物基因组与人类基因组之间编码顺序上和结构上的同源性，克隆人类疾病基因，揭示基因功能和疾病分子机制，阐明物种进化关系及基因组的内在结构。其研究内容包括种间比较基因组学和种内比较基因组学。</p>
+<h2 id="6-蛋白质组-湖南农业大学-2011-研；河北大学-2012-研"><a href="#6-蛋白质组-湖南农业大学-2011-研；河北大学-2012-研" class="headerlink" title="6. 蛋白质组 [湖南农业大学 2011 研；河北大学 2012 研]"></a>6. 蛋白质组 [湖南农业大学 2011 研；河北大学 2012 研]</h2><p>答：蛋白质组是指一个细胞、一个组织或一个机体的基因所表达的全部蛋白质，是一个整体概念。蛋白质组随着组织、甚至环境状态的不同而改变。一个蛋白质组不是一个基因组的直接产物，蛋白质组中蛋白质的数目有时可以超过基因组的数目。蛋白质组的研究内容主要有两方面，一是结构蛋白质组学，二是功能蛋白质组学。</p>
+<h2 id="7-蛋白质组学-深圳大学2011研"><a href="#7-蛋白质组学-深圳大学2011研" class="headerlink" title="7. 蛋白质组学[深圳大学2011研]"></a>7. 蛋白质组学[深圳大学2011研]</h2><p>答：蛋白质组学是研究蛋白质组的科学，是对特定时间或特定环境条件下，细胞内完整表达状况的研究，是动态过程。蛋白质组学旨在阐明生物体内全部蛋白质的表达模式和功能模式，内容包括生物体全部蛋白质的表达水平、翻译与修饰方式、结构与功能、蛋白质与蛋白质的相互作用等，由此获得关于疾病发生、发展及细胞代谢等过程的整体认识。</p>
+<h2 id="8-物理图谱-东华大学2010研"><a href="#8-物理图谱-东华大学2010研" class="headerlink" title="8. 物理图谱[东华大学2010研]"></a>8. 物理图谱[东华大学2010研]</h2><p>答：物理图谱是指利用限制性内切酶将染色体切成片段，以已知核苷酸序列的 DNA 片段为”路标”，以碱基对(bp、kb、Mb)作为基本测量单位(图距)的基因组图谱。物理图谱不考虑两个标记共同遗传的概率等信息。</p>
+<h2 id="9-基因组学-genomies-南开大学2006研"><a href="#9-基因组学-genomies-南开大学2006研" class="headerlink" title="9. 基因组学(genomies)[南开大学2006研]"></a>9. 基因组学(genomies)[南开大学2006研]</h2><p>答：基因组学(genomies)是阐明整个基因组的结构、结构与功能关系以及基因之间相互作用，使人们能够系统全面地研究生命现象的科学。基因组学的研究主要包括以全基因组测序为目标的结构基因组学和以基因功能鉴定为目标的功能基因组学两方面的内容。</p>
+<h2 id="五、简答题"><a href="#五、简答题" class="headerlink" title="五、简答题"></a>五、简答题</h2><h2 id="1-简述-Illumina-二代高通量测序技术的原理和应用。-华南理工大学-2018-研"><a href="#1-简述-Illumina-二代高通量测序技术的原理和应用。-华南理工大学-2018-研" class="headerlink" title="1. 简述 Illumina 二代高通量测序技术的原理和应用。[华南理工大学 2018 研]"></a>1. 简述 Illumina 二代高通量测序技术的原理和应用。[华南理工大学 2018 研]</h2><h2 id="答：-1-Illumina-的原理"><a href="#答：-1-Illumina-的原理" class="headerlink" title="答：(1) Illumina 的原理"></a>答：(1) Illumina 的原理</h2><p>Illumina 最基本的技术原理是利用可逆终止的、荧光标记 dNTP 进行边合成边测序的工作。将基因组 DNA 的随机片段附着到固相基底上，这些 DNA 片段经过延伸和桥式 PCR 扩增后，在固相基底上形成数以亿计的簇，每个簇是具有数千份相同模板的单分子簇；然后利用带荧光基团的四种特殊脱氧核糖核苷酸，通过可逆性末端终止、边合成边测序技术对待测的模板 DNA 进行测序。</p>
+<h2 id="2-Illumina-的应用"><a href="#2-Illumina-的应用" class="headerlink" title="(2) Illumina 的应用"></a>(2) Illumina 的应用</h2><p>Illumina 可用于 DNA 水平和 RNA 水平上的测序工作。</p>
+<p>①DNA 水平：基因组 denovo、重测序；外显子捕获测序；DNA 甲基化测序；ChIP-Seq；16S、宏基因组。</p>
+<p>②RNA 水平：转录组测序、数字表达谱 DGE、small RNA、lncRNA 等。</p>
+<ol>
+<li>简述全基因组鸟枪测序 (whole genome shotgun sequencing) 的基本步骤。[中国科学院研究生院 2007、2008 研]</li>
+</ol>
+<p>相关试题：简述全基因组鸟枪测序法。[湖南农业大学2010研]</p>
+<p>答：全基因组鸟枪测序法是在获得一定的遗传及物理图谱信息的基础上，将基因组DNA分解成2kb左右的数百万个DNA小片段进行随机测序，并辅以一定数量的10kb的克隆和BAC克隆的末端测序，利用超级计算机进行整合及序列组装的测序方法。该方法是一种被广泛使用的DNA测序方法，比传统的测序法快速，但精确度较差。利用全基因组鸟枪法测序有以下几个步骤。</p>
+<p>(1) 建立高度随机、插入片段大小为 $1 \sim 2$ kb 左右的基因组文库。克隆数要达到一定数量，即经末端测序的克隆片段的碱基总数应达到基因组 5 倍以上。</p>
+<p>(2) 高效、大规模的末端测序。对文库中每一个克隆都要进行两端测序。</p>
+<p>(3) 序列集合。利用新的计算机软件，完善序列集合规则，最大限度地排除错误的连锁匹配。</p>
+<p>(4) 填补缺口。有两种待填补的缺口，一是没有相应模板 DNA 的物理缺口，二是有模板 DNA 但未测序的序列缺口。可以同时建立插入片段为 15 ~ 20kb 的 $\lambda$ 文库以备缺口填补。</p>
+<ol>
+<li>简述双脱氧链终止法进行 DNA 测序的原理和方法。[浙江大学 2008 研]</li>
+</ol>
+<p>相关试题：</p>
+<p>(1) 简述 Sanger 法基本原理及其要点。[湖南农业大学 2010 研]</p>
+<p>(2) Sanger 的双脱氧法测序的原理。[江苏大学 2011 研]</p>
+<p>答: (1) 双脱氧链终止法进行 DNA 测序的原理</p>
+<p>双脱氧核苷酸是人造分子，这种分子糖环的 2’ 和 3’ 碳上都没有羟基基团，而在天然分子中糖环的 3’ 碳上有一个羟基。将 2’，3’ - 双脱氧 ddNTP 掺入到新合成的 DNA 链中，由于掺入的 ddNTP 缺乏 3’—OH 基团，因此不能与下一位核苷酸反应形成磷酸二酯键，DNA 合成反应将终止。</p>
+<h2 id="2-双脱氧链终止法进行-DNA-测序的方法"><a href="#2-双脱氧链终止法进行-DNA-测序的方法" class="headerlink" title="(2) 双脱氧链终止法进行 DNA 测序的方法"></a>(2) 双脱氧链终止法进行 DNA 测序的方法</h2><p>①在 DNA 测序反应中，加入模板 DNA(即待测序样本)、特异性引物、四种 dNTP(带放射性标记)和 DNA 聚合酶分成四管。</p>
+<p>②在四管反应系统中分别按比例掺入四种双脱氧碱基，只要双脱氧碱基掺入链端，该链就停止延长，而链端掺入单脱氧碱基的片段可继续延长。</p>
+<p>③每管反应体系中会产生以共同引物为 $5’$ 端，以双脱氧碱基为 $3’$ 端的一系列长度不等的核酸片段。</p>
+<p>④反应终止后，分四个泳道进行电泳以分离长短不一的核酸片段(长度相邻者仅差一个碱基)，所以凝胶电泳中该泳道不同带的 DNA 3’末端都为同一种双脱氧碱基。放射自显影检测后，从凝胶底部到顶部按 5’→3’ 方向读出新合成链的序列，由此推测待测模板链的序列。</p>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+    <div class="widget-header dis-select">
+      <span class="name">本文目录</span>
+      <button type="button" class="cap-action ui-interactive card-hover card-hover--spotlight" data-shell-action="toggle-toc" aria-label="Toggle table of contents" aria-pressed="false"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></span></button>
+    </div>
+  
+  <div class="widget-body"><ol class="toc ui-collection-adapter"><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-1-%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-text">11.1 复习笔记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%9F%A5%E8%AF%86%E6%A6%82%E8%A7%88%E3%80%91"><span class="toc-text">【知识概览】</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E9%87%8D%E9%9A%BE%E7%82%B9%E5%BD%92%E7%BA%B3%E3%80%91"><span class="toc-text">【重难点归纳】</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%80%E3%80%81%E4%BA%BA%E7%B1%BB%E5%9F%BA%E5%9B%A0%E7%BB%84%E8%AE%A1%E5%88%92"><span class="toc-text">一、人类基因组计划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E5%9F%BA%E5%9B%A0%E7%BB%84%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="toc-text">1. 基因组的相关概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6"><span class="toc-text">(1)基因组学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E4%BA%BA%E7%B1%BB%E5%9F%BA%E5%9B%A0%E7%BB%84%E8%AE%A1%E5%88%92"><span class="toc-text">(2) 人类基因组计划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%81%97%E4%BC%A0%E5%9B%BE"><span class="toc-text">2. 遗传图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E9%81%97%E4%BC%A0%E8%B7%9D%E7%A6%BB"><span class="toc-text">(1)遗传距离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%81%97%E4%BC%A0%E6%A0%87%E8%AE%B0"><span class="toc-text">(2) 遗传标记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E6%84%8F%E4%B9%89"><span class="toc-text">(3) 意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E7%89%A9%E7%90%86%E5%9B%BE"><span class="toc-text">3. 物理图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9"><span class="toc-text">(1)主要内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%84%8F%E4%B9%89"><span class="toc-text">(2) 意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-%E8%BD%AC%E5%BD%95%E5%9B%BE"><span class="toc-text">4. 转录图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-%E5%85%A8%E5%BA%8F%E5%88%97%E5%9B%BE"><span class="toc-text">5. 全序列图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%8C%E3%80%81%E9%AB%98%E9%80%9A%E9%87%8F-DNA-%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E6%8A%80%E6%9C%AF"><span class="toc-text">二、高通量 DNA 序列分析技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-Sanger-DNA-%E5%BA%8F%E5%88%97%E6%B5%8B%E5%AE%9A-%E7%AC%AC%E4%B8%80%E4%BB%A3-DNA-%E6%B5%8B%E5%BA%8F%E6%8A%80%E6%9C%AF"><span class="toc-text">1. Sanger DNA 序列测定(第一代 DNA 测序技术)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%9F%BA%E5%9B%A0%E7%BB%84-DNA-%E5%A4%A7%E7%89%87%E6%AE%B5%E6%96%87%E5%BA%93%E7%9A%84%E6%9E%84%E5%BB%BA"><span class="toc-text">2. 基因组 DNA 大片段文库的构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E9%B8%9F%E6%9E%AA%E6%B3%95%E5%BA%8F%E5%88%97%E6%B5%8B%E5%AE%9A%E6%8A%80%E6%9C%AF%E5%8F%8A%E5%85%B6%E6%94%B9%E8%89%AF"><span class="toc-text">3. 鸟枪法序列测定技术及其改良</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E6%9E%84%E5%BB%BA%E5%AE%8C%E6%95%B4%E5%85%A8%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%BA%8F%E5%88%97%E7%9A%84%E7%AD%96%E7%95%A5"><span class="toc-text">(1) 构建完整全基因组序列的策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%B8%9F%E6%9E%AA%E6%B3%95%E7%9A%84%E4%BC%98%E7%82%B9%E5%92%8C%E5%B1%80%E9%99%90"><span class="toc-text">(2)鸟枪法的优点和局限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-Sanger-%E6%B5%8B%E5%BA%8F%E6%B3%95%E7%9A%84%E6%94%B9%E8%BF%9B%E5%8F%8A%E6%96%B0%E4%B8%80%E4%BB%A3%E6%B5%8B%E5%BA%8F%E6%8A%80%E6%9C%AF"><span class="toc-text">4. Sanger 测序法的改进及新一代测序技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%89%E3%80%81%E6%96%B0%E6%B5%8B%E5%BA%8F%E5%B9%B3%E5%8F%B0%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">三、新测序平台的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E5%8D%95%E6%A0%B8%E8%8B%B7%E9%85%B8%E5%A4%9A%E6%80%81%E6%80%A7-SNP-%E7%A0%94%E7%A9%B6"><span class="toc-text">1. 单核苷酸多态性(SNP)研究</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%AB%98%E9%80%9A%E9%87%8F%E6%B5%8B%E5%BA%8F%E5%9C%A8%E6%9F%93%E8%89%B2%E4%BD%93%E6%9E%84%E8%B1%A1%E4%BF%98%E8%8E%B7%E6%8A%80%E6%9C%AF%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">2. 高通量测序在染色体构象俘获技术上的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E6%A0%B8%E7%B3%96%E4%BD%93%E5%9B%BE%E8%B0%B1%E6%B5%8B%E5%BA%8F%E5%92%8C%E5%A4%9A%E6%A0%B8%E7%B3%96%E4%BD%93%E5%9B%BE%E8%B0%B1%E6%B5%8B%E5%BA%8F"><span class="toc-text">3. 核糖体图谱测序和多核糖体图谱测序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%9B%9B%E3%80%81%E5%85%B6%E4%BB%96%E4%BB%A3%E8%A1%A8%E6%80%A7%E5%9F%BA%E5%9B%A0%E7%BB%84"><span class="toc-text">四、其他代表性基因组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%94%E3%80%81%E6%AF%94%E8%BE%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E7%A0%94%E7%A9%B6"><span class="toc-text">五、比较基因组学研究</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-2-%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3"><span class="toc-text">11.2 课后习题详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E7%AE%80%E8%BF%B0%E4%BA%BA%E7%B1%BB%E5%9F%BA%E5%9B%A0%E7%BB%84%E8%AE%A1%E5%88%92%E7%9A%84%E7%A7%91%E5%AD%A6%E6%84%8F%E4%B9%89"><span class="toc-text">1. 简述人类基因组计划的科学意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E8%AF%B7%E5%88%86%E6%9E%90%E4%BA%BA%E7%B1%BB%E5%9F%BA%E5%9B%A0%E7%BB%84%E8%AE%A1%E5%88%92%E7%9A%84%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF"><span class="toc-text">2. 请分析人类基因组计划的发展趋势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E9%81%97%E4%BC%A0%E5%9B%BE%E8%B0%B1"><span class="toc-text">(1) 遗传图谱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A0%E4%BC%98%E7%82%B9"><span class="toc-text">①优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A1%E7%BC%BA%E7%82%B9"><span class="toc-text">②缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E7%89%A9%E7%90%86%E5%9B%BE%E8%B0%B1"><span class="toc-text">(2) 物理图谱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A0%E4%BC%98%E7%82%B9-1"><span class="toc-text">①优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A1%E7%BC%BA%E7%82%B9-1"><span class="toc-text">②缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-%E4%BB%80%E4%B9%88%E6%98%AF-FISH-%E6%8A%80%E6%9C%AF%EF%BC%8C%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E5%AE%83%E6%9D%A5%E6%9E%84%E5%BB%BA%E5%9F%BA%E5%9B%A0%E7%BB%84%E7%9A%84%E7%89%A9%E7%90%86%E5%9B%BE%E8%B0%B1%EF%BC%9F"><span class="toc-text">5. 什么是 FISH 技术，如何利用它来构建基因组的物理图谱？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AD%94%EF%BC%9A-1-FISH-%E6%8A%80%E6%9C%AF%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">答：(1)FISH 技术的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%88%A9%E7%94%A8-FISH-%E6%8A%80%E6%9C%AF%E6%9E%84%E5%BB%BA%E5%9F%BA%E5%9B%A0%E7%BB%84%E7%89%A9%E7%90%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">(2) 利用 FISH 技术构建基因组物理图谱的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#6-%E9%B8%9F%E6%9E%AA%E6%B5%8B%E5%BA%8F%E6%B3%95%E7%9A%84%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">6. 鸟枪测序法的技术原理是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#7-%E4%BB%80%E4%B9%88%E6%98%AF%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%EF%BC%9F%E7%AE%80%E8%BF%B0%E8%BF%99%E4%B8%A4%E4%B8%AA%E9%A2%86%E5%9F%9F%E9%87%8C%E6%9C%80%E4%B8%BB%E8%A6%81%E7%9A%84%E7%A0%94%E7%A9%B6%E6%89%8B%E6%AE%B5"><span class="toc-text">7. 什么是蛋白质组学，什么是转录组学？简述这两个领域里最主要的研究手段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AD%94%EF%BC%9A-1-%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6"><span class="toc-text">答：(1)蛋白质组学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A0%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">①蛋白质组学的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A1%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6%E6%9C%80%E4%B8%BB%E8%A6%81%E7%9A%84%E7%A0%94%E7%A9%B6%E6%89%8B%E6%AE%B5"><span class="toc-text">②蛋白质组学最主要的研究手段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6"><span class="toc-text">(2)转录组学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A0%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">①转录组学的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A1%E8%BD%AC%E5%BD%95%E7%BB%84%E5%AD%A6%E6%9C%80%E4%B8%BB%E8%A6%81%E7%9A%84%E7%A0%94%E7%A9%B6%E6%89%8B%E6%AE%B5"><span class="toc-text">②转录组学最主要的研究手段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#8-%E7%AE%80%E8%BF%B0%E6%96%B0%E4%B8%80%E4%BB%A3%E6%B5%8B%E5%BA%8F%E5%90%84%E5%B9%B3%E5%8F%B0%E7%9A%84%E4%BC%98%E7%82%B9%E5%92%8C%E7%BC%BA%E7%82%B9%E5%8F%8A%E9%80%82%E7%94%A8%E9%A2%86%E5%9F%9F"><span class="toc-text">8. 简述新一代测序各平台的优点和缺点及适用领域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#9-%E6%96%B0%E4%B8%80%E4%BB%A3%E6%B5%8B%E5%BA%8F%E8%BE%83%E4%B9%8B%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E4%BC%98%E7%82%B9%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-text">9. 新一代测序较之芯片技术优点有哪些?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-3-%E5%90%8D%E6%A0%A1%E8%80%83%E7%A0%94%E7%9C%9F%E9%A2%98%E8%AF%A6%E8%A7%A3"><span class="toc-text">11.3 名校考研真题详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%80%E3%80%81%E9%80%89%E6%8B%A9%E9%A2%98"><span class="toc-text">一、选择题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%8C%E3%80%81%E5%A1%AB%E7%A9%BA%E9%A2%98"><span class="toc-text">二、填空题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%89%E3%80%81%E5%88%A4%E6%96%AD%E9%A2%98"><span class="toc-text">三、判断题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91%E5%AF%B9"><span class="toc-text">【答案】对</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91%E9%94%99"><span class="toc-text">【答案】错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%9B%9B%E3%80%81%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A%E9%A2%98"><span class="toc-text">四、名词解释题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-BLAST-%E7%94%B5%E5%AD%90%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6-2016-%E7%A0%94"><span class="toc-text">2. BLAST[电子科技大学 2016 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E5%8A%9F%E8%83%BD%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6-%E9%87%8D%E5%BA%86%E5%A4%A7%E5%AD%A6-2015-%E7%A0%94"><span class="toc-text">3. 功能基因组学[重庆大学 2015 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-SNP-%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A62013%E7%A0%94"><span class="toc-text">4. SNP[武汉大学2013研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-%E6%AF%94%E8%BE%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6-%E7%94%B5%E5%AD%90%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6-2012-%E7%A0%94"><span class="toc-text">5. 比较基因组学[电子科技大学 2012 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#6-%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84-%E6%B9%96%E5%8D%97%E5%86%9C%E4%B8%9A%E5%A4%A7%E5%AD%A6-2011-%E7%A0%94%EF%BC%9B%E6%B2%B3%E5%8C%97%E5%A4%A7%E5%AD%A6-2012-%E7%A0%94"><span class="toc-text">6. 蛋白质组 [湖南农业大学 2011 研；河北大学 2012 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#7-%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%84%E5%AD%A6-%E6%B7%B1%E5%9C%B3%E5%A4%A7%E5%AD%A62011%E7%A0%94"><span class="toc-text">7. 蛋白质组学[深圳大学2011研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#8-%E7%89%A9%E7%90%86%E5%9B%BE%E8%B0%B1-%E4%B8%9C%E5%8D%8E%E5%A4%A7%E5%AD%A62010%E7%A0%94"><span class="toc-text">8. 物理图谱[东华大学2010研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#9-%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6-genomies-%E5%8D%97%E5%BC%80%E5%A4%A7%E5%AD%A62006%E7%A0%94"><span class="toc-text">9. 基因组学(genomies)[南开大学2006研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%94%E3%80%81%E7%AE%80%E7%AD%94%E9%A2%98"><span class="toc-text">五、简答题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E7%AE%80%E8%BF%B0-Illumina-%E4%BA%8C%E4%BB%A3%E9%AB%98%E9%80%9A%E9%87%8F%E6%B5%8B%E5%BA%8F%E6%8A%80%E6%9C%AF%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%BA%94%E7%94%A8%E3%80%82-%E5%8D%8E%E5%8D%97%E7%90%86%E5%B7%A5%E5%A4%A7%E5%AD%A6-2018-%E7%A0%94"><span class="toc-text">1. 简述 Illumina 二代高通量测序技术的原理和应用。[华南理工大学 2018 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AD%94%EF%BC%9A-1-Illumina-%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-text">答：(1) Illumina 的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-Illumina-%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">(2) Illumina 的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%8F%8C%E8%84%B1%E6%B0%A7%E9%93%BE%E7%BB%88%E6%AD%A2%E6%B3%95%E8%BF%9B%E8%A1%8C-DNA-%E6%B5%8B%E5%BA%8F%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">(2) 双脱氧链终止法进行 DNA 测序的方法</span></a></li></ol></div>
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC11%E7%AB%A0%20%E5%9F%BA%E5%9B%A0%E7%BB%84%E4%B8%8E%E6%AF%94%E8%BE%83%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第11章 基因组与比较基因组学","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

@@ -1,0 +1,19 @@
+/* 站点自定义字体（Stellar v2）
+ *
+ * 加载位置：_config.stellar.yml -> inject.head_end
+ *
+ * 注意：本文件放在 source/custom/css/ 而非 source/assets/，
+ * 因为 CI 会把 rlcao-notes 的 assets/ rsync 到 source/assets/，
+ * 两个目录同名会互相覆盖。
+ *
+ * HarmonyOS Sans SC（华为开源字体，2021-2025 Huawei Device Co., Ltd.）
+ * 来源：harmonyos-sans-webfont-splitted（cn-font-split 按 unicode-range 拆包，
+ * 浏览器只下载页面实际用到的中文字子集，避免全量字体 10MB+ 的体积）
+ *
+ * v1 的 style.font-family.body 声明了 "HarmonyOS_Regular" 但从未引入 @font-face，
+ * 浏览器实际一直回退到 LXGW WenKai；这里补上真正的字体声明。
+ */
+
+@import url('https://cdn.cnortles.top/npm/harmonyos-sans-webfont-splitted@1.2.1/dist/HarmonyOS_Sans/Regular.css');
+@import url('https://cdn.cnortles.top/npm/harmonyos-sans-webfont-splitted@1.2.1/dist/HarmonyOS_Sans/Medium.css');
+@import url('https://cdn.cnortles.top/npm/harmonyos-sans-webfont-splitted@1.2.1/dist/HarmonyOS_Sans/Bold.css');

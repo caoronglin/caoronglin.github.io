@@ -1,0 +1,612 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC19%E7%AB%A0%20IT%20%E7%AE%A1%E7%90%86%E6%A0%87%E5%87%86%E5%8C%96/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>第19章 IT 管理标准化 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="[!info] 现行教材 · 第 2 版本页为现行考试依据的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。  第19章 IT 管理标准化标准化伴随 IT 服务的发展与成熟，从 20 世纪 80 年代发展至今，过程中不断丰富并与其他相关标准相互融合。标准化是确保 IT 管理" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第19章 IT 管理标准化" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC19%E7%AB%A0%20IT%20%E7%AE%A1%E7%90%86%E6%A0%87%E5%87%86%E5%8C%96/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="[!info] 现行教材 · 第 2 版本页为现行考试依据的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。  第19章 IT 管理标准化标准化伴随 IT 服务的发展与成熟，从 20 世纪 80 年代发展至今，过程中不断丰富并与其他相关标准相互融合。标准化是确保 IT 管理" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/images/7db743b7cda4380d8c99b56c8a966139870b1d06a41e6607be81dcaeeaaef91d.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-09-17T16:00:00.000Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.355Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="信息系统管理工程师" data-stellar-page-meta="">
+<meta property="article:tag" content="第2版教程" data-stellar-page-meta="">
+<meta property="article:tag" content="考证" data-stellar-page-meta="">
+<meta property="article:tag" content="软考" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/images/7db743b7cda4380d8c99b56c8a966139870b1d06a41e6607be81dcaeeaaef91d.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第19章 IT 管理标准化" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content=",,," data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC19%E7%AB%A0%20IT%20%E7%AE%A1%E7%90%86%E6%A0%87%E5%87%86%E5%8C%96/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"第19章 IT 管理标准化","description":"\n[!info] 现行教材 · 第 2 版本页为现行考试依据的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。\n\n第19章 IT 管理标准化标准化伴随 IT 服务的发展与成熟，从 20 世纪 80 年代发展至今，过程中不断丰富并与其他相关标准相互融合。标准化是确保 IT...","url":"https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC19%E7%AB%A0%20IT%20%E7%AE%A1%E7%90%86%E6%A0%87%E5%87%86%E5%8C%96/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC19%E7%AB%A0%20IT%20%E7%AE%A1%E7%90%86%E6%A0%87%E5%87%86%E5%8C%96/">第19章 IT 管理标准化</a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-09-17T16:00:00.000Z">2026-09-18</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.355Z">2026-10-08</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第19章 IT 管理标准化</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><blockquote>
+<p>[!info] 现行教材 · 第 2 版<br>本页为<strong>现行考试依据</strong>的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。<br>考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。</p>
+</blockquote>
+<h1 id="第19章-IT-管理标准化"><a href="#第19章-IT-管理标准化" class="headerlink" title="第19章 IT 管理标准化"></a>第19章 IT 管理标准化</h1><p>标准化伴随 IT 服务的发展与成熟，从 20 世纪 80 年代发展至今，过程中不断丰富并与其他相关标准相互融合。标准化是确保 IT 管理实现专业化、规模化的前提，也是规范 IT 管理的重要手段。在 IT 管理标准化的过程中，标准化的核心作用是确定 IT 管理的范围和内容，规范组成 IT 管理各种要素，从而为 IT 管理的规划、实施和运行奠定基础。</p>
+<h2 id="19-1-标准化知识"><a href="#19-1-标准化知识" class="headerlink" title="19.1 标准化知识"></a>19.1 标准化知识</h2><p>标准是为了在一定范围内获得最佳秩序，经协商一致制定并由公认机构批准共同使用和重复使用的一种规范性文件，是标准化活动的核心产物。标准是研究制定法律、技术法规、政策和规划的依据，是组织从事生产经营活动、消费者选择产品和服务的主要依据。经过100多年的发展，标准化已成为全球政治和经济活动的主要组成部分，甚至是技术发达国家和跨国组织的发展战略。</p>
+<p>标准化是指为了在一定范围内获得最佳秩序，对现实问题或潜在问题制定共同使用和重复使用的条款的活动。标准化是一项活动，这种活动的结果是制定条款，制定条款的目的是在一定范围内获得最佳秩序，所制定的条款的特点是共同使用和重复使用，针对的对象是现实问题或潜在问题。再结合标准的定义可以得出：多项条款的组合构成了规范性文件，如果这些规范性文件符合相应的程序，经过公认机构的批准，就成为标准或特定文件（例如国家标准化指导性技术文件）。标准化活动涉及标准及其配套文件的编写过程、征求意见过程、审查发布过程和使用过程等。</p>
+<h2 id="19-1-1-标准体系"><a href="#19-1-1-标准体系" class="headerlink" title="19.1.1 标准体系"></a>19.1.1 标准体系</h2><p>标准体系是一种由标准组成的系统，为了实现系统的目标而必须具备一整套具有内在联系的、科学的有机整体。标准体系内部各标准按照一定的结构进行逻辑组合，而不是杂乱无序的堆积，它是一个概念系统，是由人为组织制定的标准形成的人工系统。</p>
+<h2 id="1-标准体系结构"><a href="#1-标准体系结构" class="headerlink" title="1. 标准体系结构"></a>1. 标准体系结构</h2><p>标准体系结构是指标准系统内各标准内在有机联系的表现方式。形成标准体系的主要方式有层次和并列两种。层次是指一种方向性的等级顺序，彼此存在着制约关系和隶属关系；并列是指同一层次内各类或各标准之间存在的方式和秩序，如 ITSS 体系主要通过并列方式列出各类和各项标准。</p>
+<h2 id="2-标准体系表"><a href="#2-标准体系表" class="headerlink" title="2. 标准体系表"></a>2. 标准体系表</h2><p>标准体系要用一定的形式表现出来，即标准体系表。如信息技术服务标准体系表是将信息技术服务范围内的标准，按照一定结构形式排列起来的图表，反映了信息技术服务标准体系的全貌，表明了标准之间的层次和并列关系。</p>
+<h2 id="19-1-2-标准的分类"><a href="#19-1-2-标准的分类" class="headerlink" title="19.1.2 标准的分类"></a>19.1.2 标准的分类</h2><p>标准的种类繁多，根据不同的目的或原则可以划分出不同的类别。主要划分方式包括按照适用范围划分、按照涉及的对象类型划分和按照标准的要求程度划分。</p>
+<h2 id="1-按照适用范围划分"><a href="#1-按照适用范围划分" class="headerlink" title="1. 按照适用范围划分"></a>1. 按照适用范围划分</h2><p>制定标准的重要基础是在一定的范围内充分反映各相关方的利益，并对不同意见进行协调与协商，从而取得一致。其中”一定的范围”和”各相关方”的范围可大可小，可以是全球的，也可以是某个区域或某个国家层次的，还可以是某个国家内行业部门（或协会）、地方或企业层次的。显而易见，不同层次标准化活动的协商一致程度是不同的，所制定标准的适用范围也是不同的。依据制定标准的参与者所涉及的范围，也就是标准的适用范围，可将标准分为国际标准、国家标准、行业标准、团体标准、地方标准、企业标准等。</p>
+<p>（1）国际标准（International Standard）。指国际标准化组织（ISO）、国际电工委员会（IEC）和国际电信联盟（ITU）以及ISO确认并公布的其他组织制定的标准。ISO确认并公布的其他国际组织主要包括国际计量局（BIPM）、国际原子能机构（IAEA）、国际海事组织（IMO）、联合国教科文组织（UNESCO）、世界卫生组织（WHO）等49个国际标准化机构。</p>
+<p>（2）国家标准（National Standard）。指由国家标准机构通过并公开发布的标准。对我国而言，国家标准是指由国务院标准化行政主管部门组织制定，并对全国国民经济和技术发展有重大意义，需要在全国范围内统一的标准。国家标准由全国专业标准化技术委员会负责起草、审查，并由国务院标准化行政主管部门统一审批、编号和发布。</p>
+<p>（3）行业标准（Branch Standard）。指在国家的某个行业通过并公开发布的标准。对我国而言，行业标准是对没有国家标准而又需要在全国某个行业范围内统一的技术要求所制定的标准。行业标准的发布部门由国务院标准化行政主管部门审查确定。凡批准可以发布行业标准的行业，由国务院标准化行政主管部门公布行业标准代号、行业标准的归口部门及其所管理的行业标准范围。</p>
+<p>（4）团体标准（Group Standard）。指由团体按照团体确立的标准制定程序自主制定发布，由社会自愿采用的标准。团体标准可以涵盖各个领域和行业，例如产品规范、质量管理体系、环境管理、职业安全健康、信息安全、社会责任等。制定团体标准的目的是满足特定团体的需求和目标，促进内部或特定群体的统一管理、交流和合作。</p>
+<p>（5）地方标准（Provincial Standard）。指在国家的某个地区通过并公开发布的标准。对我国而言，地方标准是针对没有国家标准和行业标准，而又需要在省、自治区、直辖市范围内统一的技术要求所制定的标准。地方标准由省、自治区、直辖市标准化行政主管部门统一编制计划、组织制定、审批、编号和发布。地方标准发布后，省、自治区、直辖市标准化行政主管部门应分别向国务院标准化行政主管部门和有关行政主管部门备案。</p>
+<p>（6）企业标准（Company Standard）。指针对企业范围内需要协调、统一的技术要求、管理要求和工作要求所制定的标准。企业标准是企业组织生产、经营活动的依据。企业标准虽然只在某企业适用，但在地域上可能会影响多个国家。</p>
+<h2 id="2-按照涉及的对象类型划分"><a href="#2-按照涉及的对象类型划分" class="headerlink" title="2. 按照涉及的对象类型划分"></a>2. 按照涉及的对象类型划分</h2><p>标准涉及的对象类型不同，反映到标准的文本上体现为其技术内容及表现形式的不同。主要包括术语标准、符号标准、试验标准、产品标准、过程标准、服务标准、接口标准等。</p>
+<p>（1）术语标准（Terminology Standard）。指与术语有关的标准，通常带有定义，有时还附有注、图、示例等。术语标准是按照专业范围划分的，包含某领域内某个专业的许多术语。术语标准的主要技术要素为术语条目，通常由条目编号、术语和定义几个部分内容组成，包含术语和相应定义的术语标准，其名称为《XXX 词汇》，如果仅有术语没有定义，则名称为《XXX 术语集》。</p>
+<p>（2）符号标准（Symbol Standard）。指与符号相关的标准。符号是表达一定事物或概念，具有简化特征的视觉形象。通常分为文字符号和图形符号。文字符号又可分为字母符号、数字符号、汉字符号或它们组合而成的符号；图形符号又可分为产品技术文件用、设备用、标志用图形符号。</p>
+<p>（3）试验标准（Testing Standard）。指与试验方法有关的标准，有时附有与测试有关的其他条款，例如抽样、统计方法的应用、试验步骤。试验标准是规定试验过程的标准。试验标准规定了标准化的试验方法。</p>
+<p>（4）产品标准（Product Standard）。指规定产品应满足的要求以确保其适用性的标准。按照ISO对标准化对象的划分，产品标准是相对于过程标准和服务标准而言的一大类标准，与产品有关的标准都可以划入这一类别。产品标准可分为不同类别的标准，例如尺寸标准、材料标准等。</p>
+<p>（5）过程标准（Process Standard）。指规定过程应满足的要求以确保其适用性的标准。按照ISO对标准对象的划分，过程标准是相对于产品标准和服务标准而言的一大类标准，与过程有关的标准都可以划入这一类别。</p>
+<p>（6）服务标准（Service Standard）。指规定服务应满足的要求以确保其适用性的标准。按照ISO对标准化对象的划分，服务标准是相对于产品标准和过程标准而言的一大类标准，与服务相关的标准都可以划入这一类别。</p>
+<p>（7）接口标准（Interface Standard）。指规定产品或系统在其互连部位与兼容性有关的要求的标准。从上述定义可看出，接口标准针对的是一个产品与其他产品连接使用时，其相互连接的界面的标准化问题。</p>
+<h2 id="3-按照标准的要求程度划分"><a href="#3-按照标准的要求程度划分" class="headerlink" title="3. 按照标准的要求程度划分"></a>3. 按照标准的要求程度划分</h2><p>按照标准的要求程度不同，可划分为规范、规程、指南等。</p>
+<p>（1）规范（Specification）。指规定产品、过程或服务需要满足的要求的文件。几乎所有的标准化对象都可以成为”规范”的对象，无论是产品、过程还是服务，或者是其他更加具体的</p>
+<p>标准化对象。</p>
+<p>（2）规程（Code of Practice）。指为设备、构件或产品的设计、制造、安装、维护或使用而推荐惯例或程序的文件。规程所针对的标准化对象是设备、构件或产品。</p>
+<p>（3）指南（Guideline）。指给出某主题的一般性、原则性、方向性的信息、指导或建议的文件。指南的标准化对象较广泛，但具体到每一个特定的指南，其标准化对象则集中到某一主题的特定方面，这些特定方面是有共性的，即一般性、原则性或方向性的内容。</p>
+<h2 id="19-1-3-标准制定"><a href="#19-1-3-标准制定" class="headerlink" title="19.1.3 标准制定"></a>19.1.3 标准制定</h2><p>国家标准的制定有一套正常程序，分为预阶段、立项阶段、起草阶段、征求意见阶段、审查阶段、批准阶段、出版阶段、复审阶段以及废止阶段，如表 19-1 和图 19-1 所示。其他类型的标准制定过程，大多数情况下会参考国家标准的制定过程方法。</p>
+<p>表 19-1 国家标准制定阶段划分</p>
+<div class="md-table-scroll"><table><tbody><tr><td>阶段代码</td><td>阶段名称</td><td>阶段任务</td><td>阶段成果</td></tr><tr><td>00</td><td>预阶段</td><td>提出新工作项目建议</td><td>PWI</td></tr><tr><td>10</td><td>立项阶段</td><td>提出新工作项目</td><td>NP</td></tr><tr><td>20</td><td>起草阶段</td><td>提出标准草案征求意见稿</td><td>WD</td></tr><tr><td>30</td><td>征求意见阶段</td><td>提出标准草案征求意见稿</td><td>CD</td></tr><tr><td>40</td><td>审查阶段</td><td>提出标准草案送审稿</td><td>DS</td></tr><tr><td>50</td><td>批准阶段</td><td>提出标准出版稿</td><td>FDS</td></tr><tr><td>60</td><td>出版阶段</td><td>提出标准出版物</td><td>GB, GB/T, GB/Z</td></tr><tr><td>90</td><td>复审阶段</td><td>对实施周期达5年的标准进行复审</td><td>继续有效/修改/修订/废止</td></tr><tr><td>95</td><td>废止阶段</td><td></td><td>废止</td></tr></tbody></table></div>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/7db743b7cda4380d8c99b56c8a966139870b1d06a41e6607be81dcaeeaaef91d.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图19-1 标准制定流程图</p>
+<h2 id="19-2-主要标准"><a href="#19-2-主要标准" class="headerlink" title="19.2 主要标准"></a>19.2 主要标准</h2><p>国内外发布了较多的信息系统与软件工程、新一代信息技术以及信息技术服务相关的标准规范，有关标准为信息系统相关活动提供了最佳实践、规范要求等内容，相关信息系统活动需要根据活动的内容、预计达成的目标和技术使用情况等，遵循有关标准的规定和要求，从而确保有关活动的有效性和规范性等。</p>
+<h2 id="19-2-1-系统与软件工程标准"><a href="#19-2-1-系统与软件工程标准" class="headerlink" title="19.2.1 系统与软件工程标准"></a>19.2.1 系统与软件工程标准</h2><p>系统与软件工程相关标准主要分为基础标准、生存周期管理标准以及质量与测试标准。各标准关注的方向和侧重点不同，需要系统化融合应用。</p>
+<h2 id="1-基础标准"><a href="#1-基础标准" class="headerlink" title="1. 基础标准"></a>1. 基础标准</h2><p>基础标准方面，主要包含GB/T11457《信息技术软件工程术语》、GB/Z31102《软件工程软件工程知识体系指南》等标准。</p>
+<p>（1）GB/T 11457《信息技术 软件工程术语》标准给出了 1859 个软件工程领域的中文术语，以及每个中文术语对应的英文词汇，并对每个术语给出相应的定义。</p>
+<p>（2）GB/Z 31102《软件工程 软件工程知识体系指南》作为指导性技术文件描述了软件工程学科的边界范围，按主题提供了访问支持该学科的文献的途径。制定软件工程知识体系（SWEBOK）指南有5个目标：①促进业界对软件工程看法趋于一致；②阐明软件工程的地位，并设定软件工程与计算机科学、项目管理、计算机工程和数学等其他学科之间的界线；③描述软件工程学科的内容；④提供使用软件工程知识体系的主题；⑤为课程制定、个人认证及特许资料提供依据。</p>
+<h2 id="2-生存周期管理标准"><a href="#2-生存周期管理标准" class="headerlink" title="2. 生存周期管理标准"></a>2. 生存周期管理标准</h2><p>生存周期管理标准方面，主要包含GB/T8566《信息技术软件生存周期过程》、GB/T22032《系统与软件工程系统生存周期过程》等标准。</p>
+<p>（1）GB/T8566《信息技术软件生存周期过程》为软件生存周期过程建立了一个公共框架，可供软件工业界使用。包括在含有软件的系统、独立软件产品和软件服务的获取期间以及在软件产品的供应、开发、运行和维护期间需应用的过程、活动和任务。此外，该标准还规定了用来定义、控制和改进软件生存周期的过程。</p>
+<p>《信息技术 软件生存周期过程》适用于系统和软件产品以及服务的获取，还适用于软件产品和固件的软件部分的供应、开发、操作和维护，可在一个组织的内部或外部实施。适用于供需双方，如供需双方来自同一组织，同样适用；适用于从一项非正式协定直到法律约束的合同的各种情况。适用于系统和软件产品即服务的需方、软件产品的供方、开发方、操作方、维护方、管理方、质量保证管理者和用户。该标准可由单方作为自我改进工作使用。同时，不阻止现货软件的供方或者开发方使用该标准。</p>
+<p>（2）GB/T 22032《系统与软件工程 系统生存周期过程》为描述人工系统的生存周期建立了一个通用框架，从工程的角度定义了一组过程及相关的术语，该标准定义了软件生存周期过程。这些过程可以应用于系统结构的各个层次。在整个生存周期中，被选定的过程集合可应用于管理、运行系统生存周期的各个阶段。这是通过所有与系统有关的各方参与，以实现顾客满意为最终目标来完成的。该标准还提供了一些过程，支持用于组织或项目中生存周期过程的定义、控制和改进。当获取和供应系统时，组织和项目可使用这些生存周期过程。</p>
+<p>《系统与软件工程 系统生存周期过程》涉及一个或多个可由以下元素配置的人工系统：硬件、软件、数据、人员、过程（例如给用户提供服务的过程）、规程（例如操作指南）、设施、物资和自然存在的实体。当系统元素是软件时，ISO/IEC/IEEE 12207：2015 可以用于实现此系统元素。两个标准互相协调，可以在单个项目或单个组织中同时使用。</p>
+<h2 id="3-质量与测试标准"><a href="#3-质量与测试标准" class="headerlink" title="3. 质量与测试标准"></a>3. 质量与测试标准</h2><p>质量与测试标准方面，主要包含GB/T25000《系统与软件工程系统与软件质量要求和评价(SQuaRE)》等。</p>
+<p>《系统与软件工程 系统与软件质量要求和评价（SQuaRE）》分为多个部分，各部分内容及相应的适用范围如表 19-2 所示。</p>
+<p>表 19-2 GB/T 25000 标准各部分内容</p>
+<div class="md-table-scroll"><table><tbody><tr><td>标准号</td><td>各部分名称</td><td>主要内容</td><td>适用范围</td></tr><tr><td>GB/T25000.1</td><td>第1部分:SQuaRE指南</td><td>该部分为GB/T 25000整体标准提供使用指南。该部分旨在为GB/T 25000标准的内容、公共参考模型和定义以及各部分间的关系提供一个全面说明,允许用户根据其使用目的应用该部分</td><td>标准适用但不限于系统和软件产品的开发方、需方和独立的评价方,特别是那些负责定义系统和软件质量需求,及系统和软件产品评价的人员</td></tr><tr><td>GB/T25000.2</td><td>第2部分:计划与管理</td><td>该部分通过提供技术、工具、经验和管理技能,为负责执行和管理系统与软件产品质量需求规约和评价活动的组织提供要求和建议</td><td>该部分适用于预期用户执行:1管理用于需求规约和评价执行的技术;2明确系统与软件产品质量要求;3支持系统与软件产品质量要求;4管理系统与软件开发组织;5与质量保证职能相关的事项</td></tr><tr><td>GB/T25000.10</td><td>第10部分:系统与软件质量模型</td><td>该部分定义了:1使用质量模型,该模型由5个特性组成,每个特性又可进一步细分为一些子特性,这些特性关系到产品在特定的使用周境中使用时的交互结果;2产品质量模型,该模型由8个特性组成,每个特性又可进一步细分为一些子特性,这些特性关系到软件的静态性质和计算机系统的动态性质</td><td>使用质量模型可以应用于整个人机系统,既包括使用中的计算机系统,也包括使用中的软件产品。产品质量模型,模型既可以应用于计算机系统,也可以应用于软件产品</td></tr><tr><td>GB/T25000.12</td><td>第12部分:数据质量模型</td><td>该部分针对计算机系统中以某种结构化形式保存的数据,定义了通用的数据质量模型。关注于作为计算机系统一个组成部分的数据的质量,并定义由人和系统使用的目标数据的质量特性</td><td>数据与数据设计之间的复合型包含在该部分的范围内</td></tr><tr><td>GB/T25000.20</td><td>第20部分:质量测量框架</td><td>该部分规定了开展质量测量工作的框架</td><td>该部分可用于设计、识别、评价和执行系统与软件产品质量、使用质量和数据质量的测量模型。该参考模型可被开发方、需方、质量保证人员以及独立评价方,尤其是负责规定和评价信息通信技术系统质量的人员所使用</td></tr><tr><td>GB/T25000.21</td><td>第21部分:质量测度元素</td><td>该部分旨在定义和/或设计质量测度元素(QME)的初始集,可将其应用在软件产品的整个生存周期,以实现系统和软件质量要求与评价(SQuaRE)标准的目的。还给出了设计QME或对已有QME设计进行验证的规划集</td><td>该部分旨在供(但不限于)开发方、需方、产品的独立评价方使用,特别是面向负责定义产品质量需求和产品评价的责任人。当定义拟用来获取质量测度(例如GB/T 25000.22、GB/T25000.23、GB/T 25000.24中所规定的质量测度)相关的QME时,该部分是适用的</td></tr><tr><td>GB/T25000.22</td><td>第22部分:使用质量测量</td><td>该部分提出的使用质量测度主要在基于真实使用效果的系统与软件产品的质量保证和管理中使用。测量结果的主要用户是软件与系统开发、获取、评价或维护的管理人员</td><td>该部分针对GB/T 25000.10所定义之特性的使用质量测度进行了定义,旨在与GB/T 25000.10搭配使用。该部分能与GB/T 25000.30、GB/T 25000.40和GB/T 25000.41等标准结合使用,并能在产品或系统质量方面更普遍地满足用户需要</td></tr><tr><td>GB/T25000.23</td><td>第23部分:系统与软件产品质量测量</td><td>该部分基于GB/T 25000.10定义的特性和子特性,规定了用于量化评价系统与软件产品质量的测度</td><td>该部分定义的质量测度需要与GB/T 25000.10协同使用,并可以联合系统与软件质量要求和评价(SQuaRE)系列国际标准的质量需求分部(ISO/IEC 2503n)及评价分部(ISO/IEC 2504n),以便更广泛地满足用户对于软件产品和系统质量需求的定义与评价</td></tr><tr><td>GB/T25000.24</td><td>第24部分:数据质量测量</td><td>该部分包含:1每一个特性的数据质量测度的基本集合;2在数据生存周期中应用了质量测度的目标实体的基本集合;3对如何应用数据质量测度的解释;4指导组织定义自己的针对数据质量需求和评价的测度</td><td>该部分可以应用到用于任何种类应用的计算机系统中的、保持结构化格式的任何种类的数据</td></tr><tr><td>GB/T25000.30</td><td>第30部分:质量需求框架</td><td>该部分为系统、软件产品及数据提供了质量需求的框架,包括质量需求的概念及抽取、定义和管控它们的过程和方法</td><td>GB/T 25000标准中部分引用的文件,其最新版本(包括所有的修改单)适用于该文件</td></tr><tr><td>GB/T25000.40</td><td>第40部分:评价过程</td><td>该部分包含软件产品质量评价的要求和建议,并阐明了一般概念。它为评价软件产品质量提供了一个过程描述,并为该过程的应用明确了要求。该部分建立了评价参考模型与SQuaRE文档之间的关系,也说明了在评价过程的每个活动应如何对应使用SQuaRE文档</td><td>该部分主要适合于软件产品的开发方、需方以及独立评价方。评价过程可用于不同的目的和方法。该过程用于预开发软件、商业现货软件或定制软件的质量评价,也可用于开发过程期间或开发之后。该部分不用于软件产品其他方面(如功能性需求、过程需求、业务需求等)的评价</td></tr><tr><td>GB/T25000.41</td><td>第41部分:开发方、需方和独立评价方评价指南</td><td>该部分提供了软件产品质量评价的要求、建议和指南。该部分提供了对软件产品质量评价的过程描述,并从开发方、需方和独立评价方的视角陈述了应用评价过程的具体要求</td><td>该部分不限于任何特定的应用领域,可用于任何类型软件产品的质量评价方。评价过程可用于不同的目的和方法,也可用于预开发软件、商业现货软件或定制软件的软件产品质量评价,并可用于开发过程期间或开发之后。该部分旨在供负责软件产品质量评价的人员使用,并适用于产品的开发方、需方和独立评价方。该部分不适用于软件产品其他方面(如功能性需求、过程需求、业务需求等)的评价</td></tr><tr><td>GB/T25000.45</td><td>第45部分:易恢复性的评价模块</td><td>该部分提供了软件产品易恢复性质量评价的评价方法、过程、测度和结果说明。采用干扰注入方法和基于常见类别的操作故障和事件的干扰列表来评价承受力的质量测度。应用基于对每种干扰定义一组问题集,通过评估系统在没有人为干预的情况下检测、分析和解决干扰的程度,来评价自主恢复指数的质量测度</td><td>适用于软件产品(包括中间工作产品和最终产品)、支持单个或多个并发用户的交易系统的易恢复性质量评价。该部分旨在供负责软件产品质量评价的人员使用,并适用于产品的开发方、需方(用户)和独立评价方</td></tr><tr><td>GB/T25000.51</td><td>第51部分:就绪可用软件产品(RUSP)的质量要求和测试细则</td><td>该部分确立了就绪可用软件产品(RUSP)的质量要求</td><td>用于测试RUSP的包含测试计划、测试说明和测试结果等的测试文档集要求</td></tr><tr><td>GB/T25000.62</td><td>易用性测试报告行业通用格式(CIF)</td><td>该部分规范了用户测试过程中获取的信息类型。主要的可变因素是综合统计数据、任务描述、测试环境以及为规范研究发现而选择的特别变量</td><td>该部分适用于:1供方组织易用性专业人员编写供顾客组织使用的报告时;2顾客组织验证一个特定报告是否符合该文件时;3顾客组织内的人类工效学专家或其他易用性专业人员评价易用性测试的技术价值和产品易用性时;4顾客组织内的其他专业人员和管理者在利用测试结果对产品适宜性和购买进行商业决策时</td></tr></tbody></table></div>
+
+<h2 id="19-2-2-新一代信息技术标准"><a href="#19-2-2-新一代信息技术标准" class="headerlink" title="19.2.2 新一代信息技术标准"></a>19.2.2 新一代信息技术标准</h2><p>新一代信息技术主要包括物联网、云计算、大数据、区块链、人工智能、虚拟现实、移动互联网等，针对物联网、云计算两个领域的重点标准介绍如下。</p>
+<h2 id="1-物联网相关标准"><a href="#1-物联网相关标准" class="headerlink" title="1. 物联网相关标准"></a>1. 物联网相关标准</h2><p>物联网相关标准主要有GB/T33745《物联网术语》、GB/Z33750《物联网标准化工作指南》、GB/T33474《物联网参考体系结构》等。相关标准的标准编号、标准名称、主要内容及适用范围等如表19-3所示。</p>
+<p>表 19-3 现行主要物联网相关标准</p>
+<div class="md-table-scroll"><table><tbody><tr><td>标准号</td><td>标准名称</td><td>主要内容</td><td>适用范围</td><td>类别</td></tr><tr><td>GB/T33745</td><td>物联网术语</td><td>该标准界定了物联网中一些共性的、基础性的术语和定义</td><td>该标准适用于物联网概念的理解和信息的交流</td><td>国家标准</td></tr><tr><td>GB/Z33750</td><td>物联网标准化工作指南</td><td>该指南制定了物联网标准化工作原则、工作程序、标准名称的结构和命名以及物联网标准分类</td><td>该指导性技术文件适用于:1以物联网作为名称要素的国家标准的管理工作;2物联网基础共性标准的研制工作</td><td>国家标准</td></tr><tr><td>GB/T33474</td><td>物联网参考体系结构</td><td>该标准给出了物联网概念模型,并从系统、通信、信息三个不同的角度给出了物联网参考体系结构</td><td>该标准适用于各应用领域物联网系统的设计,为物联网系统设计提供参考</td><td>国家标准</td></tr><tr><td>GB/T35319</td><td>物联网系统接口要求</td><td>该标准规定了物联网系统实体间接口的具体功能要求</td><td>该标准适用于物联网系统实体间接口的设计、开发和应用</td><td>国家标准</td></tr><tr><td>GB/T36478.1</td><td>物联网信息交换和共享第1部分:总体架构</td><td>该部分规定了物联网系统之间进行信息交换和共享包含的过程活动、功能实体和共享交换模式</td><td>该部分适用于物联网系统之间信息交换和共享的规划、设计、系统开发以及运行维护管理</td><td>国家标准</td></tr><tr><td>GB/T36478.2</td><td>物联网信息交换和共享第2部分:通用技术要求</td><td>该部分规定了物联网系统间进行信息交换和共享的通用技术要求,包括数据服务、数据标准化处理、数据存储与管理、数据传递接口、目录管理、认证与授权、交换和共享监控及安全策略要求等内容</td><td>该部分适用于物联网系统之间信息交换和共享的规划、设计、系统开发以及运行维护管理</td><td>国家标准</td></tr><tr><td>GB/T36468</td><td>物联网系统评价指标体系编制通则</td><td>该标准规定了物联网系统评价指标体系的编制原则、体系结构以及指标描述和设计原则</td><td>该标准适用于具体行业物联网应用系统评价指标体系的编制</td><td>国家标准</td></tr><tr><td>GB/T36478.3</td><td>物联网信息交换和共享第3部分:元数据</td><td>该部分规定了物联网系统间信息交换和共享的元数据,包括元数据概念模型、核心元数据和扩展元数据。</td><td>该部分适用于物联网系统间信息交换和共享系统的规划、设计以及维护管理</td><td>国家标准</td></tr><tr><td>GB/T36478.4</td><td>物联网信息交换和共享第4部分:数据接口</td><td>该部分规定了物联网系统与外部物联网系统进行信息交换和共享时数据接口的数据推送请求、推送数据、数据获取请求、获取数据、目录获取请求、获取目录数据、目录数据推送请求和推送目录数据等接口参数</td><td>该部分适用于物联网系统之间信息交换和共享的设计、系统开发以及运行维护管理</td><td>国家标准</td></tr><tr><td>GB/T37684</td><td>物联网协同信息处理参考模型</td><td>该标准提出了物联网系统中对任务或服务的协同信息处理的参考模型,规定了实体功能和协同信息处理过程</td><td>该标准适用于物联网系统中协同信息处理的设计和开发</td><td>国家标准</td></tr><tr><td>GB/T37685</td><td>物联网应用信息服务分类</td><td>该标准规定了物联网应用信息服务分类的规则与类别</td><td>该标准适用于物联网应用系统规划、设计、研发与应用</td><td>国家标准</td></tr><tr><td>GB/T37686</td><td>物联网感知对象信息融合模型</td><td>该标准提出了物联网感知对象信息融合的概念模型,描述了感知对象信息融合在物联网参考体系结构中的位置</td><td>该标准适用于物联网系统感知对象信息融合的设计和开发</td><td>国家标准</td></tr><tr><td>GB/T38637.1</td><td>物联网感知控制设备接入第1部分:总体要求</td><td>该部分规定了物联网系统中感知控制设备接入的接入要求、应用层接入协议和协议适配</td><td>该部分适用于物联网感知控制设备的规划和研发</td><td>国家标准</td></tr><tr><td>GB/T38624.1</td><td>物联网网关第1部分:面向感知设备接入的网关技术要求</td><td>该部分规定了面向感知设备接入的物联网网关功能要求和通用数据配置要求</td><td>该部分适用于面向感知设备接入物联网网关的设计、开发和测试</td><td>国家标准</td></tr><tr><td>GB/T38637.2</td><td>物联网感知控制设备接入第2部分:数据管理要求</td><td>该部分规定了物联网感知控制设备接入网关或平台时的数据采集、数据处理、数据交换和数据安全等数据管理要求</td><td>该部分适用于物联网感知控制设备接入网关或平台时数据管理功能的设计与实现</td><td>国家标准</td></tr><tr><td>GB/T40684</td><td>物联网信息共享和交换平台通用要求</td><td>该文件规定了物联网信息共享与交换平台的概念和功能要求,功能要求包括数据管理、目录管理、服务支撑、平台管理和安全机制</td><td>该文件适用于物联网信息共享和交换平台的设计、开发和实现</td><td>国家标准</td></tr><tr><td>GB/T40688</td><td>物联网生命体征感知设备数据接口</td><td>该文件规定了面向物联网应用的生命体征感知设备到生命体征监测系统的数据接口的总则、接口消息格式以及通用接口和业务接口的基本功能和参数的要求</td><td>该文件适用于面向物联网应用的生命体征感知设备的设计、生产和使用</td><td>国家标准</td></tr><tr><td>GB/T40687</td><td>物联网生命体征感知设备通用规范</td><td>该文件规定了面向物联网应用的生命体征感知设备的要求和试验方法</td><td>该文件适用于面向物联网应用的生命体征感知设备的设计、生产和使用</td><td>国家标准</td></tr><tr><td>GB/T40778.1</td><td>物联网面向Web开放服务的系统实现第1部分:参考架构</td><td>该文件规定了面向Web开放服务的物联网系统的参考架构和功能组件,并对协议适配、物体描述、物体发现、物体共享和安全保障等功能组件进行了描述</td><td>该文件适用于面向Web开放服务的物联网系统的顶层设计,为面向Web的开放服务与物体交互实现提供指导</td><td>国家标准</td></tr><tr><td>GB/T40778.2</td><td>物联网面向Web开放服务的系统实现第2部分:物体描述方法</td><td>该文件规定了面向Web开放服务的物联网系统的物体描述模型和物体描述元数据的要求</td><td>该文件适用于面向Web开放服务的物联网系统设计和开发,为物联网应用服务提供技术支撑</td><td>国家标准</td></tr><tr><td>YD/T2437</td><td>物联网总体框架与技术要求</td><td>该标准规定了物联网通用分层模型、物联网总体框架、主要部件及能力要求、参考点要求以及物联网共性能力要求</td><td>该标准适用于整个物联网</td><td>行业标准</td></tr></tbody></table></div>
+
+<h2 id="2-云计算相关标准"><a href="#2-云计算相关标准" class="headerlink" title="2. 云计算相关标准"></a>2. 云计算相关标准</h2><p>云计算相关标准主要有 GB/T 32400《信息技术 云计算 概览与词汇》、GB/T 32399《信息技术云计算 参考架构》等。相关标准的标准编号、标准名称、主要内容及适用范围等如表 19-4 所示。</p>
+<p>表 19-4 现行主要云计算相关标准</p>
+<div class="md-table-scroll"><table><tbody><tr><td>标准号</td><td>标准名称</td><td>主要内容</td><td>适用范围</td><td>类别</td></tr><tr><td>GB/T32400</td><td>信息技术 云计算 概览与词汇</td><td>该标准给出了云计算概览、云计算相关术语及定义。该标准为云计算标准提供了术语基础</td><td>该标准适用于各类组织(例如企业、政府机关和非营利性组织)</td><td>国家标准</td></tr><tr><td>GB/T32399</td><td>信息技术 云计算 参考架构</td><td>该标准规定了云计算参考架构(CCRA),包括云计算角色、云计算活动、云计算功能组件以及他们之间的关系</td><td>该标准适用于云计算架构参考使用</td><td>国家标准</td></tr><tr><td>GB/T35301</td><td>信息技术 云计算 平台即服务(PaaS)参考架构</td><td>该标准规定了平台即服务(PaaS)参考架构的术语定义和缩略语、图例说明、PaaS 参考架构概念、PaaS 用户视图和功能视图</td><td>该标准适用于 PaaS 云计算系统的设计、实现、部署和使用</td><td>国家标准</td></tr><tr><td>GB/T35293</td><td>信息技术 云计算 虚拟机管理通用要求</td><td>该标准规定了虚拟机的基本管理,以及虚拟机的生命周期、配置与调度、监控与告警、可用性和可靠性、安全性等管理通用技术要求</td><td>该标准适用于虚拟机相关产品的设计、开发、测评、使用等</td><td>国家标准</td></tr><tr><td>GB/T 36327</td><td>信息技术云计算平台即服务(PaaS)应用程序管理要求</td><td>该标准提出了平台即服务(PaaS)应用程序的管理流程,并规定了PaaS应用程序的一般要求与管理要求</td><td>该标准适用于与平台即服务(PaaS)应用程序管理相关的PaaS提供者的服务供应,平台即服务(PaaS)客户使用云平台服务部署运行应用程序,以及平台即服务(PaaS)协作者基于平台即服务(PaaS)应用程序管理的功能提供第三方服务的场景</td><td>国家标准</td></tr><tr><td>GB/T 36326</td><td>信息技术云计算云服务运营通用要求</td><td>该标准给出了云服务总体描述,规定了云服务提供者在人员、流程、技术及资源方面应具备的条件和能力</td><td>该标准适用于:1云服务提供者向云服务开发者提出需求的依据;2云服务提供者评估自身的条件和能力;3云服务客户选择和评价云服务提供者;4第三方评估云服务提供者的能力</td><td>国家标准</td></tr><tr><td>GB/T 36325</td><td>信息技术云计算云服务级别协议基本要求</td><td>该标准给出了云服务级别协议的构成要素,明确了云服务级别协议的管理要求,并提供了云服务级别协议中的常用指标</td><td>该标准适用于:1为云服务提供者和云服务客户(简称“双方”)建立云服务级别协议提供指导;2为客户对提供者交付的云服务进行考评提供参考依据;3为第三方进行云服务级别协议评估提供参考依据</td><td>国家标准</td></tr><tr><td>GB/T 36623</td><td>信息技术云计算文件服务应用接口</td><td>该标准规定了文件服务应用接口的基本接口和扩展接口,并针对HTTP1.1协议给出了实现例子</td><td>该标准适用于基于文件的云服务应用的开发、测试和使用</td><td>国家标准</td></tr><tr><td>GB/T 37741</td><td>信息技术云计算云服务交付要求</td><td>该标准规定了云服务交付的方式、内容、过程、质量及管理要求</td><td>该标准适用于:1CSP评估和改进自身的交付能力;2CSC及第三方机构评价和认定CSP的交付能力</td><td>国家标准</td></tr><tr><td>GB/T 37740</td><td>信息技术云计算云平台间应用和数据迁移指南</td><td>该标准规定了不同云平台间应用和数据迁移过程中迁移准备、迁移设计、迁移实施和迁移交付的具体内容</td><td>该标准适用于指导迁移实施方和迁移发起方开展应用和数据迁移活动</td><td>国家标准</td></tr><tr><td>GB/T 37737</td><td>信息技术云计算分布式块存储系统总体技术要求</td><td>该标准规定了分布式块存储系统的资源管理功能要求、系统管理功能要求、可扩展要求、兼容性要求和安全性要求</td><td>该标准适用于分布式块存储系统的研发和应用</td><td>国家标准</td></tr><tr><td>GB/T37739</td><td>信息技术 云计算 平台即服务部署要求</td><td>该标准规定了云计算平台即服务(PaaS)部署过程中的活动及任务</td><td>该标准适用于平台即服务提供方进行平台即服务的部署规划、实施和评估</td><td>国家标准</td></tr><tr><td>GB/T37736</td><td>信息技术 云计算 云资源监控通用要求</td><td>该标准规定了对云资源进行监控的技术要求和管理要求</td><td>该标准适用于云服务提供者建立云资源监控能力和云服务客户评价云资源的运行情况</td><td>国家标准</td></tr><tr><td>GB/T37734</td><td>信息技术 云计算 云服务采购指南</td><td>该标准规定了云服务采购流程、云服务采购需求分析、云服务提供商选择、协议/合同签订和服务交付与验收的基本要求</td><td>该标准适用于云服务客户和云服务提供者,用于指导云服务客户采购云服务</td><td>国家标准</td></tr><tr><td>GB/T37738</td><td>信息技术 云计算 云服务质量评价指标</td><td>该标准规定了云服务质量的评价指标</td><td>该标准适用于为云服务提供商评价自身云服务质量提供方法、为云服务客户选择云服务提供商提供依据和为第三方实施云服务质量评价提供参考</td><td>国家标准</td></tr><tr><td>GB/T37735</td><td>信息技术 云计算 云服务计量指标</td><td>该标准规定了不同类型云服务的计量指标和计量单位</td><td>该标准适用于各类云服务的提供、采购、审计和监管</td><td>国家标准</td></tr><tr><td>GB/T37732</td><td>信息技术 云计算 云存储系统服务接口功能</td><td>该标准规定了云存储系统提供的块存储、文件存储、对象存储等存储服务和运维服务接口的功能</td><td>该标准适用于指导云存储系统的研发、评估和应用</td><td>国家标准</td></tr><tr><td>GB/T40690</td><td>信息技术 云计算 云际计算参考架构</td><td>该标准规定了云际计算参考架构的功能、角色与活动</td><td>该标准适用于云际计算架构的设计、实现、部署和使用,也适用于具有云际资源协作需求的各类云服务参与者</td><td>国家标准</td></tr><tr><td>YD/T3148</td><td>云计算安全框架</td><td>该标准分析了云计算环境中云服务客户、云服务提供商、云服务伙伴面临的安全威胁和挑战,阐明了可减缓这些风险和应对安全挑战的安全能力</td><td>该标准提供的框架方法,用于确定在减缓云计算安全威胁和应对安全挑战方面,需要对其中哪些安全能力做出具体规范。该标准适用于云计算</td><td>行业标准</td></tr><tr><td>YD/T2806</td><td>云计算基础设施即服务(IaaS)功能要求与架构</td><td>该标准规定了该标准规定了云计算基础设施即服务(IaaS)服务种类与服务模式,功能架构及功能需求,接口及安全要求以及关键业务流程</td><td>该标准适用于云计算基础设施即服务(IaaS)</td><td>行业标准</td></tr></tbody></table></div>
+
+<h2 id="19-2-3-信息技术服务标准"><a href="#19-2-3-信息技术服务标准" class="headerlink" title="19.2.3 信息技术服务标准"></a>19.2.3 信息技术服务标准</h2><p>信息系统管理涉及的标准国家及行业标准众多，其中关联性较强且内容覆盖较多的是信息技术标准（Information Technology Service Standards，ITSS），它是一套成体系和综合配套的信息技术服务标准库，全面规范了信息技术服务产品及其组成要素，用于指导实施标准化和可信赖的信息技术服务。ITSS 中包含了数字化转型、服务产品、IT 治理、服务管理、运维维护、云计算等相关标准。</p>
+<p>ITSS 是在工业和信息化部、国家标准化管理委员会的联合指导下而开展相关标准研制工作的，是我国 IT 服务行业最佳实践的总结和提升，也是我国从事 IT 服务研发、供应、推广和应用等各类组织自主创新成果的固化。</p>
+<h2 id="1-要素与生命周期"><a href="#1-要素与生命周期" class="headerlink" title="1. 要素与生命周期"></a>1. 要素与生命周期</h2><p>IT 服务由人员（People）、过程（Process）、技术（Technology）和资源（Resource）组成，简称 PPTR。</p>
+<p>- 人员指提供IT服务所需的人员及其知识、经验和技能要求。</p>
+<p>- 过程指提供IT服务时，合理利用必要的资源，将输入转化为输出的一组相互关联和结构化的活动。</p>
+<p>- 技术指交付满足质量要求的IT服务应使用的技术或应具备的技术能力。</p>
+<p>- 资源指提供IT服务所依存和产生的有形及无形资产。</p>
+<p>IT 服务生命周期由规划设计（Planning &amp; Design）、部署实施（Implementing）、服务运营（Operation）、持续改进（Improvement）和监督管理（Supervision）5 个阶段组成，简称 PIOIS。</p>
+<p>- 规划设计。户业务战略出发，以需求为中心，参照ITSS对IT服务进行全面系统的战略规划和设计，为IT服务的部署实施做好准备，以确保提供满足客户需求的IT服务。</p>
+<p>- 部署实施。在规划设计基础上，依据ITSS建立管理体系、部署专用工具及服务解决方案。</p>
+<p>- 服务运营。根据IT服务部署情况，依据ITSS，采用过程方法，全面管理基础设施、服务流程、人员和业务连续性，实现业务运营与IT服务运营的全面融合。</p>
+<p>- 持续改进。根据IT服务运营的实际情况，定期评审IT服务满足业务运营的情况，以及IT服务本身存在的缺陷，提出改进策略和方案，并对IT服务进行重新规划设计和部署实施，以提高IT服务质量。</p>
+<p>- 监督管理。本阶段主要依据ITSS对IT服务质量进行评价，并对IT服务供方的服务过程、交付结果实施监督和绩效评估。</p>
+<h2 id="2-ITSS-标准体系-5-0"><a href="#2-ITSS-标准体系-5-0" class="headerlink" title="2. ITSS 标准体系 5.0"></a>2. ITSS 标准体系 5.0</h2><p>ITSS 是依据上述原理制定的一系列标准，是一套完整的信息技术服务标准体系，包含信息技术服务的规划设计、部署实施、服务运营、持续改进和监督管理等全生命周期阶段应遵循的标准，涉及咨询设计、集成实施、运行维护、服务管控、服务运营和服务外包等业务领域。</p>
+<p>ITSS 5.0 标准体系的建设，结合了新形势下信息技术服务融合创新的特点，对其标准化对象的内涵与外延进行重新界定，明确了”支撑国家战略””引领产业高质量发展””促进新技术创新应用””指导信息技术服务业务升级””确保标准化工作有序开展”五大建设目标，并从”行业监管””产业基础发展””技术创新应用””融合业务场景”四重视角提炼标准化需求，最后提出了以基础服务标准为底座，以通用标准和保障标准为支柱，以技术创新服务标准和数字化转型服务标准为引领，共同支撑业务融合的ITSS5.0标准体系框架，如图19-2所示，其主要内容包括：</p>
+<p>- 通用标准。指适用于所有信息技术服务的共性标准，主要包括信息技术服务的分类与代码、质量评价指标体系、服务基本要求、从业人员能力评价要求、服务级别协议指南、服务生存周期过程、服务工具及集成框架、服务成本度量指南和服务安全要求等。</p>
+<p>- 保障标准。指对信息技术服务提出保障要求的标准，主要包括服务管控标准和外包标准。服务管控标准是指通过对信息技术服务的治理、管理和监理活动和要求，以确保信息技术服务管控的权责分明、经济有效和服务可控，服务外包则对组织通过外包形式获取服务所应采取的业务和管理措施提出要求。</p>
+<p>- 基础服务标准。指面向信息技术服务基础类服务的标准，包括咨询设计、开发服务、集成实施、运行维护、云服务、数据中心等标准。</p>
+<p>- 技术创新服务标准。指面向新技术加持下新业态新模式的标准，包含智能化服务、数据服务、数字内容处理服务和区块链服务等标准。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/9b7e07741fb0b48748d336a3f31883af1292734b97812fda44325c476b25ff19.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图19-2 ITSS标准体系5.0</p>
+<p>- 数字化转型服务标准。指支撑和服务组织数字化转型服务开展和创新融合业务发展的标准，包含数字化转型成熟度模型、就绪度评估模型、效果评价模型、数字化监测预警技术要求等标准规范和要求。</p>
+<p>- 业务融合标准。指支撑信息技术服务与各行业融合的标准，包括面向政务、广电、教育、应急、财会等行业建立具有行业特点的信息技术服务相关的标准。</p>
+<p>ITSS标准体系是动态发展的，与信息技术服务相关的技术、服务和产业发展紧密相关，同时也与标准化建设工作的目标和定位紧密相关。</p>
+<h2 id="3-主要通用标准"><a href="#3-主要通用标准" class="headerlink" title="3. 主要通用标准"></a>3. 主要通用标准</h2><p>ITSS相关标准中在本教程很多领域已经进行了介绍和引用，如数字化转系成熟度、运维通用要求、智能运维等。通用标准相关的标准编号、标准名称、主要内容及适用范围等如表19-5所示。</p>
+<p>表 19-5 现行主要信息技术服务通用标准</p>
+<div class="md-table-scroll"><table><tbody><tr><td>标准号</td><td>标准名称</td><td>主要内容</td><td>适用范围</td><td>类别</td></tr><tr><td>GB/T29264</td><td>信息技术服务分类与代码</td><td>该标准规定了信息技术服务的分类与代码,是信息技术服务分类、管理和编目的准则,为信息技术服务体系的建立提供了范围基础</td><td>该标准适用于信息技术服务的信息管理及信息交换,供科研、规划等工作使用</td><td>国家标准</td></tr><tr><td>GB/T33850</td><td>信息技术服务质量评价指标体系</td><td>该标准建立了信息技术服务质量模型,规定了信息技术服务质量评价指标、测量方法以及质量评价过程等</td><td>该标准适用于对信息技术服务质量进行评价</td><td>国家标准</td></tr><tr><td>GB/T37696</td><td>信息技术服务从业人员能力评价要求</td><td>该标准规定了信息技术服务从业人员的职业种类、能力要素等级和评价方法</td><td>该标准适用于信息技术服务从业人员的能力评价与培养</td><td>国家标准</td></tr><tr><td>GB/T37961</td><td>信息技术服务服务基本要求</td><td>该标准规定了信息技术服务中服务过程基本要求、信息技术咨询、设计与开发、信息系统集成实施、运行维护、数据处理和存储、运营等服务的活动内容和成果要求</td><td>该标准适用于服务供方和需方确立服务内容及签署合同</td><td>国家标准</td></tr><tr><td>GB/T39770</td><td>信息技术服务服务安全要求</td><td>该标准提出了信息技术服务安全模型,规定了安全总则、生存周期和能力要素的安全要求</td><td>该标准适用于信息技术服务提供方、服务需求方和第三方</td><td>国家标准</td></tr><tr><td>SJ/T11691</td><td>信息技术服务服务级别协议指南</td><td>该标准给出了信息技术服务级别协议的各项要素,并提出了针对服务级别协议的管理流程</td><td>该标准适用于建立、管理并评价一致的、全面的、可量化的服务级别协议提供指南</td><td>行业标准</td></tr><tr><td>T/CESA1154</td><td>信息技术服务从业人员能力评价指南设计与开发服务</td><td>该标准规定信息技术服务设计与开发专业从业人员的职责要求、职业序列以及等级、各职责等级的准入条件和职业能力要求</td><td>该标准适用于提供相关专业信息技术服务的企业及有关组织进行从业人员能力管理、能力评价和技能培训等</td><td>团体标准</td></tr><tr><td>T/CESA 1155</td><td>信息技术服务从业人员能力评价指南 集成实施服务</td><td>该标准规定信息技术服务集成实施专业从业人员的职责要求、职责序列以及等级、各职责等级的准入条件和职业能力要求</td><td>该标准适用于提供相关专业信息技术服务的企业及有关组织进行从业人员能力管理、能力评价和技能培训等</td><td>团体标准</td></tr><tr><td>T/CESA 1156</td><td>信息技术服务从业人员能力评价指南 运行维护服务</td><td>该标准规定信息技术服务运营维护专业从业人员的职责要求、职责序列以及等级、各职责等级的准入条件和职业能力要求</td><td>该标准适用于提供相关专业信息技术服务的企业及有关组织进行从业人员能力管理、能力评价和技能培训等</td><td>团体标准</td></tr><tr><td>T/CESA 1157</td><td>信息技术服务从业人员能力评价指南 云计算服务</td><td>该标准规定信息技术服务云计算从业人员的职责要求、职责序列以及等级、各职责等级的准入条件和职业能力要求</td><td>该标准适用于提供相关专业信息技术服务的企业及有关组织进行从业人员能力管理、能力评价和技能培训等</td><td>团体标准</td></tr><tr><td>T/CESA 1158</td><td>信息技术服务从业人员能力评价指南 信息安全服务</td><td>该标准规定信息技术服务信息安全专业从业人员的职责要求、职责序列以及等级、各职责等级的准入条件和职业能力要求</td><td>该标准适用于提供相关专业信息技术服务的企业及有关组织进行从业人员能力管理、能力评价和技能培训等</td><td>团体标准</td></tr></tbody></table></div>
+
+<h2 id="19-3-本章练习"><a href="#19-3-本章练习" class="headerlink" title="19.3 本章练习"></a>19.3 本章练习</h2><h2 id="1-选择题"><a href="#1-选择题" class="headerlink" title="1. 选择题"></a>1. 选择题</h2><p>(1) GB/T 28827.3《信息技术服务 运行维护 第3部分: 应急响应规范》规定了运维服务中应急响应的4个环节, 即应急准备、检测与预警、_、总结改进。 A. 风险规避 B. 应急处置 C. 异地备份 D. 风险接受</p>
+<p>参考答案: B</p>
+<p>(2) 关于标准和标准化的描述不正确的是: ____。</p>
+<p>A. 标准是为了在一定范围内获得最佳秩序，经协商一致制定并由公认机构批准共同使用和重复使用的一种规范性文件，是标准化活动的核心产物</p>
+<p>B. 标准是研究制定法律、技术法规、政策和规划的依据，是企业从事生产经营活动、消费者选择产品和服务的主要依据</p>
+<p>C. 世界上最早的标准化组织是国际标准化组织（ISO）</p>
+<p>D. 依据制定标准的参与者所涉及的范围，也就是标准的适用范围，可将标准分为国际标准、国家标准、行业标准、地方标准、企业标准等</p>
+<p>参考答案: C</p>
+<p>(3) 国家信息技术服务标准（ITSS）中提出的 IT 服务四要素包括: ____。</p>
+<p>A. 人员、过程、质量、技术</p>
+<p>B. 人员、容量、质量、技术</p>
+<p>C. 人员、过程、技术、资产</p>
+<p>D. 人员、过程、技术、资源</p>
+<p>参考答案：D</p>
+<p>（4）根据 GB/T 29264《信息技术服务 分类与代码》中所定义的信息技术服务的分类，面向计算机网络设备的运维服务应属于____。</p>
+<p>A. 基础环境运维 B. 硬件运维 C. 安全运维 D. 其他运维</p>
+<p>(5) 国家标准的制定的正常程序分为____。</p>
+<p>A. 预阶段、立项阶段、起草阶段、征求意见阶段、审查阶段、批准阶段、出版阶段、复审阶段以及废止阶段</p>
+<p>B. 预阶段、立项阶段、起草阶段、征求意见阶段、审查阶段、批准阶段、出版阶段</p>
+<p>C. 立项阶段、起草阶段、征求意见阶段、审查阶段、批准阶段、出版阶段、复审阶段以及废止阶段</p>
+<p>D. 起草阶段、征求意见阶段、审查阶段、批准阶段、出版阶段、复审阶段以及废止阶段</p>
+<h2 id="参考答案：A"><a href="#参考答案：A" class="headerlink" title="参考答案：A"></a>参考答案：A</h2><h2 id="2-思考题"><a href="#2-思考题" class="headerlink" title="2. 思考题"></a>2. 思考题</h2><p>（1）依据制定标准的参与者所涉及的范围，也就是标准的适用范围，可将标准分为哪些？并分别进行简述。</p>
+<p>（2）IT服务生命周期由哪几个阶段组成？并对各个阶段进行简述。</p>
+<p>参考答案：略</p>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+    <div class="widget-header dis-select">
+      <span class="name">本文目录</span>
+      <button type="button" class="cap-action ui-interactive card-hover card-hover--spotlight" data-shell-action="toggle-toc" aria-label="Toggle table of contents" aria-pressed="false"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></span></button>
+    </div>
+  
+  <div class="widget-body"><ol class="toc ui-collection-adapter"><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#19-1-%E6%A0%87%E5%87%86%E5%8C%96%E7%9F%A5%E8%AF%86"><span class="toc-text">19.1 标准化知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#19-1-1-%E6%A0%87%E5%87%86%E4%BD%93%E7%B3%BB"><span class="toc-text">19.1.1 标准体系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E6%A0%87%E5%87%86%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-text">1. 标准体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%A0%87%E5%87%86%E4%BD%93%E7%B3%BB%E8%A1%A8"><span class="toc-text">2. 标准体系表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#19-1-2-%E6%A0%87%E5%87%86%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">19.1.2 标准的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E6%8C%89%E7%85%A7%E9%80%82%E7%94%A8%E8%8C%83%E5%9B%B4%E5%88%92%E5%88%86"><span class="toc-text">1. 按照适用范围划分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%8C%89%E7%85%A7%E6%B6%89%E5%8F%8A%E7%9A%84%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E5%88%92%E5%88%86"><span class="toc-text">2. 按照涉及的对象类型划分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E6%8C%89%E7%85%A7%E6%A0%87%E5%87%86%E7%9A%84%E8%A6%81%E6%B1%82%E7%A8%8B%E5%BA%A6%E5%88%92%E5%88%86"><span class="toc-text">3. 按照标准的要求程度划分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#19-1-3-%E6%A0%87%E5%87%86%E5%88%B6%E5%AE%9A"><span class="toc-text">19.1.3 标准制定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#19-2-%E4%B8%BB%E8%A6%81%E6%A0%87%E5%87%86"><span class="toc-text">19.2 主要标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#19-2-1-%E7%B3%BB%E7%BB%9F%E4%B8%8E%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E6%A0%87%E5%87%86"><span class="toc-text">19.2.1 系统与软件工程标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E5%9F%BA%E7%A1%80%E6%A0%87%E5%87%86"><span class="toc-text">1. 基础标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E7%94%9F%E5%AD%98%E5%91%A8%E6%9C%9F%E7%AE%A1%E7%90%86%E6%A0%87%E5%87%86"><span class="toc-text">2. 生存周期管理标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E8%B4%A8%E9%87%8F%E4%B8%8E%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86"><span class="toc-text">3. 质量与测试标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#19-2-2-%E6%96%B0%E4%B8%80%E4%BB%A3%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF%E6%A0%87%E5%87%86"><span class="toc-text">19.2.2 新一代信息技术标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E7%89%A9%E8%81%94%E7%BD%91%E7%9B%B8%E5%85%B3%E6%A0%87%E5%87%86"><span class="toc-text">1. 物联网相关标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E4%BA%91%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%85%B3%E6%A0%87%E5%87%86"><span class="toc-text">2. 云计算相关标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#19-2-3-%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF%E6%9C%8D%E5%8A%A1%E6%A0%87%E5%87%86"><span class="toc-text">19.2.3 信息技术服务标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E8%A6%81%E7%B4%A0%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">1. 要素与生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-ITSS-%E6%A0%87%E5%87%86%E4%BD%93%E7%B3%BB-5-0"><span class="toc-text">2. ITSS 标准体系 5.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E4%B8%BB%E8%A6%81%E9%80%9A%E7%94%A8%E6%A0%87%E5%87%86"><span class="toc-text">3. 主要通用标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#19-3-%E6%9C%AC%E7%AB%A0%E7%BB%83%E4%B9%A0"><span class="toc-text">19.3 本章练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E9%80%89%E6%8B%A9%E9%A2%98"><span class="toc-text">1. 选择题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88%EF%BC%9AA"><span class="toc-text">参考答案：A</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-text">2. 思考题</span></a></li></ol></div>
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC19%E7%AB%A0%20IT%20%E7%AE%A1%E7%90%86%E6%A0%87%E5%87%86%E5%8C%96/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第19章 IT 管理标准化","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

@@ -1,0 +1,914 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%AC03%E7%AB%A0%20%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92(%E4%B8%8A)%E2%80%94%E2%80%94%E4%BB%8E%20DNA%20%E5%88%B0%20RNA/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>第3章 生物信息的传递(上)——从 DNA 到 RNA - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="第3章 生物信息的传递(上)——从 DNA 到 RNA生物信息的传递(上) ——从 DNA 到 RNA3.1 RNA 的结构、分类和功能 3.2 RNA转录概述 3.3 转录的基本过程 3.4 原核生物与真核生物的转录及产物特征比较 3.5 原核生物的转录 3.6 真核生物的转录 3.7 转录忠实性的维持 3.8 转录的抑制 3.9 真核生物 RNA 的转录后加工 3.10 RNA 的编辑、再编码" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第3章 生物信息的传递(上)——从 DNA 到 RNA" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%AC03%E7%AB%A0%20%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92(%E4%B8%8A)%E2%80%94%E2%80%94%E4%BB%8E%20DNA%20%E5%88%B0%20RNA/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="第3章 生物信息的传递(上)——从 DNA 到 RNA生物信息的传递(上) ——从 DNA 到 RNA3.1 RNA 的结构、分类和功能 3.2 RNA转录概述 3.3 转录的基本过程 3.4 原核生物与真核生物的转录及产物特征比较 3.5 原核生物的转录 3.6 真核生物的转录 3.7 转录忠实性的维持 3.8 转录的抑制 3.9 真核生物 RNA 的转录后加工 3.10 RNA 的编辑、再编码" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/images/ch03-%E5%9B%BE3-1-DNA%E6%A8%A1%E6%9D%BF%E4%B8%8EmRNA%E5%8F%8A%E5%A4%9A%E8%82%BD%E9%93%BE%E4%B9%8B%E9%97%B4%E5%AD%98%E5%9C%A8%E5%85%B1%E7%BA%BF%E6%80%A7%E5%85%B3.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-09-17T16:00:00.000Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.152Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="分子生物学" data-stellar-page-meta="">
+<meta property="article:tag" content="教材" data-stellar-page-meta="">
+<meta property="article:tag" content="课程" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/images/ch03-%E5%9B%BE3-1-DNA%E6%A8%A1%E6%9D%BF%E4%B8%8EmRNA%E5%8F%8A%E5%A4%9A%E8%82%BD%E9%93%BE%E4%B9%8B%E9%97%B4%E5%AD%98%E5%9C%A8%E5%85%B1%E7%BA%BF%E6%80%A7%E5%85%B3.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第3章 生物信息的传递(上)——从 DNA 到 RNA" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content=",," data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%AC03%E7%AB%A0%20%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92(%E4%B8%8A)%E2%80%94%E2%80%94%E4%BB%8E%20DNA%20%E5%88%B0%20RNA/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"第3章 生物信息的传递(上)——从 DNA 到 RNA","description":"第3章 生物信息的传递(上)——从 DNA 到 RNA生物信息的传递(上) ——从 DNA 到 RNA3.1 RNA 的结构、分类和功能\n3.2 RNA转录概述\n3.3 转录的基本过程\n3.4 原核生物与真核生物的转录及产物特征比较\n3.5 原核生物的转录\n3.6 真核生物的转录\n3.7 转录忠实性的维持\n3.8 转录的抑制\n3.9 真核生物 RNA 的转录后加工\n3.10 RNA 的编辑、...","url":"https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%AC03%E7%AB%A0%20%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92(%E4%B8%8A)%E2%80%94%E2%80%94%E4%BB%8E%20DNA%20%E5%88%B0%20RNA/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%AC03%E7%AB%A0%20%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92(%E4%B8%8A)%E2%80%94%E2%80%94%E4%BB%8E%20DNA%20%E5%88%B0%20RNA/">第3章 生物信息的传递(上)——从 DNA 到 RNA</a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-09-17T16:00:00.000Z">2026-09-18</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.152Z">2026-10-08</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第3章 生物信息的传递(上)——从 DNA 到 RNA</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="第3章-生物信息的传递-上-——从-DNA-到-RNA"><a href="#第3章-生物信息的传递-上-——从-DNA-到-RNA" class="headerlink" title="第3章 生物信息的传递(上)——从 DNA 到 RNA"></a>第3章 生物信息的传递(上)——从 DNA 到 RNA</h1><h1 id="生物信息的传递-上-——从-DNA-到-RNA"><a href="#生物信息的传递-上-——从-DNA-到-RNA" class="headerlink" title="生物信息的传递(上) ——从 DNA 到 RNA"></a>生物信息的传递(上) ——从 DNA 到 RNA</h1><p>3.1 RNA 的结构、分类和功能</p>
+<p>3.2 RNA转录概述</p>
+<p>3.3 转录的基本过程</p>
+<p>3.4 原核生物与真核生物的转录及产物特征比较</p>
+<p>3.5 原核生物的转录</p>
+<p>3.6 真核生物的转录</p>
+<p>3.7 转录忠实性的维持</p>
+<p>3.8 转录的抑制</p>
+<p>3.9 真核生物 RNA 的转录后加工</p>
+<p>3.10 RNA 的编辑、再编码和化学修饰</p>
+<p>3.11 mRNA 转运</p>
+<p>3.12 核酶</p>
+<p>3.13 RNA 在生物进化中的地位</p>
+<p>现代分子生物学的最基本原理是:基因作为唯一能够自主复制、永久存在的单位,生物功能是以蛋白质的形式表达出来的。所以我们说,DNA 序列是遗传信息的贮存者它通过自主复制得到永存,并通过转录生成信使 RNA,翻译生成蛋白质的过程来控制生命现象。</p>
+<p>基因表达包括转录(transcription)和翻译(translation)两个阶段,转录是指拷贝出一链与DNA链序列完全相同(除了T→U之外)的RNA单链的过程,是基因表达的核心步骤。翻译是指以新生的mRNA为模板,把核苷酸三联遗传密码子翻译成氨基酸序列、合成肽链的过程,是基因表达的最终目的。因为只有mRNA所携带的遗传信息才被用来指蛋白质生物合成,所以人们一般用U、C、A、G这4种核苷酸而不是T、C、A、G的组合来表示遗传性状。</p>
+<p>转录和翻译的速度基本相等, $37^{\circ} \mathrm{C}$ 时, 转录生成 mRNA 的速度大约是每分钟 2500 核苷酸, 即每秒钟合成 14 个密码子, 而蛋白质合成的速度大约是每秒钟 15 个氨基酸。正常情况下, 从一个基因开始表达到细胞中出现其 mRNA 的间隔约为 $2.5 \mathrm{~min}$ , 而再过半钟左右就能在细胞内测到相应的蛋白质。</p>
+<p>图 3-1 DNA 模板与 mRNA 及多肽链之间存在共线性关系<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-1-DNA%E6%A8%A1%E6%9D%BF%E4%B8%8EmRNA%E5%8F%8A%E5%A4%9A%E8%82%BD%E9%93%BE%E4%B9%8B%E9%97%B4%E5%AD%98%E5%9C%A8%E5%85%B1%E7%BA%BF%E6%80%A7%E5%85%B3.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>DNA 是贮藏遗传信息的最重要的生物大分子。DNA 分子中的核苷酸排列顺序不但决定了细胞内所有 RNA 及蛋白质的基本结构, 还通过蛋白质(酶)的功能间接控制了细胞内全部有效成分的生产、运转和功能发挥。我们把与 mRNA 序列相同的那条 DNA 链称为编码链(coding strand)或有义链(sense strand), 并把另一条根据碱基互补原则指导 mRNA 合成的 DNA 链称为模板链(template strand)或称反义链(antisens strand)。贮存在任何基因中的生物信息都必须首先被转录生成 RNA $^{(图 3-1)}$ , 才能得到表达。DNA 和 RNA 虽然很相似, 只有 T 或 T 及核糖的第二位碳原子上有所不同, 但它们的生物学活性却很不同。</p>
+<p>除了少数 RNA 病毒, 所有 RNA 分子都来自 DNA。贮存于 DNA 双链中的遗传信息通过一个被称为转录(transcription)的酶反应按照碱基互补配对的原则被转化成为单链 RNA 分子。</p>
+<h2 id="3-1-RNA-的结构、分类和功能"><a href="#3-1-RNA-的结构、分类和功能" class="headerlink" title="3.1 RNA 的结构、分类和功能"></a>3.1 RNA 的结构、分类和功能</h2><p>信使核糖核酸通常用 mRNA 表示, 是英文 messenger RNA 的简称。mRNA 在大肠杆菌细胞内占总 RNA 的 2% 左右 (tRNA 占 16%, 而 rRNA 则占 80% 以上)。尽管科学家很早就怀疑生物细胞内存在能将遗传信息从 DNA 上转移到蛋白质分子上的信使 (或称模板), 但由于 mRNA 在细菌细胞内的半衰期很短, 科学家直到 20 世纪 70 年代初才首次将这一重要物质从细胞中分离出来。现已查明, 许多基因的 mRNA 在体内还是相当稳定的, 半衰期从几个小时到几天不等。目前, 人们已能从几乎所有生物体内分离纯化编码任何蛋白质的 mRNA。</p>
+<p>虽然 mRNA 在所有细胞内执行着相同的功能, 即通过三联体密码翻译生成蛋白质, 但其生物合成的具体过程和成熟 mRNA 的结构在原核细胞和真核细胞内是不同的。真核细胞 mRNA 的最大特点在于它往往以一个较大分子量的前体 RNA 出现在核内, 需要经过转录后加工。只有成熟的、分子量明显变小并经化学修饰的 mRNA 才能进入细胞质, 参与蛋白质的合成。</p>
+<p>原核生物常以 AUG(有时 GUG, 甚至 UUG)作为起始密码子, 而真核生物几乎永远以 AUG 作为起始密码子。</p>
+<h2 id="3-1-1-RNA-的结构特点"><a href="#3-1-1-RNA-的结构特点" class="headerlink" title="3.1.1 RNA 的结构特点"></a>3.1.1 RNA 的结构特点</h2><h2 id="1-RNA-含有核糖和嘧啶-通常是单链线性分子"><a href="#1-RNA-含有核糖和嘧啶-通常是单链线性分子" class="headerlink" title="1. RNA 含有核糖和嘧啶,通常是单链线性分子"></a>1. RNA 含有核糖和嘧啶,通常是单链线性分子</h2><p>与 DNA 不同, RNA 骨架含有核糖, 在 RNA 中尿嘧啶取代了胸腺嘧啶, RNA 主要以单链形式存在于生物体内, 其高级结构很复杂。</p>
+<h2 id="2-RNA-链自身折叠形成局部双螺旋"><a href="#2-RNA-链自身折叠形成局部双螺旋" class="headerlink" title="2. RNA 链自身折叠形成局部双螺旋"></a>2. RNA 链自身折叠形成局部双螺旋</h2><p>由于 RNA 链频繁发生自身折叠, 在互补序列间形成碱基配对区, 所以尽管 RNA 是单链分子, 它仍然具有大量的双螺旋结构特征。RNA 可以多种茎-环结构 (stem-loop structure), 如发夹结构 (hairpin)、凸起 (bulge)、环状结构 (loop) 或四通道内环 (four-stem junction) 的形式存在 (图 3-2), 因此, RNA 的碱基配对区可以是规则的双螺旋, 也可能是不连续的部分双螺旋。</p>
+<p>除了 Watson-Crick 配对的碱基, RNA 中还具有额外的非 Watson-Crick 配对的碱基, 如 G-U 碱基对 (图 3-2), 该特征使得 RNA 链自我配对的能力得到增强, 更易形成双螺旋结构, 常常出现局部区域碱基配对。双螺旋 RNA 的小沟宽而浅, 几乎没有序列特异性信息; 大沟狭且深, 使得与其相互作用的蛋白质氨基酸侧链难以接近它, 因此 RNA 不适合与蛋白质进行序列特异性的相互作用, 虽然有一些蛋白质可以序列特异性方式结合在 RNA 上。</p>
+<h2 id="3-RNA-可折叠形成复杂的三级结构"><a href="#3-RNA-可折叠形成复杂的三级结构" class="headerlink" title="3. RNA 可折叠形成复杂的三级结构"></a>3. RNA 可折叠形成复杂的三级结构</h2><p>因为 RNA 没有形成规则双螺旋的长度限制, RNA 中的碱基配对还可能发生在不</p>
+<h2 id="3-1-RNA-的结构、分类和功能-1"><a href="#3-1-RNA-的结构、分类和功能-1" class="headerlink" title="3.1 RNA 的结构、分类和功能"></a>3.1 RNA 的结构、分类和功能</h2><p>图 3-2 RNA 的特殊结构特征</p>
+<p>(a) 发夹结构；(b) 凸起；(c) 环状结构；(d) 四通道内环；(e) G-U 碱基对；(f) 假结。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-2.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-2-RNA%E7%9A%84%E7%89%B9%E6%AE%8A%E7%BB%93%E6%9E%84%E7%89%B9%E5%BE%81.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-2-RNA%E7%9A%84%E7%89%B9%E6%AE%8A%E7%BB%93%E6%9E%84%E7%89%B9%E5%BE%81-a6022e.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-2-RNA%E7%9A%84%E7%89%B9%E6%AE%8A%E7%BB%93%E6%9E%84%E7%89%B9%E5%BE%81-bdc195.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>(d)<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-2-f.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>(6)<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-2-f-88fadd.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>(f)</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-2-f-10d585.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>相邻的序列中,形成”假结”(pseudoknot)(图3-2f)等复杂结构,这些特殊的结构特征使RNA常形成大量的三级结构。由于RNA骨架上未配对的区域可以不受限制地自由、转,所以碱基和核糖磷酸骨架之间的非常规相互作用使RNA常常折叠成包括不规则的基配对的复杂的三级结构,如tRNA中的三碱基配对以及碱基与骨架的相互作用。利用RNA结构的复杂性,研究者可以通过构建含有随机序列的RNA文库筛选到与特定小分子、多肽等具有高亲和力的RNA。</p>
+<h2 id="4-环状-RNA"><a href="#4-环状-RNA" class="headerlink" title="4. 环状 RNA"></a>4. 环状 RNA</h2><p>早在几十年前,生物学家们就发现了环状 RNA (circRNA)。近年来,随着第二代测片的发展,人们发现环状 RNA 在生物体内普遍存在。这些分子广泛存在于从古菌、酵母、小鼠到人类多种生物的细胞中。环状 RNA 呈封闭环状结构,因不受 RNA 外切酶的影响而不易降解,比线性 RNA 稳定得多。真核细胞的环状 RNA 来自于 mRNA 前体 (pre-mRNA) 的反向剪接。虽然环状 RNA 通常表达水平较低,但它们的表达存在细胞和组织特异性,近年来的研究表明,环状 RNA 可以通过不同途径影响基因表达,有效扩展真核细胞转录物组的多样性和复杂性,在细胞中扮演着重要的角色。</p>
+<h2 id="3-1-2-RNA-的分类及分布"><a href="#3-1-2-RNA-的分类及分布" class="headerlink" title="3.1.2 RNA 的分类及分布"></a>3.1.2 RNA 的分类及分布</h2><p>生物体内的 RNA 种类繁多,且分布在细胞的不同部位。各类 RNA 在组成、大小、分子结构、生物学功能以及亚细胞定位等方面都有所不同。图 3-3 列举了目前细胞中已发现的 RNA 类型。</p>
+<p>生物体内主要有 3 种 RNA 参与遗传信息的传递, 即编码特定蛋白质序列的信使 RNA (messenger RNA, mRNA), 能特异性解读 mRNA 中的遗传信息、将其转化成相应氨基酸后加入多肽链中的转运 RNA (transfer RNA, tRNA) 和直接参与核糖体中蛋白质合成的核糖体 RNA (ribosomal RNA, rRNA)。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-3-%E5%88%97%E4%B8%BE%E4%BA%86%E7%9B%AE%E5%89%8D%E7%BB%86%E8%83%9E%E4%B8%AD%E5%B7%B2%E5%8F%91%E7%8E%B0%E7%9A%84RNA%E7%B1%BB%E5%9E%8B.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图 3-3 RNA 各组分在细胞中的分布</p>
+<h2 id="3-1-3-RNA的功能"><a href="#3-1-3-RNA的功能" class="headerlink" title="3.1.3 RNA的功能"></a>3.1.3 RNA的功能</h2><p>RNA 既可作为信息分子又能作为功能分子发挥作用。作为信息分子,RNA 担负着贮藏及转移遗传信息的功能,起着遗传信息由 DNA 到蛋白质的中间传递体的核心作用;作为功能分子,它在以下几个方面发挥重要的作用:①作为细胞内蛋白质生物合成的主要参与者;②部分 RNA 可以作为核酶在细胞中催化一些重要的反应,主要作用于初始转录产物的剪接加工;③参与基因表达的调控,与生物的生长发育密切相关;④在某些病毒中,RNA 是遗传物质。</p>
+<h2 id="3-2-RNA-转录概述"><a href="#3-2-RNA-转录概述" class="headerlink" title="3.2 RNA 转录概述"></a>3.2 RNA 转录概述</h2><h2 id="3-2-1-DNA-复制和转录的比较"><a href="#3-2-1-DNA-复制和转录的比较" class="headerlink" title="3.2.1 DNA 复制和转录的比较"></a>3.2.1 DNA 复制和转录的比较</h2><p>RNA 转录与 DNA 的复制相比尽管在化学和酶学上非常相似,但两者之间存在一些明显的差别:</p>
+<p>① 与 DNA 聚合酶不同, RNA 聚合酶具有从头起始转录的能力, 所以它在催化 RNA 合成时不需要引物。</p>
+<p>② RNA 聚合酶在添加几个核苷酸后,便将正在延长的链从模板上置换下来,RNA 产物不与模板 DNA 链保持碱基互补状态。因此,多个 RNA 聚合酶分子可以同时转录一个基因,保证在短时间内合成某一个基因的大量转录产物。</p>
+<p>③ 转录具有选择性。DNA 复制必须将整个基因组全部拷贝,并且在每个细胞周期内只复制一次。RNA 转录则是选择性地复制基因组的特定部分,可以产生几个到上千个相同的拷贝。基因组的不同部分转录程度不同,在不同细胞中,同一细胞的不同生长发育阶段或者同一细胞应答不同刺激,在不同时间点所转录的基因都可能不同。</p>
+<p>④ 与 DNA 复制的精确度相比, 转录中每添加 10 000 个核苷酸会发生一次错误, 表</p>
+<p>明转录过程缺乏严谨的校正机制。</p>
+<h2 id="3-2-2-转录机器的主要成分——RNA-聚合酶"><a href="#3-2-2-转录机器的主要成分——RNA-聚合酶" class="headerlink" title="3.2.2 转录机器的主要成分——RNA 聚合酶"></a>3.2.2 转录机器的主要成分——RNA 聚合酶</h2><p>以 DNA 序列为模板的 RNA 聚合酶主要以双链 DNA 为模板(若以单链 DNA 做板, 则活性大大降低), 以 4 种核苷三磷酸作为活性前体, 并以 $\mathrm{Mg}^{2+}/\mathrm{Mn}^{2+}$ 为辅助因子, 催性 RNA 链的起始、延伸和终止, 它不需要任何引物, 催化生成的产物是与 DNA 模板链相补的 RNA。RNA 或 RNA-DNA 双链杂合体不能作为模板。RNA 聚合酶是转录过程中关键的酶。每个细胞中约有 7000 个 RNA 聚合酶分子, 根据细胞的生长情况, 任何时都可能有 $2000 \sim 5000$ 个酶在执行转录 DNA 模板的功能。原核和真核生物的 RNA 聚酶虽然都能催化 RNA 的合成, 但在其分子组成、种类和生化特性上各有特色, 我们将在面分别介绍。</p>
+<h2 id="3-2-3-启动子与转录单位"><a href="#3-2-3-启动子与转录单位" class="headerlink" title="3.2.3 启动子与转录单位"></a>3.2.3 启动子与转录单位</h2><p>转录的起始是基因表达的关键阶段,而这一阶段的重点是 RNA 聚合酶与启动子的互作用。启动子(promoter)是一段位于结构基因 5’ 端上游区的 DNA 序列(图 3-4a),能活 RNA 聚合酶,使之与模板 DNA 准确地结合并具有转录起始的特异性。有实验表明,对多启动子来说,RNA 聚合酶与之相结合的速率至少比布朗运动中的随机碰撞高 100 个对于 DNA 双链来说,理论上任何启动子都可以引导转录从左到右或从右到左产生两种同的 RNA 分子,但是启动子是非对称的,只能以一个方向结合 RNA 聚合酶。同时,于转录只能沿着 5’ 到 3’ 方向进行,一旦 RNA 聚合酶正确定位于启动子上后,就会以适的 DNA 链为模板催化转录。对于整个染色体而言,每个基因的转录方向可能是不的(图 3-4b)。此外,启动子的结构影响了它与 RNA 聚合酶的亲和力,从而影响了基因表的水平。我们将在后面分别介绍原核和真核生物启动子的组成和特点。</p>
+<p>转录单位(transcription unit) 是一段从启动子开始至终止子(terminator) 结束 DNA 序列, RNA 聚合酶从转录起点开始沿着模板前进, 直到终止子为止, 转录出一条 RI</p>
+<p>图 3-4 RNA 的转录<br>(a) RNA 的转录单元示意图；(b) 一些基因利用 DNA 的一条链作为模板进行转录，而另一些基因利用 DNA 的另一条链（启动子是非对称的，只能以一个方向结合聚合酶，以 $5’\rightarrow3’$ 方向进行转录）。<br>(a)<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-4-b.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-4-b-93e53b.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>链(图 3-4n)。</p>
+<p>转录起点是指与新生 RNA 链第一个核苷酸相对应 DNA 链上的碱基, 研究证实它通常为一个嘌呤。起点前面, 即 5’ 端的序列称为上游序列 (upstream), 而其后即 3’ 端的序列称为下游序列 (downstream)。在描述碱基的位置时, 一般用数字表示, 起点为 +1, 下游方向依次为 +2、+3……, 上游方向依次为 -1、-2、-3……。序列的书写方向通常是固定的, 使转录从左 (上游) 向右 (下游) 进行, mRNA 同样按照 5’ → 3’ 方向书写。</p>
+<h2 id="3-3-转录的基本过程"><a href="#3-3-转录的基本过程" class="headerlink" title="3.3 转录的基本过程"></a>3.3 转录的基本过程</h2><p>无论是原核还是真核细胞,RNA链的合成都具有以下几个特点(图3-5):RNA按 $5’\rightarrow3’$ 方向合成,以DNA双链中的模板链(反义链)为模板,在RNA聚合酶催化下,以4种核苷三磷酸(NTP)为原料,根据碱基配对原则(A-U、T-A、G-C、C-G),各核苷酸间通过形成磷酸二酯键相连,不需要引物的参与,合成的RNA具有与DNA编码链(有义链)相同的序列。转录的基本过程包括模板识别、转录起始、通过启动子及转录的延伸和终止(图3-6)。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-5.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图 3-5 大肠杆菌中依赖于 DNA 的 RNA 转录过程图示<br>(a) 在转录的任意时刻, 转录泡中单链 DNA 的长度为 17 个碱基左右, 被聚合形成复合物所保护的 DNA 序列为 35 个碱基左右; (b) 由于基因转录所引起的 DNA 超螺旋结构变化。</p>
+<p>图 3-6 转录周期包括 RNA 聚合酶对模板的识别、起始、延伸和终止几个阶段<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-6.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<h2 id="3-3-1-模板识别"><a href="#3-3-1-模板识别" class="headerlink" title="3.3.1 模板识别"></a>3.3.1 模板识别</h2><p>模板识别(template recognition)阶段主要指 RNA 聚合酶识别启动子序列并与启动子 DNA 双链特异性结合的过程。启动子是基因转录起始所必需的一段 DNA 序列, 是基因表达调控的上游顺式作用元件之一。</p>
+<h2 id="3-3-2-转录起始"><a href="#3-3-2-转录起始" class="headerlink" title="3.3.2 转录起始"></a>3.3.2 转录起始</h2><p>转录起始(initiation)不需要引物。RNA聚合酶结合在启动子上以后,使启动子附近的DNA双链解旋并解链,形成转录泡以促使底物核糖核苷酸与模板DNA的碱基配对:转录起始就是RNA链上第一个磷酸二酯键的产生。</p>
+<h2 id="3-3-3-转录延伸"><a href="#3-3-3-转录延伸" class="headerlink" title="3.3.3 转录延伸"></a>3.3.3 转录延伸</h2><p>RNA 的合成是连续的过程。一旦进入转录延伸(elongation)阶段,底物 NTP 不断被添加到新生 RNA 链的 3’-OH 端,随着转录泡复合物与 RNA 聚合酶沿着 DNA 模板向前移动,DNA 双螺旋持续解开,暴露出新的单链 DNA 模板,新生 RNA 链的 3’ 端不断延伸,在解链区形成 RNA-DNA 杂合物。而在解链区的后面,DNA 模板链与其原先配对的编码链重新结合成为双螺旋,RNA 链被逐步释放。</p>
+<p>现在常用 DNA 转录循环(transcription cycle)假说来解释 RNA 链的延伸。首先,三磷酸核苷酸(NTP)填补了开放的底物位点并在活性位点形成磷酯键;此时,处于 RNA 聚合酶Ⅱ活性位点的核酸发生”移位”,其中连接区的 $\alpha$ 螺旋结构从笔直变为弯折再恢复为笔直状态,为下一轮 RNA 合成留出了空的底物位点。</p>
+<h2 id="3-3-4-转录终止"><a href="#3-3-4-转录终止" class="headerlink" title="3.3.4 转录终止"></a>3.3.4 转录终止</h2><p>当 RNA 链延伸到转录终止 (termination) 位点时, RNA 聚合酶不再形成新的磷酸二酯键, RNA-DNA 杂合物分离, 转录泡瓦解, DNA 恢复成双链状态, 而 RNA 聚合酶和 RNA 链都被从模板上释放出来, 这就是转录的终止。</p>
+<h2 id="3-4-原核生物与真核生物的转录及产物特征比较"><a href="#3-4-原核生物与真核生物的转录及产物特征比较" class="headerlink" title="3.4 原核生物与真核生物的转录及产物特征比较"></a>3.4 原核生物与真核生物的转录及产物特征比较</h2><h2 id="3-4-1-原核生物与真核生物转录过程比较"><a href="#3-4-1-原核生物与真核生物转录过程比较" class="headerlink" title="3.4.1 原核生物与真核生物转录过程比较"></a>3.4.1 原核生物与真核生物转录过程比较</h2><p>原核生物与真核生物基因转录具有一定的相似性,但也存在以下几方面的差异(表3-1):</p>
+<p>① 只有一种 RNA 聚合酶参与所有类型的原核生物基因转录,而真核生物有 3 种以上的 RNA 聚合酶来负责不同类型的基因转录,合成不同类型的、在细胞核内有不同定位的 RNA。</p>
+<p>② 转录产物有差别。原核生物的初始转录产物大多数是编码序列,与蛋白质的氨基酸序列呈线性关系;而真核生物的初始转录产物很大,含有内含子序列,成熟的 mRNA 只占初始转录产物的一小部分。</p>
+<p>表 3-1 原核生物与真核生物转录比较</p>
+<div class="md-table-scroll"><table><tbody><tr><td>原核生物</td><td>真核生物</td></tr><tr><td>一种RNA聚合酶参与转录</td><td>3种以上RNA聚合酶参与转录</td></tr><tr><td>初始转录产物大多是编码序列,与蛋白质的氨基酸序列呈线性关系</td><td>初始转录产物很大,含内含子序列,成熟的mRNA只占初始转录产物的一小部分</td></tr><tr><td>初始转录产物不需要剪接加工就可行使翻译模板的功能</td><td>初始转录产物需要经过剪接、修饰等加工才能成为成熟的mRNA</td></tr><tr><td>转录和翻译发生在同一个细胞空间,这两个过程几乎是同步进行的</td><td>真核细胞mRNA的合成和功能表达发生在不同的空间和时间范畴内</td></tr></tbody></table></div>
+
+<h2 id="3-4-原核生物与真核生物的转录及产物特征比较-1"><a href="#3-4-原核生物与真核生物的转录及产物特征比较-1" class="headerlink" title="3.4 原核生物与真核生物的转录及产物特征比较"></a>3.4 原核生物与真核生物的转录及产物特征比较</h2><p>和真核生物转录及翻译的比较</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-7.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>③ 原核生物的初始转录几乎不需要剪接加工,就可直接作为成熟的 mRNA 进一步行使翻译模板的功能;真核生物转录产物需要经过剪接、修饰等转录后加工成熟过程才能成为成熟的 mRNA。</p>
+<p>④ 在原核生物细胞中,转录和翻译不仅发生在同一个细胞空间里,而且这两个过程几乎是同步进行的,蛋白质合成往往在 mRNA 刚开始转录时就被引发了。真核生物 mRNA 的合成和蛋白质的合成则发生在不同的空间和时间范畴内(图 3-7)。</p>
+<h2 id="3-4-2-原核生物-mRNA-的特征"><a href="#3-4-2-原核生物-mRNA-的特征" class="headerlink" title="3.4.2 原核生物 mRNA 的特征"></a>3.4.2 原核生物 mRNA 的特征</h2><h2 id="1-原核生物-mRNA-的半衰期短"><a href="#1-原核生物-mRNA-的半衰期短" class="headerlink" title="1. 原核生物 mRNA 的半衰期短"></a>1. 原核生物 mRNA 的半衰期短</h2><p>细菌基因的转录与翻译是紧密相联的,基因转录一旦开始,核糖体就结合到新生mRNA链的5’端,启动蛋白质合成,而此时该mRNA的3’端还远远没有转录完全(图3-8)。在电子显微镜下,我们可以看到一连串核糖体紧紧跟在RNA聚合酶后面。</p>
+<p>绝大多数细菌 mRNA 的半衰期短得令人吃惊, mRNA 的降解紧随着蛋白质翻译过程发生。现在一般认为, 转录开始 1 min 后, 降解就开始了, 这就是说, 当一个 mRNA 的 5’ 端开始降解时, 其 3’ 端部分可能仍在合成或被翻译。mRNA 降解的速度大概只有转录或翻译速度的一半。科学家发现每过大约 2 min, 体系中出现新生蛋白质的速度就下降 50%。</p>
+<p>因为基因转录和多肽链延伸的速度基本相同,所以细胞内某一基因产物(蛋白质)的多少决定于转录和翻译的起始效率,以大肠杆菌色氨酸合成酶基因为例,平均每分钟约有15次转录起始,这些mRNA链从生成到降解平均被翻译10次,所以,稳定状态下细</p>
+<p>第3章 生物信息的传递(上)——从DNA到RNA胞中每分钟生成 150 个多肽。在讨论 mRNA 半衰期的时候我们不应忘记, 所有这一切都只是统计学上的平均值。事实上, 新生 mRNA 与成熟 mRNA 受核酸酶 “攻击” 的概率是相等的。所以, 有些 mRNA 链可能被翻译了许多次, 而同一群体中的另外一些 mRNA 分子可能根本没有被翻译。虽然 mRNA 的寿命具有随机性, 但某一 mRNA 的翻译产量却是大致稳定的。</p>
+<ol>
+<li>许多原核生物 mRNA 可能以多顺反子的形式存在</li>
+</ol>
+<p>细菌 mRNA 可以同时编码不同的蛋白质, 我们把只编码一个蛋白质的 mRNA 称为单顺反子 mRNA (monocistronic mRNA), 把编码多个蛋白质的 mRNA 称为多顺反子 mRNA (polycistronic mRNA)。多顺反子 mRNA 是一组相邻或相互重叠基因的转录产物(图 3-9), 这样的一组基因可被称为一个操纵子 (operon), 是生</p>
+<p>图 3-8 在细菌中. mRNA 的转录. 翻译和降解几乎同时进行, mRNA 的半衰期非常短<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-9.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>物体内的重要遗传单位,如大肠杆菌乳糖操纵子转录成编码3条多肽的多顺反子mRNA,经过翻译生成β-半乳糖苷酶、透过酶及乙酰基转移酶。</p>
+<p>几乎所有 mRNA 都可以被分成 3 部分: 编码区和位于 AUG 之前的 5’ 端上游非编码区,以及位于终止密码子之后不翻译的 3’ 端下游非编码区。编码区从起始密码子 AUG 开始,经一连串编码氨基酸的密码子直至终止密码子。对于第一个顺反子来说,一旦 mRNA 的 5’ 端被合成,翻译起始位点即可与核糖体相结合,而后面几个顺反子翻译的起始就会受其上游顺反子结构的调控。一种情况是,第一个蛋白质合成终止以后,核糖体分解成大、小亚</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-9-%E8%AE%B8%E5%A4%9A%E5%8E%9F%E6%A0%B8%E7%BB%86%E8%83%9E%E7%9A%84mRNA%E4%BB%A5%E5%A4%9A%E9%A1%BA%E5%8F%8D%E5%AD%90%E5%BD%A2%E5%BC%8F%E5%AD%98%E5%9C%A8.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图 3-9 许多原核细胞的 mRNA 以多顺反子形式存在</p>
+<p>图3-10 原核生物多顺反子基因中后续编码区翻译起始受顺反子之间距离的影响</p>
+<p>(a) 当两个顺反子之间距离较远时, 前一顺反子翻译的终止与后一顺反子翻译的起始是相互独立的; (b) 当两个顺反子之间距离较近时, 前一顺反子翻译的终止与后一顺反子翻译的起始相衔接, 30S 小亚基始终与 mRNA 结合, 只有 50S 大亚基可能与 mRNA 分离。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-9-%E8%AE%B8%E5%A4%9A%E5%8E%9F%E6%A0%B8%E7%BB%86%E8%83%9E%E7%9A%84mRNA%E4%BB%A5%E5%A4%9A%E9%A1%BA%E5%8F%8D%E5%AD%90%E5%BD%A2%E5%BC%8F%E5%AD%98%E5%9C%A8-cba8e6.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>基,脱离 mRNA 模板,第二个蛋白质的翻译必须等到新的小亚基和大亚基与该蛋白质起始密码子相结合后才可能开始(图 3-10a)。当然,前一个多肽翻译完成以后,核糖体大、小亚基分离,小亚基也可能不离开 mRNA 模板,而是迅速与游离的大亚基结合,启动第二个多肽的合成(图 3-10b)。</p>
+<h2 id="3-原核生物-mRNA-的-5’-端无帽结构-3’-端没有或只有较短的多-A-结构"><a href="#3-原核生物-mRNA-的-5’-端无帽结构-3’-端没有或只有较短的多-A-结构" class="headerlink" title="3. 原核生物 mRNA 的 5’ 端无帽结构, 3’ 端没有或只有较短的多 (A) 结构"></a>3. 原核生物 mRNA 的 5’ 端无帽结构, 3’ 端没有或只有较短的多 (A) 结构</h2><p>原核生物起始密码子AUG上游7~12个核苷酸处有一被称为SD序列(Shine-Dalgarnosequence)的保守区,因为该序列与16S rRNA 3’端反向互补,所以被认为在核糖体与mRNA的结合过程中起作用(图3-11)。如果把16S rRNA 3’端的6个保守核苷酸反过来写,则为3’-UCCUCC-5’。所有已知大肠杆菌mRNA的翻译起始区都含有4~5个(至少3个)对应于SD序列的核苷酸。</p>
+<p>细菌 16S rRNA 的 3’ 端既非常保守, 又高度自我互补, 能形成发夹结构。与 mRNA 互补的部分也参与这个”发夹”的形成。表面上看这似乎是一对矛盾, 一个序列不可能在</p>
+<p>图 3-11 SD 序列与 16S rRNA 3’ 端反向互补，在核糖体与 mRNA 的结合过程中发挥重要作用</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-11.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>形成”发夹”的同时又与 mRNA 相结合。事实上, 这正好说明序列配对是动态的、可变的,翻译起始复合物的生成很可能包含了 rRNA 3’ 端的发夹结构的改变, 启动蛋白质翻译以后, mRNA-rRNA 杂合体被打破, 为核糖体在 mRNA 模板上的移动创造了条件。</p>
+<h2 id="3-4-3-真核生物-mRNA-的特征"><a href="#3-4-3-真核生物-mRNA-的特征" class="headerlink" title="3.4.3 真核生物 mRNA 的特征"></a>3.4.3 真核生物 mRNA 的特征</h2><p>凡是编码功能蛋白的真核基因都通过 RNA 聚合酶 II 进行转录, 真核基因几乎都是单顺反子, 只包含一个蛋白质的信息, 其长度在几百到几千个核苷酸之间。一个完整的基因, 不但包括编码区 (coding region), 还包括 5’ 和 3’ 端长度不等的特异性序列, 它们虽然不编码氨基酸, 却在基因表达的过程中起着重要作用。所以, “基因” 的分子生物学定义是: 产生一条多肽链或功能 RNA 所必需的全部核苷酸序列! 真核生物 mRNA 结构上的最大特征是 5’ 端的帽及 3’ 的多 (A) 结构 (图 3-12a)。</p>
+<h2 id="1-真核生物-mRNA-的-5’-端存在”帽”结构"><a href="#1-真核生物-mRNA-的-5’-端存在”帽”结构" class="headerlink" title="1. 真核生物 mRNA 的 5’ 端存在”帽”结构"></a>1. 真核生物 mRNA 的 5’ 端存在”帽”结构</h2><p>真核生物(不包括叶绿体和线粒体)的 mRNA 5’ 端都是经过修饰的,基因转录一般从嘌呤(主要是 A,也可能是 G)起始,第一个核苷酸保留了 5’ 端的三磷酸基团并能通过其 3’-OH 位与下一个核苷酸的 5’ 磷酸基团形成二酯键,转录产物的起始序列为 pppApNpNp……。然而,如果在体外用核酸酶处理成熟 mRNA,其 5’ 端并不产生预期的核苷三磷酸,而产生以 5’→5’ 三磷酸基团相连的二核苷酸,5’ 终端是一个在 mRNA 转录后加上去的甲基化鸟嘌呤(图 3-12)。</p>
+<p>mRNA 5’ 端加 “G” 的反应是由鸟苷酸转移酶完成的, 这个反应非常迅速, 很难在体外或体内测得 5’ 自由三磷酸基团的存在。据测算, 在新生 mRNA 链达到 50 个核苷酸之前, 甚至可能在 RNA 聚合酶 II 离开转录起始位点之前, 帽结构就已加到 mRNA 的第一个核苷酸上了。这就是说, mRNA 几乎一诞生就是戴上帽的。一般认为, 帽结构是 GTP 和原 mRNA 5’ 三磷酸腺苷 (或鸟苷) 缩合反应的产物, 新加上的 G 与 mRNA 链上所有其他核苷酸方向正好相反, 像一顶帽倒扣在 mRNA 链上, 故而得名。</p>
+<p>mRNA 的帽结构常常被甲基化。第一个甲基出现在所有真核细胞的 mRNA 中(单细胞真核生物 mRNA 主要是这个结构), 由鸟嘌呤 $-N^{7}$ -甲基转移酶 (guanine- $N^{7}$ -methyltransferase) 催化, 称为零类帽 (cap0)。帽结构的下一步是在第二个核苷酸 (原 mRNA $5’$ 第一位) 的 $2’$ -OH 位上加另一个甲基, 这步反应由 $2’$ -O-甲基转移酶完成。一般把有这两个甲基的结构称为 1 类帽 (cap1), 真核生物中以这类帽结构为主。当 mRNA 原第一位核苷酸是腺嘌呤时, 其 $N^{6}$ 位有时也被甲基化, 这一反应只能在 $2’$ -OH 被甲基化以后才能发生。在某些生物细胞内, mRNA 链上的原第二个核苷酸的 $2’$ -OH 位也可能被甲基化, 因为这个反应只以带有 1 类帽的 mRNA 为底物, 所以被称为 2 类帽 (cap2)。有 2 类帽的 mRNA 只占有帽 mRNA 总量的 $15%$ 以下。</p>
+<p>帽结构可能使 mRNA 免遭核酸酶的破坏。实验表明, 去除珠蛋白 mRNA 5’ 端的 7-甲基鸟嘌呤后, 该 mRNA 分子的翻译活性和稳定性都明显下降。而且, 有帽结构的 mRNA 更容易被蛋白质合成的起始因子所识别, 从而促进蛋白质的合成。在呼肠孤病</p>
+<p>图 3-12 真核生物 mRNA 结构</p>
+<p>(a) 真核生物 mRNA 的结构特征; (b) 真核生物 mRNA 的帽结构。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-12-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9mRNA%E7%BB%93%E6%9E%84.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>毒中, 含甲基化 5’ 端 mRNA 的蛋白质合成速度比不含甲基的 mRNA 要快。用化学方法除去 5’ 端的甲基以后, 上述 mRNA 作为蛋白质合成模板的活性消失, 说明 mRNA 5’ 端甲基化的帽是翻译所必需的。已经发现在呼肠孤病毒中无 m $^{7}$ G 的 mRNA 不能与核糖体 40S 小亚基结合, 证明甲基化的帽结构可能是蛋白质合成起始信号的一部分。</p>
+<h2 id="2-绝大多数真核生物-mRNA-具有多-A-尾"><a href="#2-绝大多数真核生物-mRNA-具有多-A-尾" class="headerlink" title="2. 绝大多数真核生物 mRNA 具有多(A)尾"></a>2. 绝大多数真核生物 mRNA 具有多(A)尾</h2><p>除组蛋白基因外,真核生物 mRNA 的 3’ 端都有多 (A) 序列,其长度因 mRNA 种类不同而变化,一般为 40 ~ 200 个。多 (A) 序列是在转录后加上去的,可能在细胞核中的核内不均一 RNA 阶段就已经加上了多 (A)。目前还不清楚 RNA 聚合酶 II 所转录基因的精确终止位点,但研究发现,几乎所有真核基因的 3’ 端转录终止位点上游 15 ~ 30 bp 处的保守序列 AAUAAA 对于初级转录产物的准确切割及加多 (A) 是必需的 (图 3-13)。实验证明,尽管多 (A) 位点及 AATAAA 的存在对于基因的转录和成熟意义重大,但 RNA 聚合酶 II 却不在多 (A) 位点终止,而往往继续转录,因此,大部分已知基因的初始转录产物拥有</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-13.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图 3-13 真核生物 mRNA 的加多( $\Lambda$ ) 反应<br>CPSF, 切割和聚腺苷酸环化特异性因子; CstF, 切割刺激因子。</p>
+<p>多(A)位点下游 0.5~2 kb 核苷酸序列。</p>
+<p>加多(A)时需要由内切酶切开 mRNA 3’ 端的特定部位,然后由多(A)合成酶催化多腺苷酸的反应。如果将上述保守序列切除,该基因组合的转录活性就会消失。点突变实验将 AAUAAA 变为 AAGAAA,虽然维持了该基因的转录活性,却发现 mRNA 的剪接加工受阻,因而没有功能性 mRNA 产生。</p>
+<p>多(A)是 mRNA 由细胞核进入细胞质所必需的形式,它大大提高了 mRNA 在细胞质中的稳定性。当 mRNA 刚从细胞核进入细胞质时,其多(A)尾一般比较长,随着 mRNA 在细胞质内逗留时间延长,多(A)尾逐渐变短消失,mRNA 进入降解过程。此外,翻译起始因子 eIF4F 和包绕在多(A)尾的多(A)结合蛋白之间的相互作用使真核 mRNA 保持环状,因而多(A)还能增强 mRNA 的可翻译能力。多(A)尾还参与 mRNA 中距离它最近的内含子的剪接,以及通过选择性地加尾反应(alternative tailing)调节基因的表达。</p>
+<p>真核生物 mRNA 大都具有多(A)尾,这一特性已被广泛应用于分子克隆。常用寡聚dT 片段与 mRNA 上的多(A)相配对,作为逆转录酶合成第一条 cDNA 链的引物。</p>
+<p>尽管大部分真核 mRNA 有多(A)尾,细胞中仍可有多达 1/3 没有多(A)的 mRNA,我们把带有多(A)的 mRNA 称为多(A) $^{+}$ ,而把没有多(A)的 mRNA 称为多(A) $^{-}$ 。现已查明,约 1/3 的 (A) $^{-}$ mRNA 编码了不同形式的组蛋白,其余 2/3 的多(A) $^{-}$ mRNA 可能带有与多(A) $^{+}$ 组分相同的遗传信息。</p>
+<h2 id="3-5-原核生物的转录"><a href="#3-5-原核生物的转录" class="headerlink" title="3.5 原核生物的转录"></a>3.5 原核生物的转录</h2><h2 id="3-5-1-原核生物-RNA-聚合酶"><a href="#3-5-1-原核生物-RNA-聚合酶" class="headerlink" title="3.5.1 原核生物 RNA 聚合酶"></a>3.5.1 原核生物 RNA 聚合酶</h2><p>在细菌中,一种 RNA 聚合酶几乎负责所有 mRNA、rRNA 和 tRNA 的合成。大多数原核生物 RNA 聚合酶的组成是相同的,大肠杆菌 RNA 聚合酶是原核生物 RNA 聚合酶中研</p>
+<h2 id="3-5-原核生物的转录-1"><a href="#3-5-原核生物的转录-1" class="headerlink" title="3.5 原核生物的转录"></a>3.5 原核生物的转录</h2><p>图 3-14 大肠杆菌 RNA 聚合酶的主要成分与功能<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-14-%E5%A4%A7%E8%82%A0%E6%9D%86%E8%8F%8CRNA%E8%81%9A%E5%90%88%E9%85%B6%E7%9A%84%E4%B8%BB%E8%A6%81%E6%88%90%E5%88%86%E4%B8%8E%E5%8A%9F%E8%83%BD.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>究最清楚的酶, 它首先由 2 个 $\alpha$ 亚基、一个 $\beta$ 亚基、一个 $\beta’$ 亚基和一个 $\omega$ 亚基组成核心酶, 然后加上一个 $\sigma$ 亚基后则成为聚合酶全酶(holoenzyme), 分子量为 $4.65 \times 10^{5}$ (图 3-14)。</p>
+<p>原核生物转录的起始需要全酶参与,由 $\sigma$ 因子辨认起始点,延长过程仅需要核心酶的催化。转录的真实性取决于有特异的转录起始位点,转录起始后按照碱基互补原则准确地转录模板 DNA 序列及具有特异的终止部位。RNA 的合成是在模板 DNA 的启动子位点上起始的,而这个任务是靠 $\sigma$ 因子来完成的。RNA 聚合酶的核心酶虽可合成 RNA,但不能找到模板 DNA 上的起始位点,所以核心酶的产物是不均一的,而且 DNA 的两条链都可作为核心酶的模板。只有带 $\sigma$ 因子的全酶才能专一地与 DNA 上的启动子结合,选择其中一条链作为模板,合成 RNA 链。 $\sigma$ 因子的作用在于帮助转录起始,因此也称为起始亚基,一旦转录开始,它就脱离了起始复合物,而由核心酶负责 RNA 链的延伸。研究发现,由 $\beta$ 和 $\beta’$ 亚基组成了聚合酶的催化中心,它们在序列上与真核生物 RNA 聚合酶的两个大亚基有同源性。 $\beta$ 亚基能与模板 DNA、新生 RNA 链及核苷酸底物相结合(表 3-2)。</p>
+<p>α亚基可能与核心酶的组装及启动子识别有关;并参与RNA聚合酶和部分调节因子的相互作用。实验证明,T4噬菌体感染大肠杆菌后对α亚基的一个精氨酸残基进行ADP糖基化修饰,造成RNA聚合酶全酶对启动子亲和力降低。</p>
+<p>$\sigma$ 因子的作用是负责模板链的选择和转录的起始,它是酶的别构效应物,使酶专一性识别模板上的启动子。在细胞内 $\sigma$ 因子的数量只有核心酶的 30%,因此任何时候只有三分之一的聚合酶以全酶形式存在。 $\sigma$ 因子可以极大地提高 RNA 聚合酶对启动子区 DNA序列的亲和力 $^{(图3-15)}$ ，酶底结合常数提高 $10^{3}$ 倍，酶底复合物的半衰期可达数小时甚至数十小时。 $\sigma$ 因子还能使RNA聚合酶与模板DNA上非特异性位点的结合常数降低 $10^{4}$ 倍，使非特异性位点酶底复合物的半衰期小于1 s。核心酶在T7噬菌体DNA上约有1300个结合位点，平均结合常数为 $2\times10^{11}$ 。加入 $\sigma$ 因子后则出现两类位点，大部分位点的结合常数在 $10^{8}\sim10^{9}$ 之间，但有8个位点的结合常数为 $10^{12}\sim10^{14}$ ，从而表明 $\sigma$ 因子不仅增加聚合酶对启动子的亲和力，还降低了它对非专一位点的亲和力。</p>
+<p>表 3-2 大肠杆菌 RNA 聚合酶的组成分析</p>
+<div class="md-table-scroll"><table><tbody><tr><td>亚基</td><td>基因</td><td>分子量</td><td>亚基数</td><td>组分</td><td>功能</td></tr><tr><td> $\alpha$ </td><td>rpoA</td><td> $3.65 \times 10^{4}$ </td><td>2</td><td>核心酶</td><td>核心酶组装,启动子识别。</td></tr><tr><td> $\beta$ </td><td>rpoB</td><td> $1.51 \times 10^{5}$ </td><td>1</td><td>核心酶</td><td rowspan="2"> $\beta$ 和 $\beta'$ 共同形成RNA合成的活性中心,与DNA模板结合,催化磷酸二酯键形成。</td></tr><tr><td> $\beta'$ </td><td>rpoC</td><td> $1.55 \times 10^{5}$ </td><td>1</td><td>核心酶</td></tr><tr><td> $\omega$ </td><td>rpoZ</td><td> $11 \times 10^{4}$ </td><td>1</td><td>核心酶</td><td>促进RNA聚合酶的组装以及稳定已经组装好的RNA聚合酶</td></tr><tr><td> $\sigma$ </td><td>rpoD</td><td> $7.0 \times 10^{4}$ </td><td>1</td><td> $\sigma$ 因子</td><td>存在多种 $\sigma$ 因子,用于识别不同的启动子,促进转录起始</td></tr></tbody></table></div>
+
+<p>在某些细菌细胞内含有能识别不同启动子的 $\sigma$ 因子,以适应不同生长发育阶段的要求,调控不同基因转录的起始(表3-3)。</p>
+<p>表 3-3 大肠杆菌中的 $\sigma$ 因子能识别并与启动子区的特异性序列相结合</p>
+<div class="md-table-scroll"><table><tbody><tr><td>因子</td><td>基因</td><td>功能</td><td>-35区</td><td>间隔(bp)</td><td>-10区</td></tr><tr><td> $\sigma^{70}$ </td><td>rpoD</td><td>广泛</td><td>TTGACA</td><td>16~18</td><td>TATAAT</td></tr><tr><td> $\sigma^{32}$ </td><td>rpoH</td><td>热休克</td><td>TCTCNCCCTTGAA</td><td>13~15</td><td>CCCCATNTA</td></tr><tr><td> $\sigma^{54}$ </td><td>rpoN</td><td>氮代谢</td><td>CTGGNA</td><td>6</td><td>TTGCA</td></tr><tr><td> $\sigma^{28}$ </td><td>fliA</td><td>鞭毛</td><td>CTAAA</td><td>15</td><td>GCCGATAA</td></tr></tbody></table></div>
+
+<p>与大肠杆菌相比,T3 和 T7 噬菌体的 RNA 聚合酶在结构上要简单得多,它们由一条多肽链组成,分子量小于 $1 \times 10^{5}$ 。在 $37^{\circ} \mathrm{C}$ 下,它们的转录速度为每秒 200 个核苷酸。但是,这种简单的聚合酶只能起始存在于噬菌体中的几个启动子的转录。因此,大肠杆菌 RNA 聚合酶组成上的复杂性可能反映了它必须与大量蛋白质因子相互作用这个事实。</p>
+<p>当 RNA 聚合酶按 $5’\rightarrow3’$ 方向延伸 RNA 链时, 解旋的 DNA 区域也随之移动。聚合酶可以横跨约 40 个碱基对, 而解旋的 DNA 区域大约是 17 个碱基对。自由核苷酸能被聚合酶加到新生的 RNA 链上, 并形成 DNA-RNA 杂合体。随着聚合酶在模板上的运动, 靠近 $3’$ 端的 DNA 不断解旋, 同时在 $5’$ 端重新形成 DNA 双链, 将 RNA 链挤出 DNA-RNA 杂合体。RNA 的 $3’$ 端有 20~30 个核苷酸与 DNA 或聚合酶相结合 (图 3-5)。</p>
+<h2 id="3-5-2-原核生物启动子结构"><a href="#3-5-2-原核生物启动子结构" class="headerlink" title="3.5.2 原核生物启动子结构"></a>3.5.2 原核生物启动子结构</h2><p>启动子区是 RNA 聚合酶的结合区, 其结构直接关系到转录的效率。那么, 启动子区</p>
+<h2 id="3-5-原核生物的转录-2"><a href="#3-5-原核生物的转录-2" class="headerlink" title="3.5 原核生物的转录"></a>3.5 原核生物的转录</h2><p>图 3-15 转录启动子区 DNA 序列的分离纯化过程图示<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-5-b2e9fd.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>有什么结构特点呢？</p>
+<p>Pribnow 设计了一个实验, 他把 RNA 聚合酶全酶与模板 DNA 结合后, 用 DNase I 水解 DNA, 然后用酚抽提, 沉淀纯化 DNA 后得到一个被 RNA 聚合酶保护的 DNA 片段 (图 3-15), 有 41~44 个核苷酸对。他先后分离了 fd 噬菌体、T7 噬菌体的 A₂ 及 A₃ 启动子、λ 噬菌体的 Pᵣ 启动子及大肠杆菌乳糖操纵子的 UV5 启动子等 5 段被酶保护的区域, 并进行了序列分析, 以后又有人做了 50 多个启动子的序列分析后发现, 在被保护区内有一个由 5 个核苷酸组成的共同序列, 是 RNA 聚合酶的紧密结合点, 现在称为 Pribnow 区 (Pribnow box), 这个区的中央大约位于起点上游 10 bp 处, 所以又称为 -10 区。</p>
+<p>提纯被保护的片段后却发现,RNA 聚合酶并不能重新</p>
+<p>结合或并不能选择正确的起始点,表明在保护区外可能还存在与 RNA 聚合酶对启动子的识别有关的序列。果然,科学家不久就从噬菌体的左、右启动子 $P_{L}$ 及 $P_{R}$ 和 SV40 启动子的 $-35$ bp 附近找到了另一段共同序列:TTGACA。经过数年的努力,分析了 46 个大肠杆菌启动子的序列以后确证绝大部分启动子都存在这两段共同序列,即位于 $-10$ bp 处的 TATA 区和 $-35$ bp 处的 TTGACA 区 (图 3-16)。现已查明, -10 位的 TATA 区和 $-35$ 位的 TTGACA 区是 RNA 聚合酶与启动子的结合位点,能与 $\sigma$ 因子相互识别而具有很高的亲和力。</p>
+<p>$$<br>\begin{array}{r l r} &amp; {- 3 5 \text {区}} &amp; {- 1 0 \text {区}} \ &amp; {\dots \dots \mathrm{T} _ {8 5} \mathrm{T} _ {8 3} \mathrm{G} _ {8 1} \mathrm{A} _ {6 1} \mathrm{C} _ {6 9} \mathrm{A} _ {5 2} \dots \dots \mathrm{T} _ {8 9} \mathrm{A} _ {8 9} \mathrm{T} _ {5 0} \mathrm{A} _ {6 5} \mathrm{A} _ {1 0 0} \dots \dots} \end{array}<br>$$</p>
+<h2 id="3-5-3-原核生物启动子中-10-区与-35-区的最佳间距"><a href="#3-5-3-原核生物启动子中-10-区与-35-区的最佳间距" class="headerlink" title="3.5.3 原核生物启动子中 -10 区与 -35 区的最佳间距"></a>3.5.3 原核生物启动子中 -10 区与 -35 区的最佳间距</h2><p>在原核生物中，-35区与-10区之间的距离通常是 $16\sim 19$ 碱基对，小于15碱基对或大于20碱基对都会降低启动子的活性(图3-17)。保持启动子这两段序列以及它们之间的距离是十分重要的，否则就会改变它所控制基因的表达水平。这可以被解释为一旦-35区相对于-10区旋转所产生的超螺旋发生改变(增减一个碱基对就会使两者之间的夹角发生 $36^{\circ}$ 的变化)，若要使酶与DNA在这个区域内保持正确的取向，就必须使二者之一发生扭曲，需要增加结合自由能。</p>
+<p>在细菌中常见两种启动子突变。一种叫下降突变(down mutation)，如果把Pribnow区从TATAAT变成AATAAT就会大大降低其结构基因的转录水平。另一类突变叫上升突变(up mutation)，即增加Pribnow区共同序列的同一性。例如，在乳糖操纵子的启动子中，将其Pribnow区从TATGTT变成TATATT，就会提高启动子的效率，提高乳糖操纵子基因的转录水平。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-17.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-16-%E5%A4%A7%E8%82%A0%E6%9D%86%E8%8F%8CRNA%E8%81%9A%E5%90%88%E9%85%B6%E5%85%A8%E9%85%B6%E6%89%80%E8%AF%86%E5%88%AB%E7%9A%84%E5%90%AF%E5%8A%A8%E5%AD%90%E5%8C%BA.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图 3-16 大肠杆菌 RNA 聚合酶全酶所识别的启动子区</p>
+<div class="md-table-scroll"><table><tbody><tr><td colspan="2">上游元件</td><td>3S区</td><td>间隔区</td><td>间隔区</td><td>转录起始位点</td></tr><tr><td colspan="5">理论上一致性序列</td><td>+1</td></tr><tr><td>NNAAAATTTTNTTTNAAAAANNN</td><td>N</td><td>TTGACA</td><td> $N_{17}$ </td><td> $N_6$ </td><td></td></tr><tr><td colspan="6">rrnBP1启动区序列</td></tr><tr><td>AGAAAATTATTTTAAATTTCCT</td><td>N</td><td>CTGTCA</td><td> $N_{16}$ </td><td> $N_8$ </td><td>A</td></tr><tr><td>trp</td><td></td><td>TTGACA</td><td> $N_{17}$ </td><td> $N_7$ </td><td>A</td></tr><tr><td>lac</td><td></td><td>TTTACA</td><td> $N_{17}$ </td><td> $N_6$ </td><td>A</td></tr><tr><td>recA</td><td></td><td>TTGATA</td><td> $N_{18}$ </td><td> $N_7$ </td><td>A</td></tr><tr><td>araBAD</td><td></td><td>CTGACG</td><td> $N_{18}$ </td><td> $N_6$ </td><td>A</td></tr></tbody></table></div>
+
+<p>图3-17 -10区和-35区的最佳距离</p>
+<h2 id="3-5-4-原核生物-RNA-聚合酶对启动子的识别和结合"><a href="#3-5-4-原核生物-RNA-聚合酶对启动子的识别和结合" class="headerlink" title="3.5.4 原核生物 RNA 聚合酶对启动子的识别和结合"></a>3.5.4 原核生物 RNA 聚合酶对启动子的识别和结合</h2><p>大肠杆菌 RNA 聚合酶与启动子的相互作用主要包括启动子区的识别、酶与启动子的</p>
+<p>结合及 $\sigma$ 因子的结合与解离。</p>
+<p>RNA 聚合酶全酶首先和非特异性 DNA 分子随机松散地结合, 沿着 DNA 分子滑动并搜索启动子序列, 在此过程中, $\sigma$ 因子能够协助 RNA 聚合酶找到启动子的特异性序列并提高聚合酶和 DNA 的亲和性。当 $\sigma$ 因子识别发现 -35 区序列时, 全酶与启动子结合变得紧密, 表明 RNA 聚合酶对启动子的识别和结合依赖于 $\sigma$ 因子, $\sigma$ 因子保证 RNA 聚合酶稳定地、特异性地结合到启动子序列。</p>
+<p>此外,RNA 聚合酶并不直接识别碱基对本身,而是通过氢键互补的方式加以识别。在启动子区 DNA 双螺旋结构中,腺嘌呤分子上的 $N^6$ 、鸟嘌呤分子上的 $N^2$ 、胞嘧啶分子上的 $N^4$ 都是氢键供体,而腺嘌呤分子上的 $N^7$ 、 $N^3$ ,胸腺嘧啶分子上的 $O^4$ 、 $O^2$ ,鸟嘌呤分子上的 $N^7$ 、 $O^6$ 、 $N^3$ 和胞嘧啶分子上的 $O^2$ 都是氢键受体。由于它们分别处于 DNA 双螺旋的大沟或小沟内,因此都具有特定的方位,而酶分子中也有处于特定空间构象的氢键受体与供体,当它们与启动子中对应的分子在一定距离内相互补时,就形成氢键,相互结合。这种氢键互补学说较为圆满地解释了启动子功能既受 DNA 序列影响,又受其构象影响这一事实。当保守区某些碱基的取代不影响 DNA 上氢键的方位和特性时,启动子原有的功能保持不变;当局部 DNA 构象或电荷密度改变影响了这些基团的相对方位时,启动子的功能就会受到影响。</p>
+<h2 id="3-5-5-原核生物-RNA-转录周期"><a href="#3-5-5-原核生物-RNA-转录周期" class="headerlink" title="3.5.5 原核生物 RNA 转录周期"></a>3.5.5 原核生物 RNA 转录周期</h2><p>原核生物 RNA 的转录周期可以用图 3-18 表示。下面详细介绍转录起始、延伸和终止过程中的主要特点。</p>
+<h2 id="1-RNA-转录起始"><a href="#1-RNA-转录起始" class="headerlink" title="1. RNA 转录起始"></a>1. RNA 转录起始</h2><p>① RNA 聚合酶全酶对启动子的识别,聚合酶与启动子可逆性结合形成封闭复合物 (closed complex)。此时,DNA 链仍处于双链状态。</p>
+<p>② 伴随着 DNA 构象上的重大变化,封闭复合物转变成开放复合物(open complex),聚合酶全酶所结合的 DNA 序列中有一小段双链被解开(图 3-18, 图 3-19)。对于强启动子来说,从封闭复合物到开放复合物的转变是不可逆的,是快反应。</p>
+<p>③ 开放复合物与最初的两个 NTP 相结合, 并在这两个核苷酸之间形成磷酸二酯键后转变成包括 RNA 聚合酶、DNA 和新生 RNA 的三元复合物 (ternary complex)。</p>
+<p>新生的三元复合物可以进入两条不同的反应途径:一是合成并释放2~9个核苷酸的短RNA转录物,即所谓的流产式起始。转录起始后直到形成9个核苷酸短链的过程是通过启动子阶段,此时RNA聚合酶一直处于启动子区,在这个阶段,聚合酶合成的产物长度小于10个核苷酸,这些转录产物如果不进一步延长,新生的RNA链与DNA模板链的结合不够牢固,就很容易从DNA链上掉下来并导致转录重新开始。其次,如果RNA聚合酶成功地合成9个以上核苷酸,就形成了一个稳定的三元复合物并离开启动子区,转录就进入正常的延伸阶段。所以,三元复合物通过某个启动子的时间代表这个启动子的起始转录作用的强弱。三元复合物通过这个启动子的时间越短,表明该基因转录起始的频率越高。含有 $\sigma$ 因子的聚合酶全酶的作用是启动子的选择和转录的起始, 而核心酶则在 RNA 链的延伸中发挥作用。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-18-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9RNA%E8%81%9A%E5%90%88%E9%85%B6%E7%9A%84%E8%BD%AC%E5%BD%95%E5%91%A8%E6%9C%9F.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图3-18 原核生物RNA聚合酶的转录周期</p>
+<h2 id="2-新生-RNA-链的延伸"><a href="#2-新生-RNA-链的延伸" class="headerlink" title="2. 新生 RNA 链的延伸"></a>2. 新生 RNA 链的延伸</h2><p>当 RNA 聚合酶催化新生的 RNA 链的长度达到 9~10 个核苷酸时, $\sigma$ 因子从转录复合物的 RNA 聚合酶全酶上脱落下来,RNA 聚合酶离开启动子,核心酶沿模板 DNA 链移动并使新生 RNA 链不断伸长的过程就是转录的延伸。</p>
+<p>进入延伸阶段,DNA 和聚合酶分子都发生了构象变化。RNA 聚合酶从起始阶段的全酶构象转变为延伸阶段的核心酶构象。核心酶与 DNA 模板的结合是松弛状的非特异性结合,有利于核心酶沿着 DNA 模板向前移动。当 $\sigma$ 因子存在时, $\beta$ 和 $\beta’$ 亚基的构象是与 DNA 专一性结合所要求的构象,不含有 $\sigma$ 因子的核心酶也失去了对特异性序列识别和结合的能力。</p>
+<p>由核心酶、DNA 和新生 RNA 所组成的转录延伸复合物是转录循环中一个十分重要的环节。与转录起始复合物相比,延伸复合物极为稳定,可以长时间地与 DNA 模板相结合而不解离。在延伸过程中,新生的 RNA 链中只有 8~9 个核苷酸与 DNA 模板保持碱基互补状态,RNA 链的其余部分则从模板上剥落下来,并从 RNA 出口通道离开。</p>
+<h2 id="3-RNA-转录的终止"><a href="#3-RNA-转录的终止" class="headerlink" title="3. RNA 转录的终止"></a>3. RNA 转录的终止</h2><p>一般情况下，RNA 聚合酶起始基因转录后，它就会沿着模板 $5’\rightarrow3’$ 方向不停地移动，合成 RNA 链，直到碰上终止信号时，RNA 聚合酶才停止加入新的核苷酸，与模板 DNA 相(hot pursuit)模型来解释。RNA合成起始以后，p因子吸附着在新生的RNA链S端的某个可能有序列或二级结构特征异性的位点上，利用ATP水解产生的能量，沿着S’→3’方向期转变泡靠近，其运动速度可能比RNA聚合酶移动的速度快些；当RNA聚合酶移动到终</p>
+<p>依赖型终止子占所有终止子的一半左右。目前认为，p因子是RNA聚合酶终止结系的重要辅助因子，它的作用机制可用”旁道”。</p>
+<p>的水解促使新生RNA链从三元转录复合物中解离出来,从而终止转录。大肠杆菌的p-</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE26.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE27.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE28.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>(q)<br>转录物折叠形成终止发芽</p>
+<p>(2) 一个不依赖于 $p$ 日子的终止子的序列位; (b) 不依赖于 $p$ 日子的终止子通过形型;</p>
+<h2 id="图示意图"><a href="#图示意图" class="headerlink" title="图示意图"></a>图示意图</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-21-a.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>因3-20基因导致缺失的特异型性</p>
+<p>RNA $^{S}$ , CCACCCGCCUAAAGCGGCUUUUUU3,</p>
+<p>DNA $^{3’}$ , $s’$ , $\left( \text{CCGAAGCCGCGCTAATGAGCAGCTTCTTTTTGACCAAA} \right)^{3’}$ 双向对称</p>
+<p>(e)</p>
+<p>结构, 因因而不能诱导转系的自发终止。体外转系实验表明, RNA聚合酶并不能识别这些转系终止信号而停止转系, 只有在加入大脑杆菌 p 因子后该聚合酶才能在 DNA 模板上准确地停止转系。p 因子是一个由 6 个相同亚基组成的六聚体 (图 3-21(a)), 它的分子量约为 ${2.8} \times  {10}^{5}$ ,它具有 NTP 酶和解弛旋酶活性,能水解各种核苷酸三磷酸,它通过催化 NTP</p>
+<p>依赖于 $p$ 因子的终止指有某些终止位点的 DNA 序列缺乏共性，而且不能形成强的发展</p>
+<h2 id="2-依赖于-P-园子的转变终止"><a href="#2-依赖于-P-园子的转变终止" class="headerlink" title="(2) 依赖于 P 园子的转变终止"></a>(2) 依赖于 P 园子的转变终止</h2><p>序列(至少4个U)长度的增加,较上效率逐步提高。</p>
+<p>个A-T碱基对序列,其转录产物的3,端为募集U。这些元件要在它们被转录之后才会影响聚合酶,即它们是以RNA形式发挥作用的。这种结构特征的存在决定了转录的终止。在新生RNA中出现夹次结构会导致RNA聚合酶的管得,破坏RNA-DNA杂合酶S’端的正常结构。募集U的存在使杂合链的3,端部分出现不稳定的U·dA区域,两者共同作用使RNA从三元复合物中解离出来( $①$ 83-20)。该正效率与二重对称序列和募集U的长垣有关,随着夹次结构(至少6bp)和募集U的长度有大,随着夹次结构(至少6bp)和募集U的长短有美,随着夹次结构(至少6bp)和募集U的长短有美,随着夹次结构(至少6bp)和募集U的长短有美,随着夹次结构(至少6bp)和募集U的长短有美,随着夹次结构(至少6bp)和募集U的长短有美,随着夹次结构(至少6bp)和募集U的长短有美,随着夹次结构(至少6bp)和募集U的长度有美,随着夹次结构(至少6bp)和募集U的长度有美,随着夹次结构(至少6bp)和募集U的长度有美,随着夹次结构(至少6bp)和募集U的长度有美,随着夹次结构(至少6bp)和募集U的长度有美,随着夹次结构(至少6bp)和募集U的长度有美,随着夹次结构(至少6bp)和募集</p>
+<p>脱离并释放新生RNA链。终止发生时，所有参与形成RNA-DNA杂合体的氢键都必须被破坏，模板DNA链才能与有父链重新组合成DNA双链。</p>
+<p>根据体外实验中RNA聚合酶是不需要辅助因子参与才能终止RNA链的延伸，可将大肠杆菌中的终止子分为不依赖于p因子和依赖于p因子两大类。</p>
+<p>(1) 不依赖于p因子的转变终止在不依赖于p因子的终止反应中，没有任何其他因子参与，核心酶就能终止基因转变。现已查明，模板DNA上存在终止转变的特殊信息——经上子，又称内在或固有终止子（intrinsic terminator），每个基因或操纵分子都有一个后动子和一个经上子。</p>
+<p>内在终止子有两个明显的结构特点：① 终止位点上游一般存在一个复合GC碱基的反向重复序列（大约20个核苷酸），由这段DNA转录产生的RNA容易形成发表实结构。</p>
+<p>② 在终止位点前面有一段由4~8</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-21-rho%E5%9B%A0%E5%AD%90%E5%8F%82%E4%B8%8E%E7%9A%84RNA%E8%BD%AC%E5%BD%95%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-21-rho%E5%9B%A0%E5%AD%90%E5%8F%82%E4%B8%8E%E7%9A%84RNA%E8%BD%AC%E5%BD%95%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F-7c1a4b.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图 3-21 $\rho$ 因子参与的 RNA 转录终止模式<br>(a) $\rho$ 因子的晶体结构, 表明 $\rho$ 因子是由 6 个单体形成一个开放的环; (b) $\rho$ 因子的”穷追”模型。</p>
+<p>止子而暂停时, $\rho$ 因子到达 RNA 的 $3^{\prime}-OH$ 端追上并取代了暂停在终止位点上的 RNA 聚合酶, 它所具有的 RNA-DNA 解螺旋活性使转录产物 RNA 从模板 DNA 上释放, 随后, 转录复合物解体, 完成转录过程 (图 3-21b)。2020 年, 德国和美国科学家利用低温冷冻电镜对大肠杆菌 DNA 模板上运行的 RNA 聚合酶的结构进行了一系列的研究, 揭示出 $\rho$ 因子导致 RNA 聚合酶失活的步骤。</p>
+<h2 id="3-6-真核生物的转录"><a href="#3-6-真核生物的转录" class="headerlink" title="3.6 真核生物的转录"></a>3.6 真核生物的转录</h2><p>真核生物的 RNA 聚合酶高度分工,转录过程中往往需要包括转录因子在内的多种蛋白因子参与,因此,真核生物基因转录过程比原核生物更为复杂。</p>
+<h2 id="3-6-1-真核生物-RNA-聚合酶"><a href="#3-6-1-真核生物-RNA-聚合酶" class="headerlink" title="3.6.1 真核生物 RNA 聚合酶"></a>3.6.1 真核生物 RNA 聚合酶</h2><p>真核生物中共有 3 类结构相对更复杂的 RNA 聚合酶, 它们在细胞核中的位置不同,负责转录的基因不同, 对 $\alpha$ -鹅膏蕈碱的敏感性也不同(表 3-4)。 $\alpha$ -鹅膏蕈碱是一种来自真菌毒蕈的八肽二环剧毒物, 它对真核生物的 3 种 RNA 聚合酶有不同的浓度依赖性作用。在动、植物及昆虫细胞中, RNA 聚合酶 II 的活性可被低浓度的 $\alpha$ -鹅膏蕈碱所抑制, 但聚合酶 I 却不受抑制。在动物细胞中高浓度的 $\alpha$ -鹅膏蕈碱可抑制聚合酶 III 的转录, 而在</p>
+<p>表 3-4 真核细胞中三类 RNA 聚合酶特性比较</p>
+<div class="md-table-scroll"><table><tbody><tr><td>酶</td><td>细胞内定位</td><td>转录产物</td><td>相对活性</td><td>对α-鹅膏蕈碱的敏感程度</td></tr><tr><td>RNA聚合酶I</td><td>核仁</td><td>rRNA前体(除了5S rRNA)</td><td>50%~70%</td><td>不敏感</td></tr><tr><td>RNA聚合酶II</td><td>核质</td><td>hnRNA、绝大多数 microRNA、具有帽结构的 smRNA 和 snoRNA 前体</td><td>20%~40%</td><td>高度敏感</td></tr><tr><td>RNA聚合酶III</td><td>核质</td><td>tRNA、5S rRNA 和 U6 snRNA 前体</td><td>约10%</td><td>中度敏感存在物种特异性</td></tr></tbody></table></div>
+
+<p>昆虫中则不具有抑制作用。</p>
+<h2 id="1-真核生物-RNA-聚合酶的分类"><a href="#1-真核生物-RNA-聚合酶的分类" class="headerlink" title="1. 真核生物 RNA 聚合酶的分类"></a>1. 真核生物 RNA 聚合酶的分类</h2><p>RNA 聚合酶 I 存在于细胞核的核仁中, 其转录产物是 45S rRNA 前体, 经剪接修饰后生成除了 5S rRNA 外的各种 rRNA。rRNA 与蛋白质组成的核糖体是蛋白质合成的场所。RNA 聚合酶 I 在低离子强度时活性最高。</p>
+<p>RNA 聚合酶 II 位于细胞核质内, 在核内转录生成 mRNA 的前体分子, 即核内不均一 RNA (heterogeneous nuclear RNA, hnRNA), 经剪接加工后生成的 mRNA 被运送到胞质中作为蛋白质合成的模板。参与 mRNA 前体剪接加工的核内小 RNA(snRNA)、微 RNA(microRNA, miRNA), 以及大部分核仁小 RNA(snoRNA) 也是由 RNA 聚合酶 II 转录的。RNA 聚合酶 II 在较高离子强度, 特别是高 Mn $^{2+}$ 条件下, 有较高的活性, 并且对 α-鹅膏蕈碱高度敏感。</p>
+<p>RNA 聚合酶Ⅲ也位于细胞核质内, 催化的主要转录产物是 tRNA、5S rRNA、U6 snRNA。RNA 聚合酶Ⅲ在很宽的离子强度范围内均有活性, 离子优选 $Mn^{2+}$ 。</p>
+<p>除了细胞核中的 RNA 聚合酶之外, 真核生物线粒体和叶绿体中还存在着不同的 RNA 聚合酶。线粒体 RNA 聚合酶只有一条多肽链, 分子量小于 $7 \times 10^{4}$ , 是已知最小的 RNA 聚合酶之一, 与 T7 噬菌体 RNA 聚合酶有同源性。叶绿体 RNA 聚合酶比较大, 结构上与细菌中的聚合酶相似, 由多个亚基组成, 部分亚基由叶绿体基因组编码。线粒体和叶绿体 RNA 聚合酶活性不受 $\alpha$ -鹅膏蕈碱所抑制。</p>
+<h2 id="2-真核生物-RNA-聚合酶的组成分析"><a href="#2-真核生物-RNA-聚合酶的组成分析" class="headerlink" title="2. 真核生物 RNA 聚合酶的组成分析"></a>2. 真核生物 RNA 聚合酶的组成分析</h2><p>3 类真核生物 RNA 聚合酶一般都由 8~16 个亚基所组成 $^{(表 3-5)}$ ，分子量超过 $5 \times 10^{5}$ 。</p>
+<p>表 3-5 真核生物 RNA 聚合酶的亚基</p>
+<div class="md-table-scroll"><table><tbody><tr><td>RNA 聚合酶I</td><td>RNA 聚合酶II</td><td>RNA 聚合酶III</td></tr><tr><td>RPA1</td><td>RPB1</td><td>RPC1</td></tr><tr><td>RPA2</td><td>RPB2</td><td>RPC2</td></tr><tr><td>RPC5</td><td>RPB3</td><td>RPC5</td></tr><tr><td>RPC9</td><td>RPB11</td><td>RPC9</td></tr><tr><td>RPB6</td><td>RPB6</td><td>RPB6</td></tr><tr><td>其他 9 个亚基</td><td>其他 7 个亚基</td><td>其他 11 个亚基</td></tr></tbody></table></div>
+
+<p>注：亚基按照分子量由大到小的顺序排列。</p>
+<h2 id="真核生物的转录"><a href="#真核生物的转录" class="headerlink" title="真核生物的转录"></a>真核生物的转录</h2><p>其中, RNA 聚合酶 II 的两个大亚基, RPB1 和 RPB2, 与细菌核心酶的两个大亚基 (β 和 β’) 是同源的; 其 RPB3 和 RPB11 与 α 亚基、RPB6 与 ω 亚基是同源的。虽然不同生物 3 类聚合酶的亚基种类和大小各异, 它们的结构都比原核生物 RNA 聚合酶复杂但有相似性。存在两条普遍遵循的原则: 一是聚合酶中有两个分子量超过 $1 \times 10^{5}$ 的大亚基; 二是同种生物 3 类聚合酶都有几个共同的亚基, 有 “共享” 小亚基的倾向, 即有几个小亚基, 如 RPB6、RPC5 和 RPC9, 是其中 3 类或 2 类聚合酶所共有的。</p>
+<h2 id="3-真核生物-RNA-聚合酶的结构"><a href="#3-真核生物-RNA-聚合酶的结构" class="headerlink" title="3. 真核生物 RNA 聚合酶的结构"></a>3. 真核生物 RNA 聚合酶的结构</h2><p>晶体结构研究表明,无论是原核生物还是真核生物,RNA聚合酶有着共同的结构形态,其形状大体像一只蟹爪(图3-22)。2006年度诺贝尔化学奖得主罗杰·科恩伯格等通过对酵母的RNA聚合酶Ⅱ的晶体结构的研究全面地揭示了各亚基间的相互关系,证明有多个通道分别允许DNA、RNA和核糖核酸进出RNA聚合酶的活性中心裂隙(图3-23)。RNA聚合酶Ⅱ分成4个主要作用模块(module),其中包括围绕在活性中心(active center)周围的一个钳子形结构域(clamp)。蟹爪的两个钳子主要是由最大的两个亚基(RPB1和RPB2)构成。酶的活性位点是由这两个亚基的一些区域共同组成的,位于钳子基部的一</p>
+<p>图 3-22 原核生物和真核生物 RNA 聚合酶的晶体结构的比较<br>(a) 噬热水生菌 (Thermus aquaticus) RNA 聚合酶的核心酶的结构；(b) 酿酒酵母 (Saccharomyces cerevisiae) RNA 聚合酶 II 的结构。<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-22.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图 3-23 模板 DNA 进入转录复合物的路径</p>
+<p>(a) 俯瞰图: 双螺旋DNA用倾斜的圆筒表示, 转录因子TFⅡ的结合位点用虚圈表示; (b) 后视图: DNA从钳子形结构和墙体/平滑结构域的中间穿越。</p>
+<p>(a)<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-22-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%92%8C%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9RNA%E8%81%9A%E5%90%88%E9%85%B6%E7%9A%84%E6%99%B6%E4%BD%93%E7%BB%93%E6%9E%84%E7%9A%84%E6%AF%94.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>(b)<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-23-%E6%A8%A1%E6%9D%BFDNA%E8%BF%9B%E5%85%A5%E8%BD%AC%E5%BD%95%E5%A4%8D%E5%90%88%E7%89%A9%E7%9A%84%E8%B7%AF%E5%BE%84.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>个被称为”活性中心裂隙”的区域内。只有当钳子形结构域处于开放状态时，才允许启动子DNA序列进入，起始基因转录。钳子形结构域延伸出来的3个平滑结构域可能在转录过程中起到促进RNA解旋以及帮助DNA重新形成螺旋的作用。</p>
+<h2 id="3-6-2-真核生物启动子及其对转录的影响"><a href="#3-6-2-真核生物启动子及其对转录的影响" class="headerlink" title="3.6.2 真核生物启动子及其对转录的影响"></a>3.6.2 真核生物启动子及其对转录的影响</h2><p>所谓启动子是指确保转录精确而有效地起始的 DNA 序列。真核生物的基因由 3 类不同 RNA 聚合酶负责转录,所以这些基因的启动子结构也有各自的特点。由 RNA 聚合酶 II 所转录的编码蛋白质的基因数目最多,这里只介绍 RNA 聚合酶 II 所转录的真核生物启动子的特点。</p>
+<p>1979 年美国科学家 Goldberg 首先注意到真核生物中由 RNA 聚合酶 II 催化转录的 DNA 序列 5’ 上游区有一段与原核生物 Pribnow 区相似、富含 TA 的保守序列。由于该序列前 4 个碱基为 TATA, 所以又称为 TATA 区 (TATA box)。此后 10 多年间, 科学家通过对许多基因启动子区的分析, 发现绝大多数功能蛋白基因的启动子都具有共同的结构模式。简单地说, 真核基因的启动子在 -25 ~ -35 区含有 TATA 序列 (图 3-24), 是核心启动子的组成部分, 在核心启动子上游 100 ~ 200 bp 范围内, 还存在一个转录调控区, 有多个启动元件, 如在很多基因的 -70 ~ -80 区含有 CCAAT 区 (CAAT box), 在 -80 ~ -110 含有 GCCACACCC 或 GGGCGGG 区 (GC box)。习惯上, 将 TATA 区上游的保守序列称为上游启动子元件 (upstream promoter element, UPE) 或称上游激活序列 (upstream activating sequence, UAS)。</p>
+<p>比较原核和真核基因转录起始位点上游区的结构,发现两者之间存在很大的差别(图3-25)。原核基因启动区范围较小,一般情况下,TATAAT(Pribnow区)的中心位于-7~-10,上游-30~-70区为正调控因子结合区,+1~-20区为负调控因子结合区。真核基因的调控区较大,TATAA/TA区位于-20~-30,而-40~-110区为上游激活区。除Pribnow区之外,原核基因启动子上游只有TTGACA区(-30~-40)作为RNA聚合酶的主要结合位点,参与转录调控;而真核基因除了含有可与之相对应的CAAT区之外,大多数基因还拥有GC区和增强子区等各种调控元件。</p>
+<p>TATA 区和上游启动子元件(CAAT 区或 GC 区)的作用有所不同。前者的主要作用是使转录精确地起始,如果除去 TATA 区或进行碱基突变,转录产物下降的相对值不如 CAAT 区或 GC 区突变后明显,但发现所获得的 RNA 产物起始点不固定。研究 SV40 晚期基因启动子发现,上游激活区的存在与否,对该启动子的生物活性有着根本性的影响。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-24-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9RNA%E8%81%9A%E5%90%88%E9%85%B6II%E6%89%80%E8%AF%86%E5%88%AB%E7%9A%84%E5%90%AF%E5%8A%A8%E5%AD%90%E5%8C%BA.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图 3-24 真核生物 RNA 聚合酶 II 所识别的启动子区</p>
+<p>图3-25 原核和真核生物基因转录起始位点上游区的结构比较<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-24-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9RNA%E8%81%9A%E5%90%88%E9%85%B6II%E6%89%80%E8%AF%86%E5%88%AB%E7%9A%84%E5%90%AF%E5%8A%A8%E5%AD%90%E5%8C%BA-2c7378.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>若将该基因 5’ 上游 -21 ~ -47 核苷酸序列切除, 基因完全不表达(图 3-26)。</p>
+<p>上游启动子元件 CAAT 区和 GC 区主要控制转录起始频率,基本不参与起始位点的确定。CAAT 区对转录起始频率的影响最大,该区任一碱基的改变都将极大地影响靶基因的转录强度,而启动区其他序列中 1~2 个碱基的置换则没有太大的影响。此外,在 TATA 区和相邻的 UPE 区之间插入核苷酸也会使转录减弱,在人类 β-血红蛋白基因启动区的两个 UPE 序列之间插入 15 个核苷酸,该启动子完全失去功能。CAAT 和 GC 区相对于 TATA 区的取向 (5’→3’ 或 3’→5’),对转录强度的影响不大。</p>
+<p>尽管这 3 种保守序列都有着重要功能,但并不是每个基因的启动子区都包含这 3 种序列。真核细胞中存在着大量特异性或组成型表达的、能够与不同基因启动子区 UPE 相结合的转录调控因子。基因转录实际上是 RNA 聚合酶、转录调控因子和启动子区各种调控元件相互作用的结果。</p>
+<p>图 3-26 SV40 基因启动子上 TATAAA 及邻近区域对基因转录活性的影响<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-26-SV40%E5%9F%BA%E5%9B%A0%E5%90%AF%E5%8A%A8%E5%AD%90%E4%B8%8ATATAAA%E5%8F%8A%E9%82%BB%E8%BF%91%E5%8C%BA%E5%9F%9F%E5%AF%B9.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<h2 id="3-6-3-转录起始复合物的组装"><a href="#3-6-3-转录起始复合物的组装" class="headerlink" title="3.6.3 转录起始复合物的组装"></a>3.6.3 转录起始复合物的组装</h2><p>真核细胞 RNA 转录起始过程中模板的识别与原核细胞有所不同。由于真核生物作为转录的 DNA 模板是在核小体的环境中，RNA 聚合酶不能直接识别基因的启动子区，需要至少 7 种与 $\sigma$ 因子在细菌转录中所执行的功能类似的、被称为通用转录因子（general transcription factor, GTF）的辅助蛋白质 $^{(表3-6)}$ ，以及中介复合物（mediator complex）和 DNA 结合调节蛋白等因子，按特定顺序结合于启动子上，帮助 RNA 聚合酶特异性地结合到靶基因的启动子上并解开 DNA 双链。因为不少辅助因子本身就包含多个亚基，所以它们与聚合酶形成的转录前起始复合物（preinitiation transcription complex, PIC）分子量特别大，大约包含 40 多条肽链，总分子量高达 $2 \times 10^{6}$ ，该复合物保证转录有效的起始。</p>
+<p>表 3-6 真核生物 RNA 聚合酶 II 所形成的转录起始复合物</p>
+<div class="md-table-scroll"><table><tbody><tr><td>蛋白质</td><td>亚基数</td><td>亚基的分子量 /×103</td><td>功能</td></tr><tr><td>RNA聚合酶II</td><td>12</td><td>10~220</td><td>催化RNA的生物合成</td></tr><tr><td>TBP</td><td>1</td><td>38</td><td>与启动子上的TATA区相结合</td></tr><tr><td>TFIIA</td><td>3</td><td>12,19,35</td><td>使TBP及TFIIB与启动子的结合比较稳定</td></tr><tr><td>TFIIB</td><td>1</td><td>35</td><td>与TBP相结合,吸引RNA聚合酶和TFIIF到启动区</td></tr><tr><td>TFIID</td><td>12</td><td>15~250</td><td>与各种调控因子相互作用</td></tr><tr><td>TFIE</td><td>2</td><td>34,57</td><td>吸引TFI IH,有ATP酶及解链酶活性</td></tr><tr><td>TFIIF</td><td>2</td><td>30,74</td><td>结合RNA聚合酶II并在TFIIB帮助下阻止聚合酶与非特异性DNA序列结合</td></tr><tr><td>TFI IH</td><td>12</td><td>35~89</td><td>在启动子区解开DNA双链,使RNA聚合酶II磷酸化,接纳核苷酸切除修复体系</td></tr></tbody></table></div>
+
+<p>转录因子和 RNA 聚合酶 II 必须以特定的顺序结合到启动子序列上。形成 PIC 的第一步, 通用转录因子 TF II D 中的组分 TBP (TATA binding protein), 利用一个广泛的 β 折叠区域识别启动子核心元件 TATA 元件的小沟并与之相结合, 使 TATA 序列发生明显的扭曲, 为招募其他通用转录因子提供一个平台。接着, RNA 聚合酶 II、TF II A、TF II B、TF II F 等才能依次结合。此后, TF II E 和 TF II H 等迅速靠近已形成的复合物, 最终形成完整的 PIC $^{(图3-27)}$ 。PIC 形成后发生一系列构象的变化, 最重要的是在 TF II H 的 ATP 依赖性解链酶活性的催化下, 使 DNA 模板从封闭的双链状态转变为局部解链的开放状态。PIC 的装配过程具有严格的顺序性, 各组分的分工明确, 如果缺少一种或几种成分, 则不能起始转录, 或者只有很低的转录速率。</p>
+<p>与原核生物转录起始过程类似,聚合酶从启动子离开并进入延伸阶段之前,也要经历一个流产式起始的过程,受到聚合酶磷酸化的调控。RNA 聚合酶 II 最大亚基的 C 端结构域(C-terminal domain,CTD)延伸成一个尾巴,它包含多个七肽重复序列:Tyr-Ser-Pro-</p>
+<p>图3-27 由RNA聚合酶Ⅱ和各种转录因子组装成转录前起始复合物指导基因转录<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-27.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>Thr-Ser-Pro-Ser,酵母 RNA 聚合酶Ⅱ的 CTD 中含有 27 个,人类 RNA 聚合酶Ⅱ的 CTD 中含有 52 个这样的重复序列。重复序列上有多个位点能够发生磷酸化(图 3-28)。被招募到启动子上的 RNA 聚合酶最初其 CTD 很大程度上未被磷酸化。在 TF IIH 的激酶活性作用下,CTD 七肽重复序列中的 Ser5 发生磷酸化修饰,导致 CTD 与 TBP 以及中介体(mediator)的解离,RNA 聚合酶离开启动子,使转录进入延伸过程。在转录延伸过程中,CTD 中的 Ser2 被磷酸化,招募 RNA 剪切和加工因子到新合成的 RNA 链上,以完成后续的 RNA 的加工反应(图 3-28)。当 RNA 聚合酶完成一个基因的转录后,磷酸酶使其 CTD 去磷酸化,去磷酸化的聚合酶可如上面描述的过程,重新结合到启动子上开始转录新的基因。因此,CTD 重复序列的磷酸化修饰对于转录的起始、延伸以及加工过程中都发挥重要的调节作用。</p>
+<h2 id="3-6-4-增强子及其功能"><a href="#3-6-4-增强子及其功能" class="headerlink" title="3.6.4 增强子及其功能"></a>3.6.4 增强子及其功能</h2><p>除了启动子以外,近年来发现还有另一序列与转录的起始有关。在 SV40 的转录单</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-28.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>图 3-28 RNA 聚合阴尾巴的磷酸化修饰调控 RNA 加工酶的募集</p>
+<p>RNA 花合酶 C 嗣尾巴不同位点丝氨酸的磷酸化对于招募加帽因子、剪接因子、多聚腺苷酸化和切割因子以及逃离启动子发挥重要的作用。Ser5 的磷酸化修饰与加相因子的募集相关，而随后的 Ser2 的磷酸化则与剪接因子的招募相关。</p>
+<p>元上发现它的转录起始位点上游约200碱基对处有两段72碱基对长的重复序列，它们不是启动子的一部分，但能增强或促进转录的起始，除去这两段序列会大大降低这些基因的转录水平，若保留其中一段或将之取出插至DNA分子的任何部位，就能保持基因的正常转录。因此，称这种能强化转录起始的序列为增强子或强化子（enhancer）。除SV40外，还在逆转录病毒基因、免疫球蛋白基因、胰岛素基因、胰糜蛋白酶基因等许多基因的启动区中陆续发现了增强子的存在。</p>
+<p>有人曾把 $\beta-$ 珠蛋白基因置于带有上述 72 碱基对序列的 DNA 分子上, 发现它在体内的转录水平提高了 200 倍。而且, 无论把这段 72 碱基对序列放在转录起点上游 1400 碱基对处还是下游 3300 碱基对处, 它都有转录增强作用。增强子很可能通过影响染色质 DNA-蛋白质结构或改变超螺旋的密度而改变模板的整体结构, 从而使得 RNA 聚合酶更容易与模板 DNA 相结合, 起始基因转录。</p>
+<p>增强子具有下列特点：</p>
+<p>① 远距离效应 一般位于上游 -200 碱基对处,但可增强远处启动子的转录,即使相距一兆碱基对(Mb)也能发挥作用。</p>
+<p>② 无方向性 无论位于靶基因的上游、下游或内部都可发挥增强转录的作用。</p>
+<p>③ 顺式调节 通常认为只调节位于同一染色体上的靶基因,但在某些细胞类型或特定</p>
+<p>生物学过程中,增强子可能通过特殊的机制跨染色体发挥作用。</p>
+<p>④ 无物种和基因的特异性,可以连接到异源基因上发挥作用。</p>
+<p>⑤ 具有组织特异性 SV40 的增强子在 3T3 细胞中比多瘤病毒的增强子要弱,但在 HeLa 细胞中 SV40 的增强子比多瘤病毒的要强 5 倍。增强子的效应需特定的蛋白质因子参与。</p>
+<p>⑥ 有相位性 其作用和 DNA 的构象有关。</p>
+<p>⑦ 某些增强子可应答外部信号 如热休克基因在高温下才表达,金属硫蛋白基因在镉和锌的存在下才表达,另外一些增强子可以被固醇类激素所激活。</p>
+<h2 id="3-6-5-真核生物转录的终止"><a href="#3-6-5-真核生物转录的终止" class="headerlink" title="3.6.5 真核生物转录的终止"></a>3.6.5 真核生物转录的终止</h2><p>对于真核生物转录终止的机制, 目前了解的还非常有限。已有的研究表明, 真核生物 3 种不同的 RNA 聚合酶在催化基因转录终止的方式也有所不同。</p>
+<h2 id="1-RNA-聚合酶-I-的终止"><a href="#1-RNA-聚合酶-I-的终止" class="headerlink" title="(1) RNA 聚合酶 I 的终止"></a>(1) RNA 聚合酶 I 的终止</h2><p>在核仁内催化 rRNA 的转录, 其所催化的转录在一段含有特殊序列的终止子区域终止。在哺乳动物细胞中, 该终止子序列约为 $18 \mathrm{bp}$ , 位于 $28 \mathrm{S} \mathrm{rRNA}$ 下游约 $500 \mathrm{bp}$ 处, 其内部含有限制性内切酶 Sal I 酶切位点, 能够被转录终止因子 (TTF-1, 酵母为 Rebl 或 Nsi1) 识别并结合导致聚合酶暂停。然后由 Pol I 和转录释放因子 (PTRF) 介导转录复合物的解离并终止转录。因此, RNA 聚合酶 I 的转录终止需要两步: 转录复合物停止延伸, 以及 rRNA 前体从转录复合物中解离释放。</p>
+<h2 id="2-RNA-聚合酶Ⅱ的终止"><a href="#2-RNA-聚合酶Ⅱ的终止" class="headerlink" title="(2) RNA 聚合酶Ⅱ的终止"></a>(2) RNA 聚合酶Ⅱ的终止</h2><p>对 RNA 聚合酶 Pol II 的终止研究比较多。对于有多(A)尾的 RNA 转录产物来说, 主要用加尾信号(AAUAAA)作为转录终止信号。当 mRNA 中转录出 5’-AAUAAA-3’ 后, 会募集一系列参与 RNA 转录后加工的包括参与剪切的内切酶在内的各种蛋白质因子, 切割新生的 mRNA 并添加多(A)尾, 然后才释放 RNA 聚合酶 II, 终止转录。在此过程中 RNA 聚合酶 II 仍可继续合成 500~2000 个核苷酸。目前主要有两个模型来描述 RNA 聚合酶 II 的终止: 鱼雷模型 (torpedo model) 和变构模型 (allosteric model)。在鱼雷模型中, mRNA 被切割后, 暴露出不受保护的 RNA 末端, 5’→3’ 核酸外切酶 (Rat1/Xm2) 会从转录复合物中剩余的 RNA 链的 5’ 端开始切割, 逐步接近 RNA 聚合酶 II, 最终赶上并与之发生碰撞, 触发复合物解体, 导致转录终止。变构模型认为, 延伸复合物通过多(A)位点时会引起延伸因子的解离或终止因子的结合, 导致复合物构象变化并最终引起转录的终止。</p>
+<p>上述 RNA 聚合酶Ⅱ的终止方式称为多(A)依赖的终止, 是其主要的终止机制。此外, 对于没有多(A)尾的 RNA 聚合酶Ⅱ转录产物, 其转录终止可能类似于细菌 $\rho$ 因子依赖型的终止机制, 也称为 NNS(Nrd1-Nab3-Sen1)依赖的终止。其中 Sen1 发挥类似于原核 $\rho$ 因子的作用。这种机制主要用于非编码 RNA 转录的早期终止, 可以抑制非编码 RNA 的过度转录, 防止其影响编码基因的表达。</p>
+<h2 id="3-RNA-聚合酶Ⅲ的终止"><a href="#3-RNA-聚合酶Ⅲ的终止" class="headerlink" title="(3) RNA 聚合酶Ⅲ的终止"></a>(3) RNA 聚合酶Ⅲ的终止</h2><p>RNA 聚合酶Ⅲ负责转录合成 tRNA、5S rRNA、U6 RNA 等其他非编码小 RNA。与 Pol I 和 Pol II 相对复杂的终止过程不同, 其模板链中有一段寡 (dA), 转录出寡 (U) 后导致转录复合物结合的减弱。比较特殊的是, 其非模板链上连续的 4~7 个脱氧胸腺嘧啶核苷 (dT) 在终止过程中也发挥重要的作用, 可以促进聚合酶暂停和转录物释放。科学家 2021 年通过对人源 PolⅢ转录终止前复合物 (PTC) 的三维结构研究, 揭示了 PolⅢ特异识别多 (dT) 造成转录停止的分子机制。PolⅢ转录的准确终止对基因的表达调控至关重要, 其突变或错误组装可导致基因的异常转录, 并且会引起异染性脑白质营养不良、特雷彻·柯林斯综合征、贝-维综合征等疾病的发生。</p>
+<h2 id="3-7-转录忠实性的维持"><a href="#3-7-转录忠实性的维持" class="headerlink" title="3.7 转录忠实性的维持"></a>3.7 转录忠实性的维持</h2><p>转录过程中,因为缺乏广泛的校正机制,RNA 聚合酶每催化添加 10 000 个核苷酸会发生 1 次错误,其精确性不如 DNA 复制。尽管如此,在 RNA 的合成过程中,仍然存在两种校正形式以维持转录的忠实性:RNA 聚合酶对底物的特异性选择和校对。</p>
+<h2 id="3-7-1-RNA-聚合酶对底物的特异性选择"><a href="#3-7-1-RNA-聚合酶对底物的特异性选择" class="headerlink" title="3.7.1 RNA 聚合酶对底物的特异性选择"></a>3.7.1 RNA 聚合酶对底物的特异性选择</h2><p>对底物特异性的选择是 RNA 聚合酶发挥维持转录忠实性功能的第一步。RNA 聚合酶可识别 NTP 中的碱基和核糖组分, 对不同的 NTP 亲和力不同, 碱基配对原则对于 NTP 的选择至关重要, RNA 聚合酶通过其”分子卡尺”的结构来识别正确的碱基对的几何构象。对真核生物 RNA 聚合酶 II 的结构研究发现, 其最大亚基 Rpb1 组分形成的触发环 (trigger loop) 是分子卡尺的主要组分, 触发环机制具有 NTP 识别和催化双重作用, 它可以区分 NTP 与 dNTP, 防止脱氧核苷酸掺入到新合成的 RNA 分子中, 保证转录的高保真度。</p>
+<p>此外,诱导契合机制在RNA聚合酶对底物的选择也发挥关键作用。没有NTP结合时,触发环距离活性中心较远(约3 nm),RNA聚合酶通常处于开放构象。在正确底物NTP结合的诱导下,触发环靠近活性中心,RNA聚合酶转为封闭构象,防止NTP从酶上释放。而当新来的NTP和模板DNA不能互补配对时,RNA聚合酶呈现开放的构象,以将错误结合的NTP释放出来。</p>
+<p>RNA 聚合酶的底物选择特异性可以使转录忠实性提高 $10^{3}$ ，但还是会有错误的 NTP 掺入到转录物中，可以被 RNA 聚合酶的校对功能纠正，使转录的忠实性显著提高，错误率约为 $10^{-5}$ 。</p>
+<h2 id="3-7-2-RNA-聚合酶的校对功能"><a href="#3-7-2-RNA-聚合酶的校对功能" class="headerlink" title="3.7.2 RNA 聚合酶的校对功能"></a>3.7.2 RNA 聚合酶的校对功能</h2><p>RNA 聚合酶通过两种机制对转录进行校对。</p>
+<h2 id="1-焦磷酸解或焦磷酸编辑-Pyrophosphorolytic-eDiting"><a href="#1-焦磷酸解或焦磷酸编辑-Pyrophosphorolytic-eDiting" class="headerlink" title="(1) 焦磷酸解或焦磷酸编辑 (Pyrophosphorolytic eDiting)"></a>(1) 焦磷酸解或焦磷酸编辑 (Pyrophosphorolytic eDiting)</h2><p>焦磷酸解是聚合反应的逆反应,RNA 聚合酶利用其活性位点,在一个简单的逆向反应中通过重新加入焦磷酸,催化错误插入的核糖核苷酸的去除,然后将另一个核糖核苷酸加入到伸长的 RNA 链中。虽然这种校对方式能够去除错误的碱基,也可以去除正确的碱基,但 RNA 聚合酶在碱基不匹配的地方停留的时间比在正确碱基处更长,所以去除错误碱基的频率更高。这种焦磷酸解的校对在转录忠实性的维持中功能有限。</p>
+<h2 id="2-水解编辑-Hydrolytic-eDiting"><a href="#2-水解编辑-Hydrolytic-eDiting" class="headerlink" title="(2) 水解编辑 (Hydrolytic eDiting)"></a>(2) 水解编辑 (Hydrolytic eDiting)</h2><p>RNA 聚合酶的剪切酶活性在校对中发挥重要的作用。这种剪切活性可以剪切单个 NTP，也可以剪切寡聚核苷酸片段。在水解编辑的校对机制中，转录剪切因子 Cre 能够激发或增强水解编辑功能，RNA 聚合酶倒退一个或更多的核苷酸并切开 RNA 产物，去除含有错误的序列。在此过程中 Cre 因子帮助聚合酶快速延伸，克服较难转录区域的”停滞不前”现象，同时也能够去除含有错误配对的序列。原核生物和真核生物的 RNA 聚合酶均可以利用这种方式对转录进行有效的校对。</p>
+<h2 id="3-8-转录的抑制"><a href="#3-8-转录的抑制" class="headerlink" title="3.8 转录的抑制"></a>3.8 转录的抑制</h2><p>RNA 转录的抑制剂根据其作用性质主要可以分为 3 大类: 第一类是嘌呤和嘧啶类似物, 它们作为核苷酸代谢拮抗剂而抑制前体 RNA 的合成; 第二类是 DNA 模板功能抑制剂, 通过与 DNA 结合而改变模板的功能; 第三类是 RNA 聚合酶的抑制物, 它们与 RNA 聚合酶结合而抑制其活力。表 3-7 是一些典型的 RNA 转录的抑制剂。</p>
+<p>表 3-7 常见的转录抑制剂</p>
+<div class="md-table-scroll"><table><tbody><tr><td>抑制剂</td><td>靶点</td><td>抑制作用</td></tr><tr><td>碱基类似物(5-氟尿嘧啶等)</td><td>核苷酸</td><td>抑制和干扰核苷酸合成</td></tr><tr><td>利福霉素</td><td>细菌全酶</td><td>和β亚基结合,抑制起始</td></tr><tr><td>利迪链霉素</td><td>细菌核心酶</td><td>和β亚基结合,抑制起始</td></tr><tr><td>α-鹅膏蕈碱</td><td>真核RNA聚合酶II</td><td>与RNA聚合酶II结合</td></tr><tr><td>放射线素D</td><td>DNA模板</td><td>与DNA结合,阻止延伸</td></tr><tr><td>烷化剂(氮芥、磺酸酯、氮丙啶等)</td><td>DNA模板</td><td>使DNA甲基化的活性烷基,同时作用于DNA的两条链,使其发生交联,无法成为转录模板</td></tr><tr><td>纺锤菌素</td><td>DNA模板</td><td>结合DNA上富含AT碱基区域</td></tr></tbody></table></div>
+
+<h2 id="3-8-1-嘌呤和嘧啶类似物"><a href="#3-8-1-嘌呤和嘧啶类似物" class="headerlink" title="3.8.1 嘌呤和嘧啶类似物"></a>3.8.1 嘌呤和嘧啶类似物</h2><p>一些人工合成的碱基类似物,如5-氟尿嘧啶、6-氮尿嘧啶、6-巯基嘌呤、8-氮鸟嘌呤等能够抑制和干扰DNA或RNA合成。这些碱基类似物或者作为代谢拮抗物直接抑制核苷酸合成有关的酶类,或者通过掺入核酸分子形成异常的核酸结构,从而影响核酸的进一步延伸。碱基类似物进入体内后一般先转变为相应的核苷酸后才能发挥抑制作用。6-巯基嘌呤在体内首先转变为巯基嘌呤核苷酸,并阻断细胞内嘌呤核苷酸的合成。它是重要的癌症治疗药物,用于治疗急性白血病和绒毛上皮癌等。8-氮鸟嘌呤形成核苷酸后既能抑制嘌呤核苷酸的合成,还能掺入到 RNA 中,形成非正常的 RNA,从而抑制相应蛋白质的合成。5- 氟尿嘧啶进入体内后首先转变为 F-UMP,再转变为脱氧核糖核苷酸 (F-dUMP),抑制胸腺嘧啶核苷酸合成酶并阻碍胸腺嘧啶渗入 RNA 分子。5- 氟尿嘧啶也具有抑制肿瘤细胞生长的功能。在正常细胞中,5- 氟尿嘧啶能被分解为 α- 氟 -β- 氨基丙酸,但在癌细胞中则不被分解,这是 5- 氟尿嘧啶在临床上被用来作为化疗药物的原因之一。</p>
+<h2 id="3-8-2-DNA-模板功能抑制剂"><a href="#3-8-2-DNA-模板功能抑制剂" class="headerlink" title="3.8.2 DNA 模板功能抑制剂"></a>3.8.2 DNA 模板功能抑制剂</h2><p>放线菌素、烷化剂和嵌入染料能与DNA结合使其失去模板功能,进而抑制RNA转录。放线菌素D(actinomycin D)具有抗菌和抗癌作用,是DNA模板功能的抑制物,可与DNA形成非共价复合物,抑制其作为模板的功能。1 mmol/L的放线菌素D就可有效抑制RNA转录,但需要10 mmol/L才能抑制DNA的复制。</p>
+<p>烷化剂如氮芥、磺酸酯、氮丙啶等分子中带有能使 DNA 烷基化的活性烷基, 同时作用于 DNA 的两条链, 使之发生交联, 抑制其模板功能。烷化剂的毒性较大, 能够引起细胞突变, 具有致癌作用。有些烷化剂, 如环磷酰胺, 能选择性杀伤肿瘤细胞, 因而在临床上被用于治疗恶性肿瘤。</p>
+<p>某些具有扁平芳香族发色团的嵌入剂,如吖啶类染料和溴化乙锭等可插入双链 DNA 相邻的碱基对之间,因此又称为嵌入染料。嵌入剂通常含有吖啶或菲啶环,它们的大小与碱基相当,插入后使 DNA 在复制中缺失或增添一个核苷酸,导致移码突变。溴化乙锭 (ethidium bromide, EB) 是高灵敏度的荧光试剂,与核酸结合后抑制其复制和转录。实验中常用来检测样品中 DNA 和 RNA 的浓度。</p>
+<h2 id="3-8-3-RNA-聚合酶抑制剂"><a href="#3-8-3-RNA-聚合酶抑制剂" class="headerlink" title="3.8.3 RNA 聚合酶抑制剂"></a>3.8.3 RNA 聚合酶抑制剂</h2><p>某些抗生素或化学药物,如利福霉素(rifamycin)、利迪链霉素(streptolydigin)和α-鹅膏蕈碱都是RNA聚合酶的抑制物。其中,利福霉素能强烈地抑制革兰氏阳性菌和结核杆菌,具有广谱抗菌作用,能特异性地抑制细菌RNA聚合酶的活性。利迪链霉素与细菌RNA聚合酶的β亚基结合,抑制转录的起始。α-鹅膏蕈碱主要抑制真核生物RNA聚合酶。</p>
+<h2 id="3-9-真核生物-RNA-的转录后加工"><a href="#3-9-真核生物-RNA-的转录后加工" class="headerlink" title="3.9 真核生物 RNA 的转录后加工"></a>3.9 真核生物 RNA 的转录后加工</h2><p>真核生物的 RNA 一旦被转录, 必须以各种方式进行加工, 然后再从细胞核运输到相应的细胞空间进行翻译。RNA 的加工包括 5’ 加帽 (capping)、剪接 (splicing) 和 3’ 端多聚腺苷酸化 (polyadenylation)。如前所述, 转录开始之后刚进入起始与延伸阶段, 即 RNA 长度在 20~40 个核苷酸时就被加帽, RNA 聚合酶 CTD 重复序列中 Ser5 的磷酸化有助于加帽酶的招募, 加帽之后, Ser5 去磷酸化并导致加帽机器从 RNA 聚合酶 CTD 的脱落, 接着, CTD 重复序列中的 Ser2 的磷酸化使得 RNA 剪接机器被招募到 CTD 尾。</p>
+<h2 id="3-9-真核生物-RNA-的转录后加工-1"><a href="#3-9-真核生物-RNA-的转录后加工-1" class="headerlink" title="3.9 真核生物 RNA 的转录后加工"></a>3.9 真核生物 RNA 的转录后加工</h2><p>图 3-29 RNA 加工酶是由 RNA 聚合酶的尾巴招募的</p>
+<p>(a) 由 RNA 聚合酶招募的参与 RNA 加工的不同的酶；(b) 七肽重复序列中不同位点丝氨酸残基的磷脂化修饰与 RNA 加工因子和转移状态的关联。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-29-RNA%E5%8A%A0%E5%B7%A5%E9%85%B6%E6%98%AF%E7%94%B1RNA%E8%81%9A%E5%90%88%E9%85%B6%E7%9A%84%E5%B0%BE%E5%B7%B4%E6%8B%9B%E5%8B%9F%E7%9A%84.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>mRNA 3’ 端的多聚腺苷酸化是 RNA 加工的最后一个事件,与转录终止密切相关,参与多聚腺苷酸化所必需的酶的募集也受到磷酸化的调控(图 3-29)。本节将主要介绍 RNA 的剪接。</p>
+<h2 id="3-9-1-真核生物-RNA-中的内含子"><a href="#3-9-1-真核生物-RNA-中的内含子" class="headerlink" title="3.9.1 真核生物 RNA 中的内含子"></a>3.9.1 真核生物 RNA 中的内含子</h2><p>真核基因大多是断裂的,也就是说,一个基因可由多个内含子和外显子间隔排列而成。研究表明,内含子在真核基因中所占的比例很高,甚至超过99%。</p>
+<p>断裂基因的存在表明真核细胞的基因结构和 mRNA 合成过程比原核细胞要复杂得多, 因为真核基因表达往往伴随着 RNA 的剪接过程 (splicing), 从 mRNA 前体分子中切除被称为内含子 (intron) 的非编码区, 并使基因中被称为外显子 (exon) 的编码区拼接形成成熟 mRNA (图 3-30)。</p>
+<h2 id="3-9-2-真核生物-tRNA-前体的转录后加工"><a href="#3-9-2-真核生物-tRNA-前体的转录后加工" class="headerlink" title="3.9.2 真核生物 tRNA 前体的转录后加工"></a>3.9.2 真核生物 tRNA 前体的转录后加工</h2><p>真核生物 tRNA 基因有内含子, 其前体必须经过剪接。其内含子具有下列特点: ①长度和序列没有共同性, 一般有 16~46 个核苷酸; ②位于反密码子的下游; ③内含子和外显子间的边界没有保守序列, 所以与 mRNA 的剪接不同, tRNA 前体的剪接不符合一般规律。</p>
+<p>由于 tRNA 分子具有高度保守的二级结构, 真核生物 tRNA 前体内含子的精确切除信号是 tRNA 分子共同的二级结构。哺乳动物、酵母、果蝇和植物等的 tRNA 的加工基本上相同, 主要包括下面需要酶催化的 3 个过程 (图 3-31):</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-30.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图 3-30 真核基因中存在非编码的内含子区<br>所示基因含有4个外显子和3个内含子。转录从启动子区开始，产生了包括全部外显子和内含子的前mRNA。通过剪接除去内含子，并将外显子连接起来，得到成熟的mRNA。</p>
+<p>① 内含子的剪接 tRNA 内切核酸酶切割前体分子中的内含子; RNA 连接酶将外显子部分连接在一起。</p>
+<p>② 3’ 端添加 CCA 真核生物所有 tRNA 前体的 3’ 端缺乏 -CCA-OH 结构, 在蛋白质翻译过程中没有活性, 因而需要在 tRNA 核苷酸转移酶的催化下在其 3’ 端添加 CCA。</p>
+<p>③ 核苷酸修饰 tRNA 分子中稀有核苷酸较多, 其修饰很频繁。如 tRNA 甲基化酶能够催化 tRNA 分子特定位置的甲基化等, 但这些稀有核苷酸的功能还有待深入研究。</p>
+<h2 id="3-9-3-真核生物-rRNA-前体的转录后加工"><a href="#3-9-3-真核生物-rRNA-前体的转录后加工" class="headerlink" title="3.9.3 真核生物 rRNA 前体的转录后加工"></a>3.9.3 真核生物 rRNA 前体的转录后加工</h2><p>大多数真核生物 rRNA 基因无内含子。有些虽然有内含子但并不转录。新生 rRNA 前体与蛋白质结合,形成巨大的核糖核蛋白前体(pre-rRNA)颗粒,前体长度约为成熟 rRNA 的 2 倍,因此,rRNA 前体必须被剪接成成熟的 rRNA 分子,此过程在核仁中</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-31-IRNA%E7%94%B1%E8%BE%83%E9%95%BF%E7%9A%84%E5%89%8D%E4%BD%93%E5%8A%A0%E5%B7%A5%E8%80%8C%E6%9D%A5.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图3-31 IRNA由较长的前体加工而来<br>tRNA 的切割和连接是独立的反应, 内含子的剪接由 tRNA 内切核酸酶和 RNA 连接酶完成, 3’ 端添加 CCA 是在 tRNA 核苷酸转移酶的催化下进行的, 多个核苷酸被修饰也是 tRNA 加工的特征之一。</p>
+<h2 id="3-9-真核生物-RNA-的转录后加工-2"><a href="#3-9-真核生物-RNA-的转录后加工-2" class="headerlink" title="3.9 真核生物 RNA 的转录后加工"></a>3.9 真核生物 RNA 的转录后加工</h2><p>图 3-32 人 HeLa 细胞和小鼠 L 细胞的 rRNA 前体转录后加工示意图<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-31-IRNA%E7%94%B1%E8%BE%83%E9%95%BF%E7%9A%84%E5%89%8D%E4%BD%93%E5%8A%A0%E5%B7%A5%E8%80%8C%E6%9D%A5-2019b5.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>进行。核仁小 RNA(snoRNA) 参与核糖核酸酶对特定立体结构的识别, 从而确定切割位点。</p>
+<p>在不同真核生物中，rRNA 前体的每个转录单位内各 rRNA 的排列顺序和加工过程都十分保守。以人 HeLa 细胞为例，哺乳动物细胞内 rRNA 前体的剪切过程包括以下 4 个步骤(图 3-32):</p>
+<p>① 在 5’ 端切除非编码的序列,生成 41S 中间产物。</p>
+<p>② 41S RNA 再被切割为两段,一段为 32S,含有 28S rRNA 和 5.8S rRNA,另一段为 20S,含有 18S rRNA。</p>
+<p>③ 32S RNA 进一步被剪切成 28S rRNA 和 5.8S rRNA。</p>
+<p>④ 20S RNA 被剪切生成 18S rRNA。</p>
+<h2 id="3-9-4-真核生物-mRNA-的剪接"><a href="#3-9-4-真核生物-mRNA-的剪接" class="headerlink" title="3.9.4 真核生物 mRNA 的剪接"></a>3.9.4 真核生物 mRNA 的剪接</h2><p>RNA 剪接主要有 3 种 (不包括 tRNA 的加工过程): pre-mRNA 剪接、I 类和 II 类自剪接内含子。</p>
+<p>由 DNA 转录生成的原始转录产物——核内不均一 RNA(hnRNA), 即 mRNA 的前体, 经过 5’ 加 “帽” 和 3’ 酶切加多腺苷酸, 再经过 RNA 的剪接, 编码蛋白质的外显子部分就连接成为一个连续的可读框 (open reading frame, ORF), 通过核孔进入细胞质, 就能作为蛋白质合成的模板了。表 3-8 总结了原始 mRNA 成熟期间的主要加工过程。</p>
+<p>真核基因平均含有 8~10 个内含子, 前体分子一般比成熟 mRNA 大 4~10 倍。不同</p>
+<p>表 3-8 RNA 加工过程及其生理功能</p>
+<div class="md-table-scroll"><table><tbody><tr><td>加工过程</td><td>推测的生理功能</td></tr><tr><td>加帽反应</td><td>mRNA 从细胞核向细胞质运转,翻译起始</td></tr><tr><td>加多A反应</td><td>转录终止,翻译起始和 mRNA 降解</td></tr><tr><td>RNA 的剪接</td><td>从 mRNA、tRNA 和 rRNA 分子中切除内含子</td></tr><tr><td>RNA 的切割</td><td>从前体 RNA 中释放成熟 tRNA 和 rRNA 分子</td></tr></tbody></table></div>
+
+<p>生物细胞内含子的边界处存在相似的核苷酸序列,表明内含子剪接过程在进化上是保守的。比较同源基因的进化过程发现内含子的异化大于外显子,特定的内含子还可能在进化过程中丢失,因此,内含子的”功能”及其在生物进化中的地位是一个引人注目的问题。另外,许多人类疾病是内含子剪接异常引起的,如地中海贫血患者的珠蛋白基因中,大约有1/4的核苷酸突变发生在内含子的5’或3’边界保守序列上,或者虽然位于内含子中间但干扰了前体mRNA的正常剪接。</p>
+<h2 id="1-RNA-序列决定了剪接的发生位点"><a href="#1-RNA-序列决定了剪接的发生位点" class="headerlink" title="1. RNA 序列决定了剪接的发生位点"></a>1. RNA 序列决定了剪接的发生位点</h2><p>比较不同基因的核苷酸序列发现,mRNA 前体中内含子的两端边界存在共同的序列,这些序列结构可能是产生 mRNA 前体剪接的信号。多数细胞核 mRNA 前体内含子的 5’ 边界序列为 GU,3’ 边界序列为 AG。因此,GU 表示供体衔接点的 5’ 端,AG 代表接纳体衔接点的 3’ 端。把这种保守序列模式称为 GU-AG 法则,又称为 Chambon 法则。</p>
+<p>除了边界序列之外,外显子与内含子交界处的序列,内含子内部的部分序列也可能参与内含子的剪接(图3-33)。在3’端剪接位点AG的附近有一段富含嘧啶的区域,含有10~20个嘧啶核苷酸;5’端有一保守序列(5’-GUPuAGU-3’)。此外,许多发生分叉剪接的核mRNA内含子3’端上游18~50个核苷酸处,存在一个序列为 $Py_{80}NPy_{87}Pu_{75}APy_{95}$ 的保守区,其中A为百分之百保守,且具有2’-OH,是参与形成分叉剪接中间物的特定腺嘌呤,称为分支点。上述保守序列都是pre-mRNA剪接过程中各种核糖核蛋白剪接调节因子的结合位点,对于有效和准确的剪接非常重要。</p>
+<h2 id="2-RNA-剪接中的两步转酯反应"><a href="#2-RNA-剪接中的两步转酯反应" class="headerlink" title="2. RNA 剪接中的两步转酯反应"></a>2. RNA 剪接中的两步转酯反应</h2><p>RNA 剪接是由两步转酯反应完成的, 这两步转酯反应使得 pre-mRNA 中原有的某些磷酸二酯键断开, 并形成一些新的磷酸二酯键。<br>第一步转酯反应是由位于分支位点的保守腺苷酸的2’羟基引发的。它作为亲核基团攻击5’剪接位点保守鸟苷酸的磷酰基团。结果，外显子3’端的核糖与内含子5’端磷酸之间的磷酸二酯键被断开，游离出来的5’磷酸则与分支点保守腺苷酸的2’羟基连接。</p>
+<div class="md-table-scroll"><table><tbody><tr><td rowspan="2">5'</td><td>5'剪接位点</td><td>分支点</td><td>3'剪接位点</td></tr><tr><td>GUPuAGU</td><td>A</td><td>富Py区 AG 3'</td></tr><tr><td>外显子</td><td colspan="2">内含子</td><td>外显子</td></tr></tbody></table></div>
+
+<p>图 3-33 脊椎动物 mRNA 前体中常见的内含子剪接所必需的保守序列</p>
+<h2 id="3-9-真核生物-RNA-的转录后加工-3"><a href="#3-9-真核生物-RNA-的转录后加工-3" class="headerlink" title="3.9 真核生物 RNA 的转录后加工"></a>3.9 真核生物 RNA 的转录后加工</h2><p>因此,除了 $5^{\prime} \rightarrow 3^{\prime}$ 骨架磷酸二酯键,新的磷酸二酯键从保守腺苷酸的 $2^{\prime}$ 羟基伸出来,产生一个三叉交汇点。</p>
+<p>第二步转酯反应中, $5’$ 外显子作为亲核基团, 攻击 $3’$ 剪接位点的磷酰基团, 导致两个结果: 一是把 $5’$ 和 $3’$ 外显子连接起来了, 二是把内含子作为离去基团释放出去。因为内含子的 $5’$ 端已经在第一次转酯反应中与分支点腺苷酸相连接, 所以新释放出来的内含子形状像一个套索 (lariat form)。</p>
+<p>在上述两步转酯反应中,没有增加新的化学键,只是断开了两个磷酸二酯键,同时形成了两个新的磷酸二酯键。</p>
+<h2 id="3-剪接体与-RNA-剪接"><a href="#3-剪接体与-RNA-剪接" class="headerlink" title="3. 剪接体与 RNA 剪接"></a>3. 剪接体与 RNA 剪接</h2><p>上述的转酯反应是由一个被称为剪接体(spliceosome)的大型复合物介导的。剪接体是mRNA前体在剪接过程中组装形成的多组分复合物,是一种具有催化剪接反映的核糖核蛋白复合物,它包含约150种蛋白质和5种RNA(图3-34),大小与核糖体差不多。研究表明,剪接体中的5种RNA(U1、U2、U4、U5和U6)统称为核小RNA(snRNA)。每种snRNA长100~300核苷酸,与几种蛋白质形成的RNA-蛋白质复合物被称为细胞核小核糖核蛋白(small nuclear ribonuclear protein, snRNP)。它是剪接体的亚单位,剪接体就是由这些snRNP形成的巨型复合物,参与RNA的剪接。但是,每种snRNP执行的任务不同,因此,在剪接反应的不同时期,剪接体中含有不同的snRNP。剪接体中可能还有一些与剪接体松散结合的不属于snRNP的蛋白质。</p>
+<p>snRNP 在剪接中的功能如下: ①识别 5’ 剪接位点和分支点; ②按需要把这两个位点集结到一起; ③催化或协助催化 RNA 的剪接和连接反应。只有参与剪接反应的 RNA 与 RNA 之间、蛋白质与 RNA 之间以及蛋白质与蛋白质之间具备很好的协同作用, 才能完成复杂的剪接反应。</p>
+<p>剪接过程的详细步骤由图 3-35 所示。mRNA 链上每个内含子的 5’ 和 3’ 端分别与不同的 snRNP 相结合, 形成 RNA 和 RNP 复合物。</p>
+<p>一般情况下,由 U1 snRNP 通过其 U1 snRNA 以碱基互补的方式识别 mRNA 前体 5’</p>
+<p>图3-34 剪接体是一个巨大的复合物剪接体分子量大小约为 $1.2\times 10^{7}$ 。5种smRNP几乎占了总体的一半。剩下的一些蛋白质包括已知的剪接因子以及参与基因表达其他阶段的蛋白质。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-35-%E6%89%80%E7%A4%BA.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>剪接点,由结合在 3’ 剪接点上游富嘧啶区的 U2AF(U2 auxiliary factor)识别 3’ 剪接点并引导 U2 snRNP 与分支点相结合,形成剪接前体(prespliceosome),并进一步与 U4、U5、U6 snRNP 三聚体相结合,形成 60S 的剪接体,进行 RNA 前体分子的剪接。</p>
+<p>哺乳动物细胞中,mRNA 前体上的 snRNP 是从 5’ 向下游”扫描”,选择在分支点富嘧啶区 3’ 下游的第一个 AG 作为剪接的 3’ 位点。AG 前一位核苷酸可以影响剪接效率,一般说来,CAG=UAG&gt;AAG&gt;GAG。如果 mRNA 前体上同时存在几个 AG, 可能发生剪接竞争。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-3-S%E8%99%9A%E6%A0%B8%E7%94%9F%E7%89%A9mRNA%E5%89%8D%E4%BD%93%E4%B8%AD%E5%86%85%E5%90%AB%E5%AD%90%E5%89%AA%E6%8E%A5%E8%BF%87%E7%A8%8B%E7%A4%BA%E6%84%8F%E5%9B%BE.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图 3-3S 虚核生物 mRNA 前体中内含子剪接过程示意图</p>
+<p>RNA 剪接过程中容易发生两类错误,一是遗漏了剪接位点,二是剪接位点邻近的非靶位点被错认为剪接位点。生物体一般通过两种机制来提高选择剪接位点的准确性。首先,在 RNA 转录过程中,RNA 聚合酶 II 携带多种参与 RNA 加工的蛋白质,包括参与剪接的蛋白质。当新合成的 RNA 形成 5’ 剪接位点时,这些蛋白质就从 RNA 聚合酶 II 上转移到 RNA 分子上并结合于 5’ 剪接位点,准备与下一个 3’ 剪接位点的剪接成分相互作用,以识别正确的 3’ 剪接位点。这种与转录同步的剪接体组装方式大大减少了外显子遗漏的可能性。此外,研究发现可能有一个富含丝氨酸和精氨酸被称为 SR 蛋白的辅助因子与外显子中的外显子剪接增强子区相结合,通过与剪接机器的相互作用将其引导到邻近的剪接位点,以优先识别最靠近外显子的剪接位点,防止错误剪接,确保剪接的准确性和高效性。</p>
+<h2 id="4-RNA-的可变剪接"><a href="#4-RNA-的可变剪接" class="headerlink" title="4. RNA 的可变剪接"></a>4. RNA 的可变剪接</h2><p>在高等真核生物中,内含子通常是有序或组成性地从 mRNA 前体中被剪接,然而,在个体发育或细胞分化时可以有选择性地越过某些外显子或某个剪接点进行变位剪接,产生出组织或发育阶段特异性 mRNA,称为内含子的可变剪接或选择性剪接。人类基因组中,大约 60% 的基因能发生可变剪接,使一个基因产生多个蛋白质产物。图 3-36 显示产</p>
+<p>图3-36 RNA剪接的5种模式</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-36-%E6%98%BE%E7%A4%BA%E4%BA%A7.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>生可变剪接的几条主要途径。</p>
+<h2 id="5-I类和Ⅱ类自剪接内含子"><a href="#5-I类和Ⅱ类自剪接内含子" class="headerlink" title="5. I类和Ⅱ类自剪接内含子"></a>5. I类和Ⅱ类自剪接内含子</h2><p>与前面所述的 mRNA 前体中 GU-AG 类(主要)和 AU-AC 类(次要)内含子剪接方式不同的是 I、II 类内含子,因为带有这些内含子的 RNA 本身具有催化活性,能通过自身折叠成一种特殊的构象来进行内含子的自我剪接,而不需要形成剪接体。表 3-9 总结了存在于生物体内的各种内含子。</p>
+<p>表 3-9 生物体内的各种内含子</p>
+<div class="md-table-scroll"><table><tbody><tr><td>内含子类型</td><td>细胞内定位</td></tr><tr><td>GU-AG</td><td>细胞核,前体mRNA(真核)</td></tr><tr><td>AU-AC</td><td>细胞核,前体mRNA(真核)</td></tr><tr><td>I类内含子</td><td>细胞核,前体rRNA(真核),细胞器RNA,少数细菌RNA</td></tr><tr><td>II类内含子</td><td>细胞器RNA,部分细菌RNA</td></tr><tr><td>III类内含子</td><td>细胞器RNA</td></tr><tr><td>双内含子</td><td>细胞器RNA</td></tr><tr><td>前体tRNA中的内含子</td><td>细胞核,前体tRNA(真核)</td></tr></tbody></table></div>
+
+<p>①I类自剪接内含子 最初在研究原生动物四膜虫RNA前体时发现了I类内含子,后来在细菌中也发现存在这类内含子。I类内含子的剪接主要也是发生了两次磷酸二酯键的转移,即两次转酯反应(trans-esterification)。在I类自剪接内含子切除体系中,第一个转酯反应由一个游离的鸟苷或鸟苷酸(GMP、GDP或GTP)介导,鸟苷或鸟苷酸的3’-OH作为亲核基团攻击内含子5’端的磷酸二酯键,从上游切开RNA链。在第二个转酯反应中,上游外显子的自由3’-OH作为亲核基团攻击内含子3’位核苷酸上的磷酸二酯键,使内含子被完全切开,上下游两个外显子通过新的磷酸二酯键相连(图3-37)。I类内含子释放出线性内含子,而不是一个套索结构。</p>
+<p>I类自剪接内含子通常比Ⅱ类内含子小,有一个保守的二级结构,包括容纳鸟苷或鸟</p>
+<p>第3章 生物信息的传递(上)——从DNA到RNA</p>
+<p>图3-37 1类内合子的自剪接过程<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-37.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>苷酸结合的口袋以及一段与 $5’$ 剪接位点序列配对的”内在指导序列”，以确定鸟苷亲核攻击的精确位置。</p>
+<p>②Ⅱ类自剪接内含子 这类内含子主要存在于真核生物的线粒体和叶绿体 rRNA 基因中。在Ⅱ类内含子切除体系中,转酯反应无需游离鸟苷酸或鸟苷,而是由内含子本身的靠近 3’ 端的腺苷酸 2’-OH 作为亲核基团攻击内含子 5’ 端的磷酸二酯键,从上游切开 RNA 链后形成套索状结构。再由上游外显子的自由 3’-OH 作为亲核基团攻击内含子 3’ 端核苷酸上的磷酸二酯键,使内含子被完全切开,上下游两个外显子通过新的磷酸二酯键相连(图 3-38)。</p>
+<p>表 3-10 和图 3-39 总结了各种剪接类型的特点。</p>
+<p>表 3-10 RNA 剪接的三种主要类型</p>
+<div class="md-table-scroll"><table><tbody><tr><td>类型</td><td>细胞核 pre-mRNA</td><td>II类自剪接内含子</td><td>I类自剪接内含子</td></tr><tr><td>丰度</td><td>常见,适用于大多数真核基因</td><td>罕见,来自某些细胞器的真核基因及原核基因</td><td>罕见,某些真核生物的细胞核 rRNA、细胞器基因,及少量原核基因</td></tr><tr><td>机制</td><td>两步转酯反应,分支点为A</td><td>两步转酯反应,与pre-mRNA类似</td><td>两步转酯反应,分支点为G</td></tr><tr><td>催化机器</td><td>主要剪接体</td><td>内含子编码的核酶</td><td>内含子编码的核酶</td></tr><tr><td>边界顺序</td><td>5'↓GU-AG↓3'</td><td>5'↓GU-AG↓3'</td><td>5'U↓-G↓3'</td></tr><tr><td>能量要求</td><td>ATP</td><td>不需要</td><td>不需要</td></tr><tr><td>中间型分子</td><td>套索</td><td>套索</td><td>环状L-19 IVS</td></tr></tbody></table></div>
+
+<h2 id="3-9-真核生物-RNA-的转录后加工-4"><a href="#3-9-真核生物-RNA-的转录后加工-4" class="headerlink" title="3.9 真核生物 RNA 的转录后加工"></a>3.9 真核生物 RNA 的转录后加工</h2><p>图3-38 Ⅱ类内合子的自剪接过程<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-38-%E2%85%A1%E7%B1%BB%E5%86%85%E5%90%88%E5%AD%90%E7%9A%84%E8%87%AA%E5%89%AA%E6%8E%A5%E8%BF%87%E7%A8%8B.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图 3-39 RNA 三种主要剪接类型的比较</p>
+<p>Ⅱ类自剪接内含子的化学过程和剪接体介导的pre-mRNA剪接反应非常相似，由内含子内高度活泼的腺苷酸启动剪接过程，并形成套索产物；I类自剪接内含子的RNA通过折叠形成一个鸟苷结合口袋，进而结合一个游离的鸟苷用以启动剪接过程，不形成套索产物。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-38-%E2%85%A1%E7%B1%BB%E5%86%85%E5%90%88%E5%AD%90%E7%9A%84%E8%87%AA%E5%89%AA%E6%8E%A5%E8%BF%87%E7%A8%8B-c092f2.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<h2 id="3-10-RNA-的编辑、再编码和化学修饰"><a href="#3-10-RNA-的编辑、再编码和化学修饰" class="headerlink" title="3.10 RNA 的编辑、再编码和化学修饰"></a>3.10 RNA 的编辑、再编码和化学修饰</h2><h2 id="3-10-1-RNA-的编辑"><a href="#3-10-1-RNA-的编辑" class="headerlink" title="3.10.1 RNA 的编辑"></a>3.10.1 RNA 的编辑</h2><p>根据中心法则,DNA、RNA 和蛋白质之间存在着直接的线性关系,即连续的序列 DNA 被真实地转录成 mRNA 序列,然后翻译产生蛋白质分子。断裂基因的发现和 RNA 的剪接虽然使得基因表达过程增加了一个步骤,但 DNA 的实际编码序列没有发生变化。</p>
+<p>RNA 的编辑 (RNA editing) 是 mRNA 前体的加工方式之一, 通过插入、删除或取代一些核苷酸残基, 使 DNA 所编码的遗传信息发生变化, 是生物细胞内改变 mRNA 序列和蛋白质编码信息的重要途径。介导 RNA 编辑的机制有两种: 位点特异性脱氨基作用和指导 RNA 引导的尿嘧啶插入或删除。</p>
+<p>哺乳动物载脂蛋白 mRNA 的编辑是广泛研究的典型例子, 图 3-40 是该基因的 DNA 序列以及在哺乳动物肝和肠组织中分离到的 mRNA 序列。载脂蛋白基因编码区共有 4563 个密码子, 在所有组织中其 DNA 序列都相同。在肝中, 该基因转录产生完整的 mRNA 并被翻译成有 4563 个氨基酸的全长蛋白质, 分子量为 $5.1 \times 10^{5}$ 。在肠中合成的却是只包含有 2153 个密码子的 mRNA, 翻译产生分子量为 $2.5 \times 10^{5}$ 的蛋白质。研究发现, 该蛋白质其实是全长载脂蛋白的 N 端, 它是由一个在序列上除了 2153 位密码子从 CAA 突变为 UAA 之外完全与肝 mRNA 相同的核酸分子所编码的, 位点特异性脱氨基作用引起的 C → U 突变使编码谷氨酰胺的密码子变成了终止密码子。</p>
+<p>RNA 的编辑虽然不是很普遍,但在真核生物中时有发生 $^{(表3-11)}$ ,表明这一途径可能</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-40-%E4%BD%8D%E7%82%B9%E7%89%B9%E5%BC%82%E6%80%A7%E8%84%B1%E6%B0%A8%E5%9F%BA%E4%BD%9C%E7%94%A8%E5%BC%95%E8%B5%B7%E7%9A%84%E5%93%BA%E4%B9%B3%E5%8A%A8%E7%89%A9%E8%BD%BD%E8%84%82%E8%9B%8B%E7%99%BD%E5%9F%BA.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图3-40 位点特异性脱氨基作用引起的哺乳动物载脂蛋白基因转录产物的编辑<br>(a,b) 胞嘧啶和腺嘌呤的位点特异性脱氨基作用产生尿嘧啶和次黄嘌呤；(c) 哺乳动物载脂蛋白基因转录产物的编辑。</p>
+<p>表 3-11 哺乳动物中 RNA 编辑的实例</p>
+<div class="md-table-scroll"><table><tbody><tr><td>组织</td><td>靶标RNA</td><td>所改变的碱基</td><td>结果</td></tr><tr><td>肝,肠</td><td>载脂蛋白B</td><td>C→U</td><td>谷氨酰胺密码子→终止子</td></tr><tr><td>肌肉</td><td>半乳糖苷酶</td><td>U→A</td><td>苯丙氨酸密码子→酪氨酸</td></tr><tr><td>睾丸,肿瘤等</td><td>Wilms 肿瘤基因-1</td><td>U→C</td><td>亮氨酸密码子→脯氨酸</td></tr><tr><td>肿瘤</td><td>神经纤维瘤基因-1</td><td>C→U</td><td>精氨酸密码子→终止子</td></tr><tr><td>脑</td><td>谷氨酸受体蛋白</td><td>A→I</td><td>多个谷氨酸密码子→精氨酸</td></tr></tbody></table></div>
+
+<p>是细胞充分发挥生理功能所必需的。</p>
+<p>载脂蛋白 mRNA 中的 C→U, 谷氨酸受体蛋白 mRNA 中的 A→I, 都属于脱氨基作用的结果, 分别由胞嘧啶和腺嘌呤脱氨酶所催化。通常情况下, 该酶促反应的特异性不强, 腺嘌呤脱氨酶可以作用于双链 RNA 区的任何腺苷酸残基。但是, RNA 的编辑发生在带有具催化作用的脱氨酶亚基的复合物中, 有附加的 RNA 结合区能帮助识别所编辑的特异性靶位点。</p>
+<p>除单碱基突变之外，RNA 编辑的另一种形式是尿苷酸的缺失和添加。研究发现，利什曼原虫属细胞色素 b mRNA 中含有许多独立于核基因的尿嘧啶残基，而特异性插入这些残基的信息来自指导 RNA (guide RNA)，因为它含有与编辑后细胞色素 b mRNA 相互补的核苷酸序列。指导 RNA 与被编辑区及其周围部分核酸序列虽然有相当程度的互补性，但该 RNA 上存在一些未能配对的腺嘌呤，形成缺口，为插入尿嘧啶提供了模板（图 3-41）。反应完成后，指导 RNA 从 mRNA 上解离下来，而 mRNA 则被用做翻译的模板。</p>
+<p>图3-41 指导RNA和RNA的编辑机制<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-41.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>RNA 编辑具有重要的生物学意义：</p>
+<p>① 校正作用 有些基因在突变过程中丢失的遗传信息可能通过RNA的编辑得以恢复。</p>
+<p>② 调控翻译 通过编辑可以构建或去除起始密码子和终止密码子, 是基因表达调控的一种方式。</p>
+<p>③ 扩充遗传信息 能使基因产物获得新的结构和功能,有利于生物的进化。</p>
+<h2 id="3-10-2-RNA的再编码"><a href="#3-10-2-RNA的再编码" class="headerlink" title="3.10.2 RNA的再编码"></a>3.10.2 RNA的再编码</h2><p>有研究发现,mRNA 在某些情况下不是以固定的方式被翻译,而可以改变原来的编码信息,以不同的方式进行翻译,科学上把 RNA 编码和读码方式的改变称为 RNA 的再编码 (RNA recoding)。</p>
+<p>某些有机体进行蛋白质翻译时, mRNA 的读码信号在 tRNA、rRNA 和相关蛋白因子的作用下发生 +1/-1 移位, 甚至发生核糖体跳过 50 个核苷酸的情况, 我们把前两者称为核糖体程序性 +1/-1 移位, 把后者称为核糖体跳跃。最近人们还发现自然界存在第 21 和 22 种氨基酸, 即硒代半胱氨酸 (selenocysteine) 和吡咯赖氨酸 (pyrrolysine), 两者都是通过终止子通读而编码的。上述的 +1/-1 移码、核糖体跳跃以及终止子通读都是再编码的表现方式, 因为它们使用了不同于常规的基因解码规则。RNA 的再编码可以使一个 mRNA 产生两种或多种相互关联但又不同的蛋白质, 这也可能是蛋白质合成的一种调节机制。</p>
+<h2 id="3-10-3-RNA-的化学修饰"><a href="#3-10-3-RNA-的化学修饰" class="headerlink" title="3.10.3 RNA 的化学修饰"></a>3.10.3 RNA 的化学修饰</h2><p>除 RNA 编辑之外,有些 RNA,特别是前体 rRNA 和 tRNA,还可能有特异性化学修饰。在 RNA 分子上目前鉴定到超过 170 种化学修饰,它们发生在长链分子内部或者两端。图 3-42 是最常见的几大类化学修饰途径及其产物。研究证实,仅人细胞内 rRNA 分子上就存在 106 种甲基化和 95 种假尿嘧啶产物,虽然尚未发现特征性保守序列,但有实验证据表明,RNA 的化学修饰可能具有位点特异性。有实验表明,分子量只有 70~100 个核苷酸的核仁 RNA(snoRNA) 参与 RNA 的化学修饰,因为这些 RNA 能通过碱基配对的方式,把 rRNA 分子上需要修饰的位点找出来。现在一般认为,snoRNA 上的 D 盒是甲基化酶的识别位点。</p>
+<p>mRNA 分子内部常见的碱基修饰有 N6-腺苷酸甲基化(N6-methyladenosine, $m^{6}A$ )、5-甲基胞嘧啶(5-methylcytosine, $m^{5}C$ )、假尿苷(pseudouridine, $\Psi$ )化、5-羟甲基胞嘧啶( $hm^{5}C$ ), N1-甲基腺嘌呤( $m^{1}A$ ), N7-甲基鸟苷( $m^{7}G$ ), N6, 2’-O-二甲基腺嘌呤核苷( $m^{6}Am$ )、胞嘧啶乙酰化( $ac^{4}C$ )等, 它们在 mRNA 的稳定性、内含子剪切、输出、翻译等生物学过程中发挥着重要的调控作用。其中, $m^{6}A$ 是 RNA 上最丰富的一种修饰, 存在于大多数真核生物(包括哺乳动物、昆虫、植物和酵母)和一些病毒的 mRNA 中, 也存在于 tRNA、rRNA、小核 RNA(snRNA)以及一些长链非编码 RNA。mRNA 的 $m^{6}A$ 修饰的异常会导致动植物发育异常和疾病的出现, 如胚胎发育迟缓和肿瘤等。</p>
+<p>传统观点认为,不同于真核生物 mRNA 的 $m^{7}G$ 端帽,原核生物 mRNA 5’ 端以三磷酸</p>
+<h2 id="3-10-RNA-的编辑、再编码和化学修饰-1"><a href="#3-10-RNA-的编辑、再编码和化学修饰-1" class="headerlink" title="3.10 RNA 的编辑、再编码和化学修饰"></a>3.10 RNA 的编辑、再编码和化学修饰</h2><p>图 3-42 rRNA 和 tRNA 分子中核苷酸的化学修饰</p>
+<h2 id="The-Image-is-Too-Blurry-to-Recognize-Any-Text-Content"><a href="#The-Image-is-Too-Blurry-to-Recognize-Any-Text-Content" class="headerlink" title="The Image is Too Blurry to Recognize Any Text Content"></a>The Image is Too Blurry to Recognize Any Text Content</h2><p>在枝苷酸的碱基或枝糖基上加一个或多个- $CH_{3}$ 举例：鸟嘌呤甲基化产物 $m^{7}G$</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-42-rRNA%E5%92%8CtRNA%E5%88%86%E5%AD%90%E4%B8%AD%E6%A0%B8%E8%8B%B7%E9%85%B8%E7%9A%84%E5%8C%96%E5%AD%A6%E4%BF%AE%E9%A5%B0.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<h2 id="Unreadable"><a href="#Unreadable" class="headerlink" title="[Unreadable]"></a>[Unreadable]</h2><p>用硫取代碱基分子上的氧举例：4-硫尿嘧啶</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-42-rRNA%E5%92%8CtRNA%E5%88%86%E5%AD%90%E4%B8%AD%E6%A0%B8%E8%8B%B7%E9%85%B8%E7%9A%84%E5%8C%96%E5%AD%A6%E4%BF%AE%E9%A5%B0-7aef14.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<h2 id="三价基的略和化"><a href="#三价基的略和化" class="headerlink" title="三价基的略和化"></a>三价基的略和化</h2><p>把一个二价链饱和</p>
+<p>举例：二氢尿嘧啶</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-42-rRNA%E5%92%8CtRNA%E5%88%86%E5%AD%90%E4%B8%AD%E6%A0%B8%E8%8B%B7%E9%85%B8%E7%9A%84%E5%8C%96%E5%AD%A6%E4%BF%AE%E9%A5%B0-b80951.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<h2 id="乙酉图珍"><a href="#乙酉图珍" class="headerlink" title="乙酉图珍"></a>乙酉图珍</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE55.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>N4-乙酰胞嘧啶核苷 (ac $^{4}$ C)</p>
+<h2 id="The-Quick-Brown-Fox-Jumps-over-the-Lazy-Dog"><a href="#The-Quick-Brown-Fox-Jumps-over-the-Lazy-Dog" class="headerlink" title="The Quick Brown Fox Jumps over the Lazy Dog"></a>The Quick Brown Fox Jumps over the Lazy Dog</h2><p>从碱基上去掉氨基</p>
+<p>举例：鸟嘌呤去氨基后成为次黄嘌呤</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE56.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<h2 id="数学的同质异构统"><a href="#数学的同质异构统" class="headerlink" title="数学的同质异构统"></a>数学的同质异构统</h2><p>碱基环结构上发生分子替代</p>
+<p>举例：尿嘧啶变构生成假尿嘧啶</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE57.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<h2 id="Unreadable-1"><a href="#Unreadable-1" class="headerlink" title="[Unreadable]"></a>[Unreadable]</h2><p>用不常见核苷酸替换常见核苷酸举例：奎嘌呤</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE58.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<h2 id="碳酸化修饰（tRNA）"><a href="#碳酸化修饰（tRNA）" class="headerlink" title="碳酸化修饰（tRNA）"></a>碳酸化修饰（tRNA）</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE59.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>RNA (pppRNA) 为主, 没有类似 m $^{7}$ G 的帽结构。但近几年在真核生物和原核生物的许多 RNA 中也发现了新的加帽修饰。研究人员在大肠杆菌和委内瑞拉链霉菌体内发现 NAD $^{+}$ 加帽修饰。随后, 人们陆续在酵母、小鼠、人源细胞、拟南芥等真核生物中也发现了 NAD-RNA。</p>
+<p>NAD $^{+}$ 作为一种辅酶,在转录过程中可替代 ATP 作为起始碱基,通过 RNAP/RNAP II 的催化生成 NAD-RNA,并进一步完成内含子剪切、poly(A)加尾等转录后加工过程。RNA 的 NAD $^{+}$ 加帽反应可能存在两种模式,即转录起始和转录后加帽。对大肠杆菌和枯草杆菌的研究结果表明,NAD $^{+}$ 加帽修饰有稳定 RNA 的作用。不同于上述原核生物,真核生物中广泛存在一类具有脱帽功能的酶——DXO 蛋白,可以去除哺乳动物和拟南芥体内 RNA 的 NAD $^{+}$ 帽,产生不稳定的 5′单磷酸 RNA,并进一步催化将其降解,最终影响体内 NAD-RNA 的水平。真核生物中 NAD $^{+}$ 修饰的基因大多亦可被 m $^{7}$ G 加帽,但 NAD-RNA 总含量远低于 m $^{7}$ G-RNA 的占比。生物体内 NAD-RNA 的丰度和种类与生长发育阶段和环境因素密切相关。</p>
+<p>除了 NAD-RNA, 近年来还检测到了许多其他类型加帽修饰的 RNA, 比如 dpCoA-RNA、FAD-RNA、NADH-RNA、ApnA-RNA、UDP-Glc-RNA 和 UDP-GlcNAc-RNA 等, 它们在体内的含量也远低于 $\mathrm{m}^{7}\mathrm{G}-\mathrm{RNA}$ 。带有这些修饰的 RNA 与 NAD-RNA 以及 $\mathrm{m}^{7}\mathrm{G}-\mathrm{RNA}$ 之间的关联仍然未知, 对于这些新的修饰的了解将有助于拓展和丰富我们对 RNA 的了解。</p>
+<h2 id="3-11-mRNA-转运"><a href="#3-11-mRNA-转运" class="headerlink" title="3.11 mRNA 转运"></a>3.11 mRNA 转运</h2><p>真核 mRNA 一旦完成加帽、去除内含子和多腺苷酸化等加工成熟过程, 就会通过核膜上的特殊结构——核孔复合物 (nuclear pore complex) 运出细胞核进入细胞质, 作为模板翻译产生蛋白质。mRNA 从细胞核进入到细胞质的过程是一个主动转运过程, 由 GTP 水解提供能量并受一系列蛋白质的精细调控, 防止加工错误或已受损伤的 RNA 进入细胞</p>
+<p>质,危害细胞正常的生理活动,甚至造成致命的后果。</p>
+<p>成熟 mRNA 必须结合一组携带了细胞核跨膜转运信号的蛋白质, 待转运受体识别这些信号后指导 RNA 通过核孔离开细胞核。进入细胞质后, 参与转运的蛋白质组分就会从 mRNA 上解离下来, 被识别后重新回到细胞核, 参与下一轮 mRNA 的运输(图 3-43)。</p>
+<h2 id="3-12-核酶"><a href="#3-12-核酶" class="headerlink" title="3.12 核酶"></a>3.12 核酶</h2><p>核酶(ribozyme)是指一类具有催化功能的 RNA 分子,通过催化靶位点 RNA 链中磷酸二酯键的断裂,特异性剪</p>
+<p>图 3-43 mRNA 从细胞核转运到细胞质<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-43.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>切底物 RNA 分子, 从而阻断基因的表达。”ribozyme”是核糖核酸和酶两个词的缩合词。</p>
+<h2 id="3-12-1-核酶的发现"><a href="#3-12-1-核酶的发现" class="headerlink" title="3.12.1 核酶的发现"></a>3.12.1 核酶的发现</h2><p>1982 年 Cech 从四膜虫 rRNA 前体的加工研究中首先发现 rRNA 前体具有自剪接作用, 提出 ribozyme 的概念, 打破了酶都是蛋白质这种传统的观念。1983 年, Altman 等人发现 RNase P 中的 RNA 组分可以催化 tRNA 前体的加工, 之后的研究还发现 T4 RNA、一些植物的类病毒 (viroid)、拟病毒 (virusoid) 等都能进行自剪接。</p>
+<h2 id="3-12-2-核酶的分类和结构"><a href="#3-12-2-核酶的分类和结构" class="headerlink" title="3.12.2 核酶的分类和结构"></a>3.12.2 核酶的分类和结构</h2><p>核酶的催化功能与其空间结构有密切关系,目前已知有多种特殊结构的核酶,如RNase P 的 RNA 亚基(M1 RNA)、锤头型、发夹型丁型肝炎 δ 病毒 RNA、I 类内含子和 II 类内含子等。具有自剪切能力的 RNA 大多数都能形成锤头结构(hammerhead structure)。该二级结构由 3 个茎(I、II、III)构成,茎区是由互补碱基构成的局部双链结构,包围着一个由 11~13 个保守核苷酸构成的催化中心(图 3-44)。核酶剪切通常发生在 H(H 是除 G 以外任意的核苷酸)位点。同一核酶分子由具有催化中心的核酶和含有剪切位点的底物部分共同组成锤头结构,底物部分是切割部位两端的核苷酸,它与核酶的茎 I 和茎 III 结合,在切割之后该底物被释放,由一个新的没有被切割的底物取代,使切割反应得以重复进行。</p>
+<p>不同的核酶具有不同的催化功能,可以分为剪切型核酶和剪接型核酶两大类。</p>
+<p>① 剪切型核酶 剪切型核酶只剪不接,能够催化自身 RNA 或不同的 RNA 分子,切下特异的核苷酸序列。M1 RNA 是最典型的例子,在高浓度 $Mg^{2+}$ 存在时,它可特异性地剪切 tRNA 前体 5’ 端片段。此外,四膜虫 rRNA 前体的剪接产物 L19 也是一种剪切型核酶。</p>
+<p>② 剪接型核酶 该类核酶具有序列特异的内切核酸酶、RNA 连接酶等多种酶的活性, 它既能切割 RNA 分子, 也能通过转酯反应形成新的磷酸二酯键, 连接切割后的 RNA 分子。前面介绍的 I 类和 II 类内含子就属于剪接型核酶。</p>
+<p>锤头型核酶和发夹型核酶都能够催化产物的连接,但发夹型核酶催化连接反应的活性比催化切割反应的活性高约10倍,而锤头型核酶催化切割反应的活性比催化连接反应</p>
+<p>图3-44 核酶的锤头结构</p>
+<p>该酶包括3个茎环区，其间有一个11-13个保守核苷酸构成的催化中心。N代表该位置上可以为任意碱基，箭头代表切割部位，H代表除了G以外的核苷酸。在类病毒中，茎Ⅲ的顶部并没有被环连接起来。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch03-%E5%9B%BE3-44-%E6%A0%B8%E9%85%B6%E7%9A%84%E9%94%A4%E5%A4%B4%E7%BB%93%E6%9E%84.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p>的活性高 100 倍。核酶的发现为基因治疗提供了新的策略,因为根据其自剪切的特点,可以人工合成多种核酶以抑制破坏病毒或癌基因等有害基因的功能。</p>
+<p>核酶的发现使我们对 RNA 的重要功能又有了新的认识。因此，核酶是继逆转录现象之后对中心法则的又一个重要修正，说明 RNA 既是遗传物质又是酶。核酶的发现为生命起源的研究提供了新思路，也许曾经存在以 RNA 为基础的原始生命。照这么说,蛋白质世界也可能(仅仅是可能)起源于 RNA 世界!</p>
+<h2 id="3-13-RNA-在生物进化中的地位"><a href="#3-13-RNA-在生物进化中的地位" class="headerlink" title="3.13 RNA 在生物进化中的地位"></a>3.13 RNA 在生物进化中的地位</h2><p>我们曾在本章开篇时说过,基因是唯一能自主复制、世代相传并永久存在的遗传学单位。中心法则也阐明了 DNA 作为遗传信息的贮存者,是生命遗传和生物进化的”中心”。那么,RNA(或许还包括蛋白质!)有没有可能在生物遗传变异的历史演变中起作用呢?</p>
+<p>研究发现,RNA不仅具有极大的拷贝数,其变异率高达 $10^{-3}\sim10^{-4}$ 核苷酸/RNA分子,翻译错误率累加可达 $10^{-1}\sim10^{-2}$ 氨基酸/蛋白质分子,能够产生各种不同蛋白质而迅速积累信息。这就是说,RNA在基因表达过程中有一定的离散,正如鸟枪射击会有一些铅弹偏离靶心一样。RNA比相应DNA序列含有更多的遗传信息,可通过剪接、改变和校正阅读框架等方式表达出多种蛋白质异构体(同工酶?),还可能通过逆转录产生与RNA信息相一致的DNA分子,直接影响后代的基因型,这种作用也可称之为”反馈效应”。</p>
+<p>其次，RNA 还是获得性遗传(表观遗传)的分子基础。所谓获得性遗传是指有机体在生长发育过程中由于环境的影响而不是基因突变所形成的新的遗传性状。在 3 类主要生物大分子中，DNA 是信息分子，蛋白质是功能分子，RNA 既是信息分子，又是功能分子，它在表达过程中起着信息提取和加工的作用。环境可以影响和诱导 RNA 的产生及信息的加工，从而使机体表现出新的性状，这种性状如果传递给子代细胞或个体，就产生获得性遗传。实际上，不仅核酸分子是遗传信息的载体，某些亚细胞结构、细胞器和生物膜也能传递部分遗传信息，它们在环境影响下发生的结构改变有时也能传递给后代。因此，任何主观武断的结论都可能经不起历史的检验。</p>
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><ol>
+<li><p>什么是编码链？什么是模板链？</p>
+</li>
+<li><p>简述 RNA 的种类及其生物学意义。</p>
+</li>
+<li><p>简述原核和真核生物 RNA 的结构特征。</p>
+</li>
+<li><p>简述 RNA 转录的概念及其基本过程。</p>
+</li>
+<li><p>请说出复制与转录的异同点。</p>
+</li>
+<li><p>大肠杆菌的 RNA 聚合酶有哪些组成成分？各个亚基的作用是什么？</p>
+</li>
+<li><p>什么是封闭复合物、开放复合物以及三元复合物？</p>
+</li>
+<li><p>简述 $\sigma$ 因子的作用。</p>
+</li>
+<li><p>什么是 Pribnow box？它的保守序列是什么？</p>
+</li>
+<li><p>说出真核与原核生物基因转录的异同。</p>
+</li>
+<li><p>大肠杆菌的终止子有哪两大类？请分别介绍一下它们的结构特点。</p>
+</li>
+<li><p>真核生物的原始转录产物必须经过哪些加工过程才能成为成熟 mRNA?</p>
+</li>
+<li><p>简述 I、II 类内含子的剪接特点。</p>
+</li>
+<li><p>什么是套索结构？哪些类型 RNA 的剪接中会形成该结构？</p>
+</li>
+</ol>
+<p>第4章</p>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+    <div class="widget-header dis-select">
+      <span class="name">本文目录</span>
+      <button type="button" class="cap-action ui-interactive card-hover card-hover--spotlight" data-shell-action="toggle-toc" aria-label="Toggle table of contents" aria-pressed="false"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></span></button>
+    </div>
+  
+  <div class="widget-body"><ol class="toc ui-collection-adapter"><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-1-RNA-%E7%9A%84%E7%BB%93%E6%9E%84%E3%80%81%E5%88%86%E7%B1%BB%E5%92%8C%E5%8A%9F%E8%83%BD"><span class="toc-text">3.1 RNA 的结构、分类和功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-1-1-RNA-%E7%9A%84%E7%BB%93%E6%9E%84%E7%89%B9%E7%82%B9"><span class="toc-text">3.1.1 RNA 的结构特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-RNA-%E5%90%AB%E6%9C%89%E6%A0%B8%E7%B3%96%E5%92%8C%E5%98%A7%E5%95%B6-%E9%80%9A%E5%B8%B8%E6%98%AF%E5%8D%95%E9%93%BE%E7%BA%BF%E6%80%A7%E5%88%86%E5%AD%90"><span class="toc-text">1. RNA 含有核糖和嘧啶,通常是单链线性分子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-RNA-%E9%93%BE%E8%87%AA%E8%BA%AB%E6%8A%98%E5%8F%A0%E5%BD%A2%E6%88%90%E5%B1%80%E9%83%A8%E5%8F%8C%E8%9E%BA%E6%97%8B"><span class="toc-text">2. RNA 链自身折叠形成局部双螺旋</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-RNA-%E5%8F%AF%E6%8A%98%E5%8F%A0%E5%BD%A2%E6%88%90%E5%A4%8D%E6%9D%82%E7%9A%84%E4%B8%89%E7%BA%A7%E7%BB%93%E6%9E%84"><span class="toc-text">3. RNA 可折叠形成复杂的三级结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-1-RNA-%E7%9A%84%E7%BB%93%E6%9E%84%E3%80%81%E5%88%86%E7%B1%BB%E5%92%8C%E5%8A%9F%E8%83%BD-1"><span class="toc-text">3.1 RNA 的结构、分类和功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-%E7%8E%AF%E7%8A%B6-RNA"><span class="toc-text">4. 环状 RNA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-1-2-RNA-%E7%9A%84%E5%88%86%E7%B1%BB%E5%8F%8A%E5%88%86%E5%B8%83"><span class="toc-text">3.1.2 RNA 的分类及分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-1-3-RNA%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">3.1.3 RNA的功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-2-RNA-%E8%BD%AC%E5%BD%95%E6%A6%82%E8%BF%B0"><span class="toc-text">3.2 RNA 转录概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-2-1-DNA-%E5%A4%8D%E5%88%B6%E5%92%8C%E8%BD%AC%E5%BD%95%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-text">3.2.1 DNA 复制和转录的比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-2-2-%E8%BD%AC%E5%BD%95%E6%9C%BA%E5%99%A8%E7%9A%84%E4%B8%BB%E8%A6%81%E6%88%90%E5%88%86%E2%80%94%E2%80%94RNA-%E8%81%9A%E5%90%88%E9%85%B6"><span class="toc-text">3.2.2 转录机器的主要成分——RNA 聚合酶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-2-3-%E5%90%AF%E5%8A%A8%E5%AD%90%E4%B8%8E%E8%BD%AC%E5%BD%95%E5%8D%95%E4%BD%8D"><span class="toc-text">3.2.3 启动子与转录单位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-3-%E8%BD%AC%E5%BD%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B"><span class="toc-text">3.3 转录的基本过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-3-1-%E6%A8%A1%E6%9D%BF%E8%AF%86%E5%88%AB"><span class="toc-text">3.3.1 模板识别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-3-2-%E8%BD%AC%E5%BD%95%E8%B5%B7%E5%A7%8B"><span class="toc-text">3.3.2 转录起始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-3-3-%E8%BD%AC%E5%BD%95%E5%BB%B6%E4%BC%B8"><span class="toc-text">3.3.3 转录延伸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-3-4-%E8%BD%AC%E5%BD%95%E7%BB%88%E6%AD%A2"><span class="toc-text">3.3.4 转录终止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-4-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E4%B8%8E%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%9A%84%E8%BD%AC%E5%BD%95%E5%8F%8A%E4%BA%A7%E7%89%A9%E7%89%B9%E5%BE%81%E6%AF%94%E8%BE%83"><span class="toc-text">3.4 原核生物与真核生物的转录及产物特征比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-4-1-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E4%B8%8E%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E8%BD%AC%E5%BD%95%E8%BF%87%E7%A8%8B%E6%AF%94%E8%BE%83"><span class="toc-text">3.4.1 原核生物与真核生物转录过程比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-4-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E4%B8%8E%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%9A%84%E8%BD%AC%E5%BD%95%E5%8F%8A%E4%BA%A7%E7%89%A9%E7%89%B9%E5%BE%81%E6%AF%94%E8%BE%83-1"><span class="toc-text">3.4 原核生物与真核生物的转录及产物特征比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-4-2-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9-mRNA-%E7%9A%84%E7%89%B9%E5%BE%81"><span class="toc-text">3.4.2 原核生物 mRNA 的特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9-mRNA-%E7%9A%84%E5%8D%8A%E8%A1%B0%E6%9C%9F%E7%9F%AD"><span class="toc-text">1. 原核生物 mRNA 的半衰期短</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9-mRNA-%E7%9A%84-5%E2%80%99-%E7%AB%AF%E6%97%A0%E5%B8%BD%E7%BB%93%E6%9E%84-3%E2%80%99-%E7%AB%AF%E6%B2%A1%E6%9C%89%E6%88%96%E5%8F%AA%E6%9C%89%E8%BE%83%E7%9F%AD%E7%9A%84%E5%A4%9A-A-%E7%BB%93%E6%9E%84"><span class="toc-text">3. 原核生物 mRNA 的 5’ 端无帽结构, 3’ 端没有或只有较短的多 (A) 结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-4-3-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-mRNA-%E7%9A%84%E7%89%B9%E5%BE%81"><span class="toc-text">3.4.3 真核生物 mRNA 的特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-mRNA-%E7%9A%84-5%E2%80%99-%E7%AB%AF%E5%AD%98%E5%9C%A8%E2%80%9D%E5%B8%BD%E2%80%9D%E7%BB%93%E6%9E%84"><span class="toc-text">1. 真核生物 mRNA 的 5’ 端存在”帽”结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E7%BB%9D%E5%A4%A7%E5%A4%9A%E6%95%B0%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-mRNA-%E5%85%B7%E6%9C%89%E5%A4%9A-A-%E5%B0%BE"><span class="toc-text">2. 绝大多数真核生物 mRNA 具有多(A)尾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-5-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%9A%84%E8%BD%AC%E5%BD%95"><span class="toc-text">3.5 原核生物的转录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-5-1-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E8%81%9A%E5%90%88%E9%85%B6"><span class="toc-text">3.5.1 原核生物 RNA 聚合酶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-5-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%9A%84%E8%BD%AC%E5%BD%95-1"><span class="toc-text">3.5 原核生物的转录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-5-2-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%90%AF%E5%8A%A8%E5%AD%90%E7%BB%93%E6%9E%84"><span class="toc-text">3.5.2 原核生物启动子结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-5-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%9A%84%E8%BD%AC%E5%BD%95-2"><span class="toc-text">3.5 原核生物的转录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-5-3-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%90%AF%E5%8A%A8%E5%AD%90%E4%B8%AD-10-%E5%8C%BA%E4%B8%8E-35-%E5%8C%BA%E7%9A%84%E6%9C%80%E4%BD%B3%E9%97%B4%E8%B7%9D"><span class="toc-text">3.5.3 原核生物启动子中 -10 区与 -35 区的最佳间距</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-5-4-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E8%81%9A%E5%90%88%E9%85%B6%E5%AF%B9%E5%90%AF%E5%8A%A8%E5%AD%90%E7%9A%84%E8%AF%86%E5%88%AB%E5%92%8C%E7%BB%93%E5%90%88"><span class="toc-text">3.5.4 原核生物 RNA 聚合酶对启动子的识别和结合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-5-5-%E5%8E%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E8%BD%AC%E5%BD%95%E5%91%A8%E6%9C%9F"><span class="toc-text">3.5.5 原核生物 RNA 转录周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-RNA-%E8%BD%AC%E5%BD%95%E8%B5%B7%E5%A7%8B"><span class="toc-text">1. RNA 转录起始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%96%B0%E7%94%9F-RNA-%E9%93%BE%E7%9A%84%E5%BB%B6%E4%BC%B8"><span class="toc-text">2. 新生 RNA 链的延伸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-RNA-%E8%BD%AC%E5%BD%95%E7%9A%84%E7%BB%88%E6%AD%A2"><span class="toc-text">3. RNA 转录的终止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%9B%BE%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="toc-text">图示意图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E4%BE%9D%E8%B5%96%E4%BA%8E-P-%E5%9B%AD%E5%AD%90%E7%9A%84%E8%BD%AC%E5%8F%98%E7%BB%88%E6%AD%A2"><span class="toc-text">(2) 依赖于 P 园子的转变终止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-6-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%9A%84%E8%BD%AC%E5%BD%95"><span class="toc-text">3.6 真核生物的转录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-6-1-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E8%81%9A%E5%90%88%E9%85%B6"><span class="toc-text">3.6.1 真核生物 RNA 聚合酶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E8%81%9A%E5%90%88%E9%85%B6%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">1. 真核生物 RNA 聚合酶的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E8%81%9A%E5%90%88%E9%85%B6%E7%9A%84%E7%BB%84%E6%88%90%E5%88%86%E6%9E%90"><span class="toc-text">2. 真核生物 RNA 聚合酶的组成分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E7%9A%84%E8%BD%AC%E5%BD%95"><span class="toc-text">真核生物的转录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E8%81%9A%E5%90%88%E9%85%B6%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-text">3. 真核生物 RNA 聚合酶的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-6-2-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E5%90%AF%E5%8A%A8%E5%AD%90%E5%8F%8A%E5%85%B6%E5%AF%B9%E8%BD%AC%E5%BD%95%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">3.6.2 真核生物启动子及其对转录的影响</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-6-3-%E8%BD%AC%E5%BD%95%E8%B5%B7%E5%A7%8B%E5%A4%8D%E5%90%88%E7%89%A9%E7%9A%84%E7%BB%84%E8%A3%85"><span class="toc-text">3.6.3 转录起始复合物的组装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-6-4-%E5%A2%9E%E5%BC%BA%E5%AD%90%E5%8F%8A%E5%85%B6%E5%8A%9F%E8%83%BD"><span class="toc-text">3.6.4 增强子及其功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-6-5-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9%E8%BD%AC%E5%BD%95%E7%9A%84%E7%BB%88%E6%AD%A2"><span class="toc-text">3.6.5 真核生物转录的终止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-RNA-%E8%81%9A%E5%90%88%E9%85%B6-I-%E7%9A%84%E7%BB%88%E6%AD%A2"><span class="toc-text">(1) RNA 聚合酶 I 的终止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-RNA-%E8%81%9A%E5%90%88%E9%85%B6%E2%85%A1%E7%9A%84%E7%BB%88%E6%AD%A2"><span class="toc-text">(2) RNA 聚合酶Ⅱ的终止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-RNA-%E8%81%9A%E5%90%88%E9%85%B6%E2%85%A2%E7%9A%84%E7%BB%88%E6%AD%A2"><span class="toc-text">(3) RNA 聚合酶Ⅲ的终止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-7-%E8%BD%AC%E5%BD%95%E5%BF%A0%E5%AE%9E%E6%80%A7%E7%9A%84%E7%BB%B4%E6%8C%81"><span class="toc-text">3.7 转录忠实性的维持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-7-1-RNA-%E8%81%9A%E5%90%88%E9%85%B6%E5%AF%B9%E5%BA%95%E7%89%A9%E7%9A%84%E7%89%B9%E5%BC%82%E6%80%A7%E9%80%89%E6%8B%A9"><span class="toc-text">3.7.1 RNA 聚合酶对底物的特异性选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-7-2-RNA-%E8%81%9A%E5%90%88%E9%85%B6%E7%9A%84%E6%A0%A1%E5%AF%B9%E5%8A%9F%E8%83%BD"><span class="toc-text">3.7.2 RNA 聚合酶的校对功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E7%84%A6%E7%A3%B7%E9%85%B8%E8%A7%A3%E6%88%96%E7%84%A6%E7%A3%B7%E9%85%B8%E7%BC%96%E8%BE%91-Pyrophosphorolytic-eDiting"><span class="toc-text">(1) 焦磷酸解或焦磷酸编辑 (Pyrophosphorolytic eDiting)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%B0%B4%E8%A7%A3%E7%BC%96%E8%BE%91-Hydrolytic-eDiting"><span class="toc-text">(2) 水解编辑 (Hydrolytic eDiting)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-8-%E8%BD%AC%E5%BD%95%E7%9A%84%E6%8A%91%E5%88%B6"><span class="toc-text">3.8 转录的抑制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-8-1-%E5%98%8C%E5%91%A4%E5%92%8C%E5%98%A7%E5%95%B6%E7%B1%BB%E4%BC%BC%E7%89%A9"><span class="toc-text">3.8.1 嘌呤和嘧啶类似物</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-8-2-DNA-%E6%A8%A1%E6%9D%BF%E5%8A%9F%E8%83%BD%E6%8A%91%E5%88%B6%E5%89%82"><span class="toc-text">3.8.2 DNA 模板功能抑制剂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-8-3-RNA-%E8%81%9A%E5%90%88%E9%85%B6%E6%8A%91%E5%88%B6%E5%89%82"><span class="toc-text">3.8.3 RNA 聚合酶抑制剂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-9-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E7%9A%84%E8%BD%AC%E5%BD%95%E5%90%8E%E5%8A%A0%E5%B7%A5"><span class="toc-text">3.9 真核生物 RNA 的转录后加工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-9-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E7%9A%84%E8%BD%AC%E5%BD%95%E5%90%8E%E5%8A%A0%E5%B7%A5-1"><span class="toc-text">3.9 真核生物 RNA 的转录后加工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-9-1-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E4%B8%AD%E7%9A%84%E5%86%85%E5%90%AB%E5%AD%90"><span class="toc-text">3.9.1 真核生物 RNA 中的内含子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-9-2-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-tRNA-%E5%89%8D%E4%BD%93%E7%9A%84%E8%BD%AC%E5%BD%95%E5%90%8E%E5%8A%A0%E5%B7%A5"><span class="toc-text">3.9.2 真核生物 tRNA 前体的转录后加工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-9-3-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-rRNA-%E5%89%8D%E4%BD%93%E7%9A%84%E8%BD%AC%E5%BD%95%E5%90%8E%E5%8A%A0%E5%B7%A5"><span class="toc-text">3.9.3 真核生物 rRNA 前体的转录后加工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-9-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E7%9A%84%E8%BD%AC%E5%BD%95%E5%90%8E%E5%8A%A0%E5%B7%A5-2"><span class="toc-text">3.9 真核生物 RNA 的转录后加工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-9-4-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-mRNA-%E7%9A%84%E5%89%AA%E6%8E%A5"><span class="toc-text">3.9.4 真核生物 mRNA 的剪接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-RNA-%E5%BA%8F%E5%88%97%E5%86%B3%E5%AE%9A%E4%BA%86%E5%89%AA%E6%8E%A5%E7%9A%84%E5%8F%91%E7%94%9F%E4%BD%8D%E7%82%B9"><span class="toc-text">1. RNA 序列决定了剪接的发生位点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-RNA-%E5%89%AA%E6%8E%A5%E4%B8%AD%E7%9A%84%E4%B8%A4%E6%AD%A5%E8%BD%AC%E9%85%AF%E5%8F%8D%E5%BA%94"><span class="toc-text">2. RNA 剪接中的两步转酯反应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-9-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E7%9A%84%E8%BD%AC%E5%BD%95%E5%90%8E%E5%8A%A0%E5%B7%A5-3"><span class="toc-text">3.9 真核生物 RNA 的转录后加工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E5%89%AA%E6%8E%A5%E4%BD%93%E4%B8%8E-RNA-%E5%89%AA%E6%8E%A5"><span class="toc-text">3. 剪接体与 RNA 剪接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-RNA-%E7%9A%84%E5%8F%AF%E5%8F%98%E5%89%AA%E6%8E%A5"><span class="toc-text">4. RNA 的可变剪接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-I%E7%B1%BB%E5%92%8C%E2%85%A1%E7%B1%BB%E8%87%AA%E5%89%AA%E6%8E%A5%E5%86%85%E5%90%AB%E5%AD%90"><span class="toc-text">5. I类和Ⅱ类自剪接内含子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-9-%E7%9C%9F%E6%A0%B8%E7%94%9F%E7%89%A9-RNA-%E7%9A%84%E8%BD%AC%E5%BD%95%E5%90%8E%E5%8A%A0%E5%B7%A5-4"><span class="toc-text">3.9 真核生物 RNA 的转录后加工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-10-RNA-%E7%9A%84%E7%BC%96%E8%BE%91%E3%80%81%E5%86%8D%E7%BC%96%E7%A0%81%E5%92%8C%E5%8C%96%E5%AD%A6%E4%BF%AE%E9%A5%B0"><span class="toc-text">3.10 RNA 的编辑、再编码和化学修饰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-10-1-RNA-%E7%9A%84%E7%BC%96%E8%BE%91"><span class="toc-text">3.10.1 RNA 的编辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-10-2-RNA%E7%9A%84%E5%86%8D%E7%BC%96%E7%A0%81"><span class="toc-text">3.10.2 RNA的再编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-10-3-RNA-%E7%9A%84%E5%8C%96%E5%AD%A6%E4%BF%AE%E9%A5%B0"><span class="toc-text">3.10.3 RNA 的化学修饰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-10-RNA-%E7%9A%84%E7%BC%96%E8%BE%91%E3%80%81%E5%86%8D%E7%BC%96%E7%A0%81%E5%92%8C%E5%8C%96%E5%AD%A6%E4%BF%AE%E9%A5%B0-1"><span class="toc-text">3.10 RNA 的编辑、再编码和化学修饰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#The-Image-is-Too-Blurry-to-Recognize-Any-Text-Content"><span class="toc-text">The Image is Too Blurry to Recognize Any Text Content</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#Unreadable"><span class="toc-text">[Unreadable]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%89%E4%BB%B7%E5%9F%BA%E7%9A%84%E7%95%A5%E5%92%8C%E5%8C%96"><span class="toc-text">三价基的略和化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B9%99%E9%85%89%E5%9B%BE%E7%8F%8D"><span class="toc-text">乙酉图珍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#The-Quick-Brown-Fox-Jumps-over-the-Lazy-Dog"><span class="toc-text">The Quick Brown Fox Jumps over the Lazy Dog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E6%95%B0%E5%AD%A6%E7%9A%84%E5%90%8C%E8%B4%A8%E5%BC%82%E6%9E%84%E7%BB%9F"><span class="toc-text">数学的同质异构统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#Unreadable-1"><span class="toc-text">[Unreadable]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%A2%B3%E9%85%B8%E5%8C%96%E4%BF%AE%E9%A5%B0%EF%BC%88tRNA%EF%BC%89"><span class="toc-text">碳酸化修饰（tRNA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-11-mRNA-%E8%BD%AC%E8%BF%90"><span class="toc-text">3.11 mRNA 转运</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-12-%E6%A0%B8%E9%85%B6"><span class="toc-text">3.12 核酶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-12-1-%E6%A0%B8%E9%85%B6%E7%9A%84%E5%8F%91%E7%8E%B0"><span class="toc-text">3.12.1 核酶的发现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-12-2-%E6%A0%B8%E9%85%B6%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E7%BB%93%E6%9E%84"><span class="toc-text">3.12.2 核酶的分类和结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-13-RNA-%E5%9C%A8%E7%94%9F%E7%89%A9%E8%BF%9B%E5%8C%96%E4%B8%AD%E7%9A%84%E5%9C%B0%E4%BD%8D"><span class="toc-text">3.13 RNA 在生物进化中的地位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-text">思考题</span></a></li></ol></div>
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%AC03%E7%AB%A0%20%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92(%E4%B8%8A)%E2%80%94%E2%80%94%E4%BB%8E%20DNA%20%E5%88%B0%20RNA/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第3章 生物信息的传递(上)——从 DNA 到 RNA","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

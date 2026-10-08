@@ -1,0 +1,657 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC11%E7%AB%A0%20%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>第11章 应用系统管理 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="[!info] 现行教材 · 第 2 版本页为现行考试依据的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。  第11章 应用系统管理应用系统管理是指对组织应用系统进行规划、设计、开发、实施、运行和维护的过程和方法，以保证应用系统在整个生命周期内正常运行和不断发展。 在应用" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第11章 应用系统管理" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC11%E7%AB%A0%20%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="[!info] 现行教材 · 第 2 版本页为现行考试依据的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。  第11章 应用系统管理应用系统管理是指对组织应用系统进行规划、设计、开发、实施、运行和维护的过程和方法，以保证应用系统在整个生命周期内正常运行和不断发展。 在应用" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-09-17T16:00:00.000Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.353Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="信息系统管理工程师" data-stellar-page-meta="">
+<meta property="article:tag" content="第2版教程" data-stellar-page-meta="">
+<meta property="article:tag" content="考证" data-stellar-page-meta="">
+<meta property="article:tag" content="软考" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第11章 应用系统管理" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content=",,," data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC11%E7%AB%A0%20%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"第11章 应用系统管理","description":"\n[!info] 现行教材 · 第 2 版本页为现行考试依据的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。\n\n第11章 应用系统管理应用系统管理是指对组织应用系统进行规划、设计、开发、实施、运行和维护的过程和方法，以保证应用系统在整个生命周期内正常运行和不断发展。\n...","url":"https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC11%E7%AB%A0%20%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC11%E7%AB%A0%20%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">第11章 应用系统管理</a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-09-17T16:00:00.000Z">2026-09-18</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.353Z">2026-10-08</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第11章 应用系统管理</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><blockquote>
+<p>[!info] 现行教材 · 第 2 版<br>本页为<strong>现行考试依据</strong>的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。<br>考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。</p>
+</blockquote>
+<h1 id="第11章-应用系统管理"><a href="#第11章-应用系统管理" class="headerlink" title="第11章 应用系统管理"></a>第11章 应用系统管理</h1><p>应用系统管理是指对组织应用系统进行规划、设计、开发、实施、运行和维护的过程和方法，以保证应用系统在整个生命周期内正常运行和不断发展。</p>
+<p>在应用系统的运维管理中，需要维护人员进行例行操作、响应支持、优化改善、调研评估等工作。例行操作包括备份、数据恢复、服务器维护、系统监控和安全管理等。响应支持指对用户反馈的问题进行及时有效的解决，以确保系统的稳定性和可靠性。优化改善包括对系统进行性能优化、功能扩展、错误修复等工作。调研评估则是通过对应用系统的使用情况、用户反馈、市场趋势等数据进行综合分析和判断，为后续的升级改进和发展提供决策支持。</p>
+<p>信息系统安全管理则是应用系统管理中的一个重要方面。组织应用系统包含各种类型的敏感信息和业务数据，对其进行安全保护显得尤为重要。信息系统安全管理工作包括账号口令管理、漏洞管理、端口管理、数据安全管理、日志管理等。只有通过信息系统安全管理，才能确保组织应用系统的稳定和可靠。</p>
+<h2 id="11-1-基础管理"><a href="#11-1-基础管理" class="headerlink" title="11.1 基础管理"></a>11.1 基础管理</h2><p>应用系统在使用过程中，随着环境的变化和技术的进步，需要不断维护与更新，新的目标和要求不断提出，从而要求设计新系统，用新系统替代旧系统。任何系统都会经历一个产生、发展、成熟、消亡或更新的过程，这种周而复始、循环不息的过程称为应用系统的生命周期。应用系统的生命周期一般包括设计阶段、交付阶段、运行阶段、终止阶段，组织应对应用系统生命周期的各阶段进行管理，设计阶段和交付阶段参见本书第6章相关内容。</p>
+<p>需要注意的是，应用系统生命周期的四个阶段并不是完全独立的，它们之间存在相互联系和交叉的部分。例如，在设计阶段和交付阶段之间，需要进行反复的沟通和协调，以确保应用系统的设计和实现能够满足用户需求和规格要求。同样，在运行阶段和终止阶段之间，也需要进行一些清理和归档工作，以便为下一个生命周期做好准备。</p>
+<h2 id="1-运行阶段"><a href="#1-运行阶段" class="headerlink" title="1. 运行阶段"></a>1. 运行阶段</h2><p>运行阶段的目标是确保应用系统的稳定性和可靠性，同时给用户提供良好的使用体验。为了达到这个目标，开发团队需要进行技术支持、维护和升级工作。</p>
+<p>在运行阶段，应用系统会正式投入使用，并向用户提供服务。应用系统运行过程中，需要与组织、人员和业务不断进行磨合和融合，需要不断进行适应性维护，使系统逐步趋于稳定。应用系统通过运行维护工作保持运行稳定，成为组织的血液和神经中枢，提高组织管理效率和效益。</p>
+<h2 id="1）运行阶段管理内容"><a href="#1）运行阶段管理内容" class="headerlink" title="1）运行阶段管理内容"></a>1）运行阶段管理内容</h2><p>应用系统运行阶段是指应用系统交付给用户或客户后的使用和维护阶段，主要涉及以下管理内容。</p>
+<p>- 系统监控和维护。在应用系统运行阶段，需要对系统的运行状态进行实时监控，以确保系统的稳定性和可靠性。监控的内容包括系统的硬件和软件配置、系统资源使用情况、系统性能和负载情况等。同时，还需要对系统进行定期维护和更新，包括系统升级、补丁更新、数据备份等，以确保系统的稳定性和安全性。</p>
+<p>- 用户支持和管理。在应用系统运行阶段，需要提供用户支持和管理服务，以帮助用户解决使用过程中遇到的问题和困难。用户支持包括技术支持、操作指南、在线帮助等，以提供用户在使用过程中的指导和支持。用户管理则包括用户权限管理、用户行为管理、用户数据管理等，以确保系统的安全性和稳定性。</p>
+<p>- 业务流程管理和优化。在应用系统运行阶段，需要对业务流程进行管理和优化，以确保系统的实际使用效果符合预期。业务流程管理包括对业务流程的监控和分析，以及针对不同业务场景的定制和优化。通过对业务流程的管理和优化，可以提高系统的效率和质量，满足用户的实际需求。</p>
+<p>- 系统性能优化和扩展。在应用系统运行阶段，需要对系统性能进行优化和扩展，以满足不断增长的业务需求和用户需求。性能优化包括对系统瓶颈的识别和解决、对系统架构的优化和改进等，以提高系统的响应速度和并发能力。系统扩展则包括对系统的硬件和软件配置进行升级和扩展，以满足不断增长的业务需求和用户需求。</p>
+<p>- 数据管理和保护。在应用系统运行阶段，需要对数据进行管理和保护，以确保数据的完整性和安全性。数据管理包括数据备份、数据恢复、数据迁移等，以确保数据的安全可靠。数据保护则包括数据加密、数据脱敏、访问控制等，以保护数据不被非法获取和滥用。</p>
+<p>- 安全管理。确保应用系统的安全性，包括用户身份认证和授权管理、数据加密与备份、防火墙和入侵检测系统的配置与管理，以及应对潜在威胁和漏洞的安全策略和应急响应计划。</p>
+<h2 id="2）运行阶段关键成功因素"><a href="#2）运行阶段关键成功因素" class="headerlink" title="2）运行阶段关键成功因素"></a>2）运行阶段关键成功因素</h2><p>应用系统在运行阶段要具备稳定性、安全性、优秀的用户体验、高性能、可扩展性、有效的数据管理和决策支持、故障处理与运维支持，综合体现一个系统能够满足用户需求并为业务提供价值的能力。该阶段关键成功因素如下。</p>
+<p>（1）识别运行维护的相关方。</p>
+<p>建立运行维护服务机制和协同机制，确保应用系统运行维护的权责分明并保持一致。</p>
+<p>(2) 运行维护策划。</p>
+<p>- 明确运行维护服务级别协议要求。</p>
+<p>- 界定运行维护要求的业务环境。</p>
+<p>- 使用时，考虑数据维护和可持续交付要求。</p>
+<p>- 评估影响应用系统运行的业务环境的变化，确定需应对的风险和机遇的运行维护要求。</p>
+<p>（3）实施运行维护活动。</p>
+<p>- 进行知识管理，收集、积累、共享、使用与运行维护相关的知识。</p>
+<p>- 实施培训，策划并实施应用软件的业务流程培训、功能培训、操作培训等。</p>
+<p>- 运行维护结果应形成规范化的文档，并满足安全保密要求。</p>
+<p>（4）应用系统评价。</p>
+<p>评价应用系统的运行维护，以确保应用系统可用、安全、稳定和可靠，并满足业务的需要。</p>
+<p>(5) 运维管理工具。</p>
+<p>- 可利用工具进行应用系统的运行维护。</p>
+<p>- 工具适合所开展的运行维护活动及应用系统的特定类型和要求。</p>
+<p>- 工具选择应考虑自动化的程度，以便实现运行维护的高效和智能。</p>
+<p>- 工具得到维护，以确保持续适合其用途。</p>
+<h2 id="2-终止阶段"><a href="#2-终止阶段" class="headerlink" title="2. 终止阶段"></a>2. 终止阶段</h2><p>终止阶段的目标是确保应用系统的数据和资源得到妥善处理和归档，以便未来进行审计和回顾。</p>
+<p>随着组织业务发展以及信息技术的发展，应用系统的功能和性能渐渐不能满足要求，开始时还可以通过局部修改完善适应需求，逐渐就完全不能满足需求。在系统功能和性能逐渐不能满足需求时，就要开始规划下一代系统了，进入系统的下一个生命周期。开发团队需要对应用系统进行总结和评估，以便为下一个生命周期提供更好的支持和管理。</p>
+<p>新一代信息系统开发完成后，进行投运，将现有系统中有关数据转换导入新系统，新系统开始试运行，一旦成功运行，原有系统将终止运行。</p>
+<h2 id="1）终止阶段管理内容"><a href="#1）终止阶段管理内容" class="headerlink" title="1）终止阶段管理内容"></a>1）终止阶段管理内容</h2><p>应用系统终止阶段是指在系统达到使用寿命、业务需求变化或其他原因导致系统停止运行之前的阶段，主要涉及以下管理内容。</p>
+<p>- 终止计划：制订系统终止计划，包括终止时间表、资源调配、用户迁移等。确定终止流程和步骤，明确各方责任和角色。进行风险评估和风险控制，确保系统终止过程安全可控。</p>
+<p>- 数据迁移：分析和评估现有数据的重要性和价值，决定数据的迁移方式。制订数据迁移计划，并确保数据的完整性、一致性和安全性。进行数据清理和备份，删除或归档不再需要的数据。</p>
+<p>- 用户通知和支持：通知系统用户和利益相关者系统终止的时间和原因。提供用户迁移指南和支持，协助用户顺利转移到新系统或其他解决方案。回答用户的问题和解决用户的疑虑，提供必要的技术支持和培训。</p>
+<p>- 合同和协议处理：审查和解除与供应商、合作伙伴及其他相关方的合同和协议。协商解决未完结的问题和争议，并进行合法合规的终止处理。</p>
+<p>- 归档管理：提取、整理和归档系统相关的知识、文档和经验，以备后续参考和利用。建立知识库或档案馆，存储和管理系统的技术文档、用户手册等信息。</p>
+<p>- 资源清理和回收：关闭系统所使用的硬件、网络和其他相关资源，归还或重新分配资源。处理系统所产生的电子垃圾和废弃物，并确保符合环境保护要求。</p>
+<p>- 安全和隐私保护：清除系统中的敏感数据和用户信息，采取必要的安全措施防止数据泄露。处理和销毁存储介质，如磁盘、磁带等，以确保数据无法恢复。</p>
+<p>- 绩效评估和总结：对系统终止阶段的工作进行评估和总结，总结经验教训，为未来提供参考。汇总终止阶段的绩效和成果，向相关利益相关者做出说明和报告。</p>
+<h2 id="2）终止阶段关键成功因素"><a href="#2）终止阶段关键成功因素" class="headerlink" title="2）终止阶段关键成功因素"></a>2）终止阶段关键成功因素</h2><p>应用系统管理终止阶段需要确保管理的完整性和准确性、安全性、可追溯性、标准化和规范化、可维护性和可更新性等得以实现。该阶段关键成功因素如下。</p>
+<h2 id="（1）制订终止计划"><a href="#（1）制订终止计划" class="headerlink" title="（1）制订终止计划"></a>（1）制订终止计划</h2><p>制订终止计划，以撤销运行和维护组织的支持，并将其形成文档。策划活动应让用户参与。该计划应涉及下述各项。</p>
+<p>- 一定时期之后，终止全部或部分支持。</p>
+<p>- 应用系统及其相关文档的归档。</p>
+<p>- 任何未来后续支持事项的职责。</p>
+<p>- 归档数据副本的可访问性。</p>
+<p>（2）通知相关责任人。</p>
+<p>用户应得到终止计划和活动的通知。通知应包括下述内容。</p>
+<p>- 替代或升级的应用系统及其生效日期的说明。</p>
+<p>- 该应用系统不再得到支持的理由说明。</p>
+<p>- 一旦失去支持，其他可用支持方案的说明。</p>
+<p>- 所有相关文档、日志应归档保存。</p>
+<p>(3) 系统切换。</p>
+<p>- 新系统的投运需要大量的基础数据，这些数据的整理与录入工作量特别庞大，应及早准备、尽快完成。</p>
+<p>- 系统切换应提前做好人员的培训工作。</p>
+<p>- 系统运行时会出现一些局部性的问题，这是正常现象。系统工作人员对此应有足够的准备，并做好记录。系统只出现局部性问题，说明系统是成功的；反之，如果出现致命的问题，则说明系统设计质量不好，整个系统甚至需要重新设计。</p>
+<p>（4）数据访问。</p>
+<p>根据服务级别协议关于数据保护和审核要求，终止应用系统相关数据的访问。</p>
+<h2 id="11-2-运行维护"><a href="#11-2-运行维护" class="headerlink" title="11.2 运行维护"></a>11.2 运行维护</h2><p>应用系统运维管理是保证在应用系统上运行的各类应用软件系统的安全性、可靠性和可用性，定期评估应用软件系统的性能、功能缺陷、用户满意度等，及时与开发商沟通消除应用系统可能存在的安全隐患和威胁，根据需求更新或变更系统功能。</p>
+<p>应用系统运维管理需要对例行操作、响应支持、优化改善和调研评估等方面进行全面的管理和控制。例行操作可以确保系统的稳定、可靠和安全运行；响应支持可以及时解决系统和用户遇到的问题；优化改善可以提高系统的性能、稳定性和安全性；调研评估可以为系统的改进和发展提供技术支持和参考。同时，也需要根据实际情况和需求的变化，不断完善和优化这些方面的例行操作、响应支持、优化改善和调研评估。</p>
+<h2 id="11-2-1-例行操作"><a href="#11-2-1-例行操作" class="headerlink" title="11.2.1 例行操作"></a>11.2.1 例行操作</h2><p>例行操作即对应用系统及其运行环境的预定运行维护，以保障应用系统的正常运行。例行操作的活动包括：</p>
+<p>- 监控指标体系设计：包括识别应用系统运行监控点，建立监控指标，以支撑实施监控和预防性检查。</p>
+<p>- 应用系统运行的监控：用于监控应用系统的运行及状态。</p>
+<p>- 客户回访：调查客户对运行维护的满意度及改进建议等。</p>
+<p>- 问题分析：分析维护事件，识别问题和风险。</p>
+<h2 id="11-2-2-响应支持"><a href="#11-2-2-响应支持" class="headerlink" title="11.2.2 响应支持"></a>11.2.2 响应支持</h2><p>响应支持即对应用软件及其运行环境的服务请求或故障申报提供即时运行维护，以保障应用系统的正常运行。响应支持包括服务受理、非故障请求处理、故障诊断定位、解决方案制定、故障处理、新用户和新功能上线、应急响应。响应支持的活动包括：</p>
+<p>- 服务受理：受理服务请求，包括故障请求和非故障请求。</p>
+<p>- 非故障请求处理：按服务级别协议分类处理。</p>
+<p>- 故障诊断定位：排查、诊断定位故障。</p>
+<p>- 解决方案制定：应基于应用系统的重要性，确定解决方案。</p>
+<p>- 故障处理：执行故障解决方案，检测、监控、跟踪故障处理效果，将处理经验和建议纳入知识库。</p>
+<p>- 新用户和新功能上线：在新用户、新功能上线前、上线中、上线后的服务工作，内容包括配置用户及用户权限、数据初始化、安全性检查和功能使用培训等。</p>
+<p>- 应急响应：针对应用系统故障影响范围大，且不能在业务连续性规定要求内解决所采取的措施，内容包括应急组织架构确定、应急预案编制、应急演练、应急处置和应急回顾。</p>
+<h2 id="11-2-3-优化改善"><a href="#11-2-3-优化改善" class="headerlink" title="11.2.3 优化改善"></a>11.2.3 优化改善</h2><p>优化改善即对应用系统的功能和性能进行调优，并满足新的需求。优化改善包括功能性改进、性能优化改进、适应性改进、预防性改进。优化改善的活动包括：</p>
+<p>- 识别优化改善的机会：可考虑从应用系统的监控指标接近或超出阈值、例行操作中未解决根本原因的问题、响应支持中重复出现事件、用户满意度、例行操作和响应支持中识别出的风险、应用系统支持的业务需求变化等活动中识别优化改善机会。</p>
+<p>- 功能性改进：包括应用软件的功能缺陷修复、满足业务需求变化，而对应用软件功能的修改、完善和新增开发。</p>
+<p>- 性能优化改进：包括因应用软件性能问题而对其功能的修改和完善，包括应用消息队列、共享内存优化、应用服务能力优化等；对应用软件运行软环境实施调优、升级或扩容等。</p>
+<p>- 适应性改进：包括应用软件因适应性变化对其功能的修改和完善；对应用软件运行软环境的适应性实施调整等。</p>
+<p>- 预防性改进：包括应用软件可能存在某种威胁或风险而对其功能的修改和完善，对应用软件运行软环境的脆弱点实施改进等。</p>
+<h2 id="11-2-4-调研评估"><a href="#11-2-4-调研评估" class="headerlink" title="11.2.4 调研评估"></a>11.2.4 调研评估</h2><p>调研评估即对应用软件及其运行环境的调查研究和分析评价，提出应用系统的运行报告或建议。调研评估包括应用系统组成要素的构成分解、关联关系分析和应用系统的维护性分析。调研评估的活动包括：</p>
+<p>- 应用系统组成要素的构成分解：应根据业务流程和应用系统架构设计，层次化分解应用系统，识别关键业务点和核心业务系统。</p>
+<p>- 应用系统构成的关联关系分析：包括与核心业务系统关联的非核心业务系统、接口连接、依存关系等。</p>
+<p>- 应用系统的维护性分析：包括应用系统的可监控性、应用系统的易用性、应用系统的安全性、应用系统的可维护性，明确应用系统运行方式、组成要素及运行维护特点。</p>
+<h2 id="11-3-应用系统安全"><a href="#11-3-应用系统安全" class="headerlink" title="11.3 应用系统安全"></a>11.3 应用系统安全</h2><p>应用系统的安全管理就是为保证信息系统资源的完整性、可靠性、保密性、安全性、有效性和合法性，维护正当的信息活动而建立和采取的措施和方法的总和，以保证系统的硬件、软件和数据不因偶然的或人为的因素而遭受破坏、泄露、修改或复制。信息系统的安全需求主要包括保密性、安全性、完整性、可靠性和可用性以及信息的有效性和合法性。</p>
+<p>应用系统的安全管理内容主要包括账号口令管理、漏洞管理、数据安全管理、端口管理与日志管理。</p>
+<h2 id="11-3-1-账号口令管理"><a href="#11-3-1-账号口令管理" class="headerlink" title="11.3.1 账号口令管理"></a>11.3.1 账号口令管理</h2><p>应用系统的安全管理中，账号口令管理的目的是规范账号口令的管理，为账号口令的使用与维护提供依据，以及降低由于账号管理不善和弱口令带来的安全风险。应用系统账号口令的安全管理包括：</p>
+<p>- 口令强度：确保口令具有足够的强度，以提高安全性。口令应该包含数字、字母和特殊字符的组合，避免使用容易猜到的或常见的口令。</p>
+<p>- 口令保密：应该妥善保管自己的口令，不让他人轻易获取。建议使用密码管理器来生成和存储口令，并且避免在公共场所或通过电子邮件、即时通信工具等途径透露口令信息。</p>
+<p>- 口令变更：定期更改口令，以降低口令泄露或被破解的风险。建议至少每季度更换一次口令，并避免使用相同的口令或类似的口令。</p>
+<p>- 口令策略：制定强密码策略，要求用户使用复杂的口令，并定期更改口令。策略可以包括口令长度、字符组合、历史记录等方面的要求。</p>
+<p>- 身份验证：除了口令，还可以使用其他方式进行身份验证，如多因素身份验证、指纹识别等：这些方法可以提供更高级别的安全保护，防止未经授权的访问。</p>
+<p>- 账号管理：限制账号的权限和访问范围，确保用户只能访问其需要的应用系统和资源。同时，对账号进行定期审查和管理，及时撤销不再需要的账号。</p>
+<p>- 安全监控：建立安全监控机制，对应用系统的访问和使用进行审计和记录。监控可以发现异常访问和潜在的安全威胁，及时采取措施应对。</p>
+<h2 id="11-3-2-漏洞管理"><a href="#11-3-2-漏洞管理" class="headerlink" title="11.3.2 漏洞管理"></a>11.3.2 漏洞管理</h2><p>应用系统的安全管理中，漏洞管理的目的是发现和修复系统中的漏洞，以保障系统的安全性和稳定性。应用系统漏洞管理包括：</p>
+<p>- 建立漏洞管理流程：在日常安全运营中建立漏洞管理流程，确保所发现的漏洞都能够得到有效处理，从而提高整体安全水平。</p>
+<p>- 漏洞发现和评估：通过安全漏洞评估方案，对信息系统进行漏洞扫描和评估，生成漏洞分析报告并提交给信息安全经理和IT相关经理备案。</p>
+<p>- 定期安全扫描：采用安全扫描工具对系统进行定期扫描，发现潜在的漏洞和安全问题，及时进行处理。</p>
+<p>- 实时监控：通过实时监控系统，及时发现和处理异常行为和入侵企图，防范漏洞被利用。</p>
+<p>- 及时更新补丁：定期检查系统补丁的更新情况，及时更新补丁以修补已知的漏洞和安全问题。</p>
+<p>- 确定漏洞归属部门：根据单位职责划分，明确漏洞的归属部门，防止出现漏洞无人认领的局面。</p>
+<p>- 制定安全加固方案：漏洞修复负责部门根据安全漏洞分析报告及加固建议制定详细的安全加固方案（包括回退方案），报业务部门和安全部门审批。</p>
+<p>- 实施漏洞修复测试：在漏洞修复负责部门实施信息系统漏洞修复测试，观察无异常后，将修复测试结果提交给业务部门和安全部门。</p>
+<p>- 建立漏洞管理制度：建立相关漏洞管理制度，明确职责和权限，确保漏洞管理工作的顺利进行。</p>
+<h2 id="11-3-3-数据安全管理"><a href="#11-3-3-数据安全管理" class="headerlink" title="11.3.3 数据安全管理"></a>11.3.3 数据安全管理</h2><p>应用系统安全管理中，数据安全管理的目的是确保数据的安全性、完整性和可用性，防止数据泄露、篡改或损坏，保障数据的机密性和可靠性。应用系统数据管理包括：</p>
+<p>- 数据加密：对敏感数据进行加密存储和传输，保护数据的隐私和机密性。常用的加密算法包括对称加密和非对称加密，可以根据具体需求选择合适的加密算法和密钥管理方案。</p>
+<p>- 数据备份和恢复：定期备份数据，并建立恢复机制，确保数据在意外丢失或损坏时可以及时恢复。备份可以采用完整备份、增量备份或差异备份等方式，根据实际情况选择合适的备份策略。恢复机制则需要制订详细的恢复流程和测试计划，以确保恢复过程的可靠性和数据完整性。</p>
+<p>- 数据访问控制：建立访问控制机制，限制用户对数据的访问权限，防止未经授权的数据泄露和被篡改。访问控制可以采用基于角色的访问控制（RBAC）或基于属性的访问控制（ABAC）等模式，根据应用系统的需求选择合适的访问控制策略。</p>
+<p>- 数据验证和校验：对数据进行验证和校验，确保数据的完整性和准确性，防止数据被篡改或损坏。数据验证和校验可以采用数据校验、数据签名、哈希值计算等方式，根据具体情况选择合适的验证和校验方案。</p>
+<p>- 数据安全审计：定期对数据的安全性进行审计和检查，发现和修复潜在的安全风险和漏洞。数据安全审计需要建立审计日志、监控和分析系统，对数据的访问、修改、删除等操作进行记录和分析，及时发现异常操作和潜在的安全风险。</p>
+<p>- 数据安全培训和教育：对系统管理员和用户进行数据安全培训，提高他们对数据安全的意识和能力。培训和教育包括数据安全政策、安全意识、密码管理、安全操作等方面的内容。</p>
+<p>- 建立应急响应机制：针对数据安全事件，建立应急响应机制，及时采取措施进行应对和处理，降低损失。应急响应机制需要包括应急响应流程、恢复计划、危机管理等方面的内容，确保在发生数据安全事件时能够迅速、有效地应对和处理。</p>
+<h2 id="11-3-4-端口管理"><a href="#11-3-4-端口管理" class="headerlink" title="11.3.4 端口管理"></a>11.3.4 端口管理</h2><p>应用系统端口管理的目的是确保系统的网络安全，防止恶意攻击和非法访问。端口是计算机系统与外部网络或应用程序之间的接口，是黑客入侵系统的主要通道之一。通过合理的管理和监控端口，可以有效防止恶意软件和黑客通过端口渗透到系统中，保护系统的数据安全和稳定性。应用系统端口管理包括：</p>
+<p>- 端口访问权限管理：通过访问控制列表（ACL）或防火墙等措施，限制特定端口和服务器的访问权限，防止非法访问和攻击。</p>
+<p>- 端口安全策略制定：制定严格的端口安全策略，包括密码强度、访问控制、加密传输等方面的要求，提高端口的安全性。</p>
+<p>- 端口监控和审计：通过网络监控工具或安全审计软件，实时监控端口的连接情况和流量，及时发现异常流量和攻击行为，并对端口访问行为进行审计和记录。</p>
+<p>- 端口更新和维护：定期更新系统和应用程序的版本，修复可能存在的安全漏洞和缺陷，确保系统的安全性。</p>
+<h2 id="11-3-5-日志管理"><a href="#11-3-5-日志管理" class="headerlink" title="11.3.5 日志管理"></a>11.3.5 日志管理</h2><p>应用系统日志管理是通过收集、存储、分析和保护日志数据，可以帮助管理员及时发现并应对安全事件，监控系统的运行状况和异常行为，满足安全审计和合规性要求，从而确保信息系统正常运行。应用系统日志管理包括：</p>
+<p>- 日志收集：收集来自不同来源的日志信息，包括系统日志、应用程序日志、安全事件日志等。收集的日志信息应包括时间戳、日志类型、日志级别、事件描述等信息。</p>
+<p>- 日志存储：将收集到的日志信息存储在适当的存储介质中，如本地磁盘、网络存储、数据库等。为了便于后续分析和审计，日志信息应按照特定的格式进行存储，例如结构化数据库或文本文件。</p>
+<p>- 日志分析：对收集到的日志信息进行分析，以识别潜在的安全事件、异常行为和故障。分析可以包括实时分析、离线分析和定期分析。通过分析日志信息，可以发现潜在的攻击、入侵行为、数据泄露等安全问题。</p>
+<p>- 日志审计：对日志信息进行审计，以评估系统的安全性。审计可以包括对日志的完整性、准确性、时效性等方面进行检查。通过审计日志信息，可以发现系统中的漏洞和弱点，并采取相应的措施进行修复和加强。</p>
+<p>- 日志保护：对存储的日志信息进行保护，以防止未经授权的访问、修改和删除。日志保护可以采用加密、访问控制、备份等技术手段，确保日志信息的完整性和机密性。</p>
+<p>- 日志清理：定期清理过期的或无用的日志信息，以节省存储空间和提高查询效率。清理的周期可以根据实际需求进行调整，通常可以根据时间、事件类型、日志级别等因素来确定清理策略。</p>
+<h2 id="11-4-本章练习"><a href="#11-4-本章练习" class="headerlink" title="11.4 本章练习"></a>11.4 本章练习</h2><h2 id="1-选择题"><a href="#1-选择题" class="headerlink" title="1. 选择题"></a>1. 选择题</h2><p>（1）在____，应用系统的目标是确保系统的数据和资源得到妥善处理和归档，以便未来进行审计和回顾。A.设计阶段 B.交付阶段C.运行阶段 D.终止阶段</p>
+<p>参考答案: D</p>
+<p>（2）关于应用系统运维管理的描述，不正确的是：____。</p>
+<p>A. 例行操作可以确保系统的稳定、可靠和安全运行</p>
+<p>B. 响应支持可以及时解决系统和用户遇到的问题</p>
+<p>C. 调研评估可以提高系统的性能、稳定性和安全性</p>
+<p>D. 需要根据实际情况和需求的变化，不断完善和优化运维管理工作</p>
+<p>参考答案：C</p>
+<p>（3）关于系统切换的描述，不正确的是：____。</p>
+<p>A. 新系统需要的大量基础数据，准备时间长，可以逐步提供</p>
+<p>B. 系统切换应提前做好人员的培训工作</p>
+<p>C. 系统只出现局部性问题，说明系统是成功的</p>
+<p>D. 系统出现致命的问题，说明系统设计质量不好</p>
+<p>参考答案：A</p>
+<p>（4）信息系统的安全需求不包括：____。</p>
+<p>A. 监管安全、投资安全</p>
+<p>B. 保密性、安全性、完整性</p>
+<p>C. 可靠性、可用性</p>
+<p>D. 信息的有效性和合法性</p>
+<p>参考答案：A</p>
+<h2 id="2-思考题"><a href="#2-思考题" class="headerlink" title="2. 思考题"></a>2. 思考题</h2><p>（1）交付阶段的成功关键因素主要有哪些？</p>
+<p>（2）系统投入运行后，哪些原因要求系统人员对系统进行维护？</p>
+<p>（3）企业的应用系统和数据的安全性如何，受到人、组织和技术这几个维度的影响？这些维度是否存在某一个的贡献比另一个更大？为什么？</p>
+<p>参考答案：略</p>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+    <div class="widget-header dis-select">
+      <span class="name">本文目录</span>
+      <button type="button" class="cap-action ui-interactive card-hover card-hover--spotlight" data-shell-action="toggle-toc" aria-label="Toggle table of contents" aria-pressed="false"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></span></button>
+    </div>
+  
+  <div class="widget-body"><ol class="toc ui-collection-adapter"><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-1-%E5%9F%BA%E7%A1%80%E7%AE%A1%E7%90%86"><span class="toc-text">11.1 基础管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E8%BF%90%E8%A1%8C%E9%98%B6%E6%AE%B5"><span class="toc-text">1. 运行阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1%EF%BC%89%E8%BF%90%E8%A1%8C%E9%98%B6%E6%AE%B5%E7%AE%A1%E7%90%86%E5%86%85%E5%AE%B9"><span class="toc-text">1）运行阶段管理内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2%EF%BC%89%E8%BF%90%E8%A1%8C%E9%98%B6%E6%AE%B5%E5%85%B3%E9%94%AE%E6%88%90%E5%8A%9F%E5%9B%A0%E7%B4%A0"><span class="toc-text">2）运行阶段关键成功因素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E7%BB%88%E6%AD%A2%E9%98%B6%E6%AE%B5"><span class="toc-text">2. 终止阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1%EF%BC%89%E7%BB%88%E6%AD%A2%E9%98%B6%E6%AE%B5%E7%AE%A1%E7%90%86%E5%86%85%E5%AE%B9"><span class="toc-text">1）终止阶段管理内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2%EF%BC%89%E7%BB%88%E6%AD%A2%E9%98%B6%E6%AE%B5%E5%85%B3%E9%94%AE%E6%88%90%E5%8A%9F%E5%9B%A0%E7%B4%A0"><span class="toc-text">2）终止阶段关键成功因素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%EF%BC%881%EF%BC%89%E5%88%B6%E8%AE%A2%E7%BB%88%E6%AD%A2%E8%AE%A1%E5%88%92"><span class="toc-text">（1）制订终止计划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-2-%E8%BF%90%E8%A1%8C%E7%BB%B4%E6%8A%A4"><span class="toc-text">11.2 运行维护</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-2-1-%E4%BE%8B%E8%A1%8C%E6%93%8D%E4%BD%9C"><span class="toc-text">11.2.1 例行操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-2-2-%E5%93%8D%E5%BA%94%E6%94%AF%E6%8C%81"><span class="toc-text">11.2.2 响应支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-2-3-%E4%BC%98%E5%8C%96%E6%94%B9%E5%96%84"><span class="toc-text">11.2.3 优化改善</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-2-4-%E8%B0%83%E7%A0%94%E8%AF%84%E4%BC%B0"><span class="toc-text">11.2.4 调研评估</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-3-%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8"><span class="toc-text">11.3 应用系统安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-3-1-%E8%B4%A6%E5%8F%B7%E5%8F%A3%E4%BB%A4%E7%AE%A1%E7%90%86"><span class="toc-text">11.3.1 账号口令管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-3-2-%E6%BC%8F%E6%B4%9E%E7%AE%A1%E7%90%86"><span class="toc-text">11.3.2 漏洞管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-3-3-%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86"><span class="toc-text">11.3.3 数据安全管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-3-4-%E7%AB%AF%E5%8F%A3%E7%AE%A1%E7%90%86"><span class="toc-text">11.3.4 端口管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-3-5-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86"><span class="toc-text">11.3.5 日志管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#11-4-%E6%9C%AC%E7%AB%A0%E7%BB%83%E4%B9%A0"><span class="toc-text">11.4 本章练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E9%80%89%E6%8B%A9%E9%A2%98"><span class="toc-text">1. 选择题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-text">2. 思考题</span></a></li></ol></div>
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC11%E7%AB%A0%20%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第11章 应用系统管理","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

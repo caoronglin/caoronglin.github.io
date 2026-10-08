@@ -1,0 +1,214 @@
+/* 返回顶部按钮 */
+#back-to-top {
+  position: fixed;
+  right: 2.2rem;
+  bottom: 2.2rem;
+  z-index: 9999;
+  width: 48px;
+  height: 48px;
+  border: none;
+  outline: none;
+  background: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.35s cubic-bezier(0.4,0.2,0.2,1), box-shadow 0.2s, transform 0.2s, background 0.2s;
+  opacity: 0;
+  pointer-events: none;
+}
+#back-to-top.show {
+  opacity: 0.92;
+  pointer-events: auto;
+}
+#back-to-top:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  transform: translateY(-4px) scale(1.08) rotate(-8deg);
+  background: rgba(255,255,255,0.98);
+  opacity: 1;
+}
+#back-to-top svg {
+  display: block;
+}
+@media (max-width: 600px) {
+#back-to-top {
+    right: 1.2rem;
+    bottom: 1.2rem;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+#post-meta {
+  font-size: 12px;
+  color: var(--text-p4);
+}
+
+/* 文章内链接下划线效果 */
+li:not([class]) a:not([class]),
+p:not([class]) a:not([class]),
+table a:not([class]) {
+  padding-bottom: 3px;
+  padding-right: 1px;
+  margin-right: 2px;
+  background: linear-gradient(0, color-mix(in srgb, var(--accent) 45%, transparent), color-mix(in srgb, var(--accent) 45%, transparent)) no-repeat center bottom / 100% 2px;
+}
+
+/* 选中文本使用超链接高亮的背景色 */
+::selection {
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+/* 输入框提示伪元素 */
+.el-input.el-input--small.el-input-group.el-input-group--prepend::before {
+  display: none;
+  position: absolute;
+  top: -60px;
+  white-space: nowrap;
+  border-radius: 10px;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 14px 18px;
+  background: #444;
+  color: #fff;
+  z-index: 9999;
+}
+.el-input.el-input--small.el-input-group.el-input-group--prepend::after {
+  display: none;
+  content: '';
+  position: absolute;
+  border: 12px solid transparent;
+  border-top-color: #444;
+  left: 50%;
+  transform: translate(-50%, -48px);
+  z-index: 9999;
+}
+.el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(1):before { content: '输入QQ号会自动获取昵称和头像🐧'; }
+.el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(2):before { content: '收到回复将会发送到您的邮箱📧'; }
+.el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(3):before { content: '填写后可以点击昵称访问您的网站🔗'; }
+
+.el-input.el-input--small.el-input-group.el-input-group--prepend:focus-within::before,
+.el-input.el-input--small.el-input-group.el-input-group--prepend:focus-within::after {
+  display: block;
+}
+
+/* 空侧栏释放列宽
+ *
+ * 主题的 .site-workspace 是三列 grid：
+ *   minmax(右栏宽, 1fr) | 主区 | 右栏宽
+ * 侧栏不用时列轨道并不会消失：
+ *   - rightbar.enabled: false  → 主题根本不渲染 .site-region--rightbar
+ *   - rightbar.widgets: []     → 只隐藏了 .widgets（`.widgets:empty{display:none}`），
+ *                               region 空壳仍在
+ * 两种情况都会白白占掉 296px，主区被压到 551px（实测视口 1179px）。
+ * 对 equipment / about 这类网格排版的内容页，主区一窄，
+ * 4 列卡片每张只剩 118px，文字被挤成竖排。
+ *
+ * 所以「不存在」和「存在但无组件」两种状态都要覆盖。
+ * 用 :has() 而非写死 class，是因为侧栏状态是运行时决定的，
+ * 局部导航只换 DOM 不重载样式表。
+ */
+body:not(:has(.site-region--rightbar)),
+body:not(:has(.site-region--rightbar .widget-instance)) {
+  /* 占位，保证下面两条规则的选择器结构一致 */
+}
+
+body:not(:has(.site-region--rightbar)) .site-region--rightbar,
+body:has(.site-region--rightbar .widgets:empty) .site-region--rightbar {
+  display: none;
+}
+
+body:not(:has(.site-region--rightbar)) .site-workspace,
+body:not(:has(.site-region--rightbar .widget-instance)) .site-workspace {
+  /* 第一列保留左栏的最小宽度：直接写 minmax(0, 1fr) 会让左栏列被
+     主区的固定宽度挤到一百多像素，左栏内容溢出（实测 161px vs 264px）。 */
+  grid-template-columns: minmax(var(--leftbar-width), 1fr) minmax(0, var(--width-main-wiki-list));
+}
+
+/* 左栏同样处理；两侧都没有时收成单列 */
+body:not(:has(.site-region--leftbar .widget-instance)) .site-workspace {
+  grid-template-columns: minmax(var(--rightbar-width), 1fr) minmax(0, var(--width-main-wiki-list));
+}
+
+body:not(:has(.site-region--leftbar)) .site-workspace,
+body:not(:has(.site-region--rightbar)):not(:has(.site-region--leftbar)) .site-workspace {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* 文章卡片 & 页面毛玻璃效果 — 与导航栏一致的 Stellar 风格
+ *
+ * 背景与边框一律取主题变量（--card / --accent），这样卡片会跟随
+ * 深浅色自动切换：硬编码白色半透明底在深色主题下会变成「白底 + 主题
+ * 白字」，正文直接看不清。
+ * 主题自身用 `:root:not([data-theme])` + `@media (prefers-color-scheme: dark)`
+ * 判定系统配色，用 `[data-theme="dark"]` 写覆盖永远匹配不到。
+ */
+.post-card,
+.site-main .md-text,
+#main .md-text {
+  background: color-mix(in srgb, var(--card) 72%, transparent) !important;
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid color-mix(in srgb, var(--card) 55%, var(--accent) 45%) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important;
+  transition: box-shadow .3s, transform .3s, border-color .3s;
+}
+.post-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-2px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .post-card,
+  :root:not([data-theme]) .site-main .md-text,
+  :root:not([data-theme]) #main .md-text {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28) !important;
+  }
+  :root:not([data-theme]) .post-card:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36) !important;
+  }
+}
+
+/* 打印样式优化 */
+@media print {
+.site-leftbar,
+.l_right,
+.top.bread-nav.footnote,
+div#read-next,
+div#post-ai,
+div#related-posts,
+div#comments,
+section#license,
+section#share,
+#link-icon,
+footer,
+.markdownIt-Anchor { display: none; }
+.md-text psw { color: unset; background: unset; border: 3px dashed var(--block-border); }
+.article.banner { background: none; border-bottom: 1px dashed var(--block-border); }
+.banner,
+.banner.top { border-radius: 0; }
+.banner .bottom,
+table { padding: 0rem; }
+#start { display: unset; }
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 { margin: 0 !important; }
+img { max-height: 100vh; }
+.md-text { max-width: 100%; line-height: unset; }
+}
+
+/* 隐藏部分评论区无用按钮 */
+.timeline .tk-comments-count,
+.timeline .tk-icon,
+.timeline .tk-action-icon {
+  display: none !important;
+}
+.timeline .tk-comment { margin-bottom: 1rem; }
+.timeline .tk-content { padding: 1rem; border-radius: 8px; background: rgba(248, 249, 250, 0.5); }

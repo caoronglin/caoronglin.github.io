@@ -1,0 +1,1089 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/wiki/bsa-seq/ch10-troubleshooting/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>BSA-Seq：第十章、排错、性能与已知问题 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="BSA-Seq 原理、项目结构、上游 GATK4 流程、核心算法与 CLI 参考" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第十章、排错、性能与已知问题" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/wiki/bsa-seq/ch10-troubleshooting/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="BSA-Seq 原理、项目结构、上游 GATK4 流程、核心算法与 CLI 参考" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第十章、排错、性能与已知问题" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content="排错,性能,已知问题,bug,FAQ" data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"WebPage","@id":"https://blog.cnortles.top/wiki/bsa-seq/ch10-troubleshooting/","name":"第十章、排错、性能与已知问题","description":"BSA-Seq 原理、项目结构、上游 GATK4 流程、核心算法与 CLI 参考","url":"https://blog.cnortles.top/wiki/bsa-seq/ch10-troubleshooting/","isPartOf":{"@type":"WebSite","name":"麟跃云起","url":"https://blog.cnortles.top"}}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular"><div class="brand-navigation"><a class="brand-navigation__back cap" href="/wiki/"><span class="ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"/></svg></span><span>所有项目</span></a></div><div class="brand-navigation-rail">
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" href="&#x2F;wiki&#x2F;" title="所有项目" aria-label="所有项目">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"/></svg></span>
+  
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+</div><div class="brand-wrap"><a class="brand-title" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;"><div class="brand-name">BSA-Seq</div></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search" data-search-domain="wiki:bsa-seq" data-search-domain-label="BSA-Seq" data-search-domain-blog="false">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;" title="主页" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--tree" data-widget-id="leftbar:0:tree" data-presentation="leftbar" data-leftbar-rail>
+
+
+<widget class="widget-wrapper doc-tree-widget" data-wiki="bsa-seq">
+  
+  <div class="widget-body"><section class="widget-section"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch01-background&#x2F;" title="第一章、BSA-Seq 与三种分析方法的原理">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第一章、BSA-Seq 与三种分析方法的原理</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch02-project-structure&#x2F;" title="第二章、项目结构与运行环境">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第二章、项目结构与运行环境</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch03-input-data&#x2F;" title="第三章、输入数据与上游 GATK4 流程">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第三章、输入数据与上游 GATK4 流程</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch04-algorithm&#x2F;" title="第四章、核心算法：显著 SV 方法与阈值模拟">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第四章、核心算法：显著 SV 方法与阈值模拟</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch05-pipeline&#x2F;" title="第五章、主流程源码走读">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第五章、主流程源码走读</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch06-cli-reference&#x2F;" title="第六章、命令行参数全解">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第六章、命令行参数全解</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch08-case-study-rice&#x2F;" title="第八章、论文案例：水稻冷害 QTL 与降采样验证">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第八章、论文案例：水稻冷害 QTL 与降采样验证</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch07-outputs&#x2F;" title="第七章、输出文件与结果解读">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第七章、输出文件与结果解读</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch09-api-reference&#x2F;" title="第九章、函数速查表">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第九章、函数速查表</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch10-troubleshooting&#x2F;" title="第十章、排错、性能与已知问题" aria-current="page">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第十章、排错、性能与已知问题</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;ch11-related-methods-kmer&#x2F;" title="第十一章、相关方法：无参考基因组的 k-mer BSA">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第十一章、相关方法：无参考基因组的 k-mer BSA</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;bsa-seq&#x2F;" title="PyBSASeq 项目解读目录">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">P</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">PyBSASeq 项目解读目录</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></section></div>
+  
+</widget>
+
+
+</div><div class="widget-instance widget-instance--related" data-widget-id="leftbar:1:related" data-presentation="leftbar" data-leftbar-rail>
+
+<widget class="widget-wrapper slide-up related-summary-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">更多：生信</span>
+      
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="summary" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;%E7%94%9F%E4%BF%A1%E5%AD%A6%E7%AC%94%E8%AE%B0&#x2F;" title="生信学笔记">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">生</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">生信学笔记</span>
+      <span class="ui-collection__description">生信学习过程中的概念、方法与流程沉淀</span>
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/bsa-seq/ch01-background/">BSA-Seq</a>
+</div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2026-10-08T04:55:06.000Z">2026-10-08</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第十章、排错、性能与已知问题</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="第十章、排错、性能与已知问题"><a href="#第十章、排错、性能与已知问题" class="headerlink" title="第十章、排错、性能与已知问题"></a>第十章、排错、性能与已知问题</h1><h2 id="10-1-已知问题清单"><a href="#10-1-已知问题清单" class="headerlink" title="10.1 已知问题清单"></a>10.1 已知问题清单</h2><p>以下问题都是<strong>在本机实测中确认过的</strong>，不是猜测。</p>
+<h3 id="⚠️-1-第-17-行语法错误，脚本完全无法运行（严重）"><a href="#⚠️-1-第-17-行语法错误，脚本完全无法运行（严重）" class="headerlink" title="⚠️ #1 第 17 行语法错误，脚本完全无法运行（严重）"></a>⚠️ #1 第 17 行语法错误，脚本完全无法运行（严重）</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.signal <span class="keyword">import</span> savgol_filter/</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SyntaxError: invalid syntax</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>修复</strong>：删掉行尾 <code>/</code>。这是最优先要处理的问题。</p>
+<h3 id="⚠️-2-a-True-复用模式会误删短染色体（严重，易被忽略）"><a href="#⚠️-2-a-True-复用模式会误删短染色体（严重，易被忽略）" class="headerlink" title="⚠️ #2 -a True / 复用模式会误删短染色体（严重，易被忽略）"></a>⚠️ #2 <code>-a True</code> / 复用模式会误删短染色体（严重，易被忽略）</h3><p><code>bsaseq_plot()</code> 和 <code>bsaseq_plot_sw()</code> 都用了硬编码的 <code>min_sv = 500</code>，</p>
+<p>但<strong>判断对象不同</strong>：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>判断对象</th>
+<th>实际要求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>bsaseq_plot()</code></td>
+<td>染色体上的 <strong>SV 条数</strong></td>
+<td>≥ 500 个 SV（容易满足）</td>
+</tr>
+<tr>
+<td><code>bsaseq_plot_sw()</code></td>
+<td>染色体上的<strong>滑窗条数</strong></td>
+<td>≥ 500 个滑窗</td>
+</tr>
+</tbody></table></div>
+<p>在默认滑窗设置（2 Mb / 10 kb）下，”≥500 个滑窗”等价于：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">染色体长度 &gt; 500 × 10,000 + 2,000,000 ≈ 7,000,000 bp</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>实测复现</strong>：对 chr9 的 1–3 Mb 区域跑成功后，再执行 <code>-a True</code> 重绘，得到</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Plotting via the sliding window algorithm</span><br><span class="line">Your dataset contains too few SVs. No analysis is performed</span><br></pre></td></tr></tbody></table></figure>
+
+<p>（该区域只有 200 个滑窗。）整个 chr9（22.9 Mb，2,094 个滑窗）则正常重绘。</p>
+<p><strong>影响范围</strong>：任何”短于 7 Mb 的染色体”或”用 <code>-e</code> 切出来的小块区域”，</p>
+<p>在 <code>-a True</code> 或”复用已有结果”模式下都会<strong>静默退出</strong>，而第一次运行是成功的。</p>
+<p><strong>规避</strong>：需要重绘短区域时，把 <code>min_sv</code> 临时改小（源码 1769 行），</p>
+<p>或者不带 <code>-a True</code> 重跑（会走 <code>bsaseq_plot()</code> 的正常路径）。</p>
+<h3 id="⚠️-3-t-a-的-type-bool-陷阱"><a href="#⚠️-3-t-a-的-type-bool-陷阱" class="headerlink" title="⚠️ #3 -t / -a 的 type=bool 陷阱"></a>⚠️ #3 <code>-t</code> / <code>-a</code> 的 <code>type=bool</code> 陷阱</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span>(<span class="string">'False'</span>)  → <span class="literal">True</span>      <span class="comment"># 任何非空字符串都是 True</span></span><br><span class="line"><span class="built_in">bool</span>(<span class="string">''</span>)       → <span class="literal">False</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>实测：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-a False  → adjust_gap=True      ← 想关掉反而打开了</span><br><span class="line">-a 0      → adjust_gap=True</span><br><span class="line">-t False  → smooth=True          ← 想关平滑根本没关</span><br><span class="line">-t ''     → smooth=False         ← 只有这样才能关</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>规避</strong>：关闭平滑写 <code>-t ''</code>；关闭 <code>-a</code> 只能靠”不带这个参数”。</p>
+<h3 id="⚠️-4-静默复用旧结果（非常容易踩）"><a href="#⚠️-4-静默复用旧结果（非常容易踩）" class="headerlink" title="⚠️ #4 静默复用旧结果（非常容易踩）"></a>⚠️ #4 静默复用旧结果（非常容易踩）</h3><p>只要 <code>Results/sv_fagz.csv</code>（或 <code>sv_fagz_di.csv</code>）存在，程序就<strong>跳过全部过滤和统计</strong>，</p>
+<p>直接读取缓存。这意味着改动下面这些参数<strong>完全不会生效</strong>：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-b  -p  -v   --parent   -c（GQ 阈值部分）   --seg_step</span><br></pre></td></tr></tbody></table></figure>
+
+<p>同理 <code>Results/threshold.txt</code> 和 <code>Results/sliding_windows.csv</code> 被复用时，</p>
+<p><code>-s</code>（滑窗大小）的改动也不会生效。README 对此只有一句提醒：</p>
+<blockquote>
+<p>The <code>threshold.txt</code> file needs to be deleted if starting over is desired<br>(e.g, if the size of the sliding window is changed).</p>
+</blockquote>
+<p><strong>强制重算的标准操作</strong>：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf Results</span><br><span class="line"><span class="comment"># 或者只删缓存，保留中间产物目录</span></span><br><span class="line"><span class="built_in">rm</span> -f Results/sv_fagz.csv Results/sv_fagz_di.csv \</span><br><span class="line">      Results/threshold.txt Results/sliding_windows.csv Results/sv_region.csv</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="⚠️-5-同一个滑窗在两处文件里的比值不同（不是-bug，但会困惑人）"><a href="#⚠️-5-同一个滑窗在两处文件里的比值不同（不是-bug，但会困惑人）" class="headerlink" title="⚠️ #5 同一个滑窗在两处文件里的比值不同（不是 bug，但会困惑人）"></a>⚠️ #5 同一个滑窗在两处文件里的比值不同（不是 bug，但会困惑人）</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>文件</th>
+<th>统计基础</th>
+<th>chr9 峰（POS 1,960,001）的 <code>sSV/totalSV</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sliding_windows.csv</code> / <code>sv_region.csv</code></td>
+<td>全部过滤后 SV</td>
+<td><strong>0.0715</strong></td>
+</tr>
+<tr>
+<td><code>BSASeq.csv</code></td>
+<td><code>bulk_df_di</code>（DI==1 独立子集）</td>
+<td><strong>0.0821</strong></td>
+</tr>
+</tbody></table></div>
+<p>原因：<code>accurate_threshold_sw()</code> 是用 <strong><code>bulk_df_di</code></strong> 重算的（见源码 2077 行</p>
+<p><code>peak_verification(peaklst, bulk_df_di)</code>），而绘图用的是全量 <code>bulk_df</code>。</p>
+<p>两个值都正确，但<strong>不要跨文件比较</strong>，也不要以为”程序算错了”。</p>
+<h3 id="⚠️-6-默认值在论文-README-代码之间不一致"><a href="#⚠️-6-默认值在论文-README-代码之间不一致" class="headerlink" title="⚠️ #6 默认值在论文 / README / 代码之间不一致"></a>⚠️ #6 默认值在论文 / README / 代码之间不一致</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>论文正文</th>
+<th>README</th>
+<th>代码默认</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>模拟判定 sSV 的 p 值（<code>sm_alpha</code>）</td>
+<td><strong>0.10</strong></td>
+<td>0.01</td>
+<td><strong>0.05</strong></td>
+</tr>
+<tr>
+<td>判定 sSV 的 p 值（<code>alpha</code>）</td>
+<td>0.01</td>
+<td>0.01</td>
+<td>0.01</td>
+</tr>
+<tr>
+<td>重复次数</td>
+<td>10,000</td>
+<td>—</td>
+<td>10,000</td>
+</tr>
+<tr>
+<td>滑窗</td>
+<td>2 Mb / 10 kb</td>
+<td>2 Mb / 10 kb</td>
+<td>2 Mb / 10 kb</td>
+</tr>
+</tbody></table></div>
+<p><strong>复现论文结果请显式传参</strong>：<code>-v 0.01,0.10</code>。</p>
+<h3 id="⚠️-7-列名拼写不一致"><a href="#⚠️-7-列名拼写不一致" class="headerlink" title="⚠️ #7 列名拼写不一致"></a>⚠️ #7 列名拼写不一致</h3><p>README 写 <code>Significance_SSV</code>，代码实际输出 <strong><code>Significance_sSV</code></strong>（小写 s）。</p>
+<p>如果你写了自动化脚本按 README 取列，会 <code>KeyError</code>。</p>
+<h3 id="⚠️-8-许可证不一致"><a href="#⚠️-8-许可证不一致" class="headerlink" title="⚠️ #8 许可证不一致"></a>⚠️ #8 许可证不一致</h3><p>仓库 <code>LICENSE</code> 是 <strong>GNU GPL v3</strong>（674 行全文）；</p>
+<p>论文 “Availability and requirements” 段写的是 <strong>MIT license</strong>。</p>
+<p>以仓库文件为准。若用于商业闭源产品，需要先澄清这一点。</p>
+<h3 id="9-c-的-Help-文本与实现不符"><a href="#9-c-的-Help-文本与实现不符" class="headerlink" title="#9 -c 的 Help 文本与实现不符"></a>#9 <code>-c</code> 的 Help 文本与实现不符</h3><p>help 说有 4 个值（<code>…, extremely high read, and mirror index…</code>），</p>
+<p>代码只解析 3 个（<code>gq_value, min_SVs, mirror_index</code>）。</p>
+<p>“extremely high read” 的功能已经移到 <code>read_filter()</code> 的 <code>mean + 3σ</code> 判据中，</p>
+<p>不再可调。传第 4 个值会被静默忽略。</p>
+<h3 id="10-BC-群体固定假设”回交到-REF-亲本”"><a href="#10-BC-群体固定假设”回交到-REF-亲本”" class="headerlink" title="#10 BC 群体固定假设”回交到 REF 亲本”"></a>#10 BC 群体固定假设”回交到 REF 亲本”</h3><p><code>sm_allelefreq()</code> 里 BC 的 <code>prob = [0.5, 0.5, 0.0]</code> 恒给出 H0 频率 <strong>0.25</strong>。</p>
+<p>若实验是回交到 ALT 亲本（H0 应为 0.75），需要先交换 REF/ALT，</p>
+<p>或者用 <code>--parent ref</code> 让程序做方向校正。</p>
+<h3 id="11-非数字染色体-ID-的-e-支持有限"><a href="#11-非数字染色体-ID-的-e-支持有限" class="headerlink" title="#11 非数字染色体 ID 的 -e 支持有限"></a>#11 非数字染色体 ID 的 <code>-e</code> 支持有限</h3><p>README 明确说明：</p>
+<blockquote>
+<p>this option will not work if the chromosome IDs in the reference genome sequences<br>are not digits, with the exception of sex chromosomes; we can use 1000 - 1005 to<br>respectively represent sex chromosomes X, Y, Z, W, U, and V</p>
+</blockquote>
+<p>即 <code>chr1</code>、<code>Chr01</code>、<code>scaffold_123</code> 这类 ID 无法用 <code>-e</code> 指定区域。</p>
+<h3 id="12-无法-Import"><a href="#12-无法-Import" class="headerlink" title="#12 无法 Import"></a>#12 无法 Import</h3><p>没有 <code>main()</code> 保护，任何 <code>import PyBSASeq</code> 都会执行整个流程。</p>
+<p>二次开发只能复制函数。另外 <code>calculate_statistics()</code> 在 scipy 兜底路径里会往</p>
+<p><strong>当前工作目录</strong>写一个固定名 <code>output.csv</code>（<code>df.to_csv('output.csv', …)</code>），</p>
+<p>多任务并行时可能互相覆盖。</p>
+<h3 id="13-g-statistic-array-的参数顺序具有误导性"><a href="#13-g-statistic-array-的参数顺序具有误导性" class="headerlink" title="#13 g_statistic_array 的参数顺序具有误导性"></a>#13 <code>g_statistic_array</code> 的参数顺序具有误导性</h3><p>签名是 <code>(o1, o3, o2, o4)</code>，调用写法却是 <code>(fb_ref, fb_alt, sb_ref, sb_alt)</code>。</p>
+<p>由于 G 统计量在矩阵转置下不变，<strong>数值结果正确</strong>，但重构时极易改错。</p>
+<h2 id="10-2-报错信息-→-原因-→-处理"><a href="#10-2-报错信息-→-原因-→-处理" class="headerlink" title="10.2 报错信息 → 原因 → 处理"></a>10.2 报错信息 → 原因 → 处理</h2><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>报错 / 提示</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SyntaxError: invalid syntax</code>（第 17 行）</td>
+<td>行尾多余的 <code>/</code></td>
+<td>删掉它（见 #1）</td>
+</tr>
+<tr>
+<td><code>Either the module 'Fisher' … or 'fisher_exact' from 'scipy.stat' is needed</code></td>
+<td><code>fisher</code> 与 <code>scipy.stats.fisher_exact</code> 都不可用</td>
+<td><code>pip install fisher</code>（或降级 scipy）</td>
+</tr>
+<tr>
+<td><code>The following required field(s) is/are missing: […]</code></td>
+<td>输入表缺 <code>CHROM/POS/REF/ALT/*.GT/*.AD/*.GQ</code></td>
+<td>补齐列，注意 <code>.AD</code> 后缀必须存在</td>
+</tr>
+<tr>
+<td><code>The input file should be in either the csv or the tsv format</code></td>
+<td>扩展名不是 <code>.csv</code> / <code>.tsv</code></td>
+<td>改名</td>
+</tr>
+<tr>
+<td><code>No valid chromosomal names were entered.</code></td>
+<td><code>-e</code> 里的染色体名不在数据里</td>
+<td>检查 <code>CHROM</code> 的实际取值</td>
+</tr>
+<tr>
+<td><code>The size of the interested region on chromosome X should be greater than {2510000} bp.</code></td>
+<td>区域短于 <code>min_frag_size</code></td>
+<td>放大区域或调小 <code>-s</code></td>
+</tr>
+<tr>
+<td><code>Your dataset contains too few SVs. No analysis is performed</code></td>
+<td>见 #2：滑窗数 &lt; 500</td>
+<td>去掉 <code>-a True</code>，或调小 <code>min_sv</code></td>
+</tr>
+<tr>
+<td><code>You need to run the script without the --gap-adjust option …</code></td>
+<td><code>-a True</code> 但 <code>threshold.txt</code> / <code>sliding_windows.csv</code> 不存在</td>
+<td>先正常跑一次</td>
+</tr>
+<tr>
+<td><code>The ID sets of bulk_df and ref_svs are not the same.</code></td>
+<td>亲本与混池文件的位点集合对不上（<code>CHROM_POS</code>）</td>
+<td>检查两文件是否来自同一次变异检测/同一参考基因组</td>
+</tr>
+<tr>
+<td><code>This sliding window does not contain any SV</code></td>
+<td>候选峰滑窗内没有 SV（<code>ZeroDivisionError</code> 被捕获）</td>
+<td>通常无害；查看 <code>wrnLog.csv</code></td>
+</tr>
+<tr>
+<td><code>KeyError: 'FE_P'</code></td>
+<td>分组统计时列被 drop 后未整列重建（源码 1680 行有注释说明）</td>
+<td>已修复，若自行改动 <code>seg_statistics()</code> 需注意</td>
+</tr>
+<tr>
+<td>图形无法显示中文 / 字体缺失</td>
+<td>全局 <code>plt.rc('font', family='Arial')</code></td>
+<td>装 Arial，或改 1710 行的字体设置</td>
+</tr>
+</tbody></table></div>
+<h2 id="10-3-性能"><a href="#10-3-性能" class="headerlink" title="10.3 性能"></a>10.3 性能</h2><h3 id="10-3-1-时间构成"><a href="#10-3-1-时间构成" class="headerlink" title="10.3.1 时间构成"></a>10.3.1 时间构成</h3><p>以本机（Python 3.14.6 / pandas 3.0.6 / scipy 1.18.1 / <code>fisher</code>，Intel x86_64）跑水稻</p>
+<p><strong>chr9 全染色体</strong>（169,701 → 59,049 个 SV）为例。</p>
+<p><strong><code>-r 10000</code>（默认参数）</strong>：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>累计耗时（分钟）</th>
+<th>本阶段耗时</th>
+<th>占比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SV 过滤（两个文件）</td>
+<td>0.056</td>
+<td>0.056</td>
+<td>2.5%</td>
+</tr>
+<tr>
+<td>向量化 Fisher（真实 + 模拟）</td>
+<td>0.095</td>
+<td>0.039</td>
+<td>1.7%</td>
+</tr>
+<tr>
+<td><strong>逐位点阈值模拟 <code>sv_ci</code></strong></td>
+<td><strong>1.562</strong></td>
+<td><strong>1.466</strong></td>
+<td><strong>65.2%</strong></td>
+</tr>
+<tr>
+<td>全局阈值 + 逐位点阈值均值</td>
+<td>1.984</td>
+<td>0.422</td>
+<td>18.8%</td>
+</tr>
+<tr>
+<td>滑窗 + 绘图 + 峰检测</td>
+<td>2.121</td>
+<td>0.137</td>
+<td>6.1%</td>
+</tr>
+<tr>
+<td>峰验证（滑窗特异阈值）</td>
+<td>2.247</td>
+<td>0.127</td>
+<td>5.7%</td>
+</tr>
+<tr>
+<td><strong>合计（wall clock）</strong></td>
+<td><strong>2:17</strong></td>
+<td><strong>2.25 min</strong></td>
+<td>100%</td>
+</tr>
+</tbody></table></div>
+<p><strong>内存峰值：851 MB</strong>（<code>Maximum resident set size</code>）。</p>
+<p><strong>结论</strong>：<code>sv_ci</code>（逐位点模拟）是绝对瓶颈，占总时间的 2/3。它是</p>
+<p><code>df.apply(sv_ci, axis=1)</code> 的<strong>逐行 Python 循环</strong>，耗时与 <code>SV 数 × rep</code> 成正比，</p>
+<p>无法向量化（每个位点的深度不同）。</p>
+<blockquote>
+<p>同样这份数据用 <code>-r 100</code> 跑，内部累计 0.39 分钟（其中 <code>sv_ci</code> 占 0.16 分钟）——<br><code>rep</code> 放大 100 倍，总时间只放大 <strong>5.8 倍</strong>。原因是 <code>sv_ci</code> 内部的<br><code>np.random.binomial(…, rep)</code> 在小数组下调用开销占主导，并不严格线性。<br>即便如此，<strong>全基因组规模（60 万 SV）仍需数十分钟量级</strong>；而按论文的 34,919 个滑窗<br>逐个做滑窗特异模拟需要一个月。</p>
+</blockquote>
+<h3 id="10-3-2-三条加速路径"><a href="#10-3-2-三条加速路径" class="headerlink" title="10.3.2 三条加速路径"></a>10.3.2 三条加速路径</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>手段</th>
+<th>效果</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>装 <code>fisher</code></strong></td>
+<td>相对 scipy 逐行 <code>fisher_exact</code> 快数十倍以上，且启用向量化阈值模拟</td>
+<td>需要编译环境（本机 <code>pip install fisher</code> 一次成功）</td>
+</tr>
+<tr>
+<td><strong>复用已有结果</strong></td>
+<td><code>sv_fagz.csv</code> 存在时跳过过滤 + Fisher + 逐位点模拟；<code>-a True</code> 直接秒级重绘</td>
+<td>参数改动不生效（见 #4）</td>
+</tr>
+<tr>
+<td><strong>降低 <code>-r</code></strong></td>
+<td>线性加速</td>
+<td>阈值不稳定，只适合调试</td>
+</tr>
+</tbody></table></div>
+<h3 id="10-3-3-内存"><a href="#10-3-3-内存" class="headerlink" title="10.3.3 内存"></a>10.3.3 内存</h3><p>全流程主要开销在 <code>sv_fagz.csv</code> 的 DataFrame（30 列 × SV 数）和几次</p>
+<p><code>df.apply(…, axis=1)</code> 的中间对象。经验值：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>数据规模</th>
+<th>内存占用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>水稻 chr9（6 万 SV）</td>
+<td>&lt; 1 GB</td>
+</tr>
+<tr>
+<td>全基因组 60 万 SV（玉米测试数据量级）</td>
+<td>数 GB</td>
+</tr>
+</tbody></table></div>
+<p>数据大时建议：<code>--seg_step</code> 用小值配合 <code>average_seg_statistics()</code> 降维，</p>
+<p>或先用 <code>-e</code> 分染色体跑。</p>
+<h3 id="10-3-4-一次完整的默认参数实测"><a href="#10-3-4-一次完整的默认参数实测" class="headerlink" title="10.3.4 一次完整的默认参数实测"></a>10.3.4 一次完整的默认参数实测</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/time -v python PyBSASeq.py -i p9.csv,b9.csv -b 430,385 -p F2</span><br><span class="line"><span class="comment"># 全部默认：-r 10000, -s 2000000,10000, -v 0.01,0.05</span></span><br></pre></td></tr></tbody></table></figure>
+
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>实测值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Wall clock</td>
+<td><strong>2 分 17 秒</strong></td>
+</tr>
+<tr>
+<td>内部累计耗时</td>
+<td>2.247 min</td>
+</tr>
+<tr>
+<td><strong>内存峰值 (Max RSS)</strong></td>
+<td><strong>851 MB</strong></td>
+</tr>
+<tr>
+<td>退出码</td>
+<td>0</td>
+</tr>
+<tr>
+<td>输入 SV</td>
+<td>169,701（亲本）+ 165,812（混池）</td>
+</tr>
+<tr>
+<td>过滤后 SV</td>
+<td>59,049</td>
+</tr>
+<tr>
+<td>独立性距离 <code>seg_size</code></td>
+<td>150</td>
+</tr>
+<tr>
+<td>每滑窗平均 SV 数</td>
+<td>1,912</td>
+</tr>
+<tr>
+<td>全局比值阈值</td>
+<td>0.03295</td>
+</tr>
+<tr>
+<td>检出峰</td>
+<td>chr9:1,960,001（比值 0.0821，四列显著性全为 1）</td>
+</tr>
+<tr>
+<td>显著区域</td>
+<td>chr9: 1 – 3,630,001（364 个滑窗，89 个局部峰）</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p><code>-r 100</code> 与 <code>-r 10000</code> 的全局阈值只差 4%（0.03165 vs 0.03295），峰位置完全一致 ——<br>说明结论对 <code>rep</code> 不敏感。正式分析仍建议用 10,000 以保证阈值稳定。</p>
+</blockquote>
+<p>当出现 <code>MemoryError</code> 或机器卡死时，优先怀疑：</p>
+<ol>
+<li><code>-r</code> 没降下来 + 数据量很大</li>
+<li>没装 <code>fisher</code>，<code>df.apply(sv_ci_scipy, axis=1)</code> 在 Python 层逐行建 DataFrame 切片</li>
+</ol>
+<h2 id="10-4-质量控制清单（出结果前逐项核对）"><a href="#10-4-质量控制清单（出结果前逐项核对）" class="headerlink" title="10.4 质量控制清单（出结果前逐项核对）"></a>10.4 质量控制清单（出结果前逐项核对）</h2><h3 id="跑之前"><a href="#跑之前" class="headerlink" title="跑之前"></a>跑之前</h3><ul>
+<li><input disabled="" type="checkbox"> <code>PyBSASeq.py</code> 第 17 行已修复（<code>savgol_filter</code> 后面没有 <code>/</code>）</li>
+<li><input disabled="" type="checkbox"> <code>fisher</code> 已安装（<code>python -c "from fisher import pvalue_npy"</code> 无报错）</li>
+<li><input disabled="" type="checkbox"> <code>which python</code> 指向预期环境</li>
+<li><input disabled="" type="checkbox"> 输入文件是同一次变异检测、同一参考基因组产物</li>
+<li><input disabled="" type="checkbox"> <code>-b</code> 填的是<strong>实际混池个体数</strong>（不是株数或 read 数）</li>
+<li><input disabled="" type="checkbox"> <code>-p</code> 与实际群体结构一致（特别是 BC）</li>
+<li><input disabled="" type="checkbox"> <code>Results/</code> 里没有需要重算的旧缓存（改了统计参数就必须删）</li>
+</ul>
+<h3 id="跑之后"><a href="#跑之后" class="headerlink" title="跑之后"></a>跑之后</h3><ul>
+<li><input disabled="" type="checkbox"> <code>misc_info.csv</code> 的 <code>Bulk ID</code> 是两个<strong>不同</strong>的池</li>
+<li><input disabled="" type="checkbox"> <code>Average locus depth</code> 与实验设计相符（BSA-Seq 通常 20×–100×；本仓库测试数据只有 ~7.5×）</li>
+<li><input disabled="" type="checkbox"> <code>Average SVs per sliding window</code> 在数百–数千量级</li>
+<li><input disabled="" type="checkbox"> <code>wrnLog.csv</code> 里的空滑窗数量不多（空滑窗段落的曲线不可信）</li>
+<li><input disabled="" type="checkbox"> <code>CHROM</code> 列表与预期染色体一致（有没有漏掉短染色体？）</li>
+<li><input disabled="" type="checkbox"> 显著峰位置与 <code>sv_region.csv</code>、<code>sliding_windows.csv</code> 自洽</li>
+<li><input disabled="" type="checkbox"> <code>BSASeq.csv</code> 的 <code>Significance_sSV</code> 与 <code>AvgLD</code> 一起看：平均深度过低的峰要打折</li>
+<li><input disabled="" type="checkbox"> 有条件的做<strong>独立方法交叉验证</strong>（SNP index 法 / G 统计量法），三个面板峰位一致才下结论</li>
+</ul>
+<h2 id="10-5-结果可信度自检"><a href="#10-5-结果可信度自检" class="headerlink" title="10.5 结果可信度自检"></a>10.5 结果可信度自检</h2><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>可能原因</th>
+<th>怎么办</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>所有染色体整条都超阈值</td>
+<td>真实的强选择 + 低重组区（如着丝粒附近），也可能是阈值过低</td>
+<td>检查 <code>sm_alpha</code> 是否太小；结合着丝粒位置判断</td>
+</tr>
+<tr>
+<td>峰特别多、特别窄</td>
+<td>SV 总数少 / 滑窗太小 / 平滑窗口太小</td>
+<td>加大 <code>-s</code> 滑窗、加大 <code>-m</code> 平滑窗口</td>
+</tr>
+<tr>
+<td><code>sliding_windows.csv</code> 里大量 ‘empty’ 或常量段</td>
+<td>SV 太稀疏或某染色体被过滤</td>
+<td>查 <code>wrnLog.csv</code>；考虑调小 <code>-s</code></td>
+</tr>
+<tr>
+<td>有亲本时 ΔAF 全部为正（或全为负）</td>
+<td>REF/ALT 方向约定问题</td>
+<td>检查亲本 GT/REF 是否一致；必要时用 <code>-c</code> 的镜像项</td>
+</tr>
+<tr>
+<td>结果与论文差异巨大</td>
+<td>覆盖度、群体、参考基因组、<code>sm_alpha</code> 任一不同都会影响</td>
+<td>逐项对齐后再比较（见<a href="ch08-case-study-rice.md" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>第八章</a> 的对比表）</td>
+</tr>
+</tbody></table></div>
+<p>→ 返回：<a href="index.md" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>目录</a></p>
+</article>
+
+
+<div class="article-footer slide-up">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文本文由rlcao编写，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section></div>
+
+<div class="related-wrap slide-up" id="read-next"><section class="body"><div class="item" id="prev"><div class="note"><svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-left" aria-hidden="true"></svg> 回顾上一篇</div><a href="/wiki/bsa-seq/ch09-api-reference/">第九章、函数速查表</a></div><div class="item" id="next"><div class="note">接下来阅读 <svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-right" aria-hidden="true"></svg></div><a href="/wiki/bsa-seq/ch11-related-methods-kmer/">第十一章、相关方法：无参考基因组的 k-mer BSA</a></div></section></div>
+
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main></div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/wiki/bsa-seq/ch10-troubleshooting/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第十章、排错、性能与已知问题","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

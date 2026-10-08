@@ -1,0 +1,704 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC04%E7%AB%A0%20%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E6%B2%BB%E7%90%86/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>第4章 信息系统治理 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="[!info] 现行教材 · 第 2 版本页为现行考试依据的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。  第4章 信息系统治理4.1 IT治理基础IT 治理是描述组织采用有效的机制，对信息技术和数据资源开发利用，平衡信息化发展和数字化转型过程中的风险，确保实现组织的战" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第4章 信息系统治理" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC04%E7%AB%A0%20%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E6%B2%BB%E7%90%86/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="[!info] 现行教材 · 第 2 版本页为现行考试依据的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。  第4章 信息系统治理4.1 IT治理基础IT 治理是描述组织采用有效的机制，对信息技术和数据资源开发利用，平衡信息化发展和数字化转型过程中的风险，确保实现组织的战" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/images/42f34bf90e6797971247258430234f293e991073b0f175df4d368a7aa932f4b4.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-09-17T16:00:00.000Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.351Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="信息系统管理工程师" data-stellar-page-meta="">
+<meta property="article:tag" content="第2版教程" data-stellar-page-meta="">
+<meta property="article:tag" content="考证" data-stellar-page-meta="">
+<meta property="article:tag" content="软考" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/images/42f34bf90e6797971247258430234f293e991073b0f175df4d368a7aa932f4b4.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第4章 信息系统治理" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content=",,," data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC04%E7%AB%A0%20%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E6%B2%BB%E7%90%86/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"第4章 信息系统治理","description":"\n[!info] 现行教材 · 第 2 版本页为现行考试依据的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。\n\n第4章 信息系统治理4.1 IT治理基础IT 治理是描述组织采用有效的机制，对信息技术和数据资源开发利用，平衡信息化发展和数字化转型过程中的风险，确保实现组...","url":"https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC04%E7%AB%A0%20%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E6%B2%BB%E7%90%86/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC04%E7%AB%A0%20%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E6%B2%BB%E7%90%86/">第4章 信息系统治理</a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-09-17T16:00:00.000Z">2026-09-18</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.351Z">2026-10-08</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第4章 信息系统治理</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><blockquote>
+<p>[!info] 现行教材 · 第 2 版<br>本页为<strong>现行考试依据</strong>的教材原文（第 2 版，2024 年 10 月出版，2025 年起启用）。<br>考纲层级见 [[知识体系]]；练习题见 [[练习题·基础知识]]；案例模板见 [[案例答题模板]]。</p>
+</blockquote>
+<h1 id="第4章-信息系统治理"><a href="#第4章-信息系统治理" class="headerlink" title="第4章 信息系统治理"></a>第4章 信息系统治理</h1><h2 id="4-1-IT治理基础"><a href="#4-1-IT治理基础" class="headerlink" title="4.1 IT治理基础"></a>4.1 IT治理基础</h2><p>IT 治理是描述组织采用有效的机制，对信息技术和数据资源开发利用，平衡信息化发展和数字化转型过程中的风险，确保实现组织的战略目标的过程。</p>
+<h2 id="1-IT-治理的驱动因素"><a href="#1-IT-治理的驱动因素" class="headerlink" title="1. IT 治理的驱动因素"></a>1. IT 治理的驱动因素</h2><p>组织信息系统建设和运行需要制定总体规划，但制定 IT 资源统一规划存在很多问题：①信息系统应用已有相当的基础，但多年来分散开发或引进的信息系统形成了许多”信息孤岛”，缺乏共享的、网络化的信息资源，系统集成难题一直无法解决；②信息资源整合目标空泛，没有整合”信息孤岛”的措施，数据中心建设和数据集中管理等规划缺乏可操作性，尤其是缺少数据标准化建设方面的规划。这些问题的出现，表明组织在 IT 资源方面没有做到有效统一规划，如何解决这些问题成为组织发展的一个重要课题。</p>
+<p>IT 资产作为组织资产的重要组成部分，IT 治理自然就是组织治理结构中不可分割的一部分。IT 治理是指组织在开发利用信息技术的过程中，为鼓励组织所期望的组织行为而明确决策权归属和责任担当的框架，其目标是通过 IT 治理的决策权和责任影响组织所期望的行为。随着时代的发展，数字特征成为组织发展的一项关键特征，组织的高质量发展对 IT 的依赖性越来越强，IT 治理对组织愈发重要，为确保 IT 治理有效，组织高层管理者需要投入越来越多的时间和精力。</p>
+<p>随着组织在 IT 方面的投资越来越大，组织的 IT 战略要与组织战略相一致，才能确保组织核心竞争力的建设与保持。要尽可能地保持开放性和长远性，以确保系统的稳定性和延续性。要认真分析组织的战略与 IT 支撑之间的影响度，并合理预测环境变化可能给组织战略带来的偏移，在规划时留有适当的余地。组织目标变化太快，很难保证 IT 与组织目标始终保持一致，因此需要多方面的协调，保证 IT 治理继续沿着正确的方向走，这也是 IT 投资者真正关心的问题。IT 治理要从组织目标和数字战略中抽取信息需求和功能需求，形成总体的 IT 治理框架和系统整体模型，为进一步进行系统设计和实施奠定基础，保证信息技术开发应用符合持续变化的业务目标。</p>
+<p>高质量的IT治理能够使组织的IT管理和应用决策与组织期望的行为和业务目标相一致，这就需要组织IT治理对组织IT发展进行科学规划并确保其有效实施。驱动组织开展高质量IT治理的因素包括：①良好的IT治理能够确保组织IT投资的有效性；②IT属于知识高度密集型领域，其价值发挥的弹性较大；③IT已经融入组织管理、运行、生产和交付等领域，成为各领域高质量发展的重要基础；④信息技术的发展演进以及新兴信息技术的引入，可为组织提供大量新的发展空间和业务机会等；⑤ IT 治理能够推动组织充分理解 IT 价值，从而促进 IT 价值挖掘和融合利用；⑥ IT 价值不仅仅取决于好的技术，也需要良好的价值管理，及场景化的业务融合应用；⑦ 高级管理层的管理幅度有限，无法深入 IT 每项管理中，需要采用明确责权和清晰管理的方式确保 IT 价值；⑧ 成熟度较高的组织以不同的方式治理 IT，获得了领域或行业领先的业务发展效果。</p>
+<p>IT治理的内涵主要体现在5个方面：①IT治理作为组织上层管理的有机组成部分，由组织治理层或高级管理层负责，从组织全局的高度对组织信息化与数字化转型做出制度安排，体现了治理层和高级管理层对信息相关活动的关注；②IT治理强调数字目标与组织战略目标保持一致，通过对IT的综合开发利用，为组织战略规划提供技术或控制方面的支持，以保证相关建设能够真正落实并贯彻组织业务战略和目标；③IT治理保护利益相关者的权益，对风险进行有效管理，合理利用IT资源，平衡成本和收益，确保信息系统应用有效、及时地满足需求，并获得期望的收益，增强组织的核心竞争力；④IT治理是一种制度和机制，主要涉及管理和制衡信息系统与业务战略匹配、信息系统建设投资、信息系统安全和信息系统绩效评价等方面的内容；⑤IT治理的组成部分包括管理层、组织结构、制度、流程、人员、技术等多个方面，共同构建完善的IT治理架构，以实现数字战略和支持组织的目标。</p>
+<h2 id="2-IT-治理的目标价值"><a href="#2-IT-治理的目标价值" class="headerlink" title="2. IT 治理的目标价值"></a>2. IT 治理的目标价值</h2><p>组织治理驱动和调整 IT 治理。同时，IT 治理能够提供关键的输入，成为战略计划的重要组成部分，它是组织治理的一个重要功能。IT 治理将帮助组织建立以组织战略为导向、以实现 IT 与业务匹配为重心、以价值交付为成果、以绩效管理为控制手段的 IT 管理体制，正确定位 IT 团队在整个组织中的作用，最终能够针对不同的业务发展要求，统一规划 IT 资源、整合信息资源、有效规避风险、制定并执行组织发展战略。IT 治理就是要明确有关 IT 决策权的归属机制和有关 IT 责任的承担机制，以鼓励 IT 应用的期望行为产生，以联接战略目标、业务目标和 IT 目标，从而使组织从 IT 中获得最大的价值。组织实施 IT 治理的使命通常包括：保持 IT 与业务目标一致，推动业务发展，促使收益最大化，合理利用 IT 资源，恰当理清与 IT 相关的风险等。IT 治理的主要目标包括：与业务目标保持一致、有效利用信息与数据资源、风险管理。</p>
+<p>（1）与业务目标保持一致。IT治理要从组织目标和数字战略中抽取信息与数据需求和功能需求，形成总体的IT治理框架和系统整体模型，为进一步进行系统设计和实施奠定基础，保证信息技术开发应用符合持续变化的业务目标。</p>
+<p>（2）有效利用信息与数据资源。目前，信息系统工程超期、IT客户的需求没有得到满足、IT平台不支持业务应用、数据开发利用效能与价值不高、信息技术与业务发展融合深度不够等问题突出，通过IT治理对信息与数据资源的管理职责进行有效管理，保证投资的回收，并支持决策。</p>
+<p>（3）风险管理。由于组织越来越依赖于信息网络、信息系统和数据资源等，新的风险不断涌现，例如，新出现的技术没有进行管理，不符合现有法律和规章制度，没有识别对IT服务的威胁等。IT治理重视风险管理，通过制定信息与数据资源的保护级别，强调对关键的信息与数据资源实施有效监控和事件处理。</p>
+<h2 id="3-IT治理的管理层次"><a href="#3-IT治理的管理层次" class="headerlink" title="3. IT治理的管理层次"></a>3. IT治理的管理层次</h2><p>IT 治理要保证总体战略目标能够自上而下贯彻执行，治理层主要集中在最高管理层（如董事会）和执行管理层。然而，由于 IT 治理的复杂性和专业性，治理层必须依赖组织的基层来提供决策和评估所需要的信息。基层依据组织总体目标采用相关的原则，提供评估业绩的衡量方法。因此，好的 IT 治理实践需要在组织全部范围内推行。其管理层次大致可分为三层：最高管理层、执行管理层、业务与服务执行层。</p>
+<p>最高管理层的主要职责包括：证实 IT 战略与业务战略一致；证实通过明确的期望和衡量手段交付 IT 价值；指导 IT 战略、平衡支持组织当前和未来发展的投资；指导信息和数据资源的分配。执行管理层的主要职责包括：制定 IT 的目标；分析新技术的机遇和风险；建设关键过程与核心竞争力；分配责任、定义规程、衡量业绩；管理风险和获得可靠保证等。业务与服务执行层的主要职责包括：信息和数据服务的提供和支持；IT 基础设施的建设和维护；IT 需求的提出和响应。</p>
+<h2 id="4-2-IT治理体系"><a href="#4-2-IT治理体系" class="headerlink" title="4.2 IT治理体系"></a>4.2 IT治理体系</h2><p>IT 治理用于描述组织在信息化建设和数字化转型的过程中是否采用有效的机制使得信息技术开发利用能够完成组织赋予它的使命。IT 治理的核心关注 IT 定位和信息化建设与数字化转型的责权划分。IT 治理体系的构成如图 4-1 所示，具体包括 IT 定位（IT 应用的期望行为与业务目标一致）、IT 组织架构（业务和 IT 在治理委员会中的构成、组织 IT 与各分支机构的 IT 权责边界等）、IT 治理内容（决策、投资、风险、绩效和管理等）、IT 治理流程（统筹、评估、指导、监督）、IT 治理效果（内外评价）等。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/42f34bf90e6797971247258430234f293e991073b0f175df4d368a7aa932f4b4.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-1 IT治理体系的构成</p>
+<h2 id="1-IT治理关键决策"><a href="#1-IT治理关键决策" class="headerlink" title="1. IT治理关键决策"></a>1. IT治理关键决策</h2><p>有效的 IT 治理必须关注 5 项关键决策，如图 4-2 所示，包括 IT 原则、IT 架构、IT 基础设施、业务应用需求、IT 投资和优先顺序。IT 原则驱动着 IT 整体架构的形成，而 IT 整体架构又决定了基础设施，这种基础设施所确定的能力又决定着基于业务需求的应用的构建，最后，IT 投资和优先顺序必须为 IT 原则、整体架构、基础设施和应用需求所驱动。然而，这些决策中又有独特问题，即 IT 治理需要确定每个决策由谁来负责输入，以及由谁来负责做出决策。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/c313da26b6ec7c93528a51cbacb9a89b19d70f22fa30d8f1f05612b3977547c3.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-2 关键的IT治理决策</p>
+<p>IT 决策过程中，需要关注各类关键问题，如表 4-1 所示。</p>
+<p>表 4-1 IT 决策的关键问题</p>
+<div class="md-table-scroll"><table><tbody><tr><td>关键决策</td><td>关键问题</td></tr><tr><td>IT原则</td><td>组织的运行模型是什么?IT在业务中的角色是什么?IT期望行为是什么?如何投资IT</td></tr><tr><td>IT架构</td><td>组织的核心业务流程是什么?它们之间有什么样的关系?哪些信息在驱动着这些核心流程?数据必须如何整合?哪些技术性能应当在组织范围内得到标准化,以支持IT效率,方便流程标准化和整合?哪些行为应当在组织范围内标准化以支持数据整合?哪些技术选择能够指引组织找到实施IT新计划的方法</td></tr><tr><td>IT基础设施</td><td>哪些基础设施对实现组织的战略目标来说是最关键的?对于每个能力集,哪些基础设施服务应该在组织级实现,这些服务的水平需求是什么?应当如何定价基础设施服务?如何保持基础技术的不断更新?哪些基础设施服务应当外包</td></tr><tr><td>业务应用需求</td><td>新业务应用的市场和业务流程机会是什么?如何设计实验以评估业务应用成功与否?如何在架构标准上满足业务需求?应当在什么时候将一个业务需求从例外转换为标准?谁拥有每个项目的成果并且发起组织变革以确保其价值</td></tr><tr><td>IT投资和优先顺序</td><td>哪些流程变革或者强化对组织来说在战略上是最为重要的?当前的以及在提议中的IT投资组合是如何分配的?这些投资组合同组织的战略目标一致吗?组织级的投资与业务单位的投资哪个更重要,实际投资情况会影响它们的相对重要性吗</td></tr></tbody></table></div>
+
+<h2 id="2-IT治理体系框架"><a href="#2-IT治理体系框架" class="headerlink" title="2. IT治理体系框架"></a>2. IT治理体系框架</h2><p>IT治理体系框架是实现组织IT治理的有效保障，缺乏良好的IT治理体系框架，IT治理的过程将会变得盲目和无序。IT治理体系框架以组织的战略目标为导向，架起了组织战略与IT的桥梁，实现了IT风险的全面管理以及IT资源的合理利用。IT治理体系框架具体包括IT战略目标、IT治理组织、IT治理机制、IT治理域、IT治理标准和IT绩效目标等部分，形成了一整套IT治理运行闭环，如图4-3所示。</p>
+<p>（1）IT战略目标。为实现IT价值和目标，使组织从IT投入中获得最大收益，而针对IT与</p>
+<p>业务关系、IT决策、IT资源利用、IT风险控制等方面制定的目标。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/1792323efc26e79db1505d1540929a3f281be75548045c5cb02336669cd2a914.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-3 IT治理体系框架</p>
+<p>（2）IT治理组织。界定组织中各相关主体在各自方面的治理范围、责权划分及其相互关系的准则，它的核心是治理组织（如IT治理委员会等）的设置和权限的划分，各治理组织职权的分配以及各机构间的相互协调，它的强弱直接影响治理的效率和效能，对IT治理效率起着决定性的作用。</p>
+<p>（3）IT治理机制。IT治理机制是IT治理决策机制、执行机制、风险控制机制、协调机制的综合体，各机制之间是相辅相成、相互促进的关系。有效的决策机制能保障IT决策与组织的业绩目标和战略目标相匹配；有效的执行机制能保证IT治理的良好运作；有效的风险控制机制能降低IT活动的风险，实现信息技术开发利用的价值效益；有效的协调机制能有力地发挥IT治理的协调效应。</p>
+<p>（4）IT 治理域。IT 治理域是在 IT 治理的规则之下，对组织 IT 资源进行整合与配置，根据 IT 目标所采取的行动，以科学、规范的做法交付面向业务的高质量 IT 服务，确保信息化”高效做事情”、数字化”敏捷做决策”。其内容包括 IT 信息系统的计划、构建、运维与监控等。</p>
+<p>（5）IT治理标准。IT治理标准包括IT治理基本规范、IT治理实施参照、IT治理评价体系和IT治理审计方法等方面，它是组织实施IT治理的最佳实践和对标依据。</p>
+<p>（6）IT绩效目标。IT绩效目标关注IT价值的实现，评价IT规划与IT构建过程中是否满足业务需求以及构建过程中工期、成本、质量是否达到目标。</p>
+<h2 id="3-IT-治理核心内容"><a href="#3-IT-治理核心内容" class="headerlink" title="3. IT 治理核心内容"></a>3. IT 治理核心内容</h2><p>IT 治理本质上关心：①实现 IT 的业务价值；②IT 风险的规避。前者是通过 IT 与业务战略匹配来实现的，后者通过在组织内部建立相关职责来实现。两者都需要相关资源的支持，并对其绩效进行有效度量。IT 治理的核心内容包括 6 个方面，即组织职责、战略匹配、资源管理、价值交付、风险管理和绩效管理，如图 4-4 所示。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/6ebae86ce38f5aa107be99420216afd96ecf97e54aa1e3c41633cf9c47536df3.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-4 IT治理核心内容</p>
+<p>（1）组织职责。组织职责指组织参与 IT 决策与管理的所有人员的集合，明确组织信息部门和业务部门之间的关系和责任，正确划分信息系统的所有者、建设者、管理者和监控者。</p>
+<p>（2）战略匹配。IT治理的一个重要内容是使组织的IT建设与组织战略相匹配，也就是通常所说的”战略匹配”。而战略匹配是IT为组织贡献业务价值的重要驱动力。</p>
+<p>（3）资源管理。资源管理的主要功能是确保用户对组织的应用系统和基础设施都有良好的理解和应用，优化 IT 投资、IT 资源（人、应用系统、信息、基础设施）的分配，做好人员的培训、发展计划，以满足组织的业务需求。</p>
+<p>（4）价值交付。通过对IT项目全生命周期的管理，确保IT能够按照组织战略实现预期的业务价值。重点是对整个交付周期成本的控制和IT业务价值的实现，使IT项目能够在预算时间、成本范围内，按预定的质量要求完成。价值交互就是创造业务价值。</p>
+<p>（5）风险管理。风险管理是IT治理中非常重要的内容。风险管理是确保IT资产的安全和灾难的恢复、组织信息资源的安全，以及人员的隐私安全。风险管理就是保护业务价值。</p>
+<p>（6）绩效管理。没有绩效管理，IT治理中任何一个域都不可能有效地进行管理。绩效管理主要是追踪和监视IT战略、IT项目的实施、信息资源的使用、IT服务的提供，以及业务流程的绩效。绩效管理所采用的工具（如平衡计分卡）可以将组织的战略目标转化成各个职能部门或团队具体的业务活动的目标，从而保证组织战略目标的实现。</p>
+<h2 id="4-IT治理机制相关经验"><a href="#4-IT治理机制相关经验" class="headerlink" title="4. IT治理机制相关经验"></a>4. IT治理机制相关经验</h2><p>建立 IT 治理机制的原则包括：①简单，机制应该明确地定义特定个人和团体所承担的责任和目标；②透明，有效的机制依赖于正式的程序，对于那些被治理决策所影响或是想要挑战治理决策的人来说，机制如何工作是需要非常清晰的；③适合，机制鼓励那些处于最佳位置的个人去制定特定的决策。</p>
+<p>影响力高且具有挑战性的IT治理机制如表4-2所示。</p>
+<p>IT治理可以从众多最佳实践中学习的经验主要包括：</p>
+<p>（1）IT指导委员会要吸纳有才干的业务经理，使之负责组织范围的IT治理决策，并在IT原则中加入严格的成本控制。</p>
+<p>表 4-2 影响力高且具有挑战性的 IT 治理机制</p>
+<div class="md-table-scroll"><table><tbody><tr><td>机制</td><td>目标</td><td>期望行为</td><td>不期望行为</td></tr><tr><td>执行层和高级管理委员会</td><td>对业务(包括IT)的整体观念</td><td>整合IT的无缝管理</td><td>IT被忽略</td></tr><tr><td>架构委员会</td><td>明确战略技术和标准是否被执行</td><td>业务驱动的IT决策制定</td><td>IT限制和延迟</td></tr><tr><td>有IT人员参与的流程团队</td><td>有效地运用IT视角</td><td>端对端的流程管理</td><td>功能性技能的停滞和分散的IT基础设施</td></tr><tr><td>资金投资批准和预算</td><td>把IT看作另一种业务投资</td><td>对于不同投资类型的不同方法</td><td>分析瘫痪小项目,避开了正式批准</td></tr><tr><td>服务级别协议</td><td>对于IT服务的详细说明和衡量</td><td>专业的供应和需求</td><td>管理服务级别协议而不是业务需求</td></tr><tr><td>费用分摊机制</td><td>从业务中补偿IT成本</td><td>IT的可靠应用</td><td>关于收费和歪曲的需求的争论</td></tr><tr><td>IT业务价值的正式追踪</td><td>衡量IT投资,并通常运用平衡计分卡计算其对业务价值的贡献</td><td>使目标、利益和成本透明化</td><td>将IT同其他资产相分离,只关注资金流,而不关注价值</td></tr></tbody></table></div>
+
+<p>（2）谨慎管理组织的IT架构和业务架构，以降低业务成本。<br>（3）设计严格的架构例外处理流程，使昂贵的例外最小化，并可以从中不断学习。<br>（4）建立集中化的IT团队，用以管理基础设施、架构和共享服务。<br>（5）应用连接 IT 投资和业务需求的流程，既可以增加透明度，又可以权衡中心和各运营部门或团队的需求。</p>
+<p>（6）设计需要对IT投资进行集中协作和核准的IT投资流程。</p>
+<p>（7）设计简单的费用分摊和服务级别协议机制，以明确分配IT开支。</p>
+<h2 id="4-3-IT治理任务"><a href="#4-3-IT治理任务" class="headerlink" title="4.3 IT治理任务"></a>4.3 IT治理任务</h2><p>组织的 IT 治理活动定义为统筹、评估、指导和监督。统筹现在和未来的 IT 战略和组织规划、管理和绩效的实施计划、策略；评估信息技术应用与服务创新解决方案及措施等的有效性；指导 IT 管理实施、绩效考评、风险控制和业务创新；监督 IT 与业务的一致性、符合性及 IT 应用的合规性。组织开展 IT 治理活动的主要任务聚焦在如下 5 个方面：</p>
+<p>（1）全局统筹。统筹规划 IT 治理的目标范围、技术环境、发展趋势和人员责权。组织需要适应当前信息环境和未来发展趋势，保证利益相关者理解和接受 IT 的战略、目标和发展方向。组织需要把 IT 治理作为组织治理的组成部分，建立 IT 治理组织，并明确组织负责人对 IT 治理工作负责。组织还需要关注 IT 发展的规划、实施、检查和改进全过程，重点包括：①制定满足可持续发展的 IT 蓝图；②实施科学决策、集约管理的策略，实现横向的业务集成和纵向的业务管控，通过内外部的监督，确保 IT 与业务的一致性和适用性；③建立适应内外部信息环境变化的持续改进和创新机制。</p>
+<p>（2）价值导向。价值导向包括基于实现有效收益、确保预期收益清晰理解、明确实现收益的问责机制。组织需要建立IT投资的价值框架，确保在可承担成本和可接受风险水平的基础上，实现IT的战略目标。确保IT治理符合组织治理的价值导向、明确战略投资方向以及由投资产生的IT服务、资产和其他资源。组织需要建立价值递送规则，确保利益相关者明确相应的权利和义务。这包括：①认可信息技术、信息系统和数据在组织中的价值；②识别投资目录，并以相应的方式进行评估和管理；③对关键指标进行设定和监督，并对变化和偏差做出及时回应；④权衡实施成本与预期效益，并随组织内外部环境的变化及时调整。</p>
+<p>（3）机制保障。组织应对自身IT发展进行有效管控，保证IT需求与实现的协调发展，并使IT安全和风险得到有效识别、管理、防范和处置。组织需要建立适合组织特点的机制保障方法，满足疏漏互补、协同发展、监督改进和安全风险可控的原则，避免扭曲决策目标方向。组织需要明确管理责任，明晰上下左右权力关系，落实责任制和各项措施。组织可以根据相关法律法规、行业管理和上级监管机构发布的规范文件要求，制定本组织的信息技术治理制度并实施。重点聚焦在：①指导建立规范过程管理和痕迹管理，并向利益相关者公开质量设定举措；②评审IT管理体系的适宜性、充分性和有效性；③审计IT的完整性、有效性和合规性；④监督由审计和管理评审提出的改进内容的实施。</p>
+<p>（4）创新发展。创新发展指利用 IT 创新开拓业务领域、提升管理水平、改进质量、绩效和降低成本，确保实现战略目标的灵活性和对环境变化的适应性。组织需要通过建立围绕知识资产的创新体系，支撑组织的技术进步、管理提升和业务模式变革。组织可以持续保持管理团队的创造技能，并指导培养各级成员的发问、观察、交际和实验能力。组织可以建立支持创新的人员、技术、制度、资金、风险、文化和市场需求的机制体系，包括：①创造基于业务团队与 IT 团队的深度沟通以及对内外部环境感知和学习的技术创新环境；②确保技术发展、管理创新、模式革新的协调联动；③对组织创新能力进行评估，并对关键创新要素进行分析和评价；④通过促进和创新有效抵御风险，并确保创新是组织文化的组成部分。</p>
+<p>（5）文化助推。文化助推指组织与利益相关者沟通 IT 治理的目标、策略和职责，营造积极向上、沟通包容的组织文化。组织需要引导组织人员适应 IT 建设所带来的变革，遵循道德和职业规范，端正态度和规范行为。组织可以要求各级管理层把符合信息技术战略发展的文化建设作为其职责的一部分。按照文化营造、实施和改进的生命周期，保障利益相关者的沟通和透明，包括：①建立与 IT 发展相适应的组织文化发展策略；②营造包括知识、技术、管理、情操在内的积极向上的文化氛围；③根据组织内部环境的变化，评估并改进组织文化的管理。</p>
+<h2 id="4-4-IT治理方法与标准"><a href="#4-4-IT治理方法与标准" class="headerlink" title="4.4 IT治理方法与标准"></a>4.4 IT治理方法与标准</h2><p>考虑到 IT 治理对组织战略目标达成的重要性，国内外各类机构持续研究并沉淀 IT 治理相关的最佳实践方法、定义相关标准，其中比较典型的是我国信息技术服务标准（Information Technology Service Standard，ITSS）库中的 IT 治理系列标准、信息和技术治理框架（COBIT）以及 IT 治理国际标准（ISO/IEC 38500）等。</p>
+<h2 id="1-ITSS中的IT服务治理"><a href="#1-ITSS中的IT服务治理" class="headerlink" title="1. ITSS中的IT服务治理"></a>1. ITSS中的IT服务治理</h2><p>我国 IT 治理标准化研究是围绕 IT 治理研究范畴，为 IT 过程、IT 资源、信息与组织战略、组织目标的连接提供了一种机制。通过指导、实施、管理和评价等过程，确保 IT 支持并拓展组织的战略和目标。在 IT 治理目标和边界确定的情况下，IT 治理围绕决策体系、责任归属、管理流程、内外评价 4 个方面，通过相关框架体系的研究，规范和引导组织的 IT 治理完成 “做什么” “如何做” “怎么样” “如何评价” 等问题，如图 4-5 所示。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/c07d8a40c189d65949c004d1d9a9bc9540244f5e0fac30460f49454ad0458853.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-5 ITSS-IT治理标准化的逻辑关系图</p>
+<h2 id="1-IT-治理通用要求"><a href="#1-IT-治理通用要求" class="headerlink" title="1) IT 治理通用要求"></a>1) IT 治理通用要求</h2><p>GB/T 34960.1《信息技术服务治理第1部分：通用要求》规定了IT治理的模型和框架、实施IT治理的原则，以及开展IT顶层设计、管理体系和资源的治理要求。该标准可用于：①建立组织的IT治理体系，并实施自我评价；②开展信息技术审计；③研发、选择和评价IT治理相关的软件或解决方案；④第三方对组织的IT治理能力进行评价。各级信息化主管部门可根据法律法规、部门规章的要求，使用该标准对所管辖各类组织的IT治理提出要求，并进行评估、指导和监督。</p>
+<p>该标准定义的IT治理模型包含治理的内外部要求、治理主体、治理方法，以及信息技术及</p>
+<p>其应用的管理体系，如图4-6所示。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/a956d6d4771859e4e3f10cb6a08538b3a989253bccefc1ea10ede3562e15df90.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-6 GB/T34960.1定义的IT治理模型</p>
+<p>治理主体以组织章程、监管职责、利益相关方期望、业务压力和业务要求为驱动力，建立评估、指导、监督的治理过程并明确任务。治理主体通过信息技术战略和方针，指导管理者对信息技术及其应用的管理体系进行完善，并对信息技术相关的方案和规划进行评估，对信息技术应用的绩效和符合性进行监督。组织结合治理原则和模型，在 IT 治理实施的过程中开展自我监督、自我评估和审计工作，并持续改进。</p>
+<p>该标准定义的 IT 治理框架包含信息技术顶层设计、管理体系和资源三大治理域，每个治理域由若干治理要素组成，如图 4-7 所示。顶层设计治理域包含信息技术的战略，以及支撑战略的组织和架构；管理体系治理域包含信息技术相关的质量管理、项目管理、投资管理、服务管理、业务连续性管理、信息安全管理、风险管理、供方管理、资产管理和其他管理；资源治理域包含信息技术相关的基础设施、应用系统和数据。</p>
+<h2 id="2）IT治理实施指南"><a href="#2）IT治理实施指南" class="headerlink" title="2）IT治理实施指南"></a>2）IT治理实施指南</h2><p>GB/T 34960.2《信息技术服务 治理 第2部分：实施指南》提出了IT治理通用要求的实施指南，分析了实施IT治理的环境因素，规定了IT治理的实施框架、实施环境和实施过程，并明确顶层设计治理、管理体系治理和资源治理的实施要求。该标准适用于：①建立组织的IT治理实施框架，明确实施方法和过程；②组织内部开展IT治理的实施；③IT治理相关软件或解决方案实施落地的指导；④第三方开展IT治理评价的指导。</p>
+<p>IT治理实施框架包括治理的实施环境、实施过程和治理域，如图4-8所示。实施环境包括组织的内外部环境和促成因素。实施过程规定了IT治理实施的方法论，包括统筹和规划、构建和运行、监督和评估、改进和优化。治理域定义了IT治理对象，包括顶层设计、管理体系和资源。顶层设计包括战略、组织和架构；管理体系包括质量管理、项目管理、投资管理、服务管理、业务连续性管理、信息安全管理、风险管理、供方管理、资产管理和其他管理；资源包括基础设施、应用系统和数据。组织可以结合实施环境的分析，按照实施过程，以治理域为对象，开展IT治理实施。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/0a93c782d6c641c55eda842b0e8d9a066b07d0679d033820e09b550dcef70709.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-7 GB/T34960.1定义的IT治理框架</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ceb6a6bb2c77025ba3065d394ee0baafca7c4b46c72d73522f2e5013bba4b8f9.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-8GB/T34960.2定义的IT治理实施框架</p>
+<h2 id="2-信息和技术治理框架"><a href="#2-信息和技术治理框架" class="headerlink" title="2. 信息和技术治理框架"></a>2. 信息和技术治理框架</h2><p>COBIT 是面向整个组织的信息和技术治理及管理框架，由成立于 1969 年的国际信息系统审计协会（ISACA）组织设计并编制。COBIT 对治理和管理进行了明确区分，这两个学科涵盖不同的活动，需要不同的组织结构，并服务于不同的目的。具体区别为：①治理确保对利益干系人的需求、条件和选择方案进行评估，以确定全面均衡、达成共识的组织目标；通过确定优先等级和制定决策来设定方向；根据议定的方向和目标监控绩效与合规性。②管理是指按治理设定的方向计划、构建、运行和监控活动，以实现组织目标。在大多数组织中，管理是首席执行官领导下的高级管理层的职责。ISACA 设计并编制了《框架：治理和管理目标》《设计指南：信息和技术治理解决方案的设计》，主要供组织信息和技术治理（EGIT）、鉴证、风险和安全专业人员作为学习资料使用。</p>
+<h2 id="1）治理和管理目标"><a href="#1）治理和管理目标" class="headerlink" title="1）治理和管理目标"></a>1）治理和管理目标</h2><p>COBIT 介绍了 40 项核心治理和管理目标，以及其中包含的流程和其他相关组件。COBIT 核心模型如图 4-9 所示。在 COBIT 中治理目标被列入评估、指导和监控（EDM）领域，在这个领域，治理组织将评估战略方案、指导高级管理层执行所选的战略方案并监督战略的实施。管理目标分为 4 个领域：①调整、规划和组织（APO）领域针对 IT 的整体组织、战略和支持活动；②内部构建、外部采购和实施（BAI）领域针对 IT 解决方案的定义、采购和实施以及它们到业务流程的整合；③交付、服务和支持（DSS）领域针对 IT 服务的运营交付和支持，包括安全；④监控、评价和评估（MEA）领域针对 IT 的性能监控及其与内部性能目标、内部控制目标和外部要求的一致程度。治理目标与治理流程有关，而管理目标与管理流程有关。治理流程通常由董事会和执行管理层负责，而管理流程则在高级和中级管理层的职责范围内。</p>
+<p>为满足治理和管理目标，每个组织都需要建立、定制和维护由多个组件构成的治理系统，如图4-10所示。治理系统的组件包括：①流程。流程描述了一组为实现某种目标而安排有序的实践和活动，并生成了一组支持实现整体IT相关目标的输出内容。②组织结构。组织结构是组织的主要决策实体。③原则、政策和程序。原则、政策和程序用于将理想行为转化为日常管理的实用指南。④信息。在任何组织中，信息无处不在，包括组织生成和使用的全部信息。COBIT侧重于有效运转组织治理系统所需的信息。⑤文化、道德和行为。个人和组织的文化、道德和行为作为治理和管理活动的成功因素，其价值往往被低估。⑥人员、技能和胜任能力。人员、技能和胜任能力对做出正确决策、采取纠正行动和成功完成所有活动而言是必不可少的。⑦服务、基础设施和应用程序。服务、基础设施和应用程序包括为组织提供IT治理系统的基础设施、技术和应用程序。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/1d0da751cd2cf70eda6978cbdd8347a170050518518b8fe5c802b270b2f16225.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-9 COBIT核心模型</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/90fb463d801f1262ffb60da50fa1554e189d810171a855331d97b63176df7fba.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-10 COBIT治理系统组件</p>
+<h2 id="2）信息和技术治理解决方案的设计"><a href="#2）信息和技术治理解决方案的设计" class="headerlink" title="2）信息和技术治理解决方案的设计"></a>2）信息和技术治理解决方案的设计</h2><p>COBIT 设计指南描述了组织如何设计量身定制的组织 IT 治理解决方案。高效和有效的 IT 治理系统是创造价值的起点。COBIT 定义的 IT 治理系统设计因素包括组织战略、组织目标、风险概况、IT 相关问题、威胁环境、合规性要求、IT 角色、IT 采购模式、IT 实施方法、技术采用战略、组织规模和未来因素，如图 4-11 所示。这些设计因素可能影响组织治理系统的设计，为成功使用 IT 奠定基础。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/82b2301792b9338b33f211f734684fbd990e0355508df2df490bf62cf042da12.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-11 COBIT定义的IT治理系统设计因素</p>
+<p>组织开展治理系统设计通过流程化的方式进行，如图 4-12 所示，COBIT 给出了建议设计流程：①了解组织环境和战略；②确定治理系统的初步范围；③优化治理系统范围；④最终确定治理系统的设计。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/e0c0ad9d785b170fdecea35e5b14d66e24a22e6d296a1975a67d4150c9875712.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图4-12 COBIT治理系统设计工作流程</p>
+<h2 id="3-IT治理国际标准"><a href="#3-IT治理国际标准" class="headerlink" title="3. IT治理国际标准"></a>3. IT治理国际标准</h2><p>2008年4月，ISO/IEC正式发布IT治理标准ISO/IEC38500，它的出台不仅标志着IT治理从概念模糊的探讨阶段进入了一个正确认识的发展阶段，而且也标志着信息化正式进入IT治理时代。这一标准促使国内外一直争论不休的IT治理理论得到统一，也促使我国在引导信息化科学方面发挥重要作用。2014年，ISO/IEC发布了第二版的ISO/IECFDIS38500，替换了2008年第一版的ISO/IEC38500。ISO/IECFDIS38500：2014提供了IT良好治理的原则、定义和模式，以帮助最高级别组织的人员理解和履行其在组织内使用IT方面的法律、法规和道德义务。</p>
+<p>该标准为组织的治理组织（可包括所有者、董事、合伙人、执行经理或类似机构）的成员提供了关于在其组织内有效、高效和可接受地使用信息技术（IT）的指导原则。具体包括：①责任。组织内的个人和团体理解并接受他们在IT的供应和需求方面的责任。那些负有行动责任的人也有权执行这些行动。②战略。组织的业务战略考虑到IT的当前和未来的能力；使用IT的计划满足了组织业务战略的当前和持续的需求。③收购。IT收购是出于正当的理由，在适当和持续的分析基础上，有明确和透明的决策。在短期和长期内，在利益、机会、成本和风险之间都存在着适当的平衡。④性能。IT适合于支持组织，提供满足当前和未来业务需求所需的服务、服务水平和服务质量。⑤一致性。IT的使用符合所有强制性法律和法规。政策和实践有明确的定义、实施和执行。⑥人的行为。IT团队的政策、实践和决策表明了对人的行为的尊重，包括所有”在这个过程中的人”的当前和不断发展的需求。</p>
+<h2 id="4-5-IT-治理的-EDM"><a href="#4-5-IT-治理的-EDM" class="headerlink" title="4.5 IT 治理的 EDM"></a>4.5 IT 治理的 EDM</h2><p>治理组织可以通过评估（Evaluate）、指导（Direct）、监视（Monitor）三个方面来治理IT，简称EDM。在使用EDM的过程中，需要借鉴和使用ISO38500给出的IT治理的6个原则，即职责分工、IT支持组织发展、可获得性、可用性、合规性、以人为本。EDM的具体过程如下：</p>
+<p>（1）评估现在和将来对IT的利用情况。</p>
+<p>治理组织应该检查和评判当前和将来对IT的利用情况，包括策略、建议和供给安排（不管是内部、外部，还是两者都有）。</p>
+<p>在评估 IT 的使用时，治理组织应该考虑业务的内外部压力，如技术的变更、经济和社会的发展以及政治影响等。随着压力的变化，可以持续进行评估。治理组织还应该考虑现在和将来的业务需求，当前和将来的组织必须达到的目标（如维持竞争优势）以及正在评估中的战略或意图的特定目标。</p>
+<p>（2）对策略和方针的相关准备事项和实施进行指导，以保证IT的使用是符合业务目标的。</p>
+<p>治理组织应该对策略和方针的准备和实施工作进行职责安排，并对其工作予以指导。策略设定了 IT 项目和 IT 运作的投资方向，方针确定了应用 IT 的行为规则。</p>
+<p>治理组织应该保证从项目转到日程运作经过了计划和管理，并考虑对业务和现有 IT 系统及基础设施运作习惯的影响。应该通过要求管理者提供及时的信息、符合组织的指导以及符合良好治理的 6 项原则，来鼓励组织内良好 IT 治理的文化。</p>
+<p>如果需要，治理组织应该指导所提交的建议方案的批准工作，以处理已识别的要求。</p>
+<p>（3）监视方针的符合性，以及对应计划的实际绩效。</p>
+<p>领导者应该通过合适的测量体系监视IT的绩效，同时还要确保IT符合外部义务（法律、法规以及合同）和内部实际工作的要求。</p>
+<p>表4-3给出了EDM在责任、策略、采购、绩效、符合性和人员行为6个方面的最佳实践活动。</p>
+<p>表 4-3 EDM 最佳实践（例）</p>
+<div class="md-table-scroll"><table><tbody><tr><td>方面</td><td>E(评估)</td><td>D(指导)</td><td>M(监视)</td></tr><tr><td>责任</td><td>治理组织按照职责分配方案进行聘 雇,在评估方案时,领导者应该设法 确保有效、高效和可以接受,以此 为依据去使用和交付IT,以支持当 前和未来的业务目标。治理组织还要 对IT决策人员的能力进行评估,一 般来说,这些人员应该是业务管理人 员,负责组织的业务目标和绩效</td><td>治理组织对IT职责的执行进行 控制,确保按照安排执行,同时 还要确保相关人员获得了履行其 职责所需的信息</td><td>1IT治理机制是否得到了建立;2相关人员接 受和理解了他们的职责;3有IT治理职责的人员 (如指导委员会的人员或 向治理组织提交建议的人 员)的绩效情况</td></tr><tr><td>策略</td><td>治理组织对IT和业务过程的开发进 行评估,以确保IT为将来的业务需 求提供支持。在考虑策略和方针时, 要评估IT相关活动,以确保其在不 断变化的环境下与组织的目标相一 致,并考虑更好的实现方式以及其他 关键利益相关方的要求。治理组织应 该确保IT的使用按照标准的建议方 式进行了风险评价和评估</td><td>治理组织对策划和方针的准备和 适用情况进行审查,以确保组 织从IT开发中获益,同时还应 该鼓励对IT适用的创新性建议, 使得组织可以应对新的机会或挑 战、承担新的业务或改进过程</td><td>治理组织对IT方案的进展情况进行监视,以保证其利用了所分配的资源, 并在要求的时间内达到目 标。治理组织应该监视IT 的使用情况,以保证其达 到预期的收益</td></tr><tr><td>采购</td><td>治理组织对已批准的IT实现方案进 行评价,平衡风险和成本效益的投资 建议</td><td>治理组织对IT资产(系统和基础设施)进行管理,包括准备合 适的文件,以确保提供所需的容 量;还要对资源需求(包括内部 和外部的资源需求)情况进行审 查,以支持组织的业务要求;治 理组织应指导他们的组织和供应 商开发一个共同理解的关于IT 采购的组织意图</td><td>治理组织监视IT投资情 况,以保证其提供了所需 的功能,领导者还要对组 织和供应商进行监视,确 保在做出任何IT采购决策 时能够满足IT维护需求</td></tr><tr><td>绩效</td><td>1评估管理者所建议的计划方案,以 保证IT具备支持业务所需的能力和 容量;2评估由IT活动所带来的业 务持续运营风险;3评估风险和对IT 资产的保护;4评估相关决策;5定 期评估组织IT治理的有效性和绩效</td><td>治理组织按照商定的优先级和预 算,分配足够的资源,以保证IT 满足组织的要求,同时应该保障 IT对业务的支持</td><td>治理组织应该监视IT对 业务的支持程度,以及所 分配的资源和预算优先次 序与业务目标吻合的程度,同时监视方针的正确 性程度,如数据的准确性和IT利用的效率等</td></tr><tr><td>符 合 性</td><td>治理组织对IT满足法律法规、合同、 内部方针、标准和专业指南的程度进 行定期评估,也要对其IT治理体系 的符合性进行定期评估</td><td>治理组织负有指导职责,需要建 立定期和例行机制以保证IT的使 用符合内部方针、标准和指南; 对方针的建立和推行进行指导, 以保证组织的IT使用符合其内部 义务;对IT员工遵循专业行为和 开发指南进行指导;确保所有IT 相关活动合乎伦理道德</td><td>治理组织应该通过合适的 报告和审计活动,监视IT 的符合性和一致性;同时 监视IT活动,包括资产 和数据的废弃,以保证环 境、隐私、战略知识管 理、组织私有技术和其他 相关义务得到满足</td></tr><tr><td>人员行为</td><td>治理组织应该评估IT相关活动,以确保对人员行为进行了识别和适当考虑</td><td>治理组织应该确保IT活动与识别的人员行为的一致性,对任何人在任何时间报告或识别的风险、机会、问题和关心事项进行管理,风险管控措施应该与已发布的策略和程序保持一致,并延伸到相关决策者</td><td>治理组织应该监视IT活动,以确保已识别的人员行为是正确的,并且已引起适当注意,同时,对实际工作方式进行监视,以确保其与合理使用IT的一致性</td></tr></tbody></table></div>
+
+<h2 id="4-6-IT治理关键域"><a href="#4-6-IT治理关键域" class="headerlink" title="4.6 IT治理关键域"></a>4.6 IT治理关键域</h2><p>IT治理框架包含信息技术三个治理关键域，分别是顶层设计、管理体系和资源，每个治理域由若干治理要素组成。</p>
+<h2 id="4-6-1-顶层设计"><a href="#4-6-1-顶层设计" class="headerlink" title="4.6.1 顶层设计"></a>4.6.1 顶层设计</h2><p>围绕组织 IT 整体与统筹部分，相关治理包括信息技术的战略，以及支撑战略的组织和架构。</p>
+<h2 id="1-战略"><a href="#1-战略" class="headerlink" title="1. 战略"></a>1. 战略</h2><p>组织战略是组织高质量发展的总体谋略，是组织相关方就其发展达成一致认识的重要基础。组织战略是指组织针对其发展进行的全局性、长远性、纲领性目标的策划和选择，即组织为适应当前和未来的环境变化，对业务部署、运行管理和高质量发展做出的全局性、长远性、纲领性目标的策划和选择。组织战略体现了组织的使命、愿景和价值观，反映了管理者对于行动、环境和业绩之间关键联系的理解，它是组织策划具体行动计划的起点。</p>
+<p>IT 战略是业务战略的有机组成部分，它定义出 IT 的目标、发展思路、愿景蓝图、建设和运维、管理策略等，对实现组织业务创新和管理提升具有重要意义。建立 IT 战略与业务战略统一的机制，保证业务战略目标实现，是 IT 治理的核心目标之一。</p>
+<p>战略为组织如何在不断变化的环境和激烈的竞争挑战中生存并不断发展指明了方向，明确了组织当前和未来有可能出现的各种条件，确定了其发展目标以及实现该目标的路径、方式和方法。</p>
+<h2 id="1）战略目标"><a href="#1）战略目标" class="headerlink" title="1）战略目标"></a>1）战略目标</h2><p>战略目标是组织在一定的战略期内总体发展的总水平和总任务。它决定了组织在该战略期间的总体发展的主要行动方向，是组织战略的核心。组织的战略目标是多元化的，包含经济性目标和非经济性目标，也包含定量目标和定性目标。战略目标的制定要明确对象和时间范围，定量和定性相结合，短、中、长期目标衔接并协调好。不同类型的组织，其战略目标的组成和覆盖领域不同。</p>
+<h2 id="2）战略类型"><a href="#2）战略类型" class="headerlink" title="2）战略类型"></a>2）战略类型</h2><p>组织当前的发展成熟度水平、不同周期期望达到的目标以及组织外部环境变化等因素都会影响组织战略的制定和选择。常见的组织总体战略类型主要包括：</p>
+<p>- 发展型战略。发展型战略是指组织从现有战略基础水平上向更高一级的目标发展的战略。组织可根据其战略定位和实际情况选择不同的发展型战略。</p>
+<p>- 稳定型战略。稳定型战略是指组织由于其运行环境和内部条件的限制，在整个战略期内基本保持战略起点的运行绩效范围和水平的一种战略。这是一种风险相对较低的战略。当组织较为满意过去的运行绩效和方法，选择延续基本相同的产品和服务时，可以采取这类战略。</p>
+<p>- 紧缩型战略。紧缩型战略是指组织从当前战略运行领域和基础水平收缩和撤退，与战略起点偏离较大的一种运行战略。紧缩型战略是一种消极的发展战略，一般作为短期性的过渡战略。</p>
+<p>- 其他类型战略。组织的总体战略还包括复合型战略、联盟战略、成本领先战略、差异化战略、集中化战略等。</p>
+<h2 id="3）战略特性"><a href="#3）战略特性" class="headerlink" title="3）战略特性"></a>3）战略特性</h2><p>组织战略通常具备的特性包括：</p>
+<p>- 全局性。组织战略作为组织发展的蓝图，从全局性角度确定了组织的战略目标，规范和指导其运行管理活动。</p>
+<p>- 长远性。组织战略着眼于组织的未来，从长远利益出发，通过判断和选择对未来发展做出正确的决策。</p>
+<p>- 纲领性。组织战略是组织运行的行动纲领。它指明了组织总体的长远目标、发展方向、经营重点、前进道路，以及基本的行动方针、重大措施和基本步骤。</p>
+<p>- 指导性。组织战略规定了一定时期内组织的基本发展目标，以及实现该战略目标的路线和途径，引导并激励员工为实现目标而奋斗。</p>
+<p>- 竞争性。通过制定和实施适合组织的有效战略，采取获得竞争优势、提升服务对象满意度、提高工作效率等行动和措施，从而在社会发展中保持核心竞争力。</p>
+<p>● 风险性。组织战略是通过当前信息分析，对未来做出的一种预测性决策。由于组织面临的实际环境是复杂多变的，组织自身条件也在不断变化，因此组织战略具有不确定性和风险性。</p>
+<p>- 相对稳定性。组织战略是长远的规划，实现战略目标需要比较长的时间，因此要保持相对稳定。但如果组织的内外环境发生了重大变化，组织的战略也应进行调整和修正。</p>
+<h2 id="4）创新和改进"><a href="#4）创新和改进" class="headerlink" title="4）创新和改进"></a>4）创新和改进</h2><p>在不同的生存和发展阶段，组织会对其目标、实力和环境有不同的认识和反应，因此组织战略必须具备动态适应性。组织需要进行战略回顾和创新分析，分析和回顾战略实施是否存在偏差，是否需要进行调整或创新。在分析和回顾战略实施过程中进行创新和改进的要素主要包括：</p>
+<p>- 内外部发展环境对战略规划的影响，包括客户和用户需求、技术或监管环境等。</p>
+<p>- 在业务增长、发展趋势等方面的预测及其与实际的差异。</p>
+<p>- 提升业务增长和盈利的措施。</p>
+<p>- 竞争优势和发展水平分析及改进措施。</p>
+<p>- 风险分析及改进措施。</p>
+<p>- 战略绩效管理体系和人力资源系统的整合优化。</p>
+<h2 id="2-组织"><a href="#2-组织" class="headerlink" title="2. 组织"></a>2. 组织</h2><p>组织需要建立 IT 治理实施的机制和机构，确保治理团队、机构和人员能力满足 IT 治理的需求。IT 治理机制包括授权机制、决策机制和沟通机制；IT 治理机构包括信息技术战略委员会、信息技术管理和服务机构、业务部门、风险管理部门、审计监督部门等。</p>
+<p>现代组织的信息化是一个长期持续的过程，必须有一个专门的机构负责与信息化相关的诸多事宜，并且能够不断完善该职能，以适应组织在不同发展阶段的不同需要。IT部门自身的组织建设在整个IT工作日常运作和战略规划中起着重要作用，它的合理与否直接影响组织IT战略的发展，IT部门的组织结构对IT的影响远远大于我们所说的硬件、软件，IT组织的建设影响着组织未来IT战略的发展方向和速度，不仅如此，IT部门的组织结构对于我们正确地分析和判断自己组织IT工作的现状，并合理地把握IT的战略发展方向也有非常重要的意义。</p>
+<p>从 IT 治理这个层面来理解 IT 组织，它绝对不能简单地等同为组织的信息部门、信息中心、信息管理中心等独立的机构，而是指组织中参与 IT 决策与管理的所有人员的集合，需要明确组织定位。</p>
+<p>组织定位应包括有清晰的使命、愿景和目标，有明确的价值观和组织文化来帮助组织实现战略要点，并能够向组织的内外部传达清晰的定位。组织定位还应包括对业务单元的定位战略。所谓业务单元定位战略，是指组织或组织的分支机构在决定进入某行业和领域、生产什么产品或提供何种服务方面所做出的长远性的谋划与方略。业务单元定位战略实质上是行业或领域中的产品或服务定位战略，也就是在行业或领域定位之后，所做出的产品定位决策或服务定位决策。</p>
+<h2 id="1）组织愿景"><a href="#1）组织愿景" class="headerlink" title="1）组织愿景"></a>1）组织愿景</h2><p>组织愿景是在汇集组织每个员工个人心愿的基础上形成的全体员工共同心愿的美好愿景，描述了组织发展的目的和对如何到达那里的理性认知。组织愿景是组织制定战略不可或缺的因素，指明了组织的前进方向、组织未来的业务形态、发展和塑造组织形象所确定的战略道路。一个明确的愿景表明了管理者对上级机构或股东的承诺，以及对所有员工的激励。愿景的制定和传达需要注意：</p>
+<p>- 要明确说明组织的定位，清晰地表达组织目标，避免笼统宽泛的陈述。愿景要能让管理者对组织的发展方向有清晰明确的认识，有利于管理者设计战略和对未来发展做充足准备。明确的愿景能为管理部门决策和资源配置提供指向性，便于各级部门确定部门使命，制定部门目标体系以及与组织发展战略协同一致的部门职能战略。</p>
+<p>- 表述应尽量鲜明和形象化，使其可靠且易于传达。具有传达力的愿景能够引人入胜，赢得组织成员的支持，激励员工为实现目标而努力。</p>
+<h2 id="2）组织使命"><a href="#2）组织使命" class="headerlink" title="2）组织使命"></a>2）组织使命</h2><p>组织使命是管理者为组织确定的较长时期的业务发展的总方向、总目的、总特征和总的指导思想，描述了组织所处的社会价值范畴、当前的业务和宗旨。组织使命是组织的生存基石和存在理由宣言，体现了组织的宗旨、核心价值观和未来方向。其陈述通常涵盖的要素包括：</p>
+<p>- 产品或服务。组织提供的主要产品或服务是什么。</p>
+<p>- 客户和服务对象。组织服务的客户和服务对象群体是哪些，他们在哪里。</p>
+<p>- 行业或领域。组织提供产品和服务的行业或领域是哪些，在什么地方。</p>
+<p>- 公众形象。组织试图营造什么样的形象；对社会、社区和环境承担了哪些责任。</p>
+<p>- 自我认知。什么是组织的独特能力和主要竞争优势。此外，组织在生存、增长和盈利、价值观、技术、员工等方面的目标也可以纳入使命的陈述。</p>
+<h2 id="3）组织文化"><a href="#3）组织文化" class="headerlink" title="3）组织文化"></a>3）组织文化</h2><p>组织文化是组织发展过程中凸显的精神特质与内涵，是组织区别于其他组织的关键因素。组织文化是组织最为本质的体现之一，是组织发展的原动力。优秀的组织文化是组织战略制定的重要条件，组织文化支撑战略的执行。由于组织文化是组织发展过程中形成的内部的共同价值观，具有鲜明的组织特色，因此组织战略需要建立在共同价值观基础上，这样更能发挥组织成员的集体合力，使其易于实现。组织要实现战略目标必须有优秀的组织文化来支撑和引领，打造形象和品牌，树立信誉，从而提升竞争力。</p>
+<p>组织文化有两个基本特征：①组织文化具有浓厚的文化属性和良好的执行性。组织文化确立了组织的核心价值观、道德准则、运行管理理念、组织宗旨和组织精神等思想层面的内容。在共同的价值观的引导下，组织各项工作朝着统一的发展方向开展。②组织文化提出了组织发展涉及的制度、行为等措施，如员工管理方法、员工互动方式、激励机制等，为日常工作提供了具体的实践方法。</p>
+<h2 id="3-架构"><a href="#3-架构" class="headerlink" title="3. 架构"></a>3. 架构</h2><p>一般认为IT规划分为三个与层面，即IT战略、组织架构与IT项目，三部分是相互依托、相互促进的，其中架构是核心。与业务战略相匹配的IT战略明确了信息化的远景目标，与业务战略以及业务流程和组织架构相匹配的IT架构是连接业务战略、IT战略与IT项目的桥梁。</p>
+<p>IT治理组织应指导、评估和监督信息技术架构，以确保支撑信息技术战略目标的实现。具体包括：</p>
+<p>- 指导信息技术架构的建立，并对规划、设计、实施、服务等过程进行评估和监督。</p>
+<p>- 评估信息技术发展内外部环境的变化，并对信息技术架构进行持续改进。</p>
+<p>- 建立与信息技术架构相适应的管理体系，并进行评估和持续改进。</p>
+<p>组织建立的信息技术架构要与组织战略目标、IT治理目标保持一致，满足信息技术战略的目标和要求，同时满足功能集成、信息集成及数据共享等应用需求。信息技术架构管理机制能够满足IT治理战略规划的要求，同时能够评估架构设计的合理性、先进性和开放性。</p>
+<h2 id="4-6-2-管理体系"><a href="#4-6-2-管理体系" class="headerlink" title="4.6.2 管理体系"></a>4.6.2 管理体系</h2><p>综合时间、空间等各个维度，管理体系要素中主要包括质量管理、项目管理、投资管理、服务管理、业务连续性管理、信息安全管理、风险管理、供方管理、资产管理以及其他管理。</p>
+<h2 id="1-质量管理"><a href="#1-质量管理" class="headerlink" title="1. 质量管理"></a>1. 质量管理</h2><p>组织需要建立信息技术服务及产品质量管理体系，明确治理管理的职责和权限、提供资源保障并持续改进和优化。</p>
+<p>质量是产品、服务或成果的一系列内在特征满足需求的程度。质量包括满足客户明示的或隐含的需求的能力。保持关注过程和成果的质量，过程和成果要符合项目目标，并与干系人提出的需求、用途和验收标准保持一致。</p>
+<p>质量不仅与项目成果有关，也与生成项目成果的项目方法和活动有关。在关注项目成果质量的同时，也需要对项目活动和过程进行评估。因此，质量管理更加关注过程的质量，侧重于在过程中提前发现和预防错误及缺陷的发生，帮助项目团队确保以最适当的方式交付符合要求的成果，达到客户和干系人的要求，并使资源最小化、目标最大化，具体要实现以下目标：①快速交付成果；②尽早识别缺陷并采取预防措施，避免或减少返工和报废。</p>
+<h2 id="2-项目管理"><a href="#2-项目管理" class="headerlink" title="2. 项目管理"></a>2. 项目管理</h2><p>组织需要建立项目管理机制，制订项目计划，确定项目范围，建立成本、进度和质量的控制机制，建立和维护项目管理的流程和方法，统计分析项目的完成情况，并评估绩效。</p>
+<h2 id="3-投资管理"><a href="#3-投资管理" class="headerlink" title="3. 投资管理"></a>3. 投资管理</h2><p>组织需要根据投资目标和规划，合理安排资金投放结构，科学确定投资项目，建立投资的拟订方案、可行性论证、方案决策、投资计划编制、投资计划实施、投资项目到期处置等制度。</p>
+<p>IT 项目管理的失败有很多并不是项目管控本身不利造成的，有的是在项目需求管理和投资决策阶段就埋下了失败的祸根，有的则是驾驭不了多个并行的项目。考虑到这些问题，IT 投资治理需要重点关注以下几个方面的问题：业务需求治理不足、IT 决策流程缺乏管控、IT 项目排序不科学。这些难题有以下几个解决思路：一是对业务需求进行科学治理；二是建立合理的项目投资决策机制和流程；第三个是技术层面的问题，利用多项目管理的技术为需求排序，同时管理多个并行的项目。</p>
+<h2 id="4-服务管理"><a href="#4-服务管理" class="headerlink" title="4. 服务管理"></a>4. 服务管理</h2><p>组织要建立信息技术的服务管理机制，控制服务实施的风险，提升服务管理能力，并定期评价服务绩效。</p>
+<p>IT 服务管理是通过主动管理和流程的持续改进来确保 IT 服务交付有效且高效的一组活动。IT 服务管理由若干不同的活动组成：服务台、事件管理、问题管理、变更管理、配置管理、发布管理、服务级别管理、财务管理、容量管理、服务连续性管理和可用性管理。</p>
+<h2 id="5-业务连续性管理"><a href="#5-业务连续性管理" class="headerlink" title="5. 业务连续性管理"></a>5. 业务连续性管理</h2><p>组织要建立业务连续性管理框架，包括业务连续性管理程序、程序维护和评审、连续性恢复后评价，并把业务连续性植入组织文化。</p>
+<p>服务连续性管理是一组与组织持续提供服务的能力相关的活动，主要是在发生自然或人为灾难时继续保持服务有效性的活动。服务连续性管理包括业务连续性管理框架、应急管理与灾难恢复。</p>
+<h2 id="6-信息安全管理"><a href="#6-信息安全管理" class="headerlink" title="6. 信息安全管理"></a>6. 信息安全管理</h2><p>组织要制定信息安全管理目标、方针和策略，建立信息安全组织并明确责任，制定信息安全管理制度，定期开展信息安全培训，确保制度落实。</p>
+<p>信息安全是指信息的保密性、完整性和可用性的保持。构建信息安全保障体系必须从安全的各个方面进行综合考虑，将技术、管理、策略、工程过程等方面紧密结合，尤其要调动高级管理人员的积极性，协调业务部门和IT部门的关系，建立合理的信息安全治理结构与流程。</p>
+<p>所谓信息安全治理，是指最高管理层用来监督管理层在信息安全战略上的过程、架构及业务的关系，以确保信息安全战略与组织的业务目标一致。它不同于信息安全管理。信息安全管理是提供管理程序、技术和保证措施，使业务管理者确信业务交易的可信性；确保信息技术服务的可用性，能适当地防御不正当操作、蓄意攻击或者自然灾害，并从这些故障中尽快恢复；确保拒绝未经授权的访问。信息安全管理的目标是组织信息及信息系统的安全运营，确定IT目标以及实现此目标所采取的行动。</p>
+<p>信息安全治理是一种基础制度安排。如果缺乏健全的制度安排，不可能有很好的信息安全管理。同样，没有有效的信息安全管理，单纯的治理机制也只能是一个美好的蓝图，而缺乏实际的内容。</p>
+<p>建立一个有效的信息安全体系首先要建立在良好的信息安全治理的基础上，其次要制定出相关的管理策略和管理体系，然后才是考虑产品安全。没有完善的治理体系和管理体系，仅有安全技术，决不能真正带来期望中的信息安全。就目前我国信息化建设的现状而言，无论是信息安全治理，还是信息安全管理，都是我们迫切需要健全的。</p>
+<h2 id="7-风险管理"><a href="#7-风险管理" class="headerlink" title="7. 风险管理"></a>7. 风险管理</h2><p>组织要建立信息技术风险管理机制，制定信息技术风险管理原则、目标和策略，建立管理制度和组织，明确责任人、角色和职责，识别、分析、评价、处置信息技术风险，提升风险应对能力，确保风险降低到组织可接受的程度。</p>
+<p>很多组织及其管理者似乎总是缺少适当方法来应对信息技术风险。首先，是没有广泛地考虑风险；其次，没有工具去发现风险；第三，缺乏一套恰当的流程指引来处置风险；第四，未定义清晰风险生命周期及风险层级；第五，缺乏风险识别的氛围、意识及能力。</p>
+<p>有些机构总是把风险管理看成”负面思维”，认为那些从事风险管理的人多虑、胆小，甚至是缺乏领袖气质的人。那些喜好”打垮或者打破（规则）”的管理者则被看成是有特质的领袖——真是一种奇怪的偏见！而真正的事实是，即使是赌徒，每天也要面对着风险回报这样的挑战。他们必须明白为了将来的回报，有些风险是必须承担的。对于风险，要认清以下几点：</p>
+<p>- 你只有认识它，才能打败它。</p>
+<p>- 没有风险，就没有收获。</p>
+<p>- 没有痛苦，就没有财富。</p>
+<p>- 风险的另一面是机会。</p>
+<p>风险是伴随着整个生命周期的，在整个生命周期里应该设计一套流程来识别、评估、监控和报告风险。</p>
+<h2 id="8-供方管理"><a href="#8-供方管理" class="headerlink" title="8. 供方管理"></a>8. 供方管理</h2><p>组织要建立供方管理机制，明确供方管理的职责、流程和方法，建立供方评估机制，保护组织的商业秘密和知识产权，以及组织所涉及的个人隐私。</p>
+<p>不管愿意还是不愿意，组织都免不了要与 IT 供应商发生联系。在信息化整个生命周期中，组织都越来越依赖于外部供应商，从需求分析到系统选型，再到项目实施乃至最后的运行维护，IT 供应商始终与组织如影随形。尤其在核心竞争力理论的指导下，”把包括 IT 在内的不能直接创造价值的部分外包出去”成为了许多组织的选择，外部供应商逐步成了组织 IT 管理的延续，在组织获得便利的同时也不得不面对供应商选择、评估、管理带来的风险。因此有一种说法，IT 供应商的选择就像人的婚姻，是一辈子的事情，需要特别谨慎和小心。</p>
+<p>在供应商与组织的合作过程中，随着力量对比的变化，双方地位也随之改变，组织的治理结构和控制措施也应随之改变。为了避免组织与供应商关系”过山车”般的变化，组织应该加强治理结构的建设，在与供应商合作的过程中明确双方的认知和期望，明确双方的权利和约束，提高实现双赢的可能性。</p>
+<h2 id="9-资产管理"><a href="#9-资产管理" class="headerlink" title="9. 资产管理"></a>9. 资产管理</h2><p>组织要建立信息技术资产应用、资产财务、资产有效性的管理体系，并对管理内容进行关联。</p>
+<p>所谓信息资产，是指一种在资产负债表之外，经过逐渐积累的，可以被用来提升机构竞争优势的信息。信息资产与其他类型的资产相比，有些相似的地方，也有些不同的地方。持有这两种资产的人都可以用这些资产获得交付价值和利益。但是同其他类型的资产不同，信息资产可以在没有成本的情况下复制，这也是信息资产难题的开始。有价值的实物资产一般都会保存在可以保障物理安全的地点，也可以把它们锁起来，无论从技术上还是从财务上看，做到这一点都不困难。</p>
+<p>另一方面，同实物资产相比，信息资产显得非常分散，每份文档、文件和数据存储设施都可能是信息资产的一部分，而且文档很容易被复制（这也确实是人们正常工作的需要）。信息资产是很多业务流程的重要输入物和产出物。</p>
+<h2 id="10-其他管理"><a href="#10-其他管理" class="headerlink" title="10. 其他管理"></a>10. 其他管理</h2><p>信息技术管理体系中还包括其他方面，例如变更管理、预算管理、需求管理、绩效管理等，组织在实施治理时，同样需要根据相关标准结合组织战略制定相应的管理策略、机制和方法。</p>
+<h2 id="4-6-3-资源"><a href="#4-6-3-资源" class="headerlink" title="4.6.3 资源"></a>4.6.3 资源</h2><p>资源管理的主要功能是确保用户对组织的应用系统和基础设施都有良好的理解和应用，优化 IT 投资、IT 资源（人、应用系统、信息、基础设施）的分配，做好人员的培训、发展计划，以满足组织的业务需求。</p>
+<h2 id="1-基础设施"><a href="#1-基础设施" class="headerlink" title="1. 基础设施"></a>1. 基础设施</h2><p>组织需要制定信息技术基础设施的规划，建立基础设施建设、采购、实施和运维机制，制定基础设施管理策略和方法。组织需要识别实现组织的战略目标的关键基础设施，识别需要在组织级实现的基础设施以及与之匹配的服务水平需求；建立基础设施服务定价的机制；建立基础设施的持续改进更新以及基础设施外包制度。</p>
+<h2 id="2-应用系统"><a href="#2-应用系统" class="headerlink" title="2. 应用系统"></a>2. 应用系统</h2><p>组织需要建立信息技术应用系统设计、开发、变更和测试的保障机制，保证功能、性能和安全等满足要求。</p>
+<h2 id="3-数据"><a href="#3-数据" class="headerlink" title="3. 数据"></a>3. 数据</h2><p>组织需要明确数据治理框架，建立数据治理机制和管理机制，完善数据治理的生命周期。数据的良好治理有助于治理组织确保在整个组织中使用数据，并对组织的绩效做出积极的贡献。数据的良好治理也有助于治理组织确保遵守与数据的可接受使用和处理有关的义务。</p>
+<h2 id="4-7-本章练习"><a href="#4-7-本章练习" class="headerlink" title="4.7 本章练习"></a>4.7 本章练习</h2><h2 id="1-选择题"><a href="#1-选择题" class="headerlink" title="1. 选择题"></a>1. 选择题</h2><p>(1)____不属于 IT 治理的管理层次。</p>
+<p>A. 作业层 B. 最高管理层 C. 执行管理层 D. 业务与服务执行层</p>
+<p>参考答案：A</p>
+<p>(2)____不属于 IT 治理的三大主要目标。</p>
+<p>A. 与业务目标保持一致</p>
+<p>B. 质量控制</p>
+<p>C. 有效利用信息与数据资源</p>
+<p>D. 风险管理</p>
+<h2 id="参考答案-B"><a href="#参考答案-B" class="headerlink" title="参考答案: B"></a>参考答案: B</h2><p>(3)____不属于 IT 治理的内容。</p>
+<p>A. 投资 B. 业务 C. 绩效 D. 标准</p>
+<p>参考答案：B</p>
+<p>(4)《信息技术服务 治理 第 1 部分：通用要求》标准不适用于____。</p>
+<p>A. 建立组织的 IT 治理体系并实施自我评价</p>
+<p>B. 组织的人力资源治理及供应链治理</p>
+<p>C. 研发、选择和评价 IT 治理相关的软件或解决方案</p>
+<p>D. 开展信息技术审计</p>
+<p>参考答案: B</p>
+<p>（5）IT治理实施框架中，____不是IT治理域定义的IT治理对象。</p>
+<p>A. 顶层设计 B. 管理体系 C. 资源 D. 实施环境</p>
+<p>参考答案: D</p>
+<ol>
+<li>思考题</li>
+</ol>
+<p>（1）请简述IT治理的核心内容包括的6个方面。</p>
+<p>（2）请简述有效的IT治理必须关注的5项关键决策。</p>
+<p>参考答案：略</p>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+    <div class="widget-header dis-select">
+      <span class="name">本文目录</span>
+      <button type="button" class="cap-action ui-interactive card-hover card-hover--spotlight" data-shell-action="toggle-toc" aria-label="Toggle table of contents" aria-pressed="false"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></span></button>
+    </div>
+  
+  <div class="widget-body"><ol class="toc ui-collection-adapter"><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-1-IT%E6%B2%BB%E7%90%86%E5%9F%BA%E7%A1%80"><span class="toc-text">4.1 IT治理基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-IT-%E6%B2%BB%E7%90%86%E7%9A%84%E9%A9%B1%E5%8A%A8%E5%9B%A0%E7%B4%A0"><span class="toc-text">1. IT 治理的驱动因素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-IT-%E6%B2%BB%E7%90%86%E7%9A%84%E7%9B%AE%E6%A0%87%E4%BB%B7%E5%80%BC"><span class="toc-text">2. IT 治理的目标价值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-IT%E6%B2%BB%E7%90%86%E7%9A%84%E7%AE%A1%E7%90%86%E5%B1%82%E6%AC%A1"><span class="toc-text">3. IT治理的管理层次</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-2-IT%E6%B2%BB%E7%90%86%E4%BD%93%E7%B3%BB"><span class="toc-text">4.2 IT治理体系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-IT%E6%B2%BB%E7%90%86%E5%85%B3%E9%94%AE%E5%86%B3%E7%AD%96"><span class="toc-text">1. IT治理关键决策</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-IT%E6%B2%BB%E7%90%86%E4%BD%93%E7%B3%BB%E6%A1%86%E6%9E%B6"><span class="toc-text">2. IT治理体系框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-IT-%E6%B2%BB%E7%90%86%E6%A0%B8%E5%BF%83%E5%86%85%E5%AE%B9"><span class="toc-text">3. IT 治理核心内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-IT%E6%B2%BB%E7%90%86%E6%9C%BA%E5%88%B6%E7%9B%B8%E5%85%B3%E7%BB%8F%E9%AA%8C"><span class="toc-text">4. IT治理机制相关经验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-3-IT%E6%B2%BB%E7%90%86%E4%BB%BB%E5%8A%A1"><span class="toc-text">4.3 IT治理任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-4-IT%E6%B2%BB%E7%90%86%E6%96%B9%E6%B3%95%E4%B8%8E%E6%A0%87%E5%87%86"><span class="toc-text">4.4 IT治理方法与标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-ITSS%E4%B8%AD%E7%9A%84IT%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86"><span class="toc-text">1. ITSS中的IT服务治理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-IT-%E6%B2%BB%E7%90%86%E9%80%9A%E7%94%A8%E8%A6%81%E6%B1%82"><span class="toc-text">1) IT 治理通用要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2%EF%BC%89IT%E6%B2%BB%E7%90%86%E5%AE%9E%E6%96%BD%E6%8C%87%E5%8D%97"><span class="toc-text">2）IT治理实施指南</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E4%BF%A1%E6%81%AF%E5%92%8C%E6%8A%80%E6%9C%AF%E6%B2%BB%E7%90%86%E6%A1%86%E6%9E%B6"><span class="toc-text">2. 信息和技术治理框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1%EF%BC%89%E6%B2%BB%E7%90%86%E5%92%8C%E7%AE%A1%E7%90%86%E7%9B%AE%E6%A0%87"><span class="toc-text">1）治理和管理目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2%EF%BC%89%E4%BF%A1%E6%81%AF%E5%92%8C%E6%8A%80%E6%9C%AF%E6%B2%BB%E7%90%86%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-text">2）信息和技术治理解决方案的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-IT%E6%B2%BB%E7%90%86%E5%9B%BD%E9%99%85%E6%A0%87%E5%87%86"><span class="toc-text">3. IT治理国际标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-5-IT-%E6%B2%BB%E7%90%86%E7%9A%84-EDM"><span class="toc-text">4.5 IT 治理的 EDM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-6-IT%E6%B2%BB%E7%90%86%E5%85%B3%E9%94%AE%E5%9F%9F"><span class="toc-text">4.6 IT治理关键域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-6-1-%E9%A1%B6%E5%B1%82%E8%AE%BE%E8%AE%A1"><span class="toc-text">4.6.1 顶层设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E6%88%98%E7%95%A5"><span class="toc-text">1. 战略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1%EF%BC%89%E6%88%98%E7%95%A5%E7%9B%AE%E6%A0%87"><span class="toc-text">1）战略目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2%EF%BC%89%E6%88%98%E7%95%A5%E7%B1%BB%E5%9E%8B"><span class="toc-text">2）战略类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3%EF%BC%89%E6%88%98%E7%95%A5%E7%89%B9%E6%80%A7"><span class="toc-text">3）战略特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4%EF%BC%89%E5%88%9B%E6%96%B0%E5%92%8C%E6%94%B9%E8%BF%9B"><span class="toc-text">4）创新和改进</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E7%BB%84%E7%BB%87"><span class="toc-text">2. 组织</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1%EF%BC%89%E7%BB%84%E7%BB%87%E6%84%BF%E6%99%AF"><span class="toc-text">1）组织愿景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2%EF%BC%89%E7%BB%84%E7%BB%87%E4%BD%BF%E5%91%BD"><span class="toc-text">2）组织使命</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3%EF%BC%89%E7%BB%84%E7%BB%87%E6%96%87%E5%8C%96"><span class="toc-text">3）组织文化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E6%9E%B6%E6%9E%84"><span class="toc-text">3. 架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-6-2-%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB"><span class="toc-text">4.6.2 管理体系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E8%B4%A8%E9%87%8F%E7%AE%A1%E7%90%86"><span class="toc-text">1. 质量管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86"><span class="toc-text">2. 项目管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E6%8A%95%E8%B5%84%E7%AE%A1%E7%90%86"><span class="toc-text">3. 投资管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86"><span class="toc-text">4. 服务管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-%E4%B8%9A%E5%8A%A1%E8%BF%9E%E7%BB%AD%E6%80%A7%E7%AE%A1%E7%90%86"><span class="toc-text">5. 业务连续性管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#6-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86"><span class="toc-text">6. 信息安全管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#7-%E9%A3%8E%E9%99%A9%E7%AE%A1%E7%90%86"><span class="toc-text">7. 风险管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#8-%E4%BE%9B%E6%96%B9%E7%AE%A1%E7%90%86"><span class="toc-text">8. 供方管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#9-%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86"><span class="toc-text">9. 资产管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#10-%E5%85%B6%E4%BB%96%E7%AE%A1%E7%90%86"><span class="toc-text">10. 其他管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-6-3-%E8%B5%84%E6%BA%90"><span class="toc-text">4.6.3 资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD"><span class="toc-text">1. 基础设施</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F"><span class="toc-text">2. 应用系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E6%95%B0%E6%8D%AE"><span class="toc-text">3. 数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-7-%E6%9C%AC%E7%AB%A0%E7%BB%83%E4%B9%A0"><span class="toc-text">4.7 本章练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E9%80%89%E6%8B%A9%E9%A2%98"><span class="toc-text">1. 选择题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%8F%82%E8%80%83%E7%AD%94%E6%A1%88-B"><span class="toc-text">参考答案: B</span></a></li></ol></div>
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC2%E7%89%88%E6%95%99%E7%A8%8B/%E7%AC%AC04%E7%AB%A0%20%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E6%B2%BB%E7%90%86/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第4章 信息系统治理","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

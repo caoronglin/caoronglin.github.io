@@ -1,0 +1,1344 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AD%94%E9%A2%98/04_%E4%B8%93%E9%A1%B9%E7%AE%A1%E7%90%86/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="教材同步练习 · ④专项管理   /* ===================== Ant Design 5 / Pro 设计令牌 ===================== */ :root {   --primary:#1677ff; --primary-hover:#4096ff; --primary-active:#0958d9;   --primary-bg:rgba(22,1" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AD%94%E9%A2%98/04_%E4%B8%93%E9%A1%B9%E7%AE%A1%E7%90%86/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="教材同步练习 · ④专项管理   /* ===================== Ant Design 5 / Pro 设计令牌 ===================== */ :root {   --primary:#1677ff; --primary-hover:#4096ff; --primary-active:#0958d9;   --primary-bg:rgba(22,1" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-10-08T04:55:06.357Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.357Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content="生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学" data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AD%94%E9%A2%98/04_%E4%B8%93%E9%A1%B9%E7%AE%A1%E7%90%86/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"麟跃云起","description":"\n\n\n\n\n教材同步练习 · ④专项管理\n\n\n/* ===================== Ant Design 5 / Pro 设计令牌 ===================== */\n:root {\n  --primary:#1677ff; --primary-hover:#4096ff; --primary-active:#0958d9;\n  --primary-bg:rgba(2...","url":"https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AD%94%E9%A2%98/04_%E4%B8%93%E9%A1%B9%E7%AE%A1%E7%90%86/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AD%94%E9%A2%98/04_%E4%B8%93%E9%A1%B9%E7%AE%A1%E7%90%86/"></a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-10-08T04:55:06.357Z">2026-10-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.357Z">2026-10-08</time></span></div>
+</div></div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><!DOCTYPE html>
+<html lang="zh-CN" data-theme="auto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>教材同步练习 · ④专项管理</title>
+<!--
+  ============================================================
+  答题模板 · Ant Design Pro 视觉复刻（单文件 / 零依赖 / 离线可用）
+  ------------------------------------------------------------
+  · 题库：改下方 QUESTIONS 数组（支持 n 个选项，answer 用选项的 key）
+  · 记录：localStorage（浏览器端数据库），按文件路径隔离，跨次累积
+  · 主题：跟随系统，右上角可手动切换 亮/暗
+  · 嵌入 Obsidian：![[本文件.html]]  或  ![[本文件.html|760x520]]
+  ============================================================
+-->
+<style>
+/* ===================== Ant Design 5 / Pro 设计令牌 ===================== */
+:root {
+  --primary:#1677ff; --primary-hover:#4096ff; --primary-active:#0958d9;
+  --primary-bg:rgba(22,119,255,.1); --primary-border:rgba(22,119,255,.35);
+  --success:#52c41a; --success-bg:rgba(82,196,26,.1); --success-border:rgba(82,196,26,.35);
+  --error:#ff4d4f;   --error-bg:rgba(255,77,79,.1);   --error-border:rgba(255,77,79,.35);
+  --warning:#faad14;
+  --text:rgba(0,0,0,.88); --text-2:rgba(0,0,0,.65); --text-3:rgba(0,0,0,.45); --text-4:rgba(0,0,0,.25);
+  --border:#d9d9d9; --border-2:#f0f0f0;
+  --bg-layout:#f5f5f5; --bg-container:#fff; --bg-spotlight:rgba(0,0,0,.02); --bg-hover:rgba(0,0,0,.04);
+  --radius:8px; --radius-sm:6px; --radius-lg:12px;
+  --shadow:0 1px 2px 0 rgba(0,0,0,.03),0 1px 6px -1px rgba(0,0,0,.02),0 2px 4px 0 rgba(0,0,0,.02);
+  --shadow-hover:0 6px 16px 0 rgba(0,0,0,.08),0 3px 6px -4px rgba(0,0,0,.12),0 9px 28px 8px rgba(0,0,0,.05);
+}
+[data-theme="dark"] {
+  --primary:#1668dc; --primary-hover:#3c89e8; --primary-active:#1554ad;
+  --primary-bg:rgba(22,104,220,.18); --primary-border:rgba(22,104,220,.45);
+  --text:rgba(255,255,255,.85); --text-2:rgba(255,255,255,.65); --text-3:rgba(255,255,255,.45); --text-4:rgba(255,255,255,.25);
+  --border:#424242; --border-2:#303030;
+  --bg-layout:#141414; --bg-container:#1f1f1f; --bg-spotlight:rgba(255,255,255,.04); --bg-hover:rgba(255,255,255,.08);
+  --shadow:0 1px 2px 0 rgba(0,0,0,.24),0 1px 6px -1px rgba(0,0,0,.16),0 2px 4px 0 rgba(0,0,0,.16);
+  --shadow-hover:0 6px 16px 0 rgba(0,0,0,.32),0 3px 6px -4px rgba(0,0,0,.4),0 9px 28px 8px rgba(0,0,0,.24);
+}
+* { box-sizing:border-box; }
+html,body { margin:0; padding:0; }
+body {
+  background:var(--bg-layout); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:14px; line-height:1.5714; -webkit-font-smoothing:antialiased;
+}
+.wrap { max-width:900px; margin:0 auto; padding:20px 24px 48px; }
+
+/* ===================== PageContainer（Pro 页面容器） ===================== */
+.page-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:20px; }
+.page-title { font-size:20px; font-weight:600; line-height:1.4; margin:0 0 4px; letter-spacing:-.01em; }
+.page-desc { color:var(--text-3); font-size:13px; margin:0; }
+.head-actions { display:flex; gap:8px; flex:none; }
+
+/* ===================== Card ===================== */
+.card {
+  background:var(--bg-container); border:1px solid var(--border-2);
+  border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:16px; overflow:hidden;
+}
+.card-head {
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:14px 20px; border-bottom:1px solid var(--border-2);
+}
+.card-title { font-size:15px; font-weight:600; }
+.card-body { padding:20px; }
+
+/* ===================== Statistic（Pro 统计卡） ===================== */
+.stat-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:16px; }
+@media (max-width:640px){ .stat-row { grid-template-columns:repeat(2,1fr); } }
+.stat { background:var(--bg-container); border:1px solid var(--border-2); border-radius:var(--radius);
+        box-shadow:var(--shadow); padding:16px 18px; transition:box-shadow .2s; }
+.stat:hover { box-shadow:var(--shadow-hover); }
+.stat-label { color:var(--text-3); font-size:13px; margin-bottom:6px; }
+.stat-value { font-size:26px; font-weight:600; line-height:1.2; font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+.stat-suffix { font-size:13px; font-weight:400; color:var(--text-3); margin-left:3px; }
+.stat.primary .stat-value { color:var(--primary); }
+.stat.success .stat-value { color:var(--success); }
+
+/* ===================== Button ===================== */
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  height:32px; padding:0 15px; font-size:14px; font-family:inherit;
+  border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--bg-container);
+  color:var(--text); cursor:pointer; transition:all .2s; white-space:nowrap;
+}
+.btn:hover { color:var(--primary); border-color:var(--primary); }
+.btn-primary { background:var(--primary); border-color:var(--primary); color:#fff; font-weight:500; }
+.btn-primary:hover { background:var(--primary-hover); border-color:var(--primary-hover); color:#fff; }
+.btn-primary:disabled { background:var(--bg-hover); border-color:var(--border); color:var(--text-4); cursor:not-allowed; }
+.btn-text { border-color:transparent; background:transparent; padding:0 8px; }
+.btn-text:hover { background:var(--bg-hover); border-color:transparent; }
+.btn-lg { height:40px; padding:0 20px; font-size:15px; }
+
+/* ===================== Tag ===================== */
+.tag {
+  display:inline-flex; align-items:center; height:22px; padding:0 8px; font-size:12px;
+  border-radius:4px; background:var(--bg-spotlight); color:var(--text-2); border:1px solid transparent;
+}
+.tag.primary { background:var(--primary-bg); color:var(--primary); border-color:var(--primary-border); }
+.tag.success { background:var(--success-bg); color:var(--success); border-color:var(--success-border); }
+.tag.error   { background:var(--error-bg);   color:var(--error);   border-color:var(--error-border); }
+
+/* ===================== Progress ===================== */
+.progress { height:8px; border-radius:100px; background:var(--bg-spotlight); overflow:hidden; }
+.progress-inner { height:100%; border-radius:100px; background:var(--primary); transition:width .3s cubic-bezier(.4,0,.2,1); }
+.progress-inner.done { background:var(--success); }
+
+/* ===================== 题目 ===================== */
+.q-stem { font-size:16px; font-weight:500; line-height:1.6; margin:0 0 18px; }
+.q-index { color:var(--text-3); font-weight:400; margin-right:6px; }
+.options { display:flex; flex-direction:column; gap:10px; }
+.opt {
+  display:flex; align-items:flex-start; gap:10px; width:100%; text-align:left;
+  padding:12px 15px; font-size:14px; font-family:inherit; line-height:1.6;
+  background:var(--bg-container); color:var(--text);
+  border:1px solid var(--border); border-radius:var(--radius-sm);
+  cursor:pointer; transition:all .2s;
+}
+.opt:hover:not(.locked) { border-color:var(--primary); color:var(--primary); background:var(--primary-bg); }
+.opt-key {
+  flex:none; width:20px; height:20px; border-radius:50%; margin-top:1px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:600; text-transform:uppercase;
+  background:var(--bg-spotlight); color:var(--text-2);
+}
+.opt:hover:not(.locked) .opt-key { background:var(--primary); color:#fff; }
+.opt.correct { border-color:var(--success); background:var(--success-bg); color:var(--success); }
+.opt.correct .opt-key { background:var(--success); color:#fff; }
+.opt.wrong { border-color:var(--error); background:var(--error-bg); color:var(--error); }
+.opt.wrong .opt-key { background:var(--error); color:#fff; }
+.opt.locked { cursor:default; }
+.opt.locked:not(.correct):not(.wrong) { opacity:.55; }
+
+/* ===================== Alert（解析框） ===================== */
+.alert { display:flex; gap:10px; padding:12px 15px; border-radius:var(--radius-sm); border:1px solid transparent; font-size:13px; line-height:1.6; margin-top:16px; }
+.alert-info { background:var(--primary-bg); border-color:var(--primary-border); color:var(--text-2); }
+.alert-success { background:var(--success-bg); border-color:var(--success-border); color:var(--text-2); }
+.alert-error { background:var(--error-bg); border-color:var(--error-border); color:var(--text-2); }
+.alert b { color:var(--text); }
+
+/* ===================== Result（结果页） ===================== */
+.result { text-align:center; padding:24px 20px 8px; }
+.result-score { font-size:56px; font-weight:600; line-height:1.1; letter-spacing:-.03em; font-variant-numeric:tabular-nums; }
+.result-score.good { color:var(--success); }
+.result-score.mid { color:var(--primary); }
+.result-score.bad { color:var(--error); }
+.result-sub { color:var(--text-3); font-size:13px; margin-top:8px; }
+.result-title { font-size:17px; font-weight:600; margin:12px 0 0; }
+.result-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border-2); border-radius:var(--radius-sm); overflow:hidden; margin-top:22px; }
+.result-cell { background:var(--bg-container); padding:14px 12px; }
+.result-cell-label { color:var(--text-3); font-size:12px; margin-bottom:4px; }
+.result-cell-value { font-size:18px; font-weight:600; font-variant-numeric:tabular-nums; }
+
+/* ===================== 历史记录 ===================== */
+.hist-row { display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid var(--border-2); font-size:13px; }
+.hist-row:last-child { border-bottom:none; }
+.hist-no { flex:none; width:24px; height:24px; border-radius:50%; background:var(--bg-spotlight);
+           display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--text-3); }
+.hist-date { flex:1; color:var(--text-3); font-variant-numeric:tabular-nums; }
+.hist-score { font-weight:600; font-variant-numeric:tabular-nums; }
+.hist-score.good { color:var(--success); } .hist-score.bad { color:var(--error); }
+.empty { text-align:center; color:var(--text-3); font-size:13px; padding:26px 0; }
+
+/* ===================== 工具栏细节 ===================== */
+.icon-btn { width:32px; height:32px; padding:0; font-size:15px; }
+.toast {
+  position:fixed; left:50%; bottom:32px; transform:translateX(-50%) translateY(12px);
+  background:var(--bg-container); color:var(--text); border:1px solid var(--border-2);
+  box-shadow:var(--shadow-hover); border-radius:var(--radius-sm); padding:9px 16px; font-size:13px;
+  opacity:0; pointer-events:none; transition:all .25s;
+}
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+code { background:var(--bg-spotlight); padding:1px 6px; border-radius:4px; font-size:.92em;
+       font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- PageContainer -->
+  <div class="page-head">
+    <div>
+      <h1 class="page-title" id="pageTitle">知识自测</h1>
+      <p class="page-desc" id="pageDesc">做好准备就点击「开始答题」，成绩会自动记录</p>
+    </div>
+    <div class="head-actions">
+      <button class="btn icon-btn" id="themeBtn" title="切换主题">🌙</button>
+      <button class="btn icon-btn" id="resetBtn" title="清空全部记录">🗑</button>
+    </div>
+  </div>
+
+  <!-- Statistic 行 -->
+  <div class="stat-row">
+    <div class="stat primary">
+      <div class="stat-label">累计答题</div>
+      <div class="stat-value" id="sTimes">0<span class="stat-suffix">次</span></div>
+    </div>
+    <div class="stat success">
+      <div class="stat-label">历史最高</div>
+      <div class="stat-value" id="sBest">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">平均得分</div>
+      <div class="stat-value" id="sAvg">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">总正确率</div>
+      <div class="stat-value" id="sRate">—</div>
+    </div>
+  </div>
+
+  <!-- 主区域 -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title" id="cardTitle">准备就绪</span>
+      <span class="tag" id="cardTag">共 0 题</span>
+    </div>
+    <div class="card-body" id="stage"></div>
+  </div>
+
+  <!-- 历史记录 -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title">答题记录</span>
+      <button class="btn btn-text" id="copyBtn">复制统计</button>
+    </div>
+    <div class="card-body" id="history"></div>
+  </div>
+
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =====================================================================
+   ①  题库：把下面的题目换成你自己的即可
+   ===================================================================== */
+const META = {"title": "教材同步练习 · ④专项管理", "desc": "项目 · 应用系统 · 网络 · 数据中心 · 终端 · 数据 · 安全　共 31 题（源：第2版教材本章练习）"};
+
+const QUESTIONS = [
+  {
+    "stem": "【第10章 项目管理】关于项目管理的描述，不正确的是：________________。",
+    "options": {
+      "A": "项目管理将知识、技能、工具与技术应用于项目活动，以满足项目的需求",
+      "B": "项目管理能够帮助组织达成业务目标",
+      "C": "项目管理用于管理持续的、重复的工作",
+      "D": "项目管理涉及五大过程组，分别是启动、规划、执行、监控和收尾"
+    },
+    "answer": "c",
+    "explain": "教材第 10 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第10章 项目管理】关于项目启动过程组的描述，不正确的是：________________。",
+    "options": {
+      "A": "项目启动过程的活动包括立项管理、制定项目章程、识别干系人、项目启动会议",
+      "B": "立项申请又称为项目建议书",
+      "C": "每个项目都有干系人，他们会受到项目积极或消极的影响",
+      "D": "项目章程的制定需要在整个项目生命周期中持续开展"
+    },
+    "answer": "d",
+    "explain": "教材第 10 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第10章 项目管理】关于项目规划过程组的描述, 正确的是________________。",
+    "options": {
+      "A": "项目规划包括明确项目全部范围、定义和优化目标及为实现目标制定行动方案",
+      "B": "项目团队把项目章程作为初始项目规划的终点",
+      "C": "项目风险是一种不确定的事件或条件, 一旦发生, 就会对项目目标产生某种负面的影响",
+      "D": "质量与等级是两个相同的概念"
+    },
+    "answer": "a",
+    "explain": "教材第 10 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第10章 项目管理】关于项目执行过程组的描述，正确的是：________________。",
+    "options": {
+      "A": "项目资源包括团队资源和实物资源",
+      "B": "项目经理的能力是团队管理的最关键因素",
+      "C": "实施风险应对是制定风险应对策略的过程",
+      "D": "项目知识管理的关键在于通过培训传递知识"
+    },
+    "answer": "a",
+    "explain": "教材第 10 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第10章 项目管理】关于项目监控过程组的描述, 不正确的是: ________________。",
+    "options": {
+      "A": "项目监控包括监督工作和控制工作",
+      "B": "项目范围是指产品范围",
+      "C": "要更新预算, 就需要了解截至目前的实际成本",
+      "D": "变更请求可能包含纠正措施、预防措施、缺陷补救"
+    },
+    "answer": "b",
+    "explain": "教材第 10 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第10章 项目管理】关于项目收尾过程组的描述不正确的是: ________________。",
+    "options": {
+      "A": "项目收尾包括为正式完成或关闭项目、阶段或合同而开展的各项活动",
+      "B": "项目验收是正式验收已完成的项目可交付成果的过程",
+      "C": "项目移交是项目收尾工作，不需要规划",
+      "D": "在项目总结之前，需要收集项目的各种信息"
+    },
+    "answer": "c",
+    "explain": "教材第 10 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第11章 应用系统管理】关于应用系统运维管理的描述，不正确的是：________________。",
+    "options": {
+      "A": "例行操作可以确保系统的稳定、可靠和安全运行",
+      "B": "响应支持可以及时解决系统和用户遇到的问题",
+      "C": "调研评估可以提高系统的性能、稳定性和安全性",
+      "D": "需要根据实际情况和需求的变化，不断完善和优化运维管理工作"
+    },
+    "answer": "c",
+    "explain": "教材第 11 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第11章 应用系统管理】关于系统切换的描述，不正确的是：________________。",
+    "options": {
+      "A": "新系统需要的大量基础数据，准备时间长，可以逐步提供",
+      "B": "系统切换应提前做好人员的培训工作",
+      "C": "系统只出现局部性问题，说明系统是成功的",
+      "D": "系统出现致命的问题，说明系统设计质量不好"
+    },
+    "answer": "a",
+    "explain": "教材第 11 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第11章 应用系统管理】信息系统的安全需求不包括：________________。",
+    "options": {
+      "A": "监管安全、投资安全",
+      "B": "保密性、安全性、完整性",
+      "C": "可靠性、可用性",
+      "D": "信息的有效性和合法性"
+    },
+    "answer": "a",
+    "explain": "教材第 11 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第12章 网络系统管理】局域网管理中，通常不包括：________________。",
+    "options": {
+      "A": "网络设备管理",
+      "B": "网络拓扑管理",
+      "C": "网络安全管理",
+      "D": "自治系统管理"
+    },
+    "answer": "d",
+    "explain": "教材第 12 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第12章 网络系统管理】网络中所有相关的被管对象信息都集中在________________中。",
+    "options": {
+      "A": "数据湖",
+      "B": "管理信息库（MIB）",
+      "C": "虚拟专用网（VPN）",
+      "D": "域名系统（DNS）"
+    },
+    "answer": "b",
+    "explain": "教材第 12 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第12章 网络系统管理】________________不属于 DHCP 应用管理活动。",
+    "options": {
+      "A": "配置转发器",
+      "B": "定义 IP 地址范围",
+      "C": "设置租约时间",
+      "D": "配置 DHCP 服务器"
+    },
+    "answer": "a",
+    "explain": "教材第 12 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第12章 网络系统管理】SHA-256 属于 ________________。",
+    "options": {
+      "A": "加密技术",
+      "B": "对称算法",
+      "C": "哈希函数",
+      "D": "非对称算法"
+    },
+    "answer": "c",
+    "explain": "教材第 12 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第12章 网络系统管理】________________不属于入侵防御系统 IPS 的主要功能。",
+    "options": {
+      "A": "核查系统配置和漏洞",
+      "B": "高质量的入侵特征库",
+      "C": "以嵌入式模式运行",
+      "D": "高效处理数据包"
+    },
+    "answer": "a",
+    "explain": "教材第 12 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第13章 数据中心管理】关于数据中心的描述，不正确的是：________________。",
+    "options": {
+      "A": "数据中心的关键组件包括各种类型应用程序和相应监控系统",
+      "B": "数据中心是为集中放置的电子信息设备提供运行环境的建筑场所",
+      "C": "数据中心用来存放组织的关键应用程序、数据的空间和物理设施",
+      "D": "数据中心按照类型可以划分为托管数据中心和云数据中心两类"
+    },
+    "answer": "d",
+    "explain": "教材第 13 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第13章 数据中心管理】不属于平台资源的管理对象。",
+    "options": {
+      "A": "操作系统",
+      "B": "数据库",
+      "C": "应用软件",
+      "D": "中间件"
+    },
+    "answer": "c",
+    "explain": "教材第 13 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第13章 数据中心管理】在数据中心中的虚拟资源管理中，________________属于事件驱动的响应。",
+    "options": {
+      "A": "虚拟机、配置信息、数据的备份与恢复",
+      "B": "操作系统崩溃",
+      "C": "服务器硬件扩容",
+      "D": "存储结构调整"
+    },
+    "answer": "b",
+    "explain": "教材第 13 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第14章 桌面与外设管理】病毒库更新属于终端运维管理的________________。",
+    "options": {
+      "A": "调研评估",
+      "B": "日常维护",
+      "C": "响应支持",
+      "D": "优化改善"
+    },
+    "answer": "b",
+    "explain": "教材第 14 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第14章 桌面与外设管理】移动计算终端运维管理过程中, ________________ 无需定期检查。",
+    "options": {
+      "A": "外观完好情况",
+      "B": "资源占用情况",
+      "C": "电池续航能力",
+      "D": "采购人员信息"
+    },
+    "answer": "d",
+    "explain": "教材第 14 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第14章 桌面与外设管理】________________不属于桌面外设安全权限控制的范畴。",
+    "options": {
+      "A": "设置用户权限",
+      "B": "设置访问控制",
+      "C": "设置门禁权限",
+      "D": "设置软件权限"
+    },
+    "answer": "c",
+    "explain": "教材第 14 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第14章 桌面与外设管理】桌面及外围设备运行维护对象具有的特点: ________________。",
+    "options": {
+      "A": "数量多、分布广、功能复杂、移动化",
+      "B": "数量少、分布集中、功能单一",
+      "C": "数量多、分布集中、功能复杂",
+      "D": "数量少、分布广、功能单一"
+    },
+    "answer": "a",
+    "explain": "教材第 14 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第14章 桌面与外设管理】存储设备的调研评估不包括: ________________。",
+    "options": {
+      "A": "评估由于设备接入而产生信息安全风险的可能性",
+      "B": "调研设备的性能、质量、使用率等情况",
+      "C": "提供采购政策优化的建议",
+      "D": "评估设备报废价值"
+    },
+    "answer": "d",
+    "explain": "教材第 14 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第15章 数据管理】DCMM 是________________。",
+    "options": {
+      "A": "数据管理能力成熟度评估模型",
+      "B": "数据治理框架",
+      "C": "数据管理能力评价模型",
+      "D": "数据管理模型"
+    },
+    "answer": "a",
+    "explain": "教材第 15 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第15章 数据管理】不属于组织的数据战略主要能力项建设内容。",
+    "options": {
+      "A": "数据战略规划",
+      "B": "数据战略实施",
+      "C": "数据战略评估",
+      "D": "数据组织建设"
+    },
+    "answer": "d",
+    "explain": "教材第 15 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第15章 数据管理】________________不属于常见数据管理组织模式。",
+    "options": {
+      "A": "集中式",
+      "B": "融合式",
+      "C": "分布式",
+      "D": "离散式"
+    },
+    "answer": "b",
+    "explain": "教材第 15 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第15章 数据管理】数据资源目录分为三个层面，不包括________________。",
+    "options": {
+      "A": "资源目录",
+      "B": "资产目录",
+      "C": "权限目录",
+      "D": "服务目录"
+    },
+    "answer": "c",
+    "explain": "教材第 15 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第15章 数据管理】关于数据脱敏的描述，不正确的是________________。",
+    "options": {
+      "A": "数据脱敏是一项重要的数据安全防护手段",
+      "B": "数据脱敏可以有效地减少敏感数据在采集、传输、使用等环节中的暴露",
+      "C": "数据脱敏需要遵循算法可逆原则",
+      "D": "通过数据脱敏，可以保障数据合规"
+    },
+    "answer": "c",
+    "explain": "教材第 15 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第16章 信息安全管理】ISO 27001：《信息安全技术 信息安全控制》标准提供了源于国际公认最佳实践的一系列________________的信息安全控制。",
+    "options": {
+      "A": "组织、人员、物理和技术",
+      "B": "组织、人员、物理和资源",
+      "C": "策略、人员、物理和技术",
+      "D": "组织、人员、环境和技术"
+    },
+    "answer": "a",
+    "explain": "教材第 16 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第16章 信息安全管理】________________不是信息安全关注的属性。",
+    "options": {
+      "A": "保密性（Confidentiality）",
+      "B": "完整性（Integrity）",
+      "C": "可用性（Availability）",
+      "D": "公正性（Impartiality）"
+    },
+    "answer": "d",
+    "explain": "教材第 16 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第16章 信息安全管理】________________为普遍应用于各类组织的广泛的信息安全控制提供了指导，控制被定义为改变或维持风险的措施。",
+    "options": {
+      "A": "GDPR (General Data Protection Regulation)",
+      "B": "HIPAA (Health Insurance Portability and Accountability Act)",
+      "C": "ISO/IEC 27001 (Information Security Management System)",
+      "D": "NIST (National Institute of Standards and Technology)"
+    },
+    "answer": "c",
+    "explain": "教材第 16 章「本章练习」原题，答案以教材为准。"
+  },
+  {
+    "stem": "【第16章 信息安全管理】应急响应处置通常被划分为________________、根除、恢复、报告与总结等阶段。",
+    "options": {
+      "A": "准备、检测、抑制",
+      "B": "分析、检测、纠正",
+      "C": "准备、分析、抑制",
+      "D": "分析、纠正、抑制"
+    },
+    "answer": "a",
+    "explain": "教材第 16 章「本章练习」原题，答案以教材为准。"
+  }
+];
+
+/* =====================================================================
+   ②  存储层：localStorage 作为浏览器端数据库
+   （按文件路径隔离，不同答题文件的记录互不干扰）
+   ===================================================================== */
+const STORE_KEY = "quiz_store_v1";
+
+const store = {
+  read() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || this.blank(); }
+    catch (e) { return this.blank(); }
+  },
+  blank() { return { times: 0, best: null, totalScore: 0, totalCorrect: 0, totalQuestions: 0, history: [] }; },
+  write(d) { try { localStorage.setItem(STORE_KEY, JSON.stringify(d)); } catch (e) {} },
+  addRun(run) {
+    const d = this.read();
+    d.times += 1;
+    d.totalScore += run.score;
+    d.totalCorrect += run.correct;
+    d.totalQuestions += run.total;
+    d.best = d.best === null ? run.score : Math.max(d.best, run.score);
+    d.history.unshift({ at: run.at, score: run.score, total: run.total, correct: run.correct, seconds: run.seconds });
+    d.history = d.history.slice(0, 20);
+    this.write(d);
+    return d;
+  },
+  clear() { this.write(this.blank()); },
+};
+
+/* =====================================================================
+   ③  主题
+   ===================================================================== */
+const themeBtn = document.getElementById("themeBtn");
+function applyTheme(mode) {
+  const sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const dark = mode === "dark" || (mode === "auto" && sysDark);
+  document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+  themeBtn.textContent = dark ? "☀️" : "🌙";
+}
+let themeMode = localStorage.getItem("quiz_theme") || "auto";
+applyTheme(themeMode);
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { if (themeMode === "auto") applyTheme("auto"); });
+themeBtn.onclick = () => {
+  const nowDark = document.documentElement.getAttribute("data-theme") === "dark";
+  themeMode = nowDark ? "light" : "dark";
+  localStorage.setItem("quiz_theme", themeMode);
+  applyTheme(themeMode);
+};
+
+/* =====================================================================
+   ④  工具
+   ===================================================================== */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const KEY_OF = i => String.fromCharCode(97 + i); // 0→a, 1→b ...
+
+function toast(msg) {
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove("show"), 1800);
+}
+function fmtDate(ts) {
+  const d = new Date(ts), p = n => String(n).padStart(2, "0");
+  return `${d.getMonth() + 1}/${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+function fmtSec(s) { return s < 60 ? `${s} 秒` : `${Math.floor(s / 60)} 分 ${s % 60} 秒`; }
+
+/* =====================================================================
+   ⑤  渲染：统计 + 历史
+   ===================================================================== */
+function renderStats() {
+  const d = store.read();
+  $("sTimes").innerHTML = `${d.times}<span class="stat-suffix">次</span>`;
+  $("sBest").innerHTML = d.best === null ? "—" : `${d.best}<span class="stat-suffix">分</span>`;
+  $("sAvg").innerHTML = d.times ? `${Math.round(d.totalScore / d.times)}<span class="stat-suffix">分</span>` : "—";
+  $("sRate").innerHTML = d.totalQuestions ? `${Math.round(d.totalCorrect / d.totalQuestions * 100)}<span class="stat-suffix">%</span>` : "—";
+}
+
+function renderHistory() {
+  const d = store.read();
+  const box = $("history");
+  if (!d.history.length) {
+    box.innerHTML = `<div class="empty">还没有答题记录，完成一次自测后这里会出现成绩</div>`;
+    return;
+  }
+  box.innerHTML = d.history.map((h, i) => {
+    const pct = Math.round(h.score / h.total * 100);
+    const cls = pct >= 80 ? "good" : pct < 60 ? "bad" : "";
+    return `<div class="hist-row">
+      <span class="hist-no">${i + 1}</span>
+      <span class="hist-date">${fmtDate(h.at)} · 用时 ${fmtSec(h.seconds)}</span>
+      <span class="tag ${cls === "good" ? "success" : cls === "bad" ? "error" : "primary"}">${pct}%</span>
+      <span class="hist-score ${cls}">${h.score} / ${h.total}</span>
+    </div>`;
+  }).join("");
+}
+
+/* =====================================================================
+   ⑥  答题流程
+   ===================================================================== */
+let session = null;
+
+function stageIntro() {
+  $("cardTitle").textContent = "准备就绪";
+  $("cardTag").textContent = `共 ${QUESTIONS.length} 题`;
+  $("cardTag").className = "tag";
+  $("stage").innerHTML = `
+    <div style="text-align:center;padding:22px 0 14px">
+      <div style="font-size:15px;color:var(--text-2);margin-bottom:6px">
+        本次共 <b style="color:var(--text)">${QUESTIONS.length}</b> 道单选题
+      </div>
+      <div style="font-size:13px;color:var(--text-3);margin-bottom:22px">答完即出成绩，记录自动保存</div>
+      <button class="btn btn-primary btn-lg" id="startBtn">开始答题</button>
+    </div>`;
+  $("startBtn").onclick = startQuiz;
+}
+
+function startQuiz() {
+  session = { idx: 0, correct: 0, locked: false, startedAt: Date.now() };
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[session.idx];
+  const total = QUESTIONS.length;
+  const pct = session.idx / total * 100;
+  const keys = Object.keys(q.options);
+
+  $("cardTitle").textContent = `第 ${session.idx + 1} 题 / 共 ${total} 题`;
+  $("cardTag").textContent = "单选";
+  $("cardTag").className = "tag primary";
+
+  $("stage").innerHTML = `
+    <div class="progress" style="margin-bottom:22px"><div class="progress-inner" style="width:${pct}%"></div></div>
+    <p class="q-stem"><span class="q-index">${session.idx + 1}.</span>${esc(q.stem)}</p>
+    <div class="options" id="opts">
+      ${keys.map((k, i) => `<button class="opt" data-k="${k}">
+        <span class="opt-key">${k.toUpperCase()}</span><span>${esc(q.options[k])}</span>
+      </button>`).join("")}
+    </div>
+    <div id="after"></div>`;
+
+  session.locked = false;
+  $("opts").querySelectorAll(".opt").forEach(btn => {
+    btn.onclick = () => pick(btn, q);
+  });
+}
+
+function pick(btn, q) {
+  if (session.locked) return;
+  session.locked = true;
+
+  const chosen = btn.dataset.k;
+  const right = chosen === q.answer;
+  if (right) session.correct++;
+
+  $("opts").querySelectorAll(".opt").forEach(b => {
+    b.classList.add("locked");
+    if (b.dataset.k === q.answer) b.classList.add("correct");
+    else if (b === btn) b.classList.add("wrong");
+    b.onclick = right && b.dataset.k === q.answer ? () => next() : null;
+  });
+
+  const isLast = session.idx === QUESTIONS.length - 1;
+  $("cardTag").textContent = right ? "回答正确" : "回答错误";
+  $("cardTag").className = `tag ${right ? "success" : "error"}`;
+
+  $("after").innerHTML = `
+    <div class="alert ${right ? "alert-success" : "alert-error"}">
+      <span style="flex:none">${right ? "✓" : "✕"}</span>
+      <span><b>${right ? "答对了" : "正确答案是 " + q.answer.toUpperCase()}</b>　${esc(q.explain || "")}</span>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px">
+      <button class="btn btn-primary" id="nextBtn">${isLast ? "查看成绩" : "下一题"}</button>
+    </div>`;
+  $("nextBtn").onclick = next;
+
+  const bar = document.querySelector(".progress-inner");
+  if (bar) bar.style.width = `${(session.idx + 1) / QUESTIONS.length * 100}%`;
+}
+
+function next() {
+  if (session.idx < QUESTIONS.length - 1) {
+    session.idx++;
+    renderQuestion();
+  } else {
+    finish();
+  }
+}
+
+function finish() {
+  const total = QUESTIONS.length;
+  const seconds = Math.max(1, Math.round((Date.now() - session.startedAt) / 1000));
+  const run = { at: Date.now(), score: session.correct, total, correct: session.correct, seconds };
+  store.addRun(run);
+
+  const pct = Math.round(run.score / total * 100);
+  const cls = pct >= 80 ? "good" : pct >= 60 ? "mid" : "bad";
+  const word = pct >= 80 ? "表现出色" : pct >= 60 ? "继续加油" : "需要复习";
+
+  $("cardTitle").textContent = "本次成绩";
+  $("cardTag").textContent = `${pct}%`;
+  $("cardTag").className = `tag ${pct >= 80 ? "success" : pct >= 60 ? "primary" : "error"}`;
+
+  $("stage").innerHTML = `
+    <div class="result">
+      <div class="result-score ${cls}">${run.score}<span style="font-size:22px;color:var(--text-3)"> / ${total}</span></div>
+      <p class="result-title">${word}</p>
+      <p class="result-sub">用时 ${fmtSec(seconds)}</p>
+      <div class="result-grid">
+        <div class="result-cell"><div class="result-cell-label">正确率</div><div class="result-cell-value">${pct}%</div></div>
+        <div class="result-cell"><div class="result-cell-label">答对</div><div class="result-cell-value">${run.correct} 题</div></div>
+        <div class="result-cell"><div class="result-cell-label">本次是第</div><div class="result-cell-value">${store.read().times} 次</div></div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:10px;margin-top:24px">
+        <button class="btn btn-primary" id="againBtn">再答一次</button>
+        <button class="btn" id="backBtn">返回</button>
+      </div>
+    </div>`;
+
+  $("againBtn").onclick = startQuiz;
+  $("backBtn").onclick = stageIntro;
+
+  renderStats();
+  renderHistory();
+}
+
+/* =====================================================================
+   ⑦  工具栏动作
+   ===================================================================== */
+$("resetBtn").onclick = () => {
+  const d = store.read();
+  if (!d.times) return toast("暂无记录可清空");
+  if (confirm(`确定清空全部答题记录吗？\n当前累计 ${d.times} 次，此操作不可撤销。`)) {
+    store.clear();
+    renderStats(); renderHistory();
+    toast("记录已清空");
+  }
+};
+
+$("copyBtn").onclick = async () => {
+  const d = store.read();
+  if (!d.times) return toast("暂无记录");
+  const lines = [
+    `答题统计（${new Date().toLocaleString("zh-CN")}）`,
+    `累计答题：${d.times} 次`,
+    `历史最高：${d.best} 分`,
+    `平均得分：${Math.round(d.totalScore / d.times)} 分`,
+    `总正确率：${Math.round(d.totalCorrect / d.totalQuestions * 100)}%`,
+    "",
+    "最近记录：",
+    ...d.history.slice(0, 10).map(h =>
+      `  ${fmtDate(h.at)}  ${h.score}/${h.total}  ${Math.round(h.score / h.total * 100)}%  用时 ${fmtSec(h.seconds)}`),
+  ].join("\n");
+  try {
+    await navigator.clipboard.writeText(lines);
+    toast("统计已复制到剪贴板");
+  } catch (e) {
+    prompt("复制下面内容：", lines);
+  }
+};
+
+/* =====================================================================
+   ⑧  初始化
+   ===================================================================== */
+$("pageTitle").textContent = META.title;
+$("pageDesc").textContent = META.desc;
+document.title = META.title;
+renderStats();
+renderHistory();
+stageIntro();
+</script>
+</body>
+</html>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+  
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AD%94%E9%A2%98/04_%E4%B8%93%E9%A1%B9%E7%AE%A1%E7%90%86/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

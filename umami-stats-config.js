@@ -1,0 +1,1 @@
+window.UMAMI_STATS={"websiteId":"2e6d48d5-2833-45d6-9dcf-320cd7e63e9f","token":"","api":"","enabled":false};

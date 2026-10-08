@@ -1,0 +1,858 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/wiki/c/chapter8/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>C语言程序设计：第8章 文件操作 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="C语言课程内容与案例整理" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第8章 文件操作" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/wiki/c/chapter8/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="C语言课程内容与案例整理" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第8章 文件操作" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content="生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学" data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"WebPage","@id":"https://blog.cnortles.top/wiki/c/chapter8/","name":"第8章 文件操作","description":"C语言课程内容与案例整理","url":"https://blog.cnortles.top/wiki/c/chapter8/","isPartOf":{"@type":"WebSite","name":"麟跃云起","url":"https://blog.cnortles.top"}}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular"><div class="brand-navigation"><a class="brand-navigation__back cap" href="/wiki/"><span class="ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"/></svg></span><span>所有项目</span></a></div><div class="brand-navigation-rail">
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" href="&#x2F;wiki&#x2F;" title="所有项目" aria-label="所有项目">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"/></svg></span>
+  
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+</div><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;wiki&#x2F;c&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a><a class="brand-title" href="&#x2F;wiki&#x2F;c&#x2F;"><div class="brand-name">C语言程序设计</div><div class="brand-tagline cap">从入门到精通</div></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search" data-search-domain="wiki:c" data-search-domain-label="C语言程序设计" data-search-domain-blog="false">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;" title="主页" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;wiki&#x2F;" title="文档" aria-current="page" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--tree" data-widget-id="leftbar:0:tree" data-presentation="leftbar" data-leftbar-rail>
+
+
+<widget class="widget-wrapper doc-tree-widget" data-wiki="c">
+  
+  <div class="widget-body"><section class="widget-section"><div class="widget-header dis-select"><span class="name">基础部分</span></div><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;c&#x2F;c-keywords&#x2F;" title="C语言32个关键字">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">C</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">C语言32个关键字</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;c&#x2F;main-function&#x2F;" title="main函数详解">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">M</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">main函数详解</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;c&#x2F;chapter2&#x2F;" title="第2章 C语言基础">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第2章 C语言基础</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;c&#x2F;chapter3&#x2F;" title="第3章 程序设计基本结构">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第3章 程序设计基本结构</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></section><section class="widget-section"><div class="widget-header dis-select"><span class="name">进阶部分</span></div><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;c&#x2F;chapter4&#x2F;" title="第4章 数组">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第4章 数组</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;c&#x2F;chapter5&#x2F;" title="第5章 指针">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第5章 指针</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;c&#x2F;chapter6&#x2F;" title="第6章 函数">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第6章 函数</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></section><section class="widget-section"><div class="widget-header dis-select"><span class="name">高级特性</span></div><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;c&#x2F;chapter7&#x2F;" title="第7章 结构体与共用体">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第7章 结构体与共用体</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active" href="&#x2F;wiki&#x2F;c&#x2F;chapter8&#x2F;" title="第8章 文件操作" aria-current="page">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第8章 文件操作</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+</div></section><section class="widget-section"><div class="widget-header dis-select"><span class="name">实践部分</span></div><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;c&#x2F;cases&#x2F;" title="经典案例与解析">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">经</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">经典案例与解析</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;c&#x2F;exam-tips&#x2F;" title="C语言期末考试易错知识点总结">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">C</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">C语言期末考试易错知识点总结</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;c&#x2F;interview-questions&#x2F;" title="C语言面试常见题">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">C</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">C语言面试常见题</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;c&#x2F;sorting-algorithms&#x2F;" title="常见排序算法详解">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">常</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">常见排序算法详解</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></section></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/c/c-keywords/">C语言程序设计</a>
+</div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2026-02-01T05:00:55.000Z">2026-02-01</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第8章 文件操作</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="第8章-文件操作"><a href="#第8章-文件操作" class="headerlink" title="第8章 文件操作"></a>第8章 文件操作</h1><p>⭐<br>实用章节 重点掌握 文件操作实现数据的持久化存储</p>
+<h2 id="本章概述"><a href="#本章概述" class="headerlink" title="本章概述"></a>本章概述</h2><p>前面学习的程序中，数据都存储在内存中，程序结束后数据就会丢失。<strong>文件操作</strong>允许我们将数据存储到磁盘上，实现数据的持久化。</p>
+<p>本章主要内容：</p>
+<ul>
+<li>文件的基本概念</li>
+<li>文件的打开与关闭</li>
+<li>文本文件的读写</li>
+<li>二进制文件的读写</li>
+<li>文件的随机读写</li>
+<li>文件检测函数</li>
+</ul>
+<h2 id="文件的基本概念"><a href="#文件的基本概念" class="headerlink" title="文件的基本概念"></a>文件的基本概念</h2><h3 id="什么是文件？"><a href="#什么是文件？" class="headerlink" title="什么是文件？"></a>什么是文件？</h3><p><strong>文件</strong>是存储在外部介质（如硬盘、U盘）上的数据的集合。从程序的角度看，文件是数据源或数据目的地。</p>
+<h3 id="文件的分类"><a href="#文件的分类" class="headerlink" title="文件的分类"></a>文件的分类</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>分类方式</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>按数据组织</td>
+<td>文本文件</td>
+<td>以ASCII码存储，可读性好</td>
+</tr>
+<tr>
+<td>按数据组织</td>
+<td>二进制文件</td>
+<td>以二进制存储，效率高</td>
+</tr>
+<tr>
+<td>按存取方式</td>
+<td>顺序文件</td>
+<td>只能顺序读写</td>
+</tr>
+<tr>
+<td>按存取方式</td>
+<td>随机文件</td>
+<td>可以随机读写任意位置</td>
+</tr>
+</tbody></table></div>
+<h3 id="文件指针"><a href="#文件指针" class="headerlink" title="文件指针"></a>文件指针</h3><p>C语言使用<code>FILE</code>结构体来表示文件，通过文件指针来操作文件：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FILE *fp;  // 文件指针</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="文件的打开与关闭"><a href="#文件的打开与关闭" class="headerlink" title="文件的打开与关闭"></a>文件的打开与关闭</h2><h3 id="打开文件-fopen"><a href="#打开文件-fopen" class="headerlink" title="打开文件 fopen"></a>打开文件 fopen</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FILE *fopen(const char *filename, const char *mode);</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>常用模式：</strong></p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>"r"</code></td>
+<td>以只读方式打开文本文件</td>
+</tr>
+<tr>
+<td><code>"w"</code></td>
+<td>以写入方式打开文本文件（会覆盖原有内容）</td>
+</tr>
+<tr>
+<td><code>"a"</code></td>
+<td>以追加方式打开文本文件</td>
+</tr>
+<tr>
+<td><code>"rb"</code></td>
+<td>以只读方式打开二进制文件</td>
+</tr>
+<tr>
+<td><code>"wb"</code></td>
+<td>以写入方式打开二进制文件</td>
+</tr>
+<tr>
+<td><code>"r+"</code></td>
+<td>以读写方式打开文件</td>
+</tr>
+<tr>
+<td><code>"w+"</code></td>
+<td>以读写方式打开文件（会覆盖）</td>
+</tr>
+</tbody></table></div>
+<h3 id="关闭文件-fclose"><a href="#关闭文件-fclose" class="headerlink" title="关闭文件 fclose"></a>关闭文件 fclose</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int fclose(FILE *stream);</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[[include]] </span><br><span class="line"></span><br><span class="line">int main() {</span><br><span class="line">    FILE *fp;</span><br><span class="line"></span><br><span class="line">    // 打开文件</span><br><span class="line">    fp = fopen("test.txt", "r");</span><br><span class="line"></span><br><span class="line">    if (fp == NULL) {</span><br><span class="line">        printf("文件打开失败！\n");</span><br><span class="line">        return 1;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    printf("文件打开成功！\n");</span><br><span class="line"></span><br><span class="line">    // 关闭文件</span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="⚠️-注意事项"><a href="#⚠️-注意事项" class="headerlink" title="⚠️ 注意事项"></a>⚠️ 注意事项</h4><ul>
+<li>打开文件后必须检查是否成功</li>
+<li>使用完文件后必须关闭</li>
+<li>关闭后文件指针会被释放，不应再使用</li>
+</ul>
+<h2 id="文本文件的读写"><a href="#文本文件的读写" class="headerlink" title="文本文件的读写"></a>文本文件的读写</h2><h3 id="字符读写-fgetc-fputc"><a href="#字符读写-fgetc-fputc" class="headerlink" title="字符读写 fgetc/fputc"></a>字符读写 fgetc/fputc</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[[include]] </span><br><span class="line"></span><br><span class="line">int main() {</span><br><span class="line">    FILE *fp;</span><br><span class="line">    char ch;</span><br><span class="line"></span><br><span class="line">    // 写入文件</span><br><span class="line">    fp = fopen("output.txt", "w");</span><br><span class="line">    if (fp == NULL) return 1;</span><br><span class="line"></span><br><span class="line">    fputc('H', fp);</span><br><span class="line">    fputc('e', fp);</span><br><span class="line">    fputc('l', fp);</span><br><span class="line">    fputc('l', fp);</span><br><span class="line">    fputc('o', fp);</span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">    // 读取文件</span><br><span class="line">    fp = fopen("output.txt", "r");</span><br><span class="line">    if (fp == NULL) return 1;</span><br><span class="line"></span><br><span class="line">    while ((ch = fgetc(fp)) != EOF) {</span><br><span class="line">        putchar(ch);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="字符串读写-fgets-fputs"><a href="#字符串读写-fgets-fputs" class="headerlink" title="字符串读写 fgets/fputs"></a>字符串读写 fgets/fputs</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[[include]] </span><br><span class="line"></span><br><span class="line">int main() {</span><br><span class="line">    FILE *fp;</span><br><span class="line">    char str[100];</span><br><span class="line"></span><br><span class="line">    // 写入字符串</span><br><span class="line">    fp = fopen("output.txt", "w");</span><br><span class="line">    fputs("Hello, World!\n", fp);</span><br><span class="line">    fputs("This is a test.\n", fp);</span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">    // 读取字符串</span><br><span class="line">    fp = fopen("output.txt", "r");</span><br><span class="line">    while (fgets(str, sizeof(str), fp) != NULL) {</span><br><span class="line">        printf("%s", str);</span><br><span class="line">    }</span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="格式化读写-fprintf-fscanf"><a href="#格式化读写-fprintf-fscanf" class="headerlink" title="格式化读写 fprintf/fscanf"></a>格式化读写 fprintf/fscanf</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[[include]] </span><br><span class="line"></span><br><span class="line">struct Student {</span><br><span class="line">    char name[50];</span><br><span class="line">    int age;</span><br><span class="line">    float score;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line">int main() {</span><br><span class="line">    FILE *fp;</span><br><span class="line">    struct Student stu = {"张三", 20, 85.5};</span><br><span class="line">    struct Student s;</span><br><span class="line"></span><br><span class="line">    // 写入文件</span><br><span class="line">    fp = fopen("student.txt", "w");</span><br><span class="line">    if (fp == NULL) return 1;</span><br><span class="line"></span><br><span class="line">    fprintf(fp, "%s %d %.2f\n", stu.name, stu.age, stu.score);</span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">    // 读取文件</span><br><span class="line">    fp = fopen("student.txt", "r");</span><br><span class="line">    if (fp == NULL) return 1;</span><br><span class="line"></span><br><span class="line">    fscanf(fp, "%s %d %f", s.name, &amp;s.age, &amp;s.score);</span><br><span class="line">    printf("姓名：%s\n", s.name);</span><br><span class="line">    printf("年龄：%d\n", s.age);</span><br><span class="line">    printf("成绩：%.2f\n", s.score);</span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="二进制文件的读写"><a href="#二进制文件的读写" class="headerlink" title="二进制文件的读写"></a>二进制文件的读写</h2><h3 id="数据块读写-fread-fwrite"><a href="#数据块读写-fread-fwrite" class="headerlink" title="数据块读写 fread/fwrite"></a>数据块读写 fread/fwrite</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">size_t fread(void *ptr, size_t size, size_t count, FILE *stream);</span><br><span class="line">size_t fwrite(const void *ptr, size_t size, size_t count, FILE *stream);</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[[include]] </span><br><span class="line"></span><br><span class="line">struct Student {</span><br><span class="line">    char name[50];</span><br><span class="line">    int age;</span><br><span class="line">    float score;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line">int main() {</span><br><span class="line">    FILE *fp;</span><br><span class="line">    struct Student students[3] = {</span><br><span class="line">        {"张三", 20, 85.5},</span><br><span class="line">        {"李四", 21, 90.0},</span><br><span class="line">        {"王五", 22, 88.5}</span><br><span class="line">    };</span><br><span class="line">    struct Student s[3];</span><br><span class="line"></span><br><span class="line">    // 写入二进制文件</span><br><span class="line">    fp = fopen("students.dat", "wb");</span><br><span class="line">    if (fp == NULL) return 1;</span><br><span class="line"></span><br><span class="line">    fwrite(students, sizeof(struct Student), 3, fp);</span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">    // 读取二进制文件</span><br><span class="line">    fp = fopen("students.dat", "rb");</span><br><span class="line">    if (fp == NULL) return 1;</span><br><span class="line"></span><br><span class="line">    fread(s, sizeof(struct Student), 3, fp);</span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">    // 显示数据</span><br><span class="line">    for (int i = 0; i &lt; 3; i++) {</span><br><span class="line">        printf("%s %d %.2f\n", s[i].name, s[i].age, s[i].score);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="💡-二进制文件-vs-文本文件"><a href="#💡-二进制文件-vs-文本文件" class="headerlink" title="💡 二进制文件 vs 文本文件"></a>💡 二进制文件 vs 文本文件</h4><ul>
+<li><strong>二进制文件</strong>：存储效率高，读写速度快，但不可读</li>
+<li><strong>文本文件</strong>：可读性好，便于调试，但效率较低</li>
+</ul>
+<h2 id="文件的随机读写"><a href="#文件的随机读写" class="headerlink" title="文件的随机读写"></a>文件的随机读写</h2><h3 id="文件定位函数"><a href="#文件定位函数" class="headerlink" title="文件定位函数"></a>文件定位函数</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>rewind(fp)</code></td>
+<td>将文件位置指针移到文件开头</td>
+</tr>
+<tr>
+<td><code>fseek(fp, offset, origin)</code></td>
+<td>将文件位置指针移到指定位置</td>
+</tr>
+<tr>
+<td><code>ftell(fp)</code></td>
+<td>获取当前文件位置</td>
+</tr>
+</tbody></table></div>
+<h3 id="fseek的使用"><a href="#fseek的使用" class="headerlink" title="fseek的使用"></a>fseek的使用</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[[include]] </span><br><span class="line"></span><br><span class="line">int main() {</span><br><span class="line">    FILE *fp;</span><br><span class="line"></span><br><span class="line">    fp = fopen("test.txt", "w+");</span><br><span class="line">    if (fp == NULL) return 1;</span><br><span class="line"></span><br><span class="line">    // 写入数据</span><br><span class="line">    fputs("ABCDEFGHIJKLMNOPQRSTUVWXYZ", fp);</span><br><span class="line"></span><br><span class="line">    // 定位到第10个字符</span><br><span class="line">    fseek(fp, 10, SEEK_SET);</span><br><span class="line">    printf("当前位置：%ld\n", ftell(fp));</span><br><span class="line"></span><br><span class="line">    // 定位到文件末尾前5个字符</span><br><span class="line">    fseek(fp, -5, SEEK_END);</span><br><span class="line">    printf("当前位置：%ld\n", ftell(fp));</span><br><span class="line"></span><br><span class="line">    // 回到文件开头</span><br><span class="line">    rewind(fp);</span><br><span class="line">    printf("当前位置：%ld\n", ftell(fp));</span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>fseek的origin参数：</strong></p>
+<ul>
+<li><code>SEEK_SET</code>：文件开头</li>
+<li><code>SEEK_CUR</code>：当前位置</li>
+<li><code>SEEK_END</code>：文件末尾</li>
+</ul>
+<h2 id="文件检测函数"><a href="#文件检测函数" class="headerlink" title="文件检测函数"></a>文件检测函数</h2><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>feof(fp)</code></td>
+<td>检测是否到达文件末尾</td>
+</tr>
+<tr>
+<td><code>ferror(fp)</code></td>
+<td>检测是否发生错误</td>
+</tr>
+<tr>
+<td><code>clearerr(fp)</code></td>
+<td>清除文件错误标志</td>
+</tr>
+</tbody></table></div>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[[include]] </span><br><span class="line"></span><br><span class="line">int main() {</span><br><span class="line">    FILE *fp;</span><br><span class="line">    char ch;</span><br><span class="line"></span><br><span class="line">    fp = fopen("test.txt", "r");</span><br><span class="line">    if (fp == NULL) return 1;</span><br><span class="line"></span><br><span class="line">    // 检测文件结束</span><br><span class="line">    while (!feof(fp)) {</span><br><span class="line">        ch = fgetc(fp);</span><br><span class="line">        if (!feof(fp)) {</span><br><span class="line">            putchar(ch);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    // 检测错误</span><br><span class="line">    if (ferror(fp)) {</span><br><span class="line">        printf("读取文件时发生错误！\n");</span><br><span class="line">        clearerr(fp);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="标准文件流"><a href="#标准文件流" class="headerlink" title="标准文件流"></a>标准文件流</h2><p>C语言定义了三个标准文件流：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>文件流</th>
+<th>说明</th>
+<th>默认设备</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>stdin</code></td>
+<td>标准输入</td>
+<td>键盘</td>
+</tr>
+<tr>
+<td><code>stdout</code></td>
+<td>标准输出</td>
+<td>屏幕</td>
+</tr>
+<tr>
+<td><code>stderr</code></td>
+<td>标准错误</td>
+<td>屏幕</td>
+</tr>
+</tbody></table></div>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[[include]] </span><br><span class="line"></span><br><span class="line">int main() {</span><br><span class="line">    // 从标准输入读取</span><br><span class="line">    fprintf(stdout, "请输入内容：");</span><br><span class="line">    char str[100];</span><br><span class="line">    fscanf(stdin, "%s", str);</span><br><span class="line"></span><br><span class="line">    // 输出到标准输出</span><br><span class="line">    fprintf(stdout, "你输入了：%s\n", str);</span><br><span class="line"></span><br><span class="line">    // 输出到标准错误</span><br><span class="line">    fprintf(stderr, "这是错误信息\n");</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="综合示例：学生成绩管理系统"><a href="#综合示例：学生成绩管理系统" class="headerlink" title="综合示例：学生成绩管理系统"></a>综合示例：学生成绩管理系统</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line">[[include]] </span><br><span class="line">[[include]] </span><br><span class="line">[[include]] </span><br><span class="line"></span><br><span class="line">[[define]] FILENAME "students.dat"</span><br><span class="line"></span><br><span class="line">struct Student {</span><br><span class="line">    int id;</span><br><span class="line">    char name[50];</span><br><span class="line">    float score;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line">// 添加学生</span><br><span class="line">void addStudent() {</span><br><span class="line">    FILE *fp = fopen(FILENAME, "ab");</span><br><span class="line">    if (fp == NULL) {</span><br><span class="line">        printf("无法打开文件！\n");</span><br><span class="line">        return;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    struct Student s;</span><br><span class="line">    printf("学号：");</span><br><span class="line">    scanf("%d", &amp;s.id);</span><br><span class="line">    printf("姓名：");</span><br><span class="line">    scanf("%s", s.name);</span><br><span class="line">    printf("成绩：");</span><br><span class="line">    scanf("%f", &amp;s.score);</span><br><span class="line"></span><br><span class="line">    fwrite(&amp;s, sizeof(struct Student), 1, fp);</span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">    printf("添加成功！\n");</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// 显示所有学生</span><br><span class="line">void displayStudents() {</span><br><span class="line">    FILE *fp = fopen(FILENAME, "rb");</span><br><span class="line">    if (fp == NULL) {</span><br><span class="line">        printf("暂无学生信息！\n");</span><br><span class="line">        return;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    struct Student s;</span><br><span class="line">    printf("\n%-10s %-20s %s\n", "学号", "姓名", "成绩");</span><br><span class="line">    printf("--------------------------------\n");</span><br><span class="line"></span><br><span class="line">    while (fread(&amp;s, sizeof(struct Student), 1, fp) == 1) {</span><br><span class="line">        printf("%-10d %-20s %.2f\n", s.id, s.name, s.score);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// 查找学生</span><br><span class="line">void searchStudent() {</span><br><span class="line">    int id;</span><br><span class="line">    printf("请输入学号：");</span><br><span class="line">    scanf("%d", &amp;id);</span><br><span class="line"></span><br><span class="line">    FILE *fp = fopen(FILENAME, "rb");</span><br><span class="line">    if (fp == NULL) {</span><br><span class="line">        printf("文件不存在！\n");</span><br><span class="line">        return;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    struct Student s;</span><br><span class="line">    int found = 0;</span><br><span class="line"></span><br><span class="line">    while (fread(&amp;s, sizeof(struct Student), 1, fp) == 1) {</span><br><span class="line">        if (s.id == id) {</span><br><span class="line">            printf("\n找到学生：\n");</span><br><span class="line">            printf("学号：%d\n", s.id);</span><br><span class="line">            printf("姓名：%s\n", s.name);</span><br><span class="line">            printf("成绩：%.2f\n", s.score);</span><br><span class="line">            found = 1;</span><br><span class="line">            break;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    if (!found) {</span><br><span class="line">        printf("未找到该学生！\n");</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// 修改学生成绩</span><br><span class="line">void updateScore() {</span><br><span class="line">    int id;</span><br><span class="line">    printf("请输入学号：");</span><br><span class="line">    scanf("%d", &amp;id);</span><br><span class="line"></span><br><span class="line">    FILE *fp = fopen(FILENAME, "rb+");</span><br><span class="line">    if (fp == NULL) {</span><br><span class="line">        printf("文件不存在！\n");</span><br><span class="line">        return;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    struct Student s;</span><br><span class="line">    int found = 0;</span><br><span class="line"></span><br><span class="line">    while (fread(&amp;s, sizeof(struct Student), 1, fp) == 1) {</span><br><span class="line">        if (s.id == id) {</span><br><span class="line">            printf("当前成绩：%.2f\n", s.score);</span><br><span class="line">            printf("新成绩：");</span><br><span class="line">            scanf("%f", &amp;s.score);</span><br><span class="line"></span><br><span class="line">            // 移动回该记录的起始位置</span><br><span class="line">            fseek(fp, -sizeof(struct Student), SEEK_CUR);</span><br><span class="line">            fwrite(&amp;s, sizeof(struct Student), 1, fp);</span><br><span class="line"></span><br><span class="line">            printf("修改成功！\n");</span><br><span class="line">            found = 1;</span><br><span class="line">            break;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    if (!found) {</span><br><span class="line">        printf("未找到该学生！\n");</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">int main() {</span><br><span class="line">    int choice;</span><br><span class="line"></span><br><span class="line">    while (1) {</span><br><span class="line">        printf("\n===== 学生成绩管理系统 =====\n");</span><br><span class="line">        printf("1. 添加学生\n");</span><br><span class="line">        printf("2. 显示所有学生\n");</span><br><span class="line">        printf("3. 查找学生\n");</span><br><span class="line">        printf("4. 修改成绩\n");</span><br><span class="line">        printf("5. 退出\n");</span><br><span class="line">        printf("请选择：");</span><br><span class="line">        scanf("%d", &amp;choice);</span><br><span class="line"></span><br><span class="line">        switch (choice) {</span><br><span class="line">            case 1: addStudent(); break;</span><br><span class="line">            case 2: displayStudents(); break;</span><br><span class="line">            case 3: searchStudent(); break;</span><br><span class="line">            case 4: updateScore(); break;</span><br><span class="line">            case 5: return 0;</span><br><span class="line">            default: printf("无效选择！\n");</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="本章小结"><a href="#本章小结" class="headerlink" title="本章小结"></a>本章小结</h2><ul>
+<li>✓ 理解了文件的基本概念</li>
+<li>✓ 掌握了文件的打开和关闭</li>
+<li>✓ 学会了文本文件和二进制文件的读写</li>
+<li>✓ 掌握了文件的随机读写</li>
+<li>✓ 了解了文件检测函数</li>
+</ul>
+<h2 id="学习完成"><a href="#学习完成" class="headerlink" title="学习完成"></a>学习完成</h2><p>恭喜！你已经完成了C语言程序设计的全部学习内容。</p>
+<p>建议继续学习：</p>
+<ul>
+<li>数据结构与算法</li>
+<li>操作系统原理</li>
+<li>计算机网络</li>
+<li>数据库系统</li>
+</ul>
+<h4 id="💡-持续学习建议"><a href="#💡-持续学习建议" class="headerlink" title="💡 持续学习建议"></a>💡 持续学习建议</h4><ul>
+<li>多编写实际项目巩固知识</li>
+<li>阅读优秀开源代码</li>
+<li>学习调试技巧</li>
+<li>关注编程规范和最佳实践</li>
+</ul>
+</article>
+
+
+<div class="article-footer slide-up">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文本文由rlcao编写，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section></div>
+
+<div class="related-wrap slide-up" id="read-next"><section class="body"><div class="item" id="prev"><div class="note"><svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-left" aria-hidden="true"></svg> 回顾上一篇</div><a href="/wiki/c/chapter7/">第7章 结构体与共用体</a></div><div class="item" id="next"><div class="note">接下来阅读 <svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-right" aria-hidden="true"></svg></div><a href="/wiki/c/cases/">经典案例与解析</a></div></section></div>
+
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main></div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/wiki/c/chapter8/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第8章 文件操作","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

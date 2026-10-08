@@ -1,0 +1,746 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%BB%83%E4%B9%A0%E9%A2%98%C2%B7%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>练习题 · 基础知识（选择题） - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="练习题 · 基础知识（选择题） 性质：全部来自网络公开文章，含考生回忆版与机构模拟题，非官方真题原文；答案与解析为原文所附，可能有个别字词讹误（见文末勘误）。用法：先盖住答案自测，再展开对照。带 ⭐ 的题在多来源重复出现，属高频。关联：[[知识体系]]（官方考纲）· [[高频考点速记]] · [[案例答题模板]]  题目总数：22 道（已跨来源去重） 题源：100 道高频考题 · 95 道高频真题" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="练习题 · 基础知识（选择题）" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%BB%83%E4%B9%A0%E9%A2%98%C2%B7%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="练习题 · 基础知识（选择题） 性质：全部来自网络公开文章，含考生回忆版与机构模拟题，非官方真题原文；答案与解析为原文所附，可能有个别字词讹误（见文末勘误）。用法：先盖住答案自测，再展开对照。带 ⭐ 的题在多来源重复出现，属高频。关联：[[知识体系]]（官方考纲）· [[高频考点速记]] · [[案例答题模板]]  题目总数：22 道（已跨来源去重） 题源：100 道高频考题 · 95 道高频真题" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-09-17T16:00:00.000Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.357Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="信息系统管理工程师" data-stellar-page-meta="">
+<meta property="article:tag" content="练习" data-stellar-page-meta="">
+<meta property="article:tag" content="考证" data-stellar-page-meta="">
+<meta property="article:tag" content="软考" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="练习题 · 基础知识（选择题）" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content=",,," data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%BB%83%E4%B9%A0%E9%A2%98%C2%B7%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"练习题 · 基础知识（选择题）","description":"练习题 · 基础知识（选择题）\n性质：全部来自网络公开文章，含考生回忆版与机构模拟题，非官方真题原文；答案与解析为原文所附，可能有个别字词讹误（见文末勘误）。用法：先盖住答案自测，再展开对照。带 ⭐ 的题在多来源重复出现，属高频。关联：[[知识体系]]（官方考纲）· [[高频考点速记]] · [[案例答题模板]]\n\n题目总数：22 道（已跨来源去重）\n题源：100 道高频考题 · 95 道高...","url":"https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%BB%83%E4%B9%A0%E9%A2%98%C2%B7%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%BB%83%E4%B9%A0%E9%A2%98%C2%B7%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">练习题 · 基础知识（选择题）</a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-09-17T16:00:00.000Z">2026-09-18</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.357Z">2026-10-08</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>练习题 · 基础知识（选择题）</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="练习题-·-基础知识（选择题）"><a href="#练习题-·-基础知识（选择题）" class="headerlink" title="练习题 · 基础知识（选择题）"></a>练习题 · 基础知识（选择题）</h1><blockquote>
+<p><strong>性质</strong>：全部来自网络公开文章，<strong>含考生回忆版与机构模拟题</strong>，非官方真题原文；答案与解析为原文所附，可能有个别字词讹误（见文末勘误）。<br><strong>用法</strong>：先盖住答案自测，再展开对照。带 ⭐ 的题在多来源重复出现，属高频。<br>关联：[[知识体系]]（官方考纲）· [[高频考点速记]] · [[案例答题模板]]</p>
+</blockquote>
+<p><strong>题目总数</strong>：22 道（已跨来源去重）</p>
+<p>题源：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/19941315587" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>100 道高频考题</a> · <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1956354348230611320" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>95 道高频真题</a> · <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1934582879184201017" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>考点自查清单</a> · <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/700278514" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>2024 上半年真题（回忆版）</a></p>
+<hr>
+<h2 id="数据库与数据管理（第-15-章）"><a href="#数据库与数据管理（第-15-章）" class="headerlink" title="数据库与数据管理（第 15 章）"></a>数据库与数据管理（第 15 章）</h2><p><strong>1.</strong> 8.关于云计算的描述不正确的是（ ）。</p>
+<p>A、云计算的关键技术主要涉及虚拟化技术、云存储技术、多租户和访问控制管理、云安全技术等</p>
+<p>B、云计算可以快速、按需、弹性服务，用户可以按照实际需求迅速获取或释放资源，并可以根据需求对资源进行动态扩展</p>
+<p>C、按照云计算服务提供的资源层次，可以分为基础设施即服务和平台即服务两种服务类型</p>
+<p>D、云计算是一种基于互联网的计算方式，用户与实际服务提供的计算资源相分离，集合了大量计算设备和资源，并向用户屏蔽底层差异的分布式处理架构</p>
+<blockquote>
+<p>[!success]- 答案 C ｜ 来源：100道/95道 · ⭐高频（多源重复）<br>本题考查新一代信息技术及应用-云计算。参考《信息系统管理工程师教程》（第2版）第2.2.2小节。</p>
+<p>按照云计算服务提供的资源层次，可以分为基础设施即服务（Infrastructure as a Service，IaaS）、平台即服务（Platform as a Service，PaaS）和软件即服务（Software as a Service，SaaS）三种服务类型。</p>
+<p>（1）IaaS。IaaS向用户提供计算机能力、存储空间等基础设施方面的服务。这种服务模式需要较大的基础设施投入和长期运营管理经验，但IaaS服务单纯出租资源的盈利能力有限。</p>
+<p>（2）PaaS。PaaS向用户提供虚拟的操作系统、数据库管理系统、Web应用等平台化的服务。PaaS服务的重点不在于直接的经济效益，而更注重构建和形成紧密的产业生态。</p>
+<p>（3）SaaS。SaaS向用户提供应用软件（如CRM、办公软件等）、组件、工作流等虚拟化软件的服务，SaaS一般采用Web技术和SOA架构，通过Internet向用户提供多租户、可定制的应用能力，大大缩短了软件产业的渠道链条，减少了软件升级、定制和运行维护的复杂程度，并使软件提供商从软件产品的生产者转变为应用服务的运营者。</p>
+<p><strong>……</strong></p>
+<p><strong>篇幅有限，有需要PDF完整版或更多资料的朋友，可以自行获取↓↓↓</strong></p>
+</blockquote>
+<p><strong>2.</strong> 4、从概念模型向关系模型转换时，对于1:M联系转换方法是（ ）。</p>
+<p>A.两个关系合并成一个关系</p>
+<p>B.将1端的主码加入到M端的关系中去</p>
+<p>C.将1端的主属性加入到M端的关系中去</p>
+<p>D.将M端的主码加入到1端的关系中去</p>
+<blockquote>
+<p>[!success]- 答案 B ｜ 来源：2024真题<br>（原文未附解析）</p>
+</blockquote>
+<p><strong>3.</strong> 7、设工资表（员工号，姓名，级别，工资），实现工资增加1000元的SQL语句是（ ）。</p>
+<p>A.INSINT 工资表 SET 工资=工资+1000</p>
+<p>B.UPDATE 工资表 SET 工资=工资+1000</p>
+<p>C.UPDATE 工资表 ADD 工资=工资+1000</p>
+<p>D.ALTER 工资表 SET 工资=工资+1000</p>
+<blockquote>
+<p>[!success]- 答案 B ｜ 来源：2024真题<br>（原文未附解析）</p>
+</blockquote>
+<p><strong>4.</strong> 9、下列不属于并发操作带来的问题是（ ）。</p>
+<p>A.插入异常</p>
+<p>B.不可重复读</p>
+<p>C.丢失修改</p>
+<p>D.读脏数据</p>
+<blockquote>
+<p>[!success]- 答案 A ｜ 来源：2024真题<br>（原文未附解析）</p>
+</blockquote>
+<h2 id="软件开发过程管理（第-6-章）"><a href="#软件开发过程管理（第-6-章）" class="headerlink" title="软件开发过程管理（第 6 章）"></a>软件开发过程管理（第 6 章）</h2><p><strong>5.</strong> 1、将软件生命周期划分为需求分析、软件设计、程序编码、软件测试和运行维护等串行化基本活动，该软件开发模型是（ ）。</p>
+<p>A.螺旋模型</p>
+<p>B.增量模型</p>
+<p>C.喷泉模型</p>
+<p>D.瀑布模型</p>
+<blockquote>
+<p>[!success]- 答案 D ｜ 来源：2024真题<br>（原文未附解析）</p>
+</blockquote>
+<p><strong>6.</strong> 10、软件在规定时间和条件下持续运行、不出故障，是对软件（ ）的设计要求。</p>
+<p>A.完整性</p>
+<p>B.正确性</p>
+<p>C.可靠性</p>
+<p>D.可用性</p>
+<blockquote>
+<p>[!success]- 答案 C ｜ 来源：2024真题<br>（原文未附解析）</p>
+</blockquote>
+<h2 id="项目管理（第-10-章）"><a href="#项目管理（第-10-章）" class="headerlink" title="项目管理（第 10 章）"></a>项目管理（第 10 章）</h2><p><strong>7.</strong> 3、（ ）以图示的方式通过活动列表和时间刻度形象地表示出任何特定项目的活动顺序与持续时间。</p>
+<p>A.用例图</p>
+<p>B.序列图</p>
+<p>C.流程图</p>
+<p>D.甘特图</p>
+<blockquote>
+<p>[!success]- 答案 D ｜ 来源：2024真题<br>（原文未附解析）</p>
+</blockquote>
+<h2 id="网络与系统管理（第-12-章）"><a href="#网络与系统管理（第-12-章）" class="headerlink" title="网络与系统管理（第 12 章）"></a>网络与系统管理（第 12 章）</h2><p><strong>8.</strong> 2、在办公室同一局域网内，小张的电脑不能上网，旁边小李的电脑可以正常上网，该故障不可能出现在（ ）。</p>
+<p>A.集线器</p>
+<p>B.入侵检测</p>
+<p>C.交换机</p>
+<p>D.防火墙</p>
+<blockquote>
+<p>[!success]- 答案 A ｜ 来源：2024真题<br>（原文未附解析）</p>
+</blockquote>
+<p><strong>9.</strong> 12、安装于生产现场的自动化在线系统，将生产过程的产量、质量、故障等信息转换为数字信号自动传给计算机。该系统属于（ ）。</p>
+<p>A.数据汇总系统</p>
+<p>B.决策计划系统</p>
+<p>C.管理控制系统</p>
+<p>D.作业处理系统</p>
+<blockquote>
+<p>[!success]- 答案 D ｜ 来源：2024真题</p>
+<hr>
+</blockquote>
+<h2 id="信息技术发展（第-2-章）"><a href="#信息技术发展（第-2-章）" class="headerlink" title="信息技术发展（第 2 章）"></a>信息技术发展（第 2 章）</h2><p><strong>10.</strong> 6.（ ）协议是用于从WWW服务器传输超文本到本地浏览器的传送协议。它可以使浏览器更加高效，减少网络传输量。</p>
+<p>A、DHCP</p>
+<p>B、SMTP</p>
+<p>C、HTTP</p>
+<p>D、DNS</p>
+<blockquote>
+<p>[!success]- 答案 C ｜ 来源：100道/95道 · ⭐高频（多源重复）<br>本题考查计算机网络-TCP/IP协议。参考《信息系统管理工程师教程》（第2版）第2.1.2小节。</p>
+<p>A选项，DHCP（Dynamic Host Configuration Protocol,动态主机配置协议）建立在UDP之上，是基于客户机/服务器模型设计的。所有IP网络设定的数据都由DHCP服务器集中管理，并负责处理客户端的DHCP要求；而客户端则会使用从服务器分配下来的IP环境数据。</p>
+<p>B选项，SMTP（Simple Mail Transfer Protocol,简单邮件传输协议）建立在TCP之上，是一种提供可靠且有效传输电子邮件的协议。</p>
+<p>C选项，HTTP（Hypertext Transfer Protocol,超文本传输协议）是用于从WWW服务器传输超文本到本地浏览器的传送协议。它可以使浏览器更加高效，减少网络传输量。HTTP建立在TCP之上，它不仅保证计算机正确快速地传输超文本文档，还可以确定传输文档中的哪一部分，以及哪部分内容首先显示等。</p>
+<p>D选项，DNS（Domain Name System,域名系统）在Internet上的域名与IP地址之间是一一对应的，域名虽然便于人们记忆，但机器之间只能相互识别IP地址，它们之间的转换工作称为域名解析，域名解析需要由专门的域名解析服务器来完成，DNS就是进行域名解析的服务器。DNS通过对用户友好的名称来查找计算机和服务。</p>
+</blockquote>
+<p><strong>11.</strong> 7.（ ）是用户可以使用的各种程序设计语言，以及用各种程序设计语言编制的应用程序的集合，分为应用软件包和用户程序。</p>
+<p>A、系统软件</p>
+<p>B、应用软件</p>
+<p>C、中间件</p>
+<p>D、办公软件</p>
+<blockquote>
+<p>[!success]- 答案 B ｜ 来源：100道/95道 · ⭐高频（多源重复）<br>本题考查计算机软硬件。参考《信息系统管理工程师教程》（第2版）第2.1.1小节。</p>
+<p>计算机软件分为系统软件、应用软件和中间件。</p>
+<p>系统软件（System Device）是指控制和协调计算机及外部设备，支持应用软件开发和运行的系统，是无须用户干预的各种程序的集合。</p>
+<p>应用软件（Application Software）是用户可以使用的各种程序设计语言，以及用各种程序设计语言编制的应用程序的集合，分为应用软件包和用户程序。</p>
+<p>中间件（Middleware）是处于操作系统和应用程序之间的软件。它使用系统软件所提供的基础服务（功能），衔接网络上应用系统的各个部分或不同的应用，能够达到资源共享和功能共享的目的。</p>
+</blockquote>
+<p><strong>12.</strong> 9.某游戏公司通过创建一种模拟环境，使用户能够沉浸在由计算机生成的三维世界中，体验视觉、听觉甚至触觉的全方位模拟。这主要使用了（ ）技术。</p>
+<p>A、物联网</p>
+<p>B、人工智能</p>
+<p>C、大数据</p>
+<p>D、虚拟现实</p>
+<blockquote>
+<p>[!success]- 答案 D ｜ 来源：95道<br>本题考查新一代信息技术及应用-虚拟现实。参考《信息系统管理工程师教程》（第2版）第2.2.6小节。</p>
+<p>虚拟现实（Virtual Reality，VR）是一种可以创立和体验虚拟世界的计算机系统（其中虚拟世界是全体虚拟环境的总称）。通过虚拟现实系统所建立的信息空间，已不再是单纯的数字信息空间，而是一个包容多种信息的多维化的信息空间（Cyberspace），人类的感性认识和理性认识能力都能在这个多维化的信息空间中得到充分发挥。</p>
+</blockquote>
+<p><strong>13.</strong> 10.通过将家庭设备（如灯光、电视、空调、安全系统等）连接到互联网，实现智能化的控制和管理，这使用了（ ）技术有力支撑。</p>
+<p>A、区块链</p>
+<p>B、物联网</p>
+<p>C、边缘计算</p>
+<p>D、大数据</p>
+<blockquote>
+<p>[!success]- 答案 B ｜ 来源：95道<br>本题考查新一代信息技术及应用-物联网。参考《信息系统管理工程师教程》（第2版）第2.2.1小节。</p>
+<p>物联网的产业链包括传感器和芯片、设备、网络运营及服务、软件与应用开发和系统集成。物联网技术在智能电网、智慧物流、智能家居、智能交通、智慧农业、环境保护、医疗健康、城市管理（智慧城市）、金融服务与保险业、公共安全等方面有非常关键和重要的应用。</p>
+<p><strong>……</strong></p>
+<p><strong>篇幅有限，有需要PDF完整版或更多资料的朋友，可以自行获取↓↓↓</strong></p>
+</blockquote>
+<h2 id="信息化发展（第-1-章）"><a href="#信息化发展（第-1-章）" class="headerlink" title="信息化发展（第 1 章）"></a>信息化发展（第 1 章）</h2><p><strong>14.</strong> 「信息系统」 1.关于信息系统的描述，以下说法错误的是（ ）。</p>
+<p>A、信息系统一般指收集、存储、处理和传播各种信息的具有完整功能的集合体</p>
+<p>B、信息系统有5个基本功能，分别是输入、存储、处理、输出和计算</p>
+<p>C、从概念上说，任何一个组织都有信息系统的存在</p>
+<p>D、信息系统既可以是基于计算机的，又可以是基于手工的</p>
+<blockquote>
+<p>[!success]- 答案 B ｜ 来源：100道/95道/自查清单 · ⭐高频（多源重复）<br>本题考查信息系统，参考《信息系统管理工程师教程》（第2版）第1.1.2小节。</p>
+<p>信息系统的5个基本功能：输入、存储、处理、输出和控制（B选项，错误）。</p>
+<p>（1）输入功能。输入功能决定于系统所要达到的目的及系统的能力和信息环境的许可。</p>
+<p>（2）存储功能。存储功能指的是系统存储各种信息资料和数据的能力。</p>
+<p>（3）处理功能。处理功能是数据的处理工具，它基于数据仓库技术的联机分析处理（OLAP）和数据挖掘（DM）技术。</p>
+<p>（4）输出功能。信息系统的各种功能都是为了保证最终实现最佳的输出功能。</p>
+<p>（5）控制功能。控制功能对构成系统的各种信息处理设备进行控制和管理，对整个信息加工、处理、传输和输出等环节通过各种程序进行控制。</p>
+</blockquote>
+<p><strong>15.</strong> 「服务现代化」 2.以体育文化产业、娱乐产业为代表的服务业引导周边衍生产品的生产需求，从而带动相关制造产业的共同发展。这种融合形态属于（ ）。</p>
+<p>A、结合型融合</p>
+<p>B、绑定型融合</p>
+<p>C、延伸型融合</p>
+<p>D、以上都不正确</p>
+<blockquote>
+<p>[!success]- 答案 C ｜ 来源：100道/95道/自查清单 · ⭐高频（多源重复）<br>本题考查服务现代化—融合形态，参考《信息系统管理工程师教程》（第2版）第1.3.3小节。</p>
+<p>以先进制造业与现代服务业融合发展为例。在工业化后期，服务业内部结构调整加快，新型业态开始出现，广告、咨询等中介服务业、房地产、旅游、娱乐等服务业发展较快，生产和生活服务业互动发展，催生了先进制造业与现代服务业的融合，主要表现出结合型融合、绑定型融合和延伸型融合。</p>
+<p>（1）结合型融合。结合型融合是指在制造业产品生产过程中，中间投入品中服务投入所占的比例越来越大；</p>
+<p>（2）绑定型融合。绑定型融合是指越来越多的制造业实体产品必须与相应的服务产品绑定在一起使用，才能使消费者获得完整的功能体验。</p>
+<p>（3）延伸型融合。延伸型融合是指以体育文化产业、娱乐产业为代表的服务业引导周边衍生产品的生产需求，从而带动相关制造产业的共同发展（C选项，正确）。</p>
+</blockquote>
+<p><strong>16.</strong> 「信息系统基础」 3.信息系统就是通过对输入的数据进行加工处理，产生信息的系统。对于信息系统而言，信息系统的开放性、（ ）和健壮性等特性会表现得比较突出。</p>
+<p>A、稳定性</p>
+<p>B、脆弱性</p>
+<p>C、整体性</p>
+<p>D、层次性</p>
+<blockquote>
+<p>[!success]- 答案 B ｜ 来源：100道/95道/自查清单 · ⭐高频（多源重复）<br>本题考查信息系统基础-信息系统及其特性，参考《信息系统管理工程师教程》（第2版）第1.1.2小节。</p>
+<p>对于信息系统而言，信息系统的开放性、脆弱性和健壮性等特性会表现得比较突出。</p>
+<p>（1）开放性。系统的开放性是指系统的可访问性。这个特性决定了系统可以被外部环境识别，外部环境或者其他系统可以按照预定的方法，使用系统的功能或者影响系统的行为。系统的开放性体现在系统有清晰描述并被准确识别和理解的接口层。</p>
+<p>（2）脆弱性。这个特性与系统的稳定性相对应，即系统可能存在着丧失结构、功能、秩序的特性，这个特性往往是隐蔽的且不易被外界感知的。脆弱的系统一旦被侵入，整体性会被破坏，甚至面临崩溃和系统瓦解。</p>
+<p>（3）健壮性。当系统面临干扰、输入错误和入侵等因素时，系统可能会出现非预期的状态。而丧失原有功能、出现错误甚至表现出破坏功能。系统具有能够抵御出现非预期状态的特性称为健壮性，也称鲁棒性（robustness）。一般来说，具有高可用性的信息系统，会采取冗余技术、容错技术、身份识别技术和可靠性技术等来抵御系统出现非预期的状态并保持系统的稳定性。</p>
+</blockquote>
+<p><strong>17.</strong> 「信息化体系」 4.在国家信息化体系要素中，（ ）是信息化的物质基础。</p>
+<p>A、信息技术应用</p>
+<p>B、信息网络</p>
+<p>C、信息资源</p>
+<p>D、信息技术和产业</p>
+<blockquote>
+<p>[!success]- 答案 D ｜ 来源：100道/95道/自查清单 · ⭐高频（多源重复）<br>本题考查信息化体系，参考《信息系统管理工程师教程》（第2版）第1.1.3小节。</p>
+<p>国家信息化体系包括信息技术应用、信息资源、信息网络、信息技术和产业、信息化人才、信息化政策法规和标准规范6个要素，这6个要素的关系构成了一个有机的整体。</p>
+<p>（1）信息技术应用。信息技术应用是指把信息技术广泛应用于经济和社会各个领域，它直接反映了效率、效果和效益。信息技术应用是信息化体系六要素中的龙头，是国家信息化建设的主阵地，集中体现了国家信息化建设的需求和效益。</p>
+<p>（2）信息资源。信息资源的开发和利用是国家信息化的核心任务，是国家信息化建设取得实效的关键，是衡量国家信息化水平的一个重要标志。</p>
+<p>（3）信息网络。信息网络是信息资源开发和利用的基础设施，包括电信网、广播电视网和计算机网络。这三种网络有各自的形成过程、服务对象和发展模式，它们的功能有所交叉，又互为补充。</p>
+<p>（4）信息技术和产业。信息产业是信息化的物质基础，包括微电子、计算机、电信等产品和技术的开发、生产、销售，以及软件、信息系统开发和电子商务等。从根本上来说，国家信息化只有在相关产品和技术方面拥有雄厚的自主知识产权，才能提高综合国力。</p>
+<p>（5）信息化人才。人才是信息化的成功之本，而合理的人才结构更是信息化人才的核心和关键。合理的信息化人才结构要求不仅要有各个层次的信息化技术人才，还要有精干的信息化管理人才，营销人才，法律、法规和情报人才。</p>
+<p>（6）信息化政策法规和标准规范。信息化政策和法规、标准、规范用于规范和协调信息化体系各要素之间的关系，是国家信息化快速、有序、健康和持续发展的保障。</p>
+</blockquote>
+<p><strong>18.</strong> 「信息的特征」 5.关于信息的特征，不正确的是（ ）。</p>
+<p>A、客观性、普遍性、无限性、动态性、相对性、不可存储性</p>
+<p>B、依附性、变换性、传递性、层次性、系统性、转化性</p>
+<p>C、相对性、依附性、变换性、传递性、层次性、转化性</p>
+<p>D、动态性、相对性、依附性、变换性、传递性、层次性</p>
+<blockquote>
+<p>[!success]- 答案 A ｜ 来源：100道/95道/自查清单 · ⭐高频（多源重复）<br>本题考查信息基础，参考《信息系统管理工程师教程》（第2版）第1.1.1小节。</p>
+<p>（1）客观性。信息是客观事物在人脑中的反映，而反映的对象则有主观和客观的区别，因此，信息可分为主观信息（例如：决策、指令和计划等）和客观信息（例如：国际形势、经济发展和一年四季等）。</p>
+<p>（2）普遍性。物质决定精神，物质的普遍性决定了信息的普遍存在。</p>
+<p>（3）无限性。客观世界是无限的，反映客观世界的信息自然也是无限的。无限性可分为两个层次：一是无限的事物产生无限的信息，即信息的总量是无限的；二是每个具体事物或有限个事物的集合所能产生的信息也可以是无限的。</p>
+<p>（4）动态性。信息是随着时间的变化而变化的。</p>
+<p>（5）相对性。不同的认识主体从同一事物中获取的信息及信息量可能是不同的。</p>
+<p>（6）依附性。信息的依附性可以从两个方面来理解：一方面，信息是客观世界的反映，任何信息必然由客观事物所产生，不存在无源的信息；另一方面，任何信息都要依附于一定的载体而存在，需要有物质的承载者，信息不能完全脱离物质而独立存在。</p>
+<p>（7）变换性。信息通过处理可以实现变换或转换，使其形式和内容发生变化，以适应特定的需要。</p>
+<p>（8）传递性。信息在时间上的传递就是存储，在空间上的传递就是转移或扩散。</p>
+<p>（9）层次性。客观世界是分层次的，反映它的信息也是分层次的。</p>
+<p>（10）系统性。信息可以表示为一种集合，不同类别的信息可以形成不同的整体。因此，可以形成与现实世界相对应的信息系统。</p>
+<p>（11）转化性。信息的产生不能没有物质，信息的传递不能没有能量，但有效地使用信息，可以将信息转化为物质或能量。</p>
+</blockquote>
+<p><strong>19.</strong> 「国家信息化趋势」 2016年7月中共中央办公厅、国务院办公厅颁布的《国家信息化发展战略纲要》强调国家信息化发展战略总目标是建设网络强国，分”三步走”：第一步到2020年，信息化成为驱动现代化建设的先导力量；第二步到2025年，建成国际领先的（ ），第三步到21世纪中叶，信息化全面支撑富强民主文明和谐的社会主义现代化国家建设。</p>
+<p>A、信息化网络</p>
+<p>B、移动通信网络</p>
+<p>C、计算机网络</p>
+<p>D、工业互联网</p>
+<blockquote>
+<p>[!success]- 答案 B ｜ 来源：自查清单<br>本题考查国家信息化趋势，参考《信息系统管理工程师教程》（第2版）第1.1.3小节。</p>
+<p>党中央、国务院一直高度重视信息化工作。2016年7月中共中央办公厅、国务院办公厅颁布的《国家信息化发展战略纲要》强调国家信息化发展战略总目标是建设网络强国，分”三步走”：第一步到2020年，核心关键技术部分领域达到国际先进水平，信息产业国际竞争力大幅提升，信息化成为驱动现代化建设的先导力量；</p>
+<p>第二步到2025年，建成国际领先的移动通信网络，根本改变核心关键技术受制于人的局面，实现技术先进、产业发达、应用领先、网络安全坚不可摧的战略目标，涌现一批具有强大国际竞争力的大型跨国网信企业；</p>
+<p>第三步到21世纪中叶，信息化全面支撑富强民主文明和谐的社会主义现代化国家建设，网络强国地位日益巩固，在引领全球信息化发展方面有更大作为。当前，我国全面部署了”构建产业数字化转型发展体系”重大任务，明确我国信息化进入加快数字化发展、建设数字中国的新阶段。</p>
+</blockquote>
+<p><strong>20.</strong> 「信息系统生命周期」 信息系统的生命周期可以分为（ ）四个阶段。</p>
+<p>A、需求、设计、开发、测试</p>
+<p>B、启动、执行、监控、收尾</p>
+<p>C、立项、开发、运维、消亡</p>
+<p>D、启动、设计、结项、运维</p>
+<blockquote>
+<p>[!success]- 答案 C ｜ 来源：自查清单<br>本题考查信息系统的生命周期，参考《信息系统管理工程师教程》（第2版），第1.1.2小节。</p>
+<p>信息系统的生命周期可以简化为：系统规划（可行性分析与项目开发计划），系统分析（需求分析），系统设计（概要设计、详细设计），系统实施（编码、测试），系统运行和维护等阶段。</p>
+<p>信息系统的生命周期还可以简化为立项（系统规划）、开发（系统分析、系统设计、系统实施）、运维及消亡四个阶段，在开发阶段不仅包括系统分析、系统设计、系统实施，还包括系统验收等工作。如果从项目管理的角度来看，项目的生命周期又划分为启动、计划、执行和收尾四个典型阶段。</p>
+</blockquote>
+<p><strong>21.</strong> 「数字化转型成熟度等级」 GB/T43439给出的数字化转型成熟度等级分为五个等级，”组织应对数字化转型的组织、技术、数据和资源进行规划，完成局部业务的数据收集、整合与应用，初步具备基于数据的运营和优化能力。”属于（ ）的特征。</p>
+<p>A、一级</p>
+<p>B、二级</p>
+<p>C、三级</p>
+<p>D、四级</p>
+<blockquote>
+<p>[!success]- 答案 B ｜ 来源：自查清单<br>本题考查数字化转型成熟度等级，参考《信息系统管理工程师教程》（第2版）第1.4.3小节。</p>
+<p>GB/T43439给出的数字化转型成熟度等级适用于根据组织现状和业务目标明确转型工作所要达成的成熟度等级目标，并根据目标等级的分级特征和要求制定详细的转型工作路径和各细项目标。成熟度等级分为五个等级，自低向高分别为一级、二级、三级、四级和五级。各级特征如下。</p>
+<p>（1）一级：组织应具备转型意识，开始对实施数字化转型的基础和条件进行规划，在运营、生产、服务等业务领域基于内外部需求开展数字化转型的探索工作。</p>
+<p>（2）二级：组织应对数字化转型的组织、技术、数据和资源进行规划，完成局部业务的数据收集、整合与应用，初步具备基于数据的运营和优化能力。</p>
+<p>（3）三级：组织应具备数字化转型总体规划并有序实施，完成关键业务的系统集成和数据交互，在运营、生产和服务领域实现基于数据的效率提升。</p>
+<p>（4）四级：组织应将数据作为支撑运营、生产和服务关键领域业务能力提升优化的核心要素，构建算法和模型为业务的相关方提供数据智能体验。</p>
+<p>（5）五级：组织应基于数据持续推动业务活动的优化和创新，实现内外部能力、资源和市场等多要素融合，构建独特的生态价值。</p>
+</blockquote>
+<h2 id="软件开发过程管理（第-6-章）·-续"><a href="#软件开发过程管理（第-6-章）·-续" class="headerlink" title="软件开发过程管理（第 6 章）· 续"></a>软件开发过程管理（第 6 章）· 续</h2><p><strong>22.</strong> 对于程序设计的风格，下列描述不准确的是（ ）。</p>
+<p>A.程序中的解释性注释一定要在程序编制中书写</p>
+<p>B.为了程序结构清晰，便于阅读，要尽量使用GOTO语句</p>
+<p>C.在标识符命名时，尽量避免使用意义容易混淆的标识名</p>
+<p>D.应设计完备的错误检测和恢复功能</p>
+<blockquote>
+<p>[!success]- 答案 B ｜ 来源：2024真题<br>（原文未附解析）</p>
+</blockquote>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+    <div class="widget-header dis-select">
+      <span class="name">本文目录</span>
+      <button type="button" class="cap-action ui-interactive card-hover card-hover--spotlight" data-shell-action="toggle-toc" aria-label="Toggle table of contents" aria-pressed="false"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></span></button>
+    </div>
+  
+  <div class="widget-body"><ol class="toc ui-collection-adapter"><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%EF%BC%88%E7%AC%AC-15-%E7%AB%A0%EF%BC%89"><span class="toc-text">数据库与数据管理（第 15 章）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E7%AE%A1%E7%90%86%EF%BC%88%E7%AC%AC-6-%E7%AB%A0%EF%BC%89"><span class="toc-text">软件开发过程管理（第 6 章）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%EF%BC%88%E7%AC%AC-10-%E7%AB%A0%EF%BC%89"><span class="toc-text">项目管理（第 10 章）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%BD%91%E7%BB%9C%E4%B8%8E%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%EF%BC%88%E7%AC%AC-12-%E7%AB%A0%EF%BC%89"><span class="toc-text">网络与系统管理（第 12 章）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF%E5%8F%91%E5%B1%95%EF%BC%88%E7%AC%AC-2-%E7%AB%A0%EF%BC%89"><span class="toc-text">信息技术发展（第 2 章）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BF%A1%E6%81%AF%E5%8C%96%E5%8F%91%E5%B1%95%EF%BC%88%E7%AC%AC-1-%E7%AB%A0%EF%BC%89"><span class="toc-text">信息化发展（第 1 章）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E7%AE%A1%E7%90%86%EF%BC%88%E7%AC%AC-6-%E7%AB%A0%EF%BC%89%C2%B7-%E7%BB%AD"><span class="toc-text">软件开发过程管理（第 6 章）· 续</span></a></li></ol></div>
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/%E8%80%83%E8%AF%81/%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%BB%83%E4%B9%A0%E9%A2%98%C2%B7%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"练习题 · 基础知识（选择题）","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

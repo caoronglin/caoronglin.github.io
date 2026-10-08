@@ -1,0 +1,1 @@
+window.FRIENDS_SUBMIT={"repo":"caoronglin/friends","label":"待审核","clientId":"Iv23liwmA7gfcCcBEo7V","redirectUri":"https://blog.cnortles.top/links/"};

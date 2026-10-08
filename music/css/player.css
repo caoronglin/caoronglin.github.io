@@ -1,0 +1,331 @@
+/* 音乐页播放器样式
+ *
+ * 颜色一律走 Stellar 主题变量（--card / --text / --accent 等），
+ * 深浅色自动适配，不出现写死的色值。
+ */
+
+.mp {
+  max-width: 1080px;
+  margin: 1.5rem auto 0;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ---------- 左：封面 + 信息 + 控制 ---------- */
+
+.mp__main {
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--card) 55%, var(--accent) 45%);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.mp__cover {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--card) 60%, var(--text) 40%);
+}
+
+.mp__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mp__title {
+  margin: 16px 0 4px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  /* 歌名可能很长，最多两行后省略 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mp__artist {
+  font-size: 0.9rem;
+  color: var(--text-meta);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 进度条：用 range 的原生轨道 + 自绘填充，省一个 DOM */
+.mp__bar {
+  position: relative;
+  margin-top: 14px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.mp__bar-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--text) 15%, transparent);
+  overflow: hidden;
+}
+
+.mp__seek-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+.mp__seek {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  height: 18px;
+}
+
+.mp__seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--card);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.mp__seek::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--card);
+}
+
+.mp__seek:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.mp__times {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-meta);
+  font-variant-numeric: tabular-nums;
+}
+
+.mp__ctrl {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mp__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.mp__btn:hover {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-color: var(--accent);
+}
+
+.mp__btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.mp__btn--main {
+  width: 48px;
+  height: 48px;
+  background: var(--accent);
+  color: var(--card);
+  border-color: transparent;
+}
+
+.mp__btn--main:hover {
+  background: var(--accent);
+  filter: brightness(1.08);
+  transform: scale(1.05);
+}
+
+.mp__vol {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-meta);
+}
+
+.mp__vol-range {
+  width: 84px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.mp__status {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--text-meta);
+  min-height: 1.2em;
+}
+
+/* ---------- 右：搜索 + 列表 ---------- */
+
+.mp__side {
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--card) 55%, var(--accent) 45%);
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  /* 关键：给列表一个确定的视口高度，否则 400 多首把页面撑得极长 */
+  max-height: 76vh;
+}
+
+.mp__side-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.mp__search {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.mp__search::placeholder {
+  color: var(--text-meta);
+}
+
+.mp__search:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.mp__count {
+  font-size: 0.8rem;
+  color: var(--text-meta);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.mp__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  /* 细滚动条，避免默认滚动条在卡片里过于抢眼 */
+  scrollbar-width: thin;
+}
+
+.mp__row {
+  display: grid;
+  grid-template-columns: 2.4em 1fr auto;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.mp__row:hover {
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+}
+
+.mp__row.is-active {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+.mp__row-n {
+  font-size: 0.75rem;
+  color: var(--text-meta);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.mp__row-t {
+  color: var(--text);
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mp__row-a {
+  font-size: 0.78rem;
+  color: var(--text-meta);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 40%;
+}
+
+.mp__empty {
+  padding: 24px 10px;
+  text-align: center;
+  color: var(--text-meta);
+  font-size: 0.85rem;
+}
+
+/* ---------- 窄屏：单列 ---------- */
+
+@media screen and (max-width: 860px) {
+  .mp {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+
+  .mp__cover {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .mp__side {
+    max-height: 58vh;
+  }
+
+  .mp__row {
+    grid-template-columns: 2.2em 1fr;
+  }
+
+  .mp__row-a {
+    display: none;
+  }
+}

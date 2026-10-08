@@ -1,0 +1,1530 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/wiki/Linux/ch05-permissions/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>Linux 基础入门：第五章、Linux 的文件权限与目录配置 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="Linux 操作系统基础概念、历史、发行版介绍及计算机基础" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第五章、Linux 的文件权限与目录配置" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/wiki/Linux/ch05-permissions/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="Linux 操作系统基础概念、历史、发行版介绍及计算机基础" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第五章、Linux 的文件权限与目录配置" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content="Linux,文件权限,用户管理" data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"WebPage","@id":"https://blog.cnortles.top/wiki/Linux/ch05-permissions/","name":"第五章、Linux 的文件权限与目录配置","description":"Linux 操作系统基础概念、历史、发行版介绍及计算机基础","url":"https://blog.cnortles.top/wiki/Linux/ch05-permissions/","isPartOf":{"@type":"WebSite","name":"麟跃云起","url":"https://blog.cnortles.top"}}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular"><div class="brand-navigation"><a class="brand-navigation__back cap" href="/wiki/"><span class="ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"/></svg></span><span>所有项目</span></a></div><div class="brand-navigation-rail">
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" href="&#x2F;wiki&#x2F;" title="所有项目" aria-label="所有项目">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"/></svg></span>
+  
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+</div><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;wiki&#x2F;Linux&#x2F;"><img no-lazy src="&#x2F;img&#x2F;linux-logo.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a><a class="brand-title" href="&#x2F;wiki&#x2F;Linux&#x2F;"><div class="brand-name">Linux 基础入门</div><div class="brand-tagline cap">从零开始学习 Linux</div></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search" data-search-domain="wiki:Linux" data-search-domain-label="Linux 基础入门" data-search-domain-blog="false">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;" title="主页" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;wiki&#x2F;" title="文档" aria-current="page" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--tree" data-widget-id="leftbar:0:tree" data-presentation="leftbar" data-leftbar-rail>
+
+
+<widget class="widget-wrapper doc-tree-widget" data-wiki="Linux">
+  
+  <div class="widget-body"><section class="widget-section"><div class="widget-header dis-select"><span class="name">...</span></div><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch00-computer-basics&#x2F;" title="第零章、计算机概论">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第零章、计算机概论</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch01-linux-intro&#x2F;" title="第一章、Linux是什么与如何学习">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第一章、Linux是什么与如何学习</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch02-partition&#x2F;" title="第二章、主机规划与磁盘分区">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第二章、主机规划与磁盘分区</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch03-install&#x2F;" title="第三章、安装 CentOS 7.x">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第三章、安装 CentOS 7.x</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch04-first-login&#x2F;" title="第四章、首次登陆与线上求助">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第四章、首次登陆与线上求助</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch06-file-management&#x2F;" title="第六章、Linux 文件与目录管理">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第六章、Linux 文件与目录管理</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch07-filesystem&#x2F;" title="第七章、Linux 磁盘与文件系统管理">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第七章、Linux 磁盘与文件系统管理</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch08-compress&#x2F;" title="第八章、文件与文件系统的压缩、打包与备份">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第八章、文件与文件系统的压缩、打包与备份</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active" href="&#x2F;wiki&#x2F;Linux&#x2F;ch05-permissions&#x2F;" title="第五章、Linux 的文件权限与目录配置" aria-current="page">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第五章、Linux 的文件权限与目录配置</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch10-bash&#x2F;" title="第十章、认识与学习BASH">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第十章、认识与学习BASH</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;" title="Linux 学习笔记目录">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">L</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">Linux 学习笔记目录</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch09-vim&#x2F;" title="第九章、vim 程序编辑器">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第九章、vim 程序编辑器</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></section></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/Linux/ch00-computer-basics/">Linux 基础入门</a>
+</div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2023-12-31T16:00:00.000Z">2024-01-01</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第五章、Linux 的文件权限与目录配置</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="第五章、Linux-的文件权限与目录配置"><a href="#第五章、Linux-的文件权限与目录配置" class="headerlink" title="第五章、Linux 的文件权限与目录配置"></a>第五章、Linux 的文件权限与目录配置</h1><h2 id="5-1-使用者与群组"><a href="#5-1-使用者与群组" class="headerlink" title="5.1 使用者与群组"></a>5.1 使用者与群组</h2><h3 id="Linux-的多用户多任务"><a href="#Linux-的多用户多任务" class="headerlink" title="Linux 的多用户多任务"></a>Linux 的多用户多任务</h3><p>Linux 是一个<strong>多用户、多任务</strong>的操作系统：</p>
+<ul>
+<li><strong>多用户</strong>：多个用户可以同时使用系统</li>
+<li><strong>多任务</strong>：系统可以同时运行多个程序</li>
+</ul>
+<h3 id="三种身份"><a href="#三种身份" class="headerlink" title="三种身份"></a>三种身份</h3><p>Linux 系统中的每个文件都有三种身份：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>身份</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>user (u)</strong></td>
+<td>文件所有者（owner）</td>
+</tr>
+<tr>
+<td><strong>group (g)</strong></td>
+<td>文件所属群组</td>
+</tr>
+<tr>
+<td><strong>others (o)</strong></td>
+<td>其他人（非所有者且非群组成员）</td>
+</tr>
+</tbody></table></div>
+<p><strong>特殊身份：</strong></p>
+<ul>
+<li><strong>root</strong>：超级管理员，拥有系统最高权限，不受权限限制</li>
+</ul>
+<h3 id="使用者与群组的关系"><a href="#使用者与群组的关系" class="headerlink" title="使用者与群组的关系"></a>使用者与群组的关系</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">系统使用者</span><br><span class="line">├── root (超级管理员)</span><br><span class="line">├── user1 (属于 groups: users, developers)</span><br><span class="line">├── user2 (属于 groups: users, designers)</span><br><span class="line">└── user3 (属于 groups: users)</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>一个用户可以属于多个群组</strong>，但只有一个<strong>主要群组</strong>（primary group）。</p>
+<h3 id="查看用户信息"><a href="#查看用户信息" class="headerlink" title="查看用户信息"></a>查看用户信息</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">whoami</span>                       <span class="comment"># 显示当前用户名</span></span><br><span class="line"><span class="built_in">id</span>                           <span class="comment"># 显示当前用户的UID、GID和所属群组</span></span><br><span class="line"><span class="built_in">id</span> username                  <span class="comment"># 显示指定用户的信息</span></span><br><span class="line"><span class="built_in">who</span>                          <span class="comment"># 显示当前登录的用户</span></span><br><span class="line">w                            <span class="comment"># 显示登录用户及其活动</span></span><br><span class="line"><span class="built_in">users</span>                        <span class="comment"># 显示用户名列表</span></span><br><span class="line">last                         <span class="comment"># 显示最近登录记录</span></span><br><span class="line">lastlog                      <span class="comment"># 显示所有用户的最后登录时间</span></span><br><span class="line">finger username              <span class="comment"># 显示用户信息（需安装finger包）</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>id 命令输出示例：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">id</span></span><br><span class="line">uid=1000(username) gid=1000(username) <span class="built_in">groups</span>=1000(username),4(adm),24(cdrom),27(<span class="built_in">sudo</span>),30(dip),46(plugdev),120(lpadmin),131(lxd),132(sambashare)</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>输出说明：</strong></p>
+<ul>
+<li><strong>uid</strong>：用户ID</li>
+<li><strong>gid</strong>：主要群组ID</li>
+<li><strong>groups</strong>：所属的所有群组</li>
+</ul>
+<h2 id="5-2-Linux-文件权限概念"><a href="#5-2-Linux-文件权限概念" class="headerlink" title="5.2 Linux 文件权限概念"></a>5.2 Linux 文件权限概念</h2><h3 id="查看文件权限"><a href="#查看文件权限" class="headerlink" title="查看文件权限"></a>查看文件权限</h3><p>使用 <code>ls -l</code> 命令查看文件权限：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l filename</span><br><span class="line"><span class="built_in">ls</span> -la                       <span class="comment"># 查看所有文件（包括隐藏文件）</span></span><br><span class="line"><span class="built_in">ls</span> -ld directory             <span class="comment"># 查看目录本身的信息（而非内容）</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>输出示例：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -l</span><br><span class="line">-rw-r--r-- 1 user group 1234 Jan  1 10:00 file.txt</span><br><span class="line">drwxr-xr-x 2 user group 4096 Jan  1 09:00 directory/</span><br><span class="line">lrwxrwxrwx 1 user group   11 Jan  1 08:00 <span class="built_in">link</span> -&gt; /path/to/target</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="权限字符串解析"><a href="#权限字符串解析" class="headerlink" title="权限字符串解析"></a>权限字符串解析</h3><p>权限字符串共 10 个字符：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-rwxr-xr-x</span><br><span class="line">│└┬┘└┬┘└┬┘</span><br><span class="line">│ │  │  │</span><br><span class="line">│ │  │  └── 其他人(others)的权限</span><br><span class="line">│ │  └───── 群组(group)的权限</span><br><span class="line">│ └──────── 所有者(user)的权限</span><br><span class="line">└────────── 文件类型</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="第1位：文件类型"><a href="#第1位：文件类型" class="headerlink" title="第1位：文件类型"></a>第1位：文件类型</h4><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-</code></td>
+<td>普通文件</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>目录</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>符号链接（软链接）</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td>块设备文件（如硬盘）</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>字符设备文件（如键盘）</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>套接字文件</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>管道文件</td>
+</tr>
+</tbody></table></div>
+<h4 id="第2-10位：权限"><a href="#第2-10位：权限" class="headerlink" title="第2-10位：权限"></a>第2-10位：权限</h4><p>每组3个字符，共3组：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>位置</th>
+<th>含义</th>
+<th>字符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>读权限</td>
+<td>可读（文件内容/目录列表）</td>
+</tr>
+<tr>
+<td>w</td>
+<td>写权限</td>
+<td>可写（修改文件/创建删除目录内容）</td>
+</tr>
+<tr>
+<td>x</td>
+<td>执行权限</td>
+<td>可执行（运行程序/进入目录）</td>
+</tr>
+<tr>
+<td>-</td>
+<td>无权限</td>
+<td>该权限未授予</td>
+</tr>
+</tbody></table></div>
+<h3 id="权限的具体含义"><a href="#权限的具体含义" class="headerlink" title="权限的具体含义"></a>权限的具体含义</h3><h4 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h4><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>权限</th>
+<th>对文件的作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>r (读)</strong></td>
+<td>可以读取文件内容（cat, less, 打开）</td>
+</tr>
+<tr>
+<td><strong>w (写)</strong></td>
+<td>可以修改文件内容（编辑、覆盖、追加）</td>
+</tr>
+<tr>
+<td><strong>x (执行)</strong></td>
+<td>可以将文件作为程序运行（./script.sh）</td>
+</tr>
+</tbody></table></div>
+<h4 id="目录权限"><a href="#目录权限" class="headerlink" title="目录权限"></a>目录权限</h4><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>权限</th>
+<th>对目录的作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>r (读)</strong></td>
+<td>可以列出目录内容（ls）</td>
+</tr>
+<tr>
+<td><strong>w (写)</strong></td>
+<td>可以在目录中创建、删除、重命名文件</td>
+</tr>
+<tr>
+<td><strong>x (执行)</strong></td>
+<td>可以进入目录（cd），访问目录中的文件</td>
+</tr>
+</tbody></table></div>
+<p>⚠️ <strong>重要说明：</strong></p>
+<ul>
+<li>对目录有 <strong>w</strong> 权限，就可以删除目录中的任何文件，即使对该文件没有权限！</li>
+<li>要访问目录中的文件，需要对目录有 <strong>x</strong> 权限</li>
+</ul>
+<h3 id="修改文件权限：chmod"><a href="#修改文件权限：chmod" class="headerlink" title="修改文件权限：chmod"></a>修改文件权限：chmod</h3><p><code>chmod</code> 命令用于修改文件或目录的权限。</p>
+<h4 id="符号模式"><a href="#符号模式" class="headerlink" title="符号模式"></a>符号模式</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> [ugoa][+-=][rwx] file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用户类别</span></span><br><span class="line">u = user (所有者)</span><br><span class="line">g = group (群组)</span><br><span class="line">o = others (其他人)</span><br><span class="line">a = all (所有人，相当于 ugo)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 操作</span></span><br><span class="line">+ = 添加权限</span><br><span class="line">- = 移除权限</span><br><span class="line">= = 设置权限（覆盖）</span><br><span class="line"></span><br><span class="line"><span class="comment"># 权限</span></span><br><span class="line">r = <span class="built_in">read</span> (读)</span><br><span class="line">w = write (写)</span><br><span class="line">x = execute (执行)</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u+x script.sh          <span class="comment"># 给所有者添加执行权限</span></span><br><span class="line"><span class="built_in">chmod</span> go-w file.txt          <span class="comment"># 移除群组和其他人的写权限</span></span><br><span class="line"><span class="built_in">chmod</span> u=rwx,go=rx directory  <span class="comment"># 所有者全权限，群组和其他人读+执行</span></span><br><span class="line"><span class="built_in">chmod</span> a+r file.txt           <span class="comment"># 给所有人添加读权限</span></span><br><span class="line"><span class="built_in">chmod</span> a-x script.sh          <span class="comment"># 移除所有人的执行权限</span></span><br><span class="line"><span class="built_in">chmod</span> u+s program            <span class="comment"># 设置 SUID 位</span></span><br><span class="line"><span class="built_in">chmod</span> g+s directory          <span class="comment"># 设置 SGID 位</span></span><br><span class="line"><span class="built_in">chmod</span> +t directory           <span class="comment"># 设置粘滞位</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="数字模式（八进制）"><a href="#数字模式（八进制）" class="headerlink" title="数字模式（八进制）"></a>数字模式（八进制）</h4><p>权限可以用数字表示：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>权限</th>
+<th>数值</th>
+<th>二进制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r (读)</td>
+<td>4</td>
+<td>100</td>
+</tr>
+<tr>
+<td>w (写)</td>
+<td>2</td>
+<td>010</td>
+</tr>
+<tr>
+<td>x (执行)</td>
+<td>1</td>
+<td>001</td>
+</tr>
+<tr>
+<td>- (无)</td>
+<td>0</td>
+<td>000</td>
+</tr>
+</tbody></table></div>
+<p><strong>组合值：</strong></p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>数字</th>
+<th>权限</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>7</td>
+<td>rwx</td>
+<td>读+写+执行</td>
+</tr>
+<tr>
+<td>6</td>
+<td>rw-</td>
+<td>读+写</td>
+</tr>
+<tr>
+<td>5</td>
+<td>r-x</td>
+<td>读+执行</td>
+</tr>
+<tr>
+<td>4</td>
+<td>r–</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>3</td>
+<td>-wx</td>
+<td>写+执行</td>
+</tr>
+<tr>
+<td>2</td>
+<td>-w-</td>
+<td>只写</td>
+</tr>
+<tr>
+<td>1</td>
+<td>–x</td>
+<td>只执行</td>
+</tr>
+<tr>
+<td>0</td>
+<td>—</td>
+<td>无权限</td>
+</tr>
+</tbody></table></div>
+<p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> XYZ file</span><br><span class="line"><span class="comment"># X = 所有者权限</span></span><br><span class="line"><span class="comment"># Y = 群组权限</span></span><br><span class="line"><span class="comment"># Z = 其他人权限</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 755 script.sh          <span class="comment"># -rwxr-xr-x (所有者全权限，其他读+执行)</span></span><br><span class="line"><span class="built_in">chmod</span> 644 file.txt           <span class="comment"># -rw-r--r-- (所有者读写，其他只读)</span></span><br><span class="line"><span class="built_in">chmod</span> 700 private.key        <span class="comment"># -rwx------ (只有所有者可访问)</span></span><br><span class="line"><span class="built_in">chmod</span> 777 shared_dir/        <span class="comment"># drwxrwxrwx (所有人全权限)</span></span><br><span class="line"><span class="built_in">chmod</span> 600 ~/.ssh/id_rsa      <span class="comment"># 私钥文件的标准权限</span></span><br><span class="line"><span class="built_in">chmod</span> 644 ~/.ssh/id_rsa.pub  <span class="comment"># 公钥文件的标准权限</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>常见文件权限组合：</strong></p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>文件类型</th>
+<th>权限</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>普通文件</td>
+<td>644 (-rw-r–r–)</td>
+<td>普通文档</td>
+</tr>
+<tr>
+<td>可执行脚本</td>
+<td>755 (-rwxr-xr-x)</td>
+<td>脚本程序</td>
+</tr>
+<tr>
+<td>配置文件</td>
+<td>600 (-rw——-)</td>
+<td>敏感配置</td>
+</tr>
+<tr>
+<td>日志文件</td>
+<td>640 (-rw-r—–)</td>
+<td>日志（组可读）</td>
+</tr>
+<tr>
+<td>目录</td>
+<td>755 (drwxr-xr-x)</td>
+<td>普通目录</td>
+</tr>
+<tr>
+<td>共享目录</td>
+<td>2775 (drwxrwsr-x)</td>
+<td>组共享（SGID）</td>
+</tr>
+<tr>
+<td>临时目录</td>
+<td>1777 (drwxrwxrwt)</td>
+<td>公共可写（粘滞位）</td>
+</tr>
+</tbody></table></div>
+<h4 id="递归修改权限"><a href="#递归修改权限" class="headerlink" title="递归修改权限"></a>递归修改权限</h4><p>对目录及其所有内容修改权限：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> -R 755 directory/      <span class="comment"># 递归修改目录及其内容的权限</span></span><br><span class="line"><span class="built_in">chmod</span> -R u+w directory/      <span class="comment"># 递归添加写权限</span></span><br><span class="line"><span class="built_in">chmod</span> -R go-w directory/     <span class="comment"># 递归移除组和其他人的写权限</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>⚠️ <strong>警告：</strong> 谨慎使用 <code>-R</code> 选项，特别是在系统目录上！</p>
+<h3 id="修改文件所有者和群组：chown"><a href="#修改文件所有者和群组：chown" class="headerlink" title="修改文件所有者和群组：chown"></a>修改文件所有者和群组：chown</h3><p><code>chown</code> 命令用于修改文件或目录的所有者和/或群组。</p>
+<h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> [选项] [所有者][:[群组]] 文件...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只改所有者</span></span><br><span class="line"><span class="built_in">chown</span> user file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只改群组</span></span><br><span class="line"><span class="built_in">chown</span> :group file</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line"><span class="built_in">chgrp</span> group file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时改所有者和群组</span></span><br><span class="line"><span class="built_in">chown</span> user:group file</span><br><span class="line"><span class="built_in">chown</span> user.group file</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> alice file.txt         <span class="comment"># 将文件所有者改为 alice</span></span><br><span class="line"><span class="built_in">chown</span> :developers file.txt   <span class="comment"># 将文件群组改为 developers</span></span><br><span class="line"><span class="built_in">chown</span> alice:developers file.txt  <span class="comment"># 同时修改所有者和群组</span></span><br><span class="line"><span class="built_in">chown</span> -R alice:alice /home/alice  <span class="comment"># 递归修改用户主目录的所有者</span></span><br><span class="line"><span class="built_in">chown</span> root:root /etc/passwd  <span class="comment"># 恢复系统文件的标准所有者</span></span><br><span class="line"><span class="built_in">chown</span> <span class="variable">$USER</span>:<span class="variable">$USER</span> script.sh   <span class="comment"># 使用环境变量设置所有者</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="常用选项"><a href="#常用选项" class="headerlink" title="常用选项"></a>常用选项</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> -R user:group <span class="built_in">dir</span>/      <span class="comment"># 递归修改目录及其内容</span></span><br><span class="line"><span class="built_in">chown</span> --reference=file1 file2 <span class="comment"># 将file2的所有者改为与file1相同</span></span><br><span class="line"><span class="built_in">chown</span> -c user file            <span class="comment"># 只在发生更改时显示信息</span></span><br><span class="line"><span class="built_in">chown</span> -v user file            <span class="comment"># 显示详细的处理信息</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="只修改群组：chgrp"><a href="#只修改群组：chgrp" class="headerlink" title="只修改群组：chgrp"></a>只修改群组：chgrp</h3><p><code>chgrp</code> 专门用于修改文件的群组，功能与 <code>chown :group</code> 相同。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chgrp</span> group file             <span class="comment"># 修改文件群组</span></span><br><span class="line"><span class="built_in">chgrp</span> -R group directory/    <span class="comment"># 递归修改目录群组</span></span><br><span class="line"><span class="built_in">chgrp</span> --reference=file1 file2  <span class="comment"># 参照file1修改file2的群组</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="特殊权限位"><a href="#特殊权限位" class="headerlink" title="特殊权限位"></a>特殊权限位</h3><p>除了基本的 rwx 权限，Linux 还有三种特殊权限位：</p>
+<h4 id="1-SUID-Set-User-ID"><a href="#1-SUID-Set-User-ID" class="headerlink" title="1. SUID (Set User ID)"></a>1. SUID (Set User ID)</h4><ul>
+<li><strong>符号</strong>：<code>s</code>（在所有者的 x 位置）</li>
+<li><strong>数值</strong>：<code>4000</code></li>
+<li><strong>作用</strong>：执行该文件时，以文件所有者的身份运行</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置SUID</span></span><br><span class="line"><span class="built_in">chmod</span> u+s file</span><br><span class="line"><span class="built_in">chmod</span> 4755 file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：/usr/bin/passwd 命令</span></span><br><span class="line"><span class="built_in">ls</span> -l /usr/bin/passwd</span><br><span class="line"><span class="comment"># -rwsr-xr-x 1 root root ... /usr/bin/passwd</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>注意：</strong> SUID 对脚本文件无效，只对二进制可执行文件有效。</p>
+<h4 id="2-SGID-Set-Group-ID"><a href="#2-SGID-Set-Group-ID" class="headerlink" title="2. SGID (Set Group ID)"></a>2. SGID (Set Group ID)</h4><ul>
+<li><strong>符号</strong>：<code>s</code>（在群组的 x 位置）</li>
+<li><strong>数值</strong>：<code>2000</code></li>
+<li><strong>作用</strong>：<ul>
+<li>对文件：执行时以文件群组的身份运行</li>
+<li>对目录：在该目录下创建的文件继承目录的群组</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置SGID</span></span><br><span class="line"><span class="built_in">chmod</span> g+s file_or_dir</span><br><span class="line"><span class="built_in">chmod</span> 2755 <span class="built_in">dir</span>/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：共享目录</span></span><br><span class="line"><span class="built_in">mkdir</span> /shared</span><br><span class="line"><span class="built_in">chown</span> :developers /shared</span><br><span class="line"><span class="built_in">chmod</span> 2775 /shared</span><br><span class="line"><span class="comment"># 现在任何人在这个目录创建的文件都属于 developers 群组</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="3-Sticky-Bit-粘滞位"><a href="#3-Sticky-Bit-粘滞位" class="headerlink" title="3. Sticky Bit (粘滞位)"></a>3. Sticky Bit (粘滞位)</h4><ul>
+<li><strong>符号</strong>：<code>t</code>（在其他的 x 位置）</li>
+<li><strong>数值</strong>：<code>1000</code></li>
+<li><strong>作用</strong>：只有文件所有者、目录所有者或 root 才能删除该目录下的文件</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置粘滞位</span></span><br><span class="line"><span class="built_in">chmod</span> +t directory</span><br><span class="line"><span class="built_in">chmod</span> 1777 directory</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：/tmp 目录</span></span><br><span class="line"><span class="built_in">ls</span> -ld /tmp</span><br><span class="line"><span class="comment"># drwxrwxrwt 10 root root ... /tmp</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>典型应用：</strong> /tmp 目录允许所有人读写，但只能删除自己的文件。</p>
+<h4 id="特殊权限总结表"><a href="#特殊权限总结表" class="headerlink" title="特殊权限总结表"></a>特殊权限总结表</h4><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>权限</th>
+<th>符号</th>
+<th>数值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SUID</td>
+<td>s (u+s)</td>
+<td>4000</td>
+<td>以文件所有者身份执行</td>
+</tr>
+<tr>
+<td>SGID</td>
+<td>s (g+s)</td>
+<td>2000</td>
+<td>以文件群组身份执行 / 继承目录群组</td>
+</tr>
+<tr>
+<td>Sticky</td>
+<td>t (+t)</td>
+<td>1000</td>
+<td>限制删除权限</td>
+</tr>
+</tbody></table></div>
+<h4 id="设置特殊权限"><a href="#设置特殊权限" class="headerlink" title="设置特殊权限"></a>设置特殊权限</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 符号模式</span></span><br><span class="line"><span class="built_in">chmod</span> u+s file               <span class="comment"># 设置SUID</span></span><br><span class="line"><span class="built_in">chmod</span> g+s <span class="built_in">dir</span>                <span class="comment"># 设置SGID</span></span><br><span class="line"><span class="built_in">chmod</span> +t <span class="built_in">dir</span>                 <span class="comment"># 设置粘滞位</span></span><br><span class="line"><span class="built_in">chmod</span> u-s file               <span class="comment"># 移除SUID</span></span><br><span class="line"><span class="built_in">chmod</span> g-s <span class="built_in">dir</span>                <span class="comment"># 移除SGID</span></span><br><span class="line"><span class="built_in">chmod</span> -t <span class="built_in">dir</span>                 <span class="comment"># 移除粘滞位</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数字模式（在普通权限前加一位）</span></span><br><span class="line"><span class="built_in">chmod</span> 4755 file              <span class="comment"># -rwsr-xr-x (SUID)</span></span><br><span class="line"><span class="built_in">chmod</span> 2755 <span class="built_in">dir</span>               <span class="comment"># drwxr-sr-x (SGID)</span></span><br><span class="line"><span class="built_in">chmod</span> 1755 <span class="built_in">dir</span>               <span class="comment"># drwxr-xr-t (Sticky)</span></span><br><span class="line"><span class="built_in">chmod</span> 6755 file              <span class="comment"># -rwsr-sr-x (SUID+SGID)</span></span><br><span class="line"><span class="built_in">chmod</span> 7777 <span class="built_in">dir</span>               <span class="comment"># drwsrwsrwt (所有特殊权限)</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="查看特殊权限"><a href="#查看特殊权限" class="headerlink" title="查看特殊权限"></a>查看特殊权限</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /usr/bin/passwd        <span class="comment"># 查看SUID</span></span><br><span class="line"><span class="built_in">ls</span> -ld /tmp                  <span class="comment"># 查看Sticky bit</span></span><br><span class="line"><span class="built_in">ls</span> -ld /var/cache/man        <span class="comment"># 查看SGID</span></span><br><span class="line">find / -perm -4000 2&gt;/dev/null  <span class="comment"># 查找所有SUID文件</span></span><br><span class="line">find / -perm -2000 2&gt;/dev/null  <span class="comment"># 查找所有SGID文件</span></span><br><span class="line">find / -perm -1000 2&gt;/dev/null  <span class="comment"># 查找所有Sticky目录</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="文件隐藏属性"><a href="#文件隐藏属性" class="headerlink" title="文件隐藏属性"></a>文件隐藏属性</h3><p>Linux 文件系统还支持隐藏属性，使用 <code>chattr</code> 命令设置，<code>lsattr</code> 命令查看。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lsattr file                  <span class="comment"># 查看文件隐藏属性</span></span><br><span class="line">chattr +i file               <span class="comment"># 设置不可变属性（连root都不能修改删除）</span></span><br><span class="line">chattr -i file               <span class="comment"># 移除不可变属性</span></span><br><span class="line">chattr +a file               <span class="comment"># 设置只能追加属性（只能添加内容，不能修改删除）</span></span><br><span class="line">chattr -a file               <span class="comment"># 移除追加属性</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>常用属性：</strong></p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>i</code></td>
+<td>不可变（immutable），不能修改、删除、重命名、创建链接</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>只能追加（append-only），只能添加内容</td>
+</tr>
+<tr>
+<td><code>A</code></td>
+<td>不更新访问时间（atime）</td>
+</tr>
+<tr>
+<td><code>S</code></td>
+<td>同步更新（synchronous），立即写入磁盘</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>dump 命令忽略</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td>使用extents格式（ext4）</td>
+</tr>
+</tbody></table></div>
+<h3 id="文件访问控制列表-ACL"><a href="#文件访问控制列表-ACL" class="headerlink" title="文件访问控制列表 (ACL)"></a>文件访问控制列表 (ACL)</h3><p>ACL (Access Control List) 提供了比传统权限更细粒度的访问控制。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看ACL</span></span><br><span class="line">getfacl file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置ACL</span></span><br><span class="line">setfacl -m u:username:rwx file      <span class="comment"># 给用户添加权限</span></span><br><span class="line">setfacl -m g:groupname:rx file       <span class="comment"># 给群组添加权限</span></span><br><span class="line">setfacl -m o::r file                 <span class="comment"># 修改其他人权限</span></span><br><span class="line">setfacl -m m::rwx file               <span class="comment"># 修改mask</span></span><br><span class="line">setfacl -x u:username file           <span class="comment"># 移除用户的ACL</span></span><br><span class="line">setfacl -b file                      <span class="comment"># 移除所有ACL</span></span><br><span class="line">setfacl -R -m u:username:rx <span class="built_in">dir</span>/     <span class="comment"># 递归设置</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 允许特定用户读写文件</span></span><br><span class="line">setfacl -m u:alice:rw file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 允许特定群组只读</span></span><br><span class="line">setfacl -m u:developers:r file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看ACL</span></span><br><span class="line">getfacl file.txt</span><br><span class="line"><span class="comment"># file: file.txt</span></span><br><span class="line"><span class="comment"># owner: bob</span></span><br><span class="line"><span class="comment"># group: users</span></span><br><span class="line"><span class="comment"># user::rw-</span></span><br><span class="line"><span class="comment"># user:alice:rw-</span></span><br><span class="line"><span class="comment"># group::r--</span></span><br><span class="line"><span class="comment"># mask::rw-</span></span><br><span class="line"><span class="comment"># other::r--</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="5-3-Linux目录配置"><a href="#5-3-Linux目录配置" class="headerlink" title="5.3 Linux目录配置"></a>5.3 Linux目录配置</h2><h3 id="Linux-目录结构标准-FHS"><a href="#Linux-目录结构标准-FHS" class="headerlink" title="Linux 目录结构标准 (FHS)"></a>Linux 目录结构标准 (FHS)</h3><p>FHS (Filesystem Hierarchy Standard) 定义了 Linux 系统中目录的用途和组织方式。</p>
+<h3 id="根目录结构"><a href="#根目录结构" class="headerlink" title="根目录结构"></a>根目录结构</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/</span><br><span class="line">├── bin/          # 基本命令（所有用户可用）</span><br><span class="line">├── boot/         # 启动相关文件</span><br><span class="line">├── dev/          # 设备文件</span><br><span class="line">├── etc/          # 系统配置文件</span><br><span class="line">├── home/         # 用户主目录</span><br><span class="line">├── lib/          # 共享库文件</span><br><span class="line">├── lib64/        # 64位共享库</span><br><span class="line">├── media/        # 可移动媒体挂载点</span><br><span class="line">├── mnt/          # 临时挂载点</span><br><span class="line">├── opt/          # 可选软件包</span><br><span class="line">├── proc/         # 进程信息虚拟文件系统</span><br><span class="line">├── root/         # root用户主目录</span><br><span class="line">├── run/          # 运行时变量数据</span><br><span class="line">├── sbin/         # 系统管理命令</span><br><span class="line">├── srv/          # 服务数据</span><br><span class="line">├── sys/          # 系统信息虚拟文件系统</span><br><span class="line">├── tmp/          # 临时文件</span><br><span class="line">├── usr/          # 用户程序和数据</span><br><span class="line">└── var/          # 可变数据</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="重要目录详解"><a href="#重要目录详解" class="headerlink" title="重要目录详解"></a>重要目录详解</h3><h4 id="bin-Binary"><a href="#bin-Binary" class="headerlink" title="/bin (Binary)"></a>/bin (Binary)</h4><ul>
+<li><strong>用途</strong>：存放所有用户都可以使用的基本命令</li>
+<li><strong>内容</strong>：ls, cp, mv, rm, cat, echo, mkdir 等</li>
+<li><strong>特点</strong>：单用户模式下也可用</li>
+</ul>
+<h4 id="sbin-System-Binary"><a href="#sbin-System-Binary" class="headerlink" title="/sbin (System Binary)"></a>/sbin (System Binary)</h4><ul>
+<li><strong>用途</strong>：存放系统管理命令</li>
+<li><strong>内容</strong>：fdisk, fsck, reboot, shutdown, ifconfig 等</li>
+<li><strong>特点</strong>：通常需要 root 权限</li>
+</ul>
+<h4 id="usr-bin-和-usr-sbin"><a href="#usr-bin-和-usr-sbin" class="headerlink" title="/usr/bin 和 /usr/sbin"></a>/usr/bin 和 /usr/sbin</h4><ul>
+<li><strong>用途</strong>：存放应用程序的命令</li>
+<li><strong>关系</strong>：现代 Linux 中，/bin 和 /sbin 通常是到 /usr/bin 和 /usr/sbin 的符号链接</li>
+</ul>
+<h4 id="boot"><a href="#boot" class="headerlink" title="/boot"></a>/boot</h4><ul>
+<li><strong>用途</strong>：存放启动加载器相关文件</li>
+<li><strong>内容</strong>：<ul>
+<li>内核文件（vmlinuz-*）</li>
+<li>初始化内存盘（initrd.img-* 或 initramfs-*）</li>
+<li>GRUB 配置文件</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>：不要删除此目录中的文件</li>
+</ul>
+<h4 id="dev-Device"><a href="#dev-Device" class="headerlink" title="/dev (Device)"></a>/dev (Device)</h4><ul>
+<li><strong>用途</strong>：存放设备文件</li>
+<li><strong>类型</strong>：<ul>
+<li><strong>块设备</strong>（b）：如硬盘（/dev/sda）、光驱</li>
+<li><strong>字符设备</strong>（c）：如终端（/dev/tty）、键盘</li>
+<li><strong>伪设备</strong>：如 /dev/null（黑洞）、/dev/zero（零字节）、/dev/random（随机数）、/dev/urandom</li>
+</ul>
+</li>
+</ul>
+<p><strong>常用设备文件：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/dev/sda          <span class="comment"># 第一块SCSI/SATA硬盘</span></span><br><span class="line">/dev/sda1         <span class="comment"># 第一块硬盘的第一个分区</span></span><br><span class="line">/dev/nvme0n1      <span class="comment"># 第一块NVMe硬盘</span></span><br><span class="line">/dev/cdrom        <span class="comment"># 光驱（符号链接）</span></span><br><span class="line">/dev/tty1         <span class="comment"># 第一个虚拟终端</span></span><br><span class="line">/dev/console      <span class="comment"># 系统控制台</span></span><br><span class="line">/dev/null         <span class="comment"># 黑洞（写入的数据消失）</span></span><br><span class="line">/dev/zero         <span class="comment"># 提供无限零字节</span></span><br><span class="line">/dev/random       <span class="comment"># 真随机数（阻塞式）</span></span><br><span class="line">/dev/urandom      <span class="comment"># 伪随机数（非阻塞）</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="etc-Editable-Text-Configuration"><a href="#etc-Editable-Text-Configuration" class="headerlink" title="/etc (Editable Text Configuration)"></a>/etc (Editable Text Configuration)</h4><ul>
+<li><strong>用途</strong>：存放系统配置文件</li>
+<li><strong>特点</strong>：纯文本格式，可编辑</li>
+<li><strong>重要配置文件：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/etc/passwd           <span class="comment"># 用户账户信息</span></span><br><span class="line">/etc/shadow           <span class="comment"># 用户密码（加密）</span></span><br><span class="line">/etc/group            <span class="comment"># 群组信息</span></span><br><span class="line">/etc/gshadow          <span class="comment"># 群组密码</span></span><br><span class="line">/etc/hosts            <span class="comment"># 主机名到IP的映射</span></span><br><span class="line">/etc/resolv.conf      <span class="comment"># DNS配置</span></span><br><span class="line">/etc/fstab            <span class="comment"># 文件系统挂载表</span></span><br><span class="line">/etc/hosts.allow      <span class="comment"># 允许访问的服务</span></span><br><span class="line">/etc/hosts.deny       <span class="comment"># 拒绝访问的服务</span></span><br><span class="line">/etc/ssh/sshd_config  <span class="comment"># SSH服务器配置</span></span><br><span class="line">/etc/crontab          <span class="comment"># 系统定时任务</span></span><br><span class="line">/etc/profile          <span class="comment"># 系统环境变量</span></span><br><span class="line">/etc/bash.bashrc      <span class="comment"># 系统bash配置</span></span><br><span class="line">/etc/apt/sources.list <span class="comment"># 软件源（Debian/Ubuntu）</span></span><br><span class="line">/etc/yum.repos.d/     <span class="comment"># 软件源（RHEL/CentOS）</span></span><br><span class="line">/etc/selinux/config   <span class="comment"># SELinux配置</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="home"><a href="#home" class="headerlink" title="/home"></a>/home</h4><ul>
+<li><strong>用途</strong>：普通用户的主目录</li>
+<li><strong>结构</strong>：<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/home/</span><br><span class="line">├── alice/          # 用户alice的主目录</span><br><span class="line">├── bob/            # 用户bob的主目录</span><br><span class="line">└── charlie/        # 用户charlie的主目录</span><br></pre></td></tr></tbody></table></figure></li>
+<li><strong>环境变量</strong>：<code>$HOME</code> 或 <code>~</code> 指向当前用户的主目录</li>
+<li><strong>注意</strong>：root 用户的主目录是 <code>/root</code>，不在 <code>/home</code> 下</li>
+</ul>
+<p><strong>用户主目录中的常见文件：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">~/.bashrc             <span class="comment"># bash配置</span></span><br><span class="line">~/.bash_profile       <span class="comment"># 登录bash配置</span></span><br><span class="line">~/.profile            <span class="comment"># 通用shell配置</span></span><br><span class="line">~/.bash_history       <span class="comment"># 命令历史</span></span><br><span class="line">~/.bash_logout        <span class="comment"># 退出bash时执行</span></span><br><span class="line">~/.ssh/               <span class="comment"># SSH配置目录</span></span><br><span class="line">~/.vimrc              <span class="comment"># vim配置</span></span><br><span class="line">~/.gitconfig          <span class="comment"># git配置</span></span><br><span class="line">~/.config/            <span class="comment"># 现代应用的配置目录</span></span><br><span class="line">~/.local/             <span class="comment"># 用户本地数据</span></span><br><span class="line">~/.cache/             <span class="comment"># 缓存数据</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="lib-lib64-lib32"><a href="#lib-lib64-lib32" class="headerlink" title="/lib, /lib64, /lib32"></a>/lib, /lib64, /lib32</h4><ul>
+<li><strong>用途</strong>：存放共享库文件（Shared Libraries）</li>
+<li><strong>内容</strong>：<ul>
+<li>动态链接库（.so 文件，如 libc.so.6）</li>
+<li>内核模块</li>
+<li>启动所需的库</li>
+</ul>
+</li>
+<li><strong>目录说明：</strong><ul>
+<li><code>/lib</code>：32位和通用的库</li>
+<li><code>/lib64</code>：64位库（在64位系统上）</li>
+<li><code>/lib32</code>：32位库（在32位系统上）</li>
+</ul>
+</li>
+</ul>
+<p><strong>常见库文件：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/lib/x86_64-linux-gnu/libc.so.6     <span class="comment"># C标准库</span></span><br><span class="line">/lib/x86_64-linux-gnu/libm.so.6     <span class="comment"># 数学库</span></span><br><span class="line">/lib/x86_64-linux-gnu/libdl.so.2    <span class="comment"># 动态链接库</span></span><br><span class="line">/lib/x86_64-linux-gnu/libpthread.so.0  <span class="comment"># 线程库</span></span><br><span class="line">/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2  <span class="comment"># 动态链接器</span></span><br><span class="line">/lib/modules/                       <span class="comment"># 内核模块</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>查看程序依赖的库：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ldd /bin/ls                  <span class="comment"># 查看ls命令依赖的库</span></span><br><span class="line">ldd /usr/bin/python3         <span class="comment"># 查看python3依赖的库</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="media-和-mnt"><a href="#media-和-mnt" class="headerlink" title="/media 和 /mnt"></a>/media 和 /mnt</h4><ul>
+<li><strong>用途</strong>：挂载点（Mount Points）</li>
+<li><strong>区别：</strong><ul>
+<li><code>/media</code>：系统自动挂载的可移动设备（U盘、光盘、移动硬盘）</li>
+<li><code>/mnt</code>：手动挂载临时文件系统的传统挂载点</li>
+</ul>
+</li>
+<li><strong>现代趋势</strong>：<code>/media</code> 越来越常用，<code>/mnt</code> 更多用于临时手动挂载</li>
+</ul>
+<p><strong>查看挂载的文件系统：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mount                        <span class="comment"># 显示所有挂载点</span></span><br><span class="line"><span class="built_in">df</span> -h                        <span class="comment"># 查看磁盘使用情况</span></span><br><span class="line">lsblk                        <span class="comment"># 列出块设备</span></span><br><span class="line">blkid                        <span class="comment"># 查看块设备UUID</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="opt"><a href="#opt" class="headerlink" title="/opt"></a>/opt</h4><ul>
+<li><strong>用途</strong>：存放可选的应用程序包</li>
+<li><strong>内容</strong>：通常是第三方商业软件或大型独立软件</li>
+<li><strong>特点</strong>：<ul>
+<li>每个软件有自己的子目录</li>
+<li>不依赖于系统包管理器</li>
+<li>可以方便地安装和卸载</li>
+</ul>
+</li>
+</ul>
+<p><strong>典型结构：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/opt/</span><br><span class="line">├── google/</span><br><span class="line">│   └── chrome/           # Google Chrome</span><br><span class="line">├── vscode/               # Visual Studio Code</span><br><span class="line">├── node-v14.x.x/         # Node.js</span><br><span class="line">└── some-app/</span><br><span class="line">    ├── bin/</span><br><span class="line">    ├── lib/</span><br><span class="line">    └── conf/</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="proc"><a href="#proc" class="headerlink" title="/proc"></a>/proc</h4><ul>
+<li><strong>用途</strong>：虚拟文件系统，提供进程和内核信息</li>
+<li><strong>特点</strong>：<ul>
+<li>不占用磁盘空间，存在于内存中</li>
+<li>实时反映系统状态</li>
+<li>许多文件是只读的</li>
+</ul>
+</li>
+<li><strong>重要文件和目录：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/proc/cpuinfo             <span class="comment"># CPU信息</span></span><br><span class="line"><span class="built_in">cat</span> /proc/cpuinfo | grep <span class="string">"model name"</span> | <span class="built_in">head</span> -1</span><br><span class="line"></span><br><span class="line">/proc/meminfo             <span class="comment"># 内存信息</span></span><br><span class="line">/proc/loadavg             <span class="comment"># 系统负载</span></span><br><span class="line">/proc/uptime              <span class="comment"># 系统运行时间</span></span><br><span class="line">/proc/version             <span class="comment"># 内核版本</span></span><br><span class="line">/proc/cmdline             <span class="comment"># 内核启动参数</span></span><br><span class="line">/proc/filesystems         <span class="comment"># 支持的文件系统</span></span><br><span class="line">/proc/partitions          <span class="comment"># 分区信息</span></span><br><span class="line">/proc/swaps               <span class="comment"># 交换分区信息</span></span><br><span class="line">/proc/net/                <span class="comment"># 网络信息</span></span><br><span class="line">/proc/sys/                <span class="comment"># 内核参数（可调整）</span></span><br><span class="line">/proc/PID/                <span class="comment"># 进程信息（PID为进程ID）</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>查看进程信息：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> /proc/$$                  <span class="comment"># 查看当前shell的信息</span></span><br><span class="line"><span class="built_in">ls</span> /proc/1/                  <span class="comment"># 查看init/systemd进程</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进程目录中的文件</span></span><br><span class="line">/proc/PID/cmdline           <span class="comment"># 启动命令</span></span><br><span class="line">/proc/PID/cwd               <span class="comment"># 当前工作目录（符号链接）</span></span><br><span class="line">/proc/PID/environ           <span class="comment"># 环境变量</span></span><br><span class="line">/proc/PID/exe               <span class="comment"># 可执行文件（符号链接）</span></span><br><span class="line">/proc/PID/fd/               <span class="comment"># 打开的文件描述符</span></span><br><span class="line">/proc/PID/maps              <span class="comment"># 内存映射</span></span><br><span class="line">/proc/PID/status            <span class="comment"># 进程状态</span></span><br><span class="line">/proc/PID/task/             <span class="comment"># 线程信息</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>通过 /proc 调整内核参数：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前值</span></span><br><span class="line"><span class="built_in">cat</span> /proc/sys/net/ipv4/ip_forward</span><br><span class="line"></span><br><span class="line"><span class="comment"># 临时修改（重启失效）</span></span><br><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line"></span><br><span class="line"><span class="comment"># 永久修改（写入配置文件）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"net.ipv4.ip_forward = 1"</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line">sysctl -p                    <span class="comment"># 重新加载配置</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="root"><a href="#root" class="headerlink" title="/root"></a>/root</h4><ul>
+<li><strong>用途</strong>：root 用户的主目录</li>
+<li><strong>为什么单独</strong>：<ul>
+<li>root 是超级管理员，拥有最高权限</li>
+<li>为了安全，与其他用户主目录分开</li>
+<li>系统故障时，其他分区可能无法挂载，但 /root 在根分区上始终可用</li>
+</ul>
+</li>
+<li><strong>路径</strong>：<code>/root</code>（不是 <code>/home/root</code>）</li>
+<li><strong>权限</strong>：通常是 <code>700</code> (drwx——)，只有 root 能访问</li>
+</ul>
+<h4 id="run"><a href="#run" class="headerlink" title="/run"></a>/run</h4><ul>
+<li><strong>用途</strong>：存放运行时变量数据</li>
+<li><strong>内容</strong>：<ul>
+<li>进程 PID 文件（/run/nginx.pid）</li>
+<li>服务状态信息</li>
+<li>运行时生成的临时数据</li>
+</ul>
+</li>
+<li><strong>特点</strong>：<ul>
+<li>tmpfs 文件系统（内存中）</li>
+<li>重启后清空</li>
+<li>早期在 /var/run，现在迁移到 /run</li>
+</ul>
+</li>
+<li><strong>相关路径</strong>：<ul>
+<li><code>/run</code> = <code>/var/run</code>（符号链接）</li>
+<li><code>/run/lock</code> = <code>/var/lock</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="sbin"><a href="#sbin" class="headerlink" title="/sbin"></a>/sbin</h4><ul>
+<li><strong>用途</strong>：存放系统管理命令</li>
+<li><strong>与 /bin 的区别</strong>：<ul>
+<li><code>/bin</code>：基本命令，所有用户都需要</li>
+<li><code>/sbin</code>：系统管理命令，通常需要 root 权限</li>
+</ul>
+</li>
+<li><strong>内容</strong>：<ul>
+<li><code>fdisk</code>、<code>mkfs</code>：磁盘分区格式化</li>
+<li><code>ifconfig</code>、<code>ip</code>：网络配置</li>
+<li><code>reboot</code>、<code>shutdown</code>、<code>poweroff</code>：关机重启</li>
+<li><code>iptables</code>：防火墙配置</li>
+</ul>
+</li>
+</ul>
+<h4 id="srv"><a href="#srv" class="headerlink" title="/srv"></a>/srv</h4><ul>
+<li><strong>用途</strong>：存放服务提供的数据</li>
+<li><strong>内容</strong>：<ul>
+<li>Web 服务器的数据（/srv/www）</li>
+<li>FTP 服务器的数据（/srv/ftp）</li>
+<li>Git 仓库（/srv/git）</li>
+</ul>
+</li>
+<li><strong>与 /var 的区别</strong>：<ul>
+<li><code>/srv</code>：服务的数据文件</li>
+<li><code>/var</code>：运行时产生的可变数据（日志、缓存等）</li>
+</ul>
+</li>
+</ul>
+<h4 id="sys"><a href="#sys" class="headerlink" title="/sys"></a>/sys</h4><ul>
+<li><strong>用途</strong>：虚拟文件系统，提供内核参数和设备信息</li>
+<li><strong>与 /proc 的区别</strong>：<ul>
+<li><code>/proc</code>：进程信息和运行时内核数据</li>
+<li><code>/sys</code>：设备和内核对象的统一视图（sysfs）</li>
+</ul>
+</li>
+<li><strong>内容</strong>：</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/sys/class/               <span class="comment"># 按类别组织的设备（块设备、网络接口等）</span></span><br><span class="line">/sys/devices/             <span class="comment"># 设备树</span></span><br><span class="line">/sys/block/               <span class="comment"># 块设备</span></span><br><span class="line">/sys/bus/                 <span class="comment"># 总线信息（PCI、USB等）</span></span><br><span class="line">/sys/kernel/              <span class="comment"># 内核配置和状态</span></span><br><span class="line">/sys/module/              <span class="comment"># 已加载的内核模块</span></span><br><span class="line">/sys/power/               <span class="comment"># 电源管理</span></span><br><span class="line">/sys/fs/                  <span class="comment"># 文件系统信息</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>常用操作：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看CPU信息</span></span><br><span class="line"><span class="built_in">ls</span> /sys/devices/system/cpu/</span><br><span class="line"><span class="built_in">cat</span> /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看内存信息</span></span><br><span class="line"><span class="built_in">cat</span> /sys/devices/system/memory/memory0/state</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看块设备</span></span><br><span class="line"><span class="built_in">ls</span> /sys/block/</span><br><span class="line"><span class="built_in">cat</span> /sys/block/sda/size      <span class="comment"># 块数（乘以512得字节数）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 控制LED（如果有的话）</span></span><br><span class="line"><span class="built_in">echo</span> 1 &gt; /sys/class/leds/input0::capslock/brightness</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>通过 /sys 调整内核参数：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启/关闭IP转发（临时，重启失效）</span></span><br><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">sysctl -w net.ipv4.ip_forward=1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改swappiness</span></span><br><span class="line">sysctl -w vm.swappiness=10</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="tmp"><a href="#tmp" class="headerlink" title="/tmp"></a>/tmp</h4><ul>
+<li><strong>用途</strong>：存放临时文件</li>
+<li><strong>特点</strong>：<ul>
+<li>所有用户都有读写权限（通常是 777 + sticky bit = 1777）</li>
+<li>定期清理（通常每天或重启时）</li>
+<li>可能使用 tmpfs（内存文件系统）</li>
+</ul>
+</li>
+<li><strong>使用场景</strong>：<ul>
+<li>程序运行时的临时数据</li>
+<li>下载和解压文件</li>
+<li>编译过程中的临时文件</li>
+</ul>
+</li>
+</ul>
+<h4 id="usr-Unix-System-Resources"><a href="#usr-Unix-System-Resources" class="headerlink" title="/usr (Unix System Resources)"></a>/usr (Unix System Resources)</h4><ul>
+<li><strong>用途</strong>：存放用户程序和文件</li>
+<li><strong>含义</strong>：历史上是 “user” 的缩写，现在是 “Unix System Resources”</li>
+<li><strong>结构</strong>：</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/usr/</span><br><span class="line">├── bin/              # 用户命令（非基本命令）</span><br><span class="line">├── include/          # C/C++ 头文件</span><br><span class="line">├── lib/              # 库文件</span><br><span class="line">├── lib64/            # 64位库文件</span><br><span class="line">├── libexec/          # 其他程序运行的程序</span><br><span class="line">├── local/            # 本地安装的软件</span><br><span class="line">│   ├── bin/</span><br><span class="line">│   ├── etc/</span><br><span class="line">│   ├── include/</span><br><span class="line">│   ├── lib/</span><br><span class="line">│   ├── sbin/</span><br><span class="line">│   └── share/</span><br><span class="line">├── sbin/             # 非基本的系统管理命令</span><br><span class="line">├── share/            # 架构无关的数据文件</span><br><span class="line">│   ├── doc/          # 文档</span><br><span class="line">│   ├── man/          # 手册页</span><br><span class="line">│   ├── info/         # info文档</span><br><span class="line">│   └── ...</span><br><span class="line">└── src/              # 源代码（可选）</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>重要子目录：</strong></p>
+<ul>
+<li><code>/usr/bin</code>：用户命令，比 <code>/bin</code> 更丰富（如 gcc, python, vim）</li>
+<li><code>/usr/sbin</code>：系统管理命令，比 <code>/sbin</code> 更丰富（如 apachectl, mysqld）</li>
+<li><code>/usr/lib</code>：程序的库文件</li>
+<li><code>/usr/share</code>：与架构无关的共享数据（文档、图标、字体等）</li>
+<li><code>/usr/local</code>：本地安装的软件，与系统包管理器分开</li>
+</ul>
+<h4 id="var-Variable"><a href="#var-Variable" class="headerlink" title="/var (Variable)"></a>/var (Variable)</h4><ul>
+<li><strong>用途</strong>：存放运行时产生的可变数据</li>
+<li><strong>特点</strong>：数据会随时间增长或变化</li>
+<li><strong>内容</strong>：</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/var/</span><br><span class="line">├── cache/            # 缓存数据</span><br><span class="line">│   ├── apt/          # apt缓存</span><br><span class="line">│   └── ...</span><br><span class="line">├── lib/              # 可变状态数据</span><br><span class="line">│   ├── dpkg/         # dpkg状态</span><br><span class="line">│   ├── mysql/        # MySQL数据</span><br><span class="line">│   ├── docker/       # Docker数据</span><br><span class="line">│   └── ...</span><br><span class="line">├── log/              # 日志文件（重要！）</span><br><span class="line">│   ├── syslog        # 系统日志</span><br><span class="line">│   ├── auth.log      # 认证日志</span><br><span class="line">│   ├── kern.log      # 内核日志</span><br><span class="line">│   ├── nginx/        # Nginx日志</span><br><span class="line">│   └── ...</span><br><span class="line">├── mail/             # 用户邮件</span><br><span class="line">├── run/              # 运行时数据（PID文件等）</span><br><span class="line">├── spool/            # 队列数据</span><br><span class="line">│   ├── cron/         # cron任务</span><br><span class="line">│   ├── mail/         # 邮件队列</span><br><span class="line">│   └── ...</span><br><span class="line">└── tmp/              # 临时文件（重启保留）</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>重要子目录：</strong></p>
+<ul>
+<li><code>/var/log</code>：日志文件，排查问题的重要依据</li>
+<li><code>/var/lib</code>：程序的运行时数据（如数据库文件）</li>
+<li><code>/var/cache</code>：缓存数据，可清理以释放空间</li>
+<li><code>/var/spool</code>：队列数据（如邮件队列、打印队列）</li>
+</ul>
+<h3 id="路径与目录操作"><a href="#路径与目录操作" class="headerlink" title="路径与目录操作"></a>路径与目录操作</h3><h4 id="绝对路径与相对路径"><a href="#绝对路径与相对路径" class="headerlink" title="绝对路径与相对路径"></a>绝对路径与相对路径</h4><p><strong>绝对路径 (Absolute Path)</strong>：</p>
+<ul>
+<li>从根目录 <code>/</code> 开始的完整路径</li>
+<li>不管当前在什么位置，都能准确找到</li>
+<li>示例：<code>/home/user/documents/file.txt</code></li>
+</ul>
+<p><strong>相对路径 (Relative Path)</strong>：</p>
+<ul>
+<li>相对于当前目录的路径</li>
+<li>不从 <code>/</code> 开始</li>
+<li>依赖当前所在位置</li>
+</ul>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.</code></td>
+<td>当前目录</td>
+</tr>
+<tr>
+<td><code>..</code></td>
+<td>上级目录</td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>当前用户的主目录</td>
+</tr>
+<tr>
+<td><code>~username</code></td>
+<td>指定用户的主目录</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>上一次所在的目录</td>
+</tr>
+</tbody></table></div>
+<p><strong>相对路径示例：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当前目录：/home/user</span></span><br><span class="line">./file.txt                   <span class="comment"># 当前目录下的 file.txt → /home/user/file.txt</span></span><br><span class="line">../etc/passwd                <span class="comment"># 上级目录的 etc/passwd → /home/etc/passwd （错误）</span></span><br><span class="line">../../etc/passwd             <span class="comment"># 上两级目录的 etc/passwd → /etc/passwd</span></span><br><span class="line">~/documents                  <span class="comment"># 主目录下的 documents → /home/user/documents</span></span><br><span class="line">~alice/public                <span class="comment"># alice 主目录下的 public</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="路径切换命令"><a href="#路径切换命令" class="headerlink" title="路径切换命令"></a>路径切换命令</h4><p><strong><code>cd</code> - 切换目录</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /path/to/directory        <span class="comment"># 切换到绝对路径</span></span><br><span class="line"><span class="built_in">cd</span> relative/path             <span class="comment"># 切换到相对路径</span></span><br><span class="line"><span class="built_in">cd</span> ~                         <span class="comment"># 切换到主目录</span></span><br><span class="line"><span class="built_in">cd</span>                           <span class="comment"># 同上</span></span><br><span class="line"><span class="built_in">cd</span> ~username                 <span class="comment"># 切换到指定用户的主目录</span></span><br><span class="line"><span class="built_in">cd</span> ..                        <span class="comment"># 切换到上级目录</span></span><br><span class="line"><span class="built_in">cd</span> ../..                     <span class="comment"># 切换到上上级目录</span></span><br><span class="line"><span class="built_in">cd</span> -                         <span class="comment"># 切换到上次所在的目录</span></span><br><span class="line"><span class="built_in">pwd</span>                          <span class="comment"># 显示当前路径</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>pwd</code> - 显示当前路径</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span>                          <span class="comment"># 显示逻辑路径（可能包含符号链接）</span></span><br><span class="line"><span class="built_in">pwd</span> -P                       <span class="comment"># 显示物理路径（解析所有符号链接）</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="目录操作命令"><a href="#目录操作命令" class="headerlink" title="目录操作命令"></a>目录操作命令</h4><p><strong><code>mkdir</code> - 创建目录</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> <span class="built_in">dirname</span>                <span class="comment"># 创建单个目录</span></span><br><span class="line"><span class="built_in">mkdir</span> dir1 dir2 dir3         <span class="comment"># 创建多个目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p parent/child/grandchild  <span class="comment"># 递归创建多级目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -m 755 mydir           <span class="comment"># 创建时指定权限</span></span><br><span class="line"><span class="built_in">mkdir</span> -v <span class="built_in">dirname</span>             <span class="comment"># 显示创建过程</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><code>rmdir</code> - 删除空目录</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rmdir</span> <span class="built_in">dirname</span>                <span class="comment"># 删除空目录</span></span><br><span class="line"><span class="built_in">rmdir</span> -p parent/child        <span class="comment"># 递归删除空目录</span></span><br><span class="line"><span class="built_in">rmdir</span> dir1 dir2              <span class="comment"># 删除多个空目录</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>⚠️ <strong>注意：</strong> <code>rmdir</code> 只能删除<strong>空目录</strong>。要删除非空目录，使用 <code>rm -r</code>。</p>
+<p><strong><code>rm</code> - 删除文件或目录</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> file.txt                  <span class="comment"># 删除文件</span></span><br><span class="line"><span class="built_in">rm</span> -r directory              <span class="comment"># 递归删除目录及其内容</span></span><br><span class="line"><span class="built_in">rm</span> -rf directory             <span class="comment"># 强制递归删除（危险！）</span></span><br><span class="line"><span class="built_in">rm</span> -i file.txt               <span class="comment"># 删除前询问</span></span><br><span class="line"><span class="built_in">rm</span> -f file.txt               <span class="comment"># 强制删除（忽略不存在文件）</span></span><br><span class="line"><span class="built_in">rm</span> *.<span class="built_in">log</span>                     <span class="comment"># 删除所有log文件</span></span><br><span class="line"><span class="built_in">rm</span> -r *                      <span class="comment"># 删除当前目录下所有内容（危险！）</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>⚠️ <strong>危险命令警告：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /                     <span class="comment"># 删除整个系统！永远不要执行！</span></span><br><span class="line"><span class="built_in">rm</span> -rf /*                    <span class="comment"># 同上</span></span><br><span class="line"><span class="built_in">rm</span> -rf ~                     <span class="comment"># 删除主目录</span></span><br><span class="line"><span class="built_in">rm</span> -rf .                     <span class="comment"># 删除当前目录</span></span><br><span class="line"><span class="built_in">rm</span> -rf .*                    <span class="comment"># 删除所有隐藏文件和上级目录！</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="文件与目录的默认权限"><a href="#文件与目录的默认权限" class="headerlink" title="文件与目录的默认权限"></a>文件与目录的默认权限</h3><h4 id="umask"><a href="#umask" class="headerlink" title="umask"></a>umask</h4><p><strong>umask</strong>（user file-creation mode mask）决定了新创建文件和目录的<strong>默认权限</strong>。</p>
+<p><strong>查看 umask：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">umask</span>                        <span class="comment"># 显示umask值（四位八进制数）</span></span><br><span class="line"><span class="built_in">umask</span> -S                     <span class="comment"># 以符号模式显示</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>默认权限计算：</strong></p>
+<ul>
+<li><strong>文件</strong>：<code>666 - umask</code></li>
+<li><strong>目录</strong>：<code>777 - umask</code></li>
+</ul>
+<p><strong>常见 umask 值：</strong></p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>umask</th>
+<th>文件权限</th>
+<th>目录权限</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>002</td>
+<td>664 (rw-rw-r–)</td>
+<td>775 (rwxrwxr-x)</td>
+<td>用户和组可写</td>
+</tr>
+<tr>
+<td>022</td>
+<td>644 (rw-r–r–)</td>
+<td>755 (rwxr-xr-x)</td>
+<td>仅用户可写（常见）</td>
+</tr>
+<tr>
+<td>077</td>
+<td>600 (rw——-)</td>
+<td>700 (rwx——)</td>
+<td>仅用户可访问（安全）</td>
+</tr>
+</tbody></table></div>
+<p><strong>设置 umask：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">umask</span> 022                    <span class="comment"># 设置umask为022</span></span><br><span class="line"><span class="built_in">umask</span> 027                    <span class="comment"># 更严格：组可读，其他人无权限</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>永久设置 umask：</strong><br>编辑 <code>~/.bashrc</code> 或 <code>~/.profile</code>：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"umask 022"</span> &gt;&gt; ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="特殊权限的实践应用"><a href="#特殊权限的实践应用" class="headerlink" title="特殊权限的实践应用"></a>特殊权限的实践应用</h3><h4 id="1-SUID-应用：passwd-命令"><a href="#1-SUID-应用：passwd-命令" class="headerlink" title="1. SUID 应用：passwd 命令"></a>1. SUID 应用：passwd 命令</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /usr/bin/passwd</span><br><span class="line"><span class="comment"># -rwsr-xr-x 1 root root ... /usr/bin/passwd</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>为什么需要 SUID？</strong></p>
+<ul>
+<li>普通用户需要修改自己的密码</li>
+<li>密码存储在 <code>/etc/shadow</code>，只有 root 可写</li>
+<li>通过 SUID，passwd 以 root 身份运行，可以修改 shadow 文件</li>
+</ul>
+<h4 id="2-SGID-应用：共享目录"><a href="#2-SGID-应用：共享目录" class="headerlink" title="2. SGID 应用：共享目录"></a>2. SGID 应用：共享目录</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建共享目录</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> /shared</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> :developers /shared</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> 2775 /shared</span><br><span class="line"></span><br><span class="line"><span class="built_in">ls</span> -ld /shared</span><br><span class="line"><span class="comment"># drwxrwsr-x 2 root developers ... /shared</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>效果：</strong></p>
+<ul>
+<li>任何人在此目录创建的文件，群组都是 <code>developers</code></li>
+<li>实现组内文件共享</li>
+</ul>
+<h4 id="3-粘滞位应用：-tmp-目录"><a href="#3-粘滞位应用：-tmp-目录" class="headerlink" title="3. 粘滞位应用：/tmp 目录"></a>3. 粘滞位应用：/tmp 目录</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -ld /tmp</span><br><span class="line"><span class="comment"># drwxrwxrwt 10 root root ... /tmp</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>效果：</strong></p>
+<ul>
+<li>所有人都可以在 /tmp 读写文件</li>
+<li>但只能删除自己创建的文件</li>
+<li>保护了用户的临时文件不被他人删除</li>
+</ul>
+<h3 id="权限管理最佳实践"><a href="#权限管理最佳实践" class="headerlink" title="权限管理最佳实践"></a>权限管理最佳实践</h3><h4 id="1-最小权限原则"><a href="#1-最小权限原则" class="headerlink" title="1. 最小权限原则"></a>1. 最小权限原则</h4><ul>
+<li>只授予必要的权限</li>
+<li>不要滥用 root 权限</li>
+<li>使用 sudo 而不是直接登录 root</li>
+</ul>
+<h4 id="2-敏感文件权限"><a href="#2-敏感文件权限" class="headerlink" title="2. 敏感文件权限"></a>2. 敏感文件权限</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 密码文件</span></span><br><span class="line"><span class="built_in">chmod</span> 600 /etc/shadow</span><br><span class="line"><span class="built_in">chmod</span> 644 /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="comment"># SSH 密钥</span></span><br><span class="line"><span class="built_in">chmod</span> 700 ~/.ssh</span><br><span class="line"><span class="built_in">chmod</span> 600 ~/.ssh/id_rsa</span><br><span class="line"><span class="built_in">chmod</span> 644 ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="built_in">chmod</span> 644 ~/.ssh/authorized_keys</span><br><span class="line"><span class="built_in">chmod</span> 644 ~/.ssh/known_hosts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置文件</span></span><br><span class="line"><span class="built_in">chmod</span> 644 /etc/hosts</span><br><span class="line"><span class="built_in">chmod</span> 755 /etc/init.d/*</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="3-目录权限设置"><a href="#3-目录权限设置" class="headerlink" title="3. 目录权限设置"></a>3. 目录权限设置</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Web 目录</span></span><br><span class="line"><span class="built_in">chmod</span> 755 /var/www/html</span><br><span class="line"><span class="built_in">chmod</span> 644 /var/www/html/*.html</span><br><span class="line"></span><br><span class="line"><span class="comment"># 日志目录</span></span><br><span class="line"><span class="built_in">chmod</span> 755 /var/log</span><br><span class="line"><span class="built_in">chmod</span> 640 /var/log/*.<span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 共享目录（SGID）</span></span><br><span class="line"><span class="built_in">chmod</span> 2770 /shared</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="4-使用-ACL-进行细粒度控制"><a href="#4-使用-ACL-进行细粒度控制" class="headerlink" title="4. 使用 ACL 进行细粒度控制"></a>4. 使用 ACL 进行细粒度控制</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 允许特定用户访问</span></span><br><span class="line">setfacl -m u:alice:r-x /restricted</span><br><span class="line"></span><br><span class="line"><span class="comment"># 允许特定组读写</span></span><br><span class="line">setfacl -m g:developers:rw- shared_file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置默认ACL（新文件继承）</span></span><br><span class="line">setfacl -d -m u:bob:rwx /shared_dir</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="5-定期审计权限"><a href="#5-定期审计权限" class="headerlink" title="5. 定期审计权限"></a>5. 定期审计权限</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找SUID/SGID文件</span></span><br><span class="line">find / -perm -4000 -o -perm -2000 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找所有人可写的文件</span></span><br><span class="line">find / -<span class="built_in">type</span> f -perm -002 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找没有所有者的文件</span></span><br><span class="line">find / -nouser -o -nogroup 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查SSH密钥权限</span></span><br><span class="line">find /home -name <span class="string">"id_rsa"</span> ! -perm 600 2&gt;/dev/null</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="本章命令总结"><a href="#本章命令总结" class="headerlink" title="本章命令总结"></a>本章命令总结</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ls -l</code></td>
+<td>查看文件权限</td>
+</tr>
+<tr>
+<td><code>chmod</code></td>
+<td>修改权限</td>
+</tr>
+<tr>
+<td><code>chown</code></td>
+<td>修改所有者</td>
+</tr>
+<tr>
+<td><code>chgrp</code></td>
+<td>修改群组</td>
+</tr>
+<tr>
+<td><code>umask</code></td>
+<td>设置默认权限</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>查看用户信息</td>
+</tr>
+<tr>
+<td><code>whoami</code></td>
+<td>显示当前用户</td>
+</tr>
+<tr>
+<td><code>groups</code></td>
+<td>查看所属群组</td>
+</tr>
+<tr>
+<td><code>getfacl</code> / <code>setfacl</code></td>
+<td>管理ACL</td>
+</tr>
+<tr>
+<td><code>lsattr</code> / <code>chattr</code></td>
+<td>管理隐藏属性</td>
+</tr>
+<tr>
+<td><code>find</code></td>
+<td>查找文件（支持按权限查找）</td>
+</tr>
+</tbody></table></div>
+<h2 id="5-4-重点回顾"><a href="#5-4-重点回顾" class="headerlink" title="5.4 重点回顾"></a>5.4 重点回顾</h2><ol>
+<li><strong>三种身份</strong>：user（所有者）、group（群组）、others（其他人）</li>
+<li><strong>三种权限</strong>：r（读，4）、w（写，2）、x（执行，1）</li>
+<li><strong>权限查看</strong>：<code>ls -l</code> 显示10位权限字符串</li>
+<li><strong>修改权限</strong>：<code>chmod</code>（符号模式或数字模式）</li>
+<li><strong>修改所有者</strong>：<code>chown</code>（可同时改群组）</li>
+<li><strong>修改群组</strong>：<code>chgrp</code>（或 <code>chown :group</code>）</li>
+<li><strong>默认权限</strong>：<code>umask</code> 决定新文件的默认权限</li>
+<li><strong>特殊权限</strong>：SUID(4)、SGID(2)、粘滞位(1)</li>
+<li><strong>隐藏属性</strong>：<code>chattr</code>、<code>lsattr</code></li>
+<li><strong>ACL</strong>：<code>setfacl</code>、<code>getfacl</code> 提供更细粒度的权限控制</li>
+<li><strong>FHS标准</strong>：Linux 目录结构遵循 FHS 标准</li>
+<li><strong>重要目录</strong>：/etc（配置）、/var（可变数据）、/home（用户主目录）</li>
+</ol>
+<h2 id="5-5-本章练习"><a href="#5-5-本章练习" class="headerlink" title="5.5 本章练习"></a>5.5 本章练习</h2><ol>
+<li><p>解释 <code>-rwxr-xr-- 1 alice developers 1234 Jan 1 10:00 script.sh</code> 中各字段的含义。</p>
+</li>
+<li><p>如何给文件添加执行权限？如何移除写权限？分别使用符号模式和数字模式。</p>
+</li>
+<li><p>创建一个目录，使得组内成员可以读写，其他人只能进入但不能列出内容。</p>
+</li>
+<li><p>解释 SUID、SGID 和粘滞位的作用，并各举一个应用场景。</p>
+</li>
+<li><p>设置 umask 使得新建文件的权限为 640，新建目录的权限为 750。</p>
+</li>
+<li><p>使用 ACL 允许特定用户访问你主目录下的某个文件，但不改变文件的基本权限。</p>
+</li>
+<li><p>解释以下目录的用途：/etc、/var、/usr、/opt、/proc。</p>
+</li>
+<li><p>查找系统中所有设置了 SUID 位的文件。</p>
+</li>
+<li><p>创建一个共享目录，要求：</p>
+<ul>
+<li>任何人都可以创建文件</li>
+<li>只能删除自己的文件</li>
+<li>新文件的群组自动继承目录的群组</li>
+</ul>
+</li>
+<li><p>检查你主目录下文件的权限，找出可能存在安全隐患的文件（如所有人可写）。</p>
+</li>
+</ol>
+<h2 id="5-6-参考资料与延伸阅读"><a href="#5-6-参考资料与延伸阅读" class="headerlink" title="5.6 参考资料与延伸阅读"></a>5.6 参考资料与延伸阅读</h2><ul>
+<li><code>man 1 chmod</code></li>
+<li><code>man 1 chown</code></li>
+<li><code>man 1 ls</code></li>
+<li><code>man 2 umask</code></li>
+<li><code>man 1 getfacl</code></li>
+<li><a target="_blank" rel="noopener" href="https://refspecs.linuxfoundation.org/fhs.shtml" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>Filesystem Hierarchy Standard</a></li>
+<li><a target="_blank" rel="noopener" href="https://linux.vbird.org/linux_basic/centos7/0210filepermission.php" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>Linux 文件权限详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://linux.vbird.org/linux_basic/centos7/0210filepermission.php" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>鸟哥的 Linux 私房菜 - 文件权限与目录配置</a></li>
+</ul>
+</article>
+
+
+<div class="article-footer slide-up">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文本文由rlcao编写，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section></div>
+
+<div class="related-wrap slide-up" id="read-next"><section class="body"><div class="item" id="prev"><div class="note"><svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-left" aria-hidden="true"></svg> 回顾上一篇</div><a href="/wiki/Linux/ch08-compress/">第八章、文件与文件系统的压缩、打包与备份</a></div><div class="item" id="next"><div class="note">接下来阅读 <svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-right" aria-hidden="true"></svg></div><a href="/wiki/Linux/ch10-bash/">第十章、认识与学习BASH</a></div></section></div>
+
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main></div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/wiki/Linux/ch05-permissions/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第五章、Linux 的文件权限与目录配置","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

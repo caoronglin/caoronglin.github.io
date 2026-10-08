@@ -1,0 +1,94 @@
+/* 友链申请表单样式
+ * 容器由 source/_data/widgets.yml 的 friends-link 组件输出：
+ *   <div id="friends-apply-form"></div>
+ * 交互逻辑在 source/custom/js/friends-apply.js
+ */
+
+.friends-apply {
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--main-border-color, var(--card-border-color, #e6e6e6));
+  border-radius: 12px;
+  background: var(--main-bg-color, var(--card, rgba(127, 127, 127, 0.06)));
+}
+
+.friends-apply__form-title {
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.fs-form { display: flex; flex-direction: column; gap: 0.65rem; }
+
+.fs-tip {
+  margin: 0 0 0.3rem;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--sp-text-p3, #8898aa);
+}
+
+.fs-field { display: flex; flex-direction: column; gap: 0.25rem; }
+
+.fs-label {
+  font-size: 0.78rem;
+  color: var(--sp-text-p3, #8898aa);
+}
+
+.fs-label i { color: #f44336; font-style: normal; margin-left: 2px; }
+
+.fs-field input {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  color: inherit;
+  background: var(--sp-card-bg, var(--card, transparent));
+  border: 1px solid var(--main-border-color, var(--card-border-color, #e6e6e6));
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.fs-field input:focus {
+  border-color: var(--sp-accent, var(--accent, #f9c74f));
+  box-shadow: 0 0 0 3px rgba(249, 199, 79, 0.18);
+}
+
+.fs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.fs-submit,
+.fs-alt {
+  flex: 1 1 auto;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.fs-submit {
+  color: #fff;
+  background: linear-gradient(90deg, #f9c74f, #f3722c);
+}
+
+.fs-alt {
+  color: inherit;
+  background: transparent;
+  border-color: var(--main-border-color, var(--card-border-color, #e6e6e6));
+}
+
+.fs-submit:hover,
+.fs-alt:hover { opacity: 0.85; }
+
+.fs-submit:disabled { opacity: 0.55; cursor: progress; }
+
+.fs-msg { margin: 0.2rem 0 0; font-size: 0.8rem; min-height: 1.2em; }
+.fs-msg.ok    { color: #2e9e5b; }
+.fs-msg.error { color: #d63629; }
+.fs-msg.info  { color: var(--sp-text-p3, #8898aa); }

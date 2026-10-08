@@ -1,0 +1,154 @@
+/* 镜像节点管理页
+ *
+ * 加载位置：随 custom.bundle.css 全站加载，选择器以 .mp- 前缀限定，
+ * 不会与主题或其他自定义样式冲突。
+ *
+ * 原先写在 source/mirror-panel/index.md 的内联 <style> 里，含 v1 的
+ * .l_main 选择器（v2 已改为 .site-main / #main），一并迁移到此。
+ */
+
+/* ---------- 页面头部 ---------- */
+
+.mp-hero {
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--main-border-color, rgba(0, 0, 0, 0.08));
+  background: linear-gradient(135deg,
+    var(--sp-card-bg, rgba(127, 127, 127, 0.06)),
+    var(--sp-block-bg, rgba(127, 127, 127, 0.03)));
+}
+
+.mp-hero h1 {
+  margin: 0 0 0.4rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.mp-hero p {
+  margin: 0;
+  color: var(--sp-text-p3, #8898aa);
+  font-size: 0.9rem;
+}
+
+/* ---------- 内容容器 ---------- */
+
+.mp-root { min-height: 600px; }
+
+/* 镜像列表网格 */
+.mp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.mp-card {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--main-border-color, rgba(0, 0, 0, 0.08));
+  background: var(--sp-card-bg, rgba(127, 127, 127, 0.06));
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mp-card:hover {
+  border-color: var(--sp-accent, #f9c74f);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.mp-card-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+  word-break: break-all;
+}
+
+.mp-card-meta {
+  font-size: 0.78rem;
+  color: var(--sp-text-p3, #8898aa);
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* 状态徽标 */
+.mp-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.mp-badge-ok      { color: #2e9e5b; background: rgba(46, 158, 91, 0.12); }
+.mp-badge-slow    { color: #d63629; background: rgba(214, 54, 41, 0.12); }
+.mp-badge-pending { color: #8898aa; background: rgba(136, 152, 170, 0.15); }
+
+/* 操作区 */
+.mp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--main-border-color, rgba(0, 0, 0, 0.08));
+}
+
+.mp-btn {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: opacity 0.15s;
+}
+
+.mp-btn:hover { opacity: 0.85; }
+.mp-btn:disabled { opacity: 0.5; cursor: progress; }
+
+.mp-btn-primary {
+  color: #fff;
+  background: linear-gradient(90deg, #f9c74f, #f3722c);
+}
+
+.mp-btn-ghost {
+  color: inherit;
+  background: transparent;
+  border-color: var(--main-border-color, rgba(0, 0, 0, 0.08));
+}
+
+/* 日志区 */
+.mp-logs {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--sp-block-bg, rgba(127, 127, 127, 0.04));
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.76rem;
+  line-height: 1.7;
+  color: var(--sp-text-p2, #66788a);
+}
+
+.mp-logs div + div { border-top: 1px dashed var(--main-border-color, rgba(0, 0, 0, 0.06)); }
+
+.mp-section-title {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.mp-empty {
+  padding: 28px;
+  text-align: center;
+  color: var(--sp-text-p3, #8898aa);
+  font-size: 0.88rem;
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 600px) {
+  .mp-grid { grid-template-columns: 1fr; }
+  .mp-hero { padding: 1.4rem; }
+  .mp-actions .mp-btn { flex: 1 1 auto; }
+}

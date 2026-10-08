@@ -1,0 +1,1604 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/class-notes/%E9%81%97%E4%BC%A0%E5%AD%A6/03-%E9%81%97%E4%BC%A0%E7%9A%84%E6%9F%93%E8%89%B2%E4%BD%93%E5%AD%A6%E8%AF%B4/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="第三章 遗传的染色体学说 [!info] 本章定位孟德尔用假设的遗传因子解释了杂交结果，却没有回答「因子在哪里」。本章补上这块基石：先在显微镜下看清染色体与细胞分裂的全过程（第一、二节），再用 2n ⇌ n 的染色体周期串起各类生物的生活史（第三节），最后把孟德尔定律与减数分裂的染色体行为一一对应（第四节）。 全章灵魂：分离定律 ↔ 后期Ⅰ同源染色体分离；自由组合定律 ↔ 后期Ⅰ非同源染色体独立分" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/class-notes/%E9%81%97%E4%BC%A0%E5%AD%A6/03-%E9%81%97%E4%BC%A0%E7%9A%84%E6%9F%93%E8%89%B2%E4%BD%93%E5%AD%A6%E8%AF%B4/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="第三章 遗传的染色体学说 [!info] 本章定位孟德尔用假设的遗传因子解释了杂交结果，却没有回答「因子在哪里」。本章补上这块基石：先在显微镜下看清染色体与细胞分裂的全过程（第一、二节），再用 2n ⇌ n 的染色体周期串起各类生物的生活史（第三节），最后把孟德尔定律与减数分裂的染色体行为一一对应（第四节）。 全章灵魂：分离定律 ↔ 后期Ⅰ同源染色体分离；自由组合定律 ↔ 后期Ⅰ非同源染色体独立分" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/figures/ch03-%E5%9B%BE3-1-%E7%8E%89%E7%B1%B3%E6%9F%93%E8%89%B2%E4%BD%93%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%9B%BE.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-10-08T04:55:06.163Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.163Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="减数分裂" data-stellar-page-meta="">
+<meta property="article:tag" content="有丝分裂" data-stellar-page-meta="">
+<meta property="article:tag" content="染色体学说" data-stellar-page-meta="">
+<meta property="article:tag" content="生活史" data-stellar-page-meta="">
+<meta property="article:tag" content="细胞分裂" data-stellar-page-meta="">
+<meta property="article:tag" content="遗传学" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/figures/ch03-%E5%9B%BE3-1-%E7%8E%89%E7%B1%B3%E6%9F%93%E8%89%B2%E4%BD%93%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%9B%BE.jpg" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content=",,,,," data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/class-notes/%E9%81%97%E4%BC%A0%E5%AD%A6/03-%E9%81%97%E4%BC%A0%E7%9A%84%E6%9F%93%E8%89%B2%E4%BD%93%E5%AD%A6%E8%AF%B4/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"麟跃云起","description":"第三章 遗传的染色体学说\n[!info] 本章定位孟德尔用假设的遗传因子解释了杂交结果，却没有回答「因子在哪里」。本章补上这块基石：先在显微镜下看清染色体与细胞分裂的全过程（第一、二节），再用 2n ⇌ n 的染色体周期串起各类生物的生活史（第三节），最后把孟德尔定律与减数分裂的染色体行为一一对应（第四节）。\n全章灵魂：分离定律 ↔ 后期Ⅰ同源染色体分离；自由组合定律 ↔ 后期Ⅰ非同源染色体...","url":"https://blog.cnortles.top/notes/class-notes/%E9%81%97%E4%BC%A0%E5%AD%A6/03-%E9%81%97%E4%BC%A0%E7%9A%84%E6%9F%93%E8%89%B2%E4%BD%93%E5%AD%A6%E8%AF%B4/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/class-notes/%E9%81%97%E4%BC%A0%E5%AD%A6/03-%E9%81%97%E4%BC%A0%E7%9A%84%E6%9F%93%E8%89%B2%E4%BD%93%E5%AD%A6%E8%AF%B4/"></a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-10-08T04:55:06.163Z">2026-10-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.163Z">2026-10-08</time></span></div>
+</div></div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="第三章-遗传的染色体学说"><a href="#第三章-遗传的染色体学说" class="headerlink" title="第三章 遗传的染色体学说"></a>第三章 遗传的染色体学说</h1><blockquote>
+<p>[!info] 本章定位<br>孟德尔用<strong>假设的遗传因子</strong>解释了杂交结果，却没有回答「因子在哪里」。本章补上这块基石：先在显微镜下看清染色体与细胞分裂的全过程（第一、二节），再用 <code>2n ⇌ n</code> 的染色体周期串起各类生物的生活史（第三节），最后把<strong>孟德尔定律与减数分裂的染色体行为一一对应</strong>（第四节）。</p>
+<p><strong>全章灵魂</strong>：分离定律 ↔ 后期Ⅰ同源染色体分离；自由组合定律 ↔ 后期Ⅰ非同源染色体独立分配。抓住这一条，整章就立起来了。</p>
+</blockquote>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-1-%E7%8E%89%E7%B1%B3%E6%9F%93%E8%89%B2%E4%BD%93%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%9B%BE.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-1 玉米染色体的模式图：玉米共 10 对染色体（$2n=20$），图中只画每对中的一条，编号 1~10。依据相对长度、着丝粒位置、核仁形成区有无和结节分布，可把这 10 条互相区分开——这正是「每条染色体形态恒定、可被识别」的直观依据。</em></p>
+<h2 id="本章地图"><a href="#本章地图" class="headerlink" title="本章地图"></a>本章地图</h2><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>节</th>
+<th>主题</th>
+<th>核心问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一节</td>
+<td>染色体</td>
+<td>染色体的数目、形态结构与命名依据是什么？</td>
+</tr>
+<tr>
+<td>第二节</td>
+<td>细胞分裂</td>
+<td>细菌二分分裂、有丝分裂、减数分裂中染色体各如何行动？</td>
+</tr>
+<tr>
+<td>第三节</td>
+<td>染色体周期</td>
+<td>动物、植物、真菌的生活史中，$2n \rightleftharpoons n$ 在何处转换？</td>
+</tr>
+<tr>
+<td>第四节</td>
+<td>遗传的染色体学说</td>
+<td>基因的行为与染色体的行为如何一一对应？</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="第一节-染色体"><a href="#第一节-染色体" class="headerlink" title="第一节 染色体"></a>第一节 染色体</h2><h3 id="1-1-染色体数目：-n-与-2n"><a href="#1-1-染色体数目：-n-与-2n" class="headerlink" title="1.1 染色体数目：$n$ 与 $2n$"></a>1.1 染色体数目：$n$ 与 $2n$</h3><ul>
+<li><strong>每种生物的染色体数是恒定的</strong>。</li>
+<li><strong>二倍体</strong>（diploid）：多数高等动植物，每一体细胞中有两组同样的染色体（与性别直接有关的<strong>性染色体</strong>可以不完成相同）。用 $2n$ 表示。</li>
+<li><strong>单倍体</strong>（haploid）：亲本的每一配子带有一组染色体，用 $n$ 表示。两个配子结合后恢复为二倍体。</li>
+<li>例：玉米 $2n=20$（10 对，图 3-1）；人 $2n=46$（23 对，图 3-2，教材给出中期染色体模式图，按相对长度与着丝粒位置排成 23 对共 8 组，A~G 组为 22 对常染色体，另有一对性染色体 X 和 Y）。</li>
+<li><strong>多数微生物的营养体是单倍体</strong>，例：粗糙链孢霉 $n=7$。</li>
+</ul>
+<p><strong>表 3-1 多种生物的染色体数（节选）</strong></p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>动物</th>
+<th>$2n$</th>
+<th>动物</th>
+<th>$2n$</th>
+<th>植物</th>
+<th>$2n$</th>
+<th>微生物</th>
+<th>$n$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>人 <em>Homo sapiens</em></td>
+<td>46</td>
+<td>马 <em>Equus calibus</em></td>
+<td>64</td>
+<td>洋葱 <em>Allium cepa</em></td>
+<td>16</td>
+<td>粗糙链孢霉 <em>Neurospora crassa</em></td>
+<td>7</td>
+</tr>
+<tr>
+<td>川金丝猴</td>
+<td>44</td>
+<td>驴 <em>Equus asinus</em></td>
+<td>62</td>
+<td>大麦 <em>Hordeum vulgare</em></td>
+<td>14</td>
+<td>青霉 <em>Penicillium</em> sp.</td>
+<td>4</td>
+</tr>
+<tr>
+<td>猕猴</td>
+<td>42</td>
+<td>山羊</td>
+<td>60</td>
+<td>水稻 <em>Oryza sativa</em></td>
+<td>24</td>
+<td>曲霉 <em>Aspergillus nidulans</em></td>
+<td>8</td>
+</tr>
+<tr>
+<td>黄牛 <em>Bos taurus</em></td>
+<td>60</td>
+<td>绵羊 <em>Ovis aries</em></td>
+<td>54</td>
+<td>小麦 <em>Triticum vulgare</em></td>
+<td>42</td>
+<td>衣藻 <em>Chlamydomonas</em></td>
+<td>16</td>
+</tr>
+<tr>
+<td>猪 <em>Sus scrofa</em></td>
+<td>40</td>
+<td>小家鼠 <em>Mus musculus</em></td>
+<td>40</td>
+<td>玉米 <em>Zea mays</em></td>
+<td>20</td>
+<td>酿酒酵母 <em>S. cerevisiae</em></td>
+<td>17</td>
+</tr>
+<tr>
+<td>狗 <em>Canis familiaris</em></td>
+<td>78</td>
+<td>大家鼠</td>
+<td>42</td>
+<td>豌豆 <em>Pisum sativum</em></td>
+<td>14</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>猫 <em>Felis domesticus</em></td>
+<td>38</td>
+<td>兔</td>
+<td>44</td>
+<td>香豌豆</td>
+<td>14</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>家蚕 <em>Bombyx mori</em></td>
+<td>56</td>
+<td>家鸽</td>
+<td>约 80</td>
+<td>蚕豆 <em>Vicia faba</em></td>
+<td>12</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>家蝇 <em>Musca domestica</em></td>
+<td>12</td>
+<td>鸡</td>
+<td>约 78</td>
+<td>菜豆</td>
+<td>22</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>果蝇 <em>D. melanogaster</em></td>
+<td>8</td>
+<td>火鸡</td>
+<td>约 80</td>
+<td>向日葵</td>
+<td>34</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>蜜蜂 <em>Apis mellifera</em></td>
+<td>32♀ / 16♂</td>
+<td>蚊 <em>Culex pipiens</em></td>
+<td>6</td>
+<td>烟草</td>
+<td>48</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>佛蝗 <em>Phlaeoba infumata</em></td>
+<td>24♀ / 23♂</td>
+<td>淡水水螅</td>
+<td>32</td>
+<td>番茄</td>
+<td>24</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>[!important] 三个必须记住的数字<br>玉米 $2n=20$、人 $2n=46$、粗糙链孢霉 $n=7$——本章后文反复用到。蜜蜂、佛蝗的雌雄染色体数不同，是<strong>性染色体</strong>存在的最直接证据（雌 32/雄 16、雌 24/雄 23）。</p>
+</blockquote>
+<h3 id="1-2-染色体的形态结构"><a href="#1-2-染色体的形态结构" class="headerlink" title="1.2 染色体的形态结构"></a>1.2 染色体的形态结构</h3><p>染色体<strong>复制以后</strong>含有纵向并列的两条<strong>姐妹染色单体</strong>（sister chromatid），只在<strong>着丝粒</strong>（centromere）区域仍连在一起。</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>结构</th>
+<th>位置与特征</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>着丝粒</strong>（初级缢痕）</td>
+<td>位置固定，把染色体分为长臂与短臂</td>
+<td>所在处常表现为一个缢痕，故又称<strong>初级缢痕</strong></td>
+</tr>
+<tr>
+<td><strong>次级缢痕</strong></td>
+<td>位置也是固定的，位于初级缢痕之外</td>
+<td>连接<strong>随体</strong>（satellite）的远端染色体小段</td>
+</tr>
+<tr>
+<td><strong>核仁形成区</strong></td>
+<td>就是次级缢痕</td>
+<td>细胞分裂将结束时核内出现 1 到几个核仁，<strong>核仁总是出现在次级缢痕的地方</strong></td>
+</tr>
+</tbody></table></div>
+<p>按着丝粒位置分类：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>着丝粒位置</th>
+<th>两臂特征</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>中间着丝粒 / 亚中间着丝粒</td>
+<td>染色体中间或中间附近</td>
+<td>两臂长度差不多</td>
+</tr>
+<tr>
+<td>近端部着丝粒</td>
+<td>靠近一端</td>
+<td>依着丝粒离开端部的远近区分</td>
+</tr>
+<tr>
+<td>端部着丝粒</td>
+<td>靠近染色体一端（端部）</td>
+<td>另一臂极短或不见</td>
+</tr>
+</tbody></table></div>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-3.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-3 染色体模式图：每一中期染色体有两条染色单体，中间相连处是初级缢痕（着丝粒区域）；图中这条染色体还有一个次级缢痕，通常就是核仁形成区，其远端小段即随体。</em></p>
+<blockquote>
+<p>[!note] 染色体的化学组成与包装<br>真核生物的染色体主要由 <strong>DNA 和蛋白质</strong>组成。在蛋白质分子的作用下，DNA 被包装成染色体的结构（教材图 3-4：每一染色单体是一条重复地折叠着的 DNA-蛋白质纤丝，在着丝粒区域，两染色单体的纤丝并合在一起），储藏在狭小的细胞核中。详细的包装过程留到<strong>基因组</strong>一章。</p>
+</blockquote>
+<hr>
+<h2 id="第二节-细胞分裂"><a href="#第二节-细胞分裂" class="headerlink" title="第二节 细胞分裂"></a>第二节 细胞分裂</h2><p>细胞靠分裂而增殖。细菌等原核生物体细胞与生殖细胞不分，细胞分裂就是个体的繁衍；高等生物则由合子（单细胞）经「一分二、二分四」的有丝分裂长成成体——成人身体内的 $10^{14}$ 个细胞，就是由单一细胞（受精卵）分裂而来的。</p>
+<h3 id="2-1-细菌的二分分裂"><a href="#2-1-细菌的二分分裂" class="headerlink" title="2.1 细菌的二分分裂"></a>2.1 细菌的二分分裂</h3><p>原核细胞与真核细胞不同：① 缺少某些细胞器（如线粒体、叶绿体等）；② 染色体位于细胞内的<strong>核区</strong>（nuclear area）中，核区外面<strong>没有核膜</strong>。</p>
+<p>细菌和其他原核细胞采用<strong>二分分裂</strong>（binary fission）增殖：</p>
+<ol>
+<li>每一原核细胞通常只有<strong>一条染色体</strong>，结构简单，是一个<strong>裸露的 DNA 分子</strong>（有时一个细胞可含两条或以上染色体，各位于各自的核区）。</li>
+<li>细菌染色体附着在称为<strong>间体</strong>（mesomere）的圆形结构上，该结构由细胞质膜<strong>内陷</strong>而成。</li>
+<li>染色体一分为二后，原有染色体与新复制的染色体分别附着在与膜相连的间体上。</li>
+<li>细菌分裂时细胞延长，带原有染色体的膜部分与带新复制染色体的膜部分彼此远离；两染色体充分分开时，中间发生凹陷，细菌分成两个，每一染色体分别处在两个细胞中。</li>
+</ol>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-5.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-5 细菌细胞的二分分裂：(a) 单一染色体附着在细胞质膜的间体上；(b) 染色体复制，两子染色体分别附着在间体上，两间体间的细胞质膜延伸；(c) 每一染色体进入一个子细胞；(d) 形成两个子细菌，各有一染色体附着在细胞质膜间体上。</em></p>
+<h3 id="2-2-真核细胞的有丝分裂"><a href="#2-2-真核细胞的有丝分裂" class="headerlink" title="2.2 真核细胞的有丝分裂"></a>2.2 真核细胞的有丝分裂</h3><p>真核细胞通过<strong>有丝分裂</strong>（mitosis）增殖，其结果是<strong>把一个细胞的整套染色体均等地分向两个子细胞</strong>，所以新形成的两个子细胞在遗传物质上与原来的细胞相同。有丝分裂分两个时相：<strong>分裂间期</strong>与<strong>有丝分裂期（M 期）</strong>。</p>
+<h4 id="（1）分裂间期"><a href="#（1）分裂间期" class="headerlink" title="（1）分裂间期"></a>（1）分裂间期</h4><p>我们通常讲的细胞核形态和结构，都指<strong>间期核</strong>。间期是两次分裂的中间时期：一般看不到染色体结构，细胞核生长增大，代谢很旺盛，贮备分裂所需物质。<strong>DNA 在间期复制合成</strong>，由原来的一条成为两条并列的染色单体。</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>时期</th>
+<th>名称</th>
+<th>主要事件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$G_1$</td>
+<td>合成前期（gap 1 phase）</td>
+<td>细胞代谢旺盛、不断生长，<strong>DNA 尚未开始合成</strong></td>
+</tr>
+<tr>
+<td>$S$</td>
+<td>合成期（synthetic phase）</td>
+<td><strong>DNA 开始合成</strong>（复制），为分裂做准备</td>
+</tr>
+<tr>
+<td>$G_2$</td>
+<td>合成后期（gap 2 phase）</td>
+<td>细胞继续生长，进行<strong>蛋白质合成</strong>，完成分裂前其他准备</td>
+</tr>
+</tbody></table></div>
+<p><strong>表 3-2 几种生物的细胞周期（单位：h）</strong></p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>细胞类型</th>
+<th>$G_1$</th>
+<th>$S$</th>
+<th>$G_2$</th>
+<th>$M$</th>
+<th>合计</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>蚕豆根尖细胞</td>
+<td>5.0</td>
+<td>7.5</td>
+<td>5.0</td>
+<td>2.0</td>
+<td>19.5</td>
+</tr>
+<tr>
+<td>小家鼠 L 细胞</td>
+<td>9~11</td>
+<td>6~7</td>
+<td>2~4</td>
+<td>1</td>
+<td>18~23</td>
+</tr>
+<tr>
+<td>人骨髓细胞</td>
+<td>25~30</td>
+<td>12~15</td>
+<td>3~4</td>
+<td>2</td>
+<td>42~51</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>[!tip] 读表要点<br>蚕豆根尖细胞间期总长 17.5 h（5.0+7.5+5.0），M 期仅约 2 h；人骨髓细胞间期长达 40~50 h。<strong>间期远长于分裂期</strong>，且不同生物各期长短差别很大。</p>
+</blockquote>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-6.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-6 真核细胞有丝分裂周期：$G_1$ 期（细胞生长）→ $S$ 期（DNA 合成、染色体复制）→ $G_2$ 期（细胞生长和蛋白质合成）→ $M$ 期（染色体分离及细胞质分离），前三个时期属分裂间期。</em></p>
+<h4 id="（2）分裂期（M-期）各时期"><a href="#（2）分裂期（M-期）各时期" class="headerlink" title="（2）分裂期（M 期）各时期"></a>（2）分裂期（M 期）各时期</h4><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>时期</th>
+<th>染色体行为</th>
+<th>其他事件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>前期</strong> prophase</td>
+<td>染色质细丝螺旋化，染色体缩短变粗，着丝粒区域变清楚；每一染色体含<strong>纵向并列的两条染色单体</strong></td>
+<td>动物与低等植物中<strong>中心体</strong>参与纺锤体组装（间期已完成复制并一分为二，前期分向两极）；微管从中心体辐射。高等植物看不到中心体，但仍出现纺锤体</td>
+</tr>
+<tr>
+<td><strong>前中期</strong> prometaphase</td>
+<td>纺锤体微管<strong>捕获着丝粒</strong>并与之结合，完成纺锤体组装；染色体散乱分布于纺锤体中部</td>
+<td><strong>核仁消失，核膜崩解</strong>；中心体到达细胞两极</td>
+</tr>
+<tr>
+<td><strong>中期</strong> metaphase</td>
+<td>染色体向赤道面移动，<strong>着丝粒区域排列在赤道面上</strong></td>
+<td>此时<strong>计算染色体数目最为容易</strong></td>
+</tr>
+<tr>
+<td><strong>后期</strong> anaphase</td>
+<td>每一染色体的<strong>着丝粒一分为二</strong>、相互分离；着丝粒被纺锤丝拉向两极，相连的染色单体也跟着分开、分别向两极移动</td>
+<td>姐妹染色单体在此<strong>才</strong>彼此分开</td>
+</tr>
+<tr>
+<td><strong>末期</strong> telophase</td>
+<td>染色体到达两极，螺旋结构逐渐消失；核膜重建、核仁重新出现、纺锤体消失</td>
+<td>整个过程「正是前期的倒转」</td>
+</tr>
+<tr>
+<td><strong>胞质分裂</strong> cytokinesis</td>
+<td>—</td>
+<td>动物细胞在<strong>赤道区域收缩</strong>，收缩深化后把细胞分成两个；植物细胞在两子核中间形成<strong>细胞板</strong>，最后成为细胞壁，把母细胞分隔成两个子细胞</td>
+</tr>
+</tbody></table></div>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-7-%E6%9C%89%E4%B8%9D%E5%88%86%E8%A3%82%E5%9B%BE%E8%A7%A3.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-7(a) 间期：不分裂的细胞，核内看不到染色体结构。</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-7-%E6%9C%89%E4%B8%9D%E5%88%86%E8%A3%82%E5%9B%BE%E8%A7%A3-467acf.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-7(b) 前期：染色体出现，呈细线状，中心体分开。</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-7-%E6%9C%89%E4%B8%9D%E5%88%86%E8%A3%82%E5%9B%BE%E8%A7%A3-f5890b.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-7(c) 前中期：染色体缩短变粗，核膜将近消失，纺锤体形成。</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE09.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-7(d) 中期：核膜消失，染色体排列在赤道面上。图中标注了中心体、纺锤丝、染色体与着丝粒四者的空间关系。</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE10.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-7(e) 中期（极面观）：从两极方向看到的赤道面，染色体散处于中央——此视角便于计数染色体。</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-7-d.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-7(f) 后期：并列的两条染色单体分别向两极移动。</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-7-d-3ecadd.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-7(g) 末期：染色体到达两极，核膜渐次出现，胞质分割，一个细胞即将分成两个子细胞，子细胞的染色体数目跟原来细胞一样。</em></p>
+<blockquote>
+<p>[!important] 有丝分裂的遗传学意义<br>前期时每个染色体的两条染色单体在<strong>形态和组成上一模一样</strong>，所以末期时两个子细胞内的染色体在<strong>数目和形态上也完全一样</strong>。由于这个缘故，<strong>有丝分裂保证了细胞内染色体精确地分配到子细胞中去</strong>——这是遗传物质稳定传递、个体正常生长与发育的物质基础。</p>
+</blockquote>
+<h3 id="2-3-减数分裂"><a href="#2-3-减数分裂" class="headerlink" title="2.3 减数分裂"></a>2.3 减数分裂</h3><p><strong>减数分裂</strong>（meiosis）是一种特殊的真核细胞分裂方式，<strong>在配子形成过程中发生</strong>。其两大特点：</p>
+<ol>
+<li><strong>连续进行两次核分裂，而染色体只复制一次</strong>，结果形成 4 个核，每个核只含单倍数的染色体（$n$），即染色体数<strong>减少一半</strong>——故名「减数」分裂。</li>
+<li><strong>前期特别长，而且变化复杂</strong>，其中包括同源染色体的<strong>配对、交换与分离</strong>等。</li>
+</ol>
+<p>两个配子（$n$）结合成合子后，染色体数恢复为 $2n$。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-8-%E6%98%AF%E6%8B%9F%E5%8D%97%E8%8A%A5%E8%8A%B1%E7%B2%89%E6%AF%8D%E7%BB%86%E8%83%9E%E5%87%8F%E6%95%B0%E5%88%86%E8%A3%82%E5%90%84%E4%B8%AA%E9%98%B6%E6%AE%B5%E7%9A%84%E6%9F%93%E8%89%B2%E4%BD%93%E7%85%A7-8d90c1.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-8 减数分裂各时期的染色体形态（上排荧光照片，下排对应模式图）：细线期 → 偶线期 → 粗线期 → 双线期 → 终变期（前期Ⅰ五个阶段），随后是中期Ⅰ、后期Ⅰ、末期Ⅰ、前期Ⅱ、中期Ⅱ、后期Ⅱ、末期Ⅱ。照片为拟南芥花粉母细胞经 DAPI 染色后的形态，示意图以含同源染色体 $AA’$ 与 $BB’$ 的细胞（$2n=4$）为例。</em></p>
+<h4 id="（1）减数分裂Ⅰ——前期Ⅰ的五个阶段"><a href="#（1）减数分裂Ⅰ——前期Ⅰ的五个阶段" class="headerlink" title="（1）减数分裂Ⅰ——前期Ⅰ的五个阶段"></a>（1）减数分裂Ⅰ——前期Ⅰ的五个阶段</h4><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>染色体行为</th>
+<th>关键名词</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>细线期</strong> leptotene</td>
+<td>染色质浓缩为几条细而长的细线，相互间往往难以区分；染色体虽已在间期复制，但此时<strong>还看不出双重性</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>偶线期</strong> zygotene</td>
+<td>两条<strong>相同染色体（同源染色体）开始配对</strong>：在两端先行靠拢配对，或在染色体全长各不同部位开始配对；配对是<strong>专一性的，只有同源染色体才会配对</strong>，最后扩展到整条染色体</td>
+<td><strong>联会</strong>（synapsis）；出现<strong>联会复合体</strong>（synaptonemal complex）；完成联会后两条同源染色体并排排列，称<strong>双价体</strong>（bivalent）</td>
+</tr>
+<tr>
+<td><strong>粗线期</strong> pachytene</td>
+<td>染色体继续缩短变粗；光学显微镜下可见每条染色体由两条姐妹染色单体组成，在着丝粒处相连 → 每对同源染色体由 <strong>4 条染色单体</strong>组成</td>
+<td><strong>四联体</strong>（tetrad）；四联体中的<strong>非姐妹染色单体之间可发生交换</strong>，彼此互换相等的染色体区段</td>
+</tr>
+<tr>
+<td><strong>双线期</strong> diplotene</td>
+<td>双价体中两条同源染色体开始分开，但分开又不完全，并不形成两个独立的单价体，而是在若干处发生<strong>交叉</strong>（chiasmata）并相互连接；交叉数目逐渐减少，<strong>着丝粒两侧的交叉向两端移动</strong></td>
+<td><strong>交叉</strong>是染色单体发生<strong>交换</strong>（crossing over）的场所；交叉端化（terminalization of chiasmata）；染色体继续缩短变粗</td>
+</tr>
+<tr>
+<td><strong>终变期</strong> diakinesis</td>
+<td>两条同源染色体仍有交叉联系，仍为 $n$ 个双价体；染色体更粗短，螺旋化达到最高，有时染色单体都看不清</td>
+<td>交叉端化继续进行；核仁和核膜开始消失，双价体开始向赤道面移动，纺锤体开始形成</td>
+</tr>
+</tbody></table></div>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-10-e4a4fa.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-9 联会过程与联会复合体：(a) 同源染色体在减数分裂前期互作的全过程——启动 → 配对 → 联会 → 重组 → 分离；(b) 联会复合体由两个<strong>侧体</strong>和一个<strong>中体</strong>组成（主要由蛋白质组成），该结构到双线期和终变期时消失，其形成可能与同源染色体配对和染色体交换有关。</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-10.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-10(a) 显微镜下的同源染色体与交叉。</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-10-b9d310.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-10(b) 同源染色体与交叉的模式图：双价体的两条同源染色体在若干处交叉相连，图中标出着丝粒与交叉的位置关系。</em></p>
+<h4 id="（2）减数分裂Ⅰ——中期Ⅰ至末期Ⅰ"><a href="#（2）减数分裂Ⅰ——中期Ⅰ至末期Ⅰ" class="headerlink" title="（2）减数分裂Ⅰ——中期Ⅰ至末期Ⅰ"></a>（2）减数分裂Ⅰ——中期Ⅰ至末期Ⅰ</h4><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>时期</th>
+<th>染色体行为</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>中期Ⅰ</strong></td>
+<td>各个双价体排列在赤道面上；纺锤体形成，纺锤丝把着丝粒连向两极；两个同源染色体上的着丝粒逐渐远离，双价体开始分离，但<strong>仍有交叉联系</strong>，交叉数目已大为减少，一般都移向端部</td>
+</tr>
+<tr>
+<td><strong>后期Ⅰ</strong></td>
+<td><strong>双价体中的两条同源染色体分开</strong>，分别向两极移动；每一染色体仍有两染色单体，在着丝粒区相连（相当于有丝分裂前期的一条染色体）。细胞两极得到 $n$ 条染色体——<strong>染色体数目的减半就发生在后期Ⅰ</strong>。双价体中哪一条染色体移向哪一极，<strong>完全是随机的</strong></td>
+</tr>
+<tr>
+<td><strong>末期Ⅰ</strong></td>
+<td>核膜重建，核仁重新形成，接着胞质分裂成为两个子细胞；染色体渐渐解开螺旋，又变成细丝状</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>[!important] 末期Ⅰ ≠ 有丝分裂末期<br><strong>末期Ⅰ</strong>：染色体只有 $n$ 个，但<strong>每条染色体含有两条染色单体</strong>；<br><strong>有丝分裂末期</strong>：染色体有 $2n$ 个，<strong>每条染色体只有一条染色单体</strong>。</p>
+</blockquote>
+<h4 id="（3）减数分裂间期与减数分裂Ⅱ"><a href="#（3）减数分裂间期与减数分裂Ⅱ" class="headerlink" title="（3）减数分裂间期与减数分裂Ⅱ"></a>（3）减数分裂间期与减数分裂Ⅱ</h4><ul>
+<li><strong>间期</strong>：第一次分裂之末，两个子细胞进入间期，细胞核形态与有丝分裂间期相似。但许多生物（例如大多数动物）<strong>没有第一次末期和随后的间期</strong>，后期染色体直接进入减数分裂Ⅱ的晚前期（late prophase），染色体仍旧保持浓缩状态。</li>
+<li>无论有没有一个间期，<strong>两次减数分裂之间都没有 DNA 合成的 S 期，自然也就没有染色体的复制</strong>——这是减数分裂间期与有丝分裂间期的根本区别。</li>
+<li><strong>前期Ⅱ</strong>：完全和有丝分裂前期一样，每一染色体具有两条染色单体，<strong>所不同的只是只有 $n$ 条染色体</strong>。</li>
+<li><strong>中期Ⅱ—末期Ⅱ</strong>：过程完全和有丝分裂一样，<strong>所不同的就是染色体数目在第一次分裂过程中已经减半</strong>，第二次分裂时只有 $n$ 条染色体。</li>
+</ul>
+<p><strong>结果</strong>：一次减数分裂形成 <strong>4 个子细胞</strong>——因为细胞分裂两次，染色体只复制一次，每个子细胞中只有 $n$ 条染色体。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-8-%E6%98%AF%E6%8B%9F%E5%8D%97%E8%8A%A5%E8%8A%B1%E7%B2%89%E6%AF%8D%E7%BB%86%E8%83%9E%E5%87%8F%E6%95%B0%E5%88%86%E8%A3%82%E5%90%84%E4%B8%AA%E9%98%B6%E6%AE%B5%E7%9A%84%E6%9F%93%E8%89%B2%E4%BD%93%E7%85%A7.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-8（分期总览）减数分裂 = 减数分裂Ⅰ（前期Ⅰ含细线期、偶线期、粗线期、双线期、终变期 → 中期Ⅰ → 后期Ⅰ → 末期Ⅰ）+ 间期 + 减数分裂Ⅱ（前期Ⅱ → 中期Ⅱ → 后期Ⅱ → 末期Ⅱ）。注意：两次分裂之间没有 S 期。</em></p>
+<blockquote>
+<p>[!important] 减数分裂的遗传学意义</p>
+<ol>
+<li><strong>保证世代间染色体数目恒定</strong>：减数分裂使配子染色体数由 $2n$ 减为 $n$，受精后合子又恢复 $2n$，从而保证亲代与子代之间染色体数目的恒定性，为后代的正常发育和性状遗传提供物质基础，保证物种的相对稳定性。</li>
+<li><strong>产生遗传变异</strong>：<ul>
+<li>各对同源染色体中的两个成员在<strong>后期Ⅰ分向两极是随机的</strong>，一对染色体的分离与任何另一对染色体的分离不发生关联，各个非同源染色体之间均可能自由组合到一个子细胞里。$n$ 对染色体就有 $2^n$ 种自由组合方式（补充：水稻 $n=12$，组合数即 $2^{12}=4096$）。</li>
+<li>同源染色体的<strong>非姐妹染色单体之间还可能发生各种方式的交换</strong>，更增加了子细胞间差异的复杂性。<br>这两点是生物变异的重要来源，为进化提供物质基础。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h3 id="2-4-有丝分裂-Vs-减数分裂（对比表-★必背）"><a href="#2-4-有丝分裂-Vs-减数分裂（对比表-★必背）" class="headerlink" title="2.4 有丝分裂 Vs 减数分裂（对比表 ★必背）"></a>2.4 有丝分裂 Vs 减数分裂（对比表 ★必背）</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>比较项</th>
+<th><strong>有丝分裂</strong></th>
+<th><strong>减数分裂</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>发生部位 / 时机</td>
+<td>所有正在生长的组织中；从合子阶段开始，延续到个体的整个生活周期</td>
+<td>只在<strong>有性繁殖组织</strong>中；高等生物限于成熟个体，许多藻类和真菌发生在合子阶段</td>
+</tr>
+<tr>
+<td>分裂次数与复制</td>
+<td>核分裂 <strong>1 次</strong>，染色体复制 <strong>1 次</strong></td>
+<td>连续 <strong>2 次</strong>核分裂（减数分裂Ⅰ、Ⅱ），染色体只复制 <strong>1 次</strong></td>
+</tr>
+<tr>
+<td>同源染色体行为</td>
+<td><strong>无联会，无交叉和互换</strong>；同源染色体不配对，各自独立排列在赤道面上</td>
+<td><strong>有联会，可以有交叉和互换</strong>；前期Ⅰ同源染色体专一性配对形成双价体/四联体</td>
+</tr>
+<tr>
+<td>关键时期·染色体行为</td>
+<td>后期<strong>着丝粒一分为二、姐妹染色单体分离</strong>（均等分裂）</td>
+<td><strong>后期Ⅰ同源染色体分离</strong>（减数分裂）；<strong>后期Ⅱ姐妹染色单体分离</strong>（均等分裂）</td>
+</tr>
+<tr>
+<td>子细胞数</td>
+<td>每个周期产生 <strong>2 个</strong>子细胞</td>
+<td>产生 <strong>4 个</strong>细胞产物（配子或孢子）</td>
+</tr>
+<tr>
+<td>子细胞染色体数</td>
+<td>与母细胞<strong>相同</strong>（$2n \rightarrow 2n$）</td>
+<td>为母细胞的<strong>一半</strong>（$2n \rightarrow n$）</td>
+</tr>
+<tr>
+<td>子细胞遗传组成</td>
+<td>产物的遗传成分<strong>相同</strong></td>
+<td>产物的遗传成分<strong>不同</strong>，是父本和母本染色体的不同组合（再加交换）</td>
+</tr>
+<tr>
+<td>前期长短</td>
+<td>短</td>
+<td><strong>特别长，变化复杂</strong>（前期Ⅰ占五个阶段）</td>
+</tr>
+<tr>
+<td>遗传学意义</td>
+<td>染色体精确均等分配到子细胞，<strong>保证子细胞与母细胞遗传组成一致</strong>；维持个体生长、发育中遗传物质的稳定性与连续性</td>
+<td>① 染色体数减半，受精后恢复 $2n$，<strong>保证世代间染色体数目恒定</strong>；② 通过非同源染色体随机组合（$2^n$）与非姐妹染色单体交换，<strong>产生丰富变异，是进化的物质基础</strong></td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>[!tip] 一句话区分<br>有丝分裂 = <strong>「复制一次、分裂一次、姐妹染色单体分离」</strong>，产物与母细胞相同；<br>减数分裂 = <strong>「复制一次、分裂两次、后期Ⅰ分同源染色体、后期Ⅱ分姐妹染色单体」</strong>，产物为 $n$ 且各不相同。</p>
+</blockquote>
+<hr>
+<h2 id="第三节-染色体周期"><a href="#第三节-染色体周期" class="headerlink" title="第三节 染色体周期"></a>第三节 染色体周期</h2><p>现在从<strong>染色体数目的变化</strong>（$2n \rightleftharpoons n$）来看生物个体的生活史。</p>
+<h3 id="3-1-动物的生活史"><a href="#3-1-动物的生活史" class="headerlink" title="3.1 动物的生活史"></a>3.1 动物的生活史</h3><p><strong>性细胞的发生链条</strong>（以雄性为例）：</p>
+<p>精原细胞（$2n$，与体细胞染色体数相同，由有丝分裂产生）$\xrightarrow{\text{多次有丝分裂后停止分裂、长大}}$ <strong>初级精母细胞</strong>（$2n$）$\xrightarrow{\text{减数分裂Ⅰ}}$ 2 个<strong>次级精母细胞</strong>（$n$）$\xrightarrow{\text{减数分裂Ⅱ}}$ 4 个<strong>精细胞</strong>（$n$）$\xrightarrow{\text{精子形成（细胞质与细胞器变化，核不再变化）}}$ <strong>精子</strong>。</p>
+<p>雌性一侧的关键差别：</p>
+<ul>
+<li>初级卵母细胞（$2n$）经第一次分裂产生<strong>大小悬殊</strong>的两个细胞：大的为<strong>次级卵母细胞</strong>（$n$），小的为<strong>第一极体</strong>（$n$）；</li>
+<li>次级卵母细胞再分裂一次，仍产生大小悬殊的两个细胞：大的为<strong>卵细胞</strong>（$n$），小的为<strong>第二极体</strong>（$n$）；</li>
+<li>第一极体有再分裂一次的，也有不分裂的，跟第二极体一起<strong>都退化了</strong>。</li>
+<li><strong>所以每个初级卵母细胞经过减数分裂，只产生一个有效的配子——卵细胞（$n$）。</strong></li>
+</ul>
+<p>受精时精子进入卵细胞成为<strong>合子</strong>，精子的细胞核与卵细胞的核融合成合子的细胞核；精细胞核的单倍体染色体数与卵细胞核的单倍体染色体数相加，成为合子核内的二倍体染色体数。合子经有丝分裂产生下一代个体的体细胞，也都是二倍体。</p>
+<p>家蚕（<em>Bombyx mori</em>）是教材给出的动物生活史示例：性细胞形成和受精过程由<strong>种系细胞</strong>（germ-line cell）完成——胚胎发育早期种系细胞就分化出来，<strong>只有这些细胞能进行减数分裂并形成配子</strong>；但这种可能性的实现，一定要在身体的体细胞部分经过无数次有丝分裂、达到成熟的时候。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-12.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-11 动物生活史（以家蚕为例）：精原细胞经减数分裂形成 4 个精子；卵原细胞经减数分裂只形成 1 个有功能的卵细胞。精子与卵细胞的染色体数都是 $n$，卵细胞受精后形成二倍体合子，染色体数是 $2n$。</em></p>
+<p><strong>人类精子与卵细胞的形成（图 3-12）</strong></p>
+<ul>
+<li>胚胎发育第 2 周，外胚层中部分细胞分化形成<strong>原始生殖细胞</strong>（PGC），第 4 周迁移至卵黄囊，第 5 周末到达正在发育的原始性腺，进一步分化形成卵原细胞或精原细胞；迁移与分化过程中 PGC 通过旺盛的有丝分裂不断增加数量。</li>
+<li><strong>XY 胚胎（精子发生）</strong>：出生后 2 个月左右，精原细胞分化形成两种精原干细胞（SSC，$2n$）——核染色深暗的 <strong>Ad 型</strong>精原细胞与核染色浅淡的 <strong>Ap 型</strong>精原细胞，包裹在曲细精管壁外围的基底层中。青春期后 Ap 型经多次有丝分裂形成 B 型精原细胞（$2n$），后者再经有丝分裂形成初级精母细胞（$2n$），连续经减数分裂Ⅰ、Ⅱ形成精细胞（$n$），并在进入曲细精管中央腔前完成变态，形成可游动的成熟精子。Ad 型则通过有丝分裂不断补充新的 Ad 与 Ap，维持干细胞数量。<ul>
+<li>一个健康成年男性，从精原干细胞发育至精子全过程 <strong>48~64 天</strong>，每天可产生 <strong>0.45 亿~2 亿</strong>个成熟精子。</li>
+<li>成熟精子停留于输卵管峡部，排卵后游向壶腹部，经<strong>精子获能</strong>（capacitation）和<strong>顶体反应</strong>（acrosome reaction）后才能与卵细胞结合得到受精卵（$2n$）。</li>
+</ul>
+</li>
+<li><strong>XX 胚胎（卵细胞发生）</strong>：从卵原细胞到成熟卵细胞需<strong>至少十余年</strong>。胚胎第 3 个月起卵原细胞在增殖同时进一步分化，部分成为初级卵母细胞（$2n$）并进入减数第一次分裂前期；第 5 个月卵巢中卵原细胞数量达最大，约 <strong>700 万个</strong>，同时大量卵原细胞与初级卵母细胞走向<strong>闭锁</strong>；第 7 个月存活初级卵母细胞全部进入减数分裂Ⅰ前期；出生前后每个初级卵母细胞被单层扁平上皮细胞包围形成<strong>原始卵泡</strong>，数量 <strong>70 万~200 万个</strong>，构成卵巢的<strong>生殖储备池</strong>。在<strong>卵母细胞成熟抑制剂</strong>（OMI）作用下，所有卵母细胞发育<strong>停滞在双线期直至排卵</strong>。<ul>
+<li>青春期后每月有 <strong>15~20 个</strong>原始卵泡被激活，依次经初级卵泡（单层扁平上皮细胞分化成立方形颗粒细胞）→ 次级卵泡（多层颗粒细胞）→ 窦卵泡（内部出现卵泡腔），重新启动减数分裂并在<strong>排卵前约 3 h 停滞在中期Ⅱ</strong>，最终每月仅有 <strong>1~2 个</strong>成熟卵母细胞被排出。</li>
+<li>卵母细胞成功受精后减数分裂再次启动形成成熟卵细胞（$n$），并释放第二极体；若未受精，则在排卵后约 <strong>24 h</strong> 降解。</li>
+<li>可见人类卵细胞发育非常漫长，<strong>女性一生的排卵数不足 500 个</strong>。</li>
+</ul>
+</li>
+</ul>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-12-8968b4.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-12 人类精子和卵细胞发育的基本过程示意图。左：精原细胞进入青春期后先经有丝分裂扩增，再经减数分裂形成精细胞，变形后成为精子。中：卵原细胞在胚胎阶段完成扩增，胚胎期已进入减数分裂Ⅰ并停滞在双线期，排卵期停滞在中期Ⅱ，直至受精后才完成全部减数分裂。右：卵泡发育进程（始基卵泡 → 初级卵泡 → 次级卵泡 → 窦卵泡 → 排卵）。</em></p>
+<h3 id="3-2-植物的生活史"><a href="#3-2-植物的生活史" class="headerlink" title="3.2 植物的生活史"></a>3.2 植物的生活史</h3><p>植物的生活史比动物复杂，教材以<strong>玉米</strong>为例（图 3-13）。玉米同一植株上着生雄花序和雌花序，分别产生小孢子和大孢子，<strong>玉米植株是雌雄同株的，是孢子体</strong>。</p>
+<p><strong>雄花序一侧（雄配子体）</strong>：雄花序着生在茎的端部。雄蕊花药表皮下有孢原细胞 → 经几次分裂成为<strong>小孢子母细胞</strong>（microsporocyte，$2n$）→ 减数分裂形成 <strong>4 个小孢子——花粉粒</strong>（$n$）→ 小孢子经一次有丝分裂产生两个单倍体核：一个核不再分裂，成为<strong>管核（营养核）</strong>（$n$）；另一核再进行一次有丝分裂，成为<strong>两个精核</strong>（$n$）。这样，<strong>雄配子体——成熟花粉粒含有 3 个单倍体核</strong>。</p>
+<p><strong>雌花序一侧（雌配子体）</strong>：雌花序着生在植株上部叶腋间。雌蕊基部的子房中有孢原细胞 → 发育成为<strong>大孢子母细胞</strong>（macrosporocyte，$2n$）→ 减数分裂产生 4 个单倍体核（$n$），<strong>其中 3 个退化</strong>，留下的 1 个大孢子又经<strong>三次有丝分裂</strong>，形成有 <strong>8 个单倍体核的胚囊</strong>。8 个核中：顶端的 3 个发育成为<strong>反足细胞</strong>；2 个移至中部成为<strong>极核</strong>；还有 3 个移至胚囊底部，构成两个助核和一个<strong>卵核</strong>，分别发育成助细胞和卵细胞。<strong>成熟胚囊包括 7 个细胞，又称雌配子体。</strong></p>
+<p><strong>双受精</strong>：受粉后花粉萌发，花粉管沿花柱长到胚囊。在那里，<strong>一个精核与卵核结合</strong>，产生二倍体核（$2n$）；<strong>另一精核与两个极核结合</strong>，产生一个三倍体核（$3n$）。两个精核分别与胚囊中的卵核和极核结合的过程，叫作<strong>双受精</strong>（double fertilization）——这是<strong>显花植物特有的现象</strong>。</p>
+<p>通过多次有丝分裂，二倍体核形成<strong>胚</strong>，三倍体核形成<strong>胚乳</strong>，胚和胚乳合在一起构成<strong>种子</strong>。种子萌芽，长成新的植株。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-13.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-13 植物生活史（以玉米为例）：玉米等高等植物不具有明显的种系，组成花器官的营养细胞（$2n$）有些分化为大孢子母细胞、有些分化为小孢子母细胞，再经减数分裂形成大孢子和小孢子；大、小孢子通过有丝分裂分别成为胚囊和花粉粒。受精时一个精核与卵核结合形成胚（$2n$），另一精核与两个极核结合形成胚乳（$3n$）。</em></p>
+<h3 id="3-3-动、植物生活史的比较"><a href="#3-3-动、植物生活史的比较" class="headerlink" title="3.3 动、植物生活史的比较"></a>3.3 动、植物生活史的比较</h3><p><strong>表 3-3 动物和植物的性细胞各时期的对照表</strong></p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>雌性·动物</th>
+<th>雌性·植物</th>
+<th>雄性·动物</th>
+<th>雄性·植物</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>卵原细胞 ↓ 初级卵母细胞</td>
+<td>雌孢原细胞 ↓ 大孢子母细胞</td>
+<td>精原细胞 ↓ 初级精母细胞</td>
+<td>雄孢原细胞 ↓ 小孢子母细胞</td>
+</tr>
+<tr>
+<td>减数分裂 ↓ <strong>1 个卵</strong></td>
+<td>减数分裂 ↓ <strong>1 个大孢子</strong>（有丝分裂 3 次）</td>
+<td>减数分裂 ↓ <strong>4 个精子</strong></td>
+<td>减数分裂 ↓ <strong>4 个小孢子（花粉粒）</strong>，各有丝分裂 1 次 → 营养核 + 生殖核，生殖核再有丝分裂 1 次 → 第一雄核、第二雄核（成熟花粉粒含 1 个营养核 + 2 个雄核）</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>[!important] 一句话抓住差异<br><strong>动物</strong>：减数分裂发生在<strong>配子形成时</strong>，直接产生配子（精细胞 4 个 / 卵细胞 1 个）。<br><strong>植物</strong>：减数分裂的产物是<strong>孢子</strong>（小孢子、大孢子），孢子还要经有丝分裂发育成配子体（花粉粒、胚囊），再由配子体产生配子，并且<strong>多了双受精与三倍体胚乳</strong>这一环节。</p>
+</blockquote>
+<h3 id="3-4-真菌类的生活史"><a href="#3-4-真菌类的生活史" class="headerlink" title="3.4 真菌类的生活史"></a>3.4 真菌类的生活史</h3><p>真菌的生活史是<strong>单倍体世代占优势，双倍体世代时间较短</strong>。以<strong>粗糙链孢霉</strong>（<em>Neurospora crassa</em>）为例（图 3-14）：</p>
+<ol>
+<li>孢子或菌丝片段落在面包等营养物上，孢子萌发，菌丝生长；菌丝相互交织形成<strong>菌丝体</strong>。菌丝的细胞壁间隔不完全，所以菌丝的细胞质是连续的，每一菌丝细胞是<strong>多核</strong>的，但每个核的染色体数是<strong>单倍的</strong>（$n$）。</li>
+<li><strong>无性繁殖</strong>：粗糙链孢霉有两个<strong>交配型</strong> A 和 a，各自可无性生殖形成菌丝，长出<strong>分生孢子</strong>（$n$）；分生孢子散布开去，继续无性生殖或进行有性生殖。</li>
+<li><strong>有性繁殖</strong>：需要一个交配型的单倍体核（$n$）通过另一相对交配型的<strong>子实体</strong>的<strong>受精丝</strong>进入子实体中，在那里有丝分裂多次，产生若干单倍体核；这些单倍体核跟子实体中的单倍体核相互结合，形成二倍体核（$2n$）。<ul>
+<li>因为细胞质主要来自子实体，所以视<strong>子实体为雌体</strong>，视<strong>分生孢子为雄体</strong>。</li>
+<li>粗糙链孢霉<strong>只有在这个短暂时间内是二倍体世代</strong>。</li>
+</ul>
+</li>
+<li>每一个二倍体核经<strong>减数分裂</strong>产生 4 个单倍体核（$n$），再经<strong>一次有丝分裂</strong>形成 8 个核（$n$），最后这些核成为<strong>子囊孢子</strong>，顺次排列在一个<strong>子囊</strong>中。所以<strong>一个子囊中的 8 个孢子是一次减数分裂和一次有丝分裂的产物</strong>。</li>
+<li>子囊孢子在适宜环境中萌发，通过连续的有丝分裂产生新的菌丝体。</li>
+</ol>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-14.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-14 真菌生活史（以粗糙链孢霉为例）：两个交配型 A 与 a 的无性世代（菌丝、分生孢子，均 $n$）→ 核融合成合子（$2n$）→ 减数分裂Ⅰ（结果 $n$）→ 减数分裂Ⅱ（结果 $n$）→ 有丝分裂后形成 8 个子囊孢子（$n$）→ 子囊孢子萌发，开始新一轮无性生殖。</em></p>
+<blockquote>
+<p>[!note] 三种生活史对照</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>类群</th>
+<th>主要世代</th>
+<th>减数分裂发生的时机</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>动物</td>
+<td>二倍体世代占优势</td>
+<td>配子形成时（性母细胞成熟）</td>
+</tr>
+<tr>
+<td>高等植物</td>
+<td>二倍体孢子体占优势，配子体微小</td>
+<td>孢子形成时（大、小孢子母细胞）</td>
+</tr>
+<tr>
+<td>真菌（粗糙链孢霉）</td>
+<td><strong>单倍体世代占优势</strong></td>
+<td><strong>合子萌发时</strong>（合子立即减数分裂）</td>
+</tr>
+</tbody></table></div>
+</blockquote>
+<hr>
+<h2 id="第四节-遗传的染色体学说"><a href="#第四节-遗传的染色体学说" class="headerlink" title="第四节 遗传的染色体学说"></a>第四节 遗传的染色体学说</h2><h3 id="4-1-染色体与基因的平行现象"><a href="#4-1-染色体与基因的平行现象" class="headerlink" title="4.1 染色体与基因的平行现象"></a>4.1 染色体与基因的平行现象</h3><p>遗传的染色体学说的证据，最早来源于<strong>染色体和基因之间的平行现象</strong>——配子形成和受精时染色体的行为，跟杂交实验中基因的行为平行。表现在下列几点：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>染色体</th>
+<th>基因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>（1）</td>
+<td>可在显微镜下看到，有一定的<strong>形态结构</strong></td>
+<td>基因是遗传学的单位，每对基因在杂交中仍保持它们的<strong>完整性和独立性</strong></td>
+</tr>
+<tr>
+<td>（2）</td>
+<td><strong>成对存在</strong></td>
+<td>也是<strong>成对存在</strong>的；在配子中只有一个等位基因，也只有一对同源染色体中的一条</td>
+</tr>
+<tr>
+<td>（3）</td>
+<td>个体中成对的两个同源染色体<strong>分别来自父本和母本</strong></td>
+<td>成对的基因也<strong>一个来自母本、一个来自父本</strong></td>
+</tr>
+<tr>
+<td>（4）</td>
+<td>不同对染色体在减数分裂后期的<strong>分离组合是独立的</strong></td>
+<td>不同对基因在形成配子时的<strong>分离组合也是独立的</strong></td>
+</tr>
+</tbody></table></div>
+<p>因此，<strong>萨顿和博韦里在 1903 年提出遗传的染色体学说，认为基因在染色体上</strong>。萨顿指出：如果假定基因在染色体上，那么就可十分圆满地解释孟德尔的分离定律和自由组合定律。</p>
+<h3 id="4-2-分离定律-↔-同源染色体的分离"><a href="#4-2-分离定律-↔-同源染色体的分离" class="headerlink" title="4.2 分离定律 ↔ 同源染色体的分离"></a>4.2 分离定律 ↔ 同源染色体的分离</h3><p>分离定律即<strong>一对基因杂合子的配子分离比为 1:1</strong>。假定控制豌豆子叶黄绿颜色的一对基因 $Y$ 和 $y$ 在某对染色体上，把注意力集中在这对染色体上、把豌豆的其余 6 对染色体置之不理（图 3-15）：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-16.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-15 根据基因在染色体上的假设，看一对基因杂合子（$Yy$）的形成：亲代黄子叶植株（$YY$）× 绿子叶植株（$yy$）→ 雌、雄配子形成 → 雌雄配子结合 → $F_1$ 植株细胞内有一对染色体，一条来自黄子叶植株（带 $Y$），一条来自绿子叶植株（带 $y$）。</em></p>
+<p><strong>推演过程</strong>（教材原文逻辑）：</p>
+<ol>
+<li>亲代黄子叶豆粒长成的植株中，每个细胞内这一对染色体的两个成员<strong>都带有 $Y$</strong>；经减数分裂产生的每个配子中只有一条这种染色体，<strong>所有配子在这条染色体上都带有 $Y$</strong>。亲代绿子叶植株的所有配子在这条染色体上都带有 $y$。</li>
+<li>$F_1$ 植株的每个细胞内也有这样一对染色体：一条从黄子叶植株来、带 $Y$，另一条从绿子叶植株来、带 $y$。$F_1$ 植株的初级性母细胞中的染色体与体细胞一样。</li>
+<li><strong>减数分裂Ⅰ中期</strong>：这一对染色体<strong>各有两条染色单体并相互配对</strong>（图 3-16）。</li>
+<li><strong>减数分裂Ⅰ后期</strong>：这对<strong>同源染色体分别进入一个次级性母细胞</strong>——一个次级性母细胞带 $Y$，它产生的两个配子也带 $Y$；另一个次级性母细胞带 $y$，由它产生的两个配子也带 $y$。</li>
+<li>$F_1$ 植株的每个初级性母细胞都产生 4 个配子，其中 <strong>2 个带 $Y$、2 个带 $y$</strong>。$n$ 个初级性母细胞产生 $4n$ 个配子，其中 $2n$ 带 $Y$、$2n$ 带 $y$，即 <strong>1:1</strong>。</li>
+</ol>
+<blockquote>
+<p>[!important] 结论<br><strong>可见基因的分离是染色体分离的结果。</strong> 孟德尔假设的成对因子「彼此分离、分别进入不同配子」，其物质基础就是<strong>后期Ⅰ同源染色体分别移向两极</strong>。</p>
+</blockquote>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-16-%E4%B8%80%E5%AF%B9%E5%9F%BA%E5%9B%A0%E6%9D%82%E5%90%88%E5%AD%90%E5%BD%A2%E6%88%90%E9%85%8D%E5%AD%90%E6%97%B6-917849.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-16 一对基因杂合子形成配子时，染色体的分离和基因的分离：减数分裂结束，一个性母细胞产生 4 个配子，2 个带 $Y$、2 个带 $y$。</em></p>
+<h3 id="4-3-自由组合定律-↔-非同源染色体的独立分配"><a href="#4-3-自由组合定律-↔-非同源染色体的独立分配" class="headerlink" title="4.3 自由组合定律 ↔ 非同源染色体的独立分配"></a>4.3 自由组合定律 ↔ 非同源染色体的独立分配</h3><p>自由组合定律即<strong>两对基因杂合子的配子分离比为 1:1:1:1</strong>。图 3-17 表示豌豆中黄圆 × 绿皱杂交所得 $F_1$ $YyRr$ 植株中性母细胞的减数分裂。假定基因 $Y$ 和 $y$ 在一对<strong>较长</strong>的染色体上，而基因 $R$ 和 $r$ 在一对<strong>较短</strong>的染色体上：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-17-%E8%A1%A8%E7%A4%BA%E8%B1%8C%E8%B1%86%E4%B8%AD%E9%BB%84%E5%9C%86%E5%92%8C%E7%BB%BF%E7%9A%B1%E6%9D%82%E4%BA%A4%E6%89%80%E5%BE%97%E7%9A%84F_1YyRr.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-17 起点：$F_1$（$YyRr$）的性母细胞在减数分裂Ⅰ中期，两对同源染色体各自配对——长染色体上带 $Y/y$，短染色体上带 $R/r$。</em></p>
+<p>就这两对染色体而言，初级性母细胞的减数分裂Ⅰ有<strong>两种可能情况，它们的机会是相等的，即各为 1/2</strong>：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>排列方式</th>
+<th>中期Ⅰ取向</th>
+<th>减数分裂产物（每个性母细胞产生 4 个配子）</th>
+<th>比例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>左栏方式</strong></td>
+<td>$Y$ 与 $R$ 走向同一极、$y$ 与 $r$ 走向另一极</td>
+<td>2 个 $YR$ + 2 个 $yr$</td>
+<td>该取向占 1/2</td>
+</tr>
+<tr>
+<td><strong>右栏方式</strong></td>
+<td>$Y$ 与 $r$ 同极、$y$ 与 $R$ 同极</td>
+<td>2 个 $Yr$ + 2 个 $yR$</td>
+<td>该取向占 1/2</td>
+</tr>
+</tbody></table></div>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-16-%E4%B8%80%E5%AF%B9%E5%9F%BA%E5%9B%A0%E6%9D%82%E5%90%88%E5%AD%90%E5%BD%A2%E6%88%90%E9%85%8D%E5%AD%90%E6%97%B6-5aea57.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-17（左栏）一种取向：长、短两对同源染色体在中期Ⅰ的排列使 $Y$ 与 $R$ 走向同一极，$y$ 与 $r$ 走向另一极。</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-17-%E4%B8%A4%E5%AF%B9%E5%9F%BA%E5%9B%A0%E6%9D%82%E5%90%88%E5%AD%90%E5%BD%A2%E6%88%90%E9%85%8D%E5%AD%90%E6%97%B6.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>图 3-17（右栏）另一种取向：$Y$ 与 $r$ 走向同一极，$y$ 与 $R$ 走向另一极。两种取向机会均等，各为 1/2。</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-16-%E4%B8%80%E5%AF%B9%E5%9F%BA%E5%9B%A0%E6%9D%82%E5%90%88%E5%AD%90%E5%BD%A2%E6%88%90%E9%85%8D%E5%AD%90%E6%97%B6-ee7720.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>左栏取向的产物：4 个配子为 $YR$、$YR$、$yr$、$yr$。</em></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/figures/ch03-%E5%9B%BE3-17-%E4%B8%A4%E5%AF%B9%E5%9F%BA%E5%9B%A0%E6%9D%82%E5%90%88%E5%AD%90%E5%BD%A2%E6%88%90%E9%85%8D%E5%AD%90%E6%97%B6-746e66.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></p>
+<p><em>右栏取向的产物：4 个配子为 $Yr$、$Yr$、$yR$、$yR$。</em></p>
+<blockquote>
+<p>[!important] 结论<br>两种取向各占一半，所以 4 种配子的比例是 <strong>1:1:1:1</strong>——<strong>可见基因的自由组合源于染色体的独立分配</strong>。<br>所以，<strong>只要假定基因在染色体上，就可十分圆满地解释孟德尔的两个定律。</strong></p>
+</blockquote>
+<h3 id="4-4-学说的确立与后续"><a href="#4-4-学说的确立与后续" class="headerlink" title="4.4 学说的确立与后续"></a>4.4 学说的确立与后续</h3><p>萨顿这个假设引起了广泛的注意，因为这个假设十分具体——<strong>染色体是细胞中具体可见的结构</strong>。但要证实这个假设，进一步自然要把某一特定基因与特定染色体联系起来；<strong>首先做到这一点的是美国遗传学家摩尔根</strong>，这要留到连锁与交换一章再讨论。</p>
+<blockquote>
+<p>[!tip] 一句话总结本章逻辑链<br>孟德尔定律（基因行为）→ 细胞学观察（染色体行为）→ <strong>两者平行</strong> → 萨顿、博韦里 1903 年提出「基因在染色体上」→ 摩尔根用果蝇把具体基因定位到具体染色体上，学说被证实。</p>
+</blockquote>
+<hr>
+<h2 id="🧠-概念辨析与易错点"><a href="#🧠-概念辨析与易错点" class="headerlink" title="🧠 概念辨析与易错点"></a>🧠 概念辨析与易错点</h2><ol>
+<li><p><strong>同源染色体 vs 姐妹染色单体</strong></p>
+<ul>
+<li><strong>同源染色体</strong>：一条来自父本、一条来自母本，<strong>形态、大小一般相同</strong>，携带着控制同一性状的等位基因（$Y$ 与 $y$）；减数分裂<strong>前期Ⅰ联会</strong>、<strong>后期Ⅰ分离</strong>。</li>
+<li><strong>姐妹染色单体</strong>：染色体复制后同一条染色体上的两条纵向并列的拷贝，<strong>基因组成完全相同</strong>（$Y$ 与 $Y$）；在<strong>后期Ⅱ（或有丝分裂后期）着丝粒一分为二时</strong>才彼此分开。</li>
+<li>口诀：<strong>「同源」看来源（父/母），「姐妹」看复制（同一染色体）。</strong></li>
+</ul>
+</li>
+<li><p><strong>联会 vs 双价体 vs 四联体 vs 四分体</strong></p>
+<ul>
+<li><strong>联会</strong>（synapsis）：偶线期两条同源染色体靠拢配对的<strong>过程</strong>，只有同源染色体才会配对。</li>
+<li><strong>双价体</strong>（bivalent）：完成联会后两条同源染色体并排排列在一起的<strong>结构</strong>（此时含 2 条染色体）。</li>
+<li><strong>四联体</strong>（tetrad）：粗线期时每对同源染色体由 4 条染色单体组成（2 条染色体 × 2 条染色单体）。</li>
+<li>易错：双价体与四联体指的是<strong>同一结构的不同强调重点</strong>（前者强调「2 条同源染色体」，后者强调「4 条染色单体」），不是两个先后出现的独立结构。</li>
+</ul>
+</li>
+<li><p><strong>减数分裂Ⅰ vs 减数分裂Ⅱ（最关键的区别）</strong></p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th></th>
+<th>减数分裂Ⅰ</th>
+<th>减数分裂Ⅱ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分离的对象</td>
+<td><strong>同源染色体</strong>（着丝粒不分裂）</td>
+<td><strong>姐妹染色单体</strong>（着丝粒一分为二）</td>
+</tr>
+<tr>
+<td>分裂性质</td>
+<td>减数分裂</td>
+<td>均等分裂，与有丝分裂过程相同</td>
+</tr>
+<tr>
+<td>有无联会 / 交叉</td>
+<td>有</td>
+<td>无</td>
+</tr>
+<tr>
+<td>产物染色体数</td>
+<td>$2n \rightarrow n$</td>
+<td>$n \rightarrow n$</td>
+</tr>
+</tbody></table></div>
+</li>
+<li><p><strong>交叉 vs 交换</strong>：<strong>交叉</strong>（chiasmata）是双线期在显微镜下<strong>看得到</strong>的、两条同源染色体之间的连接点；<strong>交换</strong>（crossing over）是发生在非姐妹染色单体之间的<strong>染色体区段互换</strong>，交叉是交换的场所/细胞学表现。交换以<strong>联会复合体</strong>为中介，可以改变单倍染色体组的遗传信息，是生物进化中遗传变异的重要来源。</p>
+</li>
+<li><p><strong>染色体数目减半发生在「后期Ⅰ」，不是后期Ⅱ，也不是末期Ⅰ</strong>：后期Ⅰ同源染色体一分开，两极各自就只有 $n$ 条染色体了。后期Ⅱ只是姐妹染色单体分开，染色体数（以着丝粒计）由 $n$ 变为 $2n$（但每个子核仍是 $n$ 条）。</p>
+</li>
+<li><p><strong>末期Ⅰ ≠ 有丝分裂末期</strong>：末期Ⅰ的染色体只有 $n$ 个，但<strong>每条含两条染色单体</strong>；有丝分裂末期染色体有 $2n$ 个，<strong>每条只有一条染色单体</strong>。</p>
+</li>
+<li><p><strong>两次减数分裂之间的「间期」没有 S 期</strong>：减数分裂全过程染色体只复制一次（在减数分裂前的间期），两分裂之间<strong>没有 DNA 合成</strong>，因此与有丝分裂间期很不一样。（补充：许多动物甚至没有末期Ⅰ和这个间期，染色体直接进入减数分裂Ⅱ的晚前期。）</p>
+</li>
+<li><p><strong>动物 vs 植物：减数分裂发生的位置不同</strong></p>
+<ul>
+<li>动物：发生在<strong>配子形成</strong>过程中，性母细胞（初级精母细胞 / 初级卵母细胞）成熟时进行，产物直接是配子（4 个精细胞 / 1 个卵 + 极体）。</li>
+<li>植物：发生在<strong>孢子形成</strong>时（小孢子母细胞、大孢子母细胞），产物是<strong>孢子</strong>（4 个小孢子 / 4 个单倍体核中存活 1 个），孢子再经<strong>有丝分裂</strong>发育成配子体（花粉粒、胚囊），之后才产生配子，并有<strong>双受精</strong>。</li>
+</ul>
+</li>
+<li><p><strong>同一个初级性母细胞产生的配子，基因型不一定相同</strong>：一个 $YyRr$ 性母细胞的 4 个配子只有两种基因型（如 $YR$、$YR$、$yr$、$yr$），<strong>比值 1:1 而不是 1:1:1:1</strong>；1:1:1:1 是<strong>群体</strong>（大量性母细胞）的结果，因为两种取向各占 1/2。</p>
+</li>
+<li><p><strong>有丝分裂与减数分裂的「中期」含义不同</strong>：有丝分裂中期是<strong>一条染色体的着丝粒</strong>排在赤道面上；减数分裂中期Ⅰ是<strong>一个双价体（两条同源染色体）<strong>排在赤道面上。因此「中期计算染色体数目最容易」这句话是针对</strong>有丝分裂</strong>说的。</p>
+</li>
+<li><p><strong>无性生殖一般不发生性状分离</strong>：无性生殖不经减数分裂与配子结合，子代来自体细胞的有丝分裂（或原核生物的二分分裂），产物遗传组成与母细胞一致。<strong>（补充）</strong> 若体细胞发生突变，则可能出现新的性状并形成嵌合体，这属于突变而非「分离」。</p>
+</li>
+<li><p><strong>极体不是「无用的东西」</strong>：正常情况下第一、第二极体都退化，每个初级卵母细胞只产生 1 个有效配子；但在孤雌生殖等特殊情形下，极体可与卵核融合（极体受精）而形成二倍体个体，这正是某些孤雌生殖个体出现<strong>杂合基因型</strong>的原因（见习题 9）。</p>
+</li>
+</ol>
+<hr>
+<h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h2><blockquote>
+<p>以下 9 题来自教材章末习题，逐题给出完整解答。解答所用方法均出自本章（分裂过程中染色体计数的规律、减数分裂产物数目、$2n \rightleftharpoons n$ 的生活史知识与染色体学说的平行关系）。</p>
+</blockquote>
+<h3 id="1-有丝分裂和减数分裂的区别在哪里？从遗传学角度来看，这两种分裂各有什么意义？无性生殖会发生性状分离吗？试加以说明"><a href="#1-有丝分裂和减数分裂的区别在哪里？从遗传学角度来看，这两种分裂各有什么意义？无性生殖会发生性状分离吗？试加以说明" class="headerlink" title="1. 有丝分裂和减数分裂的区别在哪里？从遗传学角度来看，这两种分裂各有什么意义？无性生殖会发生性状分离吗？试加以说明"></a>1. 有丝分裂和减数分裂的区别在哪里？从遗传学角度来看，这两种分裂各有什么意义？无性生殖会发生性状分离吗？试加以说明</h3><p><strong>答：</strong></p>
+<p><strong>（一）区别</strong>（详见本章 2.4 对比表，要点如下）</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>比较项</th>
+<th>有丝分裂</th>
+<th>减数分裂</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>发生部位/时机</td>
+<td>所有正在生长的组织；从合子起贯穿整个生活周期</td>
+<td>只发生在有性繁殖组织；高等生物限于成熟个体</td>
+</tr>
+<tr>
+<td>分裂次数 / 复制次数</td>
+<td>1 次 / 1 次</td>
+<td>2 次 / 1 次</td>
+</tr>
+<tr>
+<td>同源染色体行为</td>
+<td>无联会、无交叉互换</td>
+<td>有联会、有交叉互换</td>
+</tr>
+<tr>
+<td>关键时期</td>
+<td>后期着丝粒一分为二、姐妹染色单体分离</td>
+<td>后期Ⅰ同源染色体分离，后期Ⅱ姐妹染色单体分离</td>
+</tr>
+<tr>
+<td>子细胞数</td>
+<td>2 个</td>
+<td>4 个</td>
+</tr>
+<tr>
+<td>子细胞染色体数</td>
+<td>与母细胞相同（$2n$）</td>
+<td>为母细胞的一半（$n$）</td>
+</tr>
+<tr>
+<td>子细胞遗传组成</td>
+<td>相同</td>
+<td>不同（父、母本染色体的不同组合 + 交换）</td>
+</tr>
+<tr>
+<td>前期长短</td>
+<td>短</td>
+<td>前期特别长且变化复杂</td>
+</tr>
+</tbody></table></div>
+<p><strong>（二）遗传学意义</strong></p>
+<ul>
+<li><strong>有丝分裂</strong>：前期每个染色体的两条染色单体在形态和组成上一模一样，末期时两个子细胞内的染色体在数目和形态上也完全一样。因此<strong>核内每个染色体准确地复制分裂为二，为形成的两个子细胞在遗传组成上与母细胞完全一样提供了基础</strong>，复制的各对染色体又有规则而均匀地分配到两个子细胞的核中，使两个子细胞与母细胞具有同样质量和数量的染色体。这是个体正常生长、发育与遗传物质稳定传递的基础。</li>
+<li><strong>减数分裂</strong>：① 形成的 4 个子细胞各具有半数的染色体（$n$），雌雄配子受精结合为合子后又恢复为全数的染色体 $2n$，<strong>保证了亲代与子代间染色体数目的恒定性</strong>，为后代的正常发育和性状遗传提供物质基础，保证了物种的相对稳定性；② 各对染色体中的两个成员在<strong>后期Ⅰ分向两极是随机的</strong>，一对染色体的分离与任何另一对染色体的分离不发生关联，$n$ 对染色体就有 $2^n$ 种自由组合方式（补充：水稻 $n=12$，即 $2^{12}=4096$ 种）；此外<strong>同源染色体的非姐妹染色单体之间还可能出现各种方式的交换</strong>，更增加了子细胞间差异的复杂性。<strong>这为生物的变异提供了重要的物质基础。</strong></li>
+</ul>
+<p><strong>（三）无性生殖会发生性状分离吗？</strong></p>
+<p><strong>不会</strong>（就本章范围而言）。无性生殖（细菌的二分分裂、各类营养繁殖等）<strong>不经过减数分裂，也没有雌雄配子的结合</strong>，其子代来自亲本体细胞的<strong>有丝分裂（或二分分裂）</strong>。而有丝分裂的功能正是「把一个细胞的整套染色体均等地分向两个子细胞」，产物在<strong>数目和形态（遗传组成）上与母细胞完全一样</strong>，不存在等位基因的分离与重组，因此无性生殖产生的后代与亲代遗传组成一致，<strong>不发生性状分离</strong>。</p>
+<p><strong>（补充）</strong> 若体细胞在增殖过程中发生突变，则可能由突变细胞长出具新性状的组织而形成嵌合体——那属于突变，而非分离。</p>
+<hr>
+<h3 id="2-水稻正常的孢子体组织中染色体数目是-12-对，问下列各组织的染色体数目是多少？"><a href="#2-水稻正常的孢子体组织中染色体数目是-12-对，问下列各组织的染色体数目是多少？" class="headerlink" title="2. 水稻正常的孢子体组织中染色体数目是 12 对，问下列各组织的染色体数目是多少？"></a>2. 水稻正常的孢子体组织中染色体数目是 12 对，问下列各组织的染色体数目是多少？</h3><p>（1）胚乳；（2）花粉管的管核；（3）胚囊；（4）叶；（5）根端；（6）种子的胚；（7）颖片。</p>
+<p><strong>答：</strong></p>
+<p>已知水稻孢子体 $2n = 12 \times 2 = 24$，单倍体数 $n = 12$。</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>组织</th>
+<th>性质（本章依据）</th>
+<th>染色体数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>（1）<strong>胚乳</strong></td>
+<td>由<strong>一个精核（$n$）+ 两个极核（$2n$）</strong> 结合而来，是<strong>三倍体（$3n$）</strong></td>
+<td>$3n = 36$</td>
+</tr>
+<tr>
+<td>（2）<strong>花粉管的管核</strong></td>
+<td>属雄配子体，由小孢子有丝分裂产生，是单倍体核（$n$）</td>
+<td>$n = 12$</td>
+</tr>
+<tr>
+<td>（3）<strong>胚囊</strong></td>
+<td>雌配子体，由大孢子经 <strong>3 次有丝分裂</strong>形成，含 <strong>8 个单倍体核</strong></td>
+<td>每个核 $n=12$；整个胚囊共 $8 \times 12 = 96$</td>
+</tr>
+<tr>
+<td>（4）<strong>叶</strong></td>
+<td>孢子体营养组织，由合子经有丝分裂而来</td>
+<td>$2n = 24$</td>
+</tr>
+<tr>
+<td>（5）<strong>根端</strong></td>
+<td>孢子体组织（分生区）</td>
+<td>$2n = 24$</td>
+</tr>
+<tr>
+<td>（6）<strong>种子的胚</strong></td>
+<td>由**合子（$2n$）**发育而来</td>
+<td>$2n = 24$</td>
+</tr>
+<tr>
+<td>（7）<strong>颖片</strong></td>
+<td>花器官的营养细胞，属孢子体组织</td>
+<td>$2n = 24$</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>[!tip] 计数口诀<br>孢子体组织（根、茎、叶、花器官）都是 $2n$；<strong>胚</strong>是 $2n$（精 + 卵）；<strong>胚乳</strong>是 $3n$（精 + 2 极核），这是显花植物双受精的直接结果；<strong>配子体</strong>（花粉粒及其管核、胚囊）是 $n$。</p>
+</blockquote>
+<hr>
+<h3 id="3-用基因型-Aabb-的玉米花粉给基因型-AaBb-的玉米雌花授粉，你预期下一代胚乳的基因型是什么类型，比例如何？"><a href="#3-用基因型-Aabb-的玉米花粉给基因型-AaBb-的玉米雌花授粉，你预期下一代胚乳的基因型是什么类型，比例如何？" class="headerlink" title="3. 用基因型 $Aabb$ 的玉米花粉给基因型 $AaBb$ 的玉米雌花授粉，你预期下一代胚乳的基因型是什么类型，比例如何？"></a>3. 用基因型 $Aabb$ 的玉米花粉给基因型 $AaBb$ 的玉米雌花授粉，你预期下一代胚乳的基因型是什么类型，比例如何？</h3><p><strong>答：</strong></p>
+<p><strong>（1）明确胚乳的来源</strong>：糊粉层/胚乳是<strong>双受精</strong>的产物，其基因型 = <strong>2 个极核（♀）+ 1 个精核（♂）</strong>，即 $3n$。</p>
+<p><strong>（2）确定极核的基因型</strong>：胚囊由 1 个大孢子经 3 次有丝分裂形成，<strong>8 个核基因型相同</strong>，所以 2 个极核的基因型<strong>完全相同，都等于母本产生的配子（大孢子）基因型</strong>。</p>
+<p>雌株 $AaBb$ 产生 4 种配子：$AB$、$Ab$、$aB$、$ab$，各 $\dfrac{1}{4}$。</p>
+<p>故极核组合为：（$AB$）₂、（$Ab$）₂、（$aB$）₂、（$ab$）₂，各 $\dfrac{1}{4}$。</p>
+<p><strong>（3）确定精核的基因型</strong>：雄株 $Aabb$ 只产生 2 种配子：$Ab$、$ab$，各 $\dfrac{1}{2}$。</p>
+<p><strong>（4）组合（极核 ×2 + 精核 ×1）</strong>：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>极核（♀，2 份）</th>
+<th>精核（♂）</th>
+<th>胚乳基因型（A 位点 · B 位点）</th>
+<th>比例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$AB$</td>
+<td>$Ab$</td>
+<td>$AAA$ · $BBb$</td>
+<td>1/8</td>
+</tr>
+<tr>
+<td>$AB$</td>
+<td>$ab$</td>
+<td>$AAa$ · $BBb$</td>
+<td>1/8</td>
+</tr>
+<tr>
+<td>$Ab$</td>
+<td>$Ab$</td>
+<td>$AAA$ · $bbb$</td>
+<td>1/8</td>
+</tr>
+<tr>
+<td>$Ab$</td>
+<td>$ab$</td>
+<td>$AAa$ · $bbb$</td>
+<td>1/8</td>
+</tr>
+<tr>
+<td>$aB$</td>
+<td>$Ab$</td>
+<td>$Aaa$ · $BBb$</td>
+<td>1/8</td>
+</tr>
+<tr>
+<td>$aB$</td>
+<td>$ab$</td>
+<td>$aaa$ · $BBb$</td>
+<td>1/8</td>
+</tr>
+<tr>
+<td>$ab$</td>
+<td>$Ab$</td>
+<td>$Aaa$ · $bbb$</td>
+<td>1/8</td>
+</tr>
+<tr>
+<td>$ab$</td>
+<td>$ab$</td>
+<td>$aaa$ · $bbb$</td>
+<td>1/8</td>
+</tr>
+</tbody></table></div>
+<p><strong>答</strong>：下一代胚乳共有 <strong>8 种基因型</strong>——$AAABBb$、$AAaBBb$、$AAAbbb$、$AAabbb$、$AaaBBb$、$aaaBBb$、$Aaabbb$、$aaabbb$，且<strong>比例相等，各占 $\dfrac{1}{8}$</strong>。</p>
+<blockquote>
+<p>[!important] 易错点<br>① 胚乳是 $3n$，不是 $2n$，绝不能按「胚」的两倍体方式组合；② 两个极核<strong>基因型相同</strong>（同一次有丝分裂的产物），不能当作母本的两个独立配子随意组合（否则会人为多出「$AB$ + $Ab$」这类不存在的极核组合）。</p>
+</blockquote>
+<hr>
+<h3 id="4-某生物有两对同源染色体，一对染色体是中间着丝粒，另一对是端部着丝粒，以模式图方式画出"><a href="#4-某生物有两对同源染色体，一对染色体是中间着丝粒，另一对是端部着丝粒，以模式图方式画出" class="headerlink" title="4. 某生物有两对同源染色体，一对染色体是中间着丝粒，另一对是端部着丝粒，以模式图方式画出"></a>4. 某生物有两对同源染色体，一对染色体是中间着丝粒，另一对是端部着丝粒，以模式图方式画出</h3><p>（1）减数分裂Ⅰ的中期图；（2）减数分裂Ⅱ的中期图。</p>
+<p><strong>答：</strong></p>
+<p>已知 $2n = 4$（2 对同源染色体）。两图的<strong>画法要点</strong>如下：</p>
+<p><strong>（1）减数分裂Ⅰ中期图</strong></p>
+<ul>
+<li>画面中应有 <strong>2 个双价体</strong>（不是 4 条彼此独立的染色体）。每个双价体由 2 条同源染色体并排配对而成，每条染色体又含 2 条姐妹染色单体，故一个双价体共 <strong>4 条染色单体</strong>。</li>
+<li><strong>两对同源染色体的着丝粒</strong>都位于<strong>赤道面</strong>上，纺锤丝由两极连向各个着丝粒。</li>
+<li><strong>中间着丝粒染色体</strong>形成的双价体：着丝粒在中央，<strong>四条染色单体分别向两侧伸出</strong>，整体呈「××」形，两侧对称。</li>
+<li><strong>端部着丝粒染色体</strong>形成的双价体：着丝粒位于染色体一端，<strong>整个双价体呈指向一极的棒状/V 形</strong>（短臂极短，长臂拖向一侧）。</li>
+<li>两个双价体在赤道面上的<strong>取向互相独立</strong>（可有 $2^2=4$ 种相对取向，本图只画其中一种即可）。</li>
+</ul>
+<p><strong>（2）减数分裂Ⅱ中期图</strong></p>
+<ul>
+<li>染色体数目已减半，画面中只有 <strong>2 条染色体</strong>（$n=2$），<strong>不再有同源染色体配对</strong>（无联会、无交叉），不出现双价体。</li>
+<li>每条染色体仍含 <strong>2 条姐妹染色单体</strong>，两个着丝粒各自独立地排列在<strong>赤道面</strong>上，纺锤丝分别连向各自着丝粒。</li>
+<li><strong>中间着丝粒染色体</strong>：着丝粒在赤道面上，两条染色单体向两侧展开，呈 <strong>「×」形</strong>（对称）。</li>
+<li><strong>端部着丝粒染色体</strong>：着丝粒在末端并位于赤道面上，两条染色单体形成 <strong>「V」形/棒状</strong>，尖端（着丝粒）朝赤道面或朝极，长臂拖向一侧。</li>
+</ul>
+<blockquote>
+<p>[!tip] 判分要点<br>① 减数分裂Ⅰ中期画的是「<strong>双价体</strong>」（2 条染色体／4 条染色单体），减数分裂Ⅱ中期画的是「<strong>2 条独立的染色体</strong>」（各含 2 条染色单体）——这是两图最本质的差别；<br>② 两图中<strong>每条染色体都必须画出两条姐妹染色单体</strong>（因为在后期Ⅱ着丝粒分裂之前，染色单体始终存在）；<br>③ 端部着丝粒染色体要体现「着丝粒在末端」这一形态特征，中间着丝粒要体现「着丝粒居中、两臂近等长」。</p>
+</blockquote>
+<hr>
+<h3 id="5-蚕豆的体细胞有-12-条染色体，也就是-6-对同源染色体（6-个来自父本，6-个来自母本）。一个学生说，在减数分裂时，只有-1-4-的配子的-6-条染色体完全来自父本或母本，你认为他的回答对吗？"><a href="#5-蚕豆的体细胞有-12-条染色体，也就是-6-对同源染色体（6-个来自父本，6-个来自母本）。一个学生说，在减数分裂时，只有-1-4-的配子的-6-条染色体完全来自父本或母本，你认为他的回答对吗？" class="headerlink" title="5. 蚕豆的体细胞有 12 条染色体，也就是 6 对同源染色体（6 个来自父本，6 个来自母本）。一个学生说，在减数分裂时，只有 1/4 的配子的 6 条染色体完全来自父本或母本，你认为他的回答对吗？"></a>5. 蚕豆的体细胞有 12 条染色体，也就是 6 对同源染色体（6 个来自父本，6 个来自母本）。一个学生说，在减数分裂时，只有 1/4 的配子的 6 条染色体完全来自父本或母本，你认为他的回答对吗？</h3><p><strong>答：</strong></p>
+<p><strong>不对。</strong></p>
+<p><strong>理由</strong>：减数分裂后期Ⅰ，每一对同源染色体的两个成员分别随机地移向两极，因此<strong>某一条染色体来自父本（或母本）而进入某个配子的概率是 $\dfrac{1}{2}$</strong>；又因为 6 对同源染色体的分配彼此独立，所以 <strong>6 条染色体同时完全来自父本（或完全来自母本）的概率</strong>为</p>
+<p>$$<br>\left(\frac{1}{2}\right)^{6} = \frac{1}{64}<br>$$</p>
+<p>若把「完全来自父本」和「完全来自母本」两种情形合并计算，则为</p>
+<p>$$<br>2 \times \left(\frac{1}{2}\right)^{6} = \frac{1}{32}<br>$$</p>
+<p><strong>答</strong>：该学生的回答是错误的。配子中 6 条染色体完全来自父本（或完全来自母本）的概率应为 $\left(\dfrac{1}{2}\right)^{6} = \dfrac{1}{64}$；两种情形合计为 $\dfrac{1}{32}$，而不是 $\dfrac{1}{4}$。</p>
+<hr>
+<h3 id="6-在玉米中"><a href="#6-在玉米中" class="headerlink" title="6. 在玉米中"></a>6. 在玉米中</h3><p>（1）5 个小孢子母细胞能产生多少配子？</p>
+<p>（2）5 个大孢子母细胞能产生多少配子？</p>
+<p>（3）5 个花粉细胞能产生多少配子？</p>
+<p>（4）5 个胚囊能产生多少配子？</p>
+<p><strong>答：</strong></p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>小题</th>
+<th>依据（本章植物生活史）</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>（1）5 个小孢子母细胞</td>
+<td>每个小孢子母细胞（$2n$）经减数分裂产生 <strong>4 个小孢子（花粉粒，$n$）</strong>：$5 \times 4$</td>
+<td><strong>20 个</strong></td>
+</tr>
+<tr>
+<td>（2）5 个大孢子母细胞</td>
+<td>每个大孢子母细胞减数分裂产生 4 个单倍体核，<strong>其中 3 个退化</strong>，只留下 1 个大孢子发育为胚囊，最终只产生 <strong>1 个有效雌配子</strong>：$5 \times 1$</td>
+<td><strong>5 个</strong></td>
+</tr>
+<tr>
+<td>（3）5 个花粉细胞</td>
+<td>花粉粒（小孢子）即雄配子体，一个花粉粒对应一份雄配子来源：$5 \times 1$</td>
+<td><strong>5 个</strong></td>
+</tr>
+<tr>
+<td>（4）5 个胚囊</td>
+<td>每个成熟胚囊（雌配子体）中只有 1 个卵核是有效的雌配子：$5 \times 1$</td>
+<td><strong>5 个</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>答：（1）20 个；（2）5 个；（3）5 个；（4）5 个。</strong></p>
+<blockquote>
+<p>[!important] 本题考的就是「雌雄不对称」<br>减数分裂的<strong>细胞学</strong>产物都是 4 个，但<strong>遗传学上有效的配子</strong>在雌雄两侧完全不同：<br>雄方：1 个小孢子母细胞 → 4 个小孢子 →（每个花粉粒含 1 营养核 + 2 精核）；<br>雌方：1 个大孢子母细胞 → 4 个核，<strong>3 个退化</strong>，1 个大孢子 → 1 个胚囊 → <strong>1 个卵</strong>。<br>正因如此，雄性一次减数分裂的「产出」远高于雌性。<br>（补充：若按真正与卵结合的<strong>精核</strong>计数，1 个花粉粒含 2 个精核，则第（1）小题为 $5\times4\times2=40$、第（3）小题为 $5\times2=10$；教材配套答案按「小孢子／花粉粒」为单位计数，即 20／5／5／5。）</p>
+</blockquote>
+<hr>
+<h3 id="7-马的二倍体染色体数目是-64，驴的二倍体染色体数目是-62，请回答"><a href="#7-马的二倍体染色体数目是-64，驴的二倍体染色体数目是-62，请回答" class="headerlink" title="7. 马的二倍体染色体数目是 64，驴的二倍体染色体数目是 62，请回答"></a>7. 马的二倍体染色体数目是 64，驴的二倍体染色体数目是 62，请回答</h3><p>（1）马和驴的杂种的体细胞染色体数是多少？</p>
+<p>（2）如果马和驴杂种在减数分裂时染色体很少配对或没有配对，说明马－驴杂种是可育还是不育？</p>
+<p><strong>答：</strong></p>
+<p><strong>（1）</strong> 马产生的配子染色体数 $n = 64/2 = 32$，驴产生的配子染色体数 $n = 62/2 = 31$。杂种合子由二者结合而成，故</p>
+<p>$$<br>2n = 32 + 31 = 63<br>$$</p>
+<p><strong>答：马－驴杂种的体细胞染色体数是 63 条。</strong></p>
+<p><strong>（2）</strong> <strong>不育。</strong></p>
+<p><strong>理由</strong>：本章指出，联会是<strong>专一性的，只有同源染色体才会配对</strong>。马和驴的染色体分属不同物种，杂种细胞中的 32 条马染色体与 31 条驴染色体之间<strong>缺乏同源关系</strong>，减数分裂前期Ⅰ<strong>很少配对或不能配对</strong>，因而：</p>
+<ul>
+<li>无法形成正常的<strong>双价体</strong>，中期Ⅰ的染色体不能规则地排列在赤道面上、着丝粒不能正常连向两极；</li>
+<li>后期Ⅰ同源染色体不能正常分离，导致染色体分配紊乱，<strong>不能产生染色体数目完整、平衡的配子</strong>（形成正常配子的概率极低）。</li>
+</ul>
+<p>因此减数分裂不能正常完成，杂种高度不育（这正是骡子不育的细胞学原因）。</p>
+<p><strong>答：马－驴杂种是</strong>不育<strong>的。</strong></p>
+<hr>
+<h3 id="8-在玉米中，与糊粉层着色有关的基因很多，其中三对是-A-a-、-I-i-和-Pr-pr-。要糊粉层着色，除其他有关基因必须存在外，还必须有-A-基因存在，而且不能有-I-基因存在。如有-Pr-存在，糊粉层紫色；如果基因型是-prpr-，糊粉层是红色。假使在一个隔离的玉米试验区中，基因型-AaprprII-的种子种在偶数行，基因型-aaPrprii-的种子种在奇数行。植株长起来时，允许天然授粉，问在偶数行生长的植株上的果穗的糊粉层颜色怎样？在奇数行上又怎样？（提示：糊粉层是胚乳的一部分，所以是-3n-。）"><a href="#8-在玉米中，与糊粉层着色有关的基因很多，其中三对是-A-a-、-I-i-和-Pr-pr-。要糊粉层着色，除其他有关基因必须存在外，还必须有-A-基因存在，而且不能有-I-基因存在。如有-Pr-存在，糊粉层紫色；如果基因型是-prpr-，糊粉层是红色。假使在一个隔离的玉米试验区中，基因型-AaprprII-的种子种在偶数行，基因型-aaPrprii-的种子种在奇数行。植株长起来时，允许天然授粉，问在偶数行生长的植株上的果穗的糊粉层颜色怎样？在奇数行上又怎样？（提示：糊粉层是胚乳的一部分，所以是-3n-。）" class="headerlink" title="8. 在玉米中，与糊粉层着色有关的基因很多，其中三对是 $A/a$、$I/i$ 和 $Pr/pr$。要糊粉层着色，除其他有关基因必须存在外，还必须有 $A$ 基因存在，而且不能有 $I$ 基因存在。如有 $Pr$ 存在，糊粉层紫色；如果基因型是 $prpr$，糊粉层是红色。假使在一个隔离的玉米试验区中，基因型 $AaprprII$ 的种子种在偶数行，基因型 $aaPrprii$ 的种子种在奇数行。植株长起来时，允许天然授粉，问在偶数行生长的植株上的果穗的糊粉层颜色怎样？在奇数行上又怎样？（提示：糊粉层是胚乳的一部分，所以是 $3n$。）"></a>8. 在玉米中，与糊粉层着色有关的基因很多，其中三对是 $A/a$、$I/i$ 和 $Pr/pr$。要糊粉层着色，除其他有关基因必须存在外，还必须有 $A$ 基因存在，而且不能有 $I$ 基因存在。如有 $Pr$ 存在，糊粉层紫色；如果基因型是 $prpr$，糊粉层是红色。假使在一个隔离的玉米试验区中，基因型 $AaprprII$ 的种子种在偶数行，基因型 $aaPrprii$ 的种子种在奇数行。植株长起来时，允许天然授粉，问在偶数行生长的植株上的果穗的糊粉层颜色怎样？在奇数行上又怎样？（提示：糊粉层是胚乳的一部分，所以是 $3n$。）</h3><p><strong>答：</strong></p>
+<p><strong>（1）先把「着色条件」翻译成逻辑条件</strong>：</p>
+<p>着色 $\iff$ <strong>有 $A$</strong> 且 <strong>无 $I$</strong>；着色者再按 $Pr$ 区分：有 $Pr$ 为<strong>紫色</strong>，$prpr$（无 $Pr$）为<strong>红色</strong>。</p>
+<p><strong>（2）偶数行植株（$AaprprII$）作母本</strong>：</p>
+<p>糊粉层是胚乳，其基因型为「2 极核（♀）+ 1 精核（♂）」，其中极核来自母本。该植株的基因型是 $II$，因此<strong>它的所有极核都必然带 $I$</strong>，无论花粉来自何处，所结种子胚乳中<strong>必然有 $I$</strong>，不满足「无 $I$」的条件。</p>
+<p>$\Rightarrow$ <strong>偶数行植株果穗的糊粉层全部为无色。</strong></p>
+<p><strong>（3）奇数行植株（$aaPrprii$）作母本</strong>：</p>
+<p>该植株的极核都带 $i$（不含 $I$），但<strong>都不带 $A$</strong>（极核一律为 $a$）。胚乳中的 $A$ 只能靠花粉提供，而试验区内只有两类花粉来源：</p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>花粉来源</th>
+<th>精核可能类型</th>
+<th>胚乳是否含 $A$</th>
+<th>胚乳是否含 $I$</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>偶数行植株（$AaprprII$）</td>
+<td>$A\ pr\ I$ 或 $a\ pr\ I$</td>
+<td>若为前者则有 $A$</td>
+<td><strong>有 $I$</strong>（精核必带 $I$）</td>
+<td>无色</td>
+</tr>
+<tr>
+<td>奇数行植株（$aaPrprii$）</td>
+<td>$a\ Pr\ i$ 或 $a\ pr\ i$</td>
+<td><strong>无 $A$</strong></td>
+<td>无 $I$</td>
+<td>无色</td>
+</tr>
+</tbody></table></div>
+<p>即：接受偶数行花粉时虽可能得到 $A$，但<strong>同时被带入 $I$</strong>，仍不符合「无 $I$」；接受奇数行花粉时得不到 $A$，不符合「有 $A$」。</p>
+<p>$\Rightarrow$ <strong>奇数行植株果穗的糊粉层也全部为无色。</strong></p>
+<p><strong>答：偶数行生长的植株上的果穗，其糊粉层为</strong>无色**；奇数行生长的植株上的果穗，其糊粉层<strong>也为无色</strong>。**（整个试验区的果穗都不会出现紫色或红色糊粉层。）</p>
+<blockquote>
+<p>[!important] 本题的三个考点<br>① 糊粉层属<strong>胚乳</strong>，是 <strong>$3n$</strong>（2 个极核 + 1 个精核），不能按胚（$2n$）或二倍体组织处理；<br>② <strong>$I$ 是显性抑制基因</strong>——胚乳中只要有一个 $I$ 就不能着色，而偶数行植株基因型为 $II$，其<strong>所有</strong>配子（包括极核和花粉）都带 $I$；<br>③ 判定着色必须<strong>同时</strong>验证「有 $A$」和「无 $I$」两个条件，只看其一就会误判奇数行的结果。</p>
+</blockquote>
+<hr>
+<h3 id="9-兔的卵没有受精，经过刺激，发育成兔。在这种孤雌生殖的兔中，其中某些兔的有些基因是杂合的。你怎样解释？（提示：极体受精。）"><a href="#9-兔的卵没有受精，经过刺激，发育成兔。在这种孤雌生殖的兔中，其中某些兔的有些基因是杂合的。你怎样解释？（提示：极体受精。）" class="headerlink" title="9. 兔的卵没有受精，经过刺激，发育成兔。在这种孤雌生殖的兔中，其中某些兔的有些基因是杂合的。你怎样解释？（提示：极体受精。）"></a>9. 兔的卵没有受精，经过刺激，发育成兔。在这种孤雌生殖的兔中，其中某些兔的有些基因是杂合的。你怎样解释？（提示：极体受精。）</h3><p><strong>答：</strong></p>
+<p><strong>（1）如果卵细胞只靠自身的单倍体核发育</strong>：卵核（$n$）经有丝分裂复制增殖，其全部基因都只有一份来源，因此这样的孤雌生殖个体在<strong>所有基因座上都是纯合的</strong>——这无法解释「有些基因是杂合的」。</p>
+<p><strong>（2）极体受精解释</strong>：卵在成熟过程中经减数分裂产生卵核（$n$）和<strong>极体</strong>（第一极体、第二极体，都是 $n$）。若在刺激下<strong>极体（或其核）与卵核融合</strong>（即极体受精），两个单倍体核合并成二倍体核（$2n$），由此发育成的个体就是二倍体。</p>
+<p>关键在于：<strong>卵核与极体来自同一次减数分裂，但在发生交换的基因座上可以携带不同的等位基因</strong>。例如卵核带 $A$、极体带 $a$，融合后就形成 $Aa$，表现为该基因座上<strong>杂合</strong>；而在没有发生交换、卵核与极体携带相同等位基因的位点上，融合后仍是纯合。</p>
+<p><strong>答</strong>：这些孤雌生殖兔之所以在某些基因上杂合，是因为它们并非由卵核单独发育而来，而是<strong>卵核与极体（极体受精）融合形成了二倍体核</strong>——两个来源不同（可能携带不同等位基因）的单倍体核互补，因而在相应基因座上表现为杂合；只在那些卵核与极体携带相同等位基因的位点上才表现为纯合。这正好解释了题干中「<strong>某些</strong>兔的<strong>有些</strong>基因是杂合的」这一限定。</p>
+<hr>
+<h2 id="🔗-关联"><a href="#🔗-关联" class="headerlink" title="🔗 关联"></a>🔗 关联</h2><ul>
+<li>上一章：02-孟德尔定律 — 分离定律与自由组合定律的完整内容</li>
+<li>下一章：04-孟德尔遗传的拓展 — 等位基因间的关系与基因互作</li>
+<li>后续衔接：摩尔根果蝇实验（把特定基因定位到特定染色体）见「连锁与交换」一章；DNA 包装的详细过程见「基因组」一章。</li>
+</ul>
+<hr>
+<p><em>笔记依据刘祖洞《遗传学》（第4版）第三章整理；事实性内容均出自教材原文，补充说明处已标注「（补充）」。</em></p>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+    <div class="widget-header dis-select">
+      <span class="name">本文目录</span>
+      <button type="button" class="cap-action ui-interactive card-hover card-hover--spotlight" data-shell-action="toggle-toc" aria-label="Toggle table of contents" aria-pressed="false"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></span></button>
+    </div>
+  
+  <div class="widget-body"><ol class="toc ui-collection-adapter"><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E6%9C%AC%E7%AB%A0%E5%9C%B0%E5%9B%BE"><span class="toc-text">本章地图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AC%AC%E4%B8%80%E8%8A%82-%E6%9F%93%E8%89%B2%E4%BD%93"><span class="toc-text">第一节 染色体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#1-1-%E6%9F%93%E8%89%B2%E4%BD%93%E6%95%B0%E7%9B%AE%EF%BC%9A-n-%E4%B8%8E-2n"><span class="toc-text">1.1 染色体数目：$n$ 与 $2n$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#1-2-%E6%9F%93%E8%89%B2%E4%BD%93%E7%9A%84%E5%BD%A2%E6%80%81%E7%BB%93%E6%9E%84"><span class="toc-text">1.2 染色体的形态结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82-%E7%BB%86%E8%83%9E%E5%88%86%E8%A3%82"><span class="toc-text">第二节 细胞分裂</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#2-1-%E7%BB%86%E8%8F%8C%E7%9A%84%E4%BA%8C%E5%88%86%E5%88%86%E8%A3%82"><span class="toc-text">2.1 细菌的二分分裂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#2-2-%E7%9C%9F%E6%A0%B8%E7%BB%86%E8%83%9E%E7%9A%84%E6%9C%89%E4%B8%9D%E5%88%86%E8%A3%82"><span class="toc-text">2.2 真核细胞的有丝分裂</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link ui-interactive" href="#%EF%BC%881%EF%BC%89%E5%88%86%E8%A3%82%E9%97%B4%E6%9C%9F"><span class="toc-text">（1）分裂间期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link ui-interactive" href="#%EF%BC%882%EF%BC%89%E5%88%86%E8%A3%82%E6%9C%9F%EF%BC%88M-%E6%9C%9F%EF%BC%89%E5%90%84%E6%97%B6%E6%9C%9F"><span class="toc-text">（2）分裂期（M 期）各时期</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#2-3-%E5%87%8F%E6%95%B0%E5%88%86%E8%A3%82"><span class="toc-text">2.3 减数分裂</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link ui-interactive" href="#%EF%BC%881%EF%BC%89%E5%87%8F%E6%95%B0%E5%88%86%E8%A3%82%E2%85%A0%E2%80%94%E2%80%94%E5%89%8D%E6%9C%9F%E2%85%A0%E7%9A%84%E4%BA%94%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-text">（1）减数分裂Ⅰ——前期Ⅰ的五个阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link ui-interactive" href="#%EF%BC%882%EF%BC%89%E5%87%8F%E6%95%B0%E5%88%86%E8%A3%82%E2%85%A0%E2%80%94%E2%80%94%E4%B8%AD%E6%9C%9F%E2%85%A0%E8%87%B3%E6%9C%AB%E6%9C%9F%E2%85%A0"><span class="toc-text">（2）减数分裂Ⅰ——中期Ⅰ至末期Ⅰ</span></a></li><li class="toc-item toc-level-4"><a class="toc-link ui-interactive" href="#%EF%BC%883%EF%BC%89%E5%87%8F%E6%95%B0%E5%88%86%E8%A3%82%E9%97%B4%E6%9C%9F%E4%B8%8E%E5%87%8F%E6%95%B0%E5%88%86%E8%A3%82%E2%85%A1"><span class="toc-text">（3）减数分裂间期与减数分裂Ⅱ</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#2-4-%E6%9C%89%E4%B8%9D%E5%88%86%E8%A3%82-Vs-%E5%87%8F%E6%95%B0%E5%88%86%E8%A3%82%EF%BC%88%E5%AF%B9%E6%AF%94%E8%A1%A8-%E2%98%85%E5%BF%85%E8%83%8C%EF%BC%89"><span class="toc-text">2.4 有丝分裂 Vs 减数分裂（对比表 ★必背）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AC%AC%E4%B8%89%E8%8A%82-%E6%9F%93%E8%89%B2%E4%BD%93%E5%91%A8%E6%9C%9F"><span class="toc-text">第三节 染色体周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#3-1-%E5%8A%A8%E7%89%A9%E7%9A%84%E7%94%9F%E6%B4%BB%E5%8F%B2"><span class="toc-text">3.1 动物的生活史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#3-2-%E6%A4%8D%E7%89%A9%E7%9A%84%E7%94%9F%E6%B4%BB%E5%8F%B2"><span class="toc-text">3.2 植物的生活史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#3-3-%E5%8A%A8%E3%80%81%E6%A4%8D%E7%89%A9%E7%94%9F%E6%B4%BB%E5%8F%B2%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-text">3.3 动、植物生活史的比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#3-4-%E7%9C%9F%E8%8F%8C%E7%B1%BB%E7%9A%84%E7%94%9F%E6%B4%BB%E5%8F%B2"><span class="toc-text">3.4 真菌类的生活史</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82-%E9%81%97%E4%BC%A0%E7%9A%84%E6%9F%93%E8%89%B2%E4%BD%93%E5%AD%A6%E8%AF%B4"><span class="toc-text">第四节 遗传的染色体学说</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#4-1-%E6%9F%93%E8%89%B2%E4%BD%93%E4%B8%8E%E5%9F%BA%E5%9B%A0%E7%9A%84%E5%B9%B3%E8%A1%8C%E7%8E%B0%E8%B1%A1"><span class="toc-text">4.1 染色体与基因的平行现象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#4-2-%E5%88%86%E7%A6%BB%E5%AE%9A%E5%BE%8B-%E2%86%94-%E5%90%8C%E6%BA%90%E6%9F%93%E8%89%B2%E4%BD%93%E7%9A%84%E5%88%86%E7%A6%BB"><span class="toc-text">4.2 分离定律 ↔ 同源染色体的分离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#4-3-%E8%87%AA%E7%94%B1%E7%BB%84%E5%90%88%E5%AE%9A%E5%BE%8B-%E2%86%94-%E9%9D%9E%E5%90%8C%E6%BA%90%E6%9F%93%E8%89%B2%E4%BD%93%E7%9A%84%E7%8B%AC%E7%AB%8B%E5%88%86%E9%85%8D"><span class="toc-text">4.3 自由组合定律 ↔ 非同源染色体的独立分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#4-4-%E5%AD%A6%E8%AF%B4%E7%9A%84%E7%A1%AE%E7%AB%8B%E4%B8%8E%E5%90%8E%E7%BB%AD"><span class="toc-text">4.4 学说的确立与后续</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%F0%9F%A7%A0-%E6%A6%82%E5%BF%B5%E8%BE%A8%E6%9E%90%E4%B8%8E%E6%98%93%E9%94%99%E7%82%B9"><span class="toc-text">🧠 概念辨析与易错点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B9%A0%E9%A2%98"><span class="toc-text">习题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#1-%E6%9C%89%E4%B8%9D%E5%88%86%E8%A3%82%E5%92%8C%E5%87%8F%E6%95%B0%E5%88%86%E8%A3%82%E7%9A%84%E5%8C%BA%E5%88%AB%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F%E4%BB%8E%E9%81%97%E4%BC%A0%E5%AD%A6%E8%A7%92%E5%BA%A6%E6%9D%A5%E7%9C%8B%EF%BC%8C%E8%BF%99%E4%B8%A4%E7%A7%8D%E5%88%86%E8%A3%82%E5%90%84%E6%9C%89%E4%BB%80%E4%B9%88%E6%84%8F%E4%B9%89%EF%BC%9F%E6%97%A0%E6%80%A7%E7%94%9F%E6%AE%96%E4%BC%9A%E5%8F%91%E7%94%9F%E6%80%A7%E7%8A%B6%E5%88%86%E7%A6%BB%E5%90%97%EF%BC%9F%E8%AF%95%E5%8A%A0%E4%BB%A5%E8%AF%B4%E6%98%8E"><span class="toc-text">1. 有丝分裂和减数分裂的区别在哪里？从遗传学角度来看，这两种分裂各有什么意义？无性生殖会发生性状分离吗？试加以说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#2-%E6%B0%B4%E7%A8%BB%E6%AD%A3%E5%B8%B8%E7%9A%84%E5%AD%A2%E5%AD%90%E4%BD%93%E7%BB%84%E7%BB%87%E4%B8%AD%E6%9F%93%E8%89%B2%E4%BD%93%E6%95%B0%E7%9B%AE%E6%98%AF-12-%E5%AF%B9%EF%BC%8C%E9%97%AE%E4%B8%8B%E5%88%97%E5%90%84%E7%BB%84%E7%BB%87%E7%9A%84%E6%9F%93%E8%89%B2%E4%BD%93%E6%95%B0%E7%9B%AE%E6%98%AF%E5%A4%9A%E5%B0%91%EF%BC%9F"><span class="toc-text">2. 水稻正常的孢子体组织中染色体数目是 12 对，问下列各组织的染色体数目是多少？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#3-%E7%94%A8%E5%9F%BA%E5%9B%A0%E5%9E%8B-Aabb-%E7%9A%84%E7%8E%89%E7%B1%B3%E8%8A%B1%E7%B2%89%E7%BB%99%E5%9F%BA%E5%9B%A0%E5%9E%8B-AaBb-%E7%9A%84%E7%8E%89%E7%B1%B3%E9%9B%8C%E8%8A%B1%E6%8E%88%E7%B2%89%EF%BC%8C%E4%BD%A0%E9%A2%84%E6%9C%9F%E4%B8%8B%E4%B8%80%E4%BB%A3%E8%83%9A%E4%B9%B3%E7%9A%84%E5%9F%BA%E5%9B%A0%E5%9E%8B%E6%98%AF%E4%BB%80%E4%B9%88%E7%B1%BB%E5%9E%8B%EF%BC%8C%E6%AF%94%E4%BE%8B%E5%A6%82%E4%BD%95%EF%BC%9F"><span class="toc-text">3. 用基因型 $Aabb$ 的玉米花粉给基因型 $AaBb$ 的玉米雌花授粉，你预期下一代胚乳的基因型是什么类型，比例如何？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#4-%E6%9F%90%E7%94%9F%E7%89%A9%E6%9C%89%E4%B8%A4%E5%AF%B9%E5%90%8C%E6%BA%90%E6%9F%93%E8%89%B2%E4%BD%93%EF%BC%8C%E4%B8%80%E5%AF%B9%E6%9F%93%E8%89%B2%E4%BD%93%E6%98%AF%E4%B8%AD%E9%97%B4%E7%9D%80%E4%B8%9D%E7%B2%92%EF%BC%8C%E5%8F%A6%E4%B8%80%E5%AF%B9%E6%98%AF%E7%AB%AF%E9%83%A8%E7%9D%80%E4%B8%9D%E7%B2%92%EF%BC%8C%E4%BB%A5%E6%A8%A1%E5%BC%8F%E5%9B%BE%E6%96%B9%E5%BC%8F%E7%94%BB%E5%87%BA"><span class="toc-text">4. 某生物有两对同源染色体，一对染色体是中间着丝粒，另一对是端部着丝粒，以模式图方式画出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#5-%E8%9A%95%E8%B1%86%E7%9A%84%E4%BD%93%E7%BB%86%E8%83%9E%E6%9C%89-12-%E6%9D%A1%E6%9F%93%E8%89%B2%E4%BD%93%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF-6-%E5%AF%B9%E5%90%8C%E6%BA%90%E6%9F%93%E8%89%B2%E4%BD%93%EF%BC%886-%E4%B8%AA%E6%9D%A5%E8%87%AA%E7%88%B6%E6%9C%AC%EF%BC%8C6-%E4%B8%AA%E6%9D%A5%E8%87%AA%E6%AF%8D%E6%9C%AC%EF%BC%89%E3%80%82%E4%B8%80%E4%B8%AA%E5%AD%A6%E7%94%9F%E8%AF%B4%EF%BC%8C%E5%9C%A8%E5%87%8F%E6%95%B0%E5%88%86%E8%A3%82%E6%97%B6%EF%BC%8C%E5%8F%AA%E6%9C%89-1-4-%E7%9A%84%E9%85%8D%E5%AD%90%E7%9A%84-6-%E6%9D%A1%E6%9F%93%E8%89%B2%E4%BD%93%E5%AE%8C%E5%85%A8%E6%9D%A5%E8%87%AA%E7%88%B6%E6%9C%AC%E6%88%96%E6%AF%8D%E6%9C%AC%EF%BC%8C%E4%BD%A0%E8%AE%A4%E4%B8%BA%E4%BB%96%E7%9A%84%E5%9B%9E%E7%AD%94%E5%AF%B9%E5%90%97%EF%BC%9F"><span class="toc-text">5. 蚕豆的体细胞有 12 条染色体，也就是 6 对同源染色体（6 个来自父本，6 个来自母本）。一个学生说，在减数分裂时，只有 1&#x2F;4 的配子的 6 条染色体完全来自父本或母本，你认为他的回答对吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#6-%E5%9C%A8%E7%8E%89%E7%B1%B3%E4%B8%AD"><span class="toc-text">6. 在玉米中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#7-%E9%A9%AC%E7%9A%84%E4%BA%8C%E5%80%8D%E4%BD%93%E6%9F%93%E8%89%B2%E4%BD%93%E6%95%B0%E7%9B%AE%E6%98%AF-64%EF%BC%8C%E9%A9%B4%E7%9A%84%E4%BA%8C%E5%80%8D%E4%BD%93%E6%9F%93%E8%89%B2%E4%BD%93%E6%95%B0%E7%9B%AE%E6%98%AF-62%EF%BC%8C%E8%AF%B7%E5%9B%9E%E7%AD%94"><span class="toc-text">7. 马的二倍体染色体数目是 64，驴的二倍体染色体数目是 62，请回答</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#8-%E5%9C%A8%E7%8E%89%E7%B1%B3%E4%B8%AD%EF%BC%8C%E4%B8%8E%E7%B3%8A%E7%B2%89%E5%B1%82%E7%9D%80%E8%89%B2%E6%9C%89%E5%85%B3%E7%9A%84%E5%9F%BA%E5%9B%A0%E5%BE%88%E5%A4%9A%EF%BC%8C%E5%85%B6%E4%B8%AD%E4%B8%89%E5%AF%B9%E6%98%AF-A-a-%E3%80%81-I-i-%E5%92%8C-Pr-pr-%E3%80%82%E8%A6%81%E7%B3%8A%E7%B2%89%E5%B1%82%E7%9D%80%E8%89%B2%EF%BC%8C%E9%99%A4%E5%85%B6%E4%BB%96%E6%9C%89%E5%85%B3%E5%9F%BA%E5%9B%A0%E5%BF%85%E9%A1%BB%E5%AD%98%E5%9C%A8%E5%A4%96%EF%BC%8C%E8%BF%98%E5%BF%85%E9%A1%BB%E6%9C%89-A-%E5%9F%BA%E5%9B%A0%E5%AD%98%E5%9C%A8%EF%BC%8C%E8%80%8C%E4%B8%94%E4%B8%8D%E8%83%BD%E6%9C%89-I-%E5%9F%BA%E5%9B%A0%E5%AD%98%E5%9C%A8%E3%80%82%E5%A6%82%E6%9C%89-Pr-%E5%AD%98%E5%9C%A8%EF%BC%8C%E7%B3%8A%E7%B2%89%E5%B1%82%E7%B4%AB%E8%89%B2%EF%BC%9B%E5%A6%82%E6%9E%9C%E5%9F%BA%E5%9B%A0%E5%9E%8B%E6%98%AF-prpr-%EF%BC%8C%E7%B3%8A%E7%B2%89%E5%B1%82%E6%98%AF%E7%BA%A2%E8%89%B2%E3%80%82%E5%81%87%E4%BD%BF%E5%9C%A8%E4%B8%80%E4%B8%AA%E9%9A%94%E7%A6%BB%E7%9A%84%E7%8E%89%E7%B1%B3%E8%AF%95%E9%AA%8C%E5%8C%BA%E4%B8%AD%EF%BC%8C%E5%9F%BA%E5%9B%A0%E5%9E%8B-AaprprII-%E7%9A%84%E7%A7%8D%E5%AD%90%E7%A7%8D%E5%9C%A8%E5%81%B6%E6%95%B0%E8%A1%8C%EF%BC%8C%E5%9F%BA%E5%9B%A0%E5%9E%8B-aaPrprii-%E7%9A%84%E7%A7%8D%E5%AD%90%E7%A7%8D%E5%9C%A8%E5%A5%87%E6%95%B0%E8%A1%8C%E3%80%82%E6%A4%8D%E6%A0%AA%E9%95%BF%E8%B5%B7%E6%9D%A5%E6%97%B6%EF%BC%8C%E5%85%81%E8%AE%B8%E5%A4%A9%E7%84%B6%E6%8E%88%E7%B2%89%EF%BC%8C%E9%97%AE%E5%9C%A8%E5%81%B6%E6%95%B0%E8%A1%8C%E7%94%9F%E9%95%BF%E7%9A%84%E6%A4%8D%E6%A0%AA%E4%B8%8A%E7%9A%84%E6%9E%9C%E7%A9%97%E7%9A%84%E7%B3%8A%E7%B2%89%E5%B1%82%E9%A2%9C%E8%89%B2%E6%80%8E%E6%A0%B7%EF%BC%9F%E5%9C%A8%E5%A5%87%E6%95%B0%E8%A1%8C%E4%B8%8A%E5%8F%88%E6%80%8E%E6%A0%B7%EF%BC%9F%EF%BC%88%E6%8F%90%E7%A4%BA%EF%BC%9A%E7%B3%8A%E7%B2%89%E5%B1%82%E6%98%AF%E8%83%9A%E4%B9%B3%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%8C%E6%89%80%E4%BB%A5%E6%98%AF-3n-%E3%80%82%EF%BC%89"><span class="toc-text">8. 在玉米中，与糊粉层着色有关的基因很多，其中三对是 $A&#x2F;a$、$I&#x2F;i$ 和 $Pr&#x2F;pr$。要糊粉层着色，除其他有关基因必须存在外，还必须有 $A$ 基因存在，而且不能有 $I$ 基因存在。如有 $Pr$ 存在，糊粉层紫色；如果基因型是 $prpr$，糊粉层是红色。假使在一个隔离的玉米试验区中，基因型 $AaprprII$ 的种子种在偶数行，基因型 $aaPrprii$ 的种子种在奇数行。植株长起来时，允许天然授粉，问在偶数行生长的植株上的果穗的糊粉层颜色怎样？在奇数行上又怎样？（提示：糊粉层是胚乳的一部分，所以是 $3n$。）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link ui-interactive" href="#9-%E5%85%94%E7%9A%84%E5%8D%B5%E6%B2%A1%E6%9C%89%E5%8F%97%E7%B2%BE%EF%BC%8C%E7%BB%8F%E8%BF%87%E5%88%BA%E6%BF%80%EF%BC%8C%E5%8F%91%E8%82%B2%E6%88%90%E5%85%94%E3%80%82%E5%9C%A8%E8%BF%99%E7%A7%8D%E5%AD%A4%E9%9B%8C%E7%94%9F%E6%AE%96%E7%9A%84%E5%85%94%E4%B8%AD%EF%BC%8C%E5%85%B6%E4%B8%AD%E6%9F%90%E4%BA%9B%E5%85%94%E7%9A%84%E6%9C%89%E4%BA%9B%E5%9F%BA%E5%9B%A0%E6%98%AF%E6%9D%82%E5%90%88%E7%9A%84%E3%80%82%E4%BD%A0%E6%80%8E%E6%A0%B7%E8%A7%A3%E9%87%8A%EF%BC%9F%EF%BC%88%E6%8F%90%E7%A4%BA%EF%BC%9A%E6%9E%81%E4%BD%93%E5%8F%97%E7%B2%BE%E3%80%82%EF%BC%89"><span class="toc-text">9. 兔的卵没有受精，经过刺激，发育成兔。在这种孤雌生殖的兔中，其中某些兔的有些基因是杂合的。你怎样解释？（提示：极体受精。）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%F0%9F%94%97-%E5%85%B3%E8%81%94"><span class="toc-text">🔗 关联</span></a></li></ol></div>
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/class-notes/%E9%81%97%E4%BC%A0%E5%AD%A6/03-%E9%81%97%E4%BC%A0%E7%9A%84%E6%9F%93%E8%89%B2%E4%BD%93%E5%AD%A6%E8%AF%B4/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

@@ -1,0 +1,917 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/wiki/Linux/ch08-compress/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>Linux 基础入门：第八章、文件与文件系统的压缩、打包与备份 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="Linux 操作系统基础概念、历史、发行版介绍及计算机基础" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第八章、文件与文件系统的压缩、打包与备份" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/wiki/Linux/ch08-compress/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="Linux 操作系统基础概念、历史、发行版介绍及计算机基础" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第八章、文件与文件系统的压缩、打包与备份" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content="Linux,压缩,打包,备份" data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"WebPage","@id":"https://blog.cnortles.top/wiki/Linux/ch08-compress/","name":"第八章、文件与文件系统的压缩、打包与备份","description":"Linux 操作系统基础概念、历史、发行版介绍及计算机基础","url":"https://blog.cnortles.top/wiki/Linux/ch08-compress/","isPartOf":{"@type":"WebSite","name":"麟跃云起","url":"https://blog.cnortles.top"}}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular"><div class="brand-navigation"><a class="brand-navigation__back cap" href="/wiki/"><span class="ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"/></svg></span><span>所有项目</span></a></div><div class="brand-navigation-rail">
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" href="&#x2F;wiki&#x2F;" title="所有项目" aria-label="所有项目">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4-8 8 8 8"/></svg></span>
+  
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+</div><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;wiki&#x2F;Linux&#x2F;"><img no-lazy src="&#x2F;img&#x2F;linux-logo.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a><a class="brand-title" href="&#x2F;wiki&#x2F;Linux&#x2F;"><div class="brand-name">Linux 基础入门</div><div class="brand-tagline cap">从零开始学习 Linux</div></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search" data-search-domain="wiki:Linux" data-search-domain-label="Linux 基础入门" data-search-domain-blog="false">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;" title="主页" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;wiki&#x2F;" title="文档" aria-current="page" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--tree" data-widget-id="leftbar:0:tree" data-presentation="leftbar" data-leftbar-rail>
+
+
+<widget class="widget-wrapper doc-tree-widget" data-wiki="Linux">
+  
+  <div class="widget-body"><section class="widget-section"><div class="widget-header dis-select"><span class="name">...</span></div><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch00-computer-basics&#x2F;" title="第零章、计算机概论">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第零章、计算机概论</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch01-linux-intro&#x2F;" title="第一章、Linux是什么与如何学习">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第一章、Linux是什么与如何学习</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch02-partition&#x2F;" title="第二章、主机规划与磁盘分区">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第二章、主机规划与磁盘分区</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch03-install&#x2F;" title="第三章、安装 CentOS 7.x">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第三章、安装 CentOS 7.x</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch04-first-login&#x2F;" title="第四章、首次登陆与线上求助">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第四章、首次登陆与线上求助</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch06-file-management&#x2F;" title="第六章、Linux 文件与目录管理">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第六章、Linux 文件与目录管理</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch07-filesystem&#x2F;" title="第七章、Linux 磁盘与文件系统管理">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第七章、Linux 磁盘与文件系统管理</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active" href="&#x2F;wiki&#x2F;Linux&#x2F;ch08-compress&#x2F;" title="第八章、文件与文件系统的压缩、打包与备份" aria-current="page">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第八章、文件与文件系统的压缩、打包与备份</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch05-permissions&#x2F;" title="第五章、Linux 的文件权限与目录配置">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第五章、Linux 的文件权限与目录配置</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch10-bash&#x2F;" title="第十章、认识与学习BASH">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第十章、认识与学习BASH</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;" title="Linux 学习笔记目录">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">L</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">Linux 学习笔记目录</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;wiki&#x2F;Linux&#x2F;ch09-vim&#x2F;" title="第九章、vim 程序编辑器">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">第</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">第九章、vim 程序编辑器</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></section></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/Linux/ch00-computer-basics/">Linux 基础入门</a>
+</div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2023-12-31T16:00:00.000Z">2024-01-01</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第八章、文件与文件系统的压缩、打包与备份</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="第八章、文件与文件系统的压缩、打包与备份"><a href="#第八章、文件与文件系统的压缩、打包与备份" class="headerlink" title="第八章、文件与文件系统的压缩、打包与备份"></a>第八章、文件与文件系统的压缩、打包与备份</h1><h2 id="8-1-压缩文件的用途与技术"><a href="#8-1-压缩文件的用途与技术" class="headerlink" title="8.1 压缩文件的用途与技术"></a>8.1 压缩文件的用途与技术</h2><h3 id="为什么需要压缩"><a href="#为什么需要压缩" class="headerlink" title="为什么需要压缩"></a>为什么需要压缩</h3><ol>
+<li><strong>节省存储空间</strong>：压缩后的文件占用更少的磁盘空间</li>
+<li><strong>提高传输效率</strong>：网络传输时减少时间和带宽消耗</li>
+<li><strong>归档备份</strong>：将多个文件打包成单一文件便于管理</li>
+</ol>
+<h3 id="压缩的原理"><a href="#压缩的原理" class="headerlink" title="压缩的原理"></a>压缩的原理</h3><p>压缩通过消除数据中的冗余信息来减小文件大小：</p>
+<ul>
+<li><strong>无损压缩</strong>：可以完全恢复原始数据（gzip、bzip2、xz）</li>
+<li><strong>有损压缩</strong>：牺牲部分质量换取更高压缩率（jpeg、mp3）</li>
+</ul>
+<h2 id="8-2-Linux-系统常见的压缩指令"><a href="#8-2-Linux-系统常见的压缩指令" class="headerlink" title="8.2 Linux 系统常见的压缩指令"></a>8.2 Linux 系统常见的压缩指令</h2><h3 id="常见压缩工具对比"><a href="#常见压缩工具对比" class="headerlink" title="常见压缩工具对比"></a>常见压缩工具对比</h3><div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>扩展名</th>
+<th>压缩率</th>
+<th>速度</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>gzip</strong></td>
+<td>.gz</td>
+<td>中等</td>
+<td>快</td>
+<td>最常用，兼容性好</td>
+</tr>
+<tr>
+<td><strong>bzip2</strong></td>
+<td>.bz2</td>
+<td>高</td>
+<td>慢</td>
+<td>压缩率优于 gzip</td>
+</tr>
+<tr>
+<td><strong>xz</strong></td>
+<td>.xz</td>
+<td>最高</td>
+<td>最慢</td>
+<td>现代压缩标准</td>
+</tr>
+<tr>
+<td><strong>zip</strong></td>
+<td>.zip</td>
+<td>中等</td>
+<td>快</td>
+<td>Windows 兼容</td>
+</tr>
+<tr>
+<td><strong>compress</strong></td>
+<td>.Z</td>
+<td>低</td>
+<td>快</td>
+<td>已过时，很少使用</td>
+</tr>
+</tbody></table></div>
+<h3 id="gzip-和-zcat"><a href="#gzip-和-zcat" class="headerlink" title="gzip 和 zcat"></a>gzip 和 zcat</h3><p><strong>gzip - 最流行的压缩工具：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩文件（原始文件会被删除）</span></span><br><span class="line">gzip filename              <span class="comment"># 生成 filename.gz</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩时保留原始文件</span></span><br><span class="line">gzip -c filename &gt; filename.gz    <span class="comment"># 使用管道保留原文件</span></span><br><span class="line">gzip -k filename           <span class="comment"># 某些版本支持 -k (keep)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line">gunzip filename.gz         <span class="comment"># 或 gzip -d filename.gz</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用选项</span></span><br><span class="line">-1 ... -9                  <span class="comment"># 压缩级别，1最快/压缩率最低，9最慢/压缩率最高（默认6）</span></span><br><span class="line">-c                         <span class="comment"># 输出到标准输出，不删除原文件</span></span><br><span class="line">-d                         <span class="comment"># 解压缩</span></span><br><span class="line">-f                         <span class="comment"># 强制，覆盖现有文件</span></span><br><span class="line">-h                         <span class="comment"># 帮助</span></span><br><span class="line">-k                         <span class="comment"># 保留原文件（非所有版本支持）</span></span><br><span class="line">-l                         <span class="comment"># 列出压缩文件信息</span></span><br><span class="line">-L                         <span class="comment"># 显示许可证</span></span><br><span class="line">-n                         <span class="comment"># 不保存/恢复原始文件名和时间戳</span></span><br><span class="line">-N                         <span class="comment"># 保存/恢复原始文件名和时间戳（默认）</span></span><br><span class="line">-q                         <span class="comment"># 安静模式</span></span><br><span class="line">-r                         <span class="comment"># 递归处理目录（压缩目录下所有文件）</span></span><br><span class="line">-t                         <span class="comment"># 测试压缩文件的完整性</span></span><br><span class="line">-v                         <span class="comment"># 详细模式</span></span><br><span class="line">-V                         <span class="comment"># 显示版本</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">gzip -9 -k largefile.txt          <span class="comment"># 最高压缩级别，保留原文件</span></span><br><span class="line">gzip -r /path/to/directory/       <span class="comment"># 递归压缩目录下所有文件</span></span><br><span class="line">gzip -l file.gz                   <span class="comment"># 查看压缩信息</span></span><br><span class="line">gzip -t file.gz                   <span class="comment"># 测试文件完整性</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>zcat/zmore/zless - 不解压查看压缩文件：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看压缩文件内容（不解压）</span></span><br><span class="line">zcat file.gz                <span class="comment"># 等同于 cat，直接输出到屏幕</span></span><br><span class="line">zmore file.gz               <span class="comment"># 等同于 more，分页显示</span></span><br><span class="line">zless file.gz               <span class="comment"># 等同于 less，更好的分页</span></span><br><span class="line">zgrep <span class="string">"pattern"</span> file.gz     <span class="comment"># 在压缩文件中搜索</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># zcat 也可以查看 .Z 文件（compress 格式）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 zcat 输出重定向</span></span><br><span class="line">gzcat file.gz &gt; output.txt  <span class="comment"># 解压到文件</span></span><br><span class="line">zcat file.gz | grep pattern  <span class="comment"># 管道处理</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="bzip2-和-bzcat"><a href="#bzip2-和-bzcat" class="headerlink" title="bzip2 和 bzcat"></a>bzip2 和 bzcat</h3><p><strong>bzip2 - 更高压缩率：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩（默认删除原文件）</span></span><br><span class="line">bzip2 filename             <span class="comment"># 生成 filename.bz2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 保留原文件</span></span><br><span class="line">bzip2 -k filename</span><br><span class="line">bzip2 -c filename &gt; filename.bz2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line">bunzip2 filename.bz2       <span class="comment"># 或 bzip2 -d filename.bz2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用选项</span></span><br><span class="line">-1 ... -9                   <span class="comment"># 压缩级别（默认9，压缩率最高但最慢）</span></span><br><span class="line">-c                          <span class="comment"># 输出到标准输出</span></span><br><span class="line">-d                          <span class="comment"># 解压缩</span></span><br><span class="line">-f                          <span class="comment"># 强制</span></span><br><span class="line">-k                          <span class="comment"># 保留原文件</span></span><br><span class="line">-s                          <span class="comment"># 减少内存使用（较慢）</span></span><br><span class="line">-t                          <span class="comment"># 测试完整性</span></span><br><span class="line">-v                          <span class="comment"># 详细模式</span></span><br><span class="line">-z                          <span class="comment"># 压缩（默认）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">bzip2 -9 -k largefile.txt   <span class="comment"># 最高压缩级别，保留原文件</span></span><br><span class="line">bzip2 -t file.bz2          <span class="comment"># 测试文件完整性</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>bzcat/bzmore/bzless/bzgrep：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不解压查看</span></span><br><span class="line">bzcat file.bz2              <span class="comment"># 直接输出</span></span><br><span class="line">bzmore file.bz2             <span class="comment"># 分页</span></span><br><span class="line">bzless file.bz2             <span class="comment"># 更好的分页</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索</span></span><br><span class="line">bzgrep <span class="string">"pattern"</span> file.bz2</span><br><span class="line">bzgrep <span class="string">"pattern"</span> *.bz2      <span class="comment"># 搜索多个文件</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="xz-和-xzcat"><a href="#xz-和-xzcat" class="headerlink" title="xz 和 xzcat"></a>xz 和 xzcat</h3><p><strong>xz - 最高压缩率（现代标准）：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩（默认删除原文件）</span></span><br><span class="line">xz filename                <span class="comment"># 生成 filename.xz</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 保留原文件</span></span><br><span class="line">xz -k filename</span><br><span class="line">xz -c filename &gt; filename.xz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line">unxz filename.xz           <span class="comment"># 或 xz -d filename.xz</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用选项</span></span><br><span class="line">-0 ... -9                   <span class="comment"># 压缩级别（默认6，9是最佳但最慢）</span></span><br><span class="line">-e                          <span class="comment"># 极致压缩（比-9更慢更好）</span></span><br><span class="line">-c                          <span class="comment"># 输出到标准输出</span></span><br><span class="line">-d                          <span class="comment"># 解压缩</span></span><br><span class="line">-f                          <span class="comment"># 强制</span></span><br><span class="line">-k                          <span class="comment"># 保留原文件</span></span><br><span class="line">-l                          <span class="comment"># 列出压缩文件信息</span></span><br><span class="line">-t                          <span class="comment"># 测试完整性</span></span><br><span class="line">-v                          <span class="comment"># 详细模式</span></span><br><span class="line">-T NUM                      <span class="comment"># 使用NUM个线程（多核加速）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">xz -9 -k largefile.txt       <span class="comment"># 最高压缩级别，保留原文件</span></span><br><span class="line">xz -T4 largefile.txt         <span class="comment"># 使用4个线程加速</span></span><br><span class="line">xz -e file.txt               <span class="comment"># 极致压缩</span></span><br><span class="line">xz -l file.xz              <span class="comment"># 查看压缩信息</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>xzcat/xzmore/xzless/xzgrep：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不解压查看</span></span><br><span class="line">xzcat file.xz               <span class="comment"># 直接输出</span></span><br><span class="line">xzmore file.xz              <span class="comment"># 分页</span></span><br><span class="line">xzless file.xz              <span class="comment"># 更好的分页</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索</span></span><br><span class="line">xzgrep <span class="string">"pattern"</span> file.xz</span><br><span class="line">xzgrep <span class="string">"pattern"</span> *.xz</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="压缩工具对比示例"><a href="#压缩工具对比示例" class="headerlink" title="压缩工具对比示例"></a>压缩工具对比示例</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建测试文件</span></span><br><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=test.file bs=1M count=100</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对比不同工具的压缩率和速度</span></span><br><span class="line"><span class="keyword">time</span> gzip -k test.file</span><br><span class="line"><span class="keyword">time</span> bzip2 -k test.file</span><br><span class="line"><span class="keyword">time</span> xz -k test.file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看结果</span></span><br><span class="line"><span class="built_in">ls</span> -lh test.file*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩率对比（示例结果）：</span></span><br><span class="line"><span class="comment"># 原始文件：    100M</span></span><br><span class="line"><span class="comment"># gzip (.gz)：   ~70M（最快）</span></span><br><span class="line"><span class="comment"># bzip2 (.bz2)：~65M（较慢）</span></span><br><span class="line"><span class="comment"># xz (.xz)：     ~60M（最慢但压缩率最高）</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="8-3-打包指令：tar"><a href="#8-3-打包指令：tar" class="headerlink" title="8.3 打包指令：tar"></a>8.3 打包指令：tar</h2><h3 id="tar-命令概述"><a href="#tar-命令概述" class="headerlink" title="tar 命令概述"></a>tar 命令概述</h3><p>tar（Tape Archive）是 Linux/Unix 系统中最常用的归档工具，将多个文件或目录打包成单一文件（称为 tar 归档或 tarball），常与压缩工具结合使用。</p>
+<p><strong>tar 的特点：</strong></p>
+<ul>
+<li>保留文件的权限、所有者、时间戳等信息</li>
+<li>支持多种压缩格式</li>
+<li>可以增量备份</li>
+<li>支持远程备份</li>
+</ul>
+<h3 id="tar-基本语法"><a href="#tar-基本语法" class="headerlink" title="tar 基本语法"></a>tar 基本语法</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar [选项] [归档文件] [文件或目录...]</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="常用选项"><a href="#常用选项" class="headerlink" title="常用选项"></a>常用选项</h3><p><strong>操作模式（必须选其一）：</strong></p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-c</code></td>
+<td>创建新的归档文件 (create)</td>
+</tr>
+<tr>
+<td><code>-x</code></td>
+<td>从归档中提取文件 (extract)</td>
+</tr>
+<tr>
+<td><code>-t</code></td>
+<td>列出归档内容 (list)</td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td>追加文件到归档末尾 (append)</td>
+</tr>
+<tr>
+<td><code>-u</code></td>
+<td>仅追加比归档中更新的文件 (update)</td>
+</tr>
+<tr>
+<td><code>-A</code></td>
+<td>将另一个 tar 归档追加到当前归档</td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td>比较归档和文件系统的差异 (diff)</td>
+</tr>
+<tr>
+<td><code>--delete</code></td>
+<td>从归档中删除文件</td>
+</tr>
+</tbody></table></div>
+<p><strong>常用通用选项：</strong></p>
+<div class="md-table-scroll"><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-v</code></td>
+<td>详细模式，显示处理过程 (verbose)</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>指定归档文件名，必须后跟文件名</td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>保留原始文件权限和属性 (preserve)</td>
+</tr>
+<tr>
+<td><code>-P</code></td>
+<td>使用绝对路径（小心使用）</td>
+</tr>
+<tr>
+<td><code>-C</code></td>
+<td>切换到指定目录再执行操作</td>
+</tr>
+<tr>
+<td><code>-z</code></td>
+<td>使用 gzip 压缩/解压缩 (.gz)</td>
+</tr>
+<tr>
+<td><code>-j</code></td>
+<td>使用 bzip2 压缩/解压缩 (.bz2)</td>
+</tr>
+<tr>
+<td><code>-J</code></td>
+<td>使用 xz 压缩/解压缩 (.xz)</td>
+</tr>
+<tr>
+<td><code>--exclude</code></td>
+<td>排除特定文件或目录</td>
+</tr>
+<tr>
+<td><code>--exclude-from</code></td>
+<td>从文件中读取排除列表</td>
+</tr>
+<tr>
+<td><code>--files-from</code></td>
+<td>从文件中读取要处理的文件列表</td>
+</tr>
+<tr>
+<td><code>-h</code></td>
+<td>显示帮助信息</td>
+</tr>
+<tr>
+<td><code>--version</code></td>
+<td>显示版本信息</td>
+</tr>
+</tbody></table></div>
+<h3 id="tar-实战示例"><a href="#tar-实战示例" class="headerlink" title="tar 实战示例"></a>tar 实战示例</h3><p><strong>1. 创建归档：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 tar 归档（不压缩）</span></span><br><span class="line">tar -cvf archive.tar /path/to/directory</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 tar.gz 归档（gzip 压缩，最常用）</span></span><br><span class="line">tar -czvf archive.tar.gz /path/to/directory</span><br><span class="line">tar -czvf backup-$(<span class="built_in">date</span> +%Y%m%d).tar.gz ~/Documents</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 tar.bz2 归档（bzip2 压缩，压缩率更高）</span></span><br><span class="line">tar -cjvf archive.tar.bz2 /path/to/directory</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 tar.xz 归档（xz 压缩，压缩率最高）</span></span><br><span class="line">tar -cJvf archive.tar.xz /path/to/directory</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建归档并排除特定文件或目录</span></span><br><span class="line">tar -czvf backup.tar.gz /home/user --exclude=<span class="string">'*.log'</span> --exclude=<span class="string">'*.tmp'</span> --exclude=<span class="string">'cache'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从文件中读取排除列表</span></span><br><span class="line">tar -czvf backup.tar.gz /home/user --exclude-from=exclude.list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只包含特定文件类型</span></span><br><span class="line">tar -czvf scripts.tar.gz /home/user --include=<span class="string">'*.sh'</span> --include=<span class="string">'*.py'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩多个目录或文件</span></span><br><span class="line">tar -czvf backup.tar.gz /etc/nginx /var/www /home/user/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保留权限和属性创建归档</span></span><br><span class="line">tar -czvpf backup.tar.gz --same-owner /important/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建带时间戳的备份</span></span><br><span class="line">tar -czvf backup-$(<span class="built_in">date</span> +%Y%m%d_%H%M%S).tar.gz /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只备份比某个时间更新的文件</span></span><br><span class="line">tar -czN <span class="string">"2024-01-01"</span> -f recent.tar.gz /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建压缩归档到远程服务器（使用管道和 SSH）</span></span><br><span class="line">tar -czf - /local/data | ssh user@remote <span class="string">"cat &gt; /backup/data.tar.gz"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>2. 查看归档内容：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出 tar 归档内容</span></span><br><span class="line">tar -tvf archive.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出 tar.gz 归档内容</span></span><br><span class="line">tar -tzvf archive.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出 tar.bz2 归档内容</span></span><br><span class="line">tar -tjvf archive.tar.bz2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索归档中的特定文件</span></span><br><span class="line">tar -tzf archive.tar.gz | grep <span class="string">"pattern"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看归档中特定文件的详细信息</span></span><br><span class="line">tar -tvf archive.tar path/to/file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归列出目录内容</span></span><br><span class="line">tar -tvf archive.tar --wildcards <span class="string">"*.txt"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>3. 解压归档：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解压 tar 归档到当前目录</span></span><br><span class="line">tar -xvf archive.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压 tar.gz 归档到当前目录（最常用）</span></span><br><span class="line">tar -xzvf archive.tar.gz</span><br><span class="line">tar -xzf archive.tar.gz          <span class="comment"># 不显示详细过程</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压 tar.bz2 归档</span></span><br><span class="line">tar -xjvf archive.tar.bz2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压 tar.xz 归档</span></span><br><span class="line">tar -xJvf archive.tar.xz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压到指定目录</span></span><br><span class="line">tar -xzvf archive.tar.gz -C /path/to/destination</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压特定文件</span></span><br><span class="line">tar -xzvf archive.tar.gz path/to/specific/file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压特定类型的文件</span></span><br><span class="line">tar -xzvf archive.tar.gz --wildcards <span class="string">"*.txt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压并保留权限</span></span><br><span class="line">tar -xzvpf archive.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压并恢复原始所有者（需要 root）</span></span><br><span class="line"><span class="built_in">sudo</span> tar -xzvpf archive.tar.gz --same-owner</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压时显示进度条</span></span><br><span class="line">tar -xvf archive.tar --checkpoint=1000 --checkpoint-action=<span class="built_in">echo</span>=<span class="string">"Extracted %u files"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压到远程服务器</span></span><br><span class="line"><span class="built_in">cat</span> archive.tar.gz | ssh user@remote <span class="string">"tar -xzvf - -C /destination"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>4. 追加和更新归档：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 追加文件到现有 tar 归档（仅适用于未压缩的 tar）</span></span><br><span class="line">tar -rvf archive.tar newfile.txt</span><br><span class="line">tar -rvf archive.tar /path/to/new/directory/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新归档中已存在的文件（只添加更新的文件）</span></span><br><span class="line">tar -uvf archive.tar updatedfile.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 追加归档到另一个归档（合并归档）</span></span><br><span class="line">tar -Af archive1.tar archive2.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意：不能直接追加到压缩归档（.gz/.bz2/.xz）</span></span><br><span class="line"><span class="comment"># 需要先解压，追加，再压缩</span></span><br><span class="line"><span class="comment"># 或使用管道（复杂，不推荐）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：安全地追加到压缩归档</span></span><br><span class="line">gunzip archive.tar.gz      <span class="comment"># 解压</span></span><br><span class="line">tar -rvf archive.tar newfile  <span class="comment"># 追加</span></span><br><span class="line">gzip archive.tar           <span class="comment"># 重新压缩</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>5. 删除归档中的文件：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从 tar 归档中删除文件（仅适用于未压缩的 tar）</span></span><br><span class="line">tar --delete -f archive.tar file_to_delete.txt</span><br><span class="line">tar --delete -f archive.tar <span class="string">"*.log"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除多个文件</span></span><br><span class="line">tar --delete -f archive.tar file1 file2 file3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意：不能直接删除压缩归档中的文件</span></span><br><span class="line"><span class="comment"># 需要先解压，删除，再压缩</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例：从压缩归档中删除文件</span></span><br><span class="line">tar -xzvf archive.tar.gz            <span class="comment"># 解压到当前目录</span></span><br><span class="line"><span class="built_in">rm</span> file_to_delete.txt               <span class="comment"># 删除文件</span></span><br><span class="line">tar -czvf new_archive.tar.gz *      <span class="comment"># 重新打包压缩</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>6. 从归档中提取特定文件：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提取单个文件</span></span><br><span class="line">tar -xzvf archive.tar.gz path/to/file.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取多个文件</span></span><br><span class="line">tar -xzvf archive.tar.gz file1.txt file2.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用通配符提取</span></span><br><span class="line">tar -xzvf archive.tar.gz --wildcards <span class="string">"*.txt"</span></span><br><span class="line">tar -xzvf archive.tar.gz --wildcards <span class="string">"data/*.csv"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取到特定目录</span></span><br><span class="line">tar -xzvf archive.tar.gz -C /destination/directory file.txt</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>7. 特殊用法：</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过管道使用 tar</span></span><br><span class="line"><span class="comment"># 备份到远程服务器</span></span><br><span class="line"><span class="comment"># 方式1：tar + ssh</span></span><br><span class="line">tar -czf - /local/dir | ssh user@remote <span class="string">"cat &gt; /backup/backup.tar.gz"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式2：使用 rsync（更推荐）</span></span><br><span class="line">rsync -avz /local/dir/ user@remote:/backup/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从远程服务器恢复</span></span><br><span class="line"><span class="built_in">cat</span> backup.tar.gz | ssh user@remote <span class="string">"cat &gt; -"</span> | tar -xzf -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 tar 进行增量备份</span></span><br><span class="line"><span class="comment"># 创建快照文件</span></span><br><span class="line">tar -czf backup-full.tar.gz --listed-incremental=snapshot.file /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建增量备份（只备份变化的文件）</span></span><br><span class="line">tar -czf backup-incr.tar.gz --listed-incremental=snapshot.file /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并多个归档</span></span><br><span class="line"><span class="built_in">cat</span> archive1.tar archive2.tar &gt; combined.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分割大归档</span></span><br><span class="line">tar -czvf - /large/directory | <span class="built_in">split</span> -b 1G - backup.tar.gz.</span><br><span class="line"><span class="comment"># 会产生 backup.tar.gz.aa, backup.tar.gz.ab, ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分割的归档</span></span><br><span class="line"><span class="built_in">cat</span> backup.tar.gz.* | tar -xzvf -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建带有绝对路径的归档（小心使用）</span></span><br><span class="line">tar -czPvf backup.tar.gz /etc /var/log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 排除特定文件或目录</span></span><br><span class="line">tar -czvf backup.tar.gz /home --exclude=<span class="string">'*.mp4'</span> --exclude=<span class="string">'cache'</span> --exclude-vcs</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="压缩工具详解"><a href="#压缩工具详解" class="headerlink" title="压缩工具详解"></a>压缩工具详解</h3><h4 id="gzip-详解"><a href="#gzip-详解" class="headerlink" title="gzip 详解"></a>gzip 详解</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩级别测试</span></span><br><span class="line"><span class="comment"># 准备测试文件</span></span><br><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/urandom of=testfile bs=1M count=100</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不同压缩级别</span></span><br><span class="line"><span class="keyword">for</span> level <span class="keyword">in</span> 1 6 9; <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">time</span> gzip -<span class="variable">${level}</span> -c testfile &gt; testfile.gz.<span class="variable">${level}</span></span><br><span class="line">  <span class="built_in">ls</span> -lh testfile.gz.<span class="variable">${level}</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看压缩文件信息</span></span><br><span class="line">gzip -l testfile.gz</span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line"><span class="comment"># compressed        uncompressed  ratio uncompressed_name</span></span><br><span class="line"><span class="comment">#     102400            1048576  90.2% testfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归压缩目录中的所有文件（保留目录结构，但不打包）</span></span><br><span class="line">find /path/to/dir -<span class="built_in">type</span> f -<span class="built_in">exec</span> gzip {} \;</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">find /path/to/dir -<span class="built_in">type</span> f | xargs gzip</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="bzip2-详解"><a href="#bzip2-详解" class="headerlink" title="bzip2 详解"></a>bzip2 详解</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bzip2 通常比 gzip 压缩率更高但速度更慢</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 对比测试</span></span><br><span class="line"><span class="keyword">for</span> tool <span class="keyword">in</span> gzip bzip2; <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Testing <span class="variable">$tool</span>..."</span></span><br><span class="line">  <span class="keyword">time</span> <span class="variable">$tool</span> -k testfile</span><br><span class="line">  <span class="built_in">ls</span> -lh testfile.*</span><br><span class="line">  <span class="variable">$tool</span> -d testfile.*</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># bzip2 的恢复功能（用于损坏的文件）</span></span><br><span class="line">bzip2recover corrupted.bz2</span><br><span class="line"></span><br><span class="line"><span class="comment"># bzip2 使用块压缩，可以并行处理（使用 pbzip2）</span></span><br><span class="line">pbzip2 -p4 file    <span class="comment"># 使用4个线程</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="xz-详解"><a href="#xz-详解" class="headerlink" title="xz 详解"></a>xz 详解</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># xz 提供最高的压缩率，但速度最慢</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩级别对比（0-9，默认6）</span></span><br><span class="line"><span class="keyword">for</span> level <span class="keyword">in</span> 0 6 9; <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Testing xz -<span class="variable">$level</span>..."</span></span><br><span class="line">  <span class="keyword">time</span> xz -<span class="variable">${level}</span> -k -c testfile &gt; testfile.xz.<span class="variable">${level}</span></span><br><span class="line">  <span class="built_in">ls</span> -lh testfile.xz.<span class="variable">${level}</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># xz 多线程压缩（更快）</span></span><br><span class="line">xz -T4 file            <span class="comment"># 使用4个线程</span></span><br><span class="line">pxz -9 file            <span class="comment"># 使用全部核心</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># xz 格式信息</span></span><br><span class="line">xz -l file.xz          <span class="comment"># 列出压缩信息</span></span><br><span class="line">xz -t file.xz          <span class="comment"># 测试完整性</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不同的压缩预设</span></span><br><span class="line">xz --lzma2=preset=9,dict=64MiB file   <span class="comment"># 使用大字典获得更好压缩率</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="现代压缩工具"><a href="#现代压缩工具" class="headerlink" title="现代压缩工具"></a>现代压缩工具</h3><h4 id="zstd-快速压缩"><a href="#zstd-快速压缩" class="headerlink" title="zstd - 快速压缩"></a>zstd - 快速压缩</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line"><span class="built_in">sudo</span> yum install zstd    <span class="comment"># CentOS/RHEL</span></span><br><span class="line"><span class="built_in">sudo</span> apt install zstd    <span class="comment"># Debian/Ubuntu</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># zstd 提供极快的压缩和解压速度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不同压缩级别（1-19，默认3，超高质量22）</span></span><br><span class="line">zstd -1 file             <span class="comment"># 快速压缩</span></span><br><span class="line">zstd -9 file             <span class="comment"># 高质量压缩</span></span><br><span class="line">zstd -19 file            <span class="comment"># 极致压缩</span></span><br><span class="line">zstd --ultra -22 file    <span class="comment"># 超高质量</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多线程</span></span><br><span class="line">zstd -T4 file            <span class="comment"># 4线程</span></span><br><span class="line">zstd -T0 file            <span class="comment"># 自动使用所有核心</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line">zstd -d file.zst</span><br><span class="line">unzstd file.zst</span><br><span class="line"></span><br><span class="line"><span class="comment"># 其他工具</span></span><br><span class="line">zstdcat file.zst         <span class="comment"># 不解压查看</span></span><br><span class="line">zstdgrep pattern file.zst</span><br><span class="line">zstdless file.zst</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对比测试</span></span><br><span class="line"><span class="keyword">for</span> level <span class="keyword">in</span> 1 3 9; <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">time</span> zstd -<span class="variable">${level}</span> -k -c testfile &gt; testfile.zst.<span class="variable">${level}</span></span><br><span class="line">  <span class="built_in">ls</span> -lh testfile.zst.<span class="variable">${level}</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="pigz-并行-gzip"><a href="#pigz-并行-gzip" class="headerlink" title="pigz - 并行 gzip"></a>pigz - 并行 gzip</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line"><span class="built_in">sudo</span> yum install pigz</span><br><span class="line"></span><br><span class="line"><span class="comment"># pigz 是 gzip 的并行实现，使用多核加速压缩</span></span><br><span class="line"></span><br><span class="line">pigz file                  <span class="comment"># 压缩（使用所有核心）</span></span><br><span class="line">pigz -p 4 file            <span class="comment"># 使用4个进程</span></span><br><span class="line">unpigz file.gz            <span class="comment"># 解压</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 保持与 gzip 兼容的选项</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="pbzip2-并行-bzip2"><a href="#pbzip2-并行-bzip2" class="headerlink" title="pbzip2 - 并行 bzip2"></a>pbzip2 - 并行 bzip2</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line"><span class="built_in">sudo</span> yum install pbzip2</span><br><span class="line"></span><br><span class="line"><span class="comment"># pbzip2 是 bzip2 的并行实现</span></span><br><span class="line"></span><br><span class="line">pbzip2 file               <span class="comment"># 压缩（使用所有核心）</span></span><br><span class="line">pbzip2 -p4 file          <span class="comment"># 使用4个进程</span></span><br><span class="line">pbzip2 -d file.bz2       <span class="comment"># 解压</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="压缩性能对比测试脚本"><a href="#压缩性能对比测试脚本" class="headerlink" title="压缩性能对比测试脚本"></a>压缩性能对比测试脚本</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># compression_benchmark.sh</span></span><br><span class="line"></span><br><span class="line">TEST_FILE=<span class="string">"benchmark_test_file"</span></span><br><span class="line">FILE_SIZE=<span class="string">"100M"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建测试文件</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Creating test file (<span class="variable">${FILE_SIZE}</span>)..."</span></span><br><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/urandom of=<span class="variable">${TEST_FILE}</span> bs=1M count=100 status=progress</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">""</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"=========================================="</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Compression Benchmark"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"=========================================="</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Original file size: <span class="subst">$(ls -lh ${TEST_FILE} | awk '{print $5}')</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 gzip（级别 1, 6, 9）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"--- gzip ---"</span></span><br><span class="line"><span class="keyword">for</span> level <span class="keyword">in</span> 1 6 9; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">"Level <span class="variable">${level}</span>: "</span></span><br><span class="line">    <span class="keyword">time</span> (gzip -<span class="variable">${level}</span> -k -c <span class="variable">${TEST_FILE}</span> &gt; <span class="variable">${TEST_FILE}</span>.gz.<span class="variable">${level}</span>)</span><br><span class="line">    <span class="built_in">ls</span> -lh <span class="variable">${TEST_FILE}</span>.gz.<span class="variable">${level}</span> | awk <span class="string">'{print "Size:", $5}'</span></span><br><span class="line">    <span class="built_in">rm</span> -f <span class="variable">${TEST_FILE}</span>.gz.<span class="variable">${level}</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 pigz（并行 gzip）</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">command</span> -v pigz &amp;&gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"--- pigz (parallel gzip) ---"</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">"Default (all cores): "</span></span><br><span class="line">    <span class="keyword">time</span> (pigz -k -c <span class="variable">${TEST_FILE}</span> &gt; <span class="variable">${TEST_FILE}</span>.pigz)</span><br><span class="line">    <span class="built_in">ls</span> -lh <span class="variable">${TEST_FILE}</span>.pigz | awk <span class="string">'{print "Size:", $5}'</span></span><br><span class="line">    <span class="built_in">rm</span> -f <span class="variable">${TEST_FILE}</span>.pigz</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">""</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 bzip2</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">command</span> -v bzip2 &amp;&gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"--- bzip2 ---"</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">"Default: "</span></span><br><span class="line">    <span class="keyword">time</span> (bzip2 -k -c <span class="variable">${TEST_FILE}</span> &gt; <span class="variable">${TEST_FILE}</span>.bz2)</span><br><span class="line">    <span class="built_in">ls</span> -lh <span class="variable">${TEST_FILE}</span>.bz2 | awk <span class="string">'{print "Size:", $5}'</span></span><br><span class="line">    <span class="built_in">rm</span> -f <span class="variable">${TEST_FILE}</span>.bz2</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">""</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 pbzip2（并行 bzip2）</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">command</span> -v pbzip2 &amp;&gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"--- pbzip2 (parallel bzip2) ---"</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">"Default: "</span></span><br><span class="line">    <span class="keyword">time</span> (pbzip2 -k -c <span class="variable">${TEST_FILE}</span> &gt; <span class="variable">${TEST_FILE}</span>.pbz2)</span><br><span class="line">    <span class="built_in">ls</span> -lh <span class="variable">${TEST_FILE}</span>.pbz2 | awk <span class="string">'{print "Size:", $5}'</span></span><br><span class="line">    <span class="built_in">rm</span> -f <span class="variable">${TEST_FILE}</span>.pbz2</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">""</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 xz</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">command</span> -v xz &amp;&gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"--- xz ---"</span></span><br><span class="line">    <span class="keyword">for</span> level <span class="keyword">in</span> 0 6 9; <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> -n <span class="string">"Level <span class="variable">${level}</span>: "</span></span><br><span class="line">        <span class="keyword">time</span> (xz -<span class="variable">${level}</span> -k -c <span class="variable">${TEST_FILE}</span> &gt; <span class="variable">${TEST_FILE}</span>.xz.<span class="variable">${level}</span>)</span><br><span class="line">        <span class="built_in">ls</span> -lh <span class="variable">${TEST_FILE}</span>.xz.<span class="variable">${level}</span> | awk <span class="string">'{print "Size:", $5}'</span></span><br><span class="line">        <span class="built_in">rm</span> -f <span class="variable">${TEST_FILE}</span>.xz.<span class="variable">${level}</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">""</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试 zstd</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">command</span> -v zstd &amp;&gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"--- zstd ---"</span></span><br><span class="line">    <span class="keyword">for</span> level <span class="keyword">in</span> 1 3 9 19; <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> -n <span class="string">"Level <span class="variable">${level}</span>: "</span></span><br><span class="line">        <span class="keyword">time</span> (zstd -<span class="variable">${level}</span> -k -c <span class="variable">${TEST_FILE}</span> &gt; <span class="variable">${TEST_FILE}</span>.zst.<span class="variable">${level}</span>)</span><br><span class="line">        <span class="built_in">ls</span> -lh <span class="variable">${TEST_FILE}</span>.zst.<span class="variable">${level}</span> | awk <span class="string">'{print "Size:", $5}'</span></span><br><span class="line">        <span class="built_in">rm</span> -f <span class="variable">${TEST_FILE}</span>.zst.<span class="variable">${level}</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">""</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"=========================================="</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Cleaning up..."</span></span><br><span class="line"><span class="built_in">rm</span> -f <span class="variable">${TEST_FILE}</span> <span class="variable">${TEST_FILE}</span>.*</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Done!"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="使用-tar-进行完整系统备份"><a href="#使用-tar-进行完整系统备份" class="headerlink" title="使用 tar 进行完整系统备份"></a>使用 tar 进行完整系统备份</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># full_system_backup.sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置变量</span></span><br><span class="line">BACKUP_DIR=<span class="string">"/backup"</span></span><br><span class="line">DATE=$(<span class="built_in">date</span> +%Y%m%d_%H%M%S)</span><br><span class="line">HOSTNAME=$(hostname)</span><br><span class="line">BACKUP_FILE=<span class="string">"<span class="variable">${BACKUP_DIR}</span>/<span class="variable">${HOSTNAME}</span>_full_backup_<span class="variable">${DATE}</span>.tar.gz"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 排除列表（不备份的内容）</span></span><br><span class="line">EXCLUDE_LIST=(</span><br><span class="line">    <span class="string">"<span class="variable">${BACKUP_DIR}</span>"</span>          <span class="comment"># 不备份备份目录本身</span></span><br><span class="line">    <span class="string">"/proc"</span>                  <span class="comment"># 虚拟文件系统</span></span><br><span class="line">    <span class="string">"/sys"</span>                   <span class="comment"># 虚拟文件系统</span></span><br><span class="line">    <span class="string">"/dev"</span>                   <span class="comment"># 设备文件（udev 会自动创建）</span></span><br><span class="line">    <span class="string">"/run"</span>                   <span class="comment"># 运行时文件</span></span><br><span class="line">    <span class="string">"/mnt"</span>                   <span class="comment"># 挂载点</span></span><br><span class="line">    <span class="string">"/media"</span>                 <span class="comment"># 挂载点</span></span><br><span class="line">    <span class="string">"/tmp"</span>                   <span class="comment"># 临时文件</span></span><br><span class="line">    <span class="string">"/var/tmp"</span>              <span class="comment"># 临时文件</span></span><br><span class="line">    <span class="string">"/var/cache"</span>            <span class="comment"># 缓存</span></span><br><span class="line">    <span class="string">"/var/log"</span>              <span class="comment"># 日志（可选，建议单独备份）</span></span><br><span class="line">    <span class="string">"*.swap"</span>                <span class="comment"># swap 文件</span></span><br><span class="line">    <span class="string">"*/lost+found"</span>          <span class="comment"># 文件系统恢复目录</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建排除参数</span></span><br><span class="line">EXCLUDE_ARGS=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> <span class="string">"<span class="variable">${EXCLUDE_LIST[@]}</span>"</span>; <span class="keyword">do</span></span><br><span class="line">    EXCLUDE_ARGS+=<span class="string">"--exclude=<span class="variable">${item}</span> "</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确保备份目录存在</span></span><br><span class="line"><span class="built_in">mkdir</span> -p <span class="string">"<span class="variable">${BACKUP_DIR}</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始备份</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"========================================"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Starting Full System Backup"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Backup file: <span class="variable">${BACKUP_FILE}</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Started at: <span class="subst">$(date)</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"========================================"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行备份</span></span><br><span class="line">tar -czvpf <span class="string">"<span class="variable">${BACKUP_FILE}</span>"</span> \</span><br><span class="line">    <span class="variable">${EXCLUDE_ARGS}</span> \</span><br><span class="line">    --one-file-system \</span><br><span class="line">    / 2&gt;<span class="string">"<span class="variable">${BACKUP_FILE}</span>.log"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查备份结果</span></span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"========================================"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Backup completed successfully!"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Backup file: <span class="variable">${BACKUP_FILE}</span>"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Backup size: <span class="subst">$(du -h <span class="string">"<span class="variable">${BACKUP_FILE}</span>"</span> | cut -f1)</span>"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Completed at: <span class="subst">$(date)</span>"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"========================================"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可选：删除旧备份（保留最近5个）</span></span><br><span class="line">    <span class="built_in">cd</span> <span class="string">"<span class="variable">${BACKUP_DIR}</span>"</span> || <span class="built_in">exit</span></span><br><span class="line">    <span class="built_in">ls</span> -t <span class="string">"<span class="variable">${HOSTNAME}</span>_full_backup_"</span>*.tar.gz | <span class="built_in">tail</span> -n +6 | xargs -r <span class="built_in">rm</span> -f</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可选：将备份同步到远程服务器</span></span><br><span class="line">    <span class="comment"># rsync -avz --progress "${BACKUP_FILE}" user@remote:/backups/</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">exit</span> 0</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"========================================"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Backup failed!"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Check log file: <span class="variable">${BACKUP_FILE}</span>.log"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Failed at: <span class="subst">$(date)</span>"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"========================================"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="使用-tar-进行增量备份"><a href="#使用-tar-进行增量备份" class="headerlink" title="使用 tar 进行增量备份"></a>使用 tar 进行增量备份</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># incremental_backup.sh</span></span><br><span class="line"></span><br><span class="line">SOURCE_DIR=<span class="string">"/data"</span></span><br><span class="line">BACKUP_DIR=<span class="string">"/backup/incremental"</span></span><br><span class="line">DATE=$(<span class="built_in">date</span> +%Y%m%d_%H%M%S)</span><br><span class="line">SNAPSHOT_FILE=<span class="string">"<span class="variable">${BACKUP_DIR}</span>/.snapshot"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确保备份目录存在</span></span><br><span class="line"><span class="built_in">mkdir</span> -p <span class="string">"<span class="variable">${BACKUP_DIR}</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行增量备份</span></span><br><span class="line">tar -czvpf <span class="string">"<span class="variable">${BACKUP_DIR}</span>/incr_<span class="variable">${DATE}</span>.tar.gz"</span> \</span><br><span class="line">    --listed-incremental=<span class="string">"<span class="variable">${SNAPSHOT_FILE}</span>"</span> \</span><br><span class="line">    <span class="string">"<span class="variable">${SOURCE_DIR}</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理旧备份（保留最近7天）</span></span><br><span class="line">find <span class="string">"<span class="variable">${BACKUP_DIR}</span>"</span> -name <span class="string">"incr_*.tar.gz"</span> -mtime +7 -delete</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Incremental backup completed: <span class="variable">${BACKUP_DIR}</span>/incr_<span class="variable">${DATE}</span>.tar.gz"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="恢复备份"><a href="#恢复备份" class="headerlink" title="恢复备份"></a>恢复备份</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 完整恢复</span></span><br><span class="line">tar -xzvpf backup.tar.gz -C /</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复到指定目录（不覆盖根目录）</span></span><br><span class="line">tar -xzvpf backup.tar.gz -C /restore</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只恢复特定文件或目录</span></span><br><span class="line">tar -xzvpf backup.tar.gz path/to/specific/file</span><br><span class="line">tar -xzvpf backup.tar.gz --wildcards <span class="string">"etc/nginx/*"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复时保留权限（需要 root）</span></span><br><span class="line"><span class="built_in">sudo</span> tar -xzvpf backup.tar.gz -C / --same-owner</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复增量备份</span></span><br><span class="line"><span class="comment"># 先恢复完整备份</span></span><br><span class="line">tar -xzvpf full_backup.tar.gz -C /</span><br><span class="line"><span class="comment"># 然后按顺序恢复增量备份</span></span><br><span class="line"><span class="keyword">for</span> backup <span class="keyword">in</span> incr_*.tar.gz; <span class="keyword">do</span></span><br><span class="line">  tar -xzvpf <span class="string">"<span class="variable">$backup</span>"</span> -C /</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复后检查文件系统完整性</span></span><br><span class="line">checksum_file=<span class="string">"checksum.list"</span></span><br><span class="line"><span class="keyword">if</span> [ -f <span class="string">"<span class="variable">$checksum_file</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">md5sum</span> -c <span class="string">"<span class="variable">$checksum_file</span>"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="8-4-重点回顾"><a href="#8-4-重点回顾" class="headerlink" title="8.4 重点回顾"></a>8.4 重点回顾</h2><ol>
+<li><p><strong>压缩工具</strong>：</p>
+<ul>
+<li>gzip：速度快，兼容性好，压缩率中等</li>
+<li>bzip2：压缩率更高，速度较慢</li>
+<li>xz：压缩率最高，速度最慢</li>
+<li>zstd：速度极快，现代压缩标准</li>
+</ul>
+</li>
+<li><p><strong>tar 命令</strong>：</p>
+<ul>
+<li><code>-c</code> 创建，<code>-x</code> 解压，<code>-t</code> 查看，<code>-v</code> 详细，<code>-f</code> 指定文件</li>
+<li><code>-z</code> gzip，<code>-j</code> bzip2，<code>-J</code> xz 压缩</li>
+<li><code>--exclude</code> 排除文件，<code>--wildcards</code> 通配符</li>
+</ul>
+</li>
+<li><p><strong>备份策略</strong>：</p>
+<ul>
+<li>完整备份：备份所有数据</li>
+<li>增量备份：只备份变化的文件</li>
+<li>差异备份：备份自上次完整备份后变化的文件</li>
+</ul>
+</li>
+<li><p><strong>实用技巧</strong>：</p>
+<ul>
+<li>管道和 SSH 实现远程备份</li>
+<li>使用 find 和 tar 实现精细控制</li>
+<li>定期清理旧备份</li>
+<li>定期测试备份的可恢复性</li>
+</ul>
+</li>
+</ol>
+<h2 id="8-5-本章习题"><a href="#8-5-本章习题" class="headerlink" title="8.5 本章习题"></a>8.5 本章习题</h2><ol>
+<li><p>对比 gzip、bzip2、xz 三种压缩工具的压缩率和速度。</p>
+</li>
+<li><p>如何使用 tar 命令创建一个包含 /etc 目录的压缩归档，排除所有 .log 文件？</p>
+</li>
+<li><p>如何不解压查看 tar.gz 文件的内容？</p>
+</li>
+<li><p>编写一个脚本，每天自动备份 /home 目录，保留最近7天的备份。</p>
+</li>
+<li><p>如何使用 tar 和 ssh 将本地目录备份到远程服务器？</p>
+</li>
+<li><p>解释 tar 的增量备份功能，如何创建和恢复增量备份？</p>
+</li>
+<li><p>比较 zip 和 tar.gz 的异同，什么时候应该使用 zip？</p>
+</li>
+<li><p>有一个损坏的 tar.gz 文件，如何尝试恢复其中的数据？</p>
+</li>
+</ol>
+<h2 id="8-6-参考资料与延伸阅读"><a href="#8-6-参考资料与延伸阅读" class="headerlink" title="8.6 参考资料与延伸阅读"></a>8.6 参考资料与延伸阅读</h2><ul>
+<li><code>man tar</code></li>
+<li><code>man gzip</code></li>
+<li><code>man bzip2</code></li>
+<li><code>man xz</code></li>
+<li><code>man zstd</code></li>
+<li><a target="_blank" rel="noopener" href="https://www.gnu.org/software/tar/manual/" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>GNU Tar Manual</a></li>
+<li><a target="_blank" rel="noopener" href="https://linux.vbird.org/linux_basic/centos7/0240tarcompress.php" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>鸟哥的 Linux 私房菜 - 文件压缩与打包</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.tldp.org/LDP/sag/html/backup.html" data-md-link=""><span class="md-link-icon ui-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"></path><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"></path></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"></path></g></svg></span>Linux Backup and Recovery</a></li>
+</ul>
+</article>
+
+
+<div class="article-footer slide-up">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文本文由rlcao编写，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section></div>
+
+<div class="related-wrap slide-up" id="read-next"><section class="body"><div class="item" id="prev"><div class="note"><svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-left" aria-hidden="true"></svg> 回顾上一篇</div><a href="/wiki/Linux/ch07-filesystem/">第七章、Linux 磁盘与文件系统管理</a></div><div class="item" id="next"><div class="note">接下来阅读 <svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-right" aria-hidden="true"></svg></div><a href="/wiki/Linux/ch05-permissions/">第五章、Linux 的文件权限与目录配置</a></div></section></div>
+
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main></div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/wiki/Linux/ch08-compress/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第八章、文件与文件系统的压缩、打包与备份","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

@@ -1,0 +1,1430 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/class-notes/evolution/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="名词解释 Natural Selection and Adaptation  Natural Selection（自然选择）：导致表型不同的生物实体之间产生适应度持续差异的过程，使具有有利性状的个体相对繁殖率提高。  Fitness（适应度）：个体在下一代中留下的后代数量，其组分包括生存能力和繁殖能力。  Adaptation（适应）：有两个含义：①过程：通过演化改变生物体以提高生存或繁殖能力的过" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/class-notes/evolution/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="名词解释 Natural Selection and Adaptation  Natural Selection（自然选择）：导致表型不同的生物实体之间产生适应度持续差异的过程，使具有有利性状的个体相对繁殖率提高。  Fitness（适应度）：个体在下一代中留下的后代数量，其组分包括生存能力和繁殖能力。  Adaptation（适应）：有两个含义：①过程：通过演化改变生物体以提高生存或繁殖能力的过" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-10-08T04:55:06.033Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.033Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/img/7.jpg" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content="生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学" data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/class-notes/evolution/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"麟跃云起","description":"名词解释\nNatural Selection and Adaptation\n\nNatural Selection（自然选择）：导致表型不同的生物实体之间产生适应度持续差异的过程，使具有有利性状的个体相对繁殖率提高。\n\nFitness（适应度）：个体在下一代中留下的后代数量，其组分包括生存能力和繁殖能力。\n\nAdaptation（适应）：有两个含义：①过程：通过演化改变生物体以提高生存或繁殖能...","url":"https://blog.cnortles.top/notes/class-notes/evolution/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/class-notes/evolution/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/"></a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-10-08T04:55:06.033Z">2026-10-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.033Z">2026-10-08</time></span></div>
+</div></div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ul>
+<li><p>Natural Selection and Adaptation</p>
+<ul>
+<li><p>Natural Selection（自然选择）：导致表型不同的生物实体之间产生适应度持续差异的过程，使具有有利性状的个体相对繁殖率提高。</p>
+</li>
+<li><p>Fitness（适应度）：个体在下一代中留下的后代数量，其组分包括生存能力和繁殖能力。</p>
+</li>
+<li><p>Adaptation（适应）：有两个含义：①过程：通过演化改变生物体以提高生存或繁殖能力的过程；②性状：通过自然选择演化而来的具体特征。</p>
+</li>
+<li><p>Spandrels（拱肩）：指建筑结构中作为其他结构必然副产物而出现的空间；在演化生物学中比喻某些生物性状并非直接适应，而是其他演化过程的副产物（Gould &amp; Lewontin 的批判）。</p>
+</li>
+<li><p>Panglossian Paradigm（潘格洛斯范式）：源自伏尔泰小说，指认为所有性状都经过自然选择最优设计的观点，忽略了约束、历史偶然性和其他解释。</p>
+</li>
+<li><p>Exaptation（扩展适应）：原来为某种功能演化、后被选择用于新功能的性状（前适应经选择修饰）。</p>
+</li>
+<li><p>Preadaptation（前适应）：偶然服务于新功能的已有性状。</p>
+</li>
+<li><p>Artificial Selection（人工选择）：人类有意选择特定性状进行繁殖的过程。</p>
+</li>
+<li><p>Group Selection（群体选择）：选择作用于群体层面，利他群体可能因资源利用更持久而胜过自私群体。但多数观点认为个体选择更强，利他主要通过亲缘选择演化。</p>
+</li>
+<li><p>Kin Selection（亲属选择）：通过帮助亲属间接传递自身基因的利他行为演化机制。</p>
+</li>
+<li><p>Hamilton’s Rule（汉密尔顿法则）：利他行为演化的条件：rb &gt; c，其中r为遗传相关度，b为受益者的繁殖收益，c为利他者的繁殖成本。</p>
+</li>
+<li><p>Hardy-Weinberg Equilibrium（哈迪-温伯格平衡）：描述在没有突变、迁移、选择、大种群和随机交配条件下，种群基因型频率保持稳定的零模型：p² + 2pq + q² = 1。</p>
+</li>
+<li><p>Allele Frequency（等位基因频率）：特定等位基因在种群中所占的比例。</p>
+</li>
+<li><p>Linkage Disequilibrium（连锁不平衡）：两个基因座上的等位基因非随机关联的程度，用D = PAB - pA pB 衡量。</p>
+</li>
+<li><p>Epistatic Selection（上位性选择）：一个基因座上的等位基因适应度依赖于另一基因座上的等位基因，从而维持特定组合的选择。</p>
+</li>
+<li><p>Mutation（突变）：DNA序列的改变，是变异的最终来源。类型包括点突变、插入/缺失、基因复制、染色体重排、基因组倍增等。</p>
+</li>
+<li><p>Synonymous Change（同义突变）：DNA变化不改变所编码的氨基酸。</p>
+</li>
+<li><p>Nonsynonymous Change（非同义突变）：DNA变化改变所编码的氨基酸。</p>
+</li>
+<li><p>Recombination（重组）：通过独立分配和交叉互换，后代从父母获得等位基因混合的过程。</p>
+</li>
+<li><p>Recombination Rate（重组率）：两个基因座在一代中发生重组的概率。</p>
+</li>
+<li><p>Genetic Drift（遗传漂变）：小种群中由于随机抽样导致等位基因频率的随机波动。</p>
+</li>
+<li><p>Epigenetic Inheritance（表观遗传）：不改变DNA序列的基因表达修饰（如DNA甲基化、组蛋白修饰、非编码RNA）的传递。</p>
+</li>
+<li><p>Cultural Inheritance（文化继承）：通过行为学习（模仿、教学、语言等）传递信息，而非通过DNA。</p>
+</li>
+<li><p>Convergent Evolution（趋同演化）：不同物种在相似选择压力下独立演化出相似特征。</p>
+</li>
+<li><p>Comparative Method（比较研究法）：通过比较多个物种来推断性状功能的方法，常用系统发育独立对比（PIC）消除亲缘关系干扰。</p>
+</li>
+<li><p>Phylogenetically Independent Contrasts (PIC)（系统发育独立对比）：在系统发育树上计算姐妹物种间性状差异，以获得独立演化数据的方法。</p>
+</li>
+<li><p>Selective Sweep（选择性清扫）：强烈自然选择导致一个有利突变快速固定，使附近基因组区域连锁不平衡增高。</p>
+</li>
+<li><p>Co-adapted Gene Complexes（共适应基因复合体）：自然选择偏好特定等位基因组合（如A₂B₂），使这些组合在种群中共同保持。</p>
+</li>
+<li><p>Trade-off（权衡）：一个性状的优化往往以牺牲另一个性状为代价。</p>
+</li>
+<li><p>Phylogenetic Constraint（系统发育约束）：由于演化历史，某些性状即使非最优也会持续存在（如哺乳动物颈椎数）。</p>
+</li>
+</ul>
+</li>
+<li><p>The Genetical Theory of Natural Selection</p>
+<ul>
+<li><p>Absolute Fitness (绝对适应度) ：个体一生的总繁殖产出，即其产生的合子（后代）总数。</p>
+</li>
+<li><p>Adaptive Landscape (适应性地形) ：将进化可视化为一个三维地形图，其中”海拔”代表适应度。”山峰”代表高适应度的最优基因或性状组合，”山谷”代表存活率低的劣势组合。种群通常向山坡上方进化，但可能会被困在局部山峰上，需要借助遗传漂变和突变来逃脱。</p>
+</li>
+<li><p>Balancing Selection (平衡选择) ：一种维持种群遗传变异的选择机制，与导致”赢家通吃”的选择形式相反。</p>
+</li>
+<li><p>Evolutionary Trade-Offs (进化权衡) ：一个在某个性状上能增加适应度的等位基因，可能会在另一个性状上降低适应度。自然选择会平衡这些权衡，以最大化总体适应度。</p>
+</li>
+<li><p>Fecundity (生育力) ：个体产生的后代数量。</p>
+</li>
+<li><p>Fertilization Success (受精成功率) ：配子成功形成合子的概率。</p>
+</li>
+<li><p>Fisher’s Fundamental Theorem of Natural Selection (费希尔基本定理) ：由R.A. Fisher提出，核心表述为：任何生物在任何时候适应度的增加率，等于其当时的适应度加性遗传方差。公式表示为 \Delta\bar{w}=Var_A(w)/\bar{w}Δwˉ=VarA(w)/wˉ\Delta\bar{w}=Var_A(w)/\bar{w}Δwˉ=VarA​(w)/wˉ。如果没有遗传变异（方差为0），无论选择压力多强，适应度的改进速率都为零。</p>
+</li>
+<li><p>Fitness Valley (适应度谷底/适应度低谷) ：一种多重突变路径，其中间基因型的适应度低于起点，尽管最终目的地是一个更高的适应度峰。由于自然选择是”贪婪”的（只走上坡路），它通常会阻止种群进入山谷。</p>
+</li>
+<li><p>Fixation (固定) ：当一个等位基因在种群中的频率达到100%时发生的现象。在强正向选择下，有利等位基因固定得更快。</p>
+</li>
+<li><p>Genetic Drift (遗传漂变) ：由随机事件引起的等位基因频率变化。当有利突变很稀有时，随机Chance可能导致其丢失；新有益突变固定的概率约为 2s。在小种群中，漂变甚至能让有害突变持续存在。此外，漂变是种群跨越适应度低谷到达更高山峰的唯一途径。</p>
+</li>
+<li><p>Genetic Variation (遗传变异) ：种群中存在的基因差异。变异越多，进化越快；当等位基因频率居中（如0.5/0.5）时，该基因座的遗传变异最高。</p>
+</li>
+<li><p>Hitchhiking (基因搭便车效应) ：一个本身没有直接适应度效应的中性等位基因，如果与一个有利等位基因连锁，其频率也会随之增加的现象。发生的前提是存在连锁不平衡。</p>
+</li>
+<li><p>Linkage Disequilibrium (连锁不平衡) ：不同基因座上的等位基因共同遗传的频率高于随机预期的现象。由染色体上的物理邻近或选择压力引起。</p>
+</li>
+<li><p>Mating Success (交配成功率) ：寻找并成功与配偶交配的能力。</p>
+</li>
+<li><p>Multiple Niche Polymorphism (多生态位多态性) ：不同的基因型在不同的环境中具有更高的适应度，从而在种群中维持了遗传多样性（例如岩鼠的毛色形态适应浅色与深色环境）。</p>
+</li>
+<li><p>Mutation-Selection Balance (突变-选择平衡) ：新突变不断产生，而选择不断清除它们，但由于清除速度不够快以消除所有突变，导致有害突变在种群中持续存在的状态。</p>
+</li>
+<li><p>Negative Frequency-Dependent Selection (负频率依赖性选择) ：一种表型在稀有时适应度较高，但在变得常见时适应度下降的选择模式。这种机制可以维持种群中多种表型的存在。</p>
+</li>
+<li><p>Overdominance / Heterozygote Advantage (超显性/杂合子优势) ：杂合子的适应度高于任何一种纯合子的情况。结果是两个等位基因都保留在种群中，维持遗传多样性（例如镰刀型细胞贫血症中，杂合子AS对疟疾有抗性且症状轻微）。</p>
+</li>
+<li><p>Parent-Offspring Correlation (亲代-子代相关性) ：亲代的表型与其子代之间存在相关性。简单来说，子代必须在这些有利性状上与亲代相似。</p>
+</li>
+<li><p>Permissive Mutations (允许突变/宽容突变) ：能够重塑适应性地形的二次突变，它们可以减轻后续突变的适应性成本（如流感病毒抗药性演化中的V234M和R222Q），使得原本处于适应度低谷的路径变得可行。</p>
+</li>
+<li><p>Phenotype-Fitness Correlation (表型-适应度相关性) ：必须存在表型与适应度之间的一致关系。简单来说，具有某些性状的个体必须比普通个体留下更多的后代。</p>
+</li>
+<li><p>Polymorphic Equilibrium (多态平衡) ：群体遗传学中的一种稳定状态，自然选择在许多世代中维持单个基因座上的两个或多个等位基因。与导致单一等位基因固定的选择不同，此机制确保遗传变异被保留。</p>
+</li>
+<li><p>Positive Frequency-Dependent Selection (正频率依赖性选择) ：某种基因型或表型的适应度随着它变得更加常见而增加的选择模式。它会消除变异，导致多数等位基因快速固定。</p>
+</li>
+<li><p>Positive Selection (正向选择) ：选择有利于有益突变，使其在种群中频率增加的现象。会导致适应，并最终使有利等位基因固定。</p>
+</li>
+<li><p>Purifying Selection / Negative Selection (净化选择/负向选择) ：从种群中移除有害突变的选择机制。它维持现状并保护基因或性状的功能完整性，是自然界中最常见的选择形式。</p>
+</li>
+<li><p>Recessive (隐性) ：在进化轨迹中，隐性有益等位基因起初传播缓慢（因为优势隐藏在杂合子中），一旦频率足够高产生纯合子后，传播会加速。</p>
+</li>
+<li><p>Selection Coefficient (选择系数) ：用于衡量有益等位基因（如A_2A2A_2A2​）优势的参数（记为ssss）。在加性效应模型中，每个A_2A2A_2A2​拷贝增加ssss的适应度优势。等位基因传播所需的时间与ssss成反比（约等于4/s4/s4/s4/s）。</p>
+</li>
+<li><p>Selective Sweep (选择性清扫) ：当一个有益突变传播极快，导致附近与其连锁的遗传变异也一起增加频率的现象。后果是导致被选基因座附近的遗传变异减少，单倍型结构因快速固定而保持完整。</p>
+</li>
+<li><p>Spatial Variation in Selection (选择的空间变异) ：不同地理位置的选择压力不同，从而在不同区域维持不同的等位基因频率和遗传多样性。</p>
+</li>
+<li><p>Underdominance / Heterozygote Disadvantage (欠显性/杂合子劣势) ：杂合子的适应度低于两种纯合子的情况。这会产生不稳定平衡，种群最终会”选边站”并固定其中一个等位基因。遵循阈值模型：超过阈值频率则固定，低于则丢失。</p>
+</li>
+<li><p>Viability (生存率) ：个体存活到成熟阶段的概率。</p>
+</li>
+</ul>
+</li>
+<li><p>Phenotypic Evolution<br>  How and why the mean values of traits evolve?</p>
+<ul>
+<li><p>Phenotypic Evolution（表型进化）：群体中性状平均值如何以及为何随时间发生变化的过程。</p>
+</li>
+<li><p>Genotype（基因型）：个体从父母继承的遗传组成。</p>
+</li>
+<li><p>Environmental Factors（环境因素）：影响性状表达的外部条件。</p>
+</li>
+<li><p>Quantitative Traits（数量性状）：受多个基因位点影响、呈现连续变异的性状（如身高、体重）。</p>
+</li>
+<li><p>Polygenic Traits（多基因性状）：由许多基因共同作用决定的性状。</p>
+</li>
+<li><p>Fitness Function（适应度函数）：描述性状值与群体平均适应度之间关系的函数，用于预测自然选择如何塑造性状进化。</p>
+</li>
+<li><p>Directional Selection（定向选择）：倾向于增加或减少性状平均值的自然选择。</p>
+</li>
+<li><p>Stabilizing Selection（稳定选择）：倾向于中间性状、减少变异的自然选择。</p>
+</li>
+<li><p>Disruptive Selection（分裂选择）：倾向于极端性状、增加变异的自然选择，使中间个体减少。</p>
+</li>
+<li><p>Selection Gradient（选择梯度）：相对适应度对性状值的回归线斜率，量化定向选择的强度。</p>
+</li>
+<li><p>Breeder’s Equation（育种者方程式）：预测性状进化变化的公式，Δz̄ = h²S，其中Δz̄为响应，h²为遗传力，S为选择差。</p>
+</li>
+<li><p>Heritability（遗传力）：表型方差中因遗传差异导致的比例，衡量性状可遗传的程度。</p>
+</li>
+<li><p>Selection Differential（选择差）：选择前后群体性状平均值的差异。</p>
+</li>
+<li><p>Additive Genetic Variance（加性遗传方差）：等位基因独立效应产生的遗传方差，是长期进化可直接利用的遗传变异。</p>
+</li>
+<li><p>Dominance Variance（显性方差）：同一基因座内等位基因相互作用（如显性效应）产生的遗传方差。</p>
+</li>
+<li><p>Epistatic Variance（上位方差）：不同基因座等位基因之间相互作用产生的遗传方差。</p>
+</li>
+<li><p>Phenotypic Variance（表型方差）：群体中观察到的性状总变异程度。</p>
+</li>
+<li><p>Standing Genetic Variation（现存遗传变异）：群体中已存在的遗传多样性，为即时进化提供基础。</p>
+</li>
+<li><p>Genetic Covariance（遗传共变）：由于共享遗传影响（如基因多效性或连锁不平衡），一个性状的变化与另一个性状变化的关联。</p>
+</li>
+<li><p>Pleiotropy（基因多效性）：单个基因影响多个性状的现象。</p>
+</li>
+<li><p>Linkage Disequilibrium（连锁不平衡）：染色体上物理距离近的基因倾向于共同遗传的非随机关联。</p>
+</li>
+<li><p>Trade-Off（权衡）：一个性状的适应以另一个性状为代价的进化约束。</p>
+</li>
+<li><p>Evolutionary Constraints（进化约束）：由于遗传相关性等因素，性状无法独立优化的限制。</p>
+</li>
+<li><p>Genetic Line of Least Resistance（遗传最小阻力线）：由于遗传变异丰富而最易进化的性状组合。</p>
+</li>
+<li><p>Phenotypic Plasticity（表型可塑性）：同一基因型在不同环境下产生不同表型的能力。</p>
+</li>
+<li><p>Reaction Norm（反应规范）：描述基因型在不同环境条件下产生的表型变化曲线或函数。</p>
+</li>
+<li><p>Genotype-Environment Interaction (G×E)（基因型-环境相互作用）：不同基因型对环境变化的响应方式不同。</p>
+</li>
+<li><p>Plasticity-First Hypothesis（可塑性优先假说）：进化可始于环境诱导的表型改变，而后通过遗传调节固定，基因是”追随者”而非”领导者”。</p>
+</li>
+<li><p>Genetic Accommodation（遗传调节）：自然选择倾向于支持、优化或稳定新性状的基因变异。</p>
+</li>
+<li><p>Genetic Assimilation（遗传同化）：原本依赖环境诱导的性状最终成为基因组固有表达，即使去除触发因素也能表达。</p>
+</li>
+<li><p>Systems Biology（系统生物学）：研究生物系统（基因、蛋白质、代谢物）内复杂相互作用如何产生可观察性状的学科。</p>
+</li>
+<li><p>Quantitative Trait Loci (QTL)（数量性状位点）：与数量性状连续变异相关的特定基因组区域。</p>
+</li>
+<li><p>Genetic Linkage（遗传连锁）：同一染色体上相邻基因倾向于一起遗传的现象。</p>
+</li>
+<li><p>Molecular Marker（分子标记）：用于定位基因的DNA序列变异位点（如SNP、SSR）。</p>
+</li>
+<li><p>Mapping Population（定位群体）：用于QTL分析的杂交后代群体（如F2、回交或重组自交系）。</p>
+</li>
+<li><p>Backcross（回交）：F1与亲本之一杂交产生后代的方法。</p>
+</li>
+<li><p>Recombinant Inbred Lines (RILs)（重组自交系）：通过连续自交获得的、遗传上近乎纯合的品系。</p>
+</li>
+<li><p>SNP (Single Nucleotide Polymorphism)（单核苷酸多态性）：单个核苷酸变异引起的DNA序列多态性。</p>
+</li>
+<li><p>SSR (Simple Sequence Repeat)（简单重复序列）：由短串联重复单元组成的DNA多态标记。</p>
+</li>
+<li><p>Genotyping（分型）：确定个体在特定标记处基因型的过程。</p>
+</li>
+<li><p>Phenotyping（表型测量）：测定个体性状数值的过程。</p>
+</li>
+<li><p>Likelihood of QTL（QTL似然值）：统计上支持染色体某位置存在QTL的可能性。</p>
+</li>
+<li><p>Sister Species（姊妹种）：亲缘关系最近的物种。</p>
+</li>
+<li><p>Pollination Syndromes（传粉综合征）：与特定传粉者相适应的花部特征组合。</p>
+</li>
+<li><p>Hybridization（杂交）：将两个不同物种或品系交配产生后代的过程。</p>
+</li>
+<li><p>Small-Effect QTLs（微效QTL）：解释表型变异比例较小的数量性状位点。</p>
+</li>
+<li><p>Large-Effect QTLs（主效QTL）：解释表型变异比例较大的数量性状位点。</p>
+</li>
+<li><p>Major Mutations（主效突变）：对性状产生较大效应的基因突变。</p>
+</li>
+<li><p>Adaptation（适应）：生物为更好生存和繁殖而进化出有利特征的过程。</p>
+</li>
+<li><p>Speciation（物种形成）：因生殖隔离导致新物种产生的进化过程。</p>
+</li>
+<li><p>Reproductive Isolation（生殖隔离）：不同物种间无法交配或产生可育后代的机制。</p>
+</li>
+<li><p>Adaptive Peak（适应峰）：在适应性景观中，群体性状组合达到局部最高适应度的状态。</p>
+</li>
+<li><p>Genetic Architecture（遗传结构）：控制性状的基因数量、效应大小及相互作用方式。</p>
+</li>
+<li><p>Population Size（种群规模）：群体中个体数量，影响进化潜力和灭绝风险。</p>
+</li>
+<li><p>Physiological Plasticity（生理可塑性）：生物通过调整生理或行为来应对环境变化的能力。</p>
+</li>
+<li><p>Experimental Evolution（实验进化）：在实验室控制条件下观察进化过程的实验方法。</p>
+</li>
+<li><p>Coding DNA（编码DNA）：蛋白质编码序列。</p>
+</li>
+<li><p>Noncoding DNA（非编码DNA）：不编码蛋白质的DNA区域，常调控基因表达。</p>
+</li>
+<li><p>Regulatory Regions（调控区域）：非编码DNA中控制基因表达的序列。</p>
+</li>
+<li><p>Gene Regulatory Networks（基因调节网络）：控制基因表达和细胞反应的分子相互作用网络。</p>
+</li>
+<li><p>Melanin Genes（黑色素基因）：控制黑色素合成与分布的基因，常与颜色适应相关。</p>
+</li>
+<li><p>Genetic Convergence（遗传趋同）：不同物种在相似选择压力下独立进化出相同基因变异的现象。</p>
+</li>
+<li><p>Trophic Polyphenism（营养多态性）：同一基因型因摄食不同而产生不同营养形态的现象。</p>
+</li>
+<li><p>Carnivore Morph（食肉形态）：专性捕食的表型形态（如蝌蚪的肉食型）。</p>
+</li>
+<li><p>Omnivore Morph（杂食形态）：以碎屑和微生物为食的表型形态（如蝌蚪的杂食型）。</p>
+</li>
+<li><p>Overdominance（超显性）：杂合子表型优于纯合子的遗传现象。</p>
+</li>
+<li><p>F2 Mapping Population（F2定位群体）：由F1自交或互交产生的、用于遗传作图的F2代个体。</p>
+</li>
+<li><p>Qualitative Traits（质量性状）：呈离散分布、由单基因控制的性状。</p>
+</li>
+<li><p>Monogenic（单基因）：由单个基因决定的遗传特征。</p>
+</li>
+<li><p>Polygenic（多基因）：由多个基因共同决定的遗传特征。</p>
+</li>
+<li><p>Environmental Variance（环境方差）：由环境因素导致的表型变异部分。</p>
+</li>
+<li><p>Genetic Variance（遗传方差）：由遗传差异导致的表型变异部分。</p>
+</li>
+<li><p>Total Phenotypic Variance（总表型方差）：群体中表型变异的总体，包括遗传和环境成分。</p>
+</li>
+<li><p>Response to Selection（选择响应）：经过选择后群体平均性状的变化量。</p>
+</li>
+<li><p>Yeast Study（酵母研究）：以酵母为模式生物的实验进化研究。</p>
+</li>
+<li><p>High Salt Concentration（高盐浓度）：实验中施加的选择压力条件。</p>
+</li>
+<li><p>Daphnia melanica（黑水蚤）：研究紫外线诱导黑色素可塑性的模式生物。</p>
+</li>
+<li><p>Spea spadefoot toads（掘足蟾）：研究表型可塑性（蝌蚪营养多态性）的模式两栖动物。</p>
+</li>
+<li><p>YUP locus（YUP位点）：在沟酸浆属中发现的主效基因位点，控制花颜色，对传粉者转换起关键作用。</p>
+</li>
+</ul>
+</li>
+<li><p>Genetic Drift:Evolution at Random</p>
+<ul>
+<li><p>Genetic Drift (遗传漂变) ：由于有限种群中的抽样误差导致的等位基因频率随机波动。它是由概率驱动的非适应性进化，在小型种群中效应更强。</p>
+</li>
+<li><p>Natural Selection (自然选择) ：具有有利性状的个体更有可能生存和繁殖的过程，导致适应性进化，使种群更好地适应环境。</p>
+</li>
+<li><p>Mutation (突变)：DNA复制过程中随机发生的变异，不考虑对生物是否有用。突变是进化的原材料。</p>
+</li>
+<li><p>Allele Frequencies (等位基因频率)：一个基因位点上不同等位基因在种群中所占的比例，是遗传漂变和自然选择作用的对象。</p>
+</li>
+<li><p>Sampling Error (抽样误差)：在从基因库中抽取配子形成合子时，由于随机性导致的等位基因频率与预期值的偏差，是遗传漂变的直接原因。</p>
+</li>
+<li><p>Effective Population Size (有效种群大小, Ne)：理想化种群中与实际种群产生相同遗传漂变强度的个体数量。它受种群波动、性别比例、非随机繁殖等因素影响。</p>
+</li>
+<li><p>Founder Effect (奠基者效应)：当一小部分个体从原种群迁出并建立新种群时，新种群的等位基因频率可能因抽样误差而与原种群显著不同，导致遗传多样性降低。</p>
+</li>
+<li><p>Population Bottleneck (种群瓶颈)：种群数量因环境事件急剧减少，导致遗传多样性丧失和等位基因频率随机改变。</p>
+</li>
+<li><p>Coalescence (溯祖/聚合)：追溯基因谱系时，不同个体的等位基因在共同祖先处合并的过程。平均溯祖时间在二倍体生物中约为2Ne代。</p>
+</li>
+<li><p>Neutral Theory (中性理论)：由木村资生提出，认为大多数分子水平的进化差异是由中性突变通过遗传漂变固定所致，而非自然选择。</p>
+</li>
+<li><p>Molecular Clock (分子钟)：基于中性突变以相对恒定速率积累的假设，通过比较序列差异来估计物种分化时间的工具。</p>
+</li>
+<li><p>Pseudogenes (伪基因)：基因组中失去功能的基因拷贝，不受纯化选择约束，进化速率通常高于功能基因。</p>
+</li>
+<li><p>dN/dS Ratio (非同义/同义替换率比值)：衡量基因进化选择压力的指标。dN为非同义替换率，dS为同义替换率。dN/dS &lt; 1表示纯化选择，≈1表示中性进化，&gt;1表示正向选择。</p>
+</li>
+<li><p>Positive Selection (正向选择)：自然选择偏好并固定有益突变的过程，导致适应性进化。</p>
+</li>
+<li><p>Purifying Selection (纯化选择)：自然选择清除有害突变的过程，维持基因功能保守性。</p>
+</li>
+<li><p>MK Test (麦克唐纳-克赖特曼检验)：通过比较同义和非同义突变在种内多态性（P）与种间固定差异（D）的比例是否一致，来检测正选择的方法。若Dn/Ds &gt; Pn/Ps，则提示正选择。</p>
+</li>
+<li><p>Background Selection (背景选择)：有害突变在清除过程中连带消除其附近的中性变异，降低基因组区域的遗传多样性。</p>
+</li>
+<li><p>Selective Sweep (选择性清除)：有益突变在种群中快速固定时，其周围的连锁中性突变亦被一并固定，导致该区域多态性降低。</p>
+</li>
+<li><p>Heterozygosity (杂合度, π)：种群中随机两个等位基因核苷酸序列差异的平均比例，反映遗传多样性水平。中性条件下π ≈ 4Neμn。</p>
+</li>
+<li><p>Inbreeding Load (近交负荷) ：小型种群中因遗传漂变积累的有害突变导致种群适合度下降的现象。</p>
+</li>
+<li><p>Underdominant Mutation (劣势杂合子突变) ：杂合子适合度低于纯合子的突变，自然选择在低频时抵抗其扩散，但遗传漂变可推动其跨越适应低谷而被固定。</p>
+</li>
+</ul>
+</li>
+<li><p>Evolution in Space</p>
+<ul>
+<li><p>Migration (迁移/基因流动) ：在进化生物学语境下，指种群之间的基因流动。这与行为生态学中的迁徙（如动物的季节性移动）不同，关键在于是否发生了基因的混合。例如鲑鱼虽然迁徙，但回到同一溪流繁殖，并未发生不同种群间的基因交流，因此不属于进化意义上的迁移。</p>
+</li>
+<li><p>Cline (基因梯度)：指性状平均值或等位基因频率在地理空间上的逐渐变化。这种变化通常由选择、基因流动和环境梯度的共同作用形成，距离可长可短。例如白车轴草产生氰化物的能力随纬度变化形成的平滑梯度。</p>
+</li>
+<li><p>Mosaic adaptation (镶嵌适应)：当环境因素呈斑块状（patchy）分布时发生的局部适应现象。与基因梯度不同，这种适应模式表现为在不同的小生境斑块间性状的急剧变化。例如在铜矿区，植物对铜的耐受性随距离矿区远近呈现出快速的局部适应。</p>
+</li>
+<li><p>Gene flow (基因流动)：指等位基因在种群之间的移动。它主要通过个体或配子的扩散来实现。基因流动有两个主要的进化效应：均等化等位基因频率（减少种群间的遗传差异）和引入新等位基因（类似于突变的作用）。</p>
+</li>
+<li><p>Migration rate (m) (迁移率)：用于测量离散种群（如岛屿、湖泊）基因流动的指标。指每一代中移民个体所占的比例。公式为：m = \frac{移民数量}{种群总数量}m=移民数量种群总数量m = \frac{移民数量}{种群总数量}m=种群总数量移民数量​。迁移率越高，种群间的遗传同质化速度越快。</p>
+</li>
+<li><p>Migration variance (\sigma m^2σm2\sigma m^2σm2) (迁移方差)：用于测量连续种群（如森林、海洋）基因流动的指标。指个体扩散距离的方差，描述了基因像烟雾一样在世代间扩散的过程。</p>
+</li>
+<li><p>Genetic divergence (遗传分化)：指不同种群在遗传水平上的差异程度。</p>
+</li>
+<li><p>FST (Fixation Index) (遗传分化指数)：用于量化种群间遗传分化程度的指标。取值范围在0到1之间：</p>
+<ul>
+<li><p>FST = 0：种群间遗传结构完全相同。</p>
+</li>
+<li><p>FST = 1：种群固定了不同的等位基因。</p>
+</li>
+<li><p>FST值受种群隔离程度、选择压力和种群大小的影响。</p>
+</li>
+</ul>
+</li>
+<li><p>Isolation-by-Distance (IBD) (距离隔离)：指遗传分化指数（FST）随地理距离增加而升高的现象。这反映了历史上的迁移模式，距离越远，基因流动的机会越少，分化程度越高。</p>
+</li>
+<li><p>Gene swamping (基因湮灭)：当基因流动强于自然选择（m &gt;&gt; sm&gt;&gt;sm &gt;&gt; sm&gt;&gt;s）时发生的现象。大量的基因流入阻止了局部适应等位基因的建立或维持，导致局部适应丧失。</p>
+</li>
+<li><p>Tension zone (张力带)：由迁移-选择平衡维持的杂交带。来自不同种群的个体相遇并产生杂交后代，如果杂交后代适合度较低，选择作用会将其淘汰，从而在两个种群间维持一个狭窄的遗传边界。</p>
+</li>
+<li><p>Local adaptation (局部适应)：指种群在其自身环境中的适合度高于其他环境的现象。这通常是自然选择克服了基因流动的同质化作用的结果。</p>
+</li>
+<li><p>Spatial sorting (空间排序)：在物种扩张过程中，扩散能力强的个体聚集在入侵前沿的现象。这种机制可以导致扩散相关性状（如海蟾蜍的腿长）的快速进化，即使没有直接的自然选择压力。</p>
+</li>
+</ul>
+</li>
+<li><p>Species and Speciation</p>
+<ul>
+<li><p>Speciation (物种形成) ：一个物种分裂成两个或多个独立物种的过程，是进化生物学的核心概念。</p>
+</li>
+<li><p>Biological Species Concept (BSC, 生物种概念)：由恩斯特·迈尔提出，将物种定义为能够相互交配并产生可育后代、且与其他群体存在生殖隔离的群体。</p>
+</li>
+<li><p>Morphological Species Concept (形态种概念)：基于生物的外部形态特征（如体形、颜色、结构）来区分物种的概念，常用于缺乏遗传或行为数据时。</p>
+</li>
+<li><p>Phylogenetic Species Concept (系统发生种概念)：基于进化历史和遗传差异，将物种定义为可识别的最小单系群（拥有共同祖先的独立进化谱系）。</p>
+</li>
+<li><p>Ecological Species Concept (生态种概念)：将物种定义为占据独特生态位、适应特定环境的群体，强调生态分化在物种形成中的作用。</p>
+</li>
+<li><p>Reproductive Isolation (生殖隔离)：阻止不同物种间基因交流的屏障，是生物种概念下物种形成的核心。</p>
+</li>
+<li><p>Prezygotic Barriers (合子前屏障)：在受精前阻止配子结合的生殖隔离机制，包括生态隔离、时间隔离、行为隔离、机械隔离和配子隔离。</p>
+</li>
+<li><p>Postmating Prezygotic Barriers (交配后合子前屏障)：交配已发生但未能形成合子（受精失败）的屏障，包括机械不匹配、交配刺激不足和配子不兼容。</p>
+</li>
+<li><p>Postzygotic Barriers (合子后屏障)：杂交合子形成后，导致杂交个体适应性降低的屏障，包括外在因素（生态不适应、行为不育）和内在因素（杂交不活、杂交不育）。</p>
+</li>
+<li><p>Ecological Isolation (生态隔离)：潜在配偶因生活在不同栖息地或利用不同资源而无法相遇的生殖隔离类型，如栖息地隔离和季节隔离。</p>
+</li>
+<li><p>Temporal Isolation (时间隔离)：因繁殖时间不同（如不同季节、昼夜）而避免交配的合子前屏障，例如周期性蝉的13年与17年周期。</p>
+</li>
+<li><p>Habitat Isolation (栖息地隔离)：因物种在不同微环境中繁殖而导致互不接触的隔离类型，例如日本瓢虫在不同寄主植物上交配。</p>
+</li>
+<li><p>Sexual Isolation (性选择隔离)：个体倾向于选择同种个体作为配偶，拒绝异种个体，通过求偶信号（鸣叫、气味、颜色）差异实现。</p>
+</li>
+<li><p>Mechanical Isolation (机械隔离)：不同物种的生殖器官结构不匹配，导致交配无法成功完成的障碍。</p>
+</li>
+<li><p>Gametic Isolation (配子隔离)：即使交配发生，精子和卵子无法识别或融合，导致受精失败，如鲍鱼精子蛋白进化导致种间不识别。</p>
+</li>
+<li><p>Hybrid Inviability (杂交体存活率低)：杂交后代胚胎发育异常或无法存活，因遗传不兼容导致。</p>
+</li>
+<li><p>Hybrid Sterility (杂交体不育)：杂交个体能存活但无法产生可育配子，如骡子（马和驴的杂交后代）。</p>
+</li>
+<li><p>Dobzhansky-Muller Model (多布赞斯基-穆勒模型)：解释遗传不兼容如何进化的模型：两个隔离种群各自积累新等位基因，当这些等位基因在杂交后代中首次相遇时产生有害相互作用。</p>
+</li>
+<li><p>Haldane’s Rule (霍尔丹法则)：当杂交后代出现不育或不活时，通常影响异配性别（如哺乳动物雄性XY、鸟类雌性ZW）。</p>
+</li>
+<li><p>Reinforcement (强化作用)：因低适应度杂交个体的存在，自然选择倾向于加强合子前隔离，减少种间交配，如福禄考花色的分化。</p>
+</li>
+<li><p>Allopatric Speciation (异域物种形成)：种群因地理障碍（如山脉、海洋）完全隔离，基因流被阻断，从而分化成不同物种。</p>
+</li>
+<li><p>Sympatric Speciation (同域物种形成)：在同一地理区域内，没有物理障碍的情况下，一个种群因生态分化、择偶偏好等机制分裂成两个物种。</p>
+</li>
+<li><p>Parapatric Speciation (邻域物种形成)：相邻种群在部分基因流存在的情况下，因强烈环境选择而逐渐分化形成新物种，如白沙子蜥蜴的适应性进化。</p>
+</li>
+<li><p>Vicariance (地理隔离分割)：已有种群被新形成的地理屏障（如地峡、山脉）分割，导致异域种群产生，如巴拿马地峡隔离的鼓虾。</p>
+</li>
+<li><p>Dispersal (扩散)：个体迁移到新区域并建立种群，导致与原种群隔离而分化，如夏威夷果蝇的岛屿跳跃式扩散。</p>
+</li>
+<li><p>Polyploidy (多倍体形成)：基因组加倍导致瞬间物种形成，分为自倍体（同种染色体加倍）和异倍体（种间杂交后染色体加倍）。</p>
+</li>
+<li><p>Autopolyploidy (自倍体化)：同一物种内染色体组加倍，形成四倍体等，与二倍体亲本产生生殖隔离。</p>
+</li>
+<li><p>Allopolyploidy (异倍体化)：两个不同物种杂交后，通过染色体加倍形成可育的多倍体新物种，如山羊须草属（Tragopogon）的异源四倍体。</p>
+</li>
+<li><p>Hybrid Speciation (杂交物种形成)：两个物种杂交形成新物种，无需多倍体化，但通过遗传重组和染色体差异产生隔离，如向日葵属（Helianthus）的三种杂合新种。</p>
+</li>
+<li><p>Introgression (基因渗入)：通过杂交，一个物种的基因流入另一个物种的基因组中，如蝴蝶的拟态基因转移。</p>
+</li>
+<li><p>Genomic Islands of Speciation (物种形成的基因组岛屿)：基因组中高度分化的区域，含有与生殖隔离相关的基因，而其他区域仍可发生基因交流，如按蚊的X染色体。</p>
+</li>
+<li><p>Ring Species (环物种)：一群连续分布的种群，相邻种群可交配，但环两端的终端种群因生殖隔离无法交配，如加州无肺螈（Ensatina）和绿柳莺（Phylloscopus trochiloides）。</p>
+</li>
+<li><p>Magic Trait (魔法性状)：同时驱动生态适应和生殖隔离的单一性状，如寄主专一性昆虫在寄主植物上交配。</p>
+</li>
+<li><p>Assortative Mating (择偶选择/选择性交配)：个体优先选择与自己相似（相同表型或基因型）的配偶，从而加强生殖隔离，如夏威夷蟋蟀的鸣声偏好。</p>
+</li>
+<li><p>Cryptic Species (隐存种)：形态上难以区分但遗传上存在显著差异的物种，如海洋硅藻伪菱形藻属（Pseudo-nitzschia）的隐种。</p>
+</li>
+<li><p>Sibling Species (同胞种)：形态极为相似但生殖隔离的物种，如按蚊复合体（Anopheles maculipennis）中的不同种（有的传播疟疾，有的不传播）。</p>
+</li>
+<li><p>Sister Species (姊妹种)：拥有最近共同祖先的两个物种，如巴拿马地峡两侧的鼓虾姐妹种。</p>
+</li>
+<li><p>Convergent Evolution (趋同演化)：不同谱系独立演化出相似特征，如坦干依喀湖和马拉维湖的慈鲷具有相似的摄食形态。</p>
+</li>
+<li><p>Ecotype (生态型)：同一物种内适应不同局部环境的遗传分化群体，如沟酸浆（Mimulus guttatus）的海岸生态型（多年生）和内陆生态型（一年生）。</p>
+</li>
+<li><p>Founder Effect (创始效应)：少数个体定殖新区域时，因随机漂变导致遗传变异减少和新等位基因固定，可能促进物种形成，如天堂翠鸟（Tansiptera）。</p>
+</li>
+<li><p>Chromosomal Inversion (染色体倒位)：染色体片段方向反转，可抑制重组，维持与生殖隔离相关的基因组合，如西伯利亚普通鼩鼱的倒位杂合导致低育性。</p>
+</li>
+<li><p>Cytonuclear Incompatibility (细胞核-线粒体不兼容)：来自不同种群的线粒体基因与核基因不匹配，导致杂交后代适应度下降，如海洋桡足类Tigriopus californicus的F2代。</p>
+</li>
+<li><p>Hybrid Zone (杂交区)：两个物种地理分布重叠区，可发生杂交和基因流，但物种界限仍维持，如欧洲红腹蟾蜍与黄腹蟾蜍的窄杂交带。</p>
+</li>
+<li><p>Secondary Contact (二次接触)：隔离的种群因环境变化或迁移重新相遇，可能出现融合、强化或稳定杂交区三种结果。</p>
+</li>
+<li><p>Ecological Speciation (生态物种形成)：生殖隔离作为适应不同环境的副产品而进化，如猴面花（Mimulus lewisii 和 M. cardinalis）因传粉者差异而隔离。</p>
+</li>
+<li><p>Genetic Drift (遗传漂变)：随机事件导致等位基因频率在种群中变化，在小种群中可固定染色体重排，促进生殖隔离，如向日葵的染色体差异。</p>
+</li>
+<li><p>Peripatric Speciation (边缘物种形成) ：一种异域物种形成的特殊形式，边缘孤立小种群因创始效应和漂变快速分化，如天堂翠鸟。</p>
+</li>
+</ul>
+</li>
+<li><p>Sexual selection</p>
+<ul>
+<li><p>Sexual selection（性选择）：通过个体在交配成功上的差异产生的一种选择形式，导致某些个体因拥有吸引异性或战胜同性的特征而获得更多繁殖机会。</p>
+</li>
+<li><p>Sexual dimorphism（性二型性）：同一物种中雄性和雌性在形态、行为或生理上的差异，例如孔雀的尾羽、雄鹿的角。</p>
+</li>
+<li><p>Anisogamy（异配配子）：配子大小不同，即大而静止的卵子与小而能动的精子，这是性别分化的基础。</p>
+</li>
+<li><p>Hermaphroditism（雌雄同体）：同一个体同时具备雄性和雌性生殖器官，例如豹纹蛞蝓和许多植物。</p>
+</li>
+<li><p>Sequential hermaphroditism（连续性雌雄同体）：个体在生命周期中先表现为一种性别，后转变为另一种性别，如小丑鱼在雌性死亡后，优势雄性变为雌性。</p>
+</li>
+<li><p>Parasexuality（准性生殖）：细菌等生物通过接合、转化或转导等方式进行遗传物质交换，而非典型的减数分裂和受精。</p>
+</li>
+<li><p>Primary sexual traits（初级性征）：直接用于生殖的性腺和外生殖器，如卵巢、睾丸、阴茎。</p>
+</li>
+<li><p>Secondary sexual traits（次级性征）：两性间存在差异但不直接用于生殖的特征，如雄鸟的鸣叫、雄狮的鬃毛，通常由性选择驱动。</p>
+</li>
+<li><p>Bateman’s principle（巴特曼原则）：雄性通常通过增加交配次数提高繁殖成功率，而雌性一旦卵子受精，额外交配的收益有限，因此雄性受到更强的性选择压力。</p>
+</li>
+<li><p>Parental investment（亲代投资）：亲代为后代投入的时间、能量和资源，通常雌性投资更多（如卵细胞大、孕期长、育幼），导致雌性成为限制性资源。</p>
+</li>
+<li><p>Operational sex ratio（操作性别比）：在一定时间内实际可参与交配的雄性与雌性数量之比，反映了交配竞争的强度。</p>
+</li>
+<li><p>Intrasexual selection（同性内选择）：同一性别个体之间直接竞争交配机会，如雄性之间打斗。</p>
+</li>
+<li><p>Intersexual selection（同性间选择）：一种性别的个体对另一性别的配偶进行选择，通常雌性选择雄性。</p>
+</li>
+<li><p>Sperm competition（精子竞争）：交配后雄性与雄性之间通过精子质量、数量或行为（如移除其他雌性精子、产生精子栓）来竞争使卵子受精。</p>
+</li>
+<li><p>Infanticide（杀婴行为）：雄性在接管群体后杀死前任雄性后代的行为，旨在清除竞争基因、加速雌性重新发情，利于自身繁殖。</p>
+</li>
+<li><p>Negative frequency-dependent selection（负频率依赖选择）：一种选择机制，当某种表现型在种群中频率较低时，其适合度更高，从而维持多种交配策略共存，如等足类动物的α、β、γ雄性型。</p>
+</li>
+<li><p>Direct benefits（直接利益）：雌性通过选择特定雄性获得的即时好处，如食物、领地保护、亲代照料等，例如螽斯雄性提供的精包营养。</p>
+</li>
+<li><p>Pleiotropic effects（多效性）：一个基因影响多个表型特征的现象。在性选择中，雌性对某种雄性特征的偏好可能源于感知系统在其他功能（如觅食）上的多效性。</p>
+</li>
+<li><p>Good genes hypothesis（好基因假说）：雌性偏好某种雄性特征，是因为该特征指示雄性具有较高的遗传品质（如抗病性），其后代能获得更好的生存能力。</p>
+</li>
+<li><p>Indicator traits（指示性状）：能够诚实反映雄性遗传质量的表型特征，如雄鱼红色的鲜艳程度与寄生虫抗性相关。</p>
+</li>
+<li><p>Sensory bias hypothesis（感官偏向假说）：雌性的交配偏好源于其在其他环境中（如觅食、躲避捕食者）演化出的感官系统，雄性随后演化出利用这些偏好的特征。</p>
+</li>
+<li><p>Fisher’s runaway（费雪奔逃过程）：雌性偏好与雄性特征之间通过遗传连锁产生正反馈，导致特征在短时间内极度夸张，甚至超越生存最优值的演化过程。</p>
+</li>
+<li><p>Runaway selection（奔逃选择）：性选择的一种极端形式，特征和偏好相互强化，使种群偏离自然选择的平衡点，直到被其他力量阻止。</p>
+</li>
+<li><p>Linkage disequilibrium（连锁不平衡）：不同基因座上等位基因的非随机组合，在性选择中，偏好基因与特征基因可能紧密连锁。</p>
+</li>
+<li><p>Red Queen hypothesis（红皇后假说）：有性生殖能产生更多基因重组，帮助宿主在与寄主的协同进化”军备竞赛”中保持优势，从而解释了性存在的必要性。</p>
+</li>
+<li><p>Twofold cost of sex（性的双倍代价）：有性生殖中雄性个体不直接生产后代，因此无性生殖种群理论上每代可产生两倍于有性种群的雌性后代，是性维持的经典悖论。</p>
+</li>
+<li><p>Muller’s ratchet（穆勒棘轮）：无性生殖种群中，由于无法重组，有害突变不可逆地积累，最适基因型可能随机丢失且无法恢复。</p>
+</li>
+<li><p>Selective interference（选择性干扰）：基因连锁导致有益突变与有害突变绑在一起，阻碍适应进化。有性生殖通过重组打破这种干扰。</p>
+</li>
+<li><p>Clonal interference（克隆干扰）：在无性种群中，多个有益突变出现在不同个体上时，它们互相竞争而无法组合到同一个体中，减慢了适应速率。</p>
+</li>
+<li><p>Ruby-in-the-rubbish effect（垃圾中红宝石效应）：无性种群中有益突变若出现在携带大量有害突变的基因组上，会被有害突变拖累而丢失；有性生殖可将有益突变重组到干净背景中。</p>
+</li>
+<li><p>Genetic correlation（遗传相关）：两个性状因基因多效性或连锁不平衡而共同遗传，在性选择中导致偏好与特征协同演化。</p>
+</li>
+<li><p>Assortative mating（选型交配）：个体倾向于与自身表型相似的异性交配，是Fisher模型的基础。</p>
+</li>
+<li><p>Haplodiploid sex determination（单倍二倍体性别决定）：膜翅目昆虫中，受精卵发育为二倍体雌性，未受精卵发育为单倍体雄性。</p>
+</li>
+<li><p>Environmental sex determination（环境性别决定）：性别由环境因素（如温度）而非遗传决定，常见于某些爬行动物。</p>
+</li>
+<li><p>Parthenogenesis（孤雌生殖）：卵未经受精直接发育为个体的无性生殖方式，如蛭形轮虫。</p>
+</li>
+<li><p>Self-incompatibility（自交不亲和）：植物通过生化系统识别并拒绝自身花粉，防止自交，促进异交。</p>
+</li>
+<li><p>Selfing（自交）：雌雄同体个体自我受精，常见于开拓性或杂草物种，可保证繁殖成功率。</p>
+</li>
+<li><p>Outcrossing（异交）：不同个体之间的交配，可避免近交衰退，是大多数雌雄同体物种的主要策略。</p>
+</li>
+<li><p>Sex role reversal（性别角色反转）：在少数物种中，雄性承担更多亲代投资，导致雌性竞争激烈、雄性选择配偶，如红领瓣足鹬和海马。</p>
+</li>
+<li><p>Sexual selection by female choice（雌性择偶的性选择）：雌性通过偏好某些雄性特征（如鲜艳羽毛、复杂鸣声）来影响哪些雄性获得交配机会。</p>
+</li>
+<li><p>Sensory exploitation（感官剥削）：雄性演化出利用雌性已有感官偏好的特征（如模仿猎物振动信号），从而增加交配成功率。</p>
+</li>
+<li><p>Nuptial gift（婚礼）：雄性在交配前或交配中提供给雌性的食物或其他资源，作为直接利益，如蝎蛉的猎物、螽斯的精包。</p>
+</li>
+<li><p>Anisogamy（异配）：配子大小不等，大配子为卵、小配子为精子，该差异奠定了性别分化与性选择的基础。</p>
+</li>
+<li><p>Primary sexual traits（初级性征）：生殖系统本身的结构，如卵巢、睾丸、交接器。</p>
+</li>
+<li><p>Secondary sexual traits（次级性征）：除生殖器以外的两性差异，通常由性选择驱动，如鹿角、孔雀尾羽。</p>
+</li>
+</ul>
+</li>
+<li><p>Fitness &amp; life history traits</p>
+<ul>
+<li><p>Fitness (适应度) ：个体在特定环境中生存并繁殖后代的能力，通常以终生繁殖成功率（Lifetime Reproductive Success, R）衡量，是自然选择作用的最终目标。</p>
+</li>
+<li><p>Life history traits (生活史性状) ：影响生物体生存和繁殖的一系列可遗传特征，包括首次繁殖年龄、繁殖频率、每次后代数量、后代存活率、生长速度、寿命等，这些性状通过能量分配权衡演化。</p>
+</li>
+<li><p>Age at first reproduction (第一次繁殖年龄) ：生物体首次繁殖发生的年龄，决定了繁殖周期的起点，对适应度有重要影响。</p>
+</li>
+<li><p>Reproductive frequency (繁殖频率) ：生物体一生中繁殖的次数，如年年繁殖（多次繁殖，iteroparity） 或一次性繁殖（semelparity）（如鲑鱼）。</p>
+</li>
+<li><p>Number of offspring per reproductive event (每次繁殖的后代数量) ：单次繁殖产生的后代数目，与后代存活率和亲代投入之间常存在权衡。</p>
+</li>
+<li><p>Offspring survival rate (后代存活率) ：后代中能存活到繁殖年龄的比例，直接影响亲代的适应度。</p>
+</li>
+<li><p>Growth rate (生长速度) ：生物体达到性成熟或最大体型的速度，与繁殖投入之间存在能量权衡。</p>
+</li>
+<li><p>Lifespan (寿命) ：个体在自然状态下的预期生存时间，不同物种差异极大（如轮虫数天、狐尾松数千年）。</p>
+</li>
+<li><p>Lifetime reproductive success (终生繁殖成功率) ：个体一生中产生的后代总数，计算公式 R = \sum l_x m_xR=∑lxmxR = \sum l_x m_xR=∑lx​mx​，其中 l_xlxl_xlx​ 为存活到年龄 x 的概率，m_xmxm_xmx​ 为年龄 x 时的繁殖力。</p>
+</li>
+<li><p>Extrinsic mortality (外源性死亡) ：由捕食、疾病、环境灾害等外部因素导致的死亡，限制了生物体达到潜在寿命，驱动生活史演化。</p>
+</li>
+<li><p>Aging / senescence (老化/衰老) ：在生命后期，生育能力和存活率随年龄增加而下降的现象，是生活史演化的副产物。</p>
+</li>
+<li><p>Rate-of-living theory (生命速率理论) ：认为老化源于代谢损伤积累（如复制/转录错误、氧化应激），预测寿命与代谢率负相关，但实际数据并不完全支持。</p>
+</li>
+<li><p>Evolutionary theory of aging (老化的演化理论) ：包括突变积累假说和拮抗多效性假说，认为老化是由于自然选择对生命后期基因作用微弱，以及早期繁殖利益与后期存活代价之间的权衡。</p>
+</li>
+<li><p>Telomeres (端粒) ：染色体末端的保护结构，随细胞分裂而缩短，与个体衰老和死亡率相关。</p>
+</li>
+<li><p>Telomerase (端粒酶) ：能够延长端粒的酶，在干细胞和癌细胞中活跃，可延缓细胞衰老，但过度活跃可能增加癌症风险。</p>
+</li>
+<li><p>Antagonistic pleiotropy (拮抗多效性) ：某些基因在早期促进繁殖、但在后期损害存活，早期益处超过后期代价时，该基因仍能被自然选择保留，从而驱动老化演化。</p>
+</li>
+<li><p>Mutation accumulation (突变积累) ：对生命后期有轻微有害效应的突变，由于自然选择压力弱而逐渐积累，导致衰老。</p>
+</li>
+<li><p>Semelparity (一次性繁殖) ：生物体一生只繁殖一次，之后通常死亡（如鲑鱼、龙舌兰），常见于未来存活可能性低的环境。</p>
+</li>
+<li><p>Iteroparity (多次繁殖) ：生物体一生繁殖多次，将繁殖风险分散在不同年份，通常与高成体存活率和较晚成熟相关。</p>
+</li>
+<li><p>r-selection (r选择) ：在不稳定或扰动频繁的环境中，选择有利于快速生长、早熟、高繁殖力和短世代时间的策略（如昆虫、一年生植物）。</p>
+</li>
+<li><p>K-selection (K选择) ：在接近环境容纳量的稳定环境中，选择有利于竞争能力强、晚熟、后代少但质量高、寿命长的策略（如鲸、大象）。</p>
+</li>
+<li><p>Cost of reproduction (繁殖代价) ：繁殖投入（如产卵、育幼）会消耗能量，导致生长减慢、存活率降低或未来繁殖能力下降，是生活史权衡的核心。</p>
+</li>
+<li><p>Reproductive effort (繁殖投入) ：生物体分配到繁殖活动（如求偶、产卵、育幼）中的能量比例，与生长、维持、修复等其他功能竞争资源。</p>
+</li>
+<li><p>Clutch size (窝卵数/窝仔数) ：单次繁殖产生的卵或幼崽数量，通常存在一个最优窝卵数，使存活后代总数最大（Lack假说）。</p>
+</li>
+<li><p>Lack’s hypothesis (莱克假说) ：认为自然选择会优化窝卵数，使存活后代数最大；实际观察中，许多物种的窝卵数低于最优值，可能受后代质量、亲代未来繁殖等因素限制。</p>
+</li>
+<li><p>Sequential hermaphroditism (连续性雌雄同体) ：生物体在生命过程中改变性别，当繁殖成功与体型相关时发生。包括雌性先熟（protogyny） 和雄性先熟（protandry）。</p>
+</li>
+<li><p>Protogyny (雌性先熟) ：先为雌性后变为雄性（如蓝头隆头鱼），通常在体型较大时雄性竞争更有利。</p>
+</li>
+<li><p>Protandry (雄性先熟) ：先为雄性后变为雌性（如笠贝螺），通常在体型较大时产卵优势更明显。</p>
+</li>
+<li><p>Inbreeding depression (近交衰退) ：近亲繁殖导致后代适合度下降的现象，源于隐性有害等位基因纯合；近交衰退随年龄增加而增大，反映晚期有害突变积累。</p>
+</li>
+<li><p>Sexual coevolution / sexual conflict (性协同演化/性冲突) ：雌雄在繁殖利益上的冲突（如雄性精子蛋白提高受精率但伤害雌性），驱动雌性抗性机制和雄性攻击性性状的军备竞赛。</p>
+</li>
+<li><p>Chase-away sexual selection (追赶性选择) ：一种性选择过程：雄性演化出操纵雌性的信号，雌性则演化出抵抗操纵的能力，形成持续的演化军备竞赛。</p>
+</li>
+<li><p>Genetic variance (遗传变异)：群体内生活史性状的遗传差异，尽管受自然选择作用，但可通过突变-选择平衡、杂合子优势、频率依赖选择、基因型-环境互作等机制维持。</p>
+</li>
+<li><p>Mutation-selection balance (突变-选择平衡) ：有害突变不断产生，又被自然选择清除，维持一定遗传变异水平，尤其影响晚期表达的性状。</p>
+</li>
+<li><p>Heterozygote advantage (杂合子优势) ：杂合子在适合度上优于纯合子，有助于维持群体内的遗传多态性。</p>
+</li>
+<li><p>Frequency-dependent selection (频率依赖选择) ：基因型的适合度随其在群体中频率变化而变化，可维持多态性。</p>
+</li>
+<li><p>Genotype-by-environment interaction (基因型与环境互作) ：不同基因型在不同环境中的最适合度表现不同，导致生活史策略的时空波动。</p>
+</li>
+</ul>
+</li>
+<li><p>Cooperation and Conflict</p>
+<ul>
+<li><p>Cooperation（合作）：行为使他人获益，包括互利、利他等形式。合作在自然界普遍存在，但容易受到欺骗者的侵蚀。</p>
+</li>
+<li><p>Conflict（冲突）：行为使自己获益而损害他人利益。冲突与合作在群体中共同演化。</p>
+</li>
+<li><p>Mutualism（互利）：双方都从行为中获益。例如群体生活降低被捕食风险。</p>
+</li>
+<li><p>Altruism（利他）：行为者付出代价，接受者获益。利他行为可通过亲缘选择或互惠演化。</p>
+</li>
+<li><p>Selfishness（自私） ：行为者获益，接受者受损。这是自然选择最直接的结果。</p>
+</li>
+<li><p>Spite（恶意）：双方都受损。恶意行为可通过伤害较远亲属而帮助近亲得以演化，例如细菌产生细菌素。</p>
+</li>
+<li><p>Cheater（欺骗者）：在合作系统中不付出成本却享受收益的个体。自然选择往往暂时有利于欺骗者，但合作系统通过多种机制抑制欺骗。</p>
+</li>
+<li><p>Reciprocity（互惠行为）：个体通过重复互动相互回报帮助。需要记忆和识别能力。长期关系能稳定互惠合作。</p>
+</li>
+<li><p>Public Goods Game（公共物品博弈）：一种博弈模型：玩家向公共池捐款，捐款乘以系数后平均分配。没有惩罚时合作下降，引入惩罚后合作上升。</p>
+</li>
+<li><p>Ultimatum Game（最后通牒博弈）：玩家1提议分配一笔钱，玩家2接受或拒绝。拒绝则双方都无所得。跨文化实验中，提议和拒绝率存在差异，但拒绝不公平提议的行为有助于维持社会规范。</p>
+</li>
+<li><p>Evolutionarily Stable Strategy（ESS，进化稳定策略）：一种策略，任何突变策略都无法入侵。在一次性互动中，自私行为是ESS。</p>
+</li>
+<li><p>Prisoner’s Dilemma（囚徒困境）：经典博弈：双方合作收益最高，但背叛是占优策略。一次性互动中合作崩溃。</p>
+</li>
+<li><p>Hawk-Dove Model（鹰鸽模型） ：描述个体争夺资源时成本与收益的模型。鹰策略好斗，鸽策略示弱。收益矩阵取决于资源价值、受伤代价和时间浪费。</p>
+</li>
+<li><p>Inclusive Fitness（整体适应度）：个体直接繁殖成功（直接适应度）加上帮助亲属繁殖成功（间接适应度）。利他行为通过整体适应度得到解释。</p>
+</li>
+<li><p>Kin Selection（亲缘选择）：选择倾向于帮助亲属，因为亲属共享基因。利他行为在满足汉密尔顿法则时演化。</p>
+</li>
+<li><p>Hamilton’s Rule（汉密尔顿法则）：其中 rrrr 是亲缘系数，BBBB 是受益者的适应度收益，CCCC 是行为者的适应度成本。利他行为当且仅当不等式成立时被选择。<br>  rB &gt; CrB&gt;CrB &gt; CrB&gt;C</p>
+</li>
+<li><p>Green Beard Effect（绿胡子效应）：一个基因既能产生某种特征，又能使个体优先帮助同样具有该特征的其他个体。例如黏菌的csA基因。</p>
+</li>
+<li><p>Cooperative Breeding（协同繁殖）：已长大的后代帮助父母养育同胞。帮助者通常为亲属，偶尔会”绑架”幼体加入群体。亲缘选择解释个体的帮助决策。</p>
+</li>
+<li><p>Eusociality（真社会性）：某些个体放弃繁殖，专职帮助养育后代。常见于蚂蚁、蜜蜂、胡蜂、白蚁、裸鼹鼠等。特征包括生殖分工、世代重叠、合作育幼。</p>
+</li>
+<li><p>Haplodiploidy（单倍二倍体）：膜翅目昆虫的性别决定方式：雌性由受精卵发育（二倍体），雄性由未受精卵发育（单倍体）。姐妹间亲缘系数 r = 0.75r=0.75r = 0.75r=0.75，高于母子间的0.5，这被认为有利于真社会性的演化。</p>
+</li>
+<li><p>Monogamy Hypothesis（一夫一妻假说） ：终生一配导致所有后代为全同胞，帮助同胞与繁殖自己的后代具有相同的亲缘收益，从而促进真社会性的演化。</p>
+</li>
+<li><p>Infanticide（杀婴行为） ：雄性杀死非亲生幼崽，以消除竞争对手的基因并促使雌性更快进入繁殖期。常见于狮、狒狒等社会哺乳动物。</p>
+</li>
+<li><p>Siblicide（同胞相残）：兄弟姐妹间同类相食或致死行为，常见于鹰、鲣鸟等鸟类。在资源有限时，父母或子代通过同胞相残调整窝卵数。</p>
+</li>
+<li><p>Begging Behavior（乞食行为）：雏鸟为获取食物发出的信号。Trivers预测：亲缘关系越远（如半同胞），乞食强度越大。家燕实验和比较研究支持这一预测。</p>
+</li>
+<li><p>Parental Care Conflict（亲代抚育冲突）： 双亲在抚育后代时各自希望对方付出更多努力，导致进化稳定下的努力平衡。生态因素（如鱼类中雄鱼护卵可吸引更多配偶）影响谁提供照顾。</p>
+</li>
+<li><p>Fortress Nest（堡垒式巢穴）：复杂且受保护的巢穴结构，是真社会性演化的常见生态前提。例如蜜蜂、蚂蚁的巢穴。</p>
+</li>
+<li><p>Bacteriocin（细菌素）：细菌产生的有毒蛋白质，可杀死不相关的竞争者，同时受益于附近携带同样毒素基因的亲属。这是恶意行为的实例。</p>
+</li>
+</ul>
+</li>
+<li><p>Interactions among Species</p>
+<ul>
+<li><p>Coevolution (共同演化)：相互作用的物种之间发生的互惠遗传变化，每个物种对另一个物种产生自然选择压力。</p>
+</li>
+<li><p>Specific coevolution (特异性共同演化)：两个物种之间相互响应而共同演化，例如捕食者与猎物一对一的关系。</p>
+</li>
+<li><p>Diffuse coevolution (扩散性共同演化)：多个相互作用的物种共同演化，效应非独立，例如一个猎物与多种捕食者之间的适应。</p>
+</li>
+<li><p>Escape-and-radiate coevolution (逃逸-辐射共同演化)：一种新防御机制出现后导致物种多样化，随后新的敌人适应该防御，形成循环。</p>
+</li>
+<li><p>Geographic mosaic (地理镶嵌)：由于不同地区物种相互作用的变异，导致局部适应和选择性压力的空间差异。</p>
+</li>
+<li><p>Phylogenetic congruence (系统发育一致性)：宿主与共生体的系统发育树高度匹配，表明长期紧密关联，但不一定意味着共同演化（需互惠适应证据）。</p>
+</li>
+<li><p>Evolutionary arms race (演化军备竞赛)：捕食者与猎物之间定向升级的性状演化，如捕食者进攻能力增强，猎物防御能力增强，直到成本超过收益。</p>
+</li>
+<li><p>Coevolutionary imbalance (共同进化不对称)：不同种群中共同演化性状的局部不匹配，例如果皮厚度与象甲喙长的区域差异。</p>
+</li>
+<li><p>Trait oscillation (性状振荡)：当一个性状匹配过于紧密时，性状变化交替方向，可能引起种群周期，常见于宿主-寄生虫系统。</p>
+</li>
+<li><p>Aposematism (警戒性)：有毒或危险的物种通过警示色警告捕食者，捕食者通过经验学习避免攻击。</p>
+</li>
+<li><p>Batesian mimicry (贝氏拟态)：可食性物种模仿不可食的模型物种的外观，模仿者受益于负频率依赖选择（稀有时更有利）。</p>
+</li>
+<li><p>Müllerian mimicry (穆氏拟态)：多种不可食物种趋同于相似的警告信号，共享学习效应，受正频率依赖选择支持。</p>
+</li>
+<li><p>Gene-for-gene model (基因对基因模型)：宿主通过抗性基因识别病原体的无毒基因，从而阻断感染，产生频率依赖选择。</p>
+</li>
+<li><p>Matching allele model (匹配等位基因模型)：感染需要宿主与寄生虫的等位基因匹配，否则感染被阻断，也产生遗传循环或多样性。</p>
+</li>
+<li><p>Mutualism (互利关系)：两种物种互惠的关系，并非利他，各自从中获益。可从寄生演化而来，易出现作弊者。</p>
+</li>
+<li><p>Ecological character displacement (生态性状位移)：种间竞争导致资源利用上的分化，减少生态位重叠，提高共存可能性。</p>
+</li>
+<li><p>Adaptive radiation (适应性辐射)：物种在不同资源利用方式上快速分化，形成多种适应形态，如加拉帕戈斯地雀的喙形多样化。</p>
+</li>
+<li><p>Vertical transmission (垂直传播)：寄生虫从亲代直接传给子代，通常选择低毒力。</p>
+</li>
+<li><p>Horizontal transmission (水平传播)：寄生虫在无关个体之间传播，通常倾向高毒力。</p>
+</li>
+<li><p>Virulence (毒力)：寄生虫降低宿主存活或繁殖的能力。毒力的演化受传播方式、宿主寿命和抗性影响。</p>
+</li>
+<li><p>Local adaptation (局部适应)：寄生虫在共域宿主种群中表现更优（产更多孢子、致死率更高），表明局部适应增加毒力。</p>
+</li>
+<li><p>Cheating (作弊)：在互利关系中，一方获得利益却不提供回报，例如不传粉的丝果蛾或不固氮的根瘤菌。</p>
+</li>
+<li><p>Punishment (惩罚) / Partner choice (合作伙伴选择)：宿主通过惩罚不合作者或选择更合作的共生体来维持互利关系的稳定性。</p>
+</li>
+<li><p>Proboscis (口器)：授粉昆虫的吸管状口器，其长度与花管长度共同演化，形成互利关系中的军备竞赛。</p>
+</li>
+<li><p>Symbiosis (共生)：不同物种之间的紧密长期互作，可驱动重大演化创新，如线粒体和叶绿体的起源。</p>
+</li>
+<li><p>Host–parasite coevolution (宿主-寄生虫共同演化)：宿主与寄生虫之间的互惠遗传变化，包括防御与反防御，常导致频率依赖选择和遗传多样性。</p>
+</li>
+<li><p>Resurrection study (复活研究)：通过沉积物中保存的卵或孢子复活不同年代的宿主与寄生虫，研究随时间变化的共同演化动态。</p>
+</li>
+</ul>
+</li>
+<li><p>Phylogeny</p>
+<ul>
+<li><p>Phylogeny (系统发育)：研究生物之间亲缘关系（演化历史）的学科，通常用树状图表示。</p>
+</li>
+<li><p>Common Descent (共同祖先)：达尔文提出的核心思想，所有物种都来自一个共同的祖先形式，如加拉帕戈斯地雀来自单一祖先物种。</p>
+</li>
+<li><p>Tree of Life (生命之树)：基于DNA数据构建的现代系统发育树，表明所有现存生命都追溯到约40亿至37亿年前的一个共同祖先。</p>
+</li>
+<li><p>Phylogenetic Tree (系统发育树)：展示物种或谱系之间演化关系的分支图，包含根、节点、分支和末端分类群。</p>
+</li>
+<li><p>Root (根)：树中最底部的节点，代表最近共同祖先（MRCA），是树的起源方向。</p>
+</li>
+<li><p>Node (节点)：分支点，表示两个或多个谱系的共同祖先。</p>
+</li>
+<li><p>Terminal Node (末端节点)：树末端的分类群（现存或灭绝物种）的节点。</p>
+</li>
+<li><p>Lineage (谱系)：从共同祖先延续下来的连续演化分支。</p>
+</li>
+<li><p>Clade (单系群)：包含一个共同祖先及其所有后代（现存和灭绝）的演化分支。只有单系群才被认为是自然分类。</p>
+</li>
+<li><p>Sister Groups (姐妹群)：共享最近共同祖先的两个支系，互为最近亲缘关系。</p>
+</li>
+<li><p>Outgroup (外群)：在系统发育分析中，用于确定树根的关系较远的分类群，与内群相比更早分支。</p>
+</li>
+<li><p>Ingroup (内群)：研究的主要目标分类群集合，其内部关系是分析重点。</p>
+</li>
+<li><p>Parsimony (简约法则)：构建系统发育树时，选择需要最少演化变化（最少特征状态改变）的树作为最佳假设的准则。</p>
+</li>
+<li><p>Homoplasy (趋同性状)：相似性不是源于共同祖先，而是由于趋同演化、平行演化或演化逆转所导致。</p>
+</li>
+<li><p>Convergence (趋同演化)：不相关的物种独立演化出相似特征，如鲨鱼和海豚的体型。</p>
+</li>
+<li><p>Parallelism (平行演化)：亲缘关系较近的物种独立演化出相似特征（基于相同的祖先发育途径）。</p>
+</li>
+<li><p>Reversal (演化逆转)：特征从衍生状态恢复为祖先状态，如某些昆虫失去翅膀。</p>
+</li>
+<li><p>Synapomorphy (共源衍征)：由共同祖先继承并共享的衍生性状，用于定义和识别单系群。例如，脊椎骨定义脊椎动物，毛发和乳腺定义哺乳动物。</p>
+</li>
+<li><p>Derived Character (衍生性状)：在演化过程中新出现的特征状态，与祖先状态相对。</p>
+</li>
+<li><p>Character (性状)：生物体可观测的任何特征，如脚趾数目。</p>
+</li>
+<li><p>Character State (性状状态)：性状的具体变异形式，如脚趾的5趾或1趾。</p>
+</li>
+<li><p>Homologous Characters (同源性状)：源于共同祖先的相似结构，如哺乳动物的前肢（鳍、翅、人手），即使功能不同，仍为同源。</p>
+</li>
+<li><p>Radiometric Dating (放射性测定年)：利用放射性同位素的衰变速率（如碳-14、铀-铅）来确定化石或岩石的绝对年龄。</p>
+</li>
+<li><p>Stratigraphy (地层学)：通过研究沉积岩层序的相对位置，推断地质事件发生的先后顺序（相对年代）。</p>
+</li>
+<li><p>Molecular Clock (分子钟)：基于生物间遗传差异（如DNA碱基替换数）与演化时间大致成正比的原理，推算分化时间的估算方法。</p>
+</li>
+<li><p>Horizontal Gene Transfer (HGT, 水平基因转移)：基因在不同物种之间（非亲子代之间）的转移，常见于原核生物，也发生在真核生物中（如蚜虫类胡萝卜素基因来自真菌）。导致基因树与物种树不一致。</p>
+</li>
+<li><p>Hybrid Speciation (杂交物种形成)：两个不同物种杂交产生新物种，常见于植物。例如向日葵属的沙丘物种。</p>
+</li>
+<li><p>Introgression (基因渗入)：通过杂交使一个物种的基因渗入另一个物种的基因库，导致部分基因组区域显示不同的演化历史。</p>
+</li>
+<li><p>Gene Tree (基因树)：基于单个基因或DNA片段的单倍型构建的系统发育树，反映该基因的演化历史，不一定等同于物种树。</p>
+</li>
+<li><p>Species Tree (物种树)：反映物种本身真实的谱系分化历史的理论树，可通过多位点一致分析获得。</p>
+</li>
+<li><p>Paralogous Genes (旁系同源基因)：由基因重复事件产生的同源基因（如α-珠蛋白和β-珠蛋白），位于同一物种内不同位置。</p>
+</li>
+<li><p>Orthologous Genes (直系同源基因)：因物种分化（成种事件）而产生的同源基因（如人类α-珠蛋白与小鼠α-珠蛋白），通常执行相同功能。</p>
+</li>
+<li><p>Pseudogene (伪基因)：因突变导致功能丧失的基因拷贝，如某些重复后的珠蛋白基因。</p>
+</li>
+<li><p>Mosaic Evolution (镶嵌式演化)：在同一个演化谱系中，不同特征（性状）以不同速率演化，导致物种同时保留祖先特征（原始性状）和新获得的特征（衍生性状）。例如人类既有先进的大脑，也有保留的五指等。</p>
+</li>
+<li><p>Plesiomorphy (原始性状)：在祖先谱系中就已存在的祖先特征，如人类手部的五根手指（与早期四足动物共享）。</p>
+</li>
+<li><p>Apomorphy (衍生性状)：相对于祖先状态而言新出现的特征，如人类的大颅骨和单一下颌骨。</p>
+</li>
+<li><p>Gradualism (渐变论)：主张大多数演化特征是渐进地、通过微小步骤积累变化形成的，中间过渡形态常在化石和现生物中存在。</p>
+</li>
+<li><p>Radiation (快速分支)：在相对较短的地质时间内，从共同祖先演化出大量新物种，如维多利亚湖丽鱼科鱼类的适应性辐射（约450种在约1.5万年内形成）。</p>
+</li>
+<li><p>Incomplete Lineage Sorting (ILS, 不完全谱系分化)：由于祖先物种中的多态性在快速成种事件中未完全固定，导致不同基因树与真实物种树不一致的现象。常见于辐射类群，如蚱蜢和丽鱼。</p>
+</li>
+<li><p>LUCA (Last Universal Common Ancestor, 最后普遍共同祖先)：所有现存生命（细菌、古菌、真核生物）的最晚共同祖先，约38亿年前出现。</p>
+</li>
+<li><p>Site Saturation (位点饱和)：由于DNA只有4种碱基，同一核苷酸位点在长时间中可能发生多次替换（如A→T→C→A），导致测得的序列差异无法反映实际突变总数，从而丢失系统发育信号。</p>
+</li>
+<li><p>Gene Duplication (基因重复)：基因组中的基因被复制产生多个拷贝，为新功能演化提供原材料，如珠蛋白基因家族通过多次重复演化。</p>
+</li>
+<li><p>Outgroup Comparison (外群比较) ：通过将外群特征状态与内群比较，确定性状的原始状态和衍生状态，从而为系统发育树定向。</p>
+</li>
+</ul>
+</li>
+<li><p>Macroevolution</p>
+<ul>
+<li><p>Macroevolution (宏演化)：指物种水平以上的演化，包括新类群、新结构、新特征的起源，通常由微演化过程的长期积累形成。</p>
+</li>
+<li><p>Microevolution (微演化)：指物种内部的变化，如等位基因频率的改变、种群适应等。</p>
+</li>
+<li><p>Paleontology (化石学)：研究化石记录的科学，用于分析演化模式和速率。</p>
+</li>
+<li><p>Higher taxa (高等分类群)：分类学中高于属或科级别的分类单元，如鸟类、哺乳类等。</p>
+</li>
+<li><p>Paedomorphosis (幼态持续)：成体保留幼年特征的现象，可能因体型缩小或发育延迟引起。</p>
+</li>
+<li><p>Crown Mammalia (冠群哺乳类)：包括现存所有哺乳动物（单孔类、有袋类、真兽类）及其最近共同祖先的后代。</p>
+</li>
+<li><p>Gradualism (渐进论)：演化通过微小、连续的步骤缓慢进行，随时间积累产生显著变化。</p>
+</li>
+<li><p>Saltation (跃变论)：演化通过突然的大步跳跃发生，如单个突变导致新物种或新结构出现。</p>
+</li>
+<li><p>Systemic mutations (系统突变)：Goldschmidt提出的大尺度染色体突变，认为可一步产生” hopeful monsters”，该观点已被否定。</p>
+</li>
+<li><p>Co-option (功能挪用)：原有结构被改造用于新功能，例如蜜蜂的螫针由产卵器演化而来。</p>
+</li>
+<li><p>Exaptation (适应转化)：与co-option同义，强调结构原有功能转变为新功能的过程。</p>
+</li>
+<li><p>Facilitated Variation (促进变异)：核心细胞和发育过程的稳健性与灵活性使演化更容易发生，如肢体发育自动协调。</p>
+</li>
+<li><p>Developmental frameshift (发育位移)：发育过程中基因表达的位置发生偏移，例如鸟类指骨发育时，原属于D1-D3的基因表达在C2-C4位置。</p>
+</li>
+<li><p>Irreducible complexity (不可简化的复杂性)：声称某些复杂结构需要所有部件同时存在才能工作，因此不能逐步演化；但实际存在中间功能阶段。</p>
+</li>
+<li><p>Character identity (特征身份)：一个独特特征的类别，如”门齿”或”髌骨”，与特征状态（如”獠牙”是门齿的一种状态）相对。</p>
+</li>
+<li><p>Homology (同源性)：因共同祖先导致的相似性，如四足动物前肢的同源关系。</p>
+</li>
+<li><p>Serial homology (系列同源性)：同一结构在不同身体区域的重复（如前肢与后肢）。</p>
+</li>
+<li><p>Biological homology (生物同源性)：基于共享遗传-发育程序定义的相似性。</p>
+</li>
+<li><p>Deep homology (深层同源性)：远缘类群中相同的调控基因被重复用于构建不同结构（如Pax6用于眼睛，Dll用于附肢）。</p>
+</li>
+<li><p>Character identity networks (特征身份网络)：决定特征身份（如”前肢”）的基因调控网络，常通过重新布线产生新结构。</p>
+</li>
+<li><p>Living fossils (活化石)：形态上长期变化极小的现存物种，如鲎、腔棘鱼。</p>
+</li>
+<li><p>Stabilizing selection (稳定选择)：选择压力使性状保持在某个中间值，防止偏离，可导致形态停滞。</p>
+</li>
+<li><p>Punctuated equilibria (间断平衡)：Eldredge &amp; Gould提出的模型，认为物种长期处于形态停滞，变化集中在物种形成事件中快速发生。</p>
+</li>
+<li><p>Phyletic gradualism (种系渐进)：传统渐进演化模型，认为形态随时间连续缓慢变化，化石记录中的间断由记录不完整造成。</p>
+</li>
+<li><p>Species selection (物种选择)：演化趋势可由不同物种的净多样化速率（物种形成率减去灭绝率）差异驱动，而非仅个体选择。</p>
+</li>
+<li><p>Cope’s rule (柯普法则)：许多哺乳动物类群体型随时间增大的趋势。</p>
+</li>
+<li><p>Passive trend (被动趋势)：演化趋势由约束边界（如最小体型限制）造成，而非定向偏向，均值变化但部分谱系保持祖先状态。</p>
+</li>
+<li><p>Driven (active) trend (主动趋势)：演化趋势由持续偏向某一方向的选择或偏向驱动，均值、最小值和最大值均移动。</p>
+</li>
+<li><p>Self-incompatibility (SI, 自交不亲和)：植物不能自花授粉的机制，在茄科中反复丢失，但SI谱系因更高多样化速率而长期维持。</p>
+</li>
+<li><p>Self-compatibility (SC, 自交亲和)：可以自花授粉，短期个体优势，但谱系多样化速率较低。</p>
+</li>
+<li><p>Developmental rewiring (发育重连)：基因调控网络被重新连接以产生新结构或新特征，如雄性果蝇性梳的起源。</p>
+</li>
+<li><p>Regulatory genes (调控基因)：控制其他基因表达的时间、位置和水平的基因，如Hox基因、顺式调控元件。</p>
+</li>
+<li><p>Cis-regulatory elements (顺式调控元件)：位于基因附近的DNA序列，调控该基因的表达，突变可改变局部特征。</p>
+</li>
+<li><p>Pseudogenes (假基因)：因突变失去功能的基因，不再被使用，如某些植物中色素合成基因变为假基因。</p>
+</li>
+<li><p>Phyletic transformation (种系演变)：单一谱系内随时间发生的形态变化，不涉及物种分裂。</p>
+</li>
+<li><p>Cryptic species (隐性物种)：形态相似但生殖隔离的物种，传统形态分类难以区分。</p>
+</li>
+<li><p>Morphospecies (形态种)：仅依据形态特征定义的物种，可能包含隐性物种。</p>
+</li>
+<li><p>Phylogenetic species (系统发育种)：基于系统发育分析（如DNA) 定义的最小可区分单系群。</p>
+</li>
+<li><p>Trend (趋势)：特征随时间持续定向变化，可发生在单一谱系或多谱系中，分为被动和主动两种。</p>
+</li>
+<li><p>Progress (进步)：主观价值判断，认为演化趋向”更好”或更高级，达尔文否认演化等同于进步。</p>
+</li>
+<li><p>Complexity (复杂性)：生物体结构或组织的层级程度，例如从单细胞到多细胞、从孤独到社会群体。生命历史中复杂性总体呈被动增加趋势，但多次简化事件也存在。</p>
+</li>
+<li><p>Genome size (基因组大小)：细胞核DNA的总量，与表型复杂性没有简单对应关系，可因多倍体化或转座元件扩增而增大。</p>
+</li>
+<li><p>Polyploidy (多倍体化)：基因组加倍，导致基因组增大。</p>
+</li>
+<li><p>Transposable elements (转座元件) ：可在基因组内移动的DNA序列，常导致基因组膨胀。</p>
+</li>
+</ul>
+</li>
+</ul>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+  
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/class-notes/evolution/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

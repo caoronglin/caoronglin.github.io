@@ -1,0 +1,93 @@
+/* 侧边栏（Leftbar）外观
+ *
+ * 目标：暖白基调，与站点五色暖阶（#f3e5ab → #d63629）呼应。
+ * 左栏在 v2 中默认跟随 color_scheme（随系统深浅色切换），
+ * 这里只调整浅色模式下的表面与内边距，不强行覆盖暗色模式。
+ *
+ * 配色来源：侧栏背景取五色阶最浅的一档 #f3e5ab 淡化后的 #faf7ef，
+ * 卡片为纯白，主色强调用 #f9c74f（primary）与 #f3722c（accent）。
+ */
+
+@media (prefers-color-scheme: light) {
+  /* 左栏表面：暖白 */
+  .site-region--leftbar .site-region__surface {
+    background-color: #faf7ef;
+  }
+
+  /* 左栏内的组件卡片：纯白 + 极淡暖色描边 */
+  .site-region--leftbar .widget-wrapper .widget-body,
+  .site-region--leftbar .widget-wrapper .widget-header {
+    background: transparent;
+  }
+
+  /* 「🎉 抓到你啦」等 markdown 卡片 */
+  .site-region--leftbar .widget-wrapper.markdown {
+    background: #ffffff;
+    border: 1px solid rgba(249, 199, 79, 0.18);
+    border-radius: 12px;
+  }
+
+  /* 菜单项：留出更清晰的悬停态 */
+  .site-region--leftbar .menu .ui-collection__item {
+    border-radius: 10px;
+    transition: background 0.2s;
+  }
+
+  .site-region--leftbar .menu .ui-collection__item:hover {
+    background: rgba(249, 199, 79, 0.1);
+  }
+
+  /* 高亮项：左侧色条 + 淡黄底 */
+  .site-region--leftbar .menu .ui-collection__item.is-active {
+    background: rgba(249, 199, 79, 0.14);
+  }
+}
+
+/* 组件之间的垂直节奏 */
+.site-region--leftbar .widget-wrapper {
+  margin-bottom: 1.1rem;
+}
+
+/* 组件标题 */
+.site-region--leftbar .widget-wrapper .widget-header .name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* 组件内容区的字号微调，窄栏更易读 */
+.site-region--leftbar .widget-wrapper .widget-body {
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+
+/* 「最近更新」「最新评论」这类列表：悬停高亮 */
+.site-region--leftbar .widget-wrapper .widget-body a:hover {
+  color: var(--sp-accent, #f3722c);
+}
+
+/* 列表项分隔线 */
+.site-region--leftbar .widget-wrapper .widget-body > div + div {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .site-region--leftbar .widget-wrapper.markdown {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(249, 199, 79, 0.14);
+  }
+
+  .site-region--leftbar .menu .ui-collection__item:hover {
+    background: rgba(249, 199, 79, 0.08);
+  }
+
+  .site-region--leftbar .menu .ui-collection__item.is-active {
+    background: rgba(249, 199, 79, 0.12);
+  }
+
+  .site-region--leftbar .widget-wrapper .widget-body > div + div {
+    border-top-color: rgba(255, 255, 255, 0.06);
+  }
+}

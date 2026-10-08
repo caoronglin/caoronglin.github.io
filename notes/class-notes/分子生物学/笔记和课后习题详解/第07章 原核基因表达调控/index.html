@@ -1,0 +1,786 @@
+
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <!-- 构建期生成的运行参数，必须在 custom.bundle.js 之前同步加载：
+     bundle 内的 umami-stats.js / friends-apply.js 会读取 window.UMAMI_STATS、
+     window.FRIENDS_SUBMIT（凭据与 client_id 均不入库） -->
+<script src="/umami-stats-config.js"></script>
+<script src="/friends-submit-config.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/2.0.0" theme-name="Stellar" theme-version="2.0.0">
+  <link rel="canonical" href="https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC07%E7%AB%A0%20%E5%8E%9F%E6%A0%B8%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E8%B0%83%E6%8E%A7/" data-stellar-page-meta="">
+  
+  <meta name="generator" content="Hexo 8.1.2">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://cdn.cnortles.top" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title data-stellar-page-meta>第7章 原核基因表达调控 - 麟跃云起</title>
+  <script data-stellar-script="core">
+    (function () {
+      var key = 'stellar:v2:leftbar-state';
+      var fallback = "expanded";
+      try {
+        var value = localStorage.getItem(key);
+        document.documentElement.dataset.leftbarState = value === 'collapsed' || value === 'expanded' ? value : fallback;
+      } catch (error) {
+        document.documentElement.dataset.leftbarState = fallback;
+      }
+    })();
+  </script>
+
+  <meta name="description" content="第7章 原核基因表达调控7.1 复习笔记【知识概览】基因表达 概述。 基因表达调控 原核基因表达调控分类 负转录调控 正转录调控 （四）表决方式 原核基因表达调控总论 操纵子的调控 原核基因表达调控的主要特点 转录起始阶段的调控 转录终止阶段的调控 转录后调控 原核基因表达调控 乳糖操纵子的基本结构 乳糖操纵子与负控诱导系统 控制模型及其影响因子 乳糖操纵子的控制模型 乳糖操纵子的调控方式 trp" data-stellar-page-meta="">
+<meta property="og:type" content="website" data-stellar-page-meta="">
+<meta property="og:title" content="第7章 原核基因表达调控" data-stellar-page-meta="">
+<meta property="og:url" content="https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC07%E7%AB%A0%20%E5%8E%9F%E6%A0%B8%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E8%B0%83%E6%8E%A7/" data-stellar-page-meta="">
+<meta property="og:site_name" content="麟跃云起" data-stellar-page-meta="">
+<meta property="og:description" content="第7章 原核基因表达调控7.1 复习笔记【知识概览】基因表达 概述。 基因表达调控 原核基因表达调控分类 负转录调控 正转录调控 （四）表决方式 原核基因表达调控总论 操纵子的调控 原核基因表达调控的主要特点 转录起始阶段的调控 转录终止阶段的调控 转录后调控 原核基因表达调控 乳糖操纵子的基本结构 乳糖操纵子与负控诱导系统 控制模型及其影响因子 乳糖操纵子的控制模型 乳糖操纵子的调控方式 trp" data-stellar-page-meta="">
+<meta property="og:locale" content="zh_CN" data-stellar-page-meta="">
+<meta property="og:image" content="https://blog.cnortles.top/images/ch07-%E5%9B%BE7-1-%E4%B9%B3%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.jpg" data-stellar-page-meta="">
+<meta property="article:published_time" content="2026-09-17T16:00:00.000Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-08T04:55:06.151Z" data-stellar-page-meta="">
+<meta property="article:author" content="rlcao" data-stellar-page-meta="">
+<meta property="article:tag" content="习题" data-stellar-page-meta="">
+<meta property="article:tag" content="分子生物学" data-stellar-page-meta="">
+<meta property="article:tag" content="考研真题" data-stellar-page-meta="">
+<meta property="article:tag" content="课程" data-stellar-page-meta="">
+<meta name="twitter:card" content="summary" data-stellar-page-meta="">
+<meta name="twitter:image" content="https://blog.cnortles.top/images/ch07-%E5%9B%BE7-1-%E4%B9%B3%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.jpg" data-stellar-page-meta=""><meta name="twitter:title" content="第7章 原核基因表达调控" data-stellar-page-meta="">
+  
+  
+  <meta name="keywords" content=",,," data-stellar-page-meta="">
+
+  <!-- feed -->
+  
+    
+
+    
+      
+        <link rel="alternate" href="/atom.xml" title="麟跃云起" type="application/atom+xml">
+      
+    
+  
+
+  <link rel="preload" href="/css/main.css?v=2.0.0" as="style">
+  <link rel="stylesheet" href="/css/main.css?v=2.0.0">
+  <style>:root{--text-loading:"正在加载";--text-loading-error:"加载失败，请稍后重试。"}</style>
+
+
+  
+
+  
+
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"Website","@id":"https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC07%E7%AB%A0%20%E5%8E%9F%E6%A0%B8%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E8%B0%83%E6%8E%A7/","author":{"@type":"Person","name":"rlcao","sameAs":[],"image":"https://blog.cnortles.top/img/7.jpg"},"name":"第7章 原核基因表达调控","description":"第7章 原核基因表达调控7.1 复习笔记【知识概览】基因表达\n概述。\n基因表达调控\n原核基因表达调控分类\n负转录调控\n正转录调控\n（四）表决方式\n原核基因表达调控总论\n操纵子的调控\n原核基因表达调控的主要特点\n转录起始阶段的调控\n转录终止阶段的调控\n转录后调控\n原核基因表达调控\n乳糖操纵子的基本结构\n乳糖操纵子与负控诱导系统\n控制模型及其影响因子\n乳糖操纵子的控制模型\n乳糖操纵子的调控方式\n...","url":"https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC07%E7%AB%A0%20%E5%8E%9F%E6%A0%B8%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E8%B0%83%E6%8E%A7/","keywords":"生信，农林，编程，数据分析，云计算，AI，机器学习，深度学习，生物信息学，计算生物学，生物统计学"}</script>
+  <!-- 自定义资源由 scripts/bundle-assets.js 在构建时合并为单个 bundle，
+     源文件即唯一事实来源，不再逐个引用（减少请求、消除手工同步漂移） -->
+<link rel="stylesheet" href="/custom/merged/custom.bundle.css">
+<script src="/custom/merged/custom.bundle.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+  <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
+  <link rel="preload" as="script" href="/js/stellar-icons.js?v=28450bac3b25c0be">
+  
+  
+</head>
+<body data-page-type="content" data-page-layout="page" data-article-style="tech" data-text-indent><div data-stellar-runtime-region id="site-cover" class="site-cover"></div><div class="site-shell" id="start" data-regions="leftbar rightbar"><div class="site-workspace">
+<aside data-stellar-runtime-region id="leftbar-region" class="site-region site-region--leftbar" data-region="leftbar" aria-label="Leftbar"><div class="site-region__surface ui-surface"><div class="site-region__decoration" aria-hidden="true"></div><div class="site-region__viewport"><header class="site-region__header site-region__zone site-region__zone--top">
+    <div class="widget-instance widget-instance--brand" data-widget-id="leftbar:fixed:brand" data-presentation="leftbar" data-leftbar-rail>
+<header class="brand-header brand-header--regular brand-header--site"><div class="brand-wrap"><a class="brand-image brand-image--plain" href="&#x2F;about&#x2F;"><img no-lazy src="&#x2F;img&#x2F;t.png" alt="" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"></a></div><div class="brand-search">
+
+<div class="ui-collection" data-layout="list" data-variant="nav" data-density="auto">
+  
+    
+<button class="ui-collection__item ui-interactive card-hover card-hover--spotlight search-trigger has-hover-surface" type="button" title="搜索" aria-label="搜索" data-shell-action="open-search" data-search-instance="leftbar-brand-search">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">搜索</span>
+      
+      
+    </span>
+  
+  <kbd class="search-shortcut" aria-hidden="true">⌘K</kbd>
+
+  
+</button>
+
+  
+</div>
+
+
+</div></header>
+</div>
+  </header>
+  <div class="site-region__body site-region__zone site-region__zone--body">
+    <div class="widget-instance widget-instance--menu" data-widget-id="leftbar:fixed:menu" data-presentation="leftbar" data-leftbar-rail>
+
+
+<nav class="menu dis-select">
+<div class="ui-collection" data-layout="grid" data-variant="icon" data-density="auto" style="--ui-columns:4">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-active is-themed" href="&#x2F;" title="主页" aria-current="page" style="--item-theme:#f9c74f;" aria-label="主页">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">主页</span>
+      
+      
+    </span>
+  
+  
+  <span class="ui-collection__indicator"></span>
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;wiki&#x2F;" title="文档" style="--item-theme:#f9a84d;" aria-label="文档">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.94.94 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.96.96 0 0 0 .783-.073a.94.94 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031q.17-.008.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371q.277-.162.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8 8 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.1 1.1 0 0 1 .492-.13q.071 0 .138.01c.175.029.315.1.354.12l.009.005l.749.356z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">文档</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;equipment&#x2F;" title="装备" style="--item-theme:#f3722c;" aria-label="装备">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7c0-1.886 0-2.828.586-3.414C4.172 3 5.114 3 7 3h10c1.886 0 2.828 0 3.414.586C21 4.172 21 5.114 21 7v6c0 1.886 0 2.828-.586 3.414C19.828 17 18.886 17 17 17H7c-1.886 0-2.828 0-3.414-.586C3 15.828 3 14.886 3 13z" opacity=".5"/><path fill="currentColor" d="M12.75 17.75h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V17h1.5zM7 6.25h10a.75.75 0 0 1 0 1.5H7a.75.75 0 0 1 0-1.5"/></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">装备</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight is-themed" href="&#x2F;friends&#x2F;" title="社交" style="--item-theme:#d63629;" aria-label="社交">
+  
+  <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g opacity=".5"><path d="M19.7388 4.26118C17.0572 1.57961 12.7095 1.57961 10.0279 4.26118L9.30707 4.98203C9.01418 5.27492 9.01418 5.7498 9.30707 6.04269C9.59997 6.33558 10.0748 6.33558 10.3677 6.04269L11.0886 5.32184C13.1844 3.22605 16.5823 3.22605 18.6781 5.32184C20.7739 7.41763 20.7739 10.8156 18.6781 12.9114L17.9573 13.6322C17.6644 13.9251 17.6644 14.4 17.9573 14.6929C18.2502 14.9858 18.725 14.9858 19.0179 14.6929L19.7388 13.972C22.4203 11.2905 22.4203 6.94276 19.7388 4.26118Z"/><path d="M6.04269 9.30707C6.33558 9.59997 6.33558 10.0748 6.04269 10.3677L5.32184 11.0886C3.22605 13.1844 3.22605 16.5823 5.32184 18.6781C7.41763 20.7739 10.8156 20.7739 12.9114 18.6781L13.6322 17.9573C13.9251 17.6644 14.4 17.6644 14.6929 17.9573C14.9858 18.2501 14.9858 18.725 14.6929 19.0179L13.972 19.7388C11.2905 22.4203 6.94276 22.4203 4.26118 19.7388C1.57961 17.0572 1.57961 12.7095 4.26118 10.0279L4.98203 9.30707C5.27492 9.01418 5.7498 9.01418 6.04269 9.30707Z"/></g><path d="M14.6933 9.30707C14.9862 9.59997 14.9862 10.0748 14.6933 10.3677L10.3682 14.6928C10.0753 14.9857 9.60045 14.9857 9.30756 14.6928C9.01467 14.3999 9.01467 13.9251 9.30756 13.6322L13.6327 9.30707C13.9255 9.01418 14.4004 9.01418 14.6933 9.30707Z"/></g></svg></span>
+  
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">社交</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div>
+
+</nav>
+
+</div>
+    <div class="widgets widget-stack widget-stack--leftbar widget-stack--body"><div class="widget-instance widget-instance--recent" data-widget-id="leftbar:0:recent" data-presentation="leftbar">
+
+<widget class="widget-wrapper slide-up recent-widget">
+  
+    <div class="widget-header dis-select">
+      <span class="name">最近更新</span>
+      <a class="cap-action ui-interactive card-hover card-hover--spotlight" id="rss" title="Subscribe" href="&#x2F;subscribe"><span class="ui-icon"><svg class="icon" viewBox="0 0 1 1" data-icon="default:rss" aria-hidden="true"></svg></span></a>
+    </div>
+  
+  <div class="widget-body"><div class="ui-collection" data-layout="list" data-variant="nav" data-density="compact">
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-01&#x2F;" title="范式起点：从衍射反演到可微分建模">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">范</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">范式起点：从衍射反演到可微分建模</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-02&#x2F;" title="基础设施：预测结构成为公共数据">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">基</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">基础设施：预测结构成为公共数据</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-03&#x2F;" title="复合物与多模态：从蛋白到生物分子相互作用">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">复</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">复合物与多模态：从蛋白到生物分子相互作用</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-04&#x2F;" title="从预测到设计：生成式蛋白设计">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">从</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">从预测到设计：生成式蛋白设计</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+    
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;p&#x2F;aistruct-05&#x2F;" title="序列即结构：蛋白语言模型">
+  
+  
+  <span class="ui-collection__initial" aria-hidden="true">序</span>
+  
+    <span class="ui-collection__content">
+      
+      <span class="ui-collection__title">序列即结构：蛋白语言模型</span>
+      
+      
+    </span>
+  
+  
+  
+</a>
+
+  
+</div></div>
+  
+</widget>
+
+
+</div></div>
+  </div>
+  <footer class="site-region__footer">
+    
+    <div class="site-region__system ui-collection" data-layout="inline" data-variant="nav" data-density="compact">
+      <div class="site-region__settings"><div class="widget-instance widget-instance--settings" data-widget-id="leftbar:fixed:settings" data-presentation="leftbar" data-leftbar-rail>
+<a class="settings-widget ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;settings&#x2F;" data-profile-provider="artalk" data-profile-identity-enabled="true" data-profile-fallback-avatar="https:&#x2F;&#x2F;cdn.cnortles.top&#x2F;gh&#x2F;cdn-x&#x2F;placeholder@1.0.12&#x2F;avatar&#x2F;round&#x2F;3442075.svg" data-settings-placement="leftbar" data-settings-label="设置" aria-label="设置" title="设置">
+  <span class="settings-widget__avatar" aria-hidden="true">
+    <span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M12.4277 2C11.3139 2 10.2995 2.6007 8.27081 3.80211L7.58466 4.20846C5.55594 5.40987 4.54158 6.01057 3.98466 7C3.42773 7.98943 3.42773 9.19084 3.42773 11.5937V12.4063C3.42773 14.8092 3.42773 16.0106 3.98466 17C4.54158 17.9894 5.55594 18.5901 7.58466 19.7915L8.27081 20.1979C10.2995 21.3993 11.3139 22 12.4277 22C13.5416 22 14.5559 21.3993 16.5847 20.1979L17.2708 19.7915C19.2995 18.5901 20.3139 17.9894 20.8708 17C21.4277 16.0106 21.4277 14.8092 21.4277 12.4063V11.5937C21.4277 9.19084 21.4277 7.98943 20.8708 7C20.3139 6.01057 19.2995 5.40987 17.2708 4.20846L16.5847 3.80211C14.5559 2.6007 13.5416 2 12.4277 2Z" clip-rule="evenodd" opacity=".5"/><path d="M12.4277 8.25C10.3567 8.25 8.67773 9.92893 8.67773 12C8.67773 14.0711 10.3567 15.75 12.4277 15.75C14.4988 15.75 16.1777 14.0711 16.1777 12C16.1777 9.92893 14.4988 8.25 12.4277 8.25Z"/></g></svg></span>
+  </span>
+  <span class="settings-widget__name ui-collection__title">设置</span>
+</a>
+</div></div>
+      <button type="button" class="leftbar-state-toggle ui-collection__item ui-interactive card-hover card-hover--spotlight is-icon-only" aria-label="Collapse leftbar" aria-expanded="true" data-shell-action="toggle-leftbar"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"/><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"/></svg></span></button>
+    </div>
+  </footer></div></div></aside>
+<main data-stellar-runtime-region class="site-main" id="main">
+
+
+<div class="article-banner-wrap slide-up"><div class="article banner top">
+  <div class="content">
+    
+    <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC07%E7%AB%A0%20%E5%8E%9F%E6%A0%B8%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E8%B0%83%E6%8E%A7/">第7章 原核基因表达调控</a>
+  </div></div><div class="meta-row">
+<div class="flex-row" id="post-meta"><a class="author" href="/author/xaoxuu/">rlcao</a><span class="sep"></span><span class="text created"><time datetime="2026-09-17T16:00:00.000Z">2026-09-18</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-08T04:55:06.151Z">2026-10-08</time></span></div>
+</div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>第7章 原核基因表达调控</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div></div>
+<article class="md-text content slide-up"><h1 id="第7章-原核基因表达调控"><a href="#第7章-原核基因表达调控" class="headerlink" title="第7章 原核基因表达调控"></a>第7章 原核基因表达调控</h1><h2 id="7-1-复习笔记"><a href="#7-1-复习笔记" class="headerlink" title="7.1 复习笔记"></a>7.1 复习笔记</h2><h2 id="【知识概览】"><a href="#【知识概览】" class="headerlink" title="【知识概览】"></a>【知识概览】</h2><p>基因表达</p>
+<p>概述。</p>
+<p>基因表达调控</p>
+<p>原核基因表达调控分类</p>
+<p>负转录调控</p>
+<p>正转录调控</p>
+<p>（四）表决方式</p>
+<p>原核基因表达调控总论</p>
+<p>操纵子的调控</p>
+<p>原核基因表达调控的主要特点</p>
+<p>转录起始阶段的调控</p>
+<p>转录终止阶段的调控</p>
+<p>转录后调控</p>
+<p>原核基因表达调控</p>
+<p>乳糖操纵子的基本结构</p>
+<p>乳糖操纵子与负控诱导系统</p>
+<p>控制模型及其影响因子</p>
+<p>乳糖操纵子的控制模型</p>
+<p>乳糖操纵子的调控方式</p>
+<p>trp 操纵子的基本结构</p>
+<p>乳糖操纵子的调控区域</p>
+<p>trp 操纵子的阻遏系统</p>
+<p>色氨酸操纵子与负控阻遏系统。</p>
+<p>trp 操纵子的弱化作用。</p>
+<p>弱化子</p>
+<p>前导序列与前导肽</p>
+<p>转录的弱化作用</p>
+<p>trp 操纵子的其他调控机制</p>
+<p>半乳糖操纵子和阿拉伯糖操纵子</p>
+<p>其他操纵子。</p>
+<p>阻遏蛋白 LexA 的降解与细菌中的 SOS 应答</p>
+<p>转录水平上的其他调控方式</p>
+<p>mRNA 自身结构元件对翻译的调节</p>
+<p>转录后水平的调控</p>
+<p>魔斑核苷酸水平对翻译的影响</p>
+<p>其他几种转录后水平的调控方式</p>
+<h2 id="【重难点归纳】"><a href="#【重难点归纳】" class="headerlink" title="【重难点归纳】"></a>【重难点归纳】</h2><h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><h2 id="1-基因表达"><a href="#1-基因表达" class="headerlink" title="1. 基因表达"></a>1. 基因表达</h2><p>基因表达是指基因经过转录和翻译，产生具有特异性生物学功能的蛋白质产物来执行生命活动，即从 DNA 到蛋白质的过程。基因表达具有时间特异性(阶段特异性)和空间特异性。</p>
+<h2 id="2-基因表达调控"><a href="#2-基因表达调控" class="headerlink" title="2. 基因表达调控"></a>2. 基因表达调控</h2><p>基因表达调控是指发生在基因表达过程中各种各样的调节方式，基因的表达调控主要表现在转录水平的调控和转录后水平的调控。</p>
+<h2 id="二、原核基因表达调控总论"><a href="#二、原核基因表达调控总论" class="headerlink" title="二、原核基因表达调控总论"></a>二、原核基因表达调控总论</h2><h2 id="1-原核基因表达调控分类"><a href="#1-原核基因表达调控分类" class="headerlink" title="1. 原核基因表达调控分类"></a>1. 原核基因表达调控分类</h2><p>原核生物基因表达调控主要发生在转录水平阶段，分为两种调控机制，如表7-1所示。</p>
+<p>表 7-1 原核生物基因表达根据调控机制的分类</p>
+<div class="md-table-scroll"><table><tbody><tr><td colspan="2">分类</td><td>调节基因的产物</td><td>作用机制</td></tr><tr><td rowspan="2">负转录调控(负调控)</td><td>负控诱导</td><td rowspan="2">阻遏蛋白</td><td>阻遏蛋白抑制结构基因转录,而当其与诱导物结合后,变为非活性阻遏蛋白,结构基因转录</td></tr><tr><td>负控阻遏</td><td>非活性阻遏蛋白不影响结构基因的转录,当其与效应物结合后,变为活性阻遏蛋白,抑制结构基因转录</td></tr><tr><td rowspan="2">正转录调控(正调控)</td><td>正控诱导</td><td rowspan="2">激活蛋白</td><td>诱导物的存在使激活蛋白处于活性状态,开启结构基因的转录</td></tr><tr><td>正控阻遏</td><td>激活蛋白可与启动子结合,促进结构基因转录。若此时存在效应物分子,则会使激活蛋白处于非活性状态,阻遏结构基因转录</td></tr></tbody></table></div>
+
+<h2 id="2-原核基因表达调控的主要特点"><a href="#2-原核基因表达调控的主要特点" class="headerlink" title="2. 原核基因表达调控的主要特点"></a>2. 原核基因表达调控的主要特点</h2><h2 id="1-操纵子的调控"><a href="#1-操纵子的调控" class="headerlink" title="(1) 操纵子的调控"></a>(1) 操纵子的调控</h2><p>原核基因一般通过操纵子机制来实现基因表达调控，如乳糖操纵子、色氨酸操纵子以及阿拉伯糖操纵子等。</p>
+<p>①乳糖操纵子是负控诱导系统。</p>
+<p>②色氨酸操纵子是负控阻遏系统。</p>
+<h2 id="2-转录起始阶段的调控"><a href="#2-转录起始阶段的调控" class="headerlink" title="(2) 转录起始阶段的调控"></a>(2) 转录起始阶段的调控</h2><p>转录起始是基因表达调控的关键环节。</p>
+<h2 id="3-转录终止阶段的调控"><a href="#3-转录终止阶段的调控" class="headerlink" title="(3)转录终止阶段的调控"></a>(3)转录终止阶段的调控</h2><p>该阶段的调控一般包括抗终止作用和弱化作用。抗终止因子是指能够阻止转录终止的蛋白。通常在终止子上游具有抗终止子作用信号。</p>
+<h2 id="4-转录后调控"><a href="#4-转录后调控" class="headerlink" title="(4)转录后调控"></a>(4)转录后调控</h2><p>原核生物转录后调控主要是指在翻译或者翻译后水平上进行”微调”，主要包括 mRNA 自身结构元件对翻译起始的调节、反义 RNA 对翻译的调控、稀有密码子对翻译的影响以及翻译阻遏等现象。</p>
+<h2 id="三、乳糖操纵子与负控诱导系统"><a href="#三、乳糖操纵子与负控诱导系统" class="headerlink" title="三、乳糖操纵子与负控诱导系统"></a>三、乳糖操纵子与负控诱导系统</h2><h2 id="1-乳糖操纵子的基本结构"><a href="#1-乳糖操纵子的基本结构" class="headerlink" title="1. 乳糖操纵子的基本结构"></a>1. 乳糖操纵子的基本结构</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch07-%E5%9B%BE7-1-%E4%B9%B3%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图7-1 乳糖操纵子的基本结构</p>
+<h2 id="2-控制模型及其影响因子"><a href="#2-控制模型及其影响因子" class="headerlink" title="2. 控制模型及其影响因子"></a>2. 控制模型及其影响因子</h2><p>(1) 乳糖操纵子的控制模型</p>
+<p>①Z、Y、A基因的产物为一条多顺反子mRNA。</p>
+<p>②启动子 P 位于阻遏(调节)基因(I)与操纵基因(O)之间，不能单独启动合成 $\beta-$ 半乳糖苷酶和透过酶的生理过程。O 是阻遏蛋白的结合位点。</p>
+<p>③当阻遏蛋白与 O 结合时，抑制 lac mRNA 的转录起始。</p>
+<p>④诱导物与阻遏蛋白结合，使阻遏蛋白的构象发生改变而不能结合 O，转录得以进行。</p>
+<p>(2)乳糖操纵子的调控方式</p>
+<p>①阻遏蛋白的负调控</p>
+<p>a. lacI 编码阻遏蛋白。当细胞中无诱导物(乳糖)存在时, 阻遏蛋白与 lac 操纵基因特异性结合, 阻止 RNA 聚合酶与 lac 操纵子启动子区的结合, 抑制 lac mRNA 的转录, 导致乳糖操纵子中的结构基因 $Z 、 Y 、 A$ 都不被转录。</p>
+<p>b. 当培养基中有乳糖存在时，真正的诱导物异构乳糖（乳糖的异构体）与阻遏蛋白结合，阻遏蛋白构象发生改变，不能与 O 特异性结合，lac 操纵子的转录起始区暴露并与 RNA 聚合酶结合，启动 lac mRNA 转录，与乳糖利用有关的三种酶随之被诱导合成。</p>
+<p>c. 乳糖耗尽，诱导物异构乳糖减少，失去诱导物的阻遏蛋白会重新结合在操纵基因上，重新阻止结构基因的转录。</p>
+<h2 id="②CAP-的正调控"><a href="#②CAP-的正调控" class="headerlink" title="②CAP 的正调控"></a>②CAP 的正调控</h2><h2 id="A-要点"><a href="#A-要点" class="headerlink" title="A. 要点"></a>A. 要点</h2><p>第一，cAMP(环磷酸腺苷)是在腺苷酸环化酶(AC)的作用下，由 ATP 脱掉两个磷酸缩合而成。</p>
+<p>第二，环腺苷酸受体蛋白(CRP)即代谢物激活蛋白(CAP)，可结合cAMP。</p>
+<p>第三，CRP 和 cAMP 结合形成 cAMP-CRP 复合物，与 DNA 上的 CAP 位点结合。</p>
+<p>第四，cAMP-CRP 复合物与启动子区的结合是 lac mRNA 合成起始所必需的，这个复合物能使 DNA 双螺旋发生弯曲，利于 RNA 聚合酶 $\alpha$ 亚基和结合有 cAMP 的 CAP 位点结合，从而起始转录。</p>
+<h2 id="B-具体调节过程"><a href="#B-具体调节过程" class="headerlink" title="B. 具体调节过程"></a>B. 具体调节过程</h2><p>第一，当有葡萄糖时，葡萄糖的某些代谢物抑制 AC 活性，使 ATP 不能转化为 cAMP，cAMP 浓度低，cAMP-CRP 复合物不能形成，结构基因不被转录。</p>
+<p>第二，当没有葡萄糖存在时，cAMP 的浓度高，促进转录。</p>
+<h2 id="③乳糖操纵子的协同调节"><a href="#③乳糖操纵子的协同调节" class="headerlink" title="③乳糖操纵子的协同调节"></a>③乳糖操纵子的协同调节</h2><p>阻遏蛋白的负调控作用和 CAP 的正调控在乳糖操纵子的表达调控中起协同作用。当阻遏蛋白封闭转录时 CAP 不发挥作用；如果没有 CAP 加强转录，即使阻遏蛋白从 O 上解离，操纵子仍无转录活性。而葡萄糖可降低 cAMP 浓度，阻碍其与 CAP 结合从而抑制转录，因而葡萄糖和乳糖共同存在时，细菌优先利用葡萄糖（葡萄糖的存在阻止了其他糖类被利用的现象称为代谢物阻遏效应）。</p>
+<h2 id="3-乳糖操纵子的调控区域"><a href="#3-乳糖操纵子的调控区域" class="headerlink" title="(3) 乳糖操纵子的调控区域"></a>(3) 乳糖操纵子的调控区域</h2><p>①P 区即启动子区，位于 lacI 基因结束到 mRNA 转录起始位点下游 5～10bp 处。</p>
+<p>②O 区位于 $-7 \sim +28$ 处，其碱基序列具有对称性，阻遏区与 O 区的结合会影响 RNA 聚合酶与启动区结合形成转录起始复合物的效率。</p>
+<h2 id="四、色氨酸操纵子与负控阻遏系统"><a href="#四、色氨酸操纵子与负控阻遏系统" class="headerlink" title="四、色氨酸操纵子与负控阻遏系统"></a>四、色氨酸操纵子与负控阻遏系统</h2><h2 id="1-Trp-操纵子的基本结构"><a href="#1-Trp-操纵子的基本结构" class="headerlink" title="1. Trp 操纵子的基本结构"></a>1. Trp 操纵子的基本结构</h2><p>色氨酸操纵子参与生物合成，故不受葡萄糖或者 cAMP-CRP 的调控，结构如图 7-2 所示。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch07-%E5%9B%BE7-2-%E6%89%80%E7%A4%BA.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图7-2 色氨酸操纵子的结构</p>
+<p>P 表示启动子；O 表示操纵基因；L 表示前导序列；a 表示弱化子区；trpA、trpB、trpC、trpD 和 trpE 均为结构基因</p>
+<h2 id="2-Trp-操纵子的阻遏系统"><a href="#2-Trp-操纵子的阻遏系统" class="headerlink" title="2. Trp 操纵子的阻遏系统"></a>2. Trp 操纵子的阻遏系统</h2><h2 id="1-阻遏系统的基本原理"><a href="#1-阻遏系统的基本原理" class="headerlink" title="(1) 阻遏系统的基本原理"></a>(1) 阻遏系统的基本原理</h2><p>trpR 基因突变会导致其基因产物辅阻遏蛋白产生，辅阻遏蛋白与色氨酸结合被激活，形成有活性的阻遏物，与操纵基因(O)结合，关闭 trp mRNA 转录。</p>
+<h2 id="2-阻遏系统的调节"><a href="#2-阻遏系统的调节" class="headerlink" title="(2) 阻遏系统的调节"></a>(2) 阻遏系统的调节</h2><p>①色氨酸含量高时，色氨酸作为效应物与游离的辅阻遏蛋白结合，激活辅阻遏蛋白，后者与操纵基因(O)紧密结合，操纵子被关闭。</p>
+<p>②色氨酸含量低时，辅阻遏蛋白为非活性状态，不能结合操纵基因，操纵子开放，基因表达。</p>
+<h2 id="3-Trp-操纵子的弱化作用"><a href="#3-Trp-操纵子的弱化作用" class="headerlink" title="3. Trp 操纵子的弱化作用"></a>3. Trp 操纵子的弱化作用</h2><h2 id="1-弱化子"><a href="#1-弱化子" class="headerlink" title="(1) 弱化子"></a>(1) 弱化子</h2><p>弱化子是指原核生物操纵子中位于操纵子的上游，能显著减弱甚至终止转录作用的一段核苷酸序列。该区 mRNA 通过自我配对可以形成茎-环结构，有典型的终止子特点。弱化子利用原核生物转录与翻译相偶联的机制发挥转录调控作用。</p>
+<h2 id="2-前导序列与前导肽"><a href="#2-前导序列与前导肽" class="headerlink" title="(2) 前导序列与前导肽"></a>(2) 前导序列与前导肽</h2><p>①前导序列是指位于 trp 操纵子 5’ 端 trpE 起始密码子前长为 162bp 的序列，含有 4 个序列互补区（1、2、3 和 4 区），能形成不同碱基配对的 RNA 结构，其中弱化子发夹结构（茎－环结构）由序列 3 和序列 4 配对而成。</p>
+<p>②前导肽是前导序列中从起始密码子 AUG 到终止密码子 UGA 之间经翻译产生的一个含有 14 个氨基酸的多肽。前导序列的第 10 和第 11 个密码子编码连续的色氨酸残基，即色氨酸操纵子合成酶的终产物。这些密码子参与色氨酸操纵子的转录弱化机制。前导肽的作用就是决定色氨酸的含量并控制转录的终止。</p>
+<h2 id="3-转录的弱化作用"><a href="#3-转录的弱化作用" class="headerlink" title="(3) 转录的弱化作用"></a>(3) 转录的弱化作用</h2><p>色氨酸操纵子是通过前导肽的合成来感知环境中色氨酸含量的细微变化，通过转录继续与提前终止转录来对环境作出响应(图7-3)。这一机制的关键是翻译与转录密切偶联。</p>
+<p>①当没有色氨酸时，不能形成前导肽，1-2配对，3-4配对。转录在终止信号处</p>
+<p>(RNA 形成的特殊茎环构象和寡聚 U 处)停止。</p>
+<p>②低色氨酸浓度时， $\mathrm{Trp - tRNA}^{\mathrm{Trp}}$ 少，翻译通过两个相邻色氨酸密码子的速度慢，当4区被转录完成时，核糖体停留在1区（或停留在两个相邻的色氨酸密码子处），此时前导区结构2-3配对，3-4不能配对，即不能形成终止信号，转录可继续进行直至完成。</p>
+<p>③高色氨酸浓度时，核糖体快速顺利通过两个相邻的色氨酸密码子，在4区被转录之前到达2区，3-4区配对形成茎-环状终止子结构（终止信号），转录终止，色氨酸合成终止。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/ch07-%E5%9B%BE7-3.jpg" onerror="this.onerror&#x3D;null;this.src&#x3D;&quot;&#x2F;images&#x2F;stellar-error.491ee870f4940739.svg&quot;"><br>图7-3 trp操纵子的弱化作用</p>
+<h2 id="4-Trp-操纵子的其他调控机制"><a href="#4-Trp-操纵子的其他调控机制" class="headerlink" title="4. Trp 操纵子的其他调控机制"></a>4. Trp 操纵子的其他调控机制</h2><p>大肠杆菌色氨酸操纵子有两个启动子，一个位于操纵子5’端，一个位于trpG-D编码区（称为内源启动子），控制整个操纵子的转录，能够感受色氨酸和无负载的tRNA $^{Trp}$ 的浓度变化。</p>
+<h2 id="五、其他操纵子"><a href="#五、其他操纵子" class="headerlink" title="五、其他操纵子"></a>五、其他操纵子</h2><h2 id="1-半乳糖操纵子和阿拉伯糖操纵子"><a href="#1-半乳糖操纵子和阿拉伯糖操纵子" class="headerlink" title="1. 半乳糖操纵子和阿拉伯糖操纵子"></a>1. 半乳糖操纵子和阿拉伯糖操纵子</h2><p>表 7-2 半乳糖操纵子和阿拉伯糖操纵子的结构和特点</p>
+<div class="md-table-scroll"><table><tbody><tr><td></td><td>半乳糖操纵子</td><td>阿拉伯糖操纵子</td></tr><tr><td>结构基因</td><td>galE(编码异构酶)、galT(编码半乳糖-磷酸尿嘧啶核苷转移酶)和galK(编码半乳糖激酶);三种酶的联合作用使半乳糖转变为1-磷酸葡萄糖</td><td>araB、araA和araD,它们形成基因簇araBAD</td></tr><tr><td>调节基因</td><td>galR</td><td>araC</td></tr><tr><td>结构特点</td><td>有两个启动子,其mRNA可从两个不同的起始点开始转录,每个启动子拥有各自的RNA聚合酶结合位点 $S_1$ 和 $S_2$ ;有两个O区,一个在P区上游-67~-73,另一个在结构基因galE内部</td><td>araBAD存在相邻的复合启动子区域、两个操纵区( $O_1$ 、 $O_2$ )和一个调节基因araC</td></tr><tr><td>调节机制</td><td> $S_1$ 启动转录只有在无葡萄糖时才能进行,RNA聚合酶与 $S_1$ 的结合需要半乳糖、CRP和较高浓度的cAMP; $S_2$ 启动转录依赖于葡萄糖,而cAMP-CRP存在时则抑制转录</td><td>AraC蛋白有两种异构体(Pi和Pr),对ara操纵子存在正调节作用和负调节作用。有葡萄糖存在时,AraC蛋白主要以Pr形式存在,操纵子几乎关闭;有阿拉伯糖但无葡萄糖时,AraC蛋白主要以Pi形式存在,操纵子被激活;葡萄糖和阿拉伯糖均不存在时,AraC蛋白主要以Pr形式存在,不发生araBAD mRNA的转录</td></tr></tbody></table></div>
+
+<h2 id="2-阻遏蛋白-LexA-的降解与细菌中的-SOS-应答"><a href="#2-阻遏蛋白-LexA-的降解与细菌中的-SOS-应答" class="headerlink" title="2. 阻遏蛋白 LexA 的降解与细菌中的 SOS 应答"></a>2. 阻遏蛋白 LexA 的降解与细菌中的 SOS 应答</h2><p>①当细菌 DNA 遭到破坏时(如受到紫外线照射)，细菌细胞内会启动一个称为 SOS 的诱导型 DNA 修复系统，其诱导表达过程是把 LexA 阻遏蛋白从参与修复的基因的上游调控区移开。</p>
+<p>②RecA 蛋白是 SOS 反应最初的发动因子，在单链 DNA 和 ATP 存在时，RecA 蛋白被激活，表现为水解酶的活性，分解 LexA 阻遏蛋白。当 RecA 水解 LexA 阻遏蛋白后，导致 SOS 体系高效表达，DNA 得到修复。当修复完成后，活化信号消失，RecA 蛋白又恢复成非蛋白水解酶的形式，LexA 蛋白逐步积累并建立起阻遏作用。</p>
+<h2 id="六、转录水平上的其他调控方式"><a href="#六、转录水平上的其他调控方式" class="headerlink" title="六、转录水平上的其他调控方式"></a>六、转录水平上的其他调控方式</h2><p>表 7-3 转录水平上的其他调控方式</p>
+<div class="md-table-scroll"><table><tbody><tr><td>调控方式</td><td>作用机制</td></tr><tr><td> $\sigma$ 因子的调节作用</td><td> $\sigma$ 因子负责识别启动子共有序列并且只为转录起始所需, $\sigma$ 因子受到蛋白水解酶的调控,也能被同源的抗 $\sigma$ 因子作用而失活,抗 $\sigma$ 因子与 $\sigma$ 因子结合阻止它们与RNA聚合酶的组装。许多细菌产生不同系列的 $\sigma$ 因子</td></tr><tr><td>组蛋白类似蛋白的调节作用</td><td>组蛋白类似蛋白如H-NS蛋白是细菌中存在的一些非特异性的DNA结合蛋白,用来维持DNA的高级结构</td></tr><tr><td>转录调控因子的作用</td><td>转录调控因子是能够与基因的启动子区相结合,对基因的转录起激活或抑制作用的DNA结合蛋白</td></tr><tr><td>抗终止因子的调节作用</td><td>抗终止因子是能够在特定位点阻止转录终止的一类蛋白。当抗终止因子存在时,RNA聚合酶能够越过终止子,继续转录DNA</td></tr></tbody></table></div>
+
+<h2 id="七、转录后水平的调控"><a href="#七、转录后水平的调控" class="headerlink" title="七、转录后水平的调控"></a>七、转录后水平的调控</h2><h2 id="1-mRNA-自身结构元件对翻译的调节"><a href="#1-mRNA-自身结构元件对翻译的调节" class="headerlink" title="1. mRNA 自身结构元件对翻译的调节"></a>1. mRNA 自身结构元件对翻译的调节</h2><h2 id="1-起始密码子"><a href="#1-起始密码子" class="headerlink" title="(1) 起始密码子"></a>(1) 起始密码子</h2><p>原核生物中不常见的起始密码子(GUG、UUG等)与fMet-tRNA的配对能力比最常见的起始密码子AUG差，从而导致翻译效率降低。</p>
+<h2 id="2-5’非翻译区-5’UTR"><a href="#2-5’非翻译区-5’UTR" class="headerlink" title="(2)5’非翻译区(5’UTR)"></a>(2)5’非翻译区(5’UTR)</h2><p>①mRNA 的核糖体结合位点(RBS)是 mRNA 链上起始密码子 AUG 上游的包括 SD 序列在内的一段非翻译区。RBS 的结合强度取决于 SD 序列的结构及其与起始密码 AUG 之间的距离。</p>
+<p>②mRNA 的二级结构是翻译起始调控的重要因素，5’UTR 的空间结构往往会导致翻译效率的巨大差异。</p>
+<h2 id="3-核糖开关"><a href="#3-核糖开关" class="headerlink" title="(3)核糖开关"></a>(3)核糖开关</h2><p>核糖开关是一段具有复杂结构的 RNA 序列，在原核生物中通常位于 mRNA 的 5’UTR 区域。核糖开关通过感受细胞内代谢物浓度、离子浓度、温度等的变化来改变自身的二级结构和调控功能，从而改变基因的表达状态。</p>
+<h2 id="2-魔斑核苷酸水平对翻译的影响"><a href="#2-魔斑核苷酸水平对翻译的影响" class="headerlink" title="2. 魔斑核苷酸水平对翻译的影响"></a>2. 魔斑核苷酸水平对翻译的影响</h2><h2 id="1-魔斑核苷酸"><a href="#1-魔斑核苷酸" class="headerlink" title="(1) 魔斑核苷酸"></a>(1) 魔斑核苷酸</h2><h2 id="①定义"><a href="#①定义" class="headerlink" title="①定义"></a>①定义</h2><p>魔斑核苷酸是指当氨基酸缺乏时，细胞内由于空载 tRNA 增多而大量产生的鸟苷四磷酸（ppGpp）和鸟苷五磷酸（pppGpp）。ppGpp 和 pppGpp 是在色谱上检出的斑点，当时称为魔斑。</p>
+<h2 id="②意义"><a href="#②意义" class="headerlink" title="②意义"></a>②意义</h2><p>魔斑核苷酸产生的主要功能是干扰 RNA 聚合酶与启动子结合的专一性，且是细胞内严紧控制的关键。在不良环境中，ppGpp 可以诱发细菌的应急反应，活化某些氨基酸操纵子的转录表达，抑制与氨基酸转运无关的系统，活化蛋白水解酶等，以节省或开发能源，帮助细菌在不良环境条件下得以存活。</p>
+<h2 id="2-严紧控制-基因型-rel"><a href="#2-严紧控制-基因型-rel" class="headerlink" title="(2)严紧控制(基因型 $rel^{+}$ )"></a>(2)严紧控制(基因型 $rel^{+}$ )</h2><p>当细菌处于饥饿条件下，缺乏维持蛋白质合成的氨基酸，细胞内蛋白质、RNA 合成速率下降，大部分活性区域被关闭，称为严紧控制。此时核糖体上不负载氨基酸的 tRNA 是细胞产生严紧控制的信号，同时产生两种特殊的核苷酸即 ppGpp 和 pppGpp。</p>
+<h2 id="3-松散控制-基因型-Rel"><a href="#3-松散控制-基因型-Rel" class="headerlink" title="(3) 松散控制(基因型 Rel $^{-}$ )"></a>(3) 松散控制(基因型 Rel $^{-}$ )</h2><p>当氨基酸供应不足时，细胞内蛋白质合成停止，但 RNA 的合成速率却没有下降。</p>
+<h2 id="3-其他几种转录后水平的调控方式"><a href="#3-其他几种转录后水平的调控方式" class="headerlink" title="3. 其他几种转录后水平的调控方式"></a>3. 其他几种转录后水平的调控方式</h2><p>表 7-4 其他转录后水平的调控方式</p>
+<div class="md-table-scroll"><table><tbody><tr><td>调控类别</td><td>作用机制</td></tr><tr><td>mRNA 稳定性对转录水平的调控</td><td>mRNA 分子被降解的可能性取决于它们的二级结构,被降解后即失去了作为蛋白合成模板的功能</td></tr><tr><td>调节蛋白的调控作用</td><td>mRNA 结合蛋白可激活靶基因的翻译;mRNA 特异性抑制蛋白通过与核糖体竞争结合 mRNA 分子而抑制翻译的起始</td></tr><tr><td>小 RNA 的调节作用</td><td>一些非编码的小 RNA 分子能结合 mRNA 或蛋白质,改变 mRNA 的稳定性,影响蛋白质 - RNA 的结合或 mRNA 的翻译来调节基因表达</td></tr><tr><td>稀有密码子对翻译的影响</td><td>细胞内对应于稀有密码子的 tRNA 较少,高频率使用稀有密码子的基因翻译过程容易受阻,影响蛋白质合成的总量</td></tr><tr><td>重叠基因对翻译的影响</td><td>重叠基因是指两个或两个以上的基因共有一段 DNA 序列,或是指一段 DNA 序列成为两个或两个以上基因的组成部分。它保证了同一核糖体对两个连续基因进行翻译的机制,而翻译偶联可能是保证两个基因产物在数量上相等的重要手段</td></tr><tr><td>翻译的阻遏</td><td>在大肠杆菌 RNA 噬菌体 Qβ 中,纯化的复制酶可以和外壳蛋白的翻译起始区结合,形成稳定的茎 - 环结构,抑制蛋白质的合成</td></tr></tbody></table></div>
+
+<h2 id="7-2-课后习题详解"><a href="#7-2-课后习题详解" class="headerlink" title="7.2 课后习题详解"></a>7.2 课后习题详解</h2><h2 id="1-简述代谢物对基因表达调控的两种方式"><a href="#1-简述代谢物对基因表达调控的两种方式" class="headerlink" title="1. 简述代谢物对基因表达调控的两种方式"></a>1. 简述代谢物对基因表达调控的两种方式</h2><p>答：代谢物对基因表达调控的两种方式是可诱导调节和可阻遏调节。</p>
+<h2 id="1-可诱导调节"><a href="#1-可诱导调节" class="headerlink" title="(1) 可诱导调节"></a>(1) 可诱导调节</h2><p>通过小分子诱导物(某些特殊的代谢物或化合物)的参与, 即在某些物质的诱导下使基因活化。如乳糖操纵子中存在可诱导基因和诱导酶, 乳糖操纵子进行的反应被称为酶的诱导合成。</p>
+<h2 id="2-可阻遏调节"><a href="#2-可阻遏调节" class="headerlink" title="(2) 可阻遏调节"></a>(2) 可阻遏调节</h2><p>某些基因平时是开启的，处在产生蛋白质或酶的工作过程中，但由于某些小分子物质（特殊代谢物或化合物）的积累，阻遏了基因的表达。如色氨酸操纵子中存在可阻遏基因和可阻遏酶。</p>
+<h2 id="2-什么是操纵子学说？"><a href="#2-什么是操纵子学说？" class="headerlink" title="2. 什么是操纵子学说？"></a>2. 什么是操纵子学说？</h2><p>答：操纵子学说是由 Jacob 和 Monod 于 1961 年提出的关于原核生物基因结构及其表达调控的学说，开创了基因表达调节机制研究的新领域，并在 10 年内经许多科学家的补充和修正得以完成。操纵子是原核生物基因表达调控的基本单位，它们有共同的控制区和调节系统。操纵子包括在功能上彼此有关的结构基因和控制部位，后者由启动子和操纵基因所组成。一个操纵子的全部基因都排列在一起，经过转录形成一条多顺反子 mRNA。目前建立的操纵子模型有乳糖操纵子、色氨酸操纵子以及半乳糖操纵子等。</p>
+<h2 id="3-简述乳糖操纵子的调控模型"><a href="#3-简述乳糖操纵子的调控模型" class="headerlink" title="3. 简述乳糖操纵子的调控模型"></a>3. 简述乳糖操纵子的调控模型</h2><h2 id="答：-1-乳糖操纵子的基本结构"><a href="#答：-1-乳糖操纵子的基本结构" class="headerlink" title="答：(1)乳糖操纵子的基本结构"></a>答：(1)乳糖操纵子的基本结构</h2><p>①结构基因：大肠杆菌乳糖操纵子含有 Z、Y、A 三个结构基因。</p>
+<p>a. Z 基因：编码 $\beta-$ 半乳糖苷酶，将乳糖水解为半乳糖和葡萄糖。</p>
+<p>b. Y 基因：编码 $\beta-$ 半乳糖苷透过酶，负责将乳糖由胞外运送到胞内，穿过细胞壁和原生质膜进入细胞内。</p>
+<p>c. A 基因：编码 $\beta-$ 半乳糖苷乙酰基转移酶，催化乙酰-CoA 的乙酰基转移到 $\beta-$ 半乳糖苷上，形成乙酰半乳糖。</p>
+<p>②调节基因 I: I 基因编码的阻遏蛋白可以与操纵区 O 结合，使 lac 基因的转录起始受到抑制。</p>
+<p>③操纵区 O：操纵区是 DNA 上的一小段序列，是阻遏蛋白的结合位点。</p>
+<p>④启动子 P：可以与 RNA 聚合酶结合。</p>
+<p>⑤CAP 位点：可以与 cAMP-CRP 复合物结合。CRP 是 cAMP 的受体蛋白，二者结合后形成复合物可以结合在启动子上游的 CAP 位点，促进结构基因的转录。</p>
+<h2 id="2-乳糖操纵子的调控模式"><a href="#2-乳糖操纵子的调控模式" class="headerlink" title="(2) 乳糖操纵子的调控模式"></a>(2) 乳糖操纵子的调控模式</h2><p>转录时，RNA 聚合酶首先与启动子(P)结合，通过操纵区(O)向右转录。转录从 O 区中间开始，按 $Z \rightarrow Y \rightarrow A$ 方向进行，每次转录出来的一条 mRNA 上都带有这三个基因。转录的调控在启动区和操纵区进行。</p>
+<h2 id="①阻遏蛋白的负性调节"><a href="#①阻遏蛋白的负性调节" class="headerlink" title="①阻遏蛋白的负性调节"></a>①阻遏蛋白的负性调节</h2><p>a. 当细胞内无诱导物存在时，即培养基中只存在葡萄糖而不存在乳糖时，阻遏蛋白与操纵区结合，由于操纵区与启动子有一定的重叠，因此妨碍了 RNA 聚合酶与启动子形成开放性启动子复合物，不能启动结构基因的转录，因而结构基因得不到表达。</p>
+<p>b. 当加入乳糖后，乳糖被异构化形成异构乳糖，与阻遏蛋白结合，改变阻遏蛋白的构象，阻遏蛋白构象改变之后活性丧失，不能再与操纵区结合。RNA 聚合酶与启动子结合，形成开放性启动子复合物，从而开始转录 Z、Y、A 结构基因，产生与乳糖利用有关的三种酶。乳糖操纵子的这种调控机制称为可诱导的负调控。</p>
+<p>c. 当乳糖耗尽时，诱导物异构乳糖减少，失去诱导物的阻遏蛋白会重新结合在操纵区上，阻止基因转录。</p>
+<h2 id="②cAMP-CRP的正性调节"><a href="#②cAMP-CRP的正性调节" class="headerlink" title="②cAMP-CRP的正性调节"></a>②cAMP-CRP的正性调节</h2><p>a. cAMP 的浓度受到葡萄糖代谢的调节，细菌在缺乏碳源或只有甘油或乳糖等不进行糖酵解途径的碳源中，细胞内 cAMP 浓度高；在含葡萄糖的环境中，cAMP 的浓度低。</p>
+<p>b. 操纵子在启动子上游有 CAP 结合位点。当以葡萄糖为碳源的环境转变为以乳糖为碳源的环境时，cAMP 浓度升高，与 CRP 结合，使 CRP 发生变构，形成 cAMP-CRP 复合物，cAMP-CRP 复合物结合于乳糖操纵子启动序列中的 CAP 位点，激活 RNA 聚合酶活性，促进结构基因转录，促进合成利用乳糖的三种酶。cAMP-CRP 复合物与启动子区的结合是 lac mRNA 合成起始所必需的。</p>
+<h2 id="③协同调节"><a href="#③协同调节" class="headerlink" title="③协同调节"></a>③协同调节</h2><p>当阻遏蛋白封闭转录时，cAMP-CRP对该系统不能发挥作用；如无cAMP-CRP存在，即使没有阻遏蛋白与操纵区结合，操纵子仍无转录活性，即cAMP-CRP复合物与启动子区的结合是转录起始所必需的。具体存在以下4种不同的组合状态，决定基因的表达与否，以适应环境中葡萄糖和乳糖的有无状态。在有葡萄糖时，先利用葡萄糖，用完后，再利用乳糖作为能源。</p>
+<p>a. 葡萄糖和乳糖都不存在：cAMP-CRP 可发挥作用；但无乳糖的诱导，阻遏蛋白与 DNA 结合，基因关闭。</p>
+<p>b. 葡萄糖存在、乳糖不存在：有葡萄糖存在，cAMP-CRP不起作用；无乳糖存在，阻遏蛋白与DNA结合，基因关闭。</p>
+<p>c. 葡萄糖和乳糖都存在：阻遏蛋白与 DNA 解离，但由于有葡萄糖存在，cAMP-CRP 不起作用，基因仍然关闭。</p>
+<p>d. 葡萄糖不存在、乳糖存在：阻遏蛋白与 DNA 解离，因无葡萄糖存在故 cAMP-CRP 起作用，基因转录启动。</p>
+<h2 id="4-什么是葡萄糖效应？"><a href="#4-什么是葡萄糖效应？" class="headerlink" title="4. 什么是葡萄糖效应？"></a>4. 什么是葡萄糖效应？</h2><p>答：葡萄糖效应又称降解物阻遏，是指在培养基中葡萄糖和乳糖（或半乳糖、阿拉伯糖、麦芽糖等）同时存在时，葡萄糖总是优先被利用，葡萄糖的存在阻止了其他糖类被利用的现象。该现象产生的主要原因是葡萄糖的代谢产物抑制细菌的腺苷酸环化酶，使得细胞内cAMP含量降低，导致与之结合的受体CRP（环腺苷酸受体蛋白）不能被激活，阻遏其他糖类操纵子激活复合物的形成，影响该复合物与启动区结合，从而使得对应的结构基因无法转录。因此葡萄糖总是优先被利用而其他糖类不被利用。</p>
+<h2 id="5-什么是弱化作用？"><a href="#5-什么是弱化作用？" class="headerlink" title="5. 什么是弱化作用？"></a>5. 什么是弱化作用？</h2><p>答：弱化作用是一种转录翻译调控机制，是指通过操纵子前导区内类似终止子的一段DNA序列，决定转录起始后是否继续进行下去的机制。以色氨酸操纵子为例，色氨酸操纵子中存在弱化作用，其中起信号作用的是色氨酰-tRNA的浓度。转录的弱化作用是通过前导肽的翻译来进行调节的。</p>
+<p>(1) 低色氨酸浓度时， $Trp-tRNA^{Trp}$ 少，翻译通过两个相邻色氨酸密码子的速度慢，当4区被转录完成时，核糖体停留在1区（或停留在两个相邻的色氨酸密码子处），此时前导区结构2-3配对，不形成3-4配对的终止结构，转录可继续进行，直到将trp操纵子中的结构基因全部转录。</p>
+<p>(2) 高色氨酸浓度时，核糖体快速顺利通过两个相邻的色氨酸密码子，在 4 区被转录之前，核糖体到达 2 区，使 2-3 不能配对，而 3-4 区配对形成茎-环状终止子结构，转录终止，色氨酸合成终止。</p>
+<h2 id="6-简述抗终止子因子的调控机制"><a href="#6-简述抗终止子因子的调控机制" class="headerlink" title="6. 简述抗终止子因子的调控机制"></a>6. 简述抗终止子因子的调控机制</h2><p>答：抗终止子因子是能够在特定位点阻止转录终止的一类蛋白质。当抗终止子因子存在时，RNA聚合酶能够越过终止子，继续转录DNA。其调控机制是由于在终止子上游有抗终止作用的信号序列，只有与抗终止因子相结合的RNA聚合酶才能顺利通过具有茎-环结构的终止子，使转录继续进行。抗终止蛋白（在大肠杆菌中为 Nus 蛋白）、 $\sigma$ 因子均能与 RNA 聚合酶结合，但不能同时与之结合。</p>
+<h2 id="7-简述反义-RNA-的调控机制"><a href="#7-简述反义-RNA-的调控机制" class="headerlink" title="7. 简述反义 RNA 的调控机制"></a>7. 简述反义 RNA 的调控机制</h2><p>答：反义 RNA 是指与特异 mRNA 互补结合的一段 RNA 分子，也包括与其他 RNA 互补的 RNA 分子。反义 RNA 是一些非编码的小 RNA 分子。反义 RNA 与 mRNA 中的特定序列互补配对，改变 mRNA 分子的构象，导致翻译过程被开启或者关闭，也可能导致目标 mRNA 分子的快速降解。其调控机制包括以下四种方式：</p>
+<p>(1) 直接作用于 mRNA 5’ 端非编码区的 SD 序列或编码区，引起翻译的直接抑制或与靶 mRNA 结合后引起该双链 RNA 的降解。</p>
+<p>(2) 与 mRNA 5’ 端的起始密码子结合阻止转录的启动。</p>
+<p>(3)与靶 mRNA 的 SD 序列的上游非编码区互补结合，使 mRNA 构象改变，影响其与核糖体结合，从而抑制靶 mRNA 的翻译功能，间接抑制 mRNA 的转录。</p>
+<p>(4) 与 hnRNA 结合，阻碍 mRNA 的成熟及其在胞浆内转运。</p>
+<ol>
+<li>简述原核基因转录后调控的不同方式。</li>
+</ol>
+<p>答：参见本章复习笔记转录后水平的调控部分相关内容。</p>
+<ol>
+<li>简述 ppGpp 是如何参与细菌的应急反应。</li>
+</ol>
+<p>答：当氨基酸缺乏时，细胞内 GDP 或 GTP 的衍生物四磷酸或五磷酸鸟嘌呤核苷[(p) ppGpp]大量积累在细胞内，空载 tRNA 增多，ppGpp(鸟苷四磷酸)在细胞内的含量升高。ppGpp 的主要作用是干扰 RNA 聚合酶与启动子结合的专一性，影响核糖体蛋白的活性，从而成为细胞内严紧控制的关键。故 ppGpp 的出现可在很大范围内做出应急反应，如抑制核糖体和其他大分子的合成，活化某些氨基酸操纵子的转录表达，抑制与氨基酸转运无关的系统，活化蛋白水解酶等，以节省或开发能源，帮助细菌在不良环境条件下存活下来。</p>
+<h2 id="10-什么是-sigma-因子，简述-sigma-因子在原核基因调控中的作用"><a href="#10-什么是-sigma-因子，简述-sigma-因子在原核基因调控中的作用" class="headerlink" title="10. 什么是 $\sigma$ 因子，简述 $\sigma$ 因子在原核基因调控中的作用"></a>10. 什么是 $\sigma$ 因子，简述 $\sigma$ 因子在原核基因调控中的作用</h2><h2 id="答：-1-sigma-因子的定义"><a href="#答：-1-sigma-因子的定义" class="headerlink" title="答：(1) $\sigma$ 因子的定义"></a>答：(1) $\sigma$ 因子的定义</h2><p>σ 因子是原核生物 RNA 聚合酶全酶的组分，是转录起始所必需的因子，主要影响 RNA 聚合酶对转录起始位点的正确识别。</p>
+<h2 id="2-sigma-因子在原核基因调控中的作用"><a href="#2-sigma-因子在原核基因调控中的作用" class="headerlink" title="(2) $\sigma$ 因子在原核基因调控中的作用"></a>(2) $\sigma$ 因子在原核基因调控中的作用</h2><p>大肠杆菌至少存在7种 $\sigma$ 因子，其中 $\sigma^{70}$ 参与最基本的生理功能基因的转录调控，所有 $\sigma$ 因子都含有4个保守区，其中第2个和第4个保守区参与结合启动区DNA，第2个保守区的另一部分还参与双链DNA解开成单链的过程。 $\sigma$ 因子对识别DNA链上的转录信号是不可缺少的，它是RNA聚合酶核心酶和启动子之间的桥梁。不同的 $\sigma$ 因子可以独立地起作用，但是，为了保证细胞准确响应不同的环境信号变化， $\sigma$ 因子之间常常交互作用构成网络调控模式，使得原核基因的表达稳定而平衡。对于不同的RNA序列或者是不同的基因，同一个 $\sigma$ 因子与其RNA聚合酶核心酶结合的紧密程度是不同的。</p>
+<h2 id="7-3-名校考研真题详解"><a href="#7-3-名校考研真题详解" class="headerlink" title="7.3 名校考研真题详解"></a>7.3 名校考研真题详解</h2><h2 id="一、选择题"><a href="#一、选择题" class="headerlink" title="一、选择题"></a>一、选择题</h2><ol>
+<li>原核生物基因表达调控主要发生在哪个水平？（）[内蒙古农业大学2015研]<br>A. 翻译水平 B. DNA 水平 C. 转录水平 D. 转录后水平</li>
+</ol>
+<p>【答案】C</p>
+<p>【解析】原核生物的基因表达调控主要发生在转录水平上，根据调控机制的不同可分为负转录调控和正转录调控。</p>
+<ol>
+<li>下列哪个操纵子可能不含有衰减子序列？（）[电子科技大学 2013 研]<br>A. trp 操纵子 B. lac 操纵子 C. his 操纵子 D. phe 操纵子</li>
+</ol>
+<p>【解析】衰减子又称弱化子，是指当操纵子被阻遏，RNA合成被终止时，起终止转录信号作用的一段核苷酸序列，位于操纵子的上游，利用原核生物转录与翻译的偶联机制对转录进行调节。衰减子存在于大肠杆菌中的色氨酸操纵子、苯丙氨酸操纵子、苏氨酸操纵子、异亮氨酸操纵子、缬氨酸操纵子以及沙门氏菌的组氨酸操纵子和亮氨酸操纵子、嘧啶合成操纵子中。B项，lac操纵子属于负控诱导系统，不含有衰减子序列。因此答案选B。</p>
+<ol>
+<li>典型的操纵子不包括下列哪些元件？（）[浙江工业大学2012研]<br>A. 结构基因 B. 调控元件 C. 调节基因 D. 重复序列</li>
+</ol>
+<p>【解析】典型的操纵子包括以下几部分的元件：调节基因，启动子，操纵基因和结构基因，不包括重复序列。因此答案选D。</p>
+<ol>
+<li>在乳糖操纵子中，阻遏蛋白结合的是()。[湖南农业大学2011研]</li>
+</ol>
+<p>A. 操纵区 B. 调节基因 C. 启动子 D. 结构基因</p>
+<p>【解析】操纵区是 DNA 上的一小段序列，是阻遏蛋白的结合位点，当阻遏蛋白与操纵区相结合时，lac mRNA 的转录起始受到抑制。因此答案选 A。</p>
+<ol>
+<li>在调控乳糖操纵子表达中，乳糖的作用是( )。[北京理工大学 2008 研]</li>
+</ol>
+<p>A. 与 RNA 聚合酶结合诱导结构基因的表达</p>
+<p>B. 与 RNA 聚合酶结合抑制结构基因的表达</p>
+<p>C. 与抑制物结合诱导结构基因表达</p>
+<p>D. 与抑制物结合抑制结构基因表达</p>
+<p>【答案】C</p>
+<p>【解析】在乳糖操纵子(lac 操纵子)模型中，乳糖作为诱导物与阻遏蛋白结合，使阻遏蛋白构象改变，阻遏蛋白不再特异性结合 lac 操纵区，lac 操纵子的转录起始区暴露并被 RNA 聚合酶结合，激活 lac mRNA 转录。乳糖与抑制物结合后诱导结构基因的表达。因此答案选 C。</p>
+<ol>
+<li>乳糖操纵子的安慰诱导物是( )。[北京科技大学2008研]<br>A. 乳糖<br>B. 半乳糖<br>C. 异构乳糖<br>D. 异丙基巯基半乳糖苷</li>
+</ol>
+<p>【答案】D</p>
+<p>【解析】安慰诱导物是指一类高效诱导酶的合成，但又不被分解的分子。异丙基巯基半乳糖苷（IPTG）、巯甲基半乳糖苷（TMG）和O-硝基半乳糖苷（ONPG）都不是半乳糖苷酶的底物，不会被β-半乳糖苷酶所降解，但能诱导β-半乳糖苷酶的合成，因此实验室里常用它们作为乳糖操纵子的安慰诱导物。因此答案选D。</p>
+<ol>
+<li>色氨酸衰减子通过前导肽的翻译来实现对 mRNA 转录的控制属于( )。[南京大学2008研]A.可诱导的负调控 B.可阻遏的负调控C.可诱导的正调控 D.可阻遏的正调控</li>
+</ol>
+<p>【解析】衰减子能形成不同的二级结构，利用原核生物转录与翻译的偶联机制对转录进行调节，属于可阻遏的负调控。在含有衰减子序列的操纵子中前导区都有一段前导肽，前导肽中含有该操纵子所要调控的氨基酸的重复密码子，在前导肽翻译时该氨基酸含量的高低决定了核糖体所处的位置，从而决定了是否形成内部终止子，进而调控RNA聚合酶对后面结构基因的转录，调控蛋白质的合成。因此答案选B。</p>
+<ol>
+<li>正转录调控系统中，调节基因的产物被称为( )。[中国科学院研究生院2007研]<br>A. 阻遏蛋白 B. 诱导因子 C. 激活蛋白 D. 增强子</li>
+</ol>
+<p>【解析】原核生物的基因调控主要发生在转录水平上，根据调控机制的不同可分为负转录调控和正转录调控。在负转录调控系统中，调节基因的产物是阻遏蛋白；在正转录调控系统中，调节基因的产物是激活蛋白。因此答案选 C。</p>
+<h2 id="二、填空题"><a href="#二、填空题" class="headerlink" title="二、填空题"></a>二、填空题</h2><ol>
+<li>生物一般有正调控和负调控方式，原核生物一般采用____方式，真核生物一般采用____方式。[华中科技大学2017研]</li>
+</ol>
+<p>【答案】负调控；正调控</p>
+<ol>
+<li>lac 阻遏蛋白由____基因编码，结合____序列对 lac 操纵子起阻遏作用。[西北农林科技大学 2015 研]</li>
+</ol>
+<p>【答案】调节；操纵</p>
+<p>【解析】阻遏蛋白由调节基因 I 编码。当细胞中无诱导物(乳糖)存在时，阻遏蛋白与 lac 操纵基因(O)特异性结合，阻止 RNA 聚合酶与 lac 操纵子启动子区的结合，抑制 lac mRNA 的转录。</p>
+<ol>
+<li>操纵子一般由____、____和____三种成分组成。[电子科技大学2014研]</li>
+</ol>
+<p>【答案】启动子；操纵基因；结构基因</p>
+<ol>
+<li>原核生物的转录调控系统根据调控机制的不同可分为____、____，乳糖操纵子是____系统，色氨酸操纵子是____系统。[华中科技大学2007研]</li>
+</ol>
+<p>【答案】负转录调控；正转录调控；负控诱导；负控阻遏</p>
+<p>【解析】根据调控机制的不同，原核生物转录调控系统可分为负转录调控和正转录调控，其中负转录调控调节基因的产物是阻遏蛋白，正转录调控调节基因的产物是激活蛋白。负转录调控又分为负控诱导系统和负控阻遏系统。在负控诱导系统中，阻遏蛋白不与效应物（诱导物）结合时，结构基因不转录，如乳糖操纵子；在负控阻遏系统中，阻遏蛋白与效应物结合时，结构基因不转录，如色氨酸操纵子。</p>
+<ol>
+<li>SOS 应答系统(SOS response)是 DNA 损伤修复的一个重要途径, RecA 蛋白在这里的主要功能是通过引起____蛋白的降解, 从而解除它对____相关基因转录的抑制。[中国科学技术大学 2005 研]</li>
+</ol>
+<p>【答案】LexA 阻遏；DNA 损伤修复</p>
+<p>【解析】当细菌 DNA 遭到破坏时，细菌会启动一个称为 SOS 的诱导型 DNA 修复系统，把 LexA 阻遏蛋白从参与修复的基因的上游调控区移开。DNA 严重受损时，DNA 复制被中断，单链 DNA 缺口数量增加，RecA 与缺口处单链 DNA 结合，被激活成为蛋白酶，表现为水解酶的活性，分解 LexA 阻遏蛋白，解除 LexA 对 DNA 损伤修复相关基因转录的抑制，DNA 得到修复。</p>
+<h2 id="三、判断题"><a href="#三、判断题" class="headerlink" title="三、判断题"></a>三、判断题</h2><ol>
+<li>乳糖操纵子存在阻遏系统和弱化系统的调控机制。（）[扬州大学2018研]</li>
+</ol>
+<h2 id="【答案】错"><a href="#【答案】错" class="headerlink" title="【答案】错"></a>【答案】错</h2><p>【解析】乳糖操纵子中正、负调控机制相辅相成，不存在弱化系统；而色氨酸操纵子中则是阻遏系统和弱化系统共同作用。</p>
+<ol>
+<li>大肠杆菌在多种碳源同时存在的条件下，优先利用乳糖。（）[中国科学院研究生院2007研]</li>
+</ol>
+<h2 id="【答案】错-1"><a href="#【答案】错-1" class="headerlink" title="【答案】错"></a>【答案】错</h2><p>【解析】将葡萄糖和乳糖同时加入培养基中，大肠杆菌在耗尽外源葡萄糖之前不会诱发lac操纵子。这是因为有葡萄糖存在时，它的某些降解产物抑制lac mRNA合成，因此大肠杆菌在多种碳源同时存在的条件下，优先利用的是葡萄糖。这种现象也被称为葡萄糖效应。</p>
+<ol>
+<li>色氨酸操纵子(trp operon)中含有衰减子序列。( ) [华南理工大学 2005 研]</li>
+</ol>
+<p>【答案】对</p>
+<p>【解析】色氨酸操纵子的转录调控除了阻遏系统以外，还有弱化子(又称衰减子)系统。</p>
+<h2 id="四、名词解释题"><a href="#四、名词解释题" class="headerlink" title="四、名词解释题"></a>四、名词解释题</h2><h2 id="1-Repressor-Protein-宁波大学-2019-研"><a href="#1-Repressor-Protein-宁波大学-2019-研" class="headerlink" title="1. Repressor Protein [宁波大学 2019 研]"></a>1. Repressor Protein [宁波大学 2019 研]</h2><p>答：Repressor protein 的中文名称是阻遏蛋白，是指一类由调节基因产生的，在转录水平对基因表达产生负控作用的蛋白质。操纵基因是阻遏蛋白的结合位点，当阻遏蛋白结合操纵基因时会阻碍 RNA 聚合酶与启动子的结合，使得 RNA 聚合酶不能沿 DNA 向前移动，阻遏 mRNA 转录。</p>
+<ol>
+<li>反义 RNA(antisense RNA) [华中科技大学 2016 研；华东理工大学 2017 研]</li>
+</ol>
+<p>答：反义 RNA(antisense RNA) 是指与 mRNA 互补的 RNA 分子，也包括与其他 RNA 互补的 RNA 分子。反义 RNA 与 mRNA 特异性的互补结合可以改变 mRNA 分子的构象，导致翻译过程被开启或者关闭，也可能导致目标 mRNA 分子的快速降解。通过反义 RNA 控制 mRNA 的翻译是原核生物基因表达调控的一种方式。</p>
+<h2 id="3-操纵子-暨南大学2014研；浙江工业大学2015研"><a href="#3-操纵子-暨南大学2014研；浙江工业大学2015研" class="headerlink" title="3. 操纵子[暨南大学2014研；浙江工业大学2015研]"></a>3. 操纵子[暨南大学2014研；浙江工业大学2015研]</h2><p>答：操纵子是指原核生物基因中，多个功能上相关的结构基因串联排列在基因组序列中构成信息区，与上游启动区和操纵区以及下游转录终止区一起构成的基因表达单位，其中结构基因的表达受到操纵基因的调控。操纵子包括乳糖操纵子、色氨酸操纵子、半乳糖操纵子以及阿拉伯糖操纵子等。</p>
+<h2 id="4-Attenuator-河北大学-2014-研"><a href="#4-Attenuator-河北大学-2014-研" class="headerlink" title="4. Attenuator[河北大学 2014 研]"></a>4. Attenuator[河北大学 2014 研]</h2><p>答：Attenuator 的中文名称是弱化子，是指原核生物操纵子中能显著减弱甚至终止转录作用的一段核苷酸序列，位于操纵子的上游，该区域能形成不同的二级结构，利用原核生物转录与翻译偶联机制对转录进行调节。弱化子对基因活性的影响是通过影响前导序列 mRNA 的结构而发挥作用的，起调节作用的是某种对应氨酰 - tRNA 的浓度，典型例子是细菌中的色氨酸操纵子。</p>
+<h2 id="5-魔斑核苷酸-兰州大学-2011-研"><a href="#5-魔斑核苷酸-兰州大学-2011-研" class="headerlink" title="5. 魔斑核苷酸[兰州大学 2011 研]"></a>5. 魔斑核苷酸[兰州大学 2011 研]</h2><p>答：魔斑核苷酸是指当氨基酸缺乏时，细胞内由于空载 tRNA 增多而大量产生的鸟苷四磷酸（ppGpp）和鸟苷五磷酸（pppGpp）。这两种化合物是在层析谱上检出的斑点，称为魔斑。魔斑核苷酸的主要作用是影响 RNA 聚合酶与启动子结合的专一性，诱发细菌的应急反应，帮助细菌在不良环境条件中存活下来，它是细胞内严紧控制的关键。</p>
+<h2 id="五、简答题"><a href="#五、简答题" class="headerlink" title="五、简答题"></a>五、简答题</h2><ol>
+<li>论述大肠杆菌色氨酸操纵子的阻遏调节和弱化调节系统。[河北大学 2017 研]</li>
+</ol>
+<p>答：色氨酸操纵子参与生物合成，不受葡萄糖或者 cAMP-CRP 的调控。色氨酸操纵子的转录调控系统包括阻遏系统和弱化系统（衰减系统）。</p>
+<h2 id="1-阻遏系统"><a href="#1-阻遏系统" class="headerlink" title="(1) 阻遏系统"></a>(1) 阻遏系统</h2><p>①色氨酸含量较高时，色氨酸与游离的辅阻遏蛋白相结合，激活辅阻遏蛋白，后者与操纵基因(O)紧密结合，操纵子被关闭。</p>
+<p>②色氨酸供应不足时，辅阻遏物失去色氨酸并从操纵区上解离，使操纵子去阻遏，基因表达。</p>
+<h2 id="2-弱化系统"><a href="#2-弱化系统" class="headerlink" title="(2) 弱化系统"></a>(2) 弱化系统</h2><p>在色氨酸操纵子中存在弱化子，即操纵子中明显可以衰减甚至终止转录的一段核苷酸序列，转录的弱化作用是通过前导肽的翻译来进行调节的。</p>
+<p>①低色氨酸浓度时， $Trp-tRNA^{Trp}$ 少，翻译通过两个相邻色氨酸密码子的速度慢，当4区被转录完成时，核糖体停留在1区（或停留在两个相邻的色氨酸密码子处），此时前导区结构2-3配对，不形成3-4配对的终止结构，转录可继续进行，直到将trp操纵子中的结构基因全部转录。</p>
+<p>②高色氨酸浓度时，核糖体能以较快的速度顺利通过两个相邻的色氨酸密码子，在4区被转录之前，核糖体到达2区，使2-3不能配对，而3-4区配对形成茎-环状终止子结构，转录终止，色氨酸合成终止。</p>
+<ol>
+<li>简述乳糖操纵子正调控的作用机制。[中国科学院大学 2013 研]</li>
+</ol>
+<p>答：乳糖操纵子(lac 操纵子)的正调控即 cAMP-CRP 的调节，作用机制如下：</p>
+<p>(1) ATP 在腺苷酸环化酶的作用下生成 cAMP。</p>
+<p>(2) cAMP 的浓度受到葡萄糖代谢的调节，细菌在缺乏碳源或只有甘油或乳糖等不进行糖酵解途径的碳源中，细胞内 cAMP 浓度高；在含葡萄糖的环境中，cAMP 的浓度低。</p>
+<p>(3) 在 lac 操纵子启动子上游有代谢物激活蛋白(CAP)结合位点，当以葡萄糖为碳源的环境转变为以乳糖为碳源的环境时，cAMP 浓度升高，与环腺苷酸受体蛋白(CRP)结合，使 CRP 发生变构，形成 cAMP-CRP 复合物，cAMP-CRP 复合物结合于 lac 操纵子启动序列中的 CAP 位点，帮助 RNA 聚合酶结合到启动子区域，激活 lac mRNA 的转录，促进合成利用乳糖的三种酶。</p>
+<ol>
+<li>有一个研究生想使他所感兴趣的一个大肠杆菌的基因严格受碳源控制，在葡萄糖供应时，该基因不表达；当供应乳糖时，该基因大量表达。你如何帮助他实现这种想法？依据是什么？[武汉大学2008研]</li>
+</ol>
+<p>答：(1) 将乳糖操纵子的启动子元件（包括上游阻遏基因）与目的基因融合并构建到一个新的载体分子中，并将新克隆分子导入大肠杆菌中扩增。设计三组实验：①只有乳糖；②有葡萄糖和乳糖；③只有葡萄糖。由此可以帮助此研究生实现想法。</p>
+<p>(2) 将乳糖操纵子的启动子元件与目的基因融合并构建到一个新的载体分子中，并进行基因表达扩增的依据是启动子对下游基因的调控机理。</p>
+<p>①乳糖操纵子的启动子区域位于阻遏基因与结构基因中间，阻遏基因表达的阻遏物结合到启动子区，抑制下游结构基因转录。</p>
+<p>②诱导物与阻遏物结合后，改变阻遏物的三维构象，使阻遏物不再与操纵子结合，从而开启操纵子，下游结构基因转录。</p>
+<p>③下游基因的表达受碳源影响，当葡萄糖存在时，下游基因不表达；乳糖存在时，下游基因大量表达。因此可以设计上述实验满足题中研究生的想法。</p>
+<h2 id="4-简述可诱导和可阻遏的基因调控方式的区别。-北京科技大学-2008-研"><a href="#4-简述可诱导和可阻遏的基因调控方式的区别。-北京科技大学-2008-研" class="headerlink" title="4. 简述可诱导和可阻遏的基因调控方式的区别。[北京科技大学 2008 研]"></a>4. 简述可诱导和可阻遏的基因调控方式的区别。[北京科技大学 2008 研]</h2><p>答：原核生物通过特殊代谢物对基因活性的调控主要分为可诱导调控和可阻遏调控，二者区别如表7-5所示。</p>
+<p>表 7-5 可诱导和可阻遏基因调控方式的区别</p>
+<div class="md-table-scroll"><table><tbody><tr><td></td><td>可诱导调控</td><td>可阻遏调控</td></tr><tr><td>作用机制</td><td>一些基因在特殊的代谢物或化合物的作用下,由原来关闭的状态转变为工作状态,即在某些物质的诱导下使基因活化</td><td>某些基因平时都是开启的,处在产生蛋白质或酶的工作过程中,但由于一些特殊代谢物或化合物的积累而将其关闭,阻遏基因的表达</td></tr><tr><td>作用方式</td><td>操纵子只有在诱导物存在时才开放。存在诱导物时,它与阻遏物结合,改变阻遏物的三维构象,使阻遏物不再与操纵子结合,从而开启操纵子;没有诱导物时,阻遏物与操纵子结合,阻止结构基因的转录</td><td>操纵子被终产物所关闭。存在终产物时,它结合到阻遏物上,改变阻遏物的构象,使其能结合到操纵子上,关闭操纵子;不存在终产物时,阻遏物不能结合到操纵子上,因此操纵子开放</td></tr><tr><td>诱导物/阻遏物(基因)</td><td>诱导物是酶的底物或者底物类似物</td><td>阻遏基因是一些合成各种细胞代谢过程中所必需的小分子物质的基因</td></tr></tbody></table></div>
+
+<h2 id="5-正调控和负调控的主要区别。-江苏大学-2007-研"><a href="#5-正调控和负调控的主要区别。-江苏大学-2007-研" class="headerlink" title="5. 正调控和负调控的主要区别。[江苏大学 2007 研]"></a>5. 正调控和负调控的主要区别。[江苏大学 2007 研]</h2><p>答：正调控和负调控的主要区别如下：</p>
+<h2 id="1-正调控"><a href="#1-正调控" class="headerlink" title="(1) 正调控"></a>(1) 正调控</h2><p>在正调控系统中，调节基因的产物是激活蛋白，起着激活结构基因转录的作用。在没有激活蛋白存在时基因关闭，加入激活蛋白则基因表达被激活。根据作用效果不同，正转录调控系统分为正控诱导和正控阻遏。</p>
+<p>①正控诱导：效应物(诱导物)存在时，激活蛋白处于活性状态，结构基因转录。</p>
+<p>②正控阻遏：效应物存在时，激活蛋白处于无活性状态，结构基因不转录。</p>
+<h2 id="2-负调控"><a href="#2-负调控" class="headerlink" title="(2) 负调控"></a>(2) 负调控</h2><p>在负调控系统中，调节基因的产物是阻遏蛋白，其作用部位是操纵区，起着阻止结构基因转录的作用。在没有阻遏蛋白存在时基因表达，加入阻遏蛋白后基因表达活性被关闭。根据作用效果不同，负调控系统分为负控诱导和负控阻遏。</p>
+<p>①负控诱导：阻遏蛋白不与效应物(诱导物)结合时，结构基因不转录。</p>
+<p>②负控阻遏：阻遏蛋白与效应物结合时，结构基因不转录。</p>
+<h2 id="6-解释大肠杆菌半乳糖操纵子的两启动子调控机制。-暨南大学-2005-研"><a href="#6-解释大肠杆菌半乳糖操纵子的两启动子调控机制。-暨南大学-2005-研" class="headerlink" title="6. 解释大肠杆菌半乳糖操纵子的两启动子调控机制。[暨南大学 2005 研]"></a>6. 解释大肠杆菌半乳糖操纵子的两启动子调控机制。[暨南大学 2005 研]</h2><p>答：(1) 半乳糖操纵子结构</p>
+<p>大肠杆菌半乳糖操纵子包括 3 个结构基因 galE、galT、galK，分别编码 3 种酶：异构酶、半乳糖－磷酸尿嘧啶核苷转移酶和半乳糖激酶。这3个酶的作用是使半乳糖变成葡萄糖-1-磷酸。gal操纵子有两个相距仅5bp的启动子 $P_{1}$ 和 $P_{2}$ ，其mRNA可从两个不同的起始点开始转录。</p>
+<p>(2) 半乳糖操纵子的两启动子调控机制</p>
+<p>$P_{1}$ 和 $P_{2}$ 拥有各自的 RNA 聚合酶结合位点 $S_{1}$ 和 $S_{2}$ 。</p>
+<p>①从 $S_{1}$ 起始的转录只有在培养基中无葡萄糖时，才能顺利进行，RNA 聚合酶与 $S_{1}$ 的结合需要半乳糖、CAP 和较高浓度的 cAMP。</p>
+<p>②从 $S_{2}$ 起始的转录完全依赖于葡萄糖，高水平的 cAMP-CRP 能抑制由这个启动子起始的转录。</p>
+<p>③当有 cAMP-CRP 时，转录从 $S_{1}$ 开始；当无 cAMP-CRP 时，转录从 $S_{2}$ 开始。</p>
+<ol>
+<li>什么是应急调控(strigent response)? 何时会有这种现象发生? 应急调控过程中的两个重要信号分子是什么? 应急调控会调控哪些生化过程, 上调还是下调? [中国科学技术大学2005研]</li>
+</ol>
+<p>答：(1)应急调控是指细菌碰到紧急状况，如氨基酸饥饿时，为了紧缩开支，渡过难关，细菌将会停止包括生产各种RNA、糖、脂肪和蛋白质在内的几乎全部生物化学反应过程的自救措施。应急调控是细菌抵御不良条件，保存自己的一种机制。</p>
+<p>(2) 当细菌处于贫瘠的生长环境如氨基酸饥饿时会产生应急调控。</p>
+<p>(3) 应急调控过程中有两种重要的信号分子：鸟苷四磷酸(ppGpp)和鸟苷五磷酸(pppGpp)。ppGpp 和 pppGpp 能与相应的目标蛋白结合，改变其活性，进而抑制转录。</p>
+<p>(4) 当氨基酸缺乏时, 细胞中便存在大量的不带氨基酸的 tRNA, 这种空载的 tRNA 会激活焦磷酸转移酶, 使 ppGpp 大量合成。ppGpp 会关闭许多基因, 同时打开一些合成氨基酸的基因, 主要影响 RNA 聚合酶与启动子结合的专一性。ppGpp 是细胞内严紧控制的关键。应急调控会使 rRNA 和 tRNA 的合成下降, 同时蛋白质的降解加速, 糖、脂类及核苷酸的合成下降, 即下调生化反应。</p>
+<h2 id="六、论述题"><a href="#六、论述题" class="headerlink" title="六、论述题"></a>六、论述题</h2><p>写出大肠杆菌乳糖操纵子模型及调控模式。[华南理工大学2014研]</p>
+<p>相关试题：</p>
+<p>(1)试述大肠杆菌乳糖操纵子的结构及其基因表达的调节特点。[四川大学2009研；武汉大学2010研]</p>
+<p>(2) 什么是操纵子？乳糖操纵子的作用机制是什么？[浙江工业大学 2013 研]</p>
+<p>答：参见本章课后习题详解第3题答案。</p>
+</article>
+
+  <div class="related-wrap md-text slide-up" id="comments">
+    
+    
+    <section class="header cmt-title cap theme">
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    
+    <section class="body cmt-body artalk">
+      
+
+<div class="artalk with-fancybox" id="artalk_container"><div class="lazy-icon"></div></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer slide-up footnote"><hr><div class="sitemap" style="column-count:3;"><div class="sitemap-group"><span class="fs15">博客</span><a href="&#x2F;">近期发布</a><a href="&#x2F;tags&#x2F;">标签</a><a href="&#x2F;archives&#x2F;">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="&#x2F;comments&#x2F;">留言板</a><a href="&#x2F;links&#x2F;">我的朋友们</a><a href="&#x2F;about&#x2F;">关于我</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;icp.gov.moe&#x2F;?keyword&#x3D;2025139458号">豫ICP备2025139458号</a></div><div class="sitemap-group"><span class="fs15">项目</span><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;tv.cnortles.top">TV</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;pan.cnortles.top">网盘</a><a target="_blank" rel="noopener" href="https:&#x2F;&#x2F;news.cnortles.top">新闻</a><a href="&#x2F;subscribe">订阅</a></div></div><div class="text"><center>
+<span>
+© 2025
+<a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/caoronglin">Rl.</a>
+使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+创建 | 豫ICP备2025139458号
+</span>
+<br>
+<a href="https://github.com/caoronglin" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+<a href="https://space.bilibili.com/555149182" target="_blank" rel="noopener noreferrer">Bilibili</a> ·
+<a href="mailto:crl@cnortles.top">Email</a> ·
+<a href="/mirror-panel">镜像管理</a> ·
+<a href="/comments">留言板</a>
+<br>
+站点访问量 <span id="qexo-site-pv">Loading...</span>
+站点访客数 <span id="qexo-site-uv">Loading...</span>
+页面访问量 <span id="qexo-page-pv">Loading...</span>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js" crossorigin="anonymous"></script>
+<script>
+  // 统计脚本来自第三方 CDN，被拦截或超时时 loadStatistic 未定义，
+  // 直接调用会抛 ReferenceError 并中断后续内联脚本。
+  // 轮询等待函数出现，超时后静默放弃，不影响页面其余部分。
+  (function waitForStatistic(n) {
+    if (typeof loadStatistic === 'function') {
+      try { loadStatistic("https://qexo.cnortles.top"); }
+      catch (e) { console.warn('[statistic] 调用失败', e); }
+      return;
+    }
+    if (n > 0) setTimeout(function () { waitForStatistic(n - 1); }, 300);
+  })(20);
+</script>
+</center>
+</div></footer>
+</main>
+<aside data-stellar-runtime-region id="rightbar-region" class="site-region site-region--rightbar" data-region="rightbar" aria-label="Rightbar"><div class="site-region__surface ui-drawer-surface"><div class="site-region__viewport"><div class="widgets widget-stack widget-stack--rightbar widget-stack--rightbar"><div class="widget-instance widget-instance--toc" data-widget-id="rightbar:0:toc" data-presentation="rightbar">
+
+
+<widget class="widget-wrapper slide-up toc" id="data-toc" collapse="auto">
+  
+    <div class="widget-header dis-select">
+      <span class="name">本文目录</span>
+      <button type="button" class="cap-action ui-interactive card-hover card-hover--spotlight" data-shell-action="toggle-toc" aria-label="Toggle table of contents" aria-pressed="false"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></span></button>
+    </div>
+  
+  <div class="widget-body"><ol class="toc ui-collection-adapter"><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#7-1-%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-text">7.1 复习笔记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%9F%A5%E8%AF%86%E6%A6%82%E8%A7%88%E3%80%91"><span class="toc-text">【知识概览】</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E9%87%8D%E9%9A%BE%E7%82%B9%E5%BD%92%E7%BA%B3%E3%80%91"><span class="toc-text">【重难点归纳】</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%80%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">一、概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE"><span class="toc-text">1. 基因表达</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E8%B0%83%E6%8E%A7"><span class="toc-text">2. 基因表达调控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%8C%E3%80%81%E5%8E%9F%E6%A0%B8%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E8%B0%83%E6%8E%A7%E6%80%BB%E8%AE%BA"><span class="toc-text">二、原核基因表达调控总论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E5%8E%9F%E6%A0%B8%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E8%B0%83%E6%8E%A7%E5%88%86%E7%B1%BB"><span class="toc-text">1. 原核基因表达调控分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%8E%9F%E6%A0%B8%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E8%B0%83%E6%8E%A7%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9"><span class="toc-text">2. 原核基因表达调控的主要特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E8%B0%83%E6%8E%A7"><span class="toc-text">(1) 操纵子的调控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E8%BD%AC%E5%BD%95%E8%B5%B7%E5%A7%8B%E9%98%B6%E6%AE%B5%E7%9A%84%E8%B0%83%E6%8E%A7"><span class="toc-text">(2) 转录起始阶段的调控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E8%BD%AC%E5%BD%95%E7%BB%88%E6%AD%A2%E9%98%B6%E6%AE%B5%E7%9A%84%E8%B0%83%E6%8E%A7"><span class="toc-text">(3)转录终止阶段的调控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-%E8%BD%AC%E5%BD%95%E5%90%8E%E8%B0%83%E6%8E%A7"><span class="toc-text">(4)转录后调控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%89%E3%80%81%E4%B9%B3%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90%E4%B8%8E%E8%B4%9F%E6%8E%A7%E8%AF%B1%E5%AF%BC%E7%B3%BB%E7%BB%9F"><span class="toc-text">三、乳糖操纵子与负控诱导系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E4%B9%B3%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">1. 乳糖操纵子的基本结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%BD%B1%E5%93%8D%E5%9B%A0%E5%AD%90"><span class="toc-text">2. 控制模型及其影响因子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A1CAP-%E7%9A%84%E6%AD%A3%E8%B0%83%E6%8E%A7"><span class="toc-text">②CAP 的正调控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#A-%E8%A6%81%E7%82%B9"><span class="toc-text">A. 要点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#B-%E5%85%B7%E4%BD%93%E8%B0%83%E8%8A%82%E8%BF%87%E7%A8%8B"><span class="toc-text">B. 具体调节过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A2%E4%B9%B3%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E5%8D%8F%E5%90%8C%E8%B0%83%E8%8A%82"><span class="toc-text">③乳糖操纵子的协同调节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E4%B9%B3%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E8%B0%83%E6%8E%A7%E5%8C%BA%E5%9F%9F"><span class="toc-text">(3) 乳糖操纵子的调控区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%9B%9B%E3%80%81%E8%89%B2%E6%B0%A8%E9%85%B8%E6%93%8D%E7%BA%B5%E5%AD%90%E4%B8%8E%E8%B4%9F%E6%8E%A7%E9%98%BB%E9%81%8F%E7%B3%BB%E7%BB%9F"><span class="toc-text">四、色氨酸操纵子与负控阻遏系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-Trp-%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">1. Trp 操纵子的基本结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-Trp-%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E9%98%BB%E9%81%8F%E7%B3%BB%E7%BB%9F"><span class="toc-text">2. Trp 操纵子的阻遏系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E9%98%BB%E9%81%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">(1) 阻遏系统的基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%98%BB%E9%81%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%B0%83%E8%8A%82"><span class="toc-text">(2) 阻遏系统的调节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-Trp-%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E5%BC%B1%E5%8C%96%E4%BD%9C%E7%94%A8"><span class="toc-text">3. Trp 操纵子的弱化作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E5%BC%B1%E5%8C%96%E5%AD%90"><span class="toc-text">(1) 弱化子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%89%8D%E5%AF%BC%E5%BA%8F%E5%88%97%E4%B8%8E%E5%89%8D%E5%AF%BC%E8%82%BD"><span class="toc-text">(2) 前导序列与前导肽</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E8%BD%AC%E5%BD%95%E7%9A%84%E5%BC%B1%E5%8C%96%E4%BD%9C%E7%94%A8"><span class="toc-text">(3) 转录的弱化作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-Trp-%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E5%85%B6%E4%BB%96%E8%B0%83%E6%8E%A7%E6%9C%BA%E5%88%B6"><span class="toc-text">4. Trp 操纵子的其他调控机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%94%E3%80%81%E5%85%B6%E4%BB%96%E6%93%8D%E7%BA%B5%E5%AD%90"><span class="toc-text">五、其他操纵子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E5%8D%8A%E4%B9%B3%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90%E5%92%8C%E9%98%BF%E6%8B%89%E4%BC%AF%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90"><span class="toc-text">1. 半乳糖操纵子和阿拉伯糖操纵子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%98%BB%E9%81%8F%E8%9B%8B%E7%99%BD-LexA-%E7%9A%84%E9%99%8D%E8%A7%A3%E4%B8%8E%E7%BB%86%E8%8F%8C%E4%B8%AD%E7%9A%84-SOS-%E5%BA%94%E7%AD%94"><span class="toc-text">2. 阻遏蛋白 LexA 的降解与细菌中的 SOS 应答</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%85%AD%E3%80%81%E8%BD%AC%E5%BD%95%E6%B0%B4%E5%B9%B3%E4%B8%8A%E7%9A%84%E5%85%B6%E4%BB%96%E8%B0%83%E6%8E%A7%E6%96%B9%E5%BC%8F"><span class="toc-text">六、转录水平上的其他调控方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%83%E3%80%81%E8%BD%AC%E5%BD%95%E5%90%8E%E6%B0%B4%E5%B9%B3%E7%9A%84%E8%B0%83%E6%8E%A7"><span class="toc-text">七、转录后水平的调控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-mRNA-%E8%87%AA%E8%BA%AB%E7%BB%93%E6%9E%84%E5%85%83%E4%BB%B6%E5%AF%B9%E7%BF%BB%E8%AF%91%E7%9A%84%E8%B0%83%E8%8A%82"><span class="toc-text">1. mRNA 自身结构元件对翻译的调节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E8%B5%B7%E5%A7%8B%E5%AF%86%E7%A0%81%E5%AD%90"><span class="toc-text">(1) 起始密码子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-5%E2%80%99%E9%9D%9E%E7%BF%BB%E8%AF%91%E5%8C%BA-5%E2%80%99UTR"><span class="toc-text">(2)5’非翻译区(5’UTR)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E6%A0%B8%E7%B3%96%E5%BC%80%E5%85%B3"><span class="toc-text">(3)核糖开关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E9%AD%94%E6%96%91%E6%A0%B8%E8%8B%B7%E9%85%B8%E6%B0%B4%E5%B9%B3%E5%AF%B9%E7%BF%BB%E8%AF%91%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">2. 魔斑核苷酸水平对翻译的影响</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E9%AD%94%E6%96%91%E6%A0%B8%E8%8B%B7%E9%85%B8"><span class="toc-text">(1) 魔斑核苷酸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A0%E5%AE%9A%E4%B9%89"><span class="toc-text">①定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A1%E6%84%8F%E4%B9%89"><span class="toc-text">②意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E4%B8%A5%E7%B4%A7%E6%8E%A7%E5%88%B6-%E5%9F%BA%E5%9B%A0%E5%9E%8B-rel"><span class="toc-text">(2)严紧控制(基因型 $rel^{+}$ )</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E6%9D%BE%E6%95%A3%E6%8E%A7%E5%88%B6-%E5%9F%BA%E5%9B%A0%E5%9E%8B-Rel"><span class="toc-text">(3) 松散控制(基因型 Rel $^{-}$ )</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E5%85%B6%E4%BB%96%E5%87%A0%E7%A7%8D%E8%BD%AC%E5%BD%95%E5%90%8E%E6%B0%B4%E5%B9%B3%E7%9A%84%E8%B0%83%E6%8E%A7%E6%96%B9%E5%BC%8F"><span class="toc-text">3. 其他几种转录后水平的调控方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#7-2-%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3"><span class="toc-text">7.2 课后习题详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E7%AE%80%E8%BF%B0%E4%BB%A3%E8%B0%A2%E7%89%A9%E5%AF%B9%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E8%B0%83%E6%8E%A7%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">1. 简述代谢物对基因表达调控的两种方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E5%8F%AF%E8%AF%B1%E5%AF%BC%E8%B0%83%E8%8A%82"><span class="toc-text">(1) 可诱导调节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%8F%AF%E9%98%BB%E9%81%8F%E8%B0%83%E8%8A%82"><span class="toc-text">(2) 可阻遏调节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E4%BB%80%E4%B9%88%E6%98%AF%E6%93%8D%E7%BA%B5%E5%AD%90%E5%AD%A6%E8%AF%B4%EF%BC%9F"><span class="toc-text">2. 什么是操纵子学说？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E7%AE%80%E8%BF%B0%E4%B9%B3%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E8%B0%83%E6%8E%A7%E6%A8%A1%E5%9E%8B"><span class="toc-text">3. 简述乳糖操纵子的调控模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AD%94%EF%BC%9A-1-%E4%B9%B3%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">答：(1)乳糖操纵子的基本结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E4%B9%B3%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E8%B0%83%E6%8E%A7%E6%A8%A1%E5%BC%8F"><span class="toc-text">(2) 乳糖操纵子的调控模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A0%E9%98%BB%E9%81%8F%E8%9B%8B%E7%99%BD%E7%9A%84%E8%B4%9F%E6%80%A7%E8%B0%83%E8%8A%82"><span class="toc-text">①阻遏蛋白的负性调节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A1cAMP-CRP%E7%9A%84%E6%AD%A3%E6%80%A7%E8%B0%83%E8%8A%82"><span class="toc-text">②cAMP-CRP的正性调节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E2%91%A2%E5%8D%8F%E5%90%8C%E8%B0%83%E8%8A%82"><span class="toc-text">③协同调节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-%E4%BB%80%E4%B9%88%E6%98%AF%E8%91%A1%E8%90%84%E7%B3%96%E6%95%88%E5%BA%94%EF%BC%9F"><span class="toc-text">4. 什么是葡萄糖效应？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%B1%E5%8C%96%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="toc-text">5. 什么是弱化作用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#6-%E7%AE%80%E8%BF%B0%E6%8A%97%E7%BB%88%E6%AD%A2%E5%AD%90%E5%9B%A0%E5%AD%90%E7%9A%84%E8%B0%83%E6%8E%A7%E6%9C%BA%E5%88%B6"><span class="toc-text">6. 简述抗终止子因子的调控机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#7-%E7%AE%80%E8%BF%B0%E5%8F%8D%E4%B9%89-RNA-%E7%9A%84%E8%B0%83%E6%8E%A7%E6%9C%BA%E5%88%B6"><span class="toc-text">7. 简述反义 RNA 的调控机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#10-%E4%BB%80%E4%B9%88%E6%98%AF-sigma-%E5%9B%A0%E5%AD%90%EF%BC%8C%E7%AE%80%E8%BF%B0-sigma-%E5%9B%A0%E5%AD%90%E5%9C%A8%E5%8E%9F%E6%A0%B8%E5%9F%BA%E5%9B%A0%E8%B0%83%E6%8E%A7%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">10. 什么是 $\sigma$ 因子，简述 $\sigma$ 因子在原核基因调控中的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E7%AD%94%EF%BC%9A-1-sigma-%E5%9B%A0%E5%AD%90%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">答：(1) $\sigma$ 因子的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-sigma-%E5%9B%A0%E5%AD%90%E5%9C%A8%E5%8E%9F%E6%A0%B8%E5%9F%BA%E5%9B%A0%E8%B0%83%E6%8E%A7%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">(2) $\sigma$ 因子在原核基因调控中的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#7-3-%E5%90%8D%E6%A0%A1%E8%80%83%E7%A0%94%E7%9C%9F%E9%A2%98%E8%AF%A6%E8%A7%A3"><span class="toc-text">7.3 名校考研真题详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%80%E3%80%81%E9%80%89%E6%8B%A9%E9%A2%98"><span class="toc-text">一、选择题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%8C%E3%80%81%E5%A1%AB%E7%A9%BA%E9%A2%98"><span class="toc-text">二、填空题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%B8%89%E3%80%81%E5%88%A4%E6%96%AD%E9%A2%98"><span class="toc-text">三、判断题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91%E9%94%99"><span class="toc-text">【答案】错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E3%80%90%E7%AD%94%E6%A1%88%E3%80%91%E9%94%99-1"><span class="toc-text">【答案】错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%9B%9B%E3%80%81%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A%E9%A2%98"><span class="toc-text">四、名词解释题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-Repressor-Protein-%E5%AE%81%E6%B3%A2%E5%A4%A7%E5%AD%A6-2019-%E7%A0%94"><span class="toc-text">1. Repressor Protein [宁波大学 2019 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#3-%E6%93%8D%E7%BA%B5%E5%AD%90-%E6%9A%A8%E5%8D%97%E5%A4%A7%E5%AD%A62014%E7%A0%94%EF%BC%9B%E6%B5%99%E6%B1%9F%E5%B7%A5%E4%B8%9A%E5%A4%A7%E5%AD%A62015%E7%A0%94"><span class="toc-text">3. 操纵子[暨南大学2014研；浙江工业大学2015研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-Attenuator-%E6%B2%B3%E5%8C%97%E5%A4%A7%E5%AD%A6-2014-%E7%A0%94"><span class="toc-text">4. Attenuator[河北大学 2014 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-%E9%AD%94%E6%96%91%E6%A0%B8%E8%8B%B7%E9%85%B8-%E5%85%B0%E5%B7%9E%E5%A4%A7%E5%AD%A6-2011-%E7%A0%94"><span class="toc-text">5. 魔斑核苷酸[兰州大学 2011 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E4%BA%94%E3%80%81%E7%AE%80%E7%AD%94%E9%A2%98"><span class="toc-text">五、简答题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E9%98%BB%E9%81%8F%E7%B3%BB%E7%BB%9F"><span class="toc-text">(1) 阻遏系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E5%BC%B1%E5%8C%96%E7%B3%BB%E7%BB%9F"><span class="toc-text">(2) 弱化系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#4-%E7%AE%80%E8%BF%B0%E5%8F%AF%E8%AF%B1%E5%AF%BC%E5%92%8C%E5%8F%AF%E9%98%BB%E9%81%8F%E7%9A%84%E5%9F%BA%E5%9B%A0%E8%B0%83%E6%8E%A7%E6%96%B9%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%82-%E5%8C%97%E4%BA%AC%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6-2008-%E7%A0%94"><span class="toc-text">4. 简述可诱导和可阻遏的基因调控方式的区别。[北京科技大学 2008 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#5-%E6%AD%A3%E8%B0%83%E6%8E%A7%E5%92%8C%E8%B4%9F%E8%B0%83%E6%8E%A7%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8C%BA%E5%88%AB%E3%80%82-%E6%B1%9F%E8%8B%8F%E5%A4%A7%E5%AD%A6-2007-%E7%A0%94"><span class="toc-text">5. 正调控和负调控的主要区别。[江苏大学 2007 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#1-%E6%AD%A3%E8%B0%83%E6%8E%A7"><span class="toc-text">(1) 正调控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#2-%E8%B4%9F%E8%B0%83%E6%8E%A7"><span class="toc-text">(2) 负调控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#6-%E8%A7%A3%E9%87%8A%E5%A4%A7%E8%82%A0%E6%9D%86%E8%8F%8C%E5%8D%8A%E4%B9%B3%E7%B3%96%E6%93%8D%E7%BA%B5%E5%AD%90%E7%9A%84%E4%B8%A4%E5%90%AF%E5%8A%A8%E5%AD%90%E8%B0%83%E6%8E%A7%E6%9C%BA%E5%88%B6%E3%80%82-%E6%9A%A8%E5%8D%97%E5%A4%A7%E5%AD%A6-2005-%E7%A0%94"><span class="toc-text">6. 解释大肠杆菌半乳糖操纵子的两启动子调控机制。[暨南大学 2005 研]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link ui-interactive" href="#%E5%85%AD%E3%80%81%E8%AE%BA%E8%BF%B0%E9%A2%98"><span class="toc-text">六、论述题</span></a></li></ol></div>
+  <div class="widget-footer"><a class="top ui-interactive" onclick="util.scrollTop()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="M20.536 3.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464" opacity=".5"/><path fill="currentColor" d="M9.53 12.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 9.56z"/><path fill="currentColor" d="M9.53 16.03a.75.75 0 0 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06L12 13.56z"/></svg></span><span>回到顶部</span></a><a class="buttom ui-interactive" onclick="util.scrollComment()"><span class="ui-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"/></svg></span><span>参与讨论</span></a></div>
+</widget>
+
+
+</div></div></div></div></aside>
+</div><button type="button" class="site-scrim" data-shell-action="dismiss-drawer" aria-label="Close navigation" tabindex="-1"></button><div data-stellar-runtime-region class="site-dock" role="group" aria-label="Layout panels">
+  <button type="button" class="site-dock__button site-dock__button--rightbar ui-interactive" aria-label="Open rightbar" aria-controls="rightbar-region" aria-expanded="false" data-shell-action="toggle-rightbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type="button" class="site-dock__button site-dock__button--leftbar ui-interactive" aria-label="Open leftbar" aria-controls="leftbar-region" aria-expanded="false" data-shell-action="toggle-leftbar-drawer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+
+<dialog data-stellar-runtime-region class="search-dialog" id="site-search-dialog" aria-labelledby="site-search-title">
+  <div class="search-dialog__panel search-wrapper" id="site-search-wrapper" searching="false">
+    <div class="search-dialog__header">
+      <div class="search-form" role="search">
+        <span class="search-button" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Adapted from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3M3 13h3M3 18h8M16.83 13.83l3.76 3.76"/><circle cx="14" cy="11" r="4"/></g></svg></span>
+        <input type="search" class="search-input" id="site-search-input" aria-labelledby="site-search-title" placeholder="搜索">
+      </div>
+      <button type="button" class="search-dialog__close" data-shell-action="close-search" aria-label="关闭搜索">×</button>
+    </div>
+    
+      <div class="search-dialog__scope" role="radiogroup" aria-labelledby="site-search-title" hidden>
+        <label class="search-dialog__scope-option" data-search-scope-option="all">
+          <input class="ui-radio" type="radio" name="site-search-scope" value="all">
+          <span>全站</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="blog" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="blog">
+          <span>博客</span>
+        </label>
+        <label class="search-dialog__scope-option" data-search-scope-option="current" hidden>
+          <input class="ui-radio" type="radio" name="site-search-scope" value="current">
+          <span data-search-scope-current-label></span>
+        </label>
+      </div>
+    
+    <h2 class="search-dialog__title" id="site-search-title">站内搜索</h2>
+    <div class="search-result" id="site-search-result"></div>
+    <div class="search-no-result">没有找到内容！</div>
+  </div>
+</dialog>
+</div><div class="site-scripts">
+<script data-stellar-script="core" src="/js/stellar-icons.js?v=28450bac3b25c0be"></script>
+
+<script data-stellar-script="defines">
+  window.canonical = window.stellarClientData.canonical;
+  const ctx = window.stellarClientData.ctx;
+  window.canonical.param = {permalink: "https://blog.cnortles.top/notes/class-notes/%E5%88%86%E5%AD%90%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%AC%94%E8%AE%B0%E5%92%8C%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98%E8%AF%A6%E8%A7%A3/%E7%AC%AC07%E7%AB%A0%20%E5%8E%9F%E6%A0%B8%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E8%B0%83%E6%8E%A7/", checklink: ctx.services.video.js};
+  ctx.date_suffix = {"just":"刚刚","min":"分钟前","hour":"小时前","day":"天前"};
+  if (ctx.search) Object.assign(ctx.search, {"more":"更多","no_more":"没有更多了"});
+  const def = window.stellarClientData.def;
+  window.ctx = ctx;
+  window.def = def;
+</script>
+
+
+<!-- core: 迁移期 DOM/资源兼容工具；Extension 注册与生命周期由 ESM runtime 所有 -->
+<script data-stellar-script="core" src="/js/utils.js?v=2.0.0"></script>
+<script data-stellar-script="core" src="/js/main.js?v=2.0.0" defer></script>
+<script data-stellar-script="core" defer src="/js/profile.js?v=2.0.0"></script>
+
+
+
+
+
+<link data-stellar-page-style rel="stylesheet" href="https://cdn.cnortles.top/npm/katex@0.16/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous">
+
+<script data-stellar-script="core" type="application/json" id="stellar-runtime-config">{"version":1,"root":"/","policy":{"cache":{"enabled":true,"defaultTtl":3600,"ttl":{"giscus":600,"waline":600,"artalk":600,"memos":600,"memos-user":86400,"sites":86400,"friends":86400,"friends_and_posts":86400,"siteinfo":86400},"maxEntries":200},"request":{"retries":2,"timeoutMs":5000,"idleTimeoutMs":3000,"maxCacheEntryBytes":204800},"features":{"codeCopyToastMs":2500},"providers":{"linkPrefetch":"flying_pages","lightbox":"fancybox","diagrams":"mermaid"}},"extensions":[{"id":"pin-slider","module":"/js/runtime/extensions/pin-slider.js","scope":"region","when":{"selector":".pin-slider"},"config":{}},{"id":"page-controls","module":"/js/runtime/extensions/page-controls.js","scope":"region","when":{"always":true},"config":{"highlight":"/js/search/highlight.js","tagtree":"/js/tagtree.js"}},{"id":"partial-navigation","module":"/js/runtime/extensions/partial-navigation.js","scope":"document","when":{"always":true},"config":{}},{"id":"color-scheme-switch","module":"/js/runtime/extensions/color-scheme-switch.js","scope":"document","when":{"always":true},"config":{"messages":{"light":"切换到浅色模式","dark":"切换到深色模式","auto":"切换到跟随系统配色"}}},{"id":"search","module":"/js/runtime/extensions/search.js","scope":"document","when":{"selector":".search-input"},"config":{"provider":"local","options":{"scope":"all","includeContent":true,"cacheTtlSeconds":86400},"assets":{"client":null,"provider":"/js/search/local-search.js","shortcut":"/js/search/shortcut.js"}}},{"id":"hero-parallax","module":"/js/runtime/extensions/hero-parallax.js","scope":"region","when":{"selector":".wiki-hero"},"config":{}},{"id":"hero-effect","module":"/js/runtime/extensions/hero-effect.js","scope":"region","when":{"selector":"canvas[data-hero-effect]"},"config":{}},{"id":"lazy-loading","module":"/js/runtime/extensions/lazy-loading.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"}},{"id":"deferred-icons","module":"/js/runtime/extensions/deferred-icons.js","scope":"region","when":{"selector":"svg.icon[data-icon]"},"config":{}},{"id":"dropdown","module":"/js/runtime/extensions/dropdown.js","scope":"region","when":{"selector":"details.dropdown"},"config":{}},{"id":"services","module":"/js/runtime/extensions/services.js","scope":"region","when":{"selector":"#artalk_container, #twikoo_container, #waline_container, .data-service, [class*='ds-'], a[cardlink], a[data-md-link][data-siteinfo-api], .site-card [data-siteinfo-api], .voice\u003eaudio, .video\u003evideo, .chat-file"},"config":{"marked":"https://cdn.cnortles.top/npm/marked@13.0/lib/marked.umd.min.js"}},{"id":"comments","module":"/js/runtime/extensions/comments.js","scope":"region","when":{"selector":"#comments"},"config":{"provider":"artalk","options":{"server":"https://artalk.cnortles.top/","site":"blog","darkMode":"auto","imageUploader":{"api":"picgo.837838.xyz","token":"Bearer tk_7x8z9a2b3c4d5e6f","resp":"data.links.url"}},"pageTitle":"第7章 原核基因表达调控","assets":{"localCss":"/css/comments/artalk.css","js":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.js","css":"https://cdn.cnortles.top/npm/artalk@2.9/dist/Artalk.css"}}},{"id":"settings","module":"/js/runtime/extensions/settings.js","scope":"region","when":{"selector":".settings-page"},"config":{}},{"id":"link-prefetch","module":"/js/runtime/extensions/link-prefetch.js","scope":"document","when":{"always":true},"config":{"asset":"https://cdn.cnortles.top/npm/flying-pages@2/flying-pages.min.js"}},{"id":"lightbox","module":"/js/runtime/extensions/lightbox.js","scope":"region","when":{"selector":"[data-fancybox]:not(.error), .with-fancybox, .ds-memos, .timenode p\u003eimg"},"config":{"enabled":true,"selector":".timenode p\u003eimg","assets":{"localCss":"/css/plugins/fancybox.css","js":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js","css":"https://cdn.cnortles.top/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"}}},{"id":"reveal","module":"/js/runtime/extensions/reveal.js","scope":"region","when":{"selector":".slide-up"},"config":{"enabled":true,"duration":500,"interval":50,"distance":8,"blur":4}},{"id":"diagrams","module":"/js/runtime/extensions/diagrams.js","scope":"region","when":{"selector":".mermaid"},"config":{"theme":"neutral","provider":"mermaid","assets":{"js":"https://cdn.cnortles.top/npm/mermaid@v9/dist/mermaid.min.js"},"colorScheme":"auto"}},{"id":"code-copy","module":"/js/runtime/extensions/code-copy.js","scope":"region","when":{"selector":".code"},"config":{"assets":{"js":"/js/plugins/copycode.js"},"messages":{"label":"复制","copied":"复制成功","denied":"未获得剪贴板权限","unsupported":"当前浏览器不支持剪贴板或页面不是 HTTPS"}}},{"id":"adaptive-text","module":"/js/runtime/extensions/adaptive-text.js","scope":"region","when":{"selector":"[data-text-adaptive]"},"config":{"assets":{"colorJs":"/js/color.js","js":"/js/plugins/adaptive-text.js"}}},{"id":"card-hover","module":"/js/runtime/extensions/card-hover.js","scope":"region","when":{"selector":".card-hover"},"config":{"spotlight":true,"tilt":false,"assets":{"js":"/js/plugins/card-hover.js"}}},{"id":"swiper","module":"/js/runtime/extensions/swiper.js","scope":"region","when":{"selector":"#swiper-api"},"config":{"assets":{"localCss":"/css/plugins/swiper.css","js":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.js","css":"https://cdn.cnortles.top/npm/swiper@10.3/swiper-bundle.min.css"}}}]}</script>
+<script data-stellar-script="core" type="module" src="/js/runtime/index.js?v=2.0.0&runtime=1"></script>
+
+
+<!-- inject -->
+<script defer src="https://umami.cnortles.top/script.js" data-website-id="2e6d48d5-2833-45d6-9dcf-320cd7e63e9f"></script>
+
+
+<script data-stellar-script="core" defer src="/js/navigation-init.js?v=2.0.0"></script>
+</div></body></html>
+

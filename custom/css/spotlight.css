@@ -1,0 +1,69 @@
+/**
+ * 光影与数据条动效
+ *
+ * 1) 鼠标跟随光晕
+ *    主题自带 card-hover spotlight（features.card_hover.spotlight），
+ *    由 js/plugins/card-hover.js 驱动，这里不重复实现。
+ *    这份样式负责给 equipment 卡片等「没有 ui-interactive 类」的
+ *    自定义卡片补上同样的光晕，否则同一页里两类卡片 hover 表现不一致。
+ *
+ * 2) 数据条生长动画
+ *    参考 blog.zhheo.com/stats/ 的 stats-hbar-grow：条形从 0 长到目标值，
+ *    用 scaleX 而非 width，动画只跑合成层，不触发重排。
+ *
+ * 颜色一律走主题变量，深浅色自动适配。
+ */
+
+/* ---------- 1. 自定义卡片的光晕 ---------- */
+
+.kh-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.kh-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.32s ease;
+  background: radial-gradient(
+    circle at var(--kh-glow-x, 50%) var(--kh-glow-y, 50%),
+    color-mix(in srgb, var(--accent) 22%, transparent) 0%,
+    transparent 62%
+  );
+}
+
+.kh-glow:hover::after {
+  opacity: 1;
+}
+
+/* ---------- 2. 数据条生长 ---------- */
+
+@keyframes kh-bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.kh-bar {
+  transform-origin: left center;
+  animation: kh-bar-grow 0.7s cubic-bezier(0.25, 0.8, 0.3, 1) both;
+}
+
+/* 尊重系统的「减少动态效果」设置 */
+@media (prefers-reduced-motion: reduce) {
+  .kh-bar {
+    animation: none;
+  }
+
+  .kh-glow::after {
+    transition: none;
+  }
+}
